@@ -6,11 +6,14 @@ import { Check, Upload } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "@/hooks/useTranslation";
 
+type Status = "idle" | "sending" | "success" | "error";
+
 export default function CustomDesignContent() {
   const tr = useTranslation();
   const cd = tr.pages.customDesign;
 
   const [step, setStep] = useState(0);
+  const [status, setStatus] = useState<Status>("idle");
   const [data, setData] = useState({
     projectType: "",
     stone: "",
@@ -27,6 +30,36 @@ export default function CustomDesignContent() {
   });
 
   const update = (key: string, val: string) => setData((d) => ({ ...d, [key]: val }));
+
+  async function handleSubmit() {
+    setStatus("sending");
+    const fields = {
+      "Type de projet": data.projectType,
+      "Pierre": data.stone,
+      "Forme": data.shape,
+      "Métal": data.metal,
+      "Budget": data.budget,
+      "Échéancier": data.timeline,
+      "Notes": data.notes,
+      "Nom complet": data.fullName,
+      "Courriel": data.email,
+      "Téléphone": data.phone,
+      "Méthode de contact préférée": data.contactMethod,
+      email: data.email,
+    };
+
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ formType: "custom-design", fields }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
+  }
 
   const noPreference = cd.stoneTypes[cd.stoneTypes.length - 1];
   const engagementRing = cd.projectTypes[0];
@@ -272,35 +305,50 @@ export default function CustomDesignContent() {
                 <p className="text-xs text-white/50 leading-relaxed">{cd.depositDesc}</p>
               </div>
 
-              <button className="w-full py-5 bg-beto-gold text-beto-black text-xs font-medium uppercase tracking-[0.2em] hover:bg-beto-gold-light transition-colors duration-300">
-                {cd.secureButton}
-              </button>
-              <p className="text-xs text-beto-gray-light mt-4 text-center">
-                {cd.secureNote}
-              </p>
+              {status === "success" ? (
+                <p className="text-sm text-green-700 bg-green-50 border border-green-200 px-4 py-4 text-center">{cd.successMessage}</p>
+              ) : (
+                <>
+                  <button
+                    onClick={handleSubmit}
+                    disabled={status === "sending"}
+                    className="w-full py-5 bg-beto-gold text-beto-black text-xs font-medium uppercase tracking-[0.2em] hover:bg-beto-gold-light transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {status === "sending" ? cd.sending : cd.secureButton}
+                  </button>
+                  <p className="text-xs text-beto-gray-light mt-4 text-center">
+                    {cd.secureNote}
+                  </p>
+                  {status === "error" && (
+                    <p className="text-sm text-red-700 bg-red-50 border border-red-200 px-4 py-3 mt-4 text-center">{cd.errorMessage}</p>
+                  )}
+                </>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
 
         {/* Navigation */}
-        <div className="flex items-center justify-between mt-10 pt-8 border-t border-beto-gray-subtle/40">
-          <button
-            onClick={() => setStep((s) => Math.max(0, s - 1))}
-            className={cn("text-xs font-medium tracking-widest uppercase text-beto-gray hover:text-beto-black transition-colors", step === 0 && "invisible")}
-          >
-            {cd.backButton}
-          </button>
-
-          {step < cd.steps.length - 1 && (
+        {status !== "success" && (
+          <div className="flex items-center justify-between mt-10 pt-8 border-t border-beto-gray-subtle/40">
             <button
-              onClick={() => setStep((s) => s + 1)}
-              disabled={!isStepValid()}
-              className="px-8 py-3.5 bg-beto-black text-white text-xs font-medium uppercase tracking-widest disabled:opacity-40 disabled:cursor-not-allowed hover:bg-beto-gold transition-colors duration-300"
+              onClick={() => setStep((s) => Math.max(0, s - 1))}
+              className={cn("text-xs font-medium tracking-widest uppercase text-beto-gray hover:text-beto-black transition-colors", step === 0 && "invisible")}
             >
-              {cd.continueButton}
+              {cd.backButton}
             </button>
-          )}
-        </div>
+
+            {step < cd.steps.length - 1 && (
+              <button
+                onClick={() => setStep((s) => s + 1)}
+                disabled={!isStepValid()}
+                className="px-8 py-3.5 bg-beto-black text-white text-xs font-medium uppercase tracking-widest disabled:opacity-40 disabled:cursor-not-allowed hover:bg-beto-gold transition-colors duration-300"
+              >
+                {cd.continueButton}
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

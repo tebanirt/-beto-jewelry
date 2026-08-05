@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import PageHero from "@/components/shared/PageHero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+
+type Status = "idle" | "sending" | "success" | "error";
 
 function IconInstagram({ size = 16 }: { size?: number }) {
   return (
@@ -18,6 +21,34 @@ function IconInstagram({ size = 16 }: { size?: number }) {
 export default function ContactContent() {
   const tr = useTranslation();
   const p = tr.pages.contact;
+  const [status, setStatus] = useState<Status>("idle");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("sending");
+    const formData = new FormData(e.currentTarget);
+    const fields = {
+      "Prénom": formData.get("firstName")?.toString() || "",
+      "Nom": formData.get("lastName")?.toString() || "",
+      "Courriel": formData.get("email")?.toString() || "",
+      "Sujet": formData.get("subject")?.toString() || "",
+      "Message": formData.get("message")?.toString() || "",
+      email: formData.get("email")?.toString() || "",
+    };
+
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ formType: "contact", fields }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setStatus("success");
+      e.currentTarget.reset();
+    } catch {
+      setStatus("error");
+    }
+  }
 
   return (
     <>
@@ -97,27 +128,27 @@ export default function ContactContent() {
             <AnimatedSection delay={0.1}>
               <div className="bg-beto-offwhite p-10">
                 <p className="text-label text-beto-gold mb-6">{p.sendMessage}</p>
-                <div className="flex flex-col gap-5">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs font-medium text-beto-black tracking-wide mb-2 block">{p.firstName}</label>
-                      <input type="text" placeholder={p.firstNamePlaceholder} className="w-full px-4 py-3.5 border border-beto-gray-subtle/60 bg-beto-white text-sm text-beto-black placeholder:text-beto-gray-light focus:outline-none focus:border-beto-gold transition-colors" />
+                      <input name="firstName" required type="text" placeholder={p.firstNamePlaceholder} className="w-full px-4 py-3.5 border border-beto-gray-subtle/60 bg-beto-white text-sm text-beto-black placeholder:text-beto-gray-light focus:outline-none focus:border-beto-gold transition-colors" />
                     </div>
                     <div>
                       <label className="text-xs font-medium text-beto-black tracking-wide mb-2 block">{p.lastName}</label>
-                      <input type="text" placeholder={p.lastNamePlaceholder} className="w-full px-4 py-3.5 border border-beto-gray-subtle/60 bg-beto-white text-sm text-beto-black placeholder:text-beto-gray-light focus:outline-none focus:border-beto-gold transition-colors" />
+                      <input name="lastName" required type="text" placeholder={p.lastNamePlaceholder} className="w-full px-4 py-3.5 border border-beto-gray-subtle/60 bg-beto-white text-sm text-beto-black placeholder:text-beto-gray-light focus:outline-none focus:border-beto-gold transition-colors" />
                     </div>
                   </div>
 
                   <div>
                     <label className="text-xs font-medium text-beto-black tracking-wide mb-2 block">{p.email}</label>
-                    <input type="email" placeholder={p.emailPlaceholder} className="w-full px-4 py-3.5 border border-beto-gray-subtle/60 bg-beto-white text-sm text-beto-black placeholder:text-beto-gray-light focus:outline-none focus:border-beto-gold transition-colors" />
+                    <input name="email" required type="email" placeholder={p.emailPlaceholder} className="w-full px-4 py-3.5 border border-beto-gray-subtle/60 bg-beto-white text-sm text-beto-black placeholder:text-beto-gray-light focus:outline-none focus:border-beto-gold transition-colors" />
                   </div>
 
                   <div>
                     <label className="text-xs font-medium text-beto-black tracking-wide mb-2 block">{p.subject}</label>
-                    <select className="w-full px-4 py-3.5 border border-beto-gray-subtle/60 bg-beto-white text-sm text-beto-black focus:outline-none focus:border-beto-gold transition-colors appearance-none">
-                      <option value="">{p.subjectPlaceholder}</option>
+                    <select name="subject" required defaultValue="" className="w-full px-4 py-3.5 border border-beto-gray-subtle/60 bg-beto-white text-sm text-beto-black focus:outline-none focus:border-beto-gold transition-colors appearance-none">
+                      <option value="" disabled>{p.subjectPlaceholder}</option>
                       {p.subjectOptions.map((opt) => (
                         <option key={opt}>{opt}</option>
                       ))}
@@ -126,13 +157,24 @@ export default function ContactContent() {
 
                   <div>
                     <label className="text-xs font-medium text-beto-black tracking-wide mb-2 block">{p.message}</label>
-                    <textarea rows={5} placeholder={p.messagePlaceholder} className="w-full px-4 py-3.5 border border-beto-gray-subtle/60 bg-beto-white text-sm text-beto-black placeholder:text-beto-gray-light focus:outline-none focus:border-beto-gold transition-colors resize-none" />
+                    <textarea name="message" required rows={5} placeholder={p.messagePlaceholder} className="w-full px-4 py-3.5 border border-beto-gray-subtle/60 bg-beto-white text-sm text-beto-black placeholder:text-beto-gray-light focus:outline-none focus:border-beto-gold transition-colors resize-none" />
                   </div>
 
-                  <button className="w-full py-4 bg-beto-black text-white text-xs font-medium uppercase tracking-widest hover:bg-beto-gold transition-colors duration-300">
-                    {p.submitButton}
+                  <button
+                    type="submit"
+                    disabled={status === "sending"}
+                    className="w-full py-4 bg-beto-black text-white text-xs font-medium uppercase tracking-widest hover:bg-beto-gold transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {status === "sending" ? p.sending : p.submitButton}
                   </button>
-                </div>
+
+                  {status === "success" && (
+                    <p className="text-sm text-green-700 bg-green-50 border border-green-200 px-4 py-3">{p.successMessage}</p>
+                  )}
+                  {status === "error" && (
+                    <p className="text-sm text-red-700 bg-red-50 border border-red-200 px-4 py-3">{p.errorMessage}</p>
+                  )}
+                </form>
               </div>
             </AnimatedSection>
           </div>
