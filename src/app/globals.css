@@ -1,0 +1,196 @@
+@import "tailwindcss";
+
+/* ─── Beto Jewelry Design System ─────────────────────────── */
+
+@theme {
+  /* Colors */
+  --color-beto-white: #FFFFFF;
+  --color-beto-offwhite: #F8F8F6;
+  --color-beto-black: #111111;
+  --color-beto-gray: #444444;
+  --color-beto-gray-light: #888888;
+  --color-beto-gray-subtle: #E8E8E6;
+  --color-beto-gold: #C9A86A;
+  --color-beto-gold-light: #D9BC8A;
+  --color-beto-gold-dark: #A88840;
+
+  /* Fonts */
+  --font-display: var(--font-cormorant);
+  --font-sans: var(--font-inter);
+
+  /* Spacing scale */
+  --spacing-18: 4.5rem;
+  --spacing-22: 5.5rem;
+  --spacing-26: 6.5rem;
+  --spacing-30: 7.5rem;
+
+  /* Easing curves */
+  --ease-luxury: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-in-out-soft: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── CSS Custom Properties ────────────────────────────────── */
+
+:root {
+  --nav-height: 80px;
+  --transition-base: 300ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  --transition-slow: 600ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  --gold: #C9A86A;
+  --black: #111111;
+  --offwhite: #F8F8F6;
+}
+
+/* ─── Base Styles ───────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--beto-white, #FFFFFF);
+  color: var(--black);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ─── Selection Color ───────────────────────────────────────── */
+
+::selection {
+  background-color: rgba(201, 168, 106, 0.2);
+  color: #111111;
+}
+
+/* ─── Typography Base ───────────────────────────────────────── */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+p {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  line-height: 1.75;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F8F8F6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C9A86A;
+  border-radius: 3px;
+}
+
+/* ─── Custom Utilities ──────────────────────────────────────── */
+
+/* Semantic typography classes */
+.text-display-class {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+
+.text-label {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+@utility container-beto {
+  width: 100%;
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+
+  @media (min-width: 768px) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  @media (min-width: 1280px) {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+/* Gold underline helper — use as a class: .gold-underline */
+.gold-underline {
+  position: relative;
+}
+.gold-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 40px;
+  height: 1px;
+  background-color: #C9A86A;
+}
+
+/* ─── Gold Shimmer Animation ─────────────────────────────── */
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ─── Reduced Motion ─────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
