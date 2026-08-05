@@ -40,8 +40,8 @@ export default function ContactContent() {
                   </div>
                   <div>
                     <p className="text-xs font-medium tracking-wide text-beto-gray-light mb-1">{p.emailLabel}</p>
-                    <a href="mailto:hello@betojewelry.com" className="text-beto-black hover:text-beto-gold transition-colors">
-                      hello@betojewelry.com
+                    <a href="mailto:betojewlz@gmail.com" className="text-beto-black hover:text-beto-gold transition-colors">
+                      betojewlz@gmail.com
                     </a>
                   </div>
                 </div>
@@ -52,8 +52,8 @@ export default function ContactContent() {
                   </div>
                   <div>
                     <p className="text-xs font-medium tracking-wide text-beto-gray-light mb-1">{p.phoneLabel}</p>
-                    <a href="tel:+15141234567" className="text-beto-black hover:text-beto-gold transition-colors">
-                      +1 (514) 123-4567
+                    <a href="tel:+14388745759" className="text-beto-black hover:text-beto-gold transition-colors">
+                      +1 (438) 874-5759
                     </a>
                   </div>
                 </div>
