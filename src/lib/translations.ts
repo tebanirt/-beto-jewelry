@@ -615,7 +615,6 @@ export const t = {
         findDirection: "Find your style.",
         styles: [
           { name: "Open Face", desc: "Gold frames with exposed windows — the classic look." },
-          { name: "Custom Design", desc: "Entirely unique — your concept, our craft." },
           { name: "Mosaic", desc: "Mixed baguette and round diamonds set edge to edge, like a mosaic." },
           { name: "Full Iced Out Big Pointers", desc: "Oversized center stones per tooth, pavé surround — maximum sparkle, maximum statement." },
           { name: "Full Ice Out", desc: "Rose gold fully paved in diamonds — every angle catches the light." },
@@ -1256,7 +1255,6 @@ export const t = {
         findDirection: "Trouvez votre style.",
         styles: [
           { name: "Open Face", desc: "Cadres en or avec fenêtres exposées — le look classique." },
-          { name: "Design sur mesure", desc: "Entièrement unique — votre concept, notre savoir-faire." },
           { name: "Mosaic", desc: "Diamants baguette et ronds mélangés, sertis bord à bord, comme une mosaïque." },
           { name: "Full Iced Out Big Pointers", desc: "Pierres centrales surdimensionnées sur chaque dent, entourées de pavé — éclat maximal, effet garanti." },
           { name: "Full Ice Out", desc: "Or rose entièrement pavé de diamants — chaque angle capte la lumière." },

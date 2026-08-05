@@ -9,7 +9,6 @@ import { useTranslation } from "@/hooks/useTranslation";
 
 const GRILLZ_IMAGES = [
   "/grillz/open-face.png",                   // Open Face
-  "/grillz/custom-design.png",               // Custom Design
   "/grillz/mosaic.png",                      // Mosaic
   "/grillz/full-iced-out-big-pointers.png",  // Full Iced Out Big Pointers
   "/grillz/full-ice-out.png",                // Full Ice Out
@@ -21,7 +20,6 @@ const GRILLZ_IMAGES = [
 
 const GRILLZ_SLUGS: (string | null)[] = [
   null,           // Open Face
-  null,           // Custom Design
   null,           // Mosaic
   null,           // Full Iced Out Big Pointers
   "full-ice-out", // Full Ice Out
