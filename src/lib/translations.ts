@@ -344,6 +344,13 @@ export const t = {
         noSeeNote: "Don't see the piece you're imagining? Every item in our portfolio is custom-made. We can create anything.",
         startCustomPiece: "Start a Custom Piece",
         photographyPlaceholder: "Photo",
+        heroBody: "Every fine jewelry piece we create is designed from scratch, around you — no catalog, no two pieces alike. Share your idea, and we'll bring it to life in 3D within 48 hours.",
+        bookConsultation: "Book a Consultation",
+        valueProps: [
+          { number: "01", title: "Designed around you", body: "Every piece starts from your idea, not a template already made." },
+          { number: "02", title: "See it before it exists", body: "A precise 3D render of your piece in about 48 hours." },
+          { number: "03", title: "One of one", body: "No other piece like yours — never reproduced." },
+        ],
       },
       customJewelry: {
         eyebrow: "Custom Jewelry",
@@ -984,6 +991,13 @@ export const t = {
         noSeeNote: "Vous ne voyez pas la pièce que vous imaginez ? Chaque article de notre portfolio est fait sur mesure. Nous pouvons créer n'importe quoi.",
         startCustomPiece: "Créer une pièce sur mesure",
         photographyPlaceholder: "Photo",
+        heroBody: "Chaque bijou fin que nous créons est conçu à partir de zéro, autour de vous — aucun catalogue, aucune pièce identique. Partagez votre idée, et nous la donnerons vie en 3D en 48 heures.",
+        bookConsultation: "Réserver une consultation",
+        valueProps: [
+          { number: "01", title: "Conçu autour de vous", body: "Chaque pièce part de votre idée, pas d'un modèle déjà fait." },
+          { number: "02", title: "Voyez-la avant qu'elle existe", body: "Un rendu 3D précis de votre pièce en environ 48 heures." },
+          { number: "03", title: "Une seule et unique", body: "Aucune autre pièce comme la vôtre — jamais reproduite." },
+        ],
       },
       customJewelry: {
         eyebrow: "Bijoux sur mesure",
