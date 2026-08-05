@@ -27,20 +27,8 @@ const GALLERY_ITEMS: { src: string; category: number; ratio: string }[] = [
   { src: "/bands/band-matching-set.png", category: 2, ratio: "3/4" },
   { src: "/bands/band-diamond.webp", category: 2, ratio: "1/1" },
   { src: "/bands/band-classic.webp", category: 2, ratio: "4/5" },
-  // 3 = Fine Jewelry / Bijoux fins
-  { src: "/jewelry/band-eternity-white.jpg", category: 3, ratio: "1/1" },
-  { src: "/jewelry/band-eternity-yellow.jpg", category: 3, ratio: "3/4" },
-  { src: "/jewelry/band-mixed-cut.jpg", category: 3, ratio: "1/1" },
-  { src: "/jewelry/earrings-crawler.jpg", category: 3, ratio: "4/5" },
-  { src: "/jewelry/earrings-hoops.jpg", category: 3, ratio: "1/1" },
-  { src: "/jewelry/earrings-pave-huggies.jpg", category: 3, ratio: "3/4" },
-  { src: "/jewelry/necklace-circle.jpg", category: 3, ratio: "1/1" },
-  { src: "/jewelry/pendant-bee.jpg", category: 3, ratio: "4/5" },
-  { src: "/jewelry/pendant-extra.jpg", category: 3, ratio: "1/1" },
-  { src: "/jewelry/pendant-initial-b.jpg", category: 3, ratio: "3/4" },
-  { src: "/jewelry/ring-stacking.jpg", category: 3, ratio: "1/1" },
-  // 4 = Custom / Sur mesure
-  { src: "/custom-jewelry/cad-to-reality-white.png", category: 4, ratio: "1/1" },
+  // 3 = Custom / Sur mesure
+  { src: "/custom-jewelry/cad-to-reality-white.png", category: 3, ratio: "1/1" },
 ];
 
 export default function GalleryContent() {
