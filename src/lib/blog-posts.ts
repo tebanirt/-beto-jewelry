@@ -1603,6 +1603,42 @@ export const blogPosts: BlogPost[] = [
       ],
     },
   },
+  {
+    slug: "ensemble-bijoux-mariee",
+    category: { en: "Wedding Bands", fr: "Alliances" },
+    publishedDate: "2026-08-06",
+    readTime: "6 min",
+    heroImage: "/jewelry/ring-stacking.jpg",
+    heroImageAlt: { en: "An engagement ring and a matching diamond wedding band stacked together", fr: "Une bague de fiançailles et une alliance diamant assortie empilées ensemble" },
+    en: {
+      title: "Designing a Bridal Set That Actually Works Together",
+      excerpt: "An engagement ring and wedding band that were designed as a pair sit differently on the hand than two rings bought separately. Here's how to plan for that from the start.",
+      seoTitle: "Custom Bridal Set — Engagement Ring & Wedding Band",
+      seoDescription: "How to design a custom engagement ring and wedding band that actually fit together — profile, metal, and stone spacing explained.",
+      sections: [
+        { heading: "Why 'matching' isn't really the goal", body: "The two pieces don't need to look identical — they need to sit flush against each other with no visible gap and no awkward metal-on-metal collision. That's a fit problem, not a style problem, and it's the main reason bridal sets designed together outperform two rings bought at different times from different places." },
+        { heading: "The profile of the engagement ring drives everything", body: "A cathedral setting, a low-set solitaire, and a setting with a curved gallery each require a differently shaped wedding band to sit flush beside them. Designing both pieces together means the band's inner curve can be built to trace the exact silhouette of your specific engagement ring, rather than approximating a generic curve after the fact." },
+        { heading: "Deciding the wear order", body: "Some bridal sets are meant to be worn together permanently, soldered or fused after the wedding for a seamless single unit. Others are designed to sit close but separate, so each ring can still be worn alone. Deciding this upfront changes how the band's inner edge is shaped." },
+        { heading: "Matching metal, mixing metal, or matching detail instead", body: "Same-metal pairing is the safest, most classic choice. Some clients intentionally mix metals — a white gold engagement ring with a bolder wedding band, for instance — and instead match the pieces through a shared design language, like matching prong style or matching stone size, rather than matching metal." },
+        { heading: "Where the eternity band question comes in", body: "Pavé, channel-set, or shared-prong wedding bands read as more 'finished' next to a solitaire but require more careful width and stone-size matching to avoid competing with the center stone. A simpler band often photographs better next to a busier engagement ring, and vice versa." },
+        { heading: "How the design process actually works for a set", body: "Both pieces are modeled in the same CAD session so we can rotate and check the fit digitally before either is fabricated — catching gaps or clashes on screen instead of after the metal is cast. It typically adds only a small amount of time to the standard 48-hour CAD turnaround." },
+      ],
+    },
+    fr: {
+      title: "Concevoir un ensemble de mariée qui fonctionne vraiment ensemble",
+      excerpt: "Une bague de fiançailles et une alliance conçues ensemble comme paire se portent différemment que deux bagues achetées séparément. Voici comment planifier ça dès le départ.",
+      seoTitle: "Ensemble de mariée sur mesure — Bague et alliance",
+      seoDescription: "Comment concevoir une bague de fiançailles et une alliance sur mesure qui s'agencent vraiment — profil, métal et espacement des pierres expliqués.",
+      sections: [
+        { heading: "Pourquoi « assorti » n'est pas vraiment le but", body: "Les deux pièces n'ont pas besoin d'être identiques — elles doivent s'aligner parfaitement l'une contre l'autre, sans espace visible ni collision maladroite de métal contre métal. C'est un problème d'ajustement, pas de style, et c'est la principale raison pour laquelle les ensembles de mariée conçus ensemble surpassent deux bagues achetées à des moments et endroits différents." },
+        { heading: "Le profil de la bague de fiançailles détermine tout", body: "Un sertissage cathédrale, un solitaire bas, et un sertissage avec une galerie courbée exigent chacun une alliance de forme différente pour s'aligner à côté. Concevoir les deux pièces ensemble permet à la courbe intérieure de l'alliance d'être construite pour suivre exactement la silhouette de votre bague de fiançailles spécifique, plutôt que d'approximer une courbe générique après coup." },
+        { heading: "Décider de l'ordre de port", body: "Certains ensembles de mariée sont destinés à être portés ensemble en permanence, soudés ou fusionnés après le mariage pour une unité unique et sans coupure. D'autres sont conçus pour s'aligner de près mais rester séparés, afin que chaque bague puisse toujours être portée seule. Décider ça dès le départ change la façon dont le bord intérieur de l'alliance est façonné." },
+        { heading: "Assortir le métal, mélanger le métal, ou plutôt assortir le détail", body: "Le jumelage du même métal est le choix le plus sûr et classique. Certains clients mélangent intentionnellement les métaux — une bague de fiançailles en or blanc avec une alliance plus audacieuse, par exemple — et assortissent plutôt les pièces par un langage de design partagé, comme le style de griffe ou la taille des pierres, plutôt que le métal." },
+        { heading: "Où la question de l'anneau d'éternité entre en jeu", body: "Les alliances pavées, à sertissage canal ou à griffes partagées paraissent plus « complètes » à côté d'un solitaire mais exigent un appariement plus soigné de la largeur et de la taille des pierres pour ne pas rivaliser avec la pierre centrale. Une alliance plus simple photographie souvent mieux à côté d'une bague de fiançailles plus chargée, et vice versa." },
+        { heading: "Comment le processus de design fonctionne vraiment pour un ensemble", body: "Les deux pièces sont modélisées dans la même session CAD pour qu'on puisse faire pivoter et vérifier l'ajustement numériquement avant que l'une ou l'autre ne soit fabriquée — repérant les espaces ou collisions à l'écran plutôt qu'après la coulée du métal. Ça n'ajoute habituellement qu'un peu de temps au délai standard de 48 heures pour le CAD." },
+      ],
+    },
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {
