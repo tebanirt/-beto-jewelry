@@ -1747,6 +1747,42 @@ export const blogPosts: BlogPost[] = [
       ],
     },
   },
+  {
+    slug: "maximiser-budget-or-vs-diamant-laboratoire",
+    category: { en: "Budget", fr: "Budget" },
+    publishedDate: "2026-08-10",
+    readTime: "5 min",
+    heroImage: "/blog/budget-gold-vs-lab-diamond-hero.jpg",
+    heroImageAlt: { en: "A gold diamond eternity band lit by a dramatic shaft of light against a dark background", fr: "Une alliance éternité en or diamant éclairée par un rayon de lumière dramatique sur fond sombre" },
+    en: {
+      title: "Maximizing Your Budget: Where to Spend on Metal vs. Stone",
+      excerpt: "With a fixed budget, every dollar you put into metal is a dollar not going into the stone, and vice versa. Here's how to think about that trade-off deliberately instead of by accident.",
+      seoTitle: "Ring Budget Guide — Metal vs. Diamond Trade-offs",
+      seoDescription: "How to allocate a fixed engagement ring budget between metal and stone — practical trade-offs to maximize visual impact for your money.",
+      sections: [
+        { heading: "The stone almost always deserves priority", body: "Across most budgets, the center stone is what people actually look at and remember — the metal is the frame, not the picture. As a general rule, when a budget is tight, it's usually worth trimming metal cost before trimming stone size or quality, since the stone carries more of the ring's visual impact per dollar." },
+        { heading: "Where lab-grown diamonds change the math entirely", body: "Choosing a lab-grown diamond instead of a natural one frees up 60–80% of what that stone would have cost at equivalent size and quality — money that can go directly toward a larger stone, a better cut grade, or a more elaborate setting, without increasing your total budget at all." },
+        { heading: "Where metal cost is genuinely worth paying for", body: "Platinum's added cost over white gold buys real durability advantages for daily wear and a naturally hypoallergenic metal — a legitimate reason to prioritize it if either matters to you specifically. Otherwise, 18K white, yellow, or rose gold delivers a comparable look for meaningfully less." },
+        { heading: "Setting style is often the hidden lever", body: "A clean solitaire setting costs less in labor than a pavé or halo design, and redirecting that saved labor cost toward the center stone often has more visual payoff than a more elaborate setting would. It's worth pricing both directions before deciding." },
+        { heading: "A concrete example of the trade-off", body: "On a fixed budget, choosing a 1.5-carat lab-grown diamond in a simple solitaire setting will typically look more impressive on the hand than a 0.75-carat natural diamond in an elaborate pavé setting at the same total price — because carat weight and stone presence tend to read more immediately than setting detail." },
+        { heading: "How we help you actually optimize this", body: "During your consultation, we walk through real trade-offs specific to your budget — showing what happens to stone size or quality if you shift the metal choice, or vice versa — so you're deciding with real numbers in front of you, not guessing." },
+      ],
+    },
+    fr: {
+      title: "Maximiser son budget : où dépenser entre métal et pierre",
+      excerpt: "Avec un budget fixe, chaque dollar mis dans le métal est un dollar de moins pour la pierre, et vice versa. Voici comment penser ce compromis délibérément plutôt que par accident.",
+      seoTitle: "Guide de budget pour bague — Compromis métal vs diamant",
+      seoDescription: "Comment répartir un budget fixe de bague de fiançailles entre métal et pierre — compromis pratiques pour maximiser l'impact visuel de votre argent.",
+      sections: [
+        { heading: "La pierre mérite presque toujours la priorité", body: "Dans la plupart des budgets, la pierre centrale est ce que les gens regardent et retiennent réellement — le métal est le cadre, pas le tableau. En règle générale, quand le budget est serré, il vaut généralement mieux réduire le coût du métal avant de réduire la taille ou la qualité de la pierre, puisque la pierre porte une plus grande part de l'impact visuel de la bague par dollar." },
+        { heading: "Où les diamants de laboratoire changent tout le calcul", body: "Choisir un diamant de laboratoire plutôt qu'un naturel libère 60 à 80 % de ce que cette pierre aurait coûté à taille et qualité équivalentes — de l'argent qui peut aller directement vers une pierre plus grosse, une meilleure taille, ou un sertissage plus élaboré, sans augmenter votre budget total du tout." },
+        { heading: "Où le coût du métal vaut vraiment la peine d'être payé", body: "Le coût supplémentaire du platine par rapport à l'or blanc achète de vrais avantages de durabilité pour le port quotidien et un métal naturellement hypoallergène — une raison légitime de le prioriser si l'un ou l'autre compte particulièrement pour vous. Sinon, l'or blanc, jaune ou rose 18K offre un look comparable pour beaucoup moins." },
+        { heading: "Le style de sertissage est souvent le levier caché", body: "Un sertissage solitaire épuré coûte moins cher en main-d'œuvre qu'un design pavé ou halo, et rediriger ce coût de main-d'œuvre économisé vers la pierre centrale a souvent plus de rendement visuel qu'un sertissage plus élaboré. Ça vaut la peine de chiffrer les deux directions avant de décider." },
+        { heading: "Un exemple concret du compromis", body: "Avec un budget fixe, choisir un diamant de laboratoire de 1,5 carat dans un sertissage solitaire simple paraîtra typiquement plus impressionnant sur la main qu'un diamant naturel de 0,75 carat dans un sertissage pavé élaboré au même prix total — parce que le poids en carats et la présence de la pierre se lisent généralement plus immédiatement que le détail du sertissage." },
+        { heading: "Comment on vous aide à vraiment optimiser ça", body: "Pendant votre consultation, on passe à travers les vrais compromis spécifiques à votre budget — en montrant ce qui arrive à la taille ou la qualité de la pierre si vous ajustez le choix du métal, ou vice versa — pour que vous décidiez avec de vrais chiffres devant vous, pas en devinant." },
+      ],
+    },
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {
