@@ -1675,6 +1675,42 @@ export const blogPosts: BlogPost[] = [
       ],
     },
   },
+  {
+    slug: "diamant-laboratoire-est-il-vrai-diamant",
+    category: { en: "Diamonds & Stones", fr: "Diamants et pierres" },
+    publishedDate: "2026-08-08",
+    readTime: "5 min",
+    heroImage: "/blog/lab-diamond-real-diamond-hero.jpg",
+    heroImageAlt: { en: "A loose round brilliant-cut diamond held between two fingers, with more loose diamonds below", fr: "Un diamant rond brillant isolé tenu entre deux doigts, avec d'autres diamants isolés en dessous" },
+    en: {
+      title: "Is a Lab-Grown Diamond a Real Diamond?",
+      excerpt: "The honest, unglamorous answer, straight from the chemistry — and why the FTC settled this question years ago even if the marketing hasn't caught up.",
+      seoTitle: "Is a Lab Diamond a Real Diamond? — The Actual Answer",
+      seoDescription: "Is a lab-grown diamond really a diamond, or something else entirely? The chemistry, the certification standards, and the honest answer.",
+      sections: [
+        { heading: "The chemistry, plainly stated", body: "A lab-grown diamond is made of the exact same material as a mined diamond — pure crystallized carbon in a diamond cubic structure — with identical hardness, optical properties, and fire. The only difference is where the crystal formed: underground over a billion-plus years versus a lab over several weeks." },
+        { heading: "What the FTC actually says", body: "The US Federal Trade Commission revised its jewelry guidelines specifically to confirm that a lab-grown diamond is a diamond, requiring only that it be clearly disclosed as 'laboratory-grown' or 'lab-created' rather than 'natural.' The distinction the FTC enforces is about origin disclosure, not whether it counts as a real diamond." },
+        { heading: "Why the confusion persists anyway", body: "The word 'synthetic' gets used loosely in casual conversation to mean 'fake,' but in gemology it specifically means 'grown, not mined' — the same word used for lab-grown rubies and sapphires, which nobody seriously calls fake gemstones. Marketing from natural-diamond mining interests has also, understandably, leaned into that confusion." },
+        { heading: "How a gemologist actually tells them apart", body: "A standard jeweler's loupe cannot distinguish a lab-grown diamond from a mined one — they require specialized equipment designed specifically to detect the trace growth patterns unique to each origin. This is precisely why third-party lab certification (GIA or IGI) exists and clearly states the origin on the report." },
+        { heading: "The one real difference: rarity, not material", body: "The entire price gap between lab-grown and mined diamonds comes down to supply, not quality — mined diamonds are geologically rare, lab-grown diamonds are not. That's a legitimate reason some people prefer natural stones, but it's a statement about scarcity and tradition, not about which one is 'really' a diamond." },
+        { heading: "What this means for your ring", body: "Whichever you choose, the certification will say so clearly, and the stone itself will perform identically on your hand — same brilliance, same durability, same everyday wear. The decision comes down to what matters to you personally: budget, size, rarity, or tradition, not authenticity." },
+      ],
+    },
+    fr: {
+      title: "Un diamant de laboratoire est-il un vrai diamant ?",
+      excerpt: "La réponse honnête et sans détour, directement tirée de la chimie — et pourquoi la FTC a réglé cette question il y a des années, même si le marketing n'a pas suivi.",
+      seoTitle: "Un diamant de laboratoire est-il vrai ? — La vraie réponse",
+      seoDescription: "Un diamant de laboratoire est-il vraiment un diamant, ou autre chose entièrement ? La chimie, les normes de certification, et la réponse honnête.",
+      sections: [
+        { heading: "La chimie, dite simplement", body: "Un diamant de laboratoire est fait exactement du même matériau qu'un diamant extrait — du carbone pur cristallisé dans une structure cubique de diamant — avec une dureté, des propriétés optiques et un feu identiques. La seule différence est où le cristal s'est formé : sous terre pendant plus d'un milliard d'années contre un laboratoire pendant quelques semaines." },
+        { heading: "Ce que dit vraiment la FTC", body: "La Federal Trade Commission américaine a révisé ses directives sur les bijoux spécifiquement pour confirmer qu'un diamant de laboratoire est un diamant, exigeant seulement qu'il soit clairement divulgué comme « cultivé en laboratoire » plutôt que « naturel ». La distinction que la FTC applique concerne la divulgation de l'origine, pas si ça compte comme un vrai diamant." },
+        { heading: "Pourquoi la confusion persiste quand même", body: "Le mot « synthétique » est utilisé de façon décontractée dans la conversation courante pour signifier « faux », mais en gemmologie, il signifie spécifiquement « cultivé, pas extrait » — le même mot utilisé pour les rubis et saphirs de laboratoire, que personne n'appelle sérieusement de fausses pierres précieuses. Le marketing des intérêts miniers de diamants naturels a aussi, on le comprend, entretenu cette confusion." },
+        { heading: "Comment un gemmologue les distingue vraiment", body: "Une loupe de bijoutier standard ne peut pas distinguer un diamant de laboratoire d'un diamant extrait — ils nécessitent un équipement spécialisé conçu spécifiquement pour détecter les motifs de croissance uniques à chaque origine. C'est précisément pourquoi la certification tierce (GIA ou IGI) existe et indique clairement l'origine sur le rapport." },
+        { heading: "La seule vraie différence : la rareté, pas le matériau", body: "Tout l'écart de prix entre diamants de laboratoire et diamants extraits se résume à l'offre, pas à la qualité — les diamants extraits sont rares géologiquement, les diamants de laboratoire ne le sont pas. C'est une raison légitime pour laquelle certaines personnes préfèrent les pierres naturelles, mais c'est une affirmation sur la rareté et la tradition, pas sur lequel est « vraiment » un diamant." },
+        { heading: "Ce que ça signifie pour votre bague", body: "Peu importe votre choix, la certification l'indiquera clairement, et la pierre elle-même performera de façon identique sur votre main — même brillance, même durabilité, même port quotidien. La décision se résume à ce qui compte pour vous personnellement : budget, taille, rareté ou tradition, pas l'authenticité." },
+      ],
+    },
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {
