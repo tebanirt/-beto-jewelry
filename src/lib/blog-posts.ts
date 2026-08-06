@@ -1531,6 +1531,42 @@ export const blogPosts: BlogPost[] = [
       ],
     },
   },
+  {
+    slug: "halo-vs-halo-cache-lequel-choisir",
+    category: { en: "Ring Styles", fr: "Styles de bagues" },
+    publishedDate: "2026-08-05",
+    readTime: "5 min",
+    heroImage: "/blog/halo-vs-hidden-halo-hero.jpg",
+    heroImageAlt: { en: "A round diamond halo engagement ring on a white background", fr: "Une bague de fiançailles halo diamant rond sur fond blanc" },
+    en: {
+      title: "Halo vs. Hidden Halo: How to Actually Decide",
+      excerpt: "Same underlying idea, genuinely different look on the hand. Here's the real difference, not just the technical definition.",
+      seoTitle: "Halo vs Hidden Halo Ring — How to Choose",
+      seoDescription: "Classic halo or hidden halo engagement ring? A clear comparison of the look, cost, and daily wear differences to help you decide.",
+      sections: [
+        { heading: "The core visual difference", body: "A classic halo sits visibly around the center stone, immediately obvious from any angle — it's the more traditional, expected look. A hidden halo sits just beneath the center stone instead, invisible from directly above and only revealed from the side, giving a cleaner, more minimal appearance at first glance." },
+        { heading: "Which reads as 'bigger'", body: "A classic halo is generally more effective at maximizing perceived size, since the ring of diamonds directly surrounds and visually extends the center stone in every view. A hidden halo adds sparkle and a bit of extra presence but doesn't boost apparent size nearly as much, since it's not visible in the primary top-down view." },
+        { heading: "Which suits which personality", body: "A classic halo tends to suit someone who wants their ring to read as clearly detailed and substantial at a glance. A hidden halo suits someone who wants a solitaire's clean simplicity most of the time, with a personal surprise of extra sparkle only visible up close or from certain angles." },
+        { heading: "Cost comparison", body: "The two styles use a comparable number of small diamonds, so the cost difference between them is usually minor — the bigger cost factor remains the center stone itself, not which halo style surrounds or supports it." },
+        { heading: "Daily wear considerations", body: "A classic halo sits slightly more raised and can be marginally more prone to catching on fabric or hair due to its visible outer edge. A hidden halo, being tucked beneath the center stone, tends to sit a bit lower profile and catches less — a small but real practical difference for very active hands." },
+        { heading: "How to actually decide", body: "If you want the halo effect to be part of the ring's obvious identity, go classic. If you'd rather the ring look like a clean solitaire at a glance, with the halo as a private detail, go hidden — and either way, seeing both rendered in CAD with your actual center stone makes the difference far more concrete than photos alone." },
+      ],
+    },
+    fr: {
+      title: "Halo vs halo caché : comment vraiment décider",
+      excerpt: "Même idée de base, look vraiment différent sur la main. Voici la vraie différence, pas juste la définition technique.",
+      seoTitle: "Halo vs halo caché — Comment choisir",
+      seoDescription: "Bague halo classique ou halo caché ? Une comparaison claire du look, du coût et du port quotidien pour vous aider à décider.",
+      sections: [
+        { heading: "La différence visuelle fondamentale", body: "Un halo classique se voit clairement autour de la pierre centrale, immédiatement visible sous tous les angles — c'est le look le plus traditionnel et attendu. Un halo caché se place juste sous la pierre centrale à la place, invisible de dessus et révélé seulement de côté, donnant une apparence plus épurée et minimaliste au premier regard." },
+        { heading: "Lequel paraît « plus gros »", body: "Un halo classique est généralement plus efficace pour maximiser la taille perçue, puisque le cercle de diamants entoure et étend visuellement directement la pierre centrale sous chaque vue. Un halo caché ajoute du scintillement et un peu de présence supplémentaire mais n'augmente pas la taille apparente presque autant, puisqu'il n'est pas visible dans la vue principale de dessus." },
+        { heading: "Lequel convient à quelle personnalité", body: "Un halo classique tend à convenir à quelqu'un qui veut que sa bague paraisse clairement détaillée et substantielle d'un coup d'œil. Un halo caché convient à quelqu'un qui préfère la simplicité épurée d'un solitaire la plupart du temps, avec une surprise personnelle de scintillement supplémentaire visible seulement de près ou sous certains angles." },
+        { heading: "Comparaison de coût", body: "Les deux styles utilisent un nombre comparable de petits diamants, donc la différence de coût entre eux est généralement mineure — le facteur de coût le plus important reste la pierre centrale elle-même, pas quel style de halo l'entoure ou la soutient." },
+        { heading: "Considérations pour le port quotidien", body: "Un halo classique est légèrement plus surélevé et peut être marginalement plus sujet à accrocher du tissu ou des cheveux à cause de son bord extérieur visible. Un halo caché, étant glissé sous la pierre centrale, tend à être un peu plus bas profil et accroche moins — une différence pratique petite mais réelle pour des mains très actives." },
+        { heading: "Comment vraiment décider", body: "Si vous voulez que l'effet halo fasse clairement partie de l'identité évidente de la bague, optez pour le classique. Si vous préférez que la bague paraisse comme un solitaire épuré d'un coup d'œil, avec le halo comme détail privé, optez pour le caché — et dans les deux cas, voir les deux rendus en CAD avec votre vraie pierre centrale rend la différence bien plus concrète que de simples photos." },
+      ],
+    },
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {

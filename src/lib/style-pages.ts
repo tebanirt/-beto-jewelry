@@ -98,7 +98,7 @@ export const stylePages: StylePage[] = [
     category: "engagement-rings",
     heroImage: "/rings/ring-halo-cushion.jpg",
     heroImageAlt: { en: "A halo engagement ring with a cushion-cut center stone surrounded by diamonds", fr: "Une bague de fiançailles halo avec une pierre centrale taille coussin entourée de diamants" },
-    relatedBlogSlugs: ["guide-styles-bagues-fiancailles"],
+    relatedBlogSlugs: ["guide-styles-bagues-fiancailles", "halo-vs-halo-cache-lequel-choisir"],
     en: {
       title: "Halo Engagement Rings",
       subtitle: "A circle of smaller diamonds surrounding your center stone — more sparkle, more visual size, same budget.",
@@ -191,7 +191,7 @@ export const stylePages: StylePage[] = [
     category: "engagement-rings",
     heroImage: "/rings/ring-oval-hidden-halo.jpg",
     heroImageAlt: { en: "An oval engagement ring with a hidden halo beneath the center stone", fr: "Une bague de fiançailles ovale avec un halo caché sous la pierre centrale" },
-    relatedBlogSlugs: ["guide-styles-bagues-fiancailles"],
+    relatedBlogSlugs: ["guide-styles-bagues-fiancailles", "halo-vs-halo-cache-lequel-choisir"],
     en: {
       title: "Hidden Halo Engagement Rings",
       subtitle: "All the extra sparkle of a halo, tucked just beneath the center stone — visible only when you look closely.",
