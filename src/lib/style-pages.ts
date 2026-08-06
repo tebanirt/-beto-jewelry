@@ -129,7 +129,7 @@ export const stylePages: StylePage[] = [
     category: "engagement-rings",
     heroImage: "/rings/ring-three-stone-oval.jpg",
     heroImageAlt: { en: "A three-stone engagement ring with oval diamonds", fr: "Une bague de fiançailles trois-pierres avec des diamants ovales" },
-    relatedBlogSlugs: ["guide-styles-bagues-fiancailles"],
+    relatedBlogSlugs: ["guide-styles-bagues-fiancailles", "signification-bague-trois-pierres"],
     en: {
       title: "Three-Stone Engagement Rings",
       subtitle: "Past, present, and future — three stones set side by side, each one carrying its own meaning.",

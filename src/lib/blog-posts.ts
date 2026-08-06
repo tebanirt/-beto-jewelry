@@ -1495,6 +1495,42 @@ export const blogPosts: BlogPost[] = [
       ],
     },
   },
+  {
+    slug: "signification-bague-trois-pierres",
+    category: { en: "Ring Styles", fr: "Styles de bagues" },
+    publishedDate: "2026-08-05",
+    readTime: "4 min",
+    heroImage: "/blog/three-stone-meaning-hero.jpg",
+    heroImageAlt: { en: "A gold three-stone diamond cluster ring on a white background", fr: "Une bague trois-pierres en or sertie de grappes de diamants sur fond blanc" },
+    en: {
+      title: "The Meaning Behind the Three-Stone Ring",
+      excerpt: "Past, present, future — but the symbolism goes a little deeper than the shorthand version most people know.",
+      seoTitle: "Three-Stone Ring Meaning — What It Actually Represents",
+      seoDescription: "What does a three-stone engagement ring symbolize? The real meaning behind past, present, and future, and how couples personalize it further.",
+      sections: [
+        { heading: "The traditional symbolism", body: "The three stones are most commonly read as a couple's past, present, and future together — a relationship's full timeline represented in a single piece, worn every day as a reminder that the story continues forward, not just backward." },
+        { heading: "Where the tradition comes from", body: "The three-stone design became widely popular in the late 1990s and 2000s through major jewelry marketing campaigns, though clustered and trilogy-style rings existed in various forms well before that — the specific 'past, present, future' framing is largely a modern popularization of an older design convention." },
+        { heading: "Alternative meanings couples give it", body: "Beyond the timeline reading, some couples assign the three stones to specific meaning of their own — a couple plus a future child, three significant people in their story, or simply a personal number that matters to them. There's no rule requiring the traditional interpretation." },
+        { heading: "Center stone vs. side stone proportions", body: "A larger center stone with two smaller, matching side stones is the most common arrangement, emphasizing the 'present' as the largest and most prominent element — though some designs use three equally sized stones for a different, more balanced visual weight." },
+        { heading: "Choosing the right side stones", body: "Round, trapezoid, and half-moon cuts are the most common side-stone shapes, chosen specifically to complement the center stone's outline rather than compete with it. Color is flexible too — matching diamonds for a classic look, or colored side stones for something more personal." },
+        { heading: "Why it remains a meaningful choice", body: "Whatever specific meaning you assign to it, a three-stone ring's real appeal is that it's built to say something beyond 'engaged' — a structural way of telling a fuller story on the hand, which is exactly why it's stayed popular well beyond its marketing-driven origin." },
+      ],
+    },
+    fr: {
+      title: "La signification derrière la bague trois-pierres",
+      excerpt: "Passé, présent, futur — mais le symbolisme va un peu plus loin que la version raccourcie que la plupart des gens connaissent.",
+      seoTitle: "Signification de la bague trois-pierres — Ce qu'elle représente vraiment",
+      seoDescription: "Que symbolise une bague de fiançailles trois-pierres ? La vraie signification derrière passé, présent et futur, et comment les couples la personnalisent davantage.",
+      sections: [
+        { heading: "Le symbolisme traditionnel", body: "Les trois pierres sont le plus souvent lues comme le passé, présent et futur d'un couple ensemble — la ligne du temps complète d'une relation représentée dans une seule pièce, portée chaque jour comme rappel que l'histoire continue vers l'avant, pas seulement vers l'arrière." },
+        { heading: "D'où vient la tradition", body: "Le design trois-pierres est devenu largement populaire à la fin des années 1990 et dans les années 2000 grâce à de grandes campagnes marketing de bijouterie, bien que des bagues en grappe et de style trilogie aient existé sous diverses formes bien avant — le cadre spécifique « passé, présent, futur » est en grande partie une popularisation moderne d'une convention de design plus ancienne." },
+        { heading: "Significations alternatives que les couples lui donnent", body: "Au-delà de la lecture chronologique, certains couples attribuent aux trois pierres une signification qui leur est propre — un couple plus un futur enfant, trois personnes importantes dans leur histoire, ou simplement un chiffre personnel qui compte pour eux. Il n'y a aucune règle exigeant l'interprétation traditionnelle." },
+        { heading: "Proportions pierre centrale vs pierres latérales", body: "Une pierre centrale plus grosse avec deux pierres latérales plus petites et assorties est l'arrangement le plus courant, mettant l'accent sur le « présent » comme élément le plus grand et le plus proéminent — bien que certains designs utilisent trois pierres de taille égale pour un poids visuel différent et plus équilibré." },
+        { heading: "Choisir les bonnes pierres latérales", body: "Les tailles ronde, trapèze et demi-lune sont les formes de pierres latérales les plus courantes, choisies spécifiquement pour compléter le contour de la pierre centrale plutôt que de rivaliser avec elle. La couleur est flexible aussi — des diamants assortis pour un look classique, ou des pierres latérales colorées pour quelque chose de plus personnel." },
+        { heading: "Pourquoi ça reste un choix significatif", body: "Peu importe la signification précise que vous lui attribuez, le vrai attrait d'une bague trois-pierres est qu'elle est construite pour dire quelque chose au-delà de « fiancés » — une façon structurelle de raconter une histoire plus complète sur la main, exactement pourquoi elle est restée populaire bien au-delà de son origine marketing." },
+      ],
+    },
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {
