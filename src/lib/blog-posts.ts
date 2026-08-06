@@ -1639,6 +1639,42 @@ export const blogPosts: BlogPost[] = [
       ],
     },
   },
+  {
+    slug: "gia-vs-igi-certifications-diamants",
+    category: { en: "Diamonds & Stones", fr: "Diamants et pierres" },
+    publishedDate: "2026-08-07",
+    readTime: "6 min",
+    heroImage: "/blog/gia-igi-certification-hero.jpg",
+    heroImageAlt: { en: "Loose diamonds examined closely through a jeweler's loupe", fr: "Diamants isolés examinés de près à travers une loupe de bijoutier" },
+    en: {
+      title: "GIA vs. IGI: What a Diamond Certificate Actually Tells You",
+      excerpt: "The letters on the certificate matter less than what's actually inside it. Here's how to read a grading report and what the lab that issued it means for your stone.",
+      seoTitle: "GIA vs IGI Diamond Certification — What's the Difference?",
+      seoDescription: "GIA or IGI certified diamond — what's the real difference? A clear explanation of grading standards, consistency, and what actually matters when buying.",
+      sections: [
+        { heading: "What a certificate is actually for", body: "A grading report is an independent lab's assessment of a diamond's 4Cs — cut, color, clarity, and carat weight — plus a plotted diagram of its unique inclusions. It exists so you're not relying on the seller's word for what you're buying; it's a third-party fact-check, not a marketing document." },
+        { heading: "GIA: the strictest, most conservative standard", body: "The Gemological Institute of America is widely considered the strictest grading lab in the industry — its color and clarity grades tend to run slightly more conservative than other labs, meaning a GIA-graded stone often looks better in person than its grade might suggest on paper. It's the standard most trusted for natural diamonds." },
+        { heading: "IGI: excellent, especially for lab-grown", body: "The International Gemological Institute is a highly respected lab that has become the dominant certifier for lab-grown diamonds specifically, and its natural diamond grading is also solid. IGI's grading scale has historically run a touch more generous than GIA's on some grades, which is worth knowing when comparing two stones graded by different labs." },
+        { heading: "Why the lab matters more when comparing two stones", body: "A GIA-graded G color stone and an IGI-graded G color stone are not guaranteed to look identical, because of the slight grading variance between labs. When comparing options side by side, it matters whether you're comparing apples to apples — same lab, or an adjustment for the known variance between them." },
+        { heading: "What actually matters for resale and insurance", body: "GIA certification is generally viewed as carrying the most weight for resale value and insurance appraisals on natural diamonds, given its reputation as the strictest standard. For lab-grown diamonds, IGI certification is the industry norm and is well accepted by insurers and appraisers." },
+        { heading: "How we handle certification", body: "We provide GIA or IGI certification depending on the stone, always disclosed clearly before you commit, with the actual grading report included as part of your purchase — never a generic guarantee standing in for a real third-party document." },
+      ],
+    },
+    fr: {
+      title: "GIA vs IGI : ce qu'un certificat de diamant vous dit vraiment",
+      excerpt: "Les lettres sur le certificat comptent moins que ce qu'il contient vraiment. Voici comment lire un rapport de gradation et ce que le laboratoire émetteur signifie pour votre pierre.",
+      seoTitle: "GIA vs IGI — Quelle différence pour un diamant certifié ?",
+      seoDescription: "Diamant certifié GIA ou IGI — quelle est la vraie différence ? Une explication claire des normes de gradation et de ce qui compte vraiment à l'achat.",
+      sections: [
+        { heading: "À quoi sert vraiment un certificat", body: "Un rapport de gradation est l'évaluation indépendante d'un laboratoire des 4C d'un diamant — coupe, couleur, pureté et poids en carats — plus un diagramme cartographiant ses inclusions uniques. Il existe pour que vous ne dépendiez pas de la parole du vendeur sur ce que vous achetez ; c'est une vérification tierce, pas un document marketing." },
+        { heading: "GIA : la norme la plus stricte et conservatrice", body: "Le Gemological Institute of America est largement considéré comme le laboratoire de gradation le plus strict de l'industrie — ses gradations de couleur et de pureté ont tendance à être un peu plus conservatrices que d'autres laboratoires, ce qui signifie qu'une pierre gradée GIA paraît souvent mieux en personne que sa gradation ne le suggère sur papier. C'est la norme la plus fiable pour les diamants naturels." },
+        { heading: "IGI : excellent, surtout pour le laboratoire", body: "L'International Gemological Institute est un laboratoire très respecté qui est devenu le certificateur dominant spécifiquement pour les diamants de laboratoire, et sa gradation des diamants naturels est aussi solide. L'échelle de gradation d'IGI a historiquement été un peu plus généreuse que celle de GIA sur certaines gradations, ce qui vaut la peine de savoir en comparant deux pierres gradées par des laboratoires différents." },
+        { heading: "Pourquoi le laboratoire compte plus en comparant deux pierres", body: "Une pierre de couleur G gradée GIA et une pierre de couleur G gradée IGI ne sont pas garanties de paraître identiques, à cause de la légère variance de gradation entre laboratoires. En comparant des options côte à côte, il importe de savoir si vous comparez des pommes avec des pommes — même laboratoire, ou un ajustement pour la variance connue entre eux." },
+        { heading: "Ce qui compte vraiment pour la revente et l'assurance", body: "La certification GIA est généralement perçue comme ayant le plus de poids pour la valeur de revente et les évaluations d'assurance sur les diamants naturels, étant donné sa réputation de norme la plus stricte. Pour les diamants de laboratoire, la certification IGI est la norme de l'industrie et est bien acceptée par les assureurs et évaluateurs." },
+        { heading: "Comment on gère la certification", body: "On fournit une certification GIA ou IGI selon la pierre, toujours divulguée clairement avant votre engagement, avec le vrai rapport de gradation inclus dans votre achat — jamais une garantie générique remplaçant un vrai document tiers." },
+      ],
+    },
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {
