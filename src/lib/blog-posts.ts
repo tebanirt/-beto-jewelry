@@ -1711,6 +1711,42 @@ export const blogPosts: BlogPost[] = [
       ],
     },
   },
+  {
+    slug: "bagues-fiancailles-second-mariage",
+    category: { en: "Buying Guide", fr: "Guide d'achat" },
+    publishedDate: "2026-08-09",
+    readTime: "5 min",
+    heroImage: "/blog/second-marriage-ring-hero.jpg",
+    heroImageAlt: { en: "A woman's hand with a solitaire engagement ring resting casually on a patterned armchair", fr: "La main d'une femme avec une bague de fiançailles solitaire posée avec aisance sur un fauteuil à motifs" },
+    en: {
+      title: "Choosing an Engagement Ring for a Second Marriage",
+      excerpt: "There's no rulebook that says a second ring has to look like the first one — or that it has to look like anyone else's at all. Here's how clients actually approach it.",
+      seoTitle: "Second Marriage Engagement Ring — A Practical Guide",
+      seoDescription: "Designing an engagement ring for a second marriage — how to think about style, sentiment, and starting fresh, without anyone else's expectations.",
+      sections: [
+        { heading: "There's no obligation to repeat the first one", body: "Some clients want their second ring to look nothing like their first, as a deliberate marker of a new chapter. Others want something that feels similarly classic simply because that's their taste — not because of any obligation to either match or contrast with the past. Both instincts are equally valid starting points." },
+        { heading: "A common request: quieter, more personal", body: "Clients designing a second engagement ring often want less spectacle than the first time around — a smaller, more considered stone, a design that reflects who they are now rather than who they were at 24. Custom design is well suited to this, since there's no pressure to match a 'traditional' first-time silhouette." },
+        { heading: "What to do with an old ring", body: "Some clients repurpose stones from a previous ring into a new setting, or into a different piece entirely like a pendant for a child from the first marriage — a practical and often meaningful way to reuse material that still matters, without wearing the old design. Others prefer a completely fresh start with all-new materials. Both are common, and we can advise on which stones are structurally suited to a new setting." },
+        { heading: "Considering blended families in the design", body: "Some clients incorporate birthstones or symbolic details representing children from a previous relationship directly into the design — a small stone accent, a hidden engraving, or a symbolic element worked into the band. It's a way to make the ring reflect the actual family being built, not just the couple." },
+        { heading: "There's no 'appropriate' price point", body: "A second engagement ring is not expected to cost more or less than a first one, and there's no social rule dictating the budget. The right number is whatever fits your actual life circumstances now, which are often genuinely different from a first proposal made earlier in life." },
+        { heading: "How the design conversation actually goes", body: "The consultation focuses on where you are now — your taste today, any materials you'd like to carry forward, and any family considerations — rather than fitting your choice into a template of what a 'typical' engagement ring should be. It's a genuinely personal design process, same as any custom piece." },
+      ],
+    },
+    fr: {
+      title: "Choisir une bague de fiançailles pour un second mariage",
+      excerpt: "Aucune règle ne dit qu'une deuxième bague doit ressembler à la première — ni qu'elle doit ressembler à celle de qui que ce soit d'autre. Voici comment les clients l'abordent vraiment.",
+      seoTitle: "Bague de fiançailles pour second mariage — Guide pratique",
+      seoDescription: "Concevoir une bague de fiançailles pour un second mariage — comment penser le style, le sentiment et le nouveau départ, sans les attentes de personne d'autre.",
+      sections: [
+        { heading: "Aucune obligation de répéter la première", body: "Certains clients veulent que leur deuxième bague ne ressemble en rien à leur première, comme marqueur délibéré d'un nouveau chapitre. D'autres veulent quelque chose de similairement classique simplement parce que c'est leur goût — pas par obligation de s'accorder ou de contraster avec le passé. Les deux instincts sont des points de départ également valides." },
+        { heading: "Une demande fréquente : plus discret, plus personnel", body: "Les clients qui conçoivent une deuxième bague de fiançailles veulent souvent moins de spectacle que la première fois — une pierre plus petite et plus réfléchie, un design qui reflète qui ils sont maintenant plutôt que qui ils étaient à 24 ans. Le design sur mesure s'y prête bien, puisqu'il n'y a aucune pression de correspondre à une silhouette « traditionnelle » de première fois." },
+        { heading: "Que faire avec une ancienne bague", body: "Certains clients réutilisent les pierres d'une bague précédente dans un nouveau sertissage, ou dans une pièce entièrement différente comme un pendentif pour un enfant du premier mariage — une façon pratique et souvent significative de réutiliser un matériau qui compte encore, sans porter l'ancien design. D'autres préfèrent un nouveau départ complet avec des matériaux entièrement neufs. Les deux sont fréquents, et on peut conseiller quelles pierres sont structurellement adaptées à un nouveau sertissage." },
+        { heading: "Considérer les familles recomposées dans le design", body: "Certains clients incorporent des pierres de naissance ou des détails symboliques représentant des enfants d'une relation précédente directement dans le design — un petit accent de pierre, une gravure cachée, ou un élément symbolique travaillé dans l'anneau. C'est une façon de faire refléter à la bague la famille réellement construite, pas seulement le couple." },
+        { heading: "Il n'y a pas de prix « approprié »", body: "Une deuxième bague de fiançailles n'est pas censée coûter plus ou moins qu'une première, et aucune règle sociale ne dicte le budget. Le bon chiffre est celui qui correspond à vos circonstances de vie actuelles, souvent vraiment différentes d'une première demande faite plus tôt dans la vie." },
+        { heading: "Comment se déroule vraiment la conversation de design", body: "La consultation se concentre sur où vous en êtes maintenant — votre goût actuel, tout matériau que vous voudriez porter vers l'avant, et toute considération familiale — plutôt que de faire entrer votre choix dans un modèle de ce qu'une bague de fiançailles « typique » devrait être. C'est un processus de design vraiment personnel, comme toute pièce sur mesure." },
+      ],
+    },
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {
