@@ -253,7 +253,7 @@ export const stylePages: StylePage[] = [
     category: "engagement-rings",
     heroImage: "/rings/ring-marquise.jpg",
     heroImageAlt: { en: "A tension-set engagement ring with a marquise diamond appearing to float", fr: "Une bague de fiançailles serti-tension avec un diamant marquise semblant flotter" },
-    relatedBlogSlugs: ["guide-styles-bagues-fiancailles"],
+    relatedBlogSlugs: ["guide-styles-bagues-fiancailles", "sertissage-tension-explique"],
     en: {
       title: "Tension-Set Engagement Rings",
       subtitle: "The stone appears to float, held only by the tension of the metal itself — modern architecture, unmistakable presence.",

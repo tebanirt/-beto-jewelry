@@ -1567,6 +1567,42 @@ export const blogPosts: BlogPost[] = [
       ],
     },
   },
+  {
+    slug: "sertissage-tension-explique",
+    category: { en: "Ring Styles", fr: "Styles de bagues" },
+    publishedDate: "2026-08-05",
+    readTime: "5 min",
+    heroImage: "/blog/tension-setting-hero.jpg",
+    heroImageAlt: { en: "A diamond appearing to float in a tension-set ring against a dark background", fr: "Un diamant semblant flotter dans une bague serti-tension sur fond sombre" },
+    en: {
+      title: "The Tension Setting, Explained Properly",
+      excerpt: "The diamond looks like it's held by nothing at all. Here's the actual engineering behind that effect, and what to know before choosing one.",
+      seoTitle: "Tension Setting Explained — How It Actually Works",
+      seoDescription: "How does a tension-set ring actually hold the diamond without visible prongs? A clear explanation of the engineering, durability, and who it suits.",
+      sections: [
+        { heading: "The physics behind the 'floating' look", body: "A tension setting works by precisely engineering the two ends of the band to grip the stone under real mechanical tension — the metal itself is machined to hold the diamond by pressure alone, with tiny grooves cut into the stone's girdle for the metal to seat into securely. There's no traditional prong doing the holding; the tension is the setting." },
+        { heading: "Why it requires more precise fabrication", body: "Because the security of the stone depends entirely on exact tension rather than the more forgiving mechanics of prongs, a tension-set ring has less margin for error in fabrication than most styles. This is a setting where the maker's precision genuinely matters more than usual — worth asking directly about a jeweler's experience with this specific technique." },
+        { heading: "Is it actually as secure as it looks fragile?", body: "Yes, when made correctly — the tension mechanism is engineered specifically to hold the stone firmly under normal wear. That said, resizing a tension-set ring is more involved than a standard band, since the tension itself has to be recalibrated rather than simply cutting and resoldering metal — worth knowing if your ring size might change over time." },
+        { heading: "Which stones and shapes work best", body: "Round and princess cuts are the most common choices for tension settings, since their geometry distributes pressure evenly around the girdle. Elongated shapes are technically possible but require more careful engineering to avoid uneven pressure points." },
+        { heading: "The visual payoff", body: "Because there are no prongs covering the sides of the stone, a tension setting lets more light enter and exit the diamond from angles a pronged setting would partially block — a genuine brilliance advantage on top of the striking visual effect." },
+        { heading: "Who this setting actually suits", body: "This style rewards someone drawn to modern, architectural design over a traditional silhouette — it reads as distinctly different from any other ring in the room. It's a style choice as much as a technical one, and worth discussing directly with your designer if the look appeals to you." },
+      ],
+    },
+    fr: {
+      title: "Le serti-tension, bien expliqué",
+      excerpt: "Le diamant semble tenu par rien du tout. Voici la vraie ingénierie derrière cet effet, et ce qu'il faut savoir avant d'en choisir un.",
+      seoTitle: "Serti-tension expliqué — Comment ça fonctionne vraiment",
+      seoDescription: "Comment une bague serti-tension retient-elle vraiment le diamant sans griffes visibles ? Une explication claire de l'ingénierie, de la durabilité et à qui ça convient.",
+      sections: [
+        { heading: "La physique derrière le look « flottant »", body: "Un serti-tension fonctionne en concevant précisément les deux extrémités de l'anneau pour retenir la pierre sous une vraie tension mécanique — le métal lui-même est usiné pour tenir le diamant par pression seule, avec de minuscules rainures taillées dans le rondiste de la pierre pour que le métal s'y loge solidement. Il n'y a pas de griffe traditionnelle qui tient — la tension est le sertissage." },
+        { heading: "Pourquoi ça exige une fabrication plus précise", body: "Comme la sécurité de la pierre dépend entièrement d'une tension exacte plutôt que de la mécanique plus indulgente des griffes, une bague serti-tension a moins de marge d'erreur en fabrication que la plupart des styles. C'est un sertissage où la précision du fabricant compte vraiment plus que d'habitude — vaut la peine de demander directement l'expérience d'un bijoutier avec cette technique précise." },
+        { heading: "Est-ce vraiment aussi sécuritaire que ça en a l'air fragile ?", body: "Oui, quand c'est bien fait — le mécanisme de tension est conçu spécifiquement pour tenir la pierre fermement sous un port normal. Cela dit, redimensionner une bague serti-tension est plus complexe qu'un anneau standard, puisque la tension elle-même doit être recalibrée plutôt que de simplement couper et ressouder le métal — vaut la peine de savoir si votre taille de bague pourrait changer avec le temps." },
+        { heading: "Quelles pierres et formes fonctionnent le mieux", body: "Les tailles rondes et princesse sont les choix les plus courants pour les sertis-tension, puisque leur géométrie distribue la pression uniformément autour du rondiste. Les formes allongées sont techniquement possibles mais exigent une ingénierie plus soignée pour éviter des points de pression inégaux." },
+        { heading: "Le gain visuel", body: "Comme il n'y a pas de griffes couvrant les côtés de la pierre, un serti-tension laisse entrer et sortir plus de lumière du diamant sous des angles qu'un sertissage à griffes bloquerait partiellement — un vrai avantage de brillance en plus de l'effet visuel frappant." },
+        { heading: "À qui ce sertissage convient vraiment", body: "Ce style récompense quelqu'un attiré par un design moderne et architectural plutôt qu'une silhouette traditionnelle — il se distingue nettement de toute autre bague dans la pièce. C'est un choix de style autant qu'un choix technique, et ça vaut la peine d'en discuter directement avec votre designer si le look vous plaît." },
+      ],
+    },
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {
