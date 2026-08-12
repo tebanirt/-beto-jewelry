@@ -1,18 +1,23 @@
 "use client";
 
 import { useState } from "react";
+import Script from "next/script";
 import PageHero from "@/components/shared/PageHero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { cn } from "@/lib/utils";
 
+const CALENDLY_URL = "https://calendly.com/betojewlz";
+
 type Status = "idle" | "sending" | "success" | "error";
+type Tab = "booking" | "message";
 
 export default function ConsultationContent() {
   const tr = useTranslation();
   const p = tr.pages.consultation;
   const [status, setStatus] = useState<Status>("idle");
   const [format, setFormat] = useState("");
+  const [tab, setTab] = useState<Tab>("booking");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -73,6 +78,47 @@ export default function ConsultationContent() {
             <AnimatedSection delay={0.1}>
               <div className="bg-beto-offwhite p-10">
                 <p className="text-label text-beto-gold mb-6">{p.scheduleSession}</p>
+
+                <div className="grid grid-cols-2 gap-3 mb-8">
+                  <button
+                    type="button"
+                    onClick={() => setTab("booking")}
+                    className={cn(
+                      "px-4 py-3 border text-sm transition-colors",
+                      tab === "booking"
+                        ? "border-beto-gold text-beto-gold bg-beto-gold/5"
+                        : "border-beto-gray-subtle text-beto-gray hover:border-beto-gold hover:text-beto-gold"
+                    )}
+                  >
+                    {p.bookingTab}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTab("message")}
+                    className={cn(
+                      "px-4 py-3 border text-sm transition-colors",
+                      tab === "message"
+                        ? "border-beto-gold text-beto-gold bg-beto-gold/5"
+                        : "border-beto-gray-subtle text-beto-gray hover:border-beto-gold hover:text-beto-gold"
+                    )}
+                  >
+                    {p.messageTab}
+                  </button>
+                </div>
+
+                {tab === "booking" && (
+                  <div>
+                    <p className="text-xs text-beto-gray leading-relaxed mb-4">{p.bookingNote}</p>
+                    <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="afterInteractive" />
+                    <div
+                      className="calendly-inline-widget"
+                      data-url={`${CALENDLY_URL}?primary_color=c9a86a`}
+                      style={{ minWidth: "280px", height: "700px" }}
+                    />
+                  </div>
+                )}
+
+                {tab === "message" && (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-6">
                   <div>
                     <p className="text-xs font-medium text-beto-black mb-3 tracking-wide">{p.preferredFormat}</p>
@@ -140,10 +186,13 @@ export default function ConsultationContent() {
                     <p className="text-sm text-red-700 bg-red-50 border border-red-200 px-4 py-3">{p.errorMessage}</p>
                   )}
                 </form>
+                )}
 
-                <p className="text-xs text-beto-gray-light mt-4 text-center leading-relaxed">
-                  {p.responseNote}
-                </p>
+                {tab === "message" && (
+                  <p className="text-xs text-beto-gray-light mt-4 text-center leading-relaxed">
+                    {p.responseNote}
+                  </p>
+                )}
               </div>
             </AnimatedSection>
           </div>
