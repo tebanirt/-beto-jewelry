@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { useStore } from "@/store/useStore";
+import { useStore, detectLanguage } from "@/store/useStore";
 import { useTranslation } from "@/hooks/useTranslation";
 import { ChevronDown, Menu, X } from "lucide-react";
 
@@ -25,6 +25,13 @@ export default function Navigation() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isHomePage]);
+
+  // Runs client-side only, after hydration, so the browser-language-detected
+  // value never conflicts with the server-rendered ("en") first paint.
+  useEffect(() => {
+    setLanguage(detectLanguage());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (mobileMenuOpen) {
