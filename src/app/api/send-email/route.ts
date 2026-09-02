@@ -46,7 +46,7 @@ export async function POST(request: Request) {
     const replyTo = fields.email || fields.Email || undefined;
 
     const { error } = await resend.emails.send({
-      from: "Beto Jewelry <onboarding@resend.dev>",
+      from: "Beto Jewelry <noreply@betojewelry.com>",
       to: TO_EMAIL,
       replyTo,
       subject,
