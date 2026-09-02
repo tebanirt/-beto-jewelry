@@ -21,6 +21,7 @@ export async function generateMetadata({
   return {
     title: page.fr.seoTitle,
     description: page.fr.seoDescription,
+    alternates: { canonical: `/${page.category}/${page.slug}` },
     openGraph: {
       title: page.fr.seoTitle,
       description: page.fr.seoDescription,

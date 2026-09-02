@@ -4,6 +4,7 @@ import TermsContent from "./TermsContent";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description: "The terms governing custom jewelry design and purchases from Beto Jewelry, Montreal.",
+  alternates: { canonical: "/terms" },
 };
 
 export default function TermsPage() {

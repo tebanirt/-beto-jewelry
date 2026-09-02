@@ -4,6 +4,7 @@ import AboutContent from "./AboutContent";
 export const metadata: Metadata = {
   title: "About Beto Jewelry",
   description: "The story behind Beto Jewelry — Montreal's custom fine jewelry house. Learn about our goldsmith, our values, and our mission.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {
