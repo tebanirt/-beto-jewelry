@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Check, Upload } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "@/hooks/useTranslation";
+import { trackMetaLead } from "@/lib/metaPixel";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -56,6 +57,7 @@ export default function CustomDesignContent() {
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("success");
+      trackMetaLead("custom-design");
     } catch {
       setStatus("error");
     }

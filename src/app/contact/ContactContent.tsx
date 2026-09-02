@@ -5,6 +5,7 @@ import PageHero from "@/components/shared/PageHero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import { trackMetaLead } from "@/lib/metaPixel";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -44,6 +45,7 @@ export default function ContactContent() {
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("success");
+      trackMetaLead("contact");
       e.currentTarget.reset();
     } catch {
       setStatus("error");

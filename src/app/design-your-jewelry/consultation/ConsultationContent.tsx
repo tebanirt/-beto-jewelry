@@ -6,6 +6,7 @@ import PageHero from "@/components/shared/PageHero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { cn } from "@/lib/utils";
+import { trackMetaLead } from "@/lib/metaPixel";
 
 const CALENDLY_URL = "https://calendly.com/betojewlz";
 
@@ -41,6 +42,7 @@ export default function ConsultationContent() {
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("success");
+      trackMetaLead("consultation");
       e.currentTarget.reset();
       setFormat("");
     } catch {

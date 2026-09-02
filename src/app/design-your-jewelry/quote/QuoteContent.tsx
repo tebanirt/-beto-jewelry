@@ -4,6 +4,7 @@ import { useState } from "react";
 import PageHero from "@/components/shared/PageHero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { useTranslation } from "@/hooks/useTranslation";
+import { trackMetaLead } from "@/lib/metaPixel";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -34,6 +35,7 @@ export default function QuoteContent() {
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("success");
+      trackMetaLead("quote");
       e.currentTarget.reset();
     } catch {
       setStatus("error");

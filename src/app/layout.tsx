@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
+import MetaPixel from "@/components/analytics/MetaPixel";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -108,6 +109,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="bg-beto-white text-beto-black antialiased">
+        <MetaPixel />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
