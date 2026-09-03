@@ -236,6 +236,7 @@ export default function Navigation() {
             <div className="flex items-center gap-1">
               <button
                 onClick={() => setLanguage("en")}
+                aria-pressed={language === "en"}
                 className={cn(
                   "text-xs font-medium tracking-widest transition-colors",
                   language === "en"
@@ -248,6 +249,7 @@ export default function Navigation() {
               <span className={cn("text-xs", scrolled ? "text-beto-gray-subtle" : "text-white/30")}>|</span>
               <button
                 onClick={() => setLanguage("fr")}
+                aria-pressed={language === "fr"}
                 className={cn(
                   "text-xs font-medium tracking-widest transition-colors",
                   language === "fr"
@@ -343,12 +345,14 @@ export default function Navigation() {
               <div className="flex gap-4 mb-6">
                 <button
                   onClick={() => setLanguage("en")}
+                  aria-pressed={language === "en"}
                   className={cn("text-xs font-medium tracking-widest", language === "en" ? "text-beto-black" : "text-beto-gray-light")}
                 >
                   EN
                 </button>
                 <button
                   onClick={() => setLanguage("fr")}
+                  aria-pressed={language === "fr"}
                   className={cn("text-xs font-medium tracking-widest", language === "fr" ? "text-beto-black" : "text-beto-gray-light")}
                 >
                   FR

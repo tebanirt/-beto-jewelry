@@ -55,6 +55,7 @@ export default function GalleryContent() {
               <button
                 key={cat}
                 onClick={() => setActive(i)}
+                aria-pressed={i === active}
                 className={cn(
                   "px-5 py-2 text-xs font-medium tracking-wider uppercase border transition-colors",
                   i === active

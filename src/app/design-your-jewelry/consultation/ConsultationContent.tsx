@@ -85,6 +85,7 @@ export default function ConsultationContent() {
                   <button
                     type="button"
                     onClick={() => setTab("booking")}
+                    aria-pressed={tab === "booking"}
                     className={cn(
                       "px-4 py-3 border text-sm transition-colors",
                       tab === "booking"
@@ -97,6 +98,7 @@ export default function ConsultationContent() {
                   <button
                     type="button"
                     onClick={() => setTab("message")}
+                    aria-pressed={tab === "message"}
                     className={cn(
                       "px-4 py-3 border text-sm transition-colors",
                       tab === "message"

@@ -128,6 +128,7 @@ export default function CustomDesignContent() {
                   <button
                     key={type}
                     onClick={() => update("projectType", type)}
+                    aria-pressed={data.projectType === type}
                     className={cn(
                       "px-4 py-5 border text-sm font-medium text-left transition-all duration-200",
                       data.projectType === type
@@ -176,7 +177,7 @@ export default function CustomDesignContent() {
                 <p className="text-xs font-medium text-beto-black tracking-wide mb-4">{cd.stoneLabel}</p>
                 <div className="grid grid-cols-2 gap-3">
                   {cd.stoneTypes.map((s) => (
-                    <button key={s} onClick={() => update("stone", s)} className={cn("px-4 py-4 border text-sm text-left transition-all duration-200", data.stone === s ? "border-beto-gold bg-beto-gold/10 text-beto-black" : "border-beto-gray-subtle bg-beto-white text-beto-gray hover:border-beto-gold/60")}>
+                    <button key={s} onClick={() => update("stone", s)} aria-pressed={data.stone === s} className={cn("px-4 py-4 border text-sm text-left transition-all duration-200", data.stone === s ? "border-beto-gold bg-beto-gold/10 text-beto-black" : "border-beto-gray-subtle bg-beto-white text-beto-gray hover:border-beto-gold/60")}>
                       {s}
                     </button>
                   ))}
@@ -188,7 +189,7 @@ export default function CustomDesignContent() {
                   <p className="text-xs font-medium text-beto-black tracking-wide mb-4">{cd.shapeLabel} <span className="text-beto-gray-light font-normal">{cd.shapeOpt}</span></p>
                   <div className="flex flex-wrap gap-3">
                     {cd.shapes.map((s) => (
-                      <button key={s} onClick={() => update("shape", s)} className={cn("px-4 py-2.5 border text-xs font-medium tracking-wide transition-all duration-200", data.shape === s ? "border-beto-gold bg-beto-gold/10 text-beto-black" : "border-beto-gray-subtle bg-beto-white text-beto-gray hover:border-beto-gold/60")}>
+                      <button key={s} onClick={() => update("shape", s)} aria-pressed={data.shape === s} className={cn("px-4 py-2.5 border text-xs font-medium tracking-wide transition-all duration-200", data.shape === s ? "border-beto-gold bg-beto-gold/10 text-beto-black" : "border-beto-gray-subtle bg-beto-white text-beto-gray hover:border-beto-gold/60")}>
                         {s}
                       </button>
                     ))}
@@ -200,7 +201,7 @@ export default function CustomDesignContent() {
                 <p className="text-xs font-medium text-beto-black tracking-wide mb-4">{cd.metalLabel}</p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {cd.metals.map((m) => (
-                    <button key={m} onClick={() => update("metal", m)} className={cn("px-4 py-4 border text-sm text-left transition-all duration-200", data.metal === m ? "border-beto-gold bg-beto-gold/10 text-beto-black" : "border-beto-gray-subtle bg-beto-white text-beto-gray hover:border-beto-gold/60")}>
+                    <button key={m} onClick={() => update("metal", m)} aria-pressed={data.metal === m} className={cn("px-4 py-4 border text-sm text-left transition-all duration-200", data.metal === m ? "border-beto-gold bg-beto-gold/10 text-beto-black" : "border-beto-gray-subtle bg-beto-white text-beto-gray hover:border-beto-gold/60")}>
                       {m}
                     </button>
                   ))}
@@ -211,7 +212,7 @@ export default function CustomDesignContent() {
                 <p className="text-xs font-medium text-beto-black tracking-wide mb-4">{cd.budgetLabel}</p>
                 <div className="flex flex-wrap gap-3">
                   {cd.budgets.map((b) => (
-                    <button key={b} onClick={() => update("budget", b)} className={cn("px-4 py-2.5 border text-xs font-medium tracking-wide transition-all duration-200", data.budget === b ? "border-beto-gold bg-beto-gold/10 text-beto-black" : "border-beto-gray-subtle bg-beto-white text-beto-gray hover:border-beto-gold/60")}>
+                    <button key={b} onClick={() => update("budget", b)} aria-pressed={data.budget === b} className={cn("px-4 py-2.5 border text-xs font-medium tracking-wide transition-all duration-200", data.budget === b ? "border-beto-gold bg-beto-gold/10 text-beto-black" : "border-beto-gray-subtle bg-beto-white text-beto-gray hover:border-beto-gold/60")}>
                       {b}
                     </button>
                   ))}
@@ -222,7 +223,7 @@ export default function CustomDesignContent() {
                 <p className="text-xs font-medium text-beto-black tracking-wide mb-4">{cd.timelineLabel}</p>
                 <div className="flex flex-wrap gap-3">
                   {cd.timelines.map((t) => (
-                    <button key={t} onClick={() => update("timeline", t)} className={cn("px-4 py-2.5 border text-xs font-medium tracking-wide transition-all duration-200", data.timeline === t ? "border-beto-gold bg-beto-gold/10 text-beto-black" : "border-beto-gray-subtle bg-beto-white text-beto-gray hover:border-beto-gold/60")}>
+                    <button key={t} onClick={() => update("timeline", t)} aria-pressed={data.timeline === t} className={cn("px-4 py-2.5 border text-xs font-medium tracking-wide transition-all duration-200", data.timeline === t ? "border-beto-gold bg-beto-gold/10 text-beto-black" : "border-beto-gray-subtle bg-beto-white text-beto-gray hover:border-beto-gold/60")}>
                       {t}
                     </button>
                   ))}
@@ -258,7 +259,7 @@ export default function CustomDesignContent() {
                   <p className="text-xs font-medium text-beto-black tracking-wide mb-3">{cd.contactMethodLabel}</p>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     {cd.contacts.map((c) => (
-                      <button key={c} onClick={() => update("contactMethod", c)} className={cn("px-4 py-3 border text-sm transition-all duration-200", data.contactMethod === c ? "border-beto-gold bg-beto-gold/10 text-beto-black" : "border-beto-gray-subtle bg-beto-white text-beto-gray hover:border-beto-gold/60")}>
+                      <button key={c} onClick={() => update("contactMethod", c)} aria-pressed={data.contactMethod === c} className={cn("px-4 py-3 border text-sm transition-all duration-200", data.contactMethod === c ? "border-beto-gold bg-beto-gold/10 text-beto-black" : "border-beto-gray-subtle bg-beto-white text-beto-gray hover:border-beto-gold/60")}>
                         {c}
                       </button>
                     ))}

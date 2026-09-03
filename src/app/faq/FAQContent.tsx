@@ -14,6 +14,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
     <div className="border-b border-beto-gray-subtle/40">
       <button
         onClick={() => setOpen(!open)}
+        aria-expanded={open}
         className="w-full flex items-center justify-between py-5 text-left gap-6"
       >
         <span className="font-display text-beto-black text-lg font-normal leading-snug">{question}</span>
