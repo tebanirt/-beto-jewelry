@@ -8,13 +8,13 @@ import Button from "@/components/ui/Button";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const GRILLZ_IMAGES = [
-  "/grillz/open-face.png",                   // Open Face
-  "/grillz/mosaic.png",                      // Mosaic
-  "/grillz/full-iced-out-big-pointers.png",  // Full Iced Out Big Pointers
-  "/grillz/full-ice-out.png",                // Full Ice Out
+  "/grillz/open-face.jpg",                   // Open Face
+  "/grillz/mosaic.jpg",                      // Mosaic
+  "/grillz/full-iced-out-big-pointers.jpg",  // Full Iced Out Big Pointers
+  "/grillz/full-ice-out.jpg",                // Full Ice Out
   "/grillz/ten-on-ten.png",                  // 10 On 10
   "/grillz/opal-inlay.png",                  // Opal Inlay
-  "/grillz/single-tooth.png",                // Single Tooth
+  "/grillz/single-tooth.jpg",                // Single Tooth
   "/grillz/single-tooth-pave.png",           // Single Tooth Pavé
 ];
 

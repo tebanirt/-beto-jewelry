@@ -246,7 +246,7 @@ export const blogPosts: BlogPost[] = [
     category: { en: "Grillz", fr: "Grillz" },
     publishedDate: "2026-08-04",
     readTime: "6 min",
-    heroImage: "/grillz/open-face.png",
+    heroImage: "/grillz/open-face.jpg",
     heroImageAlt: { en: "Gold open-face grillz on a dental mold", fr: "Grillz en or ajourés sur un moule dentaire" },
     en: {
       title: "The Culture Behind Grillz: From Hip-Hop Roots to Custom Luxury",
@@ -1290,7 +1290,7 @@ export const blogPosts: BlogPost[] = [
     category: { en: "Grillz", fr: "Grillz" },
     publishedDate: "2026-08-05",
     readTime: "4 min",
-    heroImage: "/grillz/full-iced-out-big-pointers.png",
+    heroImage: "/grillz/full-iced-out-big-pointers.jpg",
     heroImageAlt: { en: "Fully iced out grillz with oversized center stones on a dental mold", fr: "Grillz full iced out avec pierres centrales surdimensionnées sur un moule dentaire" },
     en: {
       title: "Grillz for Special Occasions: What to Consider",
@@ -1324,7 +1324,7 @@ export const blogPosts: BlogPost[] = [
     category: { en: "Grillz", fr: "Grillz" },
     publishedDate: "2026-08-05",
     readTime: "4 min",
-    heroImage: "/grillz/single-tooth.png",
+    heroImage: "/grillz/single-tooth.jpg",
     heroImageAlt: { en: "A single gold tooth grillz cap on a dental mold", fr: "Un grillz une dent en or sur un moule dentaire" },
     en: {
       title: "Why Single Tooth Grillz Are Having a Moment",

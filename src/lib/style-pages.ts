@@ -555,7 +555,7 @@ export const stylePages: StylePage[] = [
   {
     slug: "single-tooth",
     category: "grillz",
-    heroImage: "/grillz/single-tooth.png",
+    heroImage: "/grillz/single-tooth.jpg",
     heroImageAlt: { en: "A single tooth gold grillz cap", fr: "Un grillz une dent en or" },
     relatedBlogSlugs: ["culture-grillz-bijoux-hip-hop", "entretien-nettoyage-grillz", "tendance-single-tooth-grillz"],
     en: {
@@ -586,7 +586,7 @@ export const stylePages: StylePage[] = [
   {
     slug: "full-ice-out",
     category: "grillz",
-    heroImage: "/grillz/full-ice-out.png",
+    heroImage: "/grillz/full-ice-out.jpg",
     heroImageAlt: { en: "A full ice out rose gold grillz set fully paved with diamonds", fr: "Un ensemble de grillz full ice out en or rose entièrement pavé de diamants" },
     relatedBlogSlugs: ["culture-grillz-bijoux-hip-hop", "entretien-nettoyage-grillz", "grillz-occasions-speciales"],
     en: {
