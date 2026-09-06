@@ -26,6 +26,7 @@ export async function generateMetadata({
       title: page.fr.seoTitle,
       description: page.fr.seoDescription,
       type: "website",
+      images: [{ url: page.heroImage, alt: page.heroImageAlt.fr }],
     },
   };
 }

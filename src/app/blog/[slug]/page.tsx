@@ -25,6 +25,7 @@ export async function generateMetadata({
       description: post.fr.seoDescription,
       type: "article",
       publishedTime: post.publishedDate,
+      images: [{ url: post.heroImage, alt: post.heroImageAlt.fr }],
     },
   };
 }
@@ -43,6 +44,7 @@ export default async function BlogArticlePage({
     "@type": "Article",
     headline: post.fr.title,
     description: post.fr.seoDescription,
+    image: `https://betojewelry.com${post.heroImage}`,
     datePublished: post.publishedDate,
     author: { "@type": "Organization", name: "Beto Jewelry" },
     publisher: { "@type": "Organization", name: "Beto Jewelry", logo: { "@type": "ImageObject", url: "https://betojewelry.com/logo.png" } },
