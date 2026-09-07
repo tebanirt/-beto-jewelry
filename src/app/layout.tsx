@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s | Beto Jewelry",
   },
   description:
-    "Montreal's premier custom jewelry house. Handcrafted engagement rings, wedding bands, and bespoke fine jewelry. Work directly with our designer. CAD design within 48 hours.",
+    "Custom engagement rings and fine jewelry in Montreal, designed with you by certified goldsmith Rayane Tebani. 3D rendering in 48 hours, engagement rings delivered in about two weeks.",
   keywords: [
     "custom engagement rings Montreal",
     "bespoke jewelry Montreal",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     siteName: "Beto Jewelry",
     title: "Beto Jewelry | Custom Engagement Rings Montreal",
     description:
-      "Montreal's premier custom jewelry house. Every ring is designed specifically for you.",
+      "Custom engagement rings and fine jewelry in Montreal. Every ring is designed with you, directly by the goldsmith who makes it.",
     images: [
       {
         url: "/og-image.jpg",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Beto Jewelry | Custom Engagement Rings Montreal",
     description:
-      "Montreal's premier custom jewelry house. Every ring is designed specifically for you.",
+      "Custom engagement rings and fine jewelry in Montreal. Every ring is designed with you, directly by the goldsmith who makes it.",
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -80,7 +80,7 @@ const jsonLd = {
   "@type": "JewelryStore",
   name: "Beto Jewelry",
   description:
-    "Montreal's premier custom jewelry house. Handcrafted engagement rings, wedding bands, and bespoke fine jewelry.",
+    "Custom engagement rings, wedding bands and fine jewelry in Montreal, designed with you by certified goldsmith Rayane Tebani.",
   url: "https://betojewelry.com",
   logo: "https://betojewelry.com/logo.png",
   image: "https://betojewelry.com/og-image.jpg",

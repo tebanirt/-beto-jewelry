@@ -10,7 +10,7 @@ import EducationTeaser from "@/components/home/EducationTeaser";
 export const metadata: Metadata = {
   title: "Beto Jewelry | Custom Engagement Rings Montreal",
   description:
-    "Montreal's premier custom jewelry house. Handcrafted engagement rings, wedding bands, and bespoke fine jewelry. Work directly with our designer. CAD design within 48 hours.",
+    "Custom engagement rings and fine jewelry in Montreal, designed with you by certified goldsmith Rayane Tebani. 3D rendering in 48 hours, engagement rings delivered in about two weeks.",
   alternates: { canonical: "/" },
 };
 
