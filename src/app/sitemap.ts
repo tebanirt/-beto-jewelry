@@ -6,6 +6,7 @@ const BASE_URL = "https://betojewelry.com";
 
 const routes = [
   "",
+  "/montreal",
   "/engagement-rings",
   "/wedding-bands",
   "/fine-jewelry",
@@ -30,7 +31,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${BASE_URL}${route}`,
     lastModified: new Date(),
     changeFrequency: route === "" ? "weekly" : "monthly",
-    priority: route === "" ? 1 : route.startsWith("/privacy") || route.startsWith("/terms") ? 0.2 : 0.8,
+    priority:
+      route === ""
+        ? 1
+        : route === "/montreal"
+          ? 0.9
+          : route.startsWith("/privacy") || route.startsWith("/terms")
+            ? 0.2
+            : 0.8,
   }));
 
   const blogEntries: MetadataRoute.Sitemap = blogPosts.map((post) => ({

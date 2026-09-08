@@ -27,6 +27,7 @@ export default function Footer() {
 
   const companyLinks = [
     { label: tr.footer.about, href: "/about" },
+    { label: tr.footer.montrealLink, href: "/montreal" },
     { label: tr.footer.education, href: "/education" },
     { label: tr.footer.faq, href: "/faq" },
     { label: tr.footer.contactPage, href: "/contact" },
