@@ -10,10 +10,10 @@ import { useStore } from "@/store/useStore";
 import { getBlogPost } from "@/lib/blog-posts";
 
 const RELATED_SLUGS = [
-  "combien-coute-bague-fiancailles-sur-mesure",
-  "pourquoi-bijoutier-independant-montreal",
-  "processus-design-sur-mesure-explique",
-  "diamant-naturel-vs-laboratoire-lequel-choisir",
+  "prix-bague-fiancailles-montreal-2026",
+  "a-quoi-sattendre-consultation-joaillier",
+  "grande-bijouterie-vs-joaillier-independant-montreal",
+  "bague-sur-mesure-vs-pret-a-porter",
   "meilleurs-endroits-demande-mariage-montreal",
 ];
 
