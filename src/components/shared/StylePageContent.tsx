@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import PageHero from "@/components/shared/PageHero";
+import TrustBar from "@/components/shared/TrustBar";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Button from "@/components/ui/Button";
 import { useStore } from "@/store/useStore";
@@ -25,6 +26,8 @@ export default function StylePageContent({ page }: { page: StylePage }) {
   return (
     <>
       <PageHero eyebrow={catLabel} title={p.title} subtitle={p.subtitle} />
+
+      <TrustBar />
 
       <section className="py-16 lg:py-24 bg-beto-white">
         <div className="container-beto max-w-2xl mx-auto">

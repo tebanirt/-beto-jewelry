@@ -120,6 +120,12 @@ export const t = {
         { title: "Ring Sizing & Fit", body: "How to find the right size, what affects comfort, and what to do if the ring ever needs resizing.", href: "/education#sizing", tag: "Fit" },
       ],
     },
+    trustBar: [
+      { value: "48 h", label: "3D CAD render before anything is made" },
+      { value: "From $2,000", label: "Engagement rings, diamond included (CAD)" },
+      { value: "Across Canada", label: "Free virtual consultation, or in person in Montréal" },
+      { value: "No middleman", label: "You design directly with goldsmith Rayane Tebani" },
+    ],
     footer: {
       tagline: "A new generation Canadian jewelry house. Every piece is designed exclusively for you.",
       collections: "Collections",
@@ -825,6 +831,12 @@ export const t = {
         { title: "Taille et confort de la bague", body: "Comment trouver la bonne taille, ce qui affecte le confort et quoi faire si la bague doit être redimensionnée.", href: "/education#sizing", tag: "Ajustement" },
       ],
     },
+    trustBar: [
+      { value: "48 h", label: "Rendu CAO 3D avant toute fabrication" },
+      { value: "Dès 2 000 $", label: "Bagues de fiançailles, diamant inclus (CAD)" },
+      { value: "Partout au Canada", label: "Consultation virtuelle gratuite, ou en personne à Montréal" },
+      { value: "Sans intermédiaire", label: "Vous concevez directement avec le joaillier Rayane Tebani" },
+    ],
     footer: {
       tagline: "Une nouvelle génération de joaillerie canadienne. Chaque pièce est conçue exclusivement pour vous.",
       collections: "Collections",

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import PageHero from "@/components/shared/PageHero";
+import TrustBar from "@/components/shared/TrustBar";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Button from "@/components/ui/Button";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -30,6 +31,8 @@ export default function MontrealContent() {
   return (
     <>
       <PageHero eyebrow={p.eyebrow} title={p.title} titleItalic={p.titleItalic} subtitle={p.subtitle} />
+
+      <TrustBar />
 
       <section className="bg-beto-white py-20 lg:py-28">
         <div className="container-beto max-w-3xl">
