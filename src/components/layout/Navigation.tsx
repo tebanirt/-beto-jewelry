@@ -12,15 +12,16 @@ import { ChevronDown, Menu, X } from "lucide-react";
 export default function Navigation() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
-  const [scrolled, setScrolled] = useState(!isHomePage);
+  const [homeScrolled, setHomeScrolled] = useState(false);
+  const scrolled = isHomePage ? homeScrolled : true;
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const { language, setLanguage, mobileMenuOpen, setMobileMenuOpen } = useStore();
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const tr = useTranslation();
 
   useEffect(() => {
-    if (!isHomePage) { setScrolled(true); return; }
-    const handleScroll = () => setScrolled(window.scrollY > 60);
+    if (!isHomePage) return;
+    const handleScroll = () => setHomeScrolled(window.scrollY > 60);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
