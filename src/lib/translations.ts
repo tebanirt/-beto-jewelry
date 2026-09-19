@@ -90,6 +90,7 @@ export const t = {
       eyebrow: "Client Stories",
       headline: "Moments we've",
       headlineItalic: "been part of.",
+      googleCta: "See all our reviews on Google",
       items: [
         { quote: "I came with a sketch on my phone and left with a CAD design that looked exactly like I imagined — but better. The ring was ready in three weeks and my fiancée cried when she saw it.", author: "Michael T.", detail: "Engagement Ring — Round Brilliant, 18K White Gold" },
         { quote: "The process was completely transparent. I knew every cost, every timeline, every material choice. No surprises. That kind of honesty is rare when you're spending this much.", author: "Sarah & James L.", detail: "Custom Wedding Set — Oval Diamond, Pavé Band" },
@@ -742,6 +743,7 @@ export const t = {
       eyebrow: "Témoignages",
       headline: "Des moments dont",
       headlineItalic: "nous avons fait partie.",
+      googleCta: "Voir tous nos avis sur Google",
       items: [
         { quote: "Je suis arrivé avec un croquis sur mon téléphone et je suis reparti avec un design 3D qui ressemblait exactement à ce que j'imaginais — en mieux. La bague était prête en trois semaines et ma fiancée a pleuré quand elle l'a vue.", author: "Michael T.", detail: "Bague de fiançailles — Brillant rond, Or blanc 18K" },
         { quote: "Le processus était entièrement transparent. Je connaissais chaque coût, chaque délai, chaque choix de matériau. Aucune surprise. Ce niveau d'honnêteté est rare quand on dépense autant.", author: "Sarah & James L.", detail: "Ensemble mariage sur mesure — Diamant ovale, Anneau pavé" },
