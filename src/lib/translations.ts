@@ -90,11 +90,11 @@ export const t = {
       eyebrow: "Client Stories",
       headline: "Moments we've",
       headlineItalic: "been part of.",
+      googleCta: "See all our reviews on Google",
       items: [
-        { quote: "I came with a sketch on my phone and left with a CAD design that looked exactly like I imagined — but better. The ring was ready in three weeks and my fiancée cried when she saw it.", author: "Michael T.", detail: "Engagement Ring — Round Brilliant, 18K White Gold" },
-        { quote: "The process was completely transparent. I knew every cost, every timeline, every material choice. No surprises. That kind of honesty is rare when you're spending this much.", author: "Sarah & James L.", detail: "Custom Wedding Set — Oval Diamond, Pavé Band" },
-        { quote: "We redesigned my grandmother's heirloom ring. The designer understood immediately what it meant to us. The finished piece makes it look like it was always meant to look this way.", author: "Amélie D.", detail: "Heirloom Redesign — Vintage Cluster, Rose Gold" },
-        { quote: "Working directly with the designer instead of a salesperson made all the difference. He educated us on every diamond we were considering without any pressure. We felt respected.", author: "David & Priya M.", detail: "Engagement Ring — Emerald Cut, Platinum" },
+        { quote: "It was truly an amazing experience not only did rayane and lauren help us find our dream ring but guide us in every step of the process. I must say one of the best best diamond jewellers.", author: "Eli Mdy", detail: "Verified Google Review" },
+        { quote: "5 stars isn't enough for the beautiful ring Rayane made me! He made my dream come to life and I'm beyond happy with the results! Thank you again. I will definitely order from you again", author: "Patricia Rose", detail: "Verified Google Review" },
+        { quote: "Excellent service! Super belle bijouterie, personnel professionnel et accueillant. Je recommande à 100 %!", author: "Olivier Dubé", detail: "Verified Google Review" },
       ],
     },
     designJourney: {
@@ -742,11 +742,11 @@ export const t = {
       eyebrow: "Témoignages",
       headline: "Des moments dont",
       headlineItalic: "nous avons fait partie.",
+      googleCta: "Voir tous nos avis sur Google",
       items: [
-        { quote: "Je suis arrivé avec un croquis sur mon téléphone et je suis reparti avec un design 3D qui ressemblait exactement à ce que j'imaginais — en mieux. La bague était prête en trois semaines et ma fiancée a pleuré quand elle l'a vue.", author: "Michael T.", detail: "Bague de fiançailles — Brillant rond, Or blanc 18K" },
-        { quote: "Le processus était entièrement transparent. Je connaissais chaque coût, chaque délai, chaque choix de matériau. Aucune surprise. Ce niveau d'honnêteté est rare quand on dépense autant.", author: "Sarah & James L.", detail: "Ensemble mariage sur mesure — Diamant ovale, Anneau pavé" },
-        { quote: "Nous avons repensé la bague héritée de ma grand-mère. Le designer a immédiatement compris ce que cela représentait pour nous. La pièce finale donne l'impression qu'elle a toujours été faite pour ressembler à ça.", author: "Amélie D.", detail: "Redesign héritage — Grappe vintage, Or rose" },
-        { quote: "Travailler directement avec le designer plutôt qu'un vendeur a tout changé. Il nous a renseignés sur chaque diamant que nous considérions sans aucune pression. Nous nous sommes sentis respectés.", author: "David & Priya M.", detail: "Bague de fiançailles — Coupe émeraude, Platine" },
+        { quote: "It was truly an amazing experience not only did rayane and lauren help us find our dream ring but guide us in every step of the process. I must say one of the best best diamond jewellers.", author: "Eli Mdy", detail: "Avis Google vérifié" },
+        { quote: "5 stars isn't enough for the beautiful ring Rayane made me! He made my dream come to life and I'm beyond happy with the results! Thank you again. I will definitely order from you again", author: "Patricia Rose", detail: "Avis Google vérifié" },
+        { quote: "Excellent service! Super belle bijouterie, personnel professionnel et accueillant. Je recommande à 100 %!", author: "Olivier Dubé", detail: "Avis Google vérifié" },
       ],
     },
     designJourney: {

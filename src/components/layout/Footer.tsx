@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import { GOOGLE_REVIEW_URL } from "@/lib/constants";
 
 function IconInstagram({ size = 18 }: { size?: number }) {
   return (
@@ -18,6 +19,14 @@ function IconFacebook({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  );
+}
+
+function IconGoogleReview({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2.5l2.6 5.6 6.1.8-4.5 4.3 1.1 6.1L12 16.3l-5.3 2.9 1.1-6.1L3.3 8.9l6.1-.8L12 2.5z" />
     </svg>
   );
 }
@@ -69,6 +78,15 @@ export default function Footer() {
                 aria-label="Facebook betojewelry"
               >
                 <IconFacebook size={18} />
+              </a>
+              <a
+                href={GOOGLE_REVIEW_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/40 hover:text-beto-gold transition-colors duration-200"
+                aria-label="Google Reviews"
+              >
+                <IconGoogleReview size={18} />
               </a>
             </div>
           </div>

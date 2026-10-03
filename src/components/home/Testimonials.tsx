@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedSection from "@/components/ui/AnimatedSection";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import { GOOGLE_REVIEW_URL } from "@/lib/constants";
 
 export default function Testimonials() {
   const [index, setIndex] = useState(0);
@@ -33,10 +34,21 @@ export default function Testimonials() {
         </AnimatedSection>
 
         <div className="relative max-w-3xl">
-          <div className="flex items-center gap-1 mb-8">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <span key={i} className="text-beto-gold text-sm">★</span>
-            ))}
+          <div className="flex items-center gap-4 mb-8">
+            <div className="flex items-center gap-1">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <span key={i} className="text-beto-gold text-sm">★</span>
+              ))}
+            </div>
+            <a
+              href={GOOGLE_REVIEW_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs text-beto-gray-light hover:text-beto-gold transition-colors duration-200"
+            >
+              {tr.testimonials.googleCta}
+              <ExternalLink size={12} />
+            </a>
           </div>
 
           <AnimatePresence mode="wait" custom={direction}>
