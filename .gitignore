@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# claude code local overrides (personal, not shared)
+.claude/settings.local.json
+
 # local image review material, not part of the site
 /image-review
 
