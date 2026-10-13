@@ -7,6 +7,7 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { cn } from "@/lib/utils";
 import { trackMetaLead, trackMetaSchedule } from "@/lib/metaPixel";
+import { submitLeadForm } from "@/lib/submitForm";
 
 const CALENDLY_URL = "https://calendly.com/betojewlz";
 
@@ -50,18 +51,13 @@ export default function ConsultationContent() {
       email: formData.get("email")?.toString() || "",
     };
 
-    try {
-      const res = await fetch("/api/send-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ formType: "consultation", fields }),
-      });
-      if (!res.ok) throw new Error("Request failed");
+    const ok = await submitLeadForm("consultation", fields);
+    if (ok) {
       setStatus("success");
       trackMetaLead("consultation");
       e.currentTarget.reset();
       setFormat("");
-    } catch {
+    } else {
       setStatus("error");
     }
   }
