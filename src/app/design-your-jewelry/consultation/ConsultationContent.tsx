@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Script from "next/script";
 import PageHero from "@/components/shared/PageHero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { cn } from "@/lib/utils";
-import { trackMetaLead } from "@/lib/metaPixel";
+import { trackMetaLead, trackMetaSchedule } from "@/lib/metaPixel";
 
 const CALENDLY_URL = "https://calendly.com/betojewlz";
 
@@ -19,6 +19,16 @@ export default function ConsultationContent() {
   const [status, setStatus] = useState<Status>("idle");
   const [format, setFormat] = useState("");
   const [tab, setTab] = useState<Tab>("booking");
+
+  useEffect(() => {
+    function handleCalendlyMessage(e: MessageEvent) {
+      if (e.origin === "https://calendly.com" && e.data?.event === "calendly.event_scheduled") {
+        trackMetaSchedule("consultation-booking");
+      }
+    }
+    window.addEventListener("message", handleCalendlyMessage);
+    return () => window.removeEventListener("message", handleCalendlyMessage);
+  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
