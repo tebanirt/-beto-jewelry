@@ -4,7 +4,7 @@ import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
-const PIXEL_ID = "2820302881683119";
+const PIXEL_ID = "900920389771896";
 
 /**
  * Base Meta Pixel + PageView tracking on every client-side route change.
