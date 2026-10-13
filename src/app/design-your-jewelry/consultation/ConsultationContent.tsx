@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Script from "next/script";
 import PageHero from "@/components/shared/PageHero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
@@ -19,10 +19,16 @@ export default function ConsultationContent() {
   const [status, setStatus] = useState<Status>("idle");
   const [format, setFormat] = useState("");
   const [tab, setTab] = useState<Tab>("booking");
+  const scheduledRef = useRef(false);
 
   useEffect(() => {
     function handleCalendlyMessage(e: MessageEvent) {
-      if (e.origin === "https://calendly.com" && e.data?.event === "calendly.event_scheduled") {
+      if (
+        e.origin === "https://calendly.com" &&
+        e.data?.event === "calendly.event_scheduled" &&
+        !scheduledRef.current
+      ) {
+        scheduledRef.current = true;
         trackMetaSchedule("consultation-booking");
       }
     }
