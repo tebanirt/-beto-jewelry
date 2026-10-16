@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
@@ -20,6 +20,7 @@ const stagger = {
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const tr = useTranslation();
+  const [glow, setGlow] = useState({ x: 50, y: 40 });
 
   useEffect(() => {
     if (videoRef.current) {
@@ -32,8 +33,19 @@ export default function Hero() {
     el?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleMouseMove = (e: MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setGlow({
+      x: ((e.clientX - rect.left) / rect.width) * 100,
+      y: ((e.clientY - rect.top) / rect.height) * 100,
+    });
+  };
+
   return (
-    <section className="relative w-full h-screen min-h-[600px] max-h-[900px] flex items-end overflow-hidden">
+    <section
+      onMouseMove={handleMouseMove}
+      className="relative w-full h-screen min-h-[600px] max-h-[900px] flex items-end overflow-hidden"
+    >
       {/* Background */}
       <div className="absolute inset-0 bg-beto-black" aria-hidden="true">
         <video
@@ -54,6 +66,20 @@ export default function Hero() {
           }}
         />
         <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#C9A86A]/30 to-transparent" />
+        <div
+          className="absolute pointer-events-none transition-[left,top] duration-500 ease-out hidden md:block"
+          style={{
+            left: `${glow.x}%`,
+            top: `${glow.y}%`,
+            width: "640px",
+            height: "640px",
+            transform: "translate(-50%, -50%)",
+            borderRadius: "9999px",
+            background:
+              "radial-gradient(circle, rgba(201,168,106,0.16) 0%, rgba(201,168,106,0) 70%)",
+          }}
+          aria-hidden="true"
+        />
       </div>
 
       {/* Content */}
