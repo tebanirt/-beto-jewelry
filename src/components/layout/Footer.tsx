@@ -105,6 +105,14 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/bagues-de-fiancailles-sur-mesure-montreal"
+                  className="text-sm text-white/50 hover:text-white transition-colors duration-200"
+                >
+                  Bagues de fiançailles sur mesure à Montréal
+                </Link>
+              </li>
             </ul>
           </div>
 

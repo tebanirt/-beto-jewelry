@@ -6,6 +6,7 @@ const BASE_URL = "https://betojewelry.com";
 
 const routes = [
   "",
+  "/bagues-de-fiancailles-sur-mesure-montreal",
   "/engagement-rings",
   "/wedding-bands",
   "/fine-jewelry",
