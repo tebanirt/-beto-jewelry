@@ -46,8 +46,28 @@ export default async function BlogArticlePage({
     description: post.fr.seoDescription,
     image: `https://betojewelry.com${post.heroImage}`,
     datePublished: post.publishedDate,
-    author: { "@type": "Organization", name: "Beto Jewelry" },
+    dateModified: post.publishedDate,
+    inLanguage: "fr-CA",
+    mainEntityOfPage: `https://betojewelry.com/blog/${post.slug}`,
+    author: {
+      "@type": "Person",
+      name: "Rayane Tebani",
+      jobTitle: "Goldsmith & Founder, Beto Jewelry",
+      description:
+        "Certified goldsmith trained at the École des métiers du Sud-Ouest-de-Montréal. 500+ designs created over his career.",
+      url: "https://betojewelry.com/about",
+    },
     publisher: { "@type": "Organization", name: "Beto Jewelry", logo: { "@type": "ImageObject", url: "https://betojewelry.com/logo.png" } },
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://betojewelry.com" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://betojewelry.com/blog" },
+      { "@type": "ListItem", position: 3, name: post.fr.title, item: `https://betojewelry.com/blog/${post.slug}` },
+    ],
   };
 
   return (
@@ -55,6 +75,10 @@ export default async function BlogArticlePage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <BlogArticleContent post={post} />
     </>
