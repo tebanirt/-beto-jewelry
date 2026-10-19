@@ -16,7 +16,13 @@ export const metadata: Metadata = {
     "bespoke engagement ring Montreal",
     "custom jewellery Montreal",
   ],
-  alternates: { canonical: "/montreal" },
+  alternates: {
+    canonical: "/montreal",
+    languages: {
+      en: "/montreal",
+      "fr-CA": "/bagues-de-fiancailles-sur-mesure-montreal",
+    },
+  },
   openGraph: {
     title: "Custom Engagement Rings Montréal | Beto Jewelry",
     description:

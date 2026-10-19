@@ -8,7 +8,13 @@ const DESCRIPTION =
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
-  alternates: { canonical: "/bagues-de-fiancailles-sur-mesure-montreal" },
+  alternates: {
+    canonical: "/bagues-de-fiancailles-sur-mesure-montreal",
+    languages: {
+      "fr-CA": "/bagues-de-fiancailles-sur-mesure-montreal",
+      en: "/montreal",
+    },
+  },
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
