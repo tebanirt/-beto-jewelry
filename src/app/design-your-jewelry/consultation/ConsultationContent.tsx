@@ -122,17 +122,28 @@ export default function ConsultationContent() {
                   </button>
                 </div>
 
-                {tab === "booking" && (
-                  <div>
-                    <p className="text-xs text-beto-gray leading-relaxed mb-4">{p.bookingNote}</p>
-                    <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="afterInteractive" />
-                    <div
-                      className="calendly-inline-widget"
-                      data-url={`${CALENDLY_URL}?primary_color=c9a86a`}
-                      style={{ minWidth: "280px", height: "700px" }}
-                    />
+                {/*
+                  Calendly's widget.js scans the DOM for .calendly-inline-widget
+                  only once, when it first loads — it never re-scans for a div
+                  that disappears and reappears. Conditionally unmounting this
+                  on tab switch (the old `{tab === "booking" && <div>...}`
+                  pattern) meant the widget never came back after the visitor
+                  switched to the message tab and back: an empty box forever.
+                  It now stays mounted permanently and is only hidden with CSS.
+                */}
+                <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="afterInteractive" />
+                <div className={tab === "booking" ? "" : "hidden"}>
+                  <p className="text-xs text-beto-gray leading-relaxed mb-4">{p.bookingNote}</p>
+                  <div
+                    className="calendly-inline-widget relative"
+                    data-url={`${CALENDLY_URL}?primary_color=c9a86a`}
+                    style={{ minWidth: "280px", height: "700px" }}
+                  >
+                    <p className="absolute inset-0 flex items-center justify-center text-xs text-beto-gray-light">
+                      {p.loadingCalendar}
+                    </p>
                   </div>
-                )}
+                </div>
 
                 {tab === "message" && (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-6">
