@@ -5,6 +5,7 @@ import Image from "next/image";
 import PageHero from "@/components/shared/PageHero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Button from "@/components/ui/Button";
+import Magnetic from "@/components/ui/Magnetic";
 
 const RING_IMAGES = [
   "/rings/ring-solitaire-rose-gold.jpg",
@@ -194,12 +195,16 @@ export default function BaguesFiancaillesMontrealContent() {
               Consultation gratuite, sans obligation — à Montréal ou en virtuel.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button href="/design-your-jewelry/custom-design" variant="gold" size="lg">
-                Commencer votre design
-              </Button>
-              <Button href="/design-your-jewelry/consultation" variant="secondary" size="lg" className="border-white/30 text-white hover:bg-white/5 hover:border-white">
-                Réserver une consultation
-              </Button>
+              <Magnetic>
+                <Button href="/design-your-jewelry/custom-design" variant="gold" size="lg">
+                  Commencer votre design
+                </Button>
+              </Magnetic>
+              <Magnetic>
+                <Button href="/design-your-jewelry/consultation" variant="secondary" size="lg" className="border-white/30 text-white hover:bg-white/5 hover:border-white">
+                  Réserver une consultation
+                </Button>
+              </Magnetic>
             </div>
           </AnimatedSection>
         </div>
