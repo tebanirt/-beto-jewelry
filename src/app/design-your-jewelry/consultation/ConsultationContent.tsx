@@ -22,6 +22,12 @@ export default function ConsultationContent() {
   const [tab, setTab] = useState<Tab>("booking");
   const scheduledRef = useRef(false);
 
+  const [prepProjectType, setPrepProjectType] = useState("");
+  const [prepStage, setPrepStage] = useState("");
+  const [prepFormat, setPrepFormat] = useState("");
+  const [prepNotes, setPrepNotes] = useState("");
+  const prepSummary = [prepProjectType, prepStage, prepFormat].filter(Boolean);
+
   useEffect(() => {
     function handleCalendlyMessage(e: MessageEvent) {
       if (
@@ -133,6 +139,98 @@ export default function ConsultationContent() {
                 */}
                 <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="afterInteractive" />
                 <div className={tab === "booking" ? "" : "hidden"}>
+                  <div className="mb-6 pb-6 border-b border-beto-gray-subtle/40">
+                    <p className="text-xs font-medium text-beto-black mb-4 tracking-wide">{p.prepare.label}</p>
+
+                    <div className="flex flex-col gap-4">
+                      <div>
+                        <p className="text-[11px] text-beto-gray-light uppercase tracking-wider mb-2">{p.prepare.q1Label}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {p.prepare.q1Options.map((opt) => (
+                            <button
+                              key={opt}
+                              type="button"
+                              onClick={() => setPrepProjectType(prepProjectType === opt ? "" : opt)}
+                              aria-pressed={prepProjectType === opt}
+                              className={cn(
+                                "px-3.5 py-2 text-xs border rounded-full transition-colors",
+                                prepProjectType === opt
+                                  ? "border-beto-gold text-beto-gold bg-beto-gold/5"
+                                  : "border-beto-gray-subtle text-beto-gray hover:border-beto-gold hover:text-beto-gold"
+                              )}
+                            >
+                              {opt}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div>
+                        <p className="text-[11px] text-beto-gray-light uppercase tracking-wider mb-2">{p.prepare.q2Label}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {p.prepare.q2Options.map((opt) => (
+                            <button
+                              key={opt}
+                              type="button"
+                              onClick={() => setPrepStage(prepStage === opt ? "" : opt)}
+                              aria-pressed={prepStage === opt}
+                              className={cn(
+                                "px-3.5 py-2 text-xs border rounded-full transition-colors",
+                                prepStage === opt
+                                  ? "border-beto-gold text-beto-gold bg-beto-gold/5"
+                                  : "border-beto-gray-subtle text-beto-gray hover:border-beto-gold hover:text-beto-gold"
+                              )}
+                            >
+                              {opt}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div>
+                        <p className="text-[11px] text-beto-gray-light uppercase tracking-wider mb-2">{p.prepare.q3Label}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {p.prepare.q3Options.map((opt) => (
+                            <button
+                              key={opt}
+                              type="button"
+                              onClick={() => setPrepFormat(prepFormat === opt ? "" : opt)}
+                              aria-pressed={prepFormat === opt}
+                              className={cn(
+                                "px-3.5 py-2 text-xs border rounded-full transition-colors",
+                                prepFormat === opt
+                                  ? "border-beto-gold text-beto-gold bg-beto-gold/5"
+                                  : "border-beto-gray-subtle text-beto-gray hover:border-beto-gold hover:text-beto-gold"
+                              )}
+                            >
+                              {opt}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div>
+                        <label htmlFor="prep-notes" className="text-[11px] text-beto-gray-light uppercase tracking-wider mb-2 block">
+                          {p.prepare.notesLabel}
+                        </label>
+                        <textarea
+                          id="prep-notes"
+                          rows={3}
+                          value={prepNotes}
+                          onChange={(e) => setPrepNotes(e.target.value)}
+                          placeholder={p.prepare.notesPlaceholder}
+                          className="w-full px-4 py-3 border border-beto-gray-subtle/60 bg-white text-sm text-beto-black placeholder:text-beto-gray-light focus:outline-none focus:border-beto-gold transition-colors resize-none"
+                        />
+                      </div>
+                    </div>
+
+                    {prepSummary.length > 0 && (
+                      <p className="mt-4 text-xs text-beto-gold">
+                        {p.prepare.summaryPrefix} {prepSummary.join(" · ")}
+                      </p>
+                    )}
+                  </div>
+
                   <p className="text-xs text-beto-gray leading-relaxed mb-4">{p.bookingNote}</p>
                   <div
                     className="calendly-inline-widget relative"
