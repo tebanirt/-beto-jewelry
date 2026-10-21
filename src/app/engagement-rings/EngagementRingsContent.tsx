@@ -5,6 +5,7 @@ import Image from "next/image";
 import PageHero from "@/components/shared/PageHero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Button from "@/components/ui/Button";
+import Magnetic from "@/components/ui/Magnetic";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const RING_IMAGES = [
@@ -123,12 +124,16 @@ export default function EngagementRingsContent() {
             {p.readyBody}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button href="/design-your-jewelry/custom-design" variant="gold" size="lg">
-              {p.startDesign}
-            </Button>
-            <Button href="/design-your-jewelry/consultation" variant="secondary" size="lg" className="!text-white !border-white hover:!bg-white hover:!text-beto-black">
-              {p.bookConsultation}
-            </Button>
+            <Magnetic>
+              <Button href="/design-your-jewelry/custom-design" variant="gold" size="lg">
+                {p.startDesign}
+              </Button>
+            </Magnetic>
+            <Magnetic>
+              <Button href="/design-your-jewelry/consultation" variant="secondary" size="lg" className="!text-white !border-white hover:!bg-white hover:!text-beto-black">
+                {p.bookConsultation}
+              </Button>
+            </Magnetic>
           </div>
         </div>
       </section>
