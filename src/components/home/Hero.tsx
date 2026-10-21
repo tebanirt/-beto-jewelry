@@ -5,6 +5,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import Magnetic from "@/components/ui/Magnetic";
+import AnimatedCounter from "@/components/ui/AnimatedCounter";
 
 const stagger = {
   container: {
@@ -86,24 +88,30 @@ export default function Hero() {
           </motion.p>
 
           <motion.div variants={stagger.item} className="flex flex-col sm:flex-row items-start gap-4">
-            <Link
-              href="/design-your-jewelry/custom-design"
-              className="inline-flex items-center justify-center px-8 py-4 bg-beto-gold text-beto-black text-xs font-medium uppercase tracking-[0.2em] transition-all duration-300 hover:bg-beto-gold-light hover:shadow-[0_0_30px_rgba(201,168,106,0.3)]"
-            >
-              {tr.hero.cta1}
-            </Link>
-            <Link
-              href="/design-your-jewelry/consultation"
-              className="inline-flex items-center justify-center px-8 py-4 bg-transparent text-white text-xs font-medium uppercase tracking-[0.2em] border border-white/30 transition-all duration-300 hover:border-white hover:bg-white/5"
-            >
-              {tr.hero.cta2}
-            </Link>
+            <Magnetic>
+              <Link
+                href="/design-your-jewelry/custom-design"
+                className="inline-flex items-center justify-center px-8 py-4 bg-beto-gold text-beto-black text-xs font-medium uppercase tracking-[0.2em] transition-all duration-300 hover:bg-beto-gold-light hover:shadow-[0_0_30px_rgba(201,168,106,0.3)]"
+              >
+                {tr.hero.cta1}
+              </Link>
+            </Magnetic>
+            <Magnetic>
+              <Link
+                href="/design-your-jewelry/consultation"
+                className="inline-flex items-center justify-center px-8 py-4 bg-transparent text-white text-xs font-medium uppercase tracking-[0.2em] border border-white/30 transition-all duration-300 hover:border-white hover:bg-white/5"
+              >
+                {tr.hero.cta2}
+              </Link>
+            </Magnetic>
           </motion.div>
 
           <motion.div variants={stagger.item} className="mt-12 flex flex-wrap items-center gap-8">
             {tr.hero.stats.map((stat) => (
               <div key={stat.label}>
-                <p className="text-white text-2xl font-display font-light">{stat.value}</p>
+                <p className="text-white text-2xl font-display font-light">
+                  <AnimatedCounter value={stat.value} />
+                </p>
                 <p className="text-white/40 text-xs tracking-widest uppercase mt-0.5">{stat.label}</p>
               </div>
             ))}

@@ -80,10 +80,10 @@ export const t = {
       cta1: "Start Your Custom Design",
       cta2: "Book a Consultation",
       steps: [
-        { step: "01", title: "Consultation", body: "We begin with a 30–45 minute consultation — virtual or in-person. We learn about you, your partner, your timeline, and your vision." },
-        { step: "02", title: "Design & CAD", body: "Within ~48 hours, your designer delivers a precise 3D CAD rendering. You can review, adjust, and approve before a single gram of metal is touched." },
-        { step: "03", title: "Production", body: "Once you approve the design, production begins. Every piece is crafted by hand using ethically sourced metals and certified diamonds." },
-        { step: "04", title: "Delivery", body: "Your finished piece arrives in premium Beto Jewelry packaging — along with full documentation and a certificate of authenticity." },
+        { step: "01", title: "Consultation", duration: "30–45 min · Free", body: "We begin with a 30–45 minute consultation — virtual or in-person. We learn about you, your partner, your timeline, and your vision.", detail: "Free, no obligation. We discuss your vision, a rough budget, and your timeline — you don't need to prepare anything in advance." },
+        { step: "02", title: "Design & CAD", duration: "≈ 48 hours", body: "Within ~48 hours, your designer delivers a precise 3D CAD rendering. You can review, adjust, and approve before a single gram of metal is touched.", detail: "A private link lets you explore the rendering from every angle. Revisions are included until the design is exactly yours." },
+        { step: "03", title: "Production", duration: "≈ 1.5 weeks", body: "Once you approve the design, production begins. Every piece is crafted by hand using ethically sourced metals and certified diamonds.", detail: "Ethically sourced metals, certified diamonds. Nothing moves in production without your prior approval of the final design." },
+        { step: "04", title: "Delivery", duration: "Your choice", body: "Your finished piece arrives in premium Beto Jewelry packaging — along with full documentation and a certificate of authenticity.", detail: "Hand-delivered at the atelier, or shipped with insurance — whichever suits you. Arrives with its certificate of authenticity and full documentation." },
       ],
     },
     testimonials: {
@@ -792,10 +792,10 @@ export const t = {
       cta1: "Commencer mon design",
       cta2: "Réserver une consultation",
       steps: [
-        { step: "01", title: "Consultation", body: "Nous commençons par une consultation de 30 à 45 minutes — virtuelle ou en personne. Nous apprenons à vous connaître, votre vision, votre délai et votre budget." },
-        { step: "02", title: "Design 3D", body: "En ~48 heures, vous recevez un rendu 3D précis de votre pièce. Vous pouvez réviser, ajuster et valider avant qu'un seul gramme de métal soit touché." },
-        { step: "03", title: "Production", body: "Une fois votre design approuvé, la production commence. Chaque pièce est fabriquée à la main avec des métaux sourcés éthiquement et des diamants certifiés." },
-        { step: "04", title: "Livraison", body: "Votre pièce arrive dans un emballage premium Beto Jewelry — accompagnée de la documentation complète et d'un certificat d'authenticité." },
+        { step: "01", title: "Consultation", duration: "30–45 min · Gratuite", body: "Nous commençons par une consultation de 30 à 45 minutes — virtuelle ou en personne. Nous apprenons à vous connaître, votre vision, votre délai et votre budget.", detail: "Gratuite, sans engagement. On discute de votre vision, d'une fourchette de budget et de votre échéancier — vous n'avez rien à préparer à l'avance." },
+        { step: "02", title: "Design 3D", duration: "≈ 48 heures", body: "En ~48 heures, vous recevez un rendu 3D précis de votre pièce. Vous pouvez réviser, ajuster et valider avant qu'un seul gramme de métal soit touché.", detail: "Un lien privé vous permet d'explorer le rendu sous tous les angles. Les retouches sont incluses jusqu'à ce que le design soit exactement le vôtre." },
+        { step: "03", title: "Production", duration: "≈ 1,5 semaine", body: "Une fois votre design approuvé, la production commence. Chaque pièce est fabriquée à la main avec des métaux sourcés éthiquement et des diamants certifiés.", detail: "Métaux sourcés éthiquement, diamants certifiés. Rien ne bouge en production sans votre accord préalable sur le design final." },
+        { step: "04", title: "Livraison", duration: "Selon votre choix", body: "Votre pièce arrive dans un emballage premium Beto Jewelry — accompagnée de la documentation complète et d'un certificat d'authenticité.", detail: "Remise en mains propres à l'atelier, ou expédition assurée — à votre convenance. Arrive avec son certificat d'authenticité et sa documentation complète." },
       ],
     },
     testimonials: {
