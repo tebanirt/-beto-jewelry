@@ -4,6 +4,7 @@ import Image from "next/image";
 import PageHero from "@/components/shared/PageHero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Button from "@/components/ui/Button";
+import Magnetic from "@/components/ui/Magnetic";
 import { useTranslation } from "@/hooks/useTranslation";
 
 export default function CustomJewelryContent() {
@@ -75,12 +76,16 @@ export default function CustomJewelryContent() {
           </AnimatedSection>
 
           <AnimatedSection className="mt-16 pt-12 border-t border-beto-gray-subtle/40 flex flex-col sm:flex-row gap-4">
-            <Button href="/design-your-jewelry/custom-design" variant="primary" size="lg">
-              {p.startDesign}
-            </Button>
-            <Button href="/design-your-jewelry/consultation" variant="secondary" size="lg">
-              {p.bookConsultation}
-            </Button>
+            <Magnetic>
+              <Button href="/design-your-jewelry/custom-design" variant="primary" size="lg">
+                {p.startDesign}
+              </Button>
+            </Magnetic>
+            <Magnetic>
+              <Button href="/design-your-jewelry/consultation" variant="secondary" size="lg">
+                {p.bookConsultation}
+              </Button>
+            </Magnetic>
           </AnimatedSection>
         </div>
       </section>
