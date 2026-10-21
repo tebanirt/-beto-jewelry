@@ -35,7 +35,10 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative w-full h-screen min-h-[600px] max-h-[900px] flex items-end overflow-hidden">
+    <section
+      className="relative w-full min-h-screen flex items-end overflow-hidden"
+      style={{ paddingTop: "var(--nav-height)" }}
+    >
       {/* Background */}
       <div className="absolute inset-0 bg-beto-black" aria-hidden="true">
         <video
