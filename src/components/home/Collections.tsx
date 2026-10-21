@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import AnimatedSection from "@/components/ui/AnimatedSection";
@@ -27,11 +28,34 @@ export default function Collections() {
             <AnimatedSection key={item.href} delay={i * 0.08}>
               <Link
                 href={item.href}
-                className="group relative block bg-beto-white p-10 lg:p-14 hover:bg-beto-offwhite transition-colors duration-300 overflow-hidden"
+                className={`group relative block p-10 lg:p-14 transition-colors duration-300 overflow-hidden ${
+                  "image" in item && item.image ? "" : "bg-beto-white hover:bg-beto-offwhite"
+                }`}
               >
+                {"image" in item && item.image && (
+                  <>
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background:
+                          "linear-gradient(to top, rgba(10,9,7,.82) 0%, rgba(10,9,7,.45) 45%, rgba(10,9,7,.1) 70%)",
+                      }}
+                    />
+                  </>
+                )}
+
                 {/* Background number */}
                 <span
-                  className="absolute top-6 right-8 font-display text-8xl font-light text-beto-gray-subtle/40 leading-none select-none transition-transform duration-500 group-hover:translate-x-2"
+                  className={`absolute top-6 right-8 font-display text-8xl font-light leading-none select-none transition-transform duration-500 group-hover:translate-x-2 ${
+                    "image" in item && item.image ? "text-white/15" : "text-beto-gray-subtle/40"
+                  }`}
                   aria-hidden="true"
                 >
                   {String(i + 1).padStart(2, "0")}
@@ -41,12 +65,18 @@ export default function Collections() {
                 <div className="relative">
                   <p className="text-label text-beto-gold mb-3">{item.subtitle}</p>
                   <h3
-                    className="font-display text-beto-black mb-4 group-hover:text-beto-black transition-colors"
+                    className={`font-display mb-4 transition-colors ${
+                      "image" in item && item.image ? "text-beto-white" : "text-beto-black group-hover:text-beto-black"
+                    }`}
                     style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)", fontWeight: 300 }}
                   >
                     {item.title}
                   </h3>
-                  <p className="text-sm text-beto-gray leading-relaxed max-w-sm mb-8">
+                  <p
+                    className={`text-sm leading-relaxed max-w-sm mb-8 ${
+                      "image" in item && item.image ? "text-white/70" : "text-beto-gray"
+                    }`}
+                  >
                     {item.description}
                   </p>
 
@@ -65,7 +95,7 @@ export default function Collections() {
                 </div>
 
                 {/* Bottom gold line reveal */}
-                <div className="absolute bottom-0 left-0 h-[2px] bg-beto-gold w-0 group-hover:w-full transition-all duration-500" />
+                <div className="absolute bottom-0 left-0 h-[2px] bg-beto-gold w-0 group-hover:w-full transition-all duration-500 z-10" />
               </Link>
             </AnimatedSection>
           ))}
