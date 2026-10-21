@@ -5,6 +5,7 @@ import Image from "next/image";
 import PageHero from "@/components/shared/PageHero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Button from "@/components/ui/Button";
+import Magnetic from "@/components/ui/Magnetic";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const BAND_IMAGES = [
@@ -74,9 +75,11 @@ export default function WeddingBandsContent() {
           </div>
 
           <AnimatedSection className="mt-16 text-center">
-            <Button href="/design-your-jewelry/custom-design" variant="primary" size="lg">
-              {p.startCustomBand}
-            </Button>
+            <Magnetic>
+              <Button href="/design-your-jewelry/custom-design" variant="primary" size="lg">
+                {p.startCustomBand}
+              </Button>
+            </Magnetic>
           </AnimatedSection>
         </div>
       </section>

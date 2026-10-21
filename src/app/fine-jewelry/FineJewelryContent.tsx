@@ -5,6 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Button from "@/components/ui/Button";
+import Magnetic from "@/components/ui/Magnetic";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const SLIDESHOW_IMAGES = [
@@ -73,17 +74,21 @@ export default function FineJewelryContent() {
               {p.subtitle}
             </p>
             <div className="flex flex-col sm:flex-row items-start gap-4">
-              <Button href="/design-your-jewelry/custom-design" variant="gold" size="lg">
-                {p.startCustomPiece}
-              </Button>
-              <Button
-                href="/design-your-jewelry/consultation"
-                variant="secondary"
-                size="lg"
-                className="!text-white !border-white/30 hover:!border-white hover:!bg-white/5"
-              >
-                {p.bookConsultation}
-              </Button>
+              <Magnetic>
+                <Button href="/design-your-jewelry/custom-design" variant="gold" size="lg">
+                  {p.startCustomPiece}
+                </Button>
+              </Magnetic>
+              <Magnetic>
+                <Button
+                  href="/design-your-jewelry/consultation"
+                  variant="secondary"
+                  size="lg"
+                  className="!text-white !border-white/30 hover:!border-white hover:!bg-white/5"
+                >
+                  {p.bookConsultation}
+                </Button>
+              </Magnetic>
             </div>
           </motion.div>
         </div>
@@ -108,9 +113,11 @@ export default function FineJewelryContent() {
           </div>
 
           <AnimatedSection delay={0.2} className="pt-12 border-t border-beto-gray-subtle/40 text-center">
-            <Button href="/design-your-jewelry/consultation" variant="primary" size="lg">
-              {p.bookConsultation}
-            </Button>
+            <Magnetic>
+              <Button href="/design-your-jewelry/consultation" variant="primary" size="lg">
+                {p.bookConsultation}
+              </Button>
+            </Magnetic>
           </AnimatedSection>
         </div>
       </section>
