@@ -5,6 +5,7 @@ import Image from "next/image";
 import PageHero from "@/components/shared/PageHero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Button from "@/components/ui/Button";
+import Magnetic from "@/components/ui/Magnetic";
 import { useTranslation } from "@/hooks/useTranslation";
 import { cn } from "@/lib/utils";
 
@@ -95,9 +96,11 @@ export default function GalleryContent() {
 
           <AnimatedSection className="mt-16 text-center">
             <p className="text-sm text-beto-gray mb-6">{p.inspired}</p>
-            <Button href="/design-your-jewelry/custom-design" variant="primary" size="lg">
-              {p.cta}
-            </Button>
+            <Magnetic>
+              <Button href="/design-your-jewelry/custom-design" variant="primary" size="lg">
+                {p.cta}
+              </Button>
+            </Magnetic>
           </AnimatedSection>
         </div>
       </section>
