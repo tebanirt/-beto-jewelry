@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Upload } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Magnetic from "@/components/ui/Magnetic";
 import { useTranslation } from "@/hooks/useTranslation";
 import { trackMetaLead } from "@/lib/metaPixel";
 import { submitLeadForm } from "@/lib/submitForm";
@@ -308,13 +309,15 @@ export default function CustomDesignContent() {
                 <p className="text-sm text-green-700 bg-green-50 border border-green-200 px-4 py-4 text-center">{cd.successMessage}</p>
               ) : (
                 <>
-                  <button
-                    onClick={handleSubmit}
-                    disabled={status === "sending"}
-                    className="w-full py-5 bg-beto-gold text-beto-black text-xs font-medium uppercase tracking-[0.2em] hover:bg-beto-gold-light transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {status === "sending" ? cd.sending : cd.secureButton}
-                  </button>
+                  <Magnetic className="block w-full" strength={0.15}>
+                    <button
+                      onClick={handleSubmit}
+                      disabled={status === "sending"}
+                      className="w-full py-5 bg-beto-gold text-beto-black text-xs font-medium uppercase tracking-[0.2em] hover:bg-beto-gold-light transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {status === "sending" ? cd.sending : cd.secureButton}
+                    </button>
+                  </Magnetic>
                   <p className="text-xs text-beto-gray-light mt-4 text-center">
                     {cd.secureNote}
                   </p>
