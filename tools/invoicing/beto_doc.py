@@ -246,7 +246,7 @@ def footer(c, page_label="PAGE 1"):
     c.line(X0, y + 14, X1, y + 14)
     c.setFont("Helvetica", 7)
     c.setFillColor(GRAY)
-    c.drawString(X0, y, spaced("RAYANE TEBANI · 438-874-5759 · TEBANIRT@GMAIL.COM · MONTRÉAL"))
+    c.drawString(X0, y, spaced("RAYANE TEBANI · 438-874-5759 · BETOJEWLZ@GMAIL.COM · MONTRÉAL"))
     c.drawRightString(X1, y, page_label)
 
 
