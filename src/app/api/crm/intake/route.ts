@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { recordSubmission, upsertClient } from "@/lib/supabase";
+import { escapeHtml } from "@/lib/escapeHtml";
 
 const TO_EMAIL = process.env.CONTACT_EMAIL || "betojewlz@gmail.com";
 
@@ -31,14 +32,14 @@ export async function POST(request: Request) {
         from: "Beto Jewelry <noreply@betojewelry.com>",
         to: TO_EMAIL,
         replyTo: email,
-        subject: `Nouveau client (lien d'inscription) — ${fullName}`,
+        subject: `Nouveau client (lien d'inscription) — ${escapeHtml(fullName)}`,
         html: `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
           <h2 style="color:#111;border-bottom:2px solid #C9A86A;padding-bottom:12px;">Nouveau client via le lien d'inscription</h2>
           <table style="width:100%;border-collapse:collapse;margin-top:16px;">
-            <tr><td style="padding:8px 12px;font-weight:600;color:#444;border-bottom:1px solid #eee;">Nom</td><td style="padding:8px 12px;border-bottom:1px solid #eee;">${fullName}</td></tr>
-            <tr><td style="padding:8px 12px;font-weight:600;color:#444;border-bottom:1px solid #eee;">Courriel</td><td style="padding:8px 12px;border-bottom:1px solid #eee;">${email}</td></tr>
-            <tr><td style="padding:8px 12px;font-weight:600;color:#444;border-bottom:1px solid #eee;">Téléphone</td><td style="padding:8px 12px;border-bottom:1px solid #eee;">${phone}</td></tr>
-            ${notes ? `<tr><td style="padding:8px 12px;font-weight:600;color:#444;">Notes</td><td style="padding:8px 12px;">${notes.replace(/\n/g, "<br/>")}</td></tr>` : ""}
+            <tr><td style="padding:8px 12px;font-weight:600;color:#444;border-bottom:1px solid #eee;">Nom</td><td style="padding:8px 12px;border-bottom:1px solid #eee;">${escapeHtml(fullName)}</td></tr>
+            <tr><td style="padding:8px 12px;font-weight:600;color:#444;border-bottom:1px solid #eee;">Courriel</td><td style="padding:8px 12px;border-bottom:1px solid #eee;">${escapeHtml(email)}</td></tr>
+            <tr><td style="padding:8px 12px;font-weight:600;color:#444;border-bottom:1px solid #eee;">Téléphone</td><td style="padding:8px 12px;border-bottom:1px solid #eee;">${escapeHtml(phone)}</td></tr>
+            ${notes ? `<tr><td style="padding:8px 12px;font-weight:600;color:#444;">Notes</td><td style="padding:8px 12px;">${escapeHtml(notes).replace(/\n/g, "<br/>")}</td></tr>` : ""}
           </table>
           <p style="color:#888;font-size:12px;margin-top:24px;">Ajouté automatiquement au CRM. N'oublie pas de lui envoyer sa facture.</p>
         </div>`,
