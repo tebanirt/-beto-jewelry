@@ -66,15 +66,17 @@ export async function upsertClient(input: {
     phone ? `phone.eq.${phone}` : null,
   ].filter(Boolean);
 
-  const { data: existing } = await supabase
+  const { data: existing, error: selectError } = await supabase
     .from("clients")
     .select("*")
     .or(orFilters.join(","))
     .limit(1)
     .maybeSingle();
 
+  if (selectError) throw selectError;
+
   if (existing) {
-    const { data: updated } = await supabase
+    const { data: updated, error: updateError } = await supabase
       .from("clients")
       .update({
         full_name: input.fullName?.trim() || existing.full_name,
@@ -85,10 +87,11 @@ export async function upsertClient(input: {
       .eq("id", existing.id)
       .select("*")
       .single();
+    if (updateError) throw updateError;
     return updated ?? existing;
   }
 
-  const { data: created } = await supabase
+  const { data: created, error: insertError } = await supabase
     .from("clients")
     .insert({
       full_name: input.fullName?.trim() || null,
@@ -99,6 +102,8 @@ export async function upsertClient(input: {
     .select("*")
     .single();
 
+  if (insertError) throw insertError;
+
   return created ?? null;
 }
 
@@ -108,9 +113,10 @@ export async function recordSubmission(input: {
   fields: Record<string, string>;
 }): Promise<void> {
   const supabase = getSupabaseAdmin();
-  await supabase.from("submissions").insert({
+  const { error } = await supabase.from("submissions").insert({
     client_id: input.clientId,
     form_type: input.formType,
     fields: input.fields,
   });
+  if (error) throw error;
 }
