@@ -57,9 +57,15 @@ def _draw_placeholder_mark(c, x, y):
     c.restoreState()
 
 
+LOGO_HEIGHT = 24
+LOGO_ASPECT = 1710 / 953  # largeur / hauteur du fichier logo.png fourni par Rayane
+
+
 def draw_logo_mark(c, x, y):
     if os.path.isfile(LOGO_PNG):
-        c.drawImage(LOGO_PNG, x, y, width=22, height=22, mask="auto", preserveAspectRatio=True)
+        w = LOGO_HEIGHT * LOGO_ASPECT
+        c.drawImage(LOGO_PNG, x, y, width=w, height=LOGO_HEIGHT, mask="auto", preserveAspectRatio=True)
+        return w
     else:
         print(
             f"[beto_doc] ATTENTION: logo officiel introuvable ({LOGO_PNG}). "
@@ -68,16 +74,18 @@ def draw_logo_mark(c, x, y):
             file=sys.stderr,
         )
         _draw_placeholder_mark(c, x, y)
+        return 22
 
 
 def header(c, doc_label, y):
-    draw_logo_mark(c, X0, y - 24)
+    logo_w = draw_logo_mark(c, X0, y - 24)
+    text_x = X0 + logo_w + 12
     c.setFont("Times-Roman", 15)
     c.setFillColor(INK)
-    c.drawString(X0 + 34, y - 10, spaced("BETO JEWELRY"))
+    c.drawString(text_x, y - 10, spaced("BETO JEWELRY"))
     c.setFont("Helvetica", 6.6)
     c.setFillColor(GOLD)
-    c.drawString(X0 + 34, y - 21, spaced("JOAILLERIE SUR MESURE"))
+    c.drawString(text_x, y - 21, spaced("JOAILLERIE SUR MESURE"))
 
     c.setFont("Helvetica-Bold", 7.4)
     c.setFillColor(GOLD)
