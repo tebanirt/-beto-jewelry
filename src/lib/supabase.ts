@@ -61,19 +61,20 @@ export async function upsertClient(input: {
 
   const supabase = getSupabaseAdmin();
 
-  const orFilters = [
-    email ? `email.eq.${email}` : null,
-    phone ? `phone.eq.${phone}` : null,
-  ].filter(Boolean);
-
-  const { data: existing, error: selectError } = await supabase
-    .from("clients")
-    .select("*")
-    .or(orFilters.join(","))
-    .limit(1)
-    .maybeSingle();
-
-  if (selectError) throw selectError;
+  // Looked up with separate .eq() filters (rather than building a single
+  // .or(`email.eq.${email},...`) string) so a user-supplied email/phone
+  // containing "," or "." can't be parsed as extra PostgREST filter clauses.
+  let existing: Client | null = null;
+  if (email) {
+    const { data, error } = await supabase.from("clients").select("*").eq("email", email).limit(1).maybeSingle();
+    if (error) throw error;
+    existing = data;
+  }
+  if (!existing && phone) {
+    const { data, error } = await supabase.from("clients").select("*").eq("phone", phone).limit(1).maybeSingle();
+    if (error) throw error;
+    existing = data;
+  }
 
   if (existing) {
     const { data: updated, error: updateError } = await supabase
