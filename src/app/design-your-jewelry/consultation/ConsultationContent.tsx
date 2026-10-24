@@ -241,6 +241,21 @@ export default function ConsultationContent() {
                       {p.loadingCalendar}
                     </p>
                   </div>
+                  {/*
+                    Some embedded/in-app browsers (e.g. opening a link from
+                    inside the Gmail app) sandbox third-party iframes and the
+                    Calendly widget never renders, leaving visitors stuck on
+                    "Loading the calendar...". A direct link always works
+                    since it's a normal navigation, not an iframe embed.
+                  */}
+                  <a
+                    href={CALENDLY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-center text-xs text-beto-gold hover:underline mt-3"
+                  >
+                    {p.calendarFallback}
+                  </a>
                 </div>
 
                 {tab === "message" && (
