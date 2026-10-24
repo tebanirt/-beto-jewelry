@@ -36,6 +36,7 @@ Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un 
 ## 6. Automatisation Gmail/Calendar
 
 - Triage horaire (`betojewlz@gmail.com`) : classe en Claude/Clients, Claude/Infolettres, ou Claude/À vérifier.
+- **Salutation adaptée à l'heure** (fuseau America/Toronto) dans tout brouillon de réponse à un client : « Bonjour » avant 18h00, « Bonsoir » à partir de 18h00. Jamais « Bonjour » par défaut le soir — vérifier l'heure actuelle avant d'écrire la salutation, que ce soit via le triage automatique ou une réponse manuelle dans le chat.
 - Les leads Facebook/Instagram arrivent via Zapier (sujet exact « Nouveau prospect Facebook/Instagram — Beto Jewelry »), envoyés par le compte à lui-même — Gmail ne les marque pas toujours « non lus », donc il faut aussi les chercher par sujet explicitement.
 - Jamais ouvrir un lien de confirmation/vérification de compte tiers — signaler seulement.
 
