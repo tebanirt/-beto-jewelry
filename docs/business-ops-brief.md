@@ -44,6 +44,28 @@ Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un 
 - QuickBooks / comptabilité et notifications bancaires RBC : après incorporation légale de l'entreprise.
 - Parsing automatique des factures fournisseurs pour calcul de marge : bloqué sur les mêmes clients post-incorporation.
 
-## 8. Boucle d'amélioration
+## 8. Objectif chiffré et écosystème d'agents
+
+**Objectif d'affaires (fixé le 24 oct. 2026)** : atteindre 10 000 à 15 000 $ de **profit/marge** par mois d'ici la fin de l'année — soit 10 à 15 ventes/mois générant chacune environ 1 000 $ de marge. **Le 1 000 $ est un objectif de marge par pièce, pas un prix de vente minimum** : le prix de vente et le coût de production varient selon la pièce (carat, matériaux), mais la marge cible reste ~1 000 $ par vente (ex. solitaire 1 carat coûtant 1 000 $ vendu 2 000 $, ou pièce 3-4 carats coûtant 2 500 $ vendue 3 500 $ — même marge de 1 000 $ dans les deux cas). Toute recommandation stratégique (marketing, optimisation, priorités) doit se mesurer par rapport à cet objectif de marge, pas de chiffre d'affaires brut. Le suivi de marge nécessite le coût de production par pièce, pas seulement le prix de vente/dépôt — donnée à ajouter au CRM, jamais visible des clients (voir règle absolue sur les marges, section 2).
+
+**Convention « table ronde d'experts »** : à chaque étape cruciale, nouveau projet, ou idée amenée par Rayane — pas seulement sur demande explicite — structurer la réponse comme une vraie table ronde de professionnels spécialisés plutôt qu'une réponse générique unique. Concrètement :
+- Identifier quels domaines sont concernés (marketing, codage/optimisation technique, comptabilité/finances, etc.) et donner l'avis de chacun séparément et clairement identifié (ex. **Marketing** : ..., **Codage** : ...), pas noyé dans un paragraphe vague.
+- Quand les domaines se recoupent (ex. un changement marketing qui demande un changement de code), le dire explicitement — qui doit faire quoi, dans quel ordre.
+- Toujours baser les conseils sur une vraie recherche (web, forums) quand le sujet le justifie — jamais une réponse de mémoire présentée comme à jour.
+- Rester concret et actionnable : des étapes, pas des généralités.
+- Les décisions impliquant de l'argent (budget pub, dépenses) restent toujours entre les mains de Rayane — jamais exécutées de façon autonome.
+
+**Écosystème d'agents autonomes (vision long terme)** : Rayane veut des agents qui travaillent pour lui en continu, même pendant qu'il dort — pas seulement un assistant réactif. Déjà en place :
+- Triage Gmail/Calendar horaire (agent "acquisition/service client").
+- Routine d'audit du site (`AUDIT_LOG.md`) — agent "codage/qualité".
+
+Prochaines briques (en attente que Rayane connecte les outils sur claude.ai, je ne peux pas les connecter moi-même) :
+- Supermetrics (lecture des performances publicitaires réelles Facebook/Instagram) → agent "marketing".
+- Bird (envoi WhatsApp/SMS) → canal de notification proactive.
+- Une fois ces deux connectés : une routine programmée (ex. quotidienne) qui vérifie performance pub + pipeline CRM, et envoie un résumé "table ronde" proactif par WhatsApp.
+
+Ne pas ajouter n8n ou un autre orchestrateur externe sans raison précise — l'approche de triggers programmés Claude Code fait déjà ce travail et évite la complexité/maintenance d'un deuxième système parallèle.
+
+## 9. Boucle d'amélioration
 
 Ce fichier doit être mis à jour à chaque nouvelle règle ou correction durable que Rayane donne — pas seulement retenue en mémoire de conversation, qui disparaît. Si une instruction est censée s'appliquer « toujours » ou « à partir de maintenant », elle appartient ici, pas seulement au chat.
