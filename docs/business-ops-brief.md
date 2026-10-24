@@ -43,6 +43,17 @@ Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un 
 - Les leads Facebook/Instagram arrivent via Zapier (sujet exact « Nouveau prospect Facebook/Instagram — Beto Jewelry »), envoyés par le compte à lui-même — Gmail ne les marque pas toujours « non lus », donc il faut aussi les chercher par sujet explicitement.
 - Jamais ouvrir un lien de confirmation/vérification de compte tiers — signaler seulement.
 
+## 7bis. À construire (spécifié le 24 oct. 2026, prêt à démarrer dès que Rayane le demande)
+
+**Rythme de relance** (recherché et confirmé le 24 oct. 2026, voir section 2 pour les règles de brouillon) :
+- Jamais réservé après contact pub : J+1 (déjà automatique), J+4, J+10, puis pause → relance passive aux Fêtes/Saint-Valentin.
+- Consultation eue, pas d'achat : J+2 après la rencontre, J+10, puis pause → relance passive aux Fêtes/Saint-Valentin.
+- Maximum 3 relances actives — jamais plus, pour ne pas être pressant.
+
+**CRM enrichi** : ajouter un suivi plus granulaire que le statut actuel (`nouveau → consultation → depot_recu → ...`) — distinguer clairement "a réservé mais pas encore eu la consultation", "a eu la consultation mais pas acheté", avec horodatage de dernier contact et compteur de relances, pour piloter automatiquement le rythme ci-dessus sans doublons ni oublis.
+
+**Connexion Calendly → CRM/courriel automatique** : détecter quand un client réserve via Calendly (probablement via Zapier, même pattern que pour les leads Facebook/Instagram), puis envoyer automatiquement un courriel avec un lien vers un formulaire de préparation à la rencontre, collectant : type de pierre (déjà capté par les pubs : diamant naturel/laboratoire/pierre précieuse), type de métal souhaité, type de bijou, une photo d'inspiration si disponible (upload à construire — n'existe pas encore sur le site), et un champ texte libre pour d'autres détails.
+
 ## 7. Différé (ne pas travailler là-dessus avant que Rayane le redemande)
 
 - QuickBooks / comptabilité et notifications bancaires RBC : après incorporation légale de l'entreprise.
