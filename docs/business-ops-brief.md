@@ -43,6 +43,10 @@ Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un 
 - Les leads Facebook/Instagram arrivent via Zapier (sujet exact « Nouveau prospect Facebook/Instagram — Beto Jewelry »), envoyés par le compte à lui-même — Gmail ne les marque pas toujours « non lus », donc il faut aussi les chercher par sujet explicitement.
 - Jamais ouvrir un lien de confirmation/vérification de compte tiers — signaler seulement.
 
+## 6bis. Automatisation post-réservation Calendly (active depuis le 24 oct. 2026)
+
+Quand quelqu'un réserve via Calendly, Calendly envoie une notification « New Event: ... » à betojewlz@gmail.com. Le triage horaire détecte ces courriels (recherche séparée des leads Facebook) et prépare automatiquement un brouillon adressé directement au client, lui demandant de répondre avec : type de pierre, type de métal, type de bijou, une photo d'inspiration en pièce jointe si disponible, et des détails libres. Pas de nouveau formulaire web — la réponse du client arrive directement par courriel, que Rayane peut lire avant la rencontre. Le lien Calendly (betojewlz@gmail.com) est déjà le calendrier qui reçoit les événements, donc aucune config supplémentaire nécessaire.
+
 ## 7bis. À construire (spécifié le 24 oct. 2026, prêt à démarrer dès que Rayane le demande)
 
 **Rythme de relance** (recherché et confirmé le 24 oct. 2026, voir section 2 pour les règles de brouillon) :
