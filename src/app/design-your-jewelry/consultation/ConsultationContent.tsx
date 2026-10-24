@@ -234,7 +234,7 @@ export default function ConsultationContent() {
                   <p className="text-xs text-beto-gray leading-relaxed mb-4">{p.bookingNote}</p>
                   <div
                     className="calendly-inline-widget relative"
-                    data-url={`${CALENDLY_URL}?primary_color=c9a86a`}
+                    data-url={`${CALENDLY_URL}?primary_color=c9a86a&hide_gdpr_banner=1`}
                     style={{ minWidth: "280px", height: "700px" }}
                   >
                     <p className="absolute inset-0 flex items-center justify-center text-xs text-beto-gray-light">
