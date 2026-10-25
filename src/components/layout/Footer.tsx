@@ -36,6 +36,7 @@ export default function Footer() {
 
   const companyLinks = [
     { label: tr.footer.about, href: "/about" },
+    { label: tr.footer.montrealLink, href: "/montreal" },
     { label: tr.footer.education, href: "/education" },
     { label: tr.footer.faq, href: "/faq" },
     { label: tr.footer.contactPage, href: "/contact" },
@@ -105,6 +106,14 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/bagues-de-fiancailles-sur-mesure-montreal"
+                  className="text-sm text-white/50 hover:text-white transition-colors duration-200"
+                >
+                  Bagues de fiançailles sur mesure à Montréal
+                </Link>
+              </li>
             </ul>
           </div>
 

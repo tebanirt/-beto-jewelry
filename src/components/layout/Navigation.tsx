@@ -57,11 +57,11 @@ export default function Navigation() {
     { label: tr.nav.about, href: "/about" },
     { label: tr.nav.education, href: "/education" },
     { label: tr.nav.blog, href: "/blog" },
+    { label: tr.nav.mobile_contact, href: "/contact" },
   ];
 
   const mobileExtraLinks = [
     { label: tr.nav.mobile_faq, href: "/faq" },
-    { label: tr.nav.mobile_contact, href: "/contact" },
   ];
 
   return (

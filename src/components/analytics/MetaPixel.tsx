@@ -4,7 +4,7 @@ import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
-const PIXEL_ID = "2820302881683119";
+const PIXEL_ID = "900920389771896";
 
 /**
  * Base Meta Pixel + PageView tracking on every client-side route change.
@@ -39,6 +39,7 @@ export default function MetaPixel() {
           t.src=v;s=b.getElementsByTagName(e)[0];
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('set', 'autoConfig', false, '${PIXEL_ID}');
           fbq('init', '${PIXEL_ID}');
           fbq('track', 'PageView');
         `}

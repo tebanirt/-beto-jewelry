@@ -4,6 +4,8 @@ import Image from "next/image";
 import PageHero from "@/components/shared/PageHero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Button from "@/components/ui/Button";
+import Magnetic from "@/components/ui/Magnetic";
+import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { useTranslation } from "@/hooks/useTranslation";
 
 export default function AboutContent() {
@@ -57,16 +59,20 @@ export default function AboutContent() {
               <div className="mt-8 grid grid-cols-3 gap-6 py-8 border-t border-b border-beto-gray-subtle/30">
                 {p.stats.map((s) => (
                   <div key={s.label}>
-                    <p className="font-display text-beto-black text-2xl font-light">{s.value}</p>
+                    <p className="font-display text-beto-black text-2xl font-light">
+                      <AnimatedCounter value={s.value} />
+                    </p>
                     <p className="text-xs text-beto-gray-light tracking-widest uppercase mt-1">{s.label}</p>
                   </div>
                 ))}
               </div>
 
               <div className="mt-8 flex gap-4">
-                <Button href="/design-your-jewelry/consultation" variant="primary">
-                  {p.bookConsultation}
-                </Button>
+                <Magnetic>
+                  <Button href="/design-your-jewelry/consultation" variant="primary">
+                    {p.bookConsultation}
+                  </Button>
+                </Magnetic>
               </div>
             </AnimatedSection>
           </div>
@@ -108,12 +114,16 @@ export default function AboutContent() {
             </h2>
             <p className="text-white/50 text-sm mb-10">{p.ctaSub}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button href="/design-your-jewelry/custom-design" variant="gold">
-                {p.startDesign}
-              </Button>
-              <Button href="/design-your-jewelry/consultation" variant="ghost">
-                {p.bookConsultationCta}
-              </Button>
+              <Magnetic>
+                <Button href="/design-your-jewelry/custom-design" variant="gold">
+                  {p.startDesign}
+                </Button>
+              </Magnetic>
+              <Magnetic>
+                <Button href="/design-your-jewelry/consultation" variant="ghost">
+                  {p.bookConsultationCta}
+                </Button>
+              </Magnetic>
             </div>
           </AnimatedSection>
         </div>

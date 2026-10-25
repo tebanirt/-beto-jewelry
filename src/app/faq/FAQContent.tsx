@@ -6,6 +6,7 @@ import { Plus, Minus } from "lucide-react";
 import PageHero from "@/components/shared/PageHero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Button from "@/components/ui/Button";
+import Magnetic from "@/components/ui/Magnetic";
 import { useTranslation } from "@/hooks/useTranslation";
 
 function FAQItem({ question, answer }: { question: string; answer: string }) {
@@ -72,8 +73,12 @@ export default function FAQContent() {
             <p className="font-display text-beto-black text-2xl font-light mb-3">{p.stillHaveQuestions}</p>
             <p className="text-sm text-beto-gray mb-8">{p.stillHaveQuestionsBody}</p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button href="/contact" variant="primary">{p.contactUs}</Button>
-              <Button href="/design-your-jewelry/consultation" variant="secondary">{p.bookConsultation}</Button>
+              <Magnetic>
+                <Button href="/contact" variant="primary">{p.contactUs}</Button>
+              </Magnetic>
+              <Magnetic>
+                <Button href="/design-your-jewelry/consultation" variant="secondary">{p.bookConsultation}</Button>
+              </Magnetic>
             </div>
           </AnimatedSection>
         </div>

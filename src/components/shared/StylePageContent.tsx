@@ -3,8 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import PageHero from "@/components/shared/PageHero";
+import TrustBar from "@/components/shared/TrustBar";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Button from "@/components/ui/Button";
+import Magnetic from "@/components/ui/Magnetic";
 import { useStore } from "@/store/useStore";
 import { CATEGORY_LABEL, type StylePage } from "@/lib/style-pages";
 import { blogPosts } from "@/lib/blog-posts";
@@ -25,6 +27,8 @@ export default function StylePageContent({ page }: { page: StylePage }) {
   return (
     <>
       <PageHero eyebrow={catLabel} title={p.title} subtitle={p.subtitle} />
+
+      <TrustBar />
 
       <section className="py-16 lg:py-24 bg-beto-white">
         <div className="container-beto max-w-2xl mx-auto">
@@ -67,12 +71,16 @@ export default function StylePageContent({ page }: { page: StylePage }) {
           )}
 
           <AnimatedSection className="mt-16 pt-12 border-t border-beto-gray-subtle/40 flex flex-col sm:flex-row gap-4">
-            <Button href="/design-your-jewelry/custom-design" variant="primary" size="lg">
-              {c.cta1}
-            </Button>
-            <Button href="/design-your-jewelry/consultation" variant="secondary" size="lg">
-              {c.cta2}
-            </Button>
+            <Magnetic>
+              <Button href="/design-your-jewelry/custom-design" variant="primary" size="lg">
+                {c.cta1}
+              </Button>
+            </Magnetic>
+            <Magnetic>
+              <Button href="/design-your-jewelry/consultation" variant="secondary" size="lg">
+                {c.cta2}
+              </Button>
+            </Magnetic>
           </AnimatedSection>
         </div>
       </section>

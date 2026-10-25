@@ -14,3 +14,15 @@ export function trackMetaLead(formType: string) {
     window.fbq("track", "Lead", { content_name: formType });
   }
 }
+
+/**
+ * Fires a Meta Pixel "Schedule" event once a Calendly booking is actually
+ * confirmed — call this from the `calendly.event_scheduled` postMessage
+ * event, not on widget load or tab click, so ad delivery optimizes toward
+ * real booked calls, not just views of the widget.
+ */
+export function trackMetaSchedule(contentName: string) {
+  if (typeof window !== "undefined" && typeof window.fbq === "function") {
+    window.fbq("track", "Schedule", { content_name: contentName });
+  }
+}

@@ -6,6 +6,7 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import { trackMetaLead } from "@/lib/metaPixel";
+import { submitLeadForm } from "@/lib/submitForm";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -37,17 +38,12 @@ export default function ContactContent() {
       email: formData.get("email")?.toString() || "",
     };
 
-    try {
-      const res = await fetch("/api/send-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ formType: "contact", fields }),
-      });
-      if (!res.ok) throw new Error("Request failed");
+    const ok = await submitLeadForm("contact", fields);
+    if (ok) {
       setStatus("success");
       trackMetaLead("contact");
       e.currentTarget.reset();
-    } catch {
+    } else {
       setStatus("error");
     }
   }

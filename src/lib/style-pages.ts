@@ -36,7 +36,7 @@ export const stylePages: StylePage[] = [
     category: "engagement-rings",
     heroImage: "/rings/ring-solitaire-rose-gold.jpg",
     heroImageAlt: { en: "A rose gold solitaire engagement ring with a round diamond", fr: "Une bague de fiançailles solitaire en or rose avec un diamant rond" },
-    relatedBlogSlugs: ["guide-styles-bagues-fiancailles", "or-blanc-or-rose-ou-platine-quel-metal-choisir"],
+    relatedBlogSlugs: ["guide-styles-bagues-fiancailles", "or-blanc-or-rose-ou-platine-quel-metal-choisir", "prix-bague-fiancailles-montreal-2026", "bague-sur-mesure-vs-pret-a-porter", "questions-a-poser-a-votre-joaillier"],
     en: {
       title: "Solitaire Engagement Rings",
       subtitle: "One diamond, no distractions. The most timeless setting in fine jewelry, built entirely to showcase your stone.",
@@ -67,7 +67,7 @@ export const stylePages: StylePage[] = [
     category: "engagement-rings",
     heroImage: "/rings/ring-cushion-pave.jpg",
     heroImageAlt: { en: "A pavé engagement ring band set edge-to-edge with diamonds", fr: "Un anneau de bague de fiançailles pavé serti de diamants bord à bord" },
-    relatedBlogSlugs: ["guide-styles-bagues-fiancailles", "diamant-naturel-vs-laboratoire-lequel-choisir"],
+    relatedBlogSlugs: ["guide-styles-bagues-fiancailles", "diamant-naturel-vs-laboratoire-lequel-choisir", "prix-bague-fiancailles-montreal-2026"],
     en: {
       title: "Pavé Engagement Rings",
       subtitle: "A band paved edge-to-edge in tiny diamonds, so the entire ring catches light — not just the center stone.",
@@ -98,7 +98,7 @@ export const stylePages: StylePage[] = [
     category: "engagement-rings",
     heroImage: "/rings/ring-halo-cushion.jpg",
     heroImageAlt: { en: "A halo engagement ring with a cushion-cut center stone surrounded by diamonds", fr: "Une bague de fiançailles halo avec une pierre centrale taille coussin entourée de diamants" },
-    relatedBlogSlugs: ["guide-styles-bagues-fiancailles", "halo-vs-halo-cache-lequel-choisir"],
+    relatedBlogSlugs: ["guide-styles-bagues-fiancailles", "halo-vs-halo-cache-lequel-choisir", "prix-bague-fiancailles-montreal-2026"],
     en: {
       title: "Halo Engagement Rings",
       subtitle: "A circle of smaller diamonds surrounding your center stone — more sparkle, more visual size, same budget.",
@@ -129,7 +129,7 @@ export const stylePages: StylePage[] = [
     category: "engagement-rings",
     heroImage: "/rings/ring-three-stone-oval.jpg",
     heroImageAlt: { en: "A three-stone engagement ring with oval diamonds", fr: "Une bague de fiançailles trois-pierres avec des diamants ovales" },
-    relatedBlogSlugs: ["guide-styles-bagues-fiancailles", "signification-bague-trois-pierres"],
+    relatedBlogSlugs: ["guide-styles-bagues-fiancailles", "signification-bague-trois-pierres", "tendances-bagues-fiancailles-2026"],
     en: {
       title: "Three-Stone Engagement Rings",
       subtitle: "Past, present, and future — three stones set side by side, each one carrying its own meaning.",
@@ -160,7 +160,7 @@ export const stylePages: StylePage[] = [
     category: "engagement-rings",
     heroImage: "/rings/ring-toi-et-moi.jpg",
     heroImageAlt: { en: "A toi et moi engagement ring with two side-by-side gemstones", fr: "Une bague de fiançailles toi et moi avec deux pierres côte à côte" },
-    relatedBlogSlugs: ["tendance-bagues-toi-et-moi", "guide-styles-bagues-fiancailles"],
+    relatedBlogSlugs: ["tendance-bagues-toi-et-moi", "guide-styles-bagues-fiancailles", "tendances-bagues-fiancailles-2026"],
     en: {
       title: "Toi et Moi Engagement Rings",
       subtitle: "Two stones, one meaning: you and me. A design with real history, having a genuine moment again.",
@@ -191,7 +191,7 @@ export const stylePages: StylePage[] = [
     category: "engagement-rings",
     heroImage: "/rings/ring-oval-hidden-halo.jpg",
     heroImageAlt: { en: "An oval engagement ring with a hidden halo beneath the center stone", fr: "Une bague de fiançailles ovale avec un halo caché sous la pierre centrale" },
-    relatedBlogSlugs: ["guide-styles-bagues-fiancailles", "halo-vs-halo-cache-lequel-choisir"],
+    relatedBlogSlugs: ["guide-styles-bagues-fiancailles", "halo-vs-halo-cache-lequel-choisir", "tendances-bagues-fiancailles-2026"],
     en: {
       title: "Hidden Halo Engagement Rings",
       subtitle: "All the extra sparkle of a halo, tucked just beneath the center stone — visible only when you look closely.",
@@ -222,7 +222,7 @@ export const stylePages: StylePage[] = [
     category: "engagement-rings",
     heroImage: "/rings/ring-toi-et-moi-2.jpg",
     heroImageAlt: { en: "A vintage-style engagement ring with intricate detail", fr: "Une bague de fiançailles de style vintage avec des détails complexes" },
-    relatedBlogSlugs: ["bagues-vintage-antiques-sur-mesure"],
+    relatedBlogSlugs: ["bagues-vintage-antiques-sur-mesure", "tendances-bagues-fiancailles-2026", "guide-styles-bagues-fiancailles"],
     en: {
       title: "Vintage-Style Engagement Rings",
       subtitle: "Intricate period detail — filigree, milgrain, engraving — captured in a brand-new setting built to modern durability standards.",
@@ -253,7 +253,7 @@ export const stylePages: StylePage[] = [
     category: "engagement-rings",
     heroImage: "/rings/ring-marquise.jpg",
     heroImageAlt: { en: "A tension-set engagement ring with a marquise diamond appearing to float", fr: "Une bague de fiançailles serti-tension avec un diamant marquise semblant flotter" },
-    relatedBlogSlugs: ["guide-styles-bagues-fiancailles", "sertissage-tension-explique"],
+    relatedBlogSlugs: ["guide-styles-bagues-fiancailles", "sertissage-tension-explique", "tendances-bagues-fiancailles-2026"],
     en: {
       title: "Tension-Set Engagement Rings",
       subtitle: "The stone appears to float, held only by the tension of the metal itself — modern architecture, unmistakable presence.",
@@ -284,7 +284,7 @@ export const stylePages: StylePage[] = [
     category: "engagement-rings",
     heroImage: "/rings/ring-emerald-solitaire.jpg",
     heroImageAlt: { en: "An emerald cut engagement ring with a gold pavé band", fr: "Une bague de fiançailles taille émeraude avec un anneau pavé en or" },
-    relatedBlogSlugs: ["taille-emeraude-vs-taille-ronde"],
+    relatedBlogSlugs: ["taille-emeraude-vs-taille-ronde", "tendances-bagues-fiancailles-2026", "guide-styles-bagues-fiancailles"],
     en: {
       title: "Emerald Cut Engagement Rings",
       subtitle: "Long, clean lines and a quiet 'hall of mirrors' sparkle — architectural elegance instead of maximum fire.",
@@ -315,7 +315,7 @@ export const stylePages: StylePage[] = [
     category: "engagement-rings",
     heroImage: "/rings/ring-oval-accent.jpg",
     heroImageAlt: { en: "An engagement ring with floating marquise diamond accents along the band", fr: "Une bague de fiançailles avec des accents de diamants marquise flottants le long de l'anneau" },
-    relatedBlogSlugs: ["guide-styles-bagues-fiancailles"],
+    relatedBlogSlugs: ["guide-styles-bagues-fiancailles", "tendances-bagues-fiancailles-2026", "bague-sur-mesure-vs-pret-a-porter"],
     en: {
       title: "Floating Accent Engagement Rings",
       subtitle: "Small marquise or round diamonds set to appear suspended along the band, dancing around your center stone.",
@@ -346,7 +346,7 @@ export const stylePages: StylePage[] = [
     category: "engagement-rings",
     heroImage: "/rings/ring-cushion-solitaire.jpg",
     heroImageAlt: { en: "A cushion cut solitaire engagement ring", fr: "Une bague de fiançailles solitaire taille coussin" },
-    relatedBlogSlugs: ["guide-styles-bagues-fiancailles"],
+    relatedBlogSlugs: ["guide-styles-bagues-fiancailles", "guide-taille-coussin", "prix-bague-fiancailles-montreal-2026"],
     en: {
       title: "Cushion Solitaire Engagement Rings",
       subtitle: "Soft, rounded corners on a square-ish silhouette — a warmer, more romantic alternative to a round or emerald solitaire.",
@@ -377,7 +377,7 @@ export const stylePages: StylePage[] = [
     category: "wedding-bands",
     heroImage: "/bands/band-men.png",
     heroImageAlt: { en: "A men's comfort-fit wedding band", fr: "Une alliance homme à coupe confort" },
-    relatedBlogSlugs: ["guide-alliances-homme"],
+    relatedBlogSlugs: ["guide-alliances-homme", "questions-a-poser-a-votre-joaillier"],
     en: {
       title: "Men's Wedding Bands",
       subtitle: "Refined comfort-fit bands in every metal — designed to be worn every single day for the rest of your life.",
@@ -526,7 +526,7 @@ export const stylePages: StylePage[] = [
     category: "fine-jewelry",
     heroImage: "/jewelry/bracelet-tennis-diamond.jpg",
     heroImageAlt: { en: "A white gold diamond tennis bracelet", fr: "Un bracelet tennis en diamants et or blanc" },
-    relatedBlogSlugs: [],
+    relatedBlogSlugs: ["questions-a-poser-a-votre-joaillier", "guide-boucles-oreilles-sur-mesure"],
     en: {
       title: "Custom Bracelets",
       subtitle: "Tennis, bangle, or chain-link — a bracelet built to your wrist size and your exact stone and metal preferences.",

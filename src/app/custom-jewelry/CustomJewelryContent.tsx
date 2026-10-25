@@ -4,6 +4,7 @@ import Image from "next/image";
 import PageHero from "@/components/shared/PageHero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Button from "@/components/ui/Button";
+import Magnetic from "@/components/ui/Magnetic";
 import { useTranslation } from "@/hooks/useTranslation";
 
 export default function CustomJewelryContent() {
@@ -59,13 +60,32 @@ export default function CustomJewelryContent() {
             ))}
           </div>
 
+          <AnimatedSection className="mt-20 pt-12 border-t border-beto-gray-subtle/40">
+            <p className="text-label text-beto-gold mb-3">{p.includedLabel}</p>
+            <h2 className="font-display text-beto-black text-2xl lg:text-3xl font-light mb-10">
+              {p.includedHeadline}
+            </h2>
+            <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6">
+              {p.included.map((row) => (
+                <div key={row.k} className="border-t border-beto-gray-subtle/40 pt-4">
+                  <dt className="font-display text-beto-black text-base font-normal mb-1">{row.k}</dt>
+                  <dd className="text-sm text-beto-gray leading-relaxed">{row.v}</dd>
+                </div>
+              ))}
+            </dl>
+          </AnimatedSection>
+
           <AnimatedSection className="mt-16 pt-12 border-t border-beto-gray-subtle/40 flex flex-col sm:flex-row gap-4">
-            <Button href="/design-your-jewelry/custom-design" variant="primary" size="lg">
-              {p.startDesign}
-            </Button>
-            <Button href="/design-your-jewelry/consultation" variant="secondary" size="lg">
-              {p.bookConsultation}
-            </Button>
+            <Magnetic>
+              <Button href="/design-your-jewelry/custom-design" variant="primary" size="lg">
+                {p.startDesign}
+              </Button>
+            </Magnetic>
+            <Magnetic>
+              <Button href="/design-your-jewelry/consultation" variant="secondary" size="lg">
+                {p.bookConsultation}
+              </Button>
+            </Magnetic>
           </AnimatedSection>
         </div>
       </section>

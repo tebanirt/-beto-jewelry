@@ -5,6 +5,7 @@ import Image from "next/image";
 import PageHero from "@/components/shared/PageHero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Button from "@/components/ui/Button";
+import Magnetic from "@/components/ui/Magnetic";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const GRILLZ_IMAGES = [
@@ -134,12 +135,16 @@ export default function GrillzContent() {
               <p className="text-sm text-beto-gray leading-relaxed">{p.ctaBody}</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
-              <Button href="/design-your-jewelry/custom-design" variant="primary">
-                {p.startDesign}
-              </Button>
-              <Button href="/design-your-jewelry/consultation" variant="secondary">
-                {p.bookConsultation}
-              </Button>
+              <Magnetic>
+                <Button href="/design-your-jewelry/custom-design" variant="primary">
+                  {p.startDesign}
+                </Button>
+              </Magnetic>
+              <Magnetic>
+                <Button href="/design-your-jewelry/consultation" variant="secondary">
+                  {p.bookConsultation}
+                </Button>
+              </Magnetic>
             </div>
           </AnimatedSection>
         </div>

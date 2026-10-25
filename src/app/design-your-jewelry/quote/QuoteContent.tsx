@@ -5,6 +5,7 @@ import PageHero from "@/components/shared/PageHero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { trackMetaLead } from "@/lib/metaPixel";
+import { submitLeadForm } from "@/lib/submitForm";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -27,17 +28,12 @@ export default function QuoteContent() {
       email: formData.get("email")?.toString() || "",
     };
 
-    try {
-      const res = await fetch("/api/send-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ formType: "quote", fields }),
-      });
-      if (!res.ok) throw new Error("Request failed");
+    const ok = await submitLeadForm("quote", fields);
+    if (ok) {
       setStatus("success");
       trackMetaLead("quote");
       e.currentTarget.reset();
-    } catch {
+    } else {
       setStatus("error");
     }
   }
