@@ -28,6 +28,17 @@ export default function ConsultationContent() {
   const [prepNotes, setPrepNotes] = useState("");
   const prepSummary = [prepProjectType, prepStage, prepFormat].filter(Boolean);
 
+  // Some embedded/in-app browsers (Gmail, Instagram, Facebook) sandbox
+  // third-party iframes and the Calendly widget never renders, leaving
+  // visitors stuck on "Loading the calendar...". After a few seconds we
+  // promote the fallback link into a real button with a hint, so visitors
+  // aren't left guessing whether the small text link below is their way out.
+  const [widgetSlow, setWidgetSlow] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => setWidgetSlow(true), 6000);
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     function handleCalendlyMessage(e: MessageEvent) {
       if (
@@ -241,21 +252,26 @@ export default function ConsultationContent() {
                       {p.loadingCalendar}
                     </p>
                   </div>
-                  {/*
-                    Some embedded/in-app browsers (e.g. opening a link from
-                    inside the Gmail app) sandbox third-party iframes and the
-                    Calendly widget never renders, leaving visitors stuck on
-                    "Loading the calendar...". A direct link always works
-                    since it's a normal navigation, not an iframe embed.
-                  */}
-                  <a
-                    href={CALENDLY_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-center text-xs text-beto-gold hover:underline mt-3"
-                  >
-                    {p.calendarFallback}
-                  </a>
+                  <div className="mt-3">
+                    {widgetSlow && (
+                      <p className="text-xs text-beto-gold font-medium text-center mb-2">
+                        {p.calendarFallbackHint}
+                      </p>
+                    )}
+                    <a
+                      href={CALENDLY_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cn(
+                        "block text-center transition-colors",
+                        widgetSlow
+                          ? "text-sm border border-beto-gold text-beto-gold font-medium px-4 py-3 bg-beto-gold/5 hover:bg-beto-gold/10"
+                          : "text-xs text-beto-gold hover:underline"
+                      )}
+                    >
+                      {p.calendarFallback}
+                    </a>
+                  </div>
                 </div>
 
                 {tab === "message" && (
