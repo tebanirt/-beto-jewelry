@@ -22,7 +22,7 @@ export const t = {
       ],
       design_items: [
         { label: "Start Your Custom Design", href: "/design-your-jewelry/custom-design", desc: "Begin with a $200 design deposit" },
-        { label: "Book a Consultation", href: "/design-your-jewelry/consultation", desc: "30–45 min virtual or in-person" },
+        { label: "Book a Consultation", href: "/design-your-jewelry/consultation", desc: "Free, virtual or in-person" },
         { label: "Request a Quote", href: "/design-your-jewelry/quote", desc: "No commitment required" },
       ],
       mobile_collections: "Collections",
@@ -80,7 +80,7 @@ export const t = {
       cta1: "Start Your Custom Design",
       cta2: "Book a Consultation",
       steps: [
-        { step: "01", title: "Consultation", duration: "30–45 min · Free", body: "We begin with a 30–45 minute consultation — virtual or in-person. We learn about you, your partner, your timeline, and your vision.", detail: "Free, no obligation. We discuss your vision, a rough budget, and your timeline — you don't need to prepare anything in advance." },
+        { step: "01", title: "Consultation", duration: "Free", body: "We begin with a consultation — virtual or in-person. We learn about you, your partner, your timeline, and your vision.", detail: "Free, no obligation. We discuss your vision, a rough budget, and your timeline — you don't need to prepare anything in advance." },
         { step: "02", title: "Design & CAD", duration: "≈ 48 hours", body: "Within ~48 hours, your designer delivers a precise 3D CAD rendering. You can review, adjust, and approve before a single gram of metal is touched.", detail: "A private link lets you explore the rendering from every angle. Revisions are included until the design is exactly yours." },
         { step: "03", title: "Production", duration: "≈ 1.5 weeks", body: "Once you approve the design, production begins. Every piece is crafted by hand using ethically sourced metals and certified diamonds.", detail: "Ethically sourced metals, certified diamonds. Nothing moves in production without your prior approval of the final design." },
         { step: "04", title: "Delivery", duration: "Your choice", body: "Your finished piece arrives in premium Beto Jewelry packaging — along with full documentation and a certificate of authenticity.", detail: "Hand-delivered at the atelier, or shipped with insurance — whichever suits you. Arrives with its certificate of authenticity and full documentation." },
@@ -103,7 +103,7 @@ export const t = {
       headlineItalic: "creating yours.",
       paths: [
         { label: "Most Popular", title: "Start Your Custom Design", body: "Begin with our guided questionnaire. Share your vision, upload inspiration, and secure your project with a $200 design deposit — fully credited toward your piece.", href: "/design-your-jewelry/custom-design", cta: "Begin Now" },
-        { label: "Need Guidance", title: "Book a Consultation", body: "Speak directly with our designer. A 30–45 minute session — virtual or in-person in Montreal — to explore possibilities, discuss budget, and align on a direction.", href: "/design-your-jewelry/consultation", cta: "Schedule Now" },
+        { label: "Need Guidance", title: "Book a Consultation", body: "Speak directly with our designer. A free session — virtual or in-person in Montreal — to explore possibilities, discuss budget, and align on a direction.", href: "/design-your-jewelry/consultation", cta: "Schedule Now" },
         { label: "Just Exploring", title: "Request a Quote", body: "Not ready to commit? Share your idea and we'll prepare a personalized estimate. No payment required, no pressure.", href: "/design-your-jewelry/quote", cta: "Get a Quote" },
       ],
     },
@@ -152,7 +152,7 @@ export const t = {
         eyebrow: "Book a Consultation",
         title: "Let's talk about",
         titleItalic: "your piece.",
-        subtitle: "A 30–45 minute conversation with our designer. Virtual or in-person in Montreal. No commitment required.",
+        subtitle: "A free conversation with our designer. Virtual or in-person in Montreal. No commitment required.",
         whatToExpect: "What to Expect",
         expectations: [
           { title: "We listen first", body: "Tell us your story, your timeline, and your budget. We ask the right questions." },
@@ -378,7 +378,7 @@ export const t = {
         processLabel: "How it works",
         processHeading: "Four steps, fully transparent",
         process: [
-          { n: "01", t: "Consultation", b: "30–45 minutes, free, virtual or at the Montréal atelier. We talk vision, budget and timeline — no obligation." },
+          { n: "01", t: "Consultation", b: "Free, virtual or at the Montréal atelier. We talk vision, budget and timeline — no obligation." },
           { n: "02", t: "Design & quote", b: "Rayane sketches directions and sends a clear quote. A $200 CAD deposit — credited in full to your piece — starts the CAD." },
           { n: "03", t: "3D CAD render", b: "Within ~48 hours you see your ring from every angle. Unlimited revisions, no fees, until it's exactly right." },
           { n: "04", t: "Handmade & delivered", b: "Cast, set and hand-finished in Montréal. Delivered with certified stones, a certificate of authenticity and a 12-month warranty." },
@@ -410,7 +410,7 @@ export const t = {
         processLabel: "The Process",
         processHeadline: "From idea to heirloom.",
         steps: [
-          { number: "01", title: "Consultation", body: "We begin with a 30–45 minute session — virtual or in-person — to understand your vision, budget, timeline, and style preferences. No obligation." },
+          { number: "01", title: "Consultation", body: "We begin with a session — virtual or in-person — to understand your vision, budget, timeline, and style preferences. No obligation." },
           { number: "02", title: "Concept & Sketch", body: "Based on your consultation, our designer develops initial concepts. We discuss direction and refine before moving to CAD." },
           { number: "03", title: "CAD Design", body: "Within approximately 48 hours after design approval, you receive a precise 3D CAD rendering. See every angle, every detail before production begins." },
           { number: "04", title: "Approval", body: "You review and approve the CAD. Adjustments can be made at this stage. Production only begins once you are completely satisfied." },
@@ -734,7 +734,7 @@ export const t = {
       ],
       design_items: [
         { label: "Commencer mon design", href: "/design-your-jewelry/custom-design", desc: "Débuter avec un dépôt de 200$" },
-        { label: "Réserver une consultation", href: "/design-your-jewelry/consultation", desc: "30–45 min virtuel ou en personne" },
+        { label: "Réserver une consultation", href: "/design-your-jewelry/consultation", desc: "Gratuite, virtuel ou en personne" },
         { label: "Demander un devis", href: "/design-your-jewelry/quote", desc: "Sans engagement" },
       ],
       mobile_collections: "Collections",
@@ -792,7 +792,7 @@ export const t = {
       cta1: "Commencer mon design",
       cta2: "Réserver une consultation",
       steps: [
-        { step: "01", title: "Consultation", duration: "30–45 min · Gratuite", body: "Nous commençons par une consultation de 30 à 45 minutes — virtuelle ou en personne. Nous apprenons à vous connaître, votre vision, votre délai et votre budget.", detail: "Gratuite, sans engagement. On discute de votre vision, d'une fourchette de budget et de votre échéancier — vous n'avez rien à préparer à l'avance." },
+        { step: "01", title: "Consultation", duration: "Gratuite", body: "Nous commençons par une consultation — virtuelle ou en personne. Nous apprenons à vous connaître, votre vision, votre délai et votre budget.", detail: "Gratuite, sans engagement. On discute de votre vision, d'une fourchette de budget et de votre échéancier — vous n'avez rien à préparer à l'avance." },
         { step: "02", title: "Design 3D", duration: "≈ 48 heures", body: "En ~48 heures, vous recevez un rendu 3D précis de votre pièce. Vous pouvez réviser, ajuster et valider avant qu'un seul gramme de métal soit touché.", detail: "Un lien privé vous permet d'explorer le rendu sous tous les angles. Les retouches sont incluses jusqu'à ce que le design soit exactement le vôtre." },
         { step: "03", title: "Production", duration: "≈ 1,5 semaine", body: "Une fois votre design approuvé, la production commence. Chaque pièce est fabriquée à la main avec des métaux sourcés éthiquement et des diamants certifiés.", detail: "Métaux sourcés éthiquement, diamants certifiés. Rien ne bouge en production sans votre accord préalable sur le design final." },
         { step: "04", title: "Livraison", duration: "Selon votre choix", body: "Votre pièce arrive dans un emballage premium Beto Jewelry — accompagnée de la documentation complète et d'un certificat d'authenticité.", detail: "Remise en mains propres à l'atelier, ou expédition assurée — à votre convenance. Arrive avec son certificat d'authenticité et sa documentation complète." },
@@ -815,7 +815,7 @@ export const t = {
       headlineItalic: "créer votre pièce.",
       paths: [
         { label: "Le plus populaire", title: "Commencer mon design", body: "Commencez par notre questionnaire guidé. Partagez votre vision, téléchargez vos inspirations, et sécurisez votre projet avec un dépôt de design de 200$ — entièrement crédité sur votre pièce.", href: "/design-your-jewelry/custom-design", cta: "Commencer" },
-        { label: "Besoin de conseils", title: "Réserver une consultation", body: "Parlez directement avec notre designer. Une session de 30 à 45 minutes — virtuelle ou en personne à Montréal — pour explorer les possibilités, discuter du budget et aligner la direction.", href: "/design-your-jewelry/consultation", cta: "Réserver" },
+        { label: "Besoin de conseils", title: "Réserver une consultation", body: "Parlez directement avec notre designer. Une session gratuite — virtuelle ou en personne à Montréal — pour explorer les possibilités, discuter du budget et aligner la direction.", href: "/design-your-jewelry/consultation", cta: "Réserver" },
         { label: "En exploration", title: "Demander un devis", body: "Pas encore prêt à vous engager ? Partagez votre idée et nous préparerons une estimation personnalisée. Aucun paiement requis, aucune pression.", href: "/design-your-jewelry/quote", cta: "Obtenir un devis" },
       ],
     },
@@ -864,7 +864,7 @@ export const t = {
         eyebrow: "Réserver une consultation",
         title: "Parlons de",
         titleItalic: "votre pièce.",
-        subtitle: "Une conversation de 30 à 45 minutes avec notre designer. Virtuelle ou en personne à Montréal. Sans engagement.",
+        subtitle: "Une conversation gratuite avec notre designer. Virtuelle ou en personne à Montréal. Sans engagement.",
         whatToExpect: "À quoi s'attendre",
         expectations: [
           { title: "Nous écoutons d'abord", body: "Parlez-nous de votre histoire, votre délai et votre budget. Nous posons les bonnes questions." },
@@ -1090,7 +1090,7 @@ export const t = {
         processLabel: "Comment ça fonctionne",
         processHeading: "Quatre étapes, en toute transparence",
         process: [
-          { n: "01", t: "Consultation", b: "30 à 45 minutes, gratuite, virtuelle ou à l'atelier de Montréal. On parle vision, budget et délai — sans obligation." },
+          { n: "01", t: "Consultation", b: "Gratuite, virtuelle ou à l'atelier de Montréal. On parle vision, budget et délai — sans obligation." },
           { n: "02", t: "Design et devis", b: "Rayane esquisse des directions et envoie un devis clair. Un dépôt de 200 $ CAD — crédité en entier à votre pièce — lance le CAD." },
           { n: "03", t: "Rendu CAD 3D", b: "En environ 48 heures, vous voyez votre bague sous tous les angles. Révisions illimitées, sans frais, jusqu'à ce que ce soit exactement juste." },
           { n: "04", t: "Fait main et livré", b: "Coulé, serti et fini à la main à Montréal. Livré avec des pierres certifiées, un certificat d'authenticité et une garantie de 12 mois." },
@@ -1122,7 +1122,7 @@ export const t = {
         processLabel: "Le processus",
         processHeadline: "De l'idée à l'héritage.",
         steps: [
-          { number: "01", title: "Consultation", body: "Nous commençons par une session de 30 à 45 minutes — virtuelle ou en personne — pour comprendre votre vision, votre budget, votre délai et vos préférences de style. Sans obligation." },
+          { number: "01", title: "Consultation", body: "Nous commençons par une session — virtuelle ou en personne — pour comprendre votre vision, votre budget, votre délai et vos préférences de style. Sans obligation." },
           { number: "02", title: "Concept et croquis", body: "Sur la base de votre consultation, notre designer développe des concepts initiaux. Nous discutons de la direction et affinons avant de passer au CAD." },
           { number: "03", title: "Design CAD", body: "Dans environ 48 heures après l'approbation du design, vous recevez un rendu CAD 3D précis. Voyez chaque angle, chaque détail avant que la production ne commence." },
           { number: "04", title: "Approbation", body: "Vous révisez et approuvez le CAD. Des ajustements peuvent être effectués à cette étape. La production ne commence qu'une fois que vous êtes entièrement satisfait." },
