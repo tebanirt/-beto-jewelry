@@ -361,6 +361,13 @@ export const t = {
           { number: "02", title: "See it before it exists", body: "A precise 3D render of your piece in about 48 hours." },
           { number: "03", title: "One of one", body: "No other piece like yours — never reproduced." },
         ],
+        ourStyles: "Our Styles",
+        findDirection: "Find your direction",
+        styles: [
+          { name: "Pendants", desc: "A single meaningful detail, designed around what it means to you." },
+          { name: "Earrings", desc: "Hoops, studs, huggies, or drops — made entirely to your specifications." },
+          { name: "Bracelets", desc: "Tennis, bangle, or chain-link — built to your exact wrist and stone preferences." },
+        ],
       },
       montreal: {
         eyebrow: "Montréal",
@@ -1072,6 +1079,13 @@ export const t = {
           { number: "01", title: "Conçu autour de vous", body: "Chaque pièce part de votre idée, pas d'un modèle déjà fait." },
           { number: "02", title: "Voyez-la avant qu'elle existe", body: "Un rendu 3D précis de votre pièce en environ 48 heures." },
           { number: "03", title: "Une seule et unique", body: "Aucune autre pièce comme la vôtre — jamais reproduite." },
+        ],
+        ourStyles: "Nos styles",
+        findDirection: "Trouvez votre direction",
+        styles: [
+          { name: "Pendentifs", desc: "Un détail significatif, conçu autour de ce qu'il représente pour vous." },
+          { name: "Boucles d'oreilles", desc: "Créoles, puces ou pendantes — entièrement faites selon vos spécifications." },
+          { name: "Bracelets", desc: "Tennis, jonc ou maille — conçu selon votre poignet et vos préférences de pierre." },
         ],
       },
       montreal: {
