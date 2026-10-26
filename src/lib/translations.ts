@@ -165,10 +165,6 @@ export const t = {
         messageTab: "Send a Message",
         bookingNote: "Pick a time that works for you. You'll be able to note your preferred format (virtual or in-person) in the booking form.",
         bookNowCta: "Book Your Consultation →",
-        embedNote: "Or use the calendar below, if it loads for you:",
-        loadingCalendar: "Loading the calendar…",
-        calendarFallback: "Book directly on Calendly →",
-        calendarFallbackHint: "Taking a while to load? You can book directly here instead — it's the same calendar.",
         prepare: {
           label: "Help us prepare for your visit (optional)",
           q1Label: "What are you creating?",
@@ -893,10 +889,6 @@ export const t = {
         messageTab: "Envoyer un message",
         bookingNote: "Choisissez un moment qui vous convient. Vous pourrez indiquer votre format préféré (virtuel ou en personne) dans le formulaire de réservation.",
         bookNowCta: "Réservez votre consultation →",
-        embedNote: "Ou utilisez le calendrier ci-dessous, s'il charge pour vous :",
-        loadingCalendar: "Chargement du calendrier…",
-        calendarFallback: "Réservez directement sur Calendly →",
-        calendarFallbackHint: "Le chargement prend du temps? Vous pouvez réserver directement ici — c'est le même calendrier.",
         prepare: {
           label: "Aidez-nous à préparer votre rencontre (optionnel)",
           q1Label: "Qu'est-ce qu'on crée ?",

@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Script from "next/script";
+import { useState } from "react";
 import PageHero from "@/components/shared/PageHero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { cn } from "@/lib/utils";
-import { trackMetaLead, trackMetaSchedule } from "@/lib/metaPixel";
+import { trackMetaLead } from "@/lib/metaPixel";
 import { submitLeadForm } from "@/lib/submitForm";
 
 const CALENDLY_URL = "https://calendly.com/betojewlz";
@@ -14,86 +13,18 @@ const CALENDLY_URL = "https://calendly.com/betojewlz";
 type Status = "idle" | "sending" | "success" | "error";
 type Tab = "booking" | "message";
 
-declare global {
-  interface Window {
-    Calendly?: {
-      initInlineWidget: (opts: { url: string; parentElement: HTMLElement; prefill?: object; utm?: object }) => void;
-    };
-  }
-}
-
 export default function ConsultationContent() {
   const tr = useTranslation();
   const p = tr.pages.consultation;
   const [status, setStatus] = useState<Status>("idle");
   const [format, setFormat] = useState("");
   const [tab, setTab] = useState<Tab>("booking");
-  const scheduledRef = useRef(false);
-  const calendlyRef = useRef<HTMLDivElement>(null);
-
-  // widget.js only auto-scans the DOM for .calendly-inline-widget[data-url]
-  // once, the moment it first finishes loading. next/script dedupes script
-  // injection across mounts, so if a visitor had already triggered that load
-  // on an earlier visit this session (even on a different page, if this
-  // component had mounted before), coming back to this page later never
-  // gets a second scan — the container just sits empty forever. Calling
-  // Calendly's documented initInlineWidget() ourselves, on every mount,
-  // sidesteps the auto-scan entirely and makes this reliable regardless of
-  // what loaded before.
-  useEffect(() => {
-    let cancelled = false;
-    let pollId: ReturnType<typeof setInterval> | null = null;
-
-    function init() {
-      if (cancelled || !calendlyRef.current || !window.Calendly) return;
-      calendlyRef.current.innerHTML = "";
-      window.Calendly.initInlineWidget({
-        url: `${CALENDLY_URL}?primary_color=c9a86a`,
-        parentElement: calendlyRef.current,
-      });
-    }
-
-    if (window.Calendly) {
-      init();
-    } else {
-      // Script tag is still loading (or this is the very first mount this
-      // session) — poll briefly rather than relying solely on next/script's
-      // onLoad, which only fires once globally and may already have fired
-      // before this component existed.
-      pollId = setInterval(() => {
-        if (window.Calendly) {
-          if (pollId) clearInterval(pollId);
-          init();
-        }
-      }, 150);
-    }
-
-    return () => {
-      cancelled = true;
-      if (pollId) clearInterval(pollId);
-    };
-  }, []);
 
   const [prepProjectType, setPrepProjectType] = useState("");
   const [prepStage, setPrepStage] = useState("");
   const [prepFormat, setPrepFormat] = useState("");
   const [prepNotes, setPrepNotes] = useState("");
   const prepSummary = [prepProjectType, prepStage, prepFormat].filter(Boolean);
-
-  useEffect(() => {
-    function handleCalendlyMessage(e: MessageEvent) {
-      if (
-        e.origin === "https://calendly.com" &&
-        e.data?.event === "calendly.event_scheduled" &&
-        !scheduledRef.current
-      ) {
-        scheduledRef.current = true;
-        trackMetaSchedule("consultation-booking");
-      }
-    }
-    window.addEventListener("message", handleCalendlyMessage);
-    return () => window.removeEventListener("message", handleCalendlyMessage);
-  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -181,16 +112,6 @@ export default function ConsultationContent() {
                   </button>
                 </div>
 
-                {/*
-                  The widget is initialized imperatively via window.Calendly
-                  .initInlineWidget() in the effect above, not by Calendly's
-                  own DOM auto-scan (which only runs once per script load and
-                  would miss this div on a later remount). This div also
-                  stays permanently mounted and is only hidden with CSS on
-                  tab switch, since the iframe Calendly injects into it would
-                  otherwise be destroyed and never recreated on an unmount.
-                */}
-                <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="afterInteractive" />
                 <div className={tab === "booking" ? "" : "hidden"}>
                   <div className="mb-6 pb-6 border-b border-beto-gray-subtle/40">
                     <p className="text-xs font-medium text-beto-black mb-4 tracking-wide">{p.prepare.label}</p>
@@ -287,33 +208,22 @@ export default function ConsultationContent() {
                   <p className="text-xs text-beto-gray leading-relaxed mb-4">{p.bookingNote}</p>
 
                   {/*
-                    Primary path: always visible immediately, never gated
-                    behind a timer or dependent on the embed below loading.
-                    Calendly's own widget.js has a live, confirmed bug
-                    (throws on load, independent of anything this site
-                    sends it) affecting every device tested — a visitor
-                    can no longer be asked to wait and hope. No
+                    Direct Calendly link, no embed. Calendly's own
+                    widget.js has a live, confirmed bug (throws on load,
+                    independent of anything this site sends it) on every
+                    device tested tonight — not something fixable from our
+                    side, so the embed was removed rather than ask a
+                    visitor to wait on something broken. No
                     target="_blank": a left-click on a new-tab link can be
                     silently swallowed by ad-block/privacy extensions,
                     confirmed live tonight.
                   */}
                   <a
                     href={CALENDLY_URL}
-                    className="block text-center text-sm font-medium uppercase tracking-widest px-4 py-4 bg-beto-gold text-beto-black hover:bg-beto-gold-dark transition-colors duration-300 mb-6"
+                    className="block text-center text-sm font-medium uppercase tracking-widest px-4 py-4 bg-beto-gold text-beto-black hover:bg-beto-gold-dark transition-colors duration-300"
                   >
                     {p.bookNowCta}
                   </a>
-
-                  <p className="text-xs text-beto-gray-light mb-3">{p.embedNote}</p>
-                  <div
-                    ref={calendlyRef}
-                    className="calendly-inline-widget relative"
-                    style={{ minWidth: "280px", height: "700px" }}
-                  >
-                    <p className="absolute inset-0 flex items-center justify-center text-xs text-beto-gray-light">
-                      {p.loadingCalendar}
-                    </p>
-                  </div>
                 </div>
 
                 {tab === "message" && (
