@@ -259,10 +259,17 @@ export default function ConsultationContent() {
                         {p.calendarFallbackHint}
                       </p>
                     )}
+                    {/*
+                      No target="_blank" on purpose: some ad-block/privacy
+                      extensions silently swallow a left-click on a
+                      new-tab link while leaving right-click "open in new
+                      tab" working, which looked broken but wasn't — a
+                      plain same-tab navigation isn't interceptable that
+                      way. This is already the last-resort fallback, so
+                      leaving the Beto site tab is an acceptable trade.
+                    */}
                     <a
                       href={CALENDLY_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
                       className={cn(
                         "block text-center transition-colors",
                         widgetSlow
