@@ -80,17 +80,6 @@ export default function ConsultationContent() {
   const [prepNotes, setPrepNotes] = useState("");
   const prepSummary = [prepProjectType, prepStage, prepFormat].filter(Boolean);
 
-  // Some embedded/in-app browsers (Gmail, Instagram, Facebook) sandbox
-  // third-party iframes and the Calendly widget never renders, leaving
-  // visitors stuck on "Loading the calendar...". After a few seconds we
-  // promote the fallback link into a real button with a hint, so visitors
-  // aren't left guessing whether the small text link below is their way out.
-  const [widgetSlow, setWidgetSlow] = useState(false);
-  useEffect(() => {
-    const timer = setTimeout(() => setWidgetSlow(true), 6000);
-    return () => clearTimeout(timer);
-  }, []);
-
   useEffect(() => {
     function handleCalendlyMessage(e: MessageEvent) {
       if (
@@ -296,6 +285,26 @@ export default function ConsultationContent() {
                   </div>
 
                   <p className="text-xs text-beto-gray leading-relaxed mb-4">{p.bookingNote}</p>
+
+                  {/*
+                    Primary path: always visible immediately, never gated
+                    behind a timer or dependent on the embed below loading.
+                    Calendly's own widget.js has a live, confirmed bug
+                    (throws on load, independent of anything this site
+                    sends it) affecting every device tested — a visitor
+                    can no longer be asked to wait and hope. No
+                    target="_blank": a left-click on a new-tab link can be
+                    silently swallowed by ad-block/privacy extensions,
+                    confirmed live tonight.
+                  */}
+                  <a
+                    href={CALENDLY_URL}
+                    className="block text-center text-sm font-medium uppercase tracking-widest px-4 py-4 bg-beto-gold text-beto-black hover:bg-beto-gold-dark transition-colors duration-300 mb-6"
+                  >
+                    {p.bookNowCta}
+                  </a>
+
+                  <p className="text-xs text-beto-gray-light mb-3">{p.embedNote}</p>
                   <div
                     ref={calendlyRef}
                     className="calendly-inline-widget relative"
@@ -304,33 +313,6 @@ export default function ConsultationContent() {
                     <p className="absolute inset-0 flex items-center justify-center text-xs text-beto-gray-light">
                       {p.loadingCalendar}
                     </p>
-                  </div>
-                  <div className="mt-3">
-                    {widgetSlow && (
-                      <p className="text-xs text-beto-gold font-medium text-center mb-2">
-                        {p.calendarFallbackHint}
-                      </p>
-                    )}
-                    {/*
-                      No target="_blank" on purpose: some ad-block/privacy
-                      extensions silently swallow a left-click on a
-                      new-tab link while leaving right-click "open in new
-                      tab" working, which looked broken but wasn't — a
-                      plain same-tab navigation isn't interceptable that
-                      way. This is already the last-resort fallback, so
-                      leaving the Beto site tab is an acceptable trade.
-                    */}
-                    <a
-                      href={CALENDLY_URL}
-                      className={cn(
-                        "block text-center transition-colors",
-                        widgetSlow
-                          ? "text-sm border border-beto-gold text-beto-gold font-medium px-4 py-3 bg-beto-gold/5 hover:bg-beto-gold/10"
-                          : "text-xs text-beto-gold hover:underline"
-                      )}
-                    >
-                      {p.calendarFallback}
-                    </a>
                   </div>
                 </div>
 
