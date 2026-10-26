@@ -1,5 +1,15 @@
 export const t = {
   en: {
+    bookingNextStep: {
+      eyebrow: "Request received",
+      title: "One last step: choose your time.",
+      titleWithName: "one last step: choose your time.",
+      body: "Your request is in. Book your free consultation now (45 min to 1 h, virtual or in person in Montreal) to secure your spot with our designer. It takes 30 seconds, and your details are already filled in.",
+      cta: "Choose my time →",
+      redirecting: "Taking you to the calendar in {s} s…",
+      stay: "Stay on this page",
+      fallback: "Prefer to wait? We'll still reply personally within 1 business day.",
+    },
     nav: {
       collections: "Collections",
       collectionsDesc: "Browse our work",
@@ -719,6 +729,16 @@ export const t = {
     },
   },
   fr: {
+    bookingNextStep: {
+      eyebrow: "Demande reçue",
+      title: "Dernière étape : choisissez votre moment.",
+      titleWithName: "dernière étape : choisissez votre moment.",
+      body: "Votre demande est bien reçue. Réservez maintenant votre consultation gratuite (45 min à 1 h, virtuelle ou en personne à Montréal) pour garantir votre place avec notre designer. Ça prend 30 secondes, vos informations sont déjà remplies.",
+      cta: "Choisir mon moment →",
+      redirecting: "Redirection vers le calendrier dans {s} s…",
+      stay: "Rester sur cette page",
+      fallback: "Vous préférez attendre ? Nous vous répondrons personnellement d'ici 1 jour ouvrable.",
+    },
     nav: {
       collections: "Collections",
       collectionsDesc: "Parcourir nos créations",

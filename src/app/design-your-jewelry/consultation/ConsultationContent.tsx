@@ -7,6 +7,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { cn } from "@/lib/utils";
 import { trackMetaLead } from "@/lib/metaPixel";
 import { submitLeadForm } from "@/lib/submitForm";
+import CalendlyNextStep from "@/components/shared/CalendlyNextStep";
 
 const CALENDLY_URL = "https://calendly.com/betojewlz";
 
@@ -19,6 +20,7 @@ export default function ConsultationContent() {
   const [status, setStatus] = useState<Status>("idle");
   const [format, setFormat] = useState("");
   const [tab, setTab] = useState<Tab>("booking");
+  const [lead, setLead] = useState({ name: "", email: "" });
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -37,6 +39,7 @@ export default function ConsultationContent() {
 
     const ok = await submitLeadForm("consultation", fields);
     if (ok) {
+      setLead({ name: fields["Nom complet"], email: fields.email });
       setStatus("success");
       trackMetaLead("consultation");
       form.reset();
@@ -128,7 +131,11 @@ export default function ConsultationContent() {
                   </a>
                 </div>
 
-                {tab === "message" && (
+                {tab === "message" && status === "success" && (
+                  <CalendlyNextStep name={lead.name} email={lead.email} autoRedirect />
+                )}
+
+                {tab === "message" && status !== "success" && (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-6">
                   <div>
                     <p className="text-xs font-medium text-beto-black mb-3 tracking-wide">{p.preferredFormat}</p>
@@ -189,16 +196,13 @@ export default function ConsultationContent() {
                     {status === "sending" ? p.sending : p.submitButton}
                   </button>
 
-                  {status === "success" && (
-                    <p className="text-sm text-green-700 bg-green-50 border border-green-200 px-4 py-3">{p.successMessage}</p>
-                  )}
                   {status === "error" && (
                     <p className="text-sm text-red-700 bg-red-50 border border-red-200 px-4 py-3">{p.errorMessage}</p>
                   )}
                 </form>
                 )}
 
-                {tab === "message" && (
+                {tab === "message" && status !== "success" && (
                   <p className="text-xs text-beto-gray-light mt-4 text-center leading-relaxed">
                     {p.responseNote}
                   </p>
