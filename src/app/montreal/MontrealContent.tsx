@@ -10,6 +10,7 @@ import Magnetic from "@/components/ui/Magnetic";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useStore } from "@/store/useStore";
 import { getBlogPost } from "@/lib/blog-posts";
+import PrivateOffices from "@/components/shared/PrivateOffices";
 
 const RELATED_SLUGS = [
   "prix-bague-fiancailles-montreal-2026",
@@ -162,6 +163,8 @@ export default function MontrealContent() {
           </AnimatedSection>
         </div>
       </section>
+
+      <PrivateOffices />
     </>
   );
 }

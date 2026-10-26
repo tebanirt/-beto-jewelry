@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { trackMetaLead } from "@/lib/metaPixel";
 import { submitLeadForm } from "@/lib/submitForm";
 import CalendlyNextStep from "@/components/shared/CalendlyNextStep";
+import PrivateOffices from "@/components/shared/PrivateOffices";
 
 const CALENDLY_URL = "https://calendly.com/betojewlz";
 
@@ -212,6 +213,8 @@ export default function ConsultationContent() {
           </div>
         </div>
       </section>
+
+      <PrivateOffices />
     </>
   );
 }

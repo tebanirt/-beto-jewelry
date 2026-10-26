@@ -8,6 +8,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { trackMetaLead } from "@/lib/metaPixel";
 import { submitLeadForm } from "@/lib/submitForm";
 import CalendlyNextStep from "@/components/shared/CalendlyNextStep";
+import PrivateOffices from "@/components/shared/PrivateOffices";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -190,6 +191,8 @@ export default function ContactContent() {
           </div>
         </div>
       </section>
+
+      <PrivateOffices />
     </>
   );
 }
