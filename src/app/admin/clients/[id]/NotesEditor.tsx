@@ -9,13 +9,20 @@ export default function NotesEditor({ clientId, initialNotes }: { clientId: stri
 
   async function handleSave() {
     setSaving(true);
-    await fetch(`/api/admin/clients/${clientId}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ notes }),
-    });
+    let ok = false;
+    try {
+      const res = await fetch(`/api/admin/clients/${clientId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ notes }),
+      });
+      ok = res.ok;
+    } catch {
+      ok = false;
+    }
     setSaving(false);
-    setSaved(true);
+    if (ok) setSaved(true);
+    else alert("Les notes n'ont pas été enregistrées. Réessayez.");
   }
 
   return (

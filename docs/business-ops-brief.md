@@ -20,7 +20,7 @@ Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un 
 
 ## 4. CRM (Supabase)
 
-- Tables `clients` (statuts : `nouveau → consultation → depot_recu → design → production → livre → perdu`) et `submissions`.
+- Tables `clients` (statuts : `nouveau → consultation_reservee → consultation_faite → depot_recu → design → production → livre → perdu`) et `submissions`. Colonnes de suivi (26 oct. 2026) : `consultation_at`, `last_contact_at` (dernier message envoyé par Beto), `followup_count` (relances dans l'étape actuelle, remis à 0 à chaque changement de statut), `followups_paused`. Règles de relance codées dans `src/lib/followups.ts` (badge « Relance due » dans `/admin/clients`).
 - `/nouveau-client` : formulaire public d'intake (après dépôt hors plateforme, ex. Facebook Marketplace).
 - `/admin/clients` : dashboard protégé par mot de passe (session HMAC), jamais indexé (robots.txt + noindex).
 - Toujours vérifier les erreurs Supabase (`error`) sur chaque requête — ne jamais laisser un échec d'écriture silencieux.
@@ -70,7 +70,17 @@ Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un 
 
 Quand quelqu'un réserve via Calendly, Calendly envoie une notification « New Event: ... » à betojewlz@gmail.com. Le triage horaire détecte ces courriels (recherche séparée des leads Facebook) et prépare automatiquement un brouillon adressé directement au client, lui demandant de répondre avec : type de pierre, type de métal, type de bijou, une photo d'inspiration en pièce jointe si disponible, et des détails libres. Pas de nouveau formulaire web — la réponse du client arrive directement par courriel, que Rayane peut lire avant la rencontre. Le lien Calendly (betojewlz@gmail.com) est déjà le calendrier qui reçoit les événements, donc aucune config supplémentaire nécessaire.
 
-## 7bis. À construire (spécifié le 24 oct. 2026, prêt à démarrer dès que Rayane le demande)
+## 7ter. Relances automatiques (actives depuis le 26 oct. 2026 — tâche programmée « Relances clients — Beto Jewelry », tous les jours 8 h 37)
+
+- **Brouillons seulement**, jamais d'envoi. Rayane relit et envoie lui-même.
+- Rythme : `nouveau` → J+4 et J+10 après la création ; `consultation_faite` → J+2 et J+10 après la consultation. Puis pause (relance passive Fêtes/Saint-Valentin, pas encore automatisée).
+- Jamais de relance si `followups_paused`, si le client a répondu en dernier dans Gmail (c'est à Rayane de répondre), ou si un brouillon pour ce client existe déjà.
+- Synchro Calendly → CRM : chaque notification « New Event » met le client en `consultation_reservee` avec `consultation_at` (création du client s'il n'existe pas, source « Calendly »).
+- Consultation passée mais statut encore `consultation_reservee` : signalé dans le résumé (Rayane met `consultation_faite` ou `depot_recu`).
+- Ton : chaleureux, court, jamais pressant ; toujours les deux chemins (soumission ou consultation via https://calendly.com/betojewlz) ; mentionner les deux bureaux privés (centre-ville, avenue Union / Saint-Laurent, Cavendish) ; salutation selon l'heure.
+- Remplace l'étape 6 du triage horaire pour les clients présents dans le CRM (le triage garde les rappels calendrier pour les fils hors CRM).
+
+## 7bis. À construire (spécifié le 24 oct. 2026 — rythme de relance et CRM enrichi faits le 26 oct., voir §7ter)
 
 **Rythme de relance** (recherché et confirmé le 24 oct. 2026, voir section 2 pour les règles de brouillon) :
 - Jamais réservé après contact pub : J+1 (déjà automatique), J+4, J+10, puis pause → relance passive aux Fêtes/Saint-Valentin.
