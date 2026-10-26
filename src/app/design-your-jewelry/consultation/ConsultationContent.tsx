@@ -14,6 +14,14 @@ const CALENDLY_URL = "https://calendly.com/betojewlz";
 type Status = "idle" | "sending" | "success" | "error";
 type Tab = "booking" | "message";
 
+declare global {
+  interface Window {
+    Calendly?: {
+      initInlineWidget: (opts: { url: string; parentElement: HTMLElement; prefill?: object; utm?: object }) => void;
+    };
+  }
+}
+
 export default function ConsultationContent() {
   const tr = useTranslation();
   const p = tr.pages.consultation;
@@ -21,6 +29,50 @@ export default function ConsultationContent() {
   const [format, setFormat] = useState("");
   const [tab, setTab] = useState<Tab>("booking");
   const scheduledRef = useRef(false);
+  const calendlyRef = useRef<HTMLDivElement>(null);
+
+  // widget.js only auto-scans the DOM for .calendly-inline-widget[data-url]
+  // once, the moment it first finishes loading. next/script dedupes script
+  // injection across mounts, so if a visitor had already triggered that load
+  // on an earlier visit this session (even on a different page, if this
+  // component had mounted before), coming back to this page later never
+  // gets a second scan — the container just sits empty forever. Calling
+  // Calendly's documented initInlineWidget() ourselves, on every mount,
+  // sidesteps the auto-scan entirely and makes this reliable regardless of
+  // what loaded before.
+  useEffect(() => {
+    let cancelled = false;
+    let pollId: ReturnType<typeof setInterval> | null = null;
+
+    function init() {
+      if (cancelled || !calendlyRef.current || !window.Calendly) return;
+      calendlyRef.current.innerHTML = "";
+      window.Calendly.initInlineWidget({
+        url: `${CALENDLY_URL}?primary_color=c9a86a&hide_gdpr_banner=1`,
+        parentElement: calendlyRef.current,
+      });
+    }
+
+    if (window.Calendly) {
+      init();
+    } else {
+      // Script tag is still loading (or this is the very first mount this
+      // session) — poll briefly rather than relying solely on next/script's
+      // onLoad, which only fires once globally and may already have fired
+      // before this component existed.
+      pollId = setInterval(() => {
+        if (window.Calendly) {
+          if (pollId) clearInterval(pollId);
+          init();
+        }
+      }, 150);
+    }
+
+    return () => {
+      cancelled = true;
+      if (pollId) clearInterval(pollId);
+    };
+  }, []);
 
   const [prepProjectType, setPrepProjectType] = useState("");
   const [prepStage, setPrepStage] = useState("");
@@ -141,13 +193,13 @@ export default function ConsultationContent() {
                 </div>
 
                 {/*
-                  Calendly's widget.js scans the DOM for .calendly-inline-widget
-                  only once, when it first loads — it never re-scans for a div
-                  that disappears and reappears. Conditionally unmounting this
-                  on tab switch (the old `{tab === "booking" && <div>...}`
-                  pattern) meant the widget never came back after the visitor
-                  switched to the message tab and back: an empty box forever.
-                  It now stays mounted permanently and is only hidden with CSS.
+                  The widget is initialized imperatively via window.Calendly
+                  .initInlineWidget() in the effect above, not by Calendly's
+                  own DOM auto-scan (which only runs once per script load and
+                  would miss this div on a later remount). This div also
+                  stays permanently mounted and is only hidden with CSS on
+                  tab switch, since the iframe Calendly injects into it would
+                  otherwise be destroyed and never recreated on an unmount.
                 */}
                 <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="afterInteractive" />
                 <div className={tab === "booking" ? "" : "hidden"}>
@@ -245,8 +297,8 @@ export default function ConsultationContent() {
 
                   <p className="text-xs text-beto-gray leading-relaxed mb-4">{p.bookingNote}</p>
                   <div
+                    ref={calendlyRef}
                     className="calendly-inline-widget relative"
-                    data-url={`${CALENDLY_URL}?primary_color=c9a86a&hide_gdpr_banner=1`}
                     style={{ minWidth: "280px", height: "700px" }}
                   >
                     <p className="absolute inset-0 flex items-center justify-center text-xs text-beto-gray-light">
