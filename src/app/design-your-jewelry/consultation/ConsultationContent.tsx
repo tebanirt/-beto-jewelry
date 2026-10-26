@@ -48,7 +48,7 @@ export default function ConsultationContent() {
       if (cancelled || !calendlyRef.current || !window.Calendly) return;
       calendlyRef.current.innerHTML = "";
       window.Calendly.initInlineWidget({
-        url: `${CALENDLY_URL}?primary_color=c9a86a&hide_gdpr_banner=1`,
+        url: `${CALENDLY_URL}?primary_color=c9a86a`,
         parentElement: calendlyRef.current,
       });
     }
