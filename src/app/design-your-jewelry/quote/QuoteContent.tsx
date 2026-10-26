@@ -16,8 +16,9 @@ export default function QuoteContent() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget; // React nulls e.currentTarget after an await — grab it now
     setStatus("sending");
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(form);
     const fields = {
       "Nom complet": formData.get("name")?.toString() || "",
       "Courriel": formData.get("email")?.toString() || "",
@@ -32,7 +33,7 @@ export default function QuoteContent() {
     if (ok) {
       setStatus("success");
       trackMetaLead("quote");
-      e.currentTarget.reset();
+      form.reset();
     } else {
       setStatus("error");
     }

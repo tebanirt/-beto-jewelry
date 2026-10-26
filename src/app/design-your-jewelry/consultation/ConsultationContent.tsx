@@ -56,8 +56,9 @@ export default function ConsultationContent() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget; // React nulls e.currentTarget after an await — grab it now
     setStatus("sending");
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(form);
     const fields = {
       "Format préféré": format,
       "Nom complet": formData.get("fullName")?.toString() || "",
@@ -72,7 +73,7 @@ export default function ConsultationContent() {
     if (ok) {
       setStatus("success");
       trackMetaLead("consultation");
-      e.currentTarget.reset();
+      form.reset();
       setFormat("");
     } else {
       setStatus("error");

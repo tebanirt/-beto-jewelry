@@ -27,8 +27,9 @@ export default function ContactContent() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget; // React nulls e.currentTarget after an await — grab it now
     setStatus("sending");
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(form);
     const fields = {
       "Prénom": formData.get("firstName")?.toString() || "",
       "Nom": formData.get("lastName")?.toString() || "",
@@ -42,7 +43,7 @@ export default function ContactContent() {
     if (ok) {
       setStatus("success");
       trackMetaLead("contact");
-      e.currentTarget.reset();
+      form.reset();
     } else {
       setStatus("error");
     }
