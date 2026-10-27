@@ -54,7 +54,7 @@ from beto_doc import (  # noqa: E402
 _LABELS = {
     "fr": {
         "doc_label": "SOUMISSION",
-        "title": "Soumission — Bague de fiançailles",
+        "title": "Soumission",
         "prepared_for": "PRÉPARÉE POUR",
         "reference": "RÉFÉRENCE",
         "number": "NUMÉRO",
@@ -70,7 +70,7 @@ _LABELS = {
     },
     "en": {
         "doc_label": "QUOTE",
-        "title": "Quote — Engagement Ring",
+        "title": "Quote",
         "prepared_for": "PREPARED FOR",
         "reference": "REFERENCE",
         "number": "NUMBER",
