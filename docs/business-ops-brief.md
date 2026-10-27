@@ -28,6 +28,7 @@ Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un 
 ## 5. Facturation (`tools/invoicing/`)
 
 - Gabarit officiel confirmé le 23 octobre 2026, basé sur `Beto-Jewelry_Recu-depot_Maxim-Huard.pdf` : bandeau or/bronze, mise en page à deux colonnes, tableau, bandeau crème pour le solde, étapes suivantes, pied de page avec les seules coordonnées de Rayane.
+- **Soumission à options multiples + photos de référence** (confirmé le 27 oct. 2026, `soumission_multi_option.py`) : pour une soumission présentant plusieurs options de prix (ex. carats de métal différents) avec des photos de référence (modèle souhaité, détails de style). Bilingue (fr/en). Toujours montrer le PDF à Rayane pour confirmation avant tout brouillon de courriel au client — même règle que les autres documents.
 - Logo réel dans `tools/invoicing/assets/logo.png` — fourni par Rayane, ne jamais recréer ni modifier. Si le fichier est absent, le script avertit bruyamment ; ne jamais envoyer un document dans ce cas.
 - Numérotation : `BJ-AAAA-MMJJ` (facture/soumission), `REC-AAAA-MMJJ` (reçu).
 - Pour une ancienne facture à refaire dans ce format : reprendre les infos du client (montant total, date et montant du dépôt, date et montant du paiement final, mode de paiement précisé par Rayane) et reconstruire l'historique complet, même pour un paiement final — jamais juste le solde.
