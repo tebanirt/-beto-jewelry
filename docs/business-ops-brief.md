@@ -25,6 +25,17 @@ Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un 
 - `/admin/clients` : dashboard protégé par mot de passe (session HMAC), jamais indexé (robots.txt + noindex).
 - Toujours vérifier les erreurs Supabase (`error`) sur chaque requête — ne jamais laisser un échec d'écriture silencieux.
 
+## 4bis. CRM enrichi + rythme de relance (construit le 27 oct. 2026)
+
+Déclenché par l'analyse du 27 oct. 2026 : sur 8 leads Facebook/Instagram contactés depuis 1 à 6 jours, 0 % avaient répondu, et aucune relance n'existait. La table `clients` a déjà les colonnes nécessaires (`status`, `consultation_at`, `last_contact_at`, `followup_count`, `followups_paused`) — ce qui manquait, c'était leur utilisation :
+
+- **À chaque vrai client/prospect traité** (étape 3 du triage horaire) : upsert dans `clients` (clé : `email`) avec `full_name`, `email`, `phone`, `source` (`facebook_instagram`, `site`, ou `calendly`), `status='nouveau'` si nouvelle ligne, `last_contact_at=maintenant`. Ne jamais dupliquer une ligne existante pour le même courriel — mettre à jour plutôt que recréer.
+- **Rythme de relance** (confirmé le 24 oct. 2026, voir aussi section 8) :
+  - `status='nouveau'` (jamais réservé après contact pub) : le premier courriel de contact compte comme J+1 (déjà fait). Prochaine relance à J+4 (`followup_count` 0→1), puis J+10 après cette relance (`followup_count` 1→2), puis `followups_paused=true` — plus de relance active, seulement une relance passive aux Fêtes/Saint-Valentin (non automatisée pour l'instant).
+  - `status='consultation'` (consultation eue, pas d'achat, `consultation_at` rempli) : J+2 après la rencontre, puis J+10, puis pause, même logique de compteur.
+  - **Maximum 3 relances actives (`followup_count` ne dépasse jamais 3)** — jamais plus, pour ne pas être pressant.
+- **À l'étape 6 (Relances) du triage horaire** : interroger `clients` où `followups_paused=false` et `followup_count<3`, calculer si `last_contact_at` dépasse le seuil applicable (J+4/J+10 ou J+2/J+10 selon `status`). Pour chaque ligne due : créer un brouillon de relance chaleureux (rappel des deux chemins : soumission directe ou consultation gratuite), `label_thread` Claude/Clients si pas déjà fait, puis mettre à jour la ligne (`last_contact_at=maintenant`, `followup_count+=1`, et `followups_paused=true` si ça atteint 3).
+
 ## 5. Facturation (`tools/invoicing/`)
 
 - Gabarit officiel confirmé le 23 octobre 2026, basé sur `Beto-Jewelry_Recu-depot_Maxim-Huard.pdf` : bandeau or/bronze, mise en page à deux colonnes, tableau, bandeau crème pour le solde, étapes suivantes, pied de page avec les seules coordonnées de Rayane.
@@ -48,16 +59,17 @@ Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un 
 
 1. **Labels** (`list_labels`) : « Claude/Clients », « Claude/Infolettres », « Claude/À vérifier » — utiliser leurs IDs réels.
 2. **Trois recherches séparées**, combinées sans doublons :
-   - a) `in:inbox is:unread -label:Claude/Clients -label:Claude/Infolettres -label:Claude/À vérifier`
-   - b) `in:inbox subject:"Nouveau prospect Facebook/Instagram — Beto Jewelry" -label:Claude/Clients -label:Claude/Infolettres -label:Claude/À vérifier` (jamais filtrer sur `is:unread` ici — voir règle ci-dessus)
-   - c) `from:notifications@calendly.com subject:"New Event:" -label:Claude/Clients -label:Claude/Infolettres -label:Claude/À vérifier`
+   - a) `in:inbox is:unread -label:"Claude/Clients" -label:"Claude/Infolettres" -label:"Claude/À vérifier"`
+   - b) `in:inbox subject:"Nouveau prospect Facebook/Instagram — Beto Jewelry" -label:"Claude/Clients" -label:"Claude/Infolettres" -label:"Claude/À vérifier"` (jamais filtrer sur `is:unread` ici — voir règle ci-dessus)
+   - c) `from:notifications@calendly.com subject:"New Event:" -label:"Claude/Clients" -label:"Claude/Infolettres" -label:"Claude/À vérifier"`
+   - **Toujours mettre les noms de labels entre guillemets** (ex. `-label:"Claude/À vérifier"`, pas `-label:Claude/À vérifier`). Bug découvert le 27 oct. 2026 : sans guillemets, Gmail coupe la requête au premier espace et traite le reste comme un mot-clé positif au lieu d'une exclusion — ce qui a fait rater silencieusement plusieurs vrais leads pendant plusieurs heures de triage avant d'être détecté. Ne jamais revenir à la syntaxe sans guillemets.
 3. **Classification (a) et (b)** — lire le fil entier (`get_thread`) :
-   - *Vrai client/prospect* (site : « Nouvelle demande — ... », ou lead Facebook/Instagram Zapier, ou réponse directe d'un client existant) → rédiger un brouillon selon les règles ci-dessus (salutation/sujet/lien Calendly/lieu) et les faits entreprise ci-dessous → label Claude/Clients.
+   - *Vrai client/prospect* (site : « Nouvelle demande — ... », ou lead Facebook/Instagram Zapier, ou réponse directe d'un client existant) → rédiger un brouillon selon les règles ci-dessus (salutation/sujet/lien Calendly/lieu) et les faits entreprise ci-dessous → label Claude/Clients → **upsert dans Supabase `clients`** (voir section 4bis juste en dessous).
    - *Infolettre/marketing* (Calendly, Zoom, ChatGPT, Zapier promo, etc.) → label Claude/Infolettres **et** retirer INBOX (archiver).
    - *Administratif/sécurité à vérifier* (alertes Google, confirmations tierces, réservations Calendly test) → label Claude/À vérifier, laisser dans la boîte, ne rien toucher d'autre.
 4. **Recherche (c) = vraies réservations, pas des leads** : extraire nom/courriel invité, type d'événement, date/heure. Nom/courriel visiblement test → Claude/À vérifier, rien d'envoyé. Sinon → nouveau brouillon **direct à l'invité** (pas une réponse à la notif Calendly), sujet « {Prénom}, quelques détails avant notre rencontre du {date} », salutation adaptée à l'heure, remerciement + confirmation date/heure, demande de répondre avec : type de pierre, type de métal, type de bijou, photo d'inspiration si possible, détails libres — préciser que rien n'est obligatoire. Label Claude/Clients sur le fil de la notification (pour ne pas le retraiter).
 5. **Synchro calendrier** (betojewlz@gmail.com, fuseau America/Toronto) : pour chaque vrai client/prospect de l'étape 3, si ça correspond à un jalon concret (nouveau lead FB/IG, dépôt 200$ reçu, rendu 3D envoyé, design approuvé, nouvelle demande consultation/devis) → `search_events` d'abord pour éviter tout doublon → si rien, créer un événement court (15-30 min, aujourd'hui), titre « [Nom client] — [jalon] », description avec les faits réels seulement (jamais de prix/dates inventés). Les réservations Calendly créent déjà leur propre événement — ne pas en recréer un pour l'étape 4.
-6. **Relances** : recherche légère `search_threads label:Claude/Clients`, repérer les fils dont le dernier message vient de Beto Jewelry depuis 3 jours ou plus sans réponse ; `search_events` pour vérifier qu'un rappel n'existe pas déjà dans les 3 prochains jours ; sinon créer « Relancer [nom] — pas de réponse depuis X jours » pour aujourd'hui/demain.
+6. **Relances** (basées sur le CRM depuis le 27 oct. 2026 — voir section 4bis pour le détail complet) : requête Supabase `clients` où `followups_paused=false` et `followup_count<3`, filtrer celles dont `last_contact_at` dépasse le seuil J+4/J+10 (statut `nouveau`) ou J+2/J+10 (statut `consultation`) ; pour chaque ligne due, créer un brouillon de relance chaleureux puis mettre à jour `last_contact_at`/`followup_count`/`followups_paused` dans la même ligne.
 7. **Résumé final TRÈS court** : « Rien de nouveau. » si rien, sinon nombre de clients traités (en précisant FB/IG, site, ou Calendly), nombre à vérifier, nombre d'événements créés — max 4-5 lignes.
 
 **Faits entreprise pour les brouillons** (en plus des règles de salutation/sujet/lien/lieu ci-dessus) : consultation gratuite (45 min à 1h) → design 3D ~48h → révisions incluses → production ~1,5 semaine après approbation → livraison en mains propres ou expédition assurée. Dépôt design 200$, entièrement crédité sur la pièce finale. Rayane : joaillier diplômé, 500+ créations, communication bilingue directe. Diamants naturels certifiés OU de laboratoire selon le budget, jamais de jugement entre les deux. Ne jamais inventer un prix précis, une date de rendez-vous ou une promesse spécifique non confirmée.
@@ -70,16 +82,11 @@ Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un 
 
 Quand quelqu'un réserve via Calendly, Calendly envoie une notification « New Event: ... » à betojewlz@gmail.com. Le triage horaire détecte ces courriels (recherche séparée des leads Facebook) et prépare automatiquement un brouillon adressé directement au client, lui demandant de répondre avec : type de pierre, type de métal, type de bijou, une photo d'inspiration en pièce jointe si disponible, et des détails libres. Pas de nouveau formulaire web — la réponse du client arrive directement par courriel, que Rayane peut lire avant la rencontre. Le lien Calendly (betojewlz@gmail.com) est déjà le calendrier qui reçoit les événements, donc aucune config supplémentaire nécessaire.
 
-## 7bis. À construire (spécifié le 24 oct. 2026, prêt à démarrer dès que Rayane le demande)
+## 7bis. À construire
 
-**Rythme de relance** (recherché et confirmé le 24 oct. 2026, voir section 2 pour les règles de brouillon) :
-- Jamais réservé après contact pub : J+1 (déjà automatique), J+4, J+10, puis pause → relance passive aux Fêtes/Saint-Valentin.
-- Consultation eue, pas d'achat : J+2 après la rencontre, J+10, puis pause → relance passive aux Fêtes/Saint-Valentin.
-- Maximum 3 relances actives — jamais plus, pour ne pas être pressant.
+**Rythme de relance + CRM enrichi** : ✅ construits le 27 oct. 2026 — voir section 4bis et section 6 étape 6. Ne plus traiter comme "à construire", juste appliquer la procédure.
 
-**CRM enrichi** : ajouter un suivi plus granulaire que le statut actuel (`nouveau → consultation → depot_recu → ...`) — distinguer clairement "a réservé mais pas encore eu la consultation", "a eu la consultation mais pas acheté", avec horodatage de dernier contact et compteur de relances, pour piloter automatiquement le rythme ci-dessus sans doublons ni oublis.
-
-**Connexion Calendly → CRM/courriel automatique** : détecter quand un client réserve via Calendly (probablement via Zapier, même pattern que pour les leads Facebook/Instagram), puis envoyer automatiquement un courriel avec un lien vers un formulaire de préparation à la rencontre, collectant : type de pierre (déjà capté par les pubs : diamant naturel/laboratoire/pierre précieuse), type de métal souhaité, type de bijou, une photo d'inspiration si disponible (upload à construire — n'existe pas encore sur le site), et un champ texte libre pour d'autres détails.
+**Connexion Calendly → CRM/courriel automatique** (spécifié le 24 oct. 2026, toujours à construire) : détecter quand un client réserve via Calendly (probablement via Zapier, même pattern que pour les leads Facebook/Instagram), puis envoyer automatiquement un courriel avec un lien vers un formulaire de préparation à la rencontre, collectant : type de pierre (déjà capté par les pubs : diamant naturel/laboratoire/pierre précieuse), type de métal souhaité, type de bijou, une photo d'inspiration si disponible (upload à construire — n'existe pas encore sur le site), et un champ texte libre pour d'autres détails.
 
 ## 7. Différé (ne pas travailler là-dessus avant que Rayane le redemande)
 
