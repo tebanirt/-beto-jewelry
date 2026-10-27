@@ -7,6 +7,8 @@ import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import { trackMetaLead } from "@/lib/metaPixel";
 import { submitLeadForm } from "@/lib/submitForm";
+import CalendlyNextStep from "@/components/shared/CalendlyNextStep";
+import PrivateOffices from "@/components/shared/PrivateOffices";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -24,6 +26,7 @@ export default function ContactContent() {
   const tr = useTranslation();
   const p = tr.pages.contact;
   const [status, setStatus] = useState<Status>("idle");
+  const [lead, setLead] = useState({ name: "", email: "", isNewProject: true });
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -41,6 +44,12 @@ export default function ContactContent() {
 
     const ok = await submitLeadForm("contact", fields);
     if (ok) {
+      // "Existing Order" (index 3) is a current client, not a new lead — no booking push.
+      setLead({
+        name: `${fields["Prénom"]} ${fields["Nom"]}`.trim(),
+        email: fields.email,
+        isNewProject: fields["Sujet"] !== p.subjectOptions[3],
+      });
       setStatus("success");
       trackMetaLead("contact");
       form.reset();
@@ -168,7 +177,10 @@ export default function ContactContent() {
                   </button>
 
                   {status === "success" && (
-                    <p className="text-sm text-green-700 bg-green-50 border border-green-200 px-4 py-3">{p.successMessage}</p>
+                    <>
+                      <p className="text-sm text-green-700 bg-green-50 border border-green-200 px-4 py-3">{p.successMessage}</p>
+                      {lead.isNewProject && <CalendlyNextStep name={lead.name} email={lead.email} />}
+                    </>
                   )}
                   {status === "error" && (
                     <p className="text-sm text-red-700 bg-red-50 border border-red-200 px-4 py-3">{p.errorMessage}</p>
@@ -179,6 +191,8 @@ export default function ContactContent() {
           </div>
         </div>
       </section>
+
+      <PrivateOffices />
     </>
   );
 }

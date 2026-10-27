@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { getSupabaseAdmin, type Client } from "@/lib/supabase";
-import { StatusSelect, LogoutButton } from "./ClientRowControls";
+import { StatusSelect, LogoutButton, STATUS_OPTIONS } from "./ClientRowControls";
+import FollowupBadge from "./FollowupBadge";
+import { followupState } from "@/lib/followups";
 
 export const dynamic = "force-dynamic";
 
@@ -21,6 +23,15 @@ async function getClients(): Promise<Client[]> {
 export default async function AdminClientsPage() {
   const clients = await getClients();
   const notConfigured = !process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const now = new Date();
+  const dueCount = clients.filter((c) => {
+    const s = followupState(c, now).kind;
+    return s === "due" || s === "update_status";
+  }).length;
+  const pipeline = STATUS_OPTIONS.map((opt) => ({
+    ...opt,
+    count: clients.filter((c) => c.status === opt.value).length,
+  })).filter((s) => s.count > 0);
 
   return (
     <section className="min-h-screen bg-beto-offwhite px-5 py-10" style={{ paddingTop: "calc(var(--nav-height, 0px) + 2.5rem)" }}>
@@ -32,6 +43,19 @@ export default async function AdminClientsPage() {
           </div>
           <LogoutButton />
         </div>
+
+        {clients.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-6">
+            <span className={`text-xs px-3 py-1.5 border ${dueCount > 0 ? "border-beto-gold text-beto-black bg-beto-gold/10" : "border-beto-gray-subtle text-beto-gray-light"}`}>
+              À traiter aujourd&apos;hui : {dueCount}
+            </span>
+            {pipeline.map((s) => (
+              <span key={s.value} className="text-xs px-3 py-1.5 border border-beto-gray-subtle text-beto-gray">
+                {s.label} : {s.count}
+              </span>
+            ))}
+          </div>
+        )}
 
         {notConfigured && (
           <p className="text-sm text-red-700 bg-red-50 border border-red-200 px-4 py-3 mb-6">
@@ -52,6 +76,8 @@ export default async function AdminClientsPage() {
                   <th className="px-4 py-3">Contact</th>
                   <th className="px-4 py-3">Source</th>
                   <th className="px-4 py-3">Statut</th>
+                  <th className="px-4 py-3">Consultation</th>
+                  <th className="px-4 py-3">Relance</th>
                   <th className="px-4 py-3">Mis à jour</th>
                   <th className="px-4 py-3" />
                 </tr>
@@ -69,6 +95,14 @@ export default async function AdminClientsPage() {
                     <td className="px-4 py-3 text-beto-gray-light">{client.source}</td>
                     <td className="px-4 py-3">
                       <StatusSelect clientId={client.id} status={client.status} />
+                    </td>
+                    <td className="px-4 py-3 text-beto-gray-light whitespace-nowrap">
+                      {client.consultation_at
+                        ? new Date(client.consultation_at).toLocaleString("fr-CA", { dateStyle: "medium", timeStyle: "short", timeZone: "America/Toronto" })
+                        : "—"}
+                    </td>
+                    <td className="px-4 py-3 whitespace-nowrap">
+                      <FollowupBadge state={followupState(client, now)} />
                     </td>
                     <td className="px-4 py-3 text-beto-gray-light whitespace-nowrap">
                       {new Date(client.updated_at).toLocaleDateString("fr-CA")}

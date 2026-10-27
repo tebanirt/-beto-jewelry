@@ -1,5 +1,32 @@
 export const t = {
   en: {
+    privateOffices: {
+      eyebrow: "Our private offices",
+      title: "Two private offices, to make it easier for you.",
+      intro: "In-person consultations take place by appointment in one of our two private offices. Choose the one closest to home: a quiet, private space to look at stones and talk through your project with Rayane. Prefer to stay home? The consultation is also available by video, anywhere in Canada.",
+      downtown: {
+        label: "Downtown",
+        name: "Montréal — Downtown",
+        idealFor: "Ideal if you live in Montréal (central and east) or on the South Shore.",
+      },
+      saintLaurent: {
+        label: "Saint-Laurent",
+        name: "Montréal — Saint-Laurent",
+        idealFor: "Ideal if you live in Laval, on the North Shore or in the West Island.",
+      },
+      cta: "Book my free consultation now",
+      note: "When booking, select the office of your choice. By appointment only.",
+    },
+    bookingNextStep: {
+      eyebrow: "Request received",
+      title: "One last step: choose your time.",
+      titleWithName: "one last step: choose your time.",
+      body: "Your request is in. Book your free consultation now (45 min to 1 h, virtual or in person in Montreal) to secure your spot with our designer. It takes 30 seconds, and your details are already filled in.",
+      cta: "Choose my time →",
+      redirecting: "Taking you to the calendar in {s} s…",
+      stay: "Stay on this page",
+      fallback: "Prefer to wait? We'll still reply personally within 1 business day.",
+    },
     nav: {
       collections: "Collections",
       collectionsDesc: "Browse our work",
@@ -83,7 +110,7 @@ export const t = {
         { step: "01", title: "Consultation", duration: "Free", body: "We begin with a consultation — virtual or in-person. We learn about you, your partner, your timeline, and your vision.", detail: "Free, no obligation. We discuss your vision, a rough budget, and your timeline — you don't need to prepare anything in advance." },
         { step: "02", title: "Design & CAD", duration: "≈ 48 hours", body: "Within ~48 hours, your designer delivers a precise 3D CAD rendering. You can review, adjust, and approve before a single gram of metal is touched.", detail: "A private link lets you explore the rendering from every angle. Revisions are included until the design is exactly yours." },
         { step: "03", title: "Production", duration: "≈ 1.5 weeks", body: "Once you approve the design, production begins. Every piece is crafted by hand using ethically sourced metals and certified diamonds.", detail: "Ethically sourced metals, certified diamonds. Nothing moves in production without your prior approval of the final design." },
-        { step: "04", title: "Delivery", duration: "Your choice", body: "Your finished piece arrives in premium Beto Jewelry packaging — along with full documentation and a certificate of authenticity.", detail: "Hand-delivered at the atelier, or shipped with insurance — whichever suits you. Arrives with its certificate of authenticity and full documentation." },
+        { step: "04", title: "Delivery", duration: "Your choice", body: "Your finished piece arrives in premium Beto Jewelry packaging — along with full documentation and a certificate of authenticity.", detail: "Hand-delivered at one of our two private offices in Montréal, or shipped with insurance — whichever suits you. Arrives with its certificate of authenticity and full documentation." },
       ],
     },
     testimonials: {
@@ -373,7 +400,7 @@ export const t = {
         eyebrow: "Montréal",
         title: "Custom engagement rings,",
         titleItalic: "made in Montréal.",
-        subtitle: "An independent goldsmith's atelier in Montréal. You design your ring directly with Rayane — in person here, or by video anywhere in Canada — and he makes it himself.",
+        subtitle: "An independent goldsmith's atelier in Montréal. You design your ring directly with Rayane — in person at one of our two private offices, or by video anywhere in Canada — and he makes it himself.",
         introHeading: "A real atelier, not a showroom floor",
         introBody: "Beto Jewelry is one goldsmith, Rayane Tebani, trained at Montréal's École des métiers du Sud-Ouest. There's no sales team and no markup for a name on the door. You bring an idea, a photo, or a stone; together you shape the design; you approve a 3D render within about 48 hours; then Rayane casts, sets and finishes the ring by hand. An engagement ring is typically ready about 1½–2 weeks after you approve the CAD.",
         makeLabel: "What we make in Montréal",
@@ -385,7 +412,7 @@ export const t = {
         processLabel: "How it works",
         processHeading: "Four steps, fully transparent",
         process: [
-          { n: "01", t: "Consultation", b: "Free, virtual or at the Montréal atelier. We talk vision, budget and timeline — no obligation." },
+          { n: "01", t: "Consultation", b: "Free, virtual or in person at one of our two private offices (downtown or Saint-Laurent). We talk vision, budget and timeline — no obligation." },
           { n: "02", t: "Design & quote", b: "Rayane sketches directions and sends a clear quote. A $200 CAD deposit — credited in full to your piece — starts the CAD." },
           { n: "03", t: "3D CAD render", b: "Within ~48 hours you see your ring from every angle. Unlimited revisions, no fees, until it's exactly right." },
           { n: "04", t: "Handmade & delivered", b: "Cast, set and hand-finished in Montréal. Delivered with certified stones, a certificate of authenticity and a 12-month warranty." },
@@ -399,8 +426,8 @@ export const t = {
         ],
         faqLabel: "Common questions",
         faq: [
-          { q: "Do you work with clients outside Montréal?", a: "Yes. About half of our projects run entirely by video call — consultation, design review and CAD approval — with the finished ring shipped insured anywhere in Canada. Montréal clients are welcome at the atelier by appointment." },
-          { q: "Where is the atelier?", a: "In Montréal, Québec. It's a working goldsmith's atelier, visited by appointment rather than a walk-in store — that's how we keep the focus (and the price) on the ring." },
+          { q: "Do you work with clients outside Montréal?", a: "Yes. About half of our projects run entirely by video call — consultation, design review and CAD approval — with the finished ring shipped insured anywhere in Canada. Montréal-area clients are welcome at our private offices by appointment." },
+          { q: "Where do in-person consultations take place?", a: "In one of our two private offices, by appointment: downtown Montréal (1188, avenue Union) or Saint-Laurent (9900, boul. Cavendish, suite 200). Pick the one closest to you — downtown suits Montréal and the South Shore, Saint-Laurent suits Laval, the North Shore and the West Island. Pieces are made in our Montréal atelier." },
           { q: "How do we start?", a: "Book a free consultation or start a custom design request online. There's no charge until you and Rayane have agreed on a direction and you place the $200 CAD design deposit, which is credited to your final piece." },
         ],
         seeFullProcess: "See the full custom process",
@@ -433,7 +460,7 @@ export const t = {
           { k: "Revisions", v: "Unlimited, at no extra cost, until the CAD is exactly right." },
           { k: "Engagement ring delivery", v: "About 1½–2 weeks after you approve the CAD." },
           { k: "More complex pieces", v: "2–4 weeks after CAD approval — we give you a firm date up front." },
-          { k: "Consultation", v: "Free — virtual anywhere in Canada, or in person at the Montreal atelier." },
+          { k: "Consultation", v: "Free — virtual anywhere in Canada, or in person at one of our two private offices (downtown Montréal or Saint-Laurent)." },
           { k: "Every piece includes", v: "GIA or IGI certified stones, a certificate of authenticity, and a 12-month warranty." },
           { k: "Who you work with", v: "Rayane, the goldsmith who designs and makes your ring — no middleman, no sales floor." },
         ],
@@ -705,7 +732,7 @@ export const t = {
         processLabel: "How It Works",
         processIntro: "We take a dental impression, design your grillz in 3D, and craft them by hand in your chosen metal and stone. Every piece fits your teeth exactly — not a template.",
         processSteps: [
-          { number: "01", title: "Dental Impression", body: "We guide you through taking your own dental mold at home with our kit, or you visit us in person in Montreal." },
+          { number: "01", title: "Dental Impression", body: "We guide you through taking your own dental mold at home with our kit, or you visit us in person at one of our private offices in Montréal." },
           { number: "02", title: "Design & Material", body: "Choose your metal, stone setting, and style. We create a 3D preview before any production begins." },
           { number: "03", title: "Handcrafted Production", body: "Your grillz are cast, set with stones if applicable, and polished to your exact specifications." },
           { number: "04", title: "Delivery", body: "Premium packaging with care instructions, a certificate of authenticity, and full material documentation." },
@@ -719,6 +746,33 @@ export const t = {
     },
   },
   fr: {
+    privateOffices: {
+      eyebrow: "Nos bureaux privés",
+      title: "Deux bureaux privés, pour vous faciliter la vie.",
+      intro: "Les consultations en personne se font sur rendez-vous dans l'un de nos deux bureaux privés. Choisissez celui qui est le plus près de chez vous : un espace calme et privé pour voir des pierres et parler de votre projet avec Rayane. Vous préférez rester chez vous ? La consultation est aussi offerte par vidéo, partout au Canada.",
+      downtown: {
+        label: "Centre-ville",
+        name: "Montréal — Centre-ville",
+        idealFor: "Idéal si vous habitez à Montréal (centre et est) ou sur la Rive-Sud.",
+      },
+      saintLaurent: {
+        label: "Saint-Laurent",
+        name: "Montréal — Saint-Laurent",
+        idealFor: "Idéal si vous habitez à Laval, sur la Rive-Nord ou dans l'Ouest-de-l'Île.",
+      },
+      cta: "Réserver ma consultation gratuite",
+      note: "Lors de la réservation, sélectionnez le bureau de votre choix. Sur rendez-vous seulement.",
+    },
+    bookingNextStep: {
+      eyebrow: "Demande reçue",
+      title: "Dernière étape : choisissez votre moment.",
+      titleWithName: "dernière étape : choisissez votre moment.",
+      body: "Votre demande est bien reçue. Réservez maintenant votre consultation gratuite (45 min à 1 h, virtuelle ou en personne à Montréal) pour garantir votre place avec notre designer. Ça prend 30 secondes, vos informations sont déjà remplies.",
+      cta: "Choisir mon moment →",
+      redirecting: "Redirection vers le calendrier dans {s} s…",
+      stay: "Rester sur cette page",
+      fallback: "Vous préférez attendre ? Nous vous répondrons personnellement d'ici 1 jour ouvrable.",
+    },
     nav: {
       collections: "Collections",
       collectionsDesc: "Parcourir nos créations",
@@ -802,7 +856,7 @@ export const t = {
         { step: "01", title: "Consultation", duration: "Gratuite", body: "Nous commençons par une consultation — virtuelle ou en personne. Nous apprenons à vous connaître, votre vision, votre délai et votre budget.", detail: "Gratuite, sans engagement. On discute de votre vision, d'une fourchette de budget et de votre échéancier — vous n'avez rien à préparer à l'avance." },
         { step: "02", title: "Design 3D", duration: "≈ 48 heures", body: "En ~48 heures, vous recevez un rendu 3D précis de votre pièce. Vous pouvez réviser, ajuster et valider avant qu'un seul gramme de métal soit touché.", detail: "Un lien privé vous permet d'explorer le rendu sous tous les angles. Les retouches sont incluses jusqu'à ce que le design soit exactement le vôtre." },
         { step: "03", title: "Production", duration: "≈ 1,5 semaine", body: "Une fois votre design approuvé, la production commence. Chaque pièce est fabriquée à la main avec des métaux sourcés éthiquement et des diamants certifiés.", detail: "Métaux sourcés éthiquement, diamants certifiés. Rien ne bouge en production sans votre accord préalable sur le design final." },
-        { step: "04", title: "Livraison", duration: "Selon votre choix", body: "Votre pièce arrive dans un emballage premium Beto Jewelry — accompagnée de la documentation complète et d'un certificat d'authenticité.", detail: "Remise en mains propres à l'atelier, ou expédition assurée — à votre convenance. Arrive avec son certificat d'authenticité et sa documentation complète." },
+        { step: "04", title: "Livraison", duration: "Selon votre choix", body: "Votre pièce arrive dans un emballage premium Beto Jewelry — accompagnée de la documentation complète et d'un certificat d'authenticité.", detail: "Remise en mains propres dans l'un de nos deux bureaux privés à Montréal, ou expédition assurée — à votre convenance. Arrive avec son certificat d'authenticité et sa documentation complète." },
       ],
     },
     testimonials: {
@@ -1092,7 +1146,7 @@ export const t = {
         eyebrow: "Montréal",
         title: "Bagues de fiançailles sur mesure,",
         titleItalic: "faites à Montréal.",
-        subtitle: "L'atelier d'un joaillier indépendant à Montréal. Vous concevez votre bague directement avec Rayane — en personne ici, ou par visioconférence partout au Canada — et c'est lui qui la fabrique.",
+        subtitle: "L'atelier d'un joaillier indépendant à Montréal. Vous concevez votre bague directement avec Rayane — en personne dans l'un de nos deux bureaux privés, ou par visioconférence partout au Canada — et c'est lui qui la fabrique.",
         introHeading: "Un vrai atelier, pas un plancher de vente",
         introBody: "Beto Jewelry, c'est un seul joaillier, Rayane Tebani, formé à l'École des métiers du Sud-Ouest de Montréal. Pas d'équipe de vente, pas de majoration pour un nom sur la porte. Vous apportez une idée, une photo ou une pierre ; ensemble vous façonnez le design ; vous approuvez un rendu 3D en environ 48 heures ; puis Rayane coule, sertit et finit la bague à la main. Une bague de fiançailles est généralement prête environ 1½ à 2 semaines après l'approbation du CAD.",
         makeLabel: "Ce que nous créons à Montréal",
@@ -1104,7 +1158,7 @@ export const t = {
         processLabel: "Comment ça fonctionne",
         processHeading: "Quatre étapes, en toute transparence",
         process: [
-          { n: "01", t: "Consultation", b: "Gratuite, virtuelle ou à l'atelier de Montréal. On parle vision, budget et délai — sans obligation." },
+          { n: "01", t: "Consultation", b: "Gratuite, virtuelle ou en personne dans l'un de nos deux bureaux privés (centre-ville ou Saint-Laurent). On parle vision, budget et délai — sans obligation." },
           { n: "02", t: "Design et devis", b: "Rayane esquisse des directions et envoie un devis clair. Un dépôt de 200 $ CAD — crédité en entier à votre pièce — lance le CAD." },
           { n: "03", t: "Rendu CAD 3D", b: "En environ 48 heures, vous voyez votre bague sous tous les angles. Révisions illimitées, sans frais, jusqu'à ce que ce soit exactement juste." },
           { n: "04", t: "Fait main et livré", b: "Coulé, serti et fini à la main à Montréal. Livré avec des pierres certifiées, un certificat d'authenticité et une garantie de 12 mois." },
@@ -1118,8 +1172,8 @@ export const t = {
         ],
         faqLabel: "Questions fréquentes",
         faq: [
-          { q: "Travaillez-vous avec des clients hors de Montréal ?", a: "Oui. Environ la moitié de nos projets se déroulent entièrement par visioconférence — consultation, révision du design et approbation du CAD — et la bague finie est expédiée assurée partout au Canada. Les clients de Montréal sont les bienvenus à l'atelier sur rendez-vous." },
-          { q: "Où se trouve l'atelier ?", a: "À Montréal, au Québec. C'est un atelier de joaillier en activité, que l'on visite sur rendez-vous plutôt qu'une boutique avec pignon sur rue — c'est ainsi qu'on garde l'attention (et le prix) sur la bague." },
+          { q: "Travaillez-vous avec des clients hors de Montréal ?", a: "Oui. Environ la moitié de nos projets se déroulent entièrement par visioconférence — consultation, révision du design et approbation du CAD — et la bague finie est expédiée assurée partout au Canada. Les clients de la grande région de Montréal sont les bienvenus dans nos bureaux privés, sur rendez-vous." },
+          { q: "Où se passent les consultations en personne ?", a: "Dans l'un de nos deux bureaux privés, sur rendez-vous : au centre-ville de Montréal (1188, avenue Union) ou à Saint-Laurent (9900, boul. Cavendish, bureau 200). Choisissez le plus près de chez vous : le centre-ville convient bien à Montréal et à la Rive-Sud, Saint-Laurent à Laval, à la Rive-Nord et à l'Ouest-de-l'Île. Les pièces sont fabriquées dans notre atelier de Montréal." },
           { q: "Comment commencer ?", a: "Réservez une consultation gratuite ou lancez une demande de design sur mesure en ligne. Rien n'est facturé tant que vous et Rayane ne vous êtes pas entendus sur une direction et que vous n'avez pas versé le dépôt de design de 200 $ CAD, crédité à votre pièce finale." },
         ],
         seeFullProcess: "Voir le processus sur mesure complet",
@@ -1152,7 +1206,7 @@ export const t = {
           { k: "Révisions", v: "Illimitées, sans frais supplémentaires, jusqu'à ce que le CAD soit exactement juste." },
           { k: "Livraison bague de fiançailles", v: "Environ 1½ à 2 semaines après l'approbation du CAD." },
           { k: "Pièces plus complexes", v: "2 à 4 semaines après l'approbation du CAD — nous vous donnons une date ferme dès le départ." },
-          { k: "Consultation", v: "Gratuite — virtuelle partout au Canada, ou en personne à l'atelier de Montréal." },
+          { k: "Consultation", v: "Gratuite — virtuelle partout au Canada, ou en personne dans l'un de nos deux bureaux privés (centre-ville de Montréal ou Saint-Laurent)." },
           { k: "Chaque pièce comprend", v: "Des pierres certifiées GIA ou IGI, un certificat d'authenticité et une garantie de 12 mois." },
           { k: "Avec qui vous travaillez", v: "Rayane, le joaillier qui conçoit et fabrique votre bague — pas d'intermédiaire, pas de plancher de vente." },
         ],
@@ -1424,7 +1478,7 @@ export const t = {
         processLabel: "Comment ça fonctionne",
         processIntro: "Nous prenons une empreinte dentaire, concevons vos grillz en 3D et les fabriquons à la main dans le métal et la pierre de votre choix. Chaque pièce s'adapte exactement à vos dents — pas un modèle standard.",
         processSteps: [
-          { number: "01", title: "Empreinte dentaire", body: "Nous vous guidons pour prendre votre propre empreinte dentaire à la maison avec notre kit, ou vous nous rendez visite en personne à Montréal." },
+          { number: "01", title: "Empreinte dentaire", body: "Nous vous guidons pour prendre votre propre empreinte dentaire à la maison avec notre kit, ou vous nous rendez visite en personne dans l'un de nos bureaux privés à Montréal." },
           { number: "02", title: "Design et matériaux", body: "Choisissez votre métal, votre serti et votre style. Nous créons un aperçu 3D avant toute production." },
           { number: "03", title: "Production artisanale", body: "Vos grillz sont coulés, sertis si applicable et polis selon vos spécifications exactes." },
           { number: "04", title: "Livraison", body: "Emballage premium avec instructions d'entretien, un certificat d'authenticité et la documentation complète des matériaux." },

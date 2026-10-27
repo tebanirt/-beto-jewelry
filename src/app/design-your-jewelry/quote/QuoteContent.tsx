@@ -6,6 +6,7 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { trackMetaLead } from "@/lib/metaPixel";
 import { submitLeadForm } from "@/lib/submitForm";
+import CalendlyNextStep from "@/components/shared/CalendlyNextStep";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -13,6 +14,7 @@ export default function QuoteContent() {
   const tr = useTranslation();
   const p = tr.pages.quote;
   const [status, setStatus] = useState<Status>("idle");
+  const [lead, setLead] = useState({ name: "", email: "" });
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -31,6 +33,7 @@ export default function QuoteContent() {
 
     const ok = await submitLeadForm("quote", fields);
     if (ok) {
+      setLead({ name: fields["Nom complet"], email: fields.email });
       setStatus("success");
       trackMetaLead("quote");
       form.reset();
@@ -97,7 +100,10 @@ export default function QuoteContent() {
               </button>
 
               {status === "success" && (
-                <p className="text-sm text-green-700 bg-green-50 border border-green-200 px-4 py-3">{p.successMessage}</p>
+                <>
+                  <p className="text-sm text-green-700 bg-green-50 border border-green-200 px-4 py-3">{p.successMessage}</p>
+                  <CalendlyNextStep name={lead.name} email={lead.email} />
+                </>
               )}
               {status === "error" && (
                 <p className="text-sm text-red-700 bg-red-50 border border-red-200 px-4 py-3">{p.errorMessage}</p>
