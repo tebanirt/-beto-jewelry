@@ -16,7 +16,7 @@ Rayane Tebani, fondateur de Beto Jewelry — 438-874-5759, Montréal. **Courriel
 
 ## 3. Positionnement de marque (résumé — voir `docs/design-brief.md` pour la direction visuelle complète)
 
-Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un tunnel de conversion basé sur un service : consultation → dépôt de design (200$) → design 3D 48h → révisions → production ~1,5 semaine → livraison.
+Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un tunnel de conversion basé sur un service : consultation → dépôt de design (200$) → design 3D 48h → révisions → production ~2 semaines → livraison.
 
 ## 4. CRM (Supabase)
 
@@ -64,7 +64,7 @@ Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un 
 6. **Relances** : gérées par la tâche programmée quotidienne « Relances clients — Beto Jewelry » (8h37, voir §7ter) pour tout client déjà présent dans le CRM — ne pas dupliquer cette logique ici. Pour un fil Claude/Clients qui n'a PAS de ligne CRM correspondante (cas rare depuis que l'étape 3 upsert systématiquement) : recherche légère `search_threads label:"Claude/Clients"`, et si le dernier message date de 3+ jours sans réponse, créer un rappel calendrier (pas un brouillon) pour que Rayane vérifie manuellement.
 7. **Résumé final TRÈS court** : « Rien de nouveau. » si rien, sinon nombre de clients traités (en précisant FB/IG, site, ou Calendly), nombre à vérifier, nombre d'événements créés — max 4-5 lignes.
 
-**Faits entreprise pour les brouillons** (en plus des règles de salutation/sujet/lien/lieu ci-dessus) : consultation gratuite (45 min à 1h) → design 3D ~48h → révisions incluses → production ~1,5 semaine après approbation → livraison en mains propres ou expédition assurée. Dépôt design 200$, entièrement crédité sur la pièce finale. Rayane : joaillier diplômé, 500+ créations, communication bilingue directe. Diamants naturels certifiés OU de laboratoire selon le budget, jamais de jugement entre les deux. Ne jamais inventer un prix précis, une date de rendez-vous ou une promesse spécifique non confirmée.
+**Faits entreprise pour les brouillons** (en plus des règles de salutation/sujet/lien/lieu ci-dessus) : consultation gratuite (45 min à 1h) → design 3D ~48h → révisions incluses → production ~2 semaines après approbation (corrigé par Rayane le 29 oct. 2026 : tout diamant de laboratoire peut être fourni et la bague fabriquée en 2 semaines) → livraison en mains propres ou expédition assurée. Dépôt design 200$, entièrement crédité sur la pièce finale. Rayane : joaillier diplômé, 500+ créations, communication bilingue directe. Diamants naturels certifiés OU de laboratoire selon le budget, jamais de jugement entre les deux. Ne jamais inventer un prix précis, une date de rendez-vous ou une promesse spécifique non confirmée.
 
 **Infos à demander pour préparer une soumission** (confirmé le 26 oct. 2026, à réutiliser pour tout message de suivi à un prospect, quelle que soit la plateforme — Instagram, SMS, courriel) : type de bijou, type de coupe, carat/grosseur de la pierre, **carat du métal (14k ou 18k — Rayane travaille seulement avec ces deux)** même si le prospect a déjà précisé le type de métal (or blanc/jaune/rose) sans préciser le carat, couleur du métal, et une photo de référence/inspiration si possible. Toujours vérifier ces éléments avant de considérer l'information complète pour une soumission.
 
