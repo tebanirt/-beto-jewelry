@@ -9,6 +9,7 @@ Rayane Tebani, fondateur de Beto Jewelry — 438-874-5759, Montréal. **Courriel
 ## 2. Règles absolues (jamais sans confirmation explicite, à chaque fois)
 
 - **Jamais pousser (`git push`) vers GitHub sans confirmation explicite et séparée de Rayane**, même après une confirmation antérieure pour un autre changement.
+  - **Seule exception préautorisée (confirmée par Rayane le 2 nov. 2026)** : les deux agents techniques programmés « Beto Jewelry — Optimisation continue » (quotidien) et « Optimisation SEO hebdomadaire » peuvent pousser eux-mêmes sur `main`, **uniquement** pour des corrections techniques objectivement sans risque et vérifiables (performance/images, liens cassés, SEO technique : canonical, JSON-LD, sitemap, metadata ; accessibilité technique ; code mort), et seulement après un `npm run build` réussi. Jamais pour du contenu (textes, prix, délais, promesses), le design visuel, la stratégie, les secrets ou les réglages (Vercel, Meta, Resend, etc.) : ceux-là restent soumis à la confirmation de Rayane. Toute autre session, y compris les conversations avec Rayane, reste soumise à la règle générale.
 - **Jamais envoyer un vrai courriel à un client** (`send_message`/`reply`/`forward`) — uniquement des brouillons Gmail (`create_draft`) que Rayane valide et envoie lui-même.
 - **Jamais confirmer/envoyer une facture sans que Rayane la confirme explicitement d'abord** — toujours lui montrer le PDF généré avant.
 - **Jamais changer le logo, la palette ou la mise en page des documents officiels** sans instruction explicite, même pour une « amélioration ».
@@ -105,8 +106,14 @@ Quand quelqu'un réserve via Calendly, Calendly envoie une notification « New E
 - Les décisions impliquant de l'argent (budget pub, dépenses) restent toujours entre les mains de Rayane — jamais exécutées de façon autonome.
 
 **Écosystème d'agents autonomes (vision long terme)** : Rayane veut des agents qui travaillent pour lui en continu, même pendant qu'il dort — pas seulement un assistant réactif. Déjà en place :
-- Triage Gmail/Calendar horaire (agent "acquisition/service client").
-- Routine d'audit du site (`AUDIT_LOG.md`) — agent "codage/qualité".
+- Triage Gmail/Calendar horaire, 6 h à 22 h (agent "acquisition/service client").
+- Relances clients quotidiennes (§7ter) et résumé de la boîte matin/soir.
+- Pipeline et production, quotidien (ajouté le 2 nov. 2026) : synchronise les courriels envoyés → `last_contact_at`, signale les rencontres des prochaines 36 h sans confirmation, les statuts à mettre à jour, les productions de 12 jours et plus, les promesses faites aux clients sans suivi et les brouillons qui dorment. Aucune écriture hors `last_contact_at`, aucun changement de statut, aucun brouillon client.
+- Rétro hebdo et amélioration continue, dimanche soir (ajouté le 2 nov. 2026) : chiffres de la semaine vs semaine précédente et vs objectif, table ronde, et **propositions** d'amélioration des autres agents. Lecture seule : les agents proposent, Rayane accepte, puis on applique. Aucun agent ne modifie lui-même ses règles.
+- Routine d'audit du site (`AUDIT_LOG.md`) — agent "codage/qualité", avec l'exception de push technique décrite au §2.
+- Juge design hebdomadaire (propose seulement) et SEO hebdomadaire.
+
+Fiabilité (décidé le 2 nov. 2026) : les agents doivent tourner en sessions indépendantes (une nouvelle session à chaque passage, avec les connecteurs Gmail, Google Calendar et Supabase attachés à la tâche), pas dans une seule conversation qui peut être fermée ou archivée. Leurs prompts doivent se suffire à eux-mêmes, parce qu'une session indépendante n'a pas forcément ce dépôt ni ce brief sous la main.
 
 Prochaines briques (en attente que Rayane connecte les outils sur claude.ai, je ne peux pas les connecter moi-même) :
 - Supermetrics (lecture des performances publicitaires réelles Facebook/Instagram) → agent "marketing".
