@@ -96,6 +96,8 @@ Quand quelqu'un réserve via Calendly, Calendly envoie une notification « New E
 
 ## 7. Différé (ne pas travailler là-dessus avant que Rayane le redemande)
 
+**Mise à jour 3 nov. 2026** : l'entreprise est **incorporée**. Rayane attend de son comptable les numéros **TPS/TVQ** (le comptable a demandé un dernier document). Une fois reçus, Rayane fournira les infos pour : factures/soumissions avec numéros de taxes et nom légal, Stripe Tax (inscriptions Québec TPS + TVQ), et un **agent comptabilité** (suivi des revenus, dépôts, marges, taxes à remettre). Les éléments ci-dessous restent en attente de ces infos — ne rien activer avant.
+
 - QuickBooks / comptabilité et notifications bancaires RBC : après incorporation légale de l'entreprise.
 - Parsing automatique des factures fournisseurs pour calcul de marge : bloqué sur les mêmes clients post-incorporation.
 
