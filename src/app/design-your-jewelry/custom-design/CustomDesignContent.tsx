@@ -31,7 +31,6 @@ import {
 } from "@/lib/imageAttachments";
 import {
   ENGAGEMENT_CARATS,
-  RING_STYLES,
   lookupQuote,
   type EngagementCarat,
   type EngagementPriceTable,
@@ -49,7 +48,14 @@ type LabColor = "white" | "colored";
 type MetalColor = "yellow" | "white" | "rose" | "platinum";
 type KaratChoice = "10k" | "14k" | "18k" | "unsure";
 type LabShade = (typeof LAB_SHADES)[number];
-type StyleChoice = RingStyle | "unsure";
+// Cathedral versions are a style difference only: same price as the base style.
+type StyleChoice =
+  | RingStyle
+  | "cathedral"
+  | "cathedralHaloHalf"
+  | "cathedralHaloThreeQuarter"
+  | "unsure"
+  | "other";
 type CaratChoice = EngagementCarat | "unsure";
 type ContactId = "email" | "phone" | "whatsapp" | "any";
 
@@ -76,7 +82,28 @@ const METAL_SWATCH: Record<MetalColor, string> = {
 const KARATS: KaratChoice[] = ["14k", "18k", "unsure"];
 // Grillz are also made in 10K (Rayane, 3 nov. 2026).
 const KARATS_GRILLZ: KaratChoice[] = ["10k", "14k", "18k", "unsure"];
-const STYLE_CHOICES: StyleChoice[] = [...RING_STYLES, "unsure"];
+// Shown in pairs: each style next to its cathedral version.
+const STYLE_CHOICES: StyleChoice[] = [
+  "solitaire",
+  "cathedral",
+  "haloHalf",
+  "cathedralHaloHalf",
+  "haloThreeQuarter",
+  "cathedralHaloThreeQuarter",
+  "unsure",
+  "other",
+];
+/** Style used for the price ("other" has no instant price: Rayane quotes it). */
+const PRICE_STYLE: Record<StyleChoice, RingStyle | "unsure" | null> = {
+  solitaire: "solitaire",
+  cathedral: "solitaire",
+  haloHalf: "haloHalf",
+  cathedralHaloHalf: "haloHalf",
+  haloThreeQuarter: "haloThreeQuarter",
+  cathedralHaloThreeQuarter: "haloThreeQuarter",
+  unsure: "unsure",
+  other: null,
+};
 const CONTACTS: ContactId[] = ["email", "phone", "whatsapp", "any"];
 const CARAT_CHOICES: CaratChoice[] = [...ENGAGEMENT_CARATS, "unsure"];
 const ENGAGEMENT_INDEX = 0;
@@ -99,6 +126,7 @@ type Draft = {
   shape: string;
   carat: CaratChoice | null;
   ringStyle: StyleChoice | null;
+  ringStyleOther: string;
   metalColor: MetalColor | null;
   karat: KaratChoice | null;
   budget: string;
@@ -120,6 +148,7 @@ const EMPTY_DRAFT: Draft = {
   shape: "",
   carat: null,
   ringStyle: null,
+  ringStyleOther: "",
   metalColor: null,
   karat: null,
   budget: "",
@@ -159,6 +188,7 @@ function readDraft(projectCount: number): { draft: Draft; step: number } | null 
       shape: str(d.shape),
       carat: oneOf(d.carat, CARAT_CHOICES),
       ringStyle: oneOf(d.ringStyle, STYLE_CHOICES),
+      ringStyleOther: str(d.ringStyleOther),
       metalColor: oneOf(d.metalColor, METAL_COLORS),
       karat: oneOf(d.karat, KARATS_GRILLZ),
       budget: str(d.budget),
@@ -475,7 +505,13 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
     d.metalColor === "platinum" ? "platinum" : d.karat === "10k" ? null : d.karat;
   const quote =
     isEngagement && images.length === 0
-      ? lookupQuote(priceTable, pricedStone, typeof d.carat === "number" ? d.carat : null, d.ringStyle, metalGrade)
+      ? lookupQuote(
+          priceTable,
+          pricedStone,
+          typeof d.carat === "number" ? d.carat : null,
+          d.ringStyle ? PRICE_STYLE[d.ringStyle] : null,
+          metalGrade
+        )
       : null;
   const showPrice = quote !== null;
   // Otherwise: lab-grown engagement ring → price within the hour (9 h–21 h);
@@ -524,6 +560,8 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
   const livePriceText =
     images.length > 0
       ? cd.livePriceImage
+      : d.ringStyle === "other"
+        ? cd.livePriceOther
       : quote
         ? quote.prices.length > 1 || quote.startingFrom
           ? `${cd.estimateFrom} ${money(Math.min(...quote.prices.map((p) => p.price)))}`
@@ -557,6 +595,11 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
     }));
   }
   const caratLabel = d.carat === null ? "" : d.carat === "unsure" ? cd.caratUnsure : caratText(d.carat);
+  const styleLabel = !d.ringStyle
+    ? ""
+    : d.ringStyle === "other"
+      ? `${cd.ringStyles.other.label}${d.ringStyleOther.trim() ? ` : ${d.ringStyleOther.trim()}` : ""}`
+      : cd.ringStyles[d.ringStyle].label;
   const metalLabel = [
     d.metalColor ? cd.metalColors[d.metalColor] : "",
     d.metalColor !== "platinum" && d.karat ? (d.karat === "unsure" ? cd.karatToConfirm : cd.metalKarats[d.karat]) : "",
@@ -654,6 +697,8 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
       else if (d.stone === "birthstone" && d.birthMonths.length === 0) errors.push(["birthMonths", cd.errorChoose]);
       if (askCarat && d.carat === null) errors.push(["carat", cd.errorChoose]);
       if (isEngagement && d.stone && !d.ringStyle) errors.push(["ringStyle", cd.errorChoose]);
+      else if (isEngagement && d.ringStyle === "other" && !d.ringStyleOther.trim())
+        errors.push(["ringStyleOther", cd.errorStyleOther]);
       if (!d.metalColor) errors.push(["metalColor", cd.errorChoose]);
       if (!d.karat && d.metalColor !== "platinum") errors.push(["karat", cd.errorChoose]);
       if (!d.budget) errors.push(["budget", cd.errorChoose]);
@@ -729,7 +774,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
       "Pierre": stoneLabel,
       "Forme": d.shape,
       "Carat (pierre centrale)": caratLabel,
-      "Style de monture": isEngagement && d.ringStyle ? cd.ringStyles[d.ringStyle].label : "",
+      "Style de monture": isEngagement && d.ringStyle ? styleLabel : "",
       "Métal": metalLabel,
       "Budget": d.budget,
       "Échéancier": d.timeline,
@@ -773,7 +818,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
     { label: sl.stone, value: stoneLabel },
     { label: sl.shape, value: d.shape || sl.notSpecified },
     ...(askCarat ? [{ label: sl.carat, value: caratLabel }] : []),
-    ...(isEngagement && d.ringStyle ? [{ label: sl.style, value: cd.ringStyles[d.ringStyle].label }] : []),
+    ...(isEngagement && d.ringStyle ? [{ label: sl.style, value: styleLabel }] : []),
     { label: sl.metal, value: metalLabel },
     { label: sl.budget, value: d.budget },
     { label: sl.timeline, value: d.timeline || sl.notSpecified },
@@ -1168,6 +1213,30 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                         </Chip>
                       ))}
                     </div>
+                    <Reveal show={d.ringStyle === "other"} id="ring-style-other">
+                      <div className="mt-4">
+                        <label htmlFor="field-ringStyleOther" className="text-xs font-medium text-beto-black tracking-wide mb-2 block">
+                          {cd.ringStyleOtherLabel}
+                          <span aria-hidden className="text-beto-gold-dark ml-0.5">*</span>
+                        </label>
+                        <textarea
+                          id="field-ringStyleOther"
+                          rows={3}
+                          required
+                          aria-invalid={errorFor("ringStyleOther") ? true : undefined}
+                          aria-describedby={errorFor("ringStyleOther") ? "ringStyleOther-error" : undefined}
+                          value={d.ringStyleOther}
+                          onChange={(e) => set("ringStyleOther", e.target.value)}
+                          placeholder={cd.ringStyleOtherPlaceholder}
+                          className={cn(
+                            inputClass,
+                            "resize-none",
+                            errorFor("ringStyleOther") ? "border-red-600 shadow-[inset_0_0_0_1px_#dc2626]" : inputIdle
+                          )}
+                        />
+                        <FieldError id="ringStyleOther-error" message={errorFor("ringStyleOther")} />
+                      </div>
+                    </Reveal>
                   </ChoiceGroup>
                 </Reveal>
 
@@ -1456,7 +1525,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
           <div className="sticky bottom-0 z-20 -mx-6 px-6 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] mt-10 bg-beto-offwhite/95 backdrop-blur-sm border-t border-beto-gray-subtle md:static md:mx-0 md:px-0 md:pt-8 md:pb-0 md:bg-transparent md:backdrop-blur-none">
             {showLivePrice && (
               <p className="flex items-baseline justify-between gap-3 text-xs text-beto-gray mb-2.5" aria-live="polite">
-                <span>{cd.livePriceLabel}</span>
+                <span className="shrink-0 whitespace-nowrap">{cd.livePriceLabel}</span>
                 <span className={cn("text-right lining-nums", quote && images.length === 0 && "text-sm font-medium text-beto-black")}>
                   {livePriceText}
                 </span>
