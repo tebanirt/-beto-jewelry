@@ -149,6 +149,17 @@ But : automatiser le plus possible, **sans jamais faire d'erreur critique**. Cha
 - **Erreur critique** = mauvais destinataire ou prénom, prix/date/montant faux, message à quelqu'un qui a demandé d'arrêter, doublon, mauvaise salutation (heure) ou mauvaise langue, pièce jointe manquante ou illisible.
 - **Garde-fous permanents** : envois du lundi au samedi, 9 h à 20 h (America/Toronto) ; maximum 15 envois automatiques par jour ; contrôle aléatoire de 1 message sur 10 même au niveau 2 ; **LCAP** (loi anti-pourriel) : consentement tacite 6 mois après la dernière demande du client, possibilité de refuser dans chaque message, et tout « arrête » stoppe définitivement (à faire confirmer par le comptable/avocat) ; changer le texte d'un modèle remet son compteur à 0 ; optimisation lente : une seule variation testée à la fois, au moins 20 envois avant de proposer de garder la meilleure.
 
+## 8ter. Assistant par mots-clés (décidé par Rayane le 3 nov. 2026)
+
+Rayane envoie ses notes, fichiers et demandes **dans un chat Claude** (comme une conversation Claude Code), en commençant par un mot-clé. Toute session qui reçoit un de ces messages applique cette procédure (le numéro WhatsApp 438-874-5759 est le numéro clients dans Bird : il ne sert pas à écrire à l'assistant). Sans mot-clé : deviner la catégorie, et **dans le doute, demander**.
+
+- **#vente** (client avant le dépôt) → mettre à jour la fiche CRM (statut, notes datées, `last_contact_at` si Rayane a contacté le client), préparer le brouillon de suivi selon §6, créer le rappel calendrier si une date est donnée.
+- **#devis** (soumission ou facture client) → générer le PDF avec le gabarit officiel (§5) et **le montrer à Rayane pour confirmation** ; aucun brouillon au client avant son OK.
+- **#prod** (atelier, fournisseurs, délais) → mettre à jour le statut (`design` → `production` → `livre`) et les notes ; signaler toute pièce au-delà de 12 jours (3 semaines en platine) ; quand une bague est prête, préparer le message au client (brouillon).
+- **#argent** (dépenses, factures fournisseurs, paiements reçus) → noter fournisseur, date, montant, TPS/TVQ si présentes ; mettre à jour `sale_price`/`production_cost` du client concerné ; classer le fichier dans Google Drive `Comptabilité/{année}/{mois}` quand c'est possible (sinon dire clairement à Rayane qu'il doit le classer lui-même et lequel) ; jamais rien payer.
+- **#contenu** (photos, vidéos, idées de pubs) → classer dans Drive `Contenu/{date}` en reliant au client, proposer accroche + texte + fiche monteur ; tout changement de pub ou de budget est seulement proposé, appliqué après le « OK » de Rayane.
+- **Toujours** : confirmation courte après chaque message (« ✅ #argent — … ») ; ce qui attend une décision est listé clairement ; les règles absolues du §2 et l'autonomie graduée du §8bis s'appliquent.
+
 ## 9. Boucle d'amélioration
 
 Ce fichier doit être mis à jour à chaque nouvelle règle ou correction durable que Rayane donne — pas seulement retenue en mémoire de conversation, qui disparaît. Si une instruction est censée s'appliquer « toujours » ou « à partir de maintenant », elle appartient ici, pas seulement au chat.
