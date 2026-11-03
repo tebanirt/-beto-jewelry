@@ -116,7 +116,7 @@ export const t = {
       steps: [
         { step: "01", title: "Consultation", duration: "Free", body: "We begin with a consultation — virtual or in-person. We learn about you, your partner, your timeline, and your vision.", detail: "Free, no obligation. We discuss your vision, a rough budget, and your timeline — you don't need to prepare anything in advance." },
         { step: "02", title: "Design & CAD", duration: "≈ 48 hours", body: "Within ~48 hours, your designer delivers a precise 3D CAD rendering. You can review, adjust, and approve before a single gram of metal is touched.", detail: "A private link lets you explore the rendering from every angle. Revisions are included until the design is exactly yours." },
-        { step: "03", title: "Production", duration: "≈ 1.5 weeks", body: "Once you approve the design, production begins. Every piece is crafted by hand using ethically sourced metals and certified diamonds.", detail: "Ethically sourced metals, certified diamonds. Nothing moves in production without your prior approval of the final design." },
+        { step: "03", title: "Production", duration: "≈ 2 weeks", body: "Once you approve the design, production begins. Every piece is crafted by hand using ethically sourced metals and certified diamonds.", detail: "Ethically sourced metals, certified diamonds. Nothing moves in production without your prior approval of the final design." },
         { step: "04", title: "Delivery", duration: "Your choice", body: "Your finished piece arrives in premium Beto Jewelry packaging — along with full documentation and a certificate of authenticity.", detail: "Hand-delivered at one of our two private offices in Montréal, or shipped with insurance — whichever suits you. Arrives with its certificate of authenticity and full documentation." },
       ],
     },
@@ -316,7 +316,7 @@ export const t = {
         ctaLabel: "Ready to begin?",
         ctaHeadline: "Your moment deserves",
         ctaHeadlineItalic: "a unique piece.",
-        ctaSub: "Free consultation · 3D rendering in 48h · Engagement ring delivered in 1½–2 weeks",
+        ctaSub: "Free consultation · 3D rendering in 48h · Engagement ring delivered in 2 weeks (3 weeks in platinum)",
         startDesign: "Start My Design",
         bookConsultationCta: "Book a Consultation",
         photoCreditPlaceholder: "Photo — Rayane Tebani",
@@ -409,7 +409,7 @@ export const t = {
         titleItalic: "made in Montréal.",
         subtitle: "An independent goldsmith's atelier in Montréal. You design your ring directly with Rayane — in person at one of our two private offices, or by video anywhere in Canada — and he makes it himself.",
         introHeading: "A real atelier, not a showroom floor",
-        introBody: "Beto Jewelry is one goldsmith, Rayane Tebani, trained at Montréal's École des métiers du Sud-Ouest. There's no sales team and no markup for a name on the door. You bring an idea, a photo, or a stone; together you shape the design; you approve a 3D render within about 48 hours; then Rayane casts, sets and finishes the ring by hand. An engagement ring is typically ready about 1½–2 weeks after you approve the CAD.",
+        introBody: "Beto Jewelry is one goldsmith, Rayane Tebani, trained at Montréal's École des métiers du Sud-Ouest. There's no sales team and no markup for a name on the door. You bring an idea, a photo, or a stone; together you shape the design; you approve a 3D render within about 48 hours; then Rayane casts, sets and finishes the ring by hand. An engagement ring is typically ready about 2 weeks (3 weeks in platinum) after you approve the CAD.",
         makeLabel: "What we make in Montréal",
         make: [
           { title: "Engagement rings", body: "Solitaires, halos, hidden halos, three-stone, toi et moi, vintage-inspired — natural or lab-grown diamonds, or a coloured stone.", href: "/engagement-rings", cta: "Engagement rings" },
@@ -465,7 +465,7 @@ export const t = {
           { k: "Design deposit", v: "$250 CAD to begin — credited in full toward your finished piece." },
           { k: "3D CAD rendering", v: "Ready within about 48 hours of design approval." },
           { k: "Revisions", v: "Unlimited, at no extra cost, until the CAD is exactly right." },
-          { k: "Engagement ring delivery", v: "About 1½–2 weeks after you approve the CAD." },
+          { k: "Engagement ring delivery", v: "About 2 weeks (3 weeks in platinum) after you approve the CAD." },
           { k: "More complex pieces", v: "2–4 weeks after CAD approval — we give you a firm date up front." },
           { k: "Consultation", v: "Free — virtual anywhere in Canada, or in person at one of our two private offices (downtown Montréal or Saint-Laurent)." },
           { k: "Every piece includes", v: "GIA or IGI certified stones, a certificate of authenticity, and a 12-month warranty." },
@@ -550,7 +550,7 @@ export const t = {
             category: "Custom Process",
             items: [
               { q: "How does the custom design process work?", a: "It begins with a consultation (virtual or in-person), followed by a concept discussion, CAD rendering within ~48 hours of design approval, your review and sign-off, then production. You're involved at every step." },
-              { q: "How long does it take to create a custom ring?", a: "An engagement ring is typically ready about 1½–2 weeks after you approve the CAD; more complex pieces take 2–4 weeks. Your 3D CAD is ready within about 48 hours of design approval. We give you a firm timeline at the start of your project." },
+              { q: "How long does it take to create a custom ring?", a: "An engagement ring is typically ready about 2 weeks (3 weeks in platinum) after you approve the CAD; more complex pieces take 2–4 weeks. Your 3D CAD is ready within about 48 hours of design approval. We give you a firm timeline at the start of your project." },
               { q: "Can I see my ring before it's made?", a: "Yes. We provide a detailed 3D CAD rendering from multiple angles before any metal is cast. You can request adjustments at no extra cost until you're completely satisfied." },
               { q: "What is the $250 design deposit?", a: "The $250 CAD design deposit secures your project and initiates the design process. It is non-refundable, but 100% credited toward the final price of your piece if you proceed." },
             ],
@@ -699,7 +699,7 @@ export const t = {
           },
           {
             heading: "Production & delivery",
-            body: "Engagement rings are typically ready about 1½–2 weeks after CAD approval; more complex pieces take 2–4 weeks. Delivery timelines are estimates, not guarantees, and may vary with material sourcing or custom requests.",
+            body: "Engagement rings are typically ready about 2 weeks (3 weeks in platinum) after CAD approval; more complex pieces take 2–4 weeks. Delivery timelines are estimates, not guarantees, and may vary with material sourcing or custom requests.",
           },
           {
             heading: "Cancellations & changes",
@@ -869,7 +869,7 @@ export const t = {
       steps: [
         { step: "01", title: "Consultation", duration: "Gratuite", body: "Nous commençons par une consultation — virtuelle ou en personne. Nous apprenons à vous connaître, votre vision, votre délai et votre budget.", detail: "Gratuite, sans engagement. On discute de votre vision, d'une fourchette de budget et de votre échéancier — vous n'avez rien à préparer à l'avance." },
         { step: "02", title: "Design 3D", duration: "≈ 48 heures", body: "En ~48 heures, vous recevez un rendu 3D précis de votre pièce. Vous pouvez réviser, ajuster et valider avant qu'un seul gramme de métal soit touché.", detail: "Un lien privé vous permet d'explorer le rendu sous tous les angles. Les retouches sont incluses jusqu'à ce que le design soit exactement le vôtre." },
-        { step: "03", title: "Production", duration: "≈ 1,5 semaine", body: "Une fois votre design approuvé, la production commence. Chaque pièce est fabriquée à la main avec des métaux sourcés éthiquement et des diamants certifiés.", detail: "Métaux sourcés éthiquement, diamants certifiés. Rien ne bouge en production sans votre accord préalable sur le design final." },
+        { step: "03", title: "Production", duration: "≈ 2 semaines", body: "Une fois votre design approuvé, la production commence. Chaque pièce est fabriquée à la main avec des métaux sourcés éthiquement et des diamants certifiés.", detail: "Métaux sourcés éthiquement, diamants certifiés. Rien ne bouge en production sans votre accord préalable sur le design final." },
         { step: "04", title: "Livraison", duration: "Selon votre choix", body: "Votre pièce arrive dans un emballage premium Beto Jewelry — accompagnée de la documentation complète et d'un certificat d'authenticité.", detail: "Remise en mains propres dans l'un de nos deux bureaux privés à Montréal, ou expédition assurée — à votre convenance. Arrive avec son certificat d'authenticité et sa documentation complète." },
       ],
     },
@@ -1069,7 +1069,7 @@ export const t = {
         ctaLabel: "Prêt à commencer ?",
         ctaHeadline: "Votre moment mérite",
         ctaHeadlineItalic: "une pièce unique.",
-        ctaSub: "Consultation gratuite · Rendu 3D en 48 h · Bague de fiançailles livrée en 1½ à 2 semaines",
+        ctaSub: "Consultation gratuite · Rendu 3D en 48 h · Bague de fiançailles livrée en 2 semaines (3 semaines en platine)",
         startDesign: "Commencer mon design",
         bookConsultationCta: "Réserver une consultation",
         photoCreditPlaceholder: "Photo — Rayane Tebani",
@@ -1162,7 +1162,7 @@ export const t = {
         titleItalic: "faites à Montréal.",
         subtitle: "L'atelier d'un joaillier indépendant à Montréal. Vous concevez votre bague directement avec Rayane — en personne dans l'un de nos deux bureaux privés, ou par visioconférence partout au Canada — et c'est lui qui la fabrique.",
         introHeading: "Un vrai atelier, pas un plancher de vente",
-        introBody: "Beto Jewelry, c'est un seul joaillier, Rayane Tebani, formé à l'École des métiers du Sud-Ouest de Montréal. Pas d'équipe de vente, pas de majoration pour un nom sur la porte. Vous apportez une idée, une photo ou une pierre ; ensemble vous façonnez le design ; vous approuvez un rendu 3D en environ 48 heures ; puis Rayane coule, sertit et finit la bague à la main. Une bague de fiançailles est généralement prête environ 1½ à 2 semaines après l'approbation du CAD.",
+        introBody: "Beto Jewelry, c'est un seul joaillier, Rayane Tebani, formé à l'École des métiers du Sud-Ouest de Montréal. Pas d'équipe de vente, pas de majoration pour un nom sur la porte. Vous apportez une idée, une photo ou une pierre ; ensemble vous façonnez le design ; vous approuvez un rendu 3D en environ 48 heures ; puis Rayane coule, sertit et finit la bague à la main. Une bague de fiançailles est généralement prête environ 2 semaines (3 semaines en platine) après l'approbation du CAD.",
         makeLabel: "Ce que nous créons à Montréal",
         make: [
           { title: "Bagues de fiançailles", body: "Solitaires, halos, halos cachés, trois pierres, toi et moi, inspiration vintage — diamants naturels ou de laboratoire, ou une pierre de couleur.", href: "/engagement-rings", cta: "Bagues de fiançailles" },
@@ -1218,7 +1218,7 @@ export const t = {
           { k: "Dépôt de design", v: "250 $ CAD pour commencer — entièrement crédité vers votre pièce finale." },
           { k: "Rendu CAD 3D", v: "Prêt dans environ 48 heures après l'approbation du design." },
           { k: "Révisions", v: "Illimitées, sans frais supplémentaires, jusqu'à ce que le CAD soit exactement juste." },
-          { k: "Livraison bague de fiançailles", v: "Environ 1½ à 2 semaines après l'approbation du CAD." },
+          { k: "Livraison bague de fiançailles", v: "Environ 2 semaines (3 semaines en platine) après l'approbation du CAD." },
           { k: "Pièces plus complexes", v: "2 à 4 semaines après l'approbation du CAD — nous vous donnons une date ferme dès le départ." },
           { k: "Consultation", v: "Gratuite — virtuelle partout au Canada, ou en personne dans l'un de nos deux bureaux privés (centre-ville de Montréal ou Saint-Laurent)." },
           { k: "Chaque pièce comprend", v: "Des pierres certifiées GIA ou IGI, un certificat d'authenticité et une garantie de 12 mois." },
@@ -1303,7 +1303,7 @@ export const t = {
             category: "Processus de création",
             items: [
               { q: "Comment fonctionne le processus de design sur mesure ?", a: "Tout commence par une consultation (virtuelle ou en personne), suivie d'une discussion de concept, d'un rendu CAD en ~48 heures après approbation du design, de votre révision et approbation, puis de la production. Vous êtes impliqué à chaque étape." },
-              { q: "Combien de temps faut-il pour créer une bague sur mesure ?", a: "Une bague de fiançailles est généralement prête environ 1½ à 2 semaines après l'approbation du CAD ; les pièces plus complexes prennent de 2 à 4 semaines. Votre rendu CAD 3D est prêt dans environ 48 heures après l'approbation du design. Nous vous donnons un calendrier ferme au début de votre projet." },
+              { q: "Combien de temps faut-il pour créer une bague sur mesure ?", a: "Une bague de fiançailles est généralement prête environ 2 semaines (3 semaines en platine) après l'approbation du CAD ; les pièces plus complexes prennent de 2 à 4 semaines. Votre rendu CAD 3D est prêt dans environ 48 heures après l'approbation du design. Nous vous donnons un calendrier ferme au début de votre projet." },
               { q: "Puis-je voir ma bague avant qu'elle soit fabriquée ?", a: "Oui. Nous fournissons un rendu CAD 3D détaillé depuis plusieurs angles avant qu'un seul métal soit coulé. Vous pouvez demander des ajustements sans frais supplémentaires jusqu'à ce que vous soyez entièrement satisfait." },
               { q: "Qu'est-ce que le dépôt de design de 250$ ?", a: "Le dépôt de design de 250 CAD sécurise votre projet et initie le processus de design. Il est non remboursable, mais crédité à 100% vers le prix final de votre pièce si vous procédez." },
             ],
@@ -1452,7 +1452,7 @@ export const t = {
           },
           {
             heading: "Production et livraison",
-            body: "Une bague de fiançailles est généralement prête environ 1½ à 2 semaines après l'approbation du CAD ; les pièces plus complexes prennent de 2 à 4 semaines. Les délais de livraison sont des estimations, non des garanties, et peuvent varier selon l'approvisionnement en matériaux ou les demandes personnalisées.",
+            body: "Une bague de fiançailles est généralement prête environ 2 semaines (3 semaines en platine) après l'approbation du CAD ; les pièces plus complexes prennent de 2 à 4 semaines. Les délais de livraison sont des estimations, non des garanties, et peuvent varier selon l'approvisionnement en matériaux ou les demandes personnalisées.",
           },
           {
             heading: "Annulations et modifications",
