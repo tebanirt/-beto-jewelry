@@ -38,6 +38,11 @@ export interface Client {
   last_contact_at: string | null;
   followup_count: number;
   followups_paused: boolean;
+  /** Noms Meta (campagne / ensemble / pub) du lead, tels que reçus de Zapier. */
+  attribution: string | null;
+  /** Interne seulement — jamais visible des clients. */
+  sale_price: number | null;
+  production_cost: number | null;
   created_at: string;
   updated_at: string;
 }

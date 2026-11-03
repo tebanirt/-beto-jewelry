@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getSupabaseAdmin, type Client, type Submission } from "@/lib/supabase";
-import { StatusSelect, FollowupControls, PaymentLinkControls } from "../ClientRowControls";
+import { StatusSelect, FollowupControls, PaymentLinkControls, MarginControls } from "../ClientRowControls";
 import { DEPOSIT_AMOUNT_CAD } from "@/lib/stripe";
 import FollowupBadge from "../FollowupBadge";
 import { followupState } from "@/lib/followups";
@@ -44,7 +44,8 @@ export default async function AdminClientDetailPage({ params }: { params: Promis
             <StatusSelect clientId={client.id} status={client.status} />
           </div>
           <p className="text-xs text-beto-gray-light mb-4">
-            Source : {client.source || "—"} · Créé le {new Date(client.created_at).toLocaleDateString("fr-CA")}
+            Source : {client.source || "—"}
+            {client.attribution && <> · Pub : {client.attribution}</>} · Créé le {new Date(client.created_at).toLocaleDateString("fr-CA")}
             {client.last_contact_at && (
               <> · Dernier contact de ta part : {new Date(client.last_contact_at).toLocaleDateString("fr-CA")}</>
             )}
@@ -59,6 +60,7 @@ export default async function AdminClientDetailPage({ params }: { params: Promis
             followupsPaused={client.followups_paused}
             followupCount={client.followup_count}
           />
+          <MarginControls clientId={client.id} salePrice={client.sale_price} productionCost={client.production_cost} />
           <PaymentLinkControls clientId={client.id} depositAmount={DEPOSIT_AMOUNT_CAD} />
         </div>
 

@@ -138,6 +138,72 @@ export function FollowupControls({
   );
 }
 
+/** Prix de vente + coût de production → marge par pièce (interne, jamais visible des clients). */
+export function MarginControls({
+  clientId,
+  salePrice,
+  productionCost,
+}: {
+  clientId: string;
+  salePrice: number | null;
+  productionCost: number | null;
+}) {
+  const router = useRouter();
+  const [sale, setSale] = useState(salePrice?.toString() ?? "");
+  const [cost, setCost] = useState(productionCost?.toString() ?? "");
+  const [busy, setBusy] = useState(false);
+  const margin = sale && cost ? Number(sale) - Number(cost) : null;
+
+  async function save() {
+    setBusy(true);
+    await patchClient(clientId, {
+      salePrice: sale ? Number(sale) : null,
+      productionCost: cost ? Number(cost) : null,
+    });
+    setBusy(false);
+    router.refresh();
+  }
+
+  return (
+    <div className="flex flex-col gap-3 border-t border-beto-gray-subtle/40 pt-5 mt-5">
+      <label className="text-xs font-medium text-beto-black tracking-wide">Marge (interne)</label>
+      <div className="flex flex-wrap items-center gap-2 text-sm">
+        <input
+          type="number"
+          min={0}
+          step="0.01"
+          placeholder="Prix de vente ($)"
+          value={sale}
+          onChange={(e) => setSale(e.target.value)}
+          className="w-36 px-3 py-2 border border-beto-gray-subtle/60 bg-beto-offwhite text-sm focus:outline-none focus:border-beto-gold"
+        />
+        <input
+          type="number"
+          min={0}
+          step="0.01"
+          placeholder="Coût de production ($)"
+          value={cost}
+          onChange={(e) => setCost(e.target.value)}
+          className="w-44 px-3 py-2 border border-beto-gray-subtle/60 bg-beto-offwhite text-sm focus:outline-none focus:border-beto-gold"
+        />
+        <button
+          type="button"
+          disabled={busy}
+          onClick={save}
+          className="text-xs font-medium uppercase tracking-widest text-beto-gold hover:text-beto-black disabled:opacity-40"
+        >
+          Enregistrer
+        </button>
+        {margin !== null && (
+          <span className={margin >= 1000 ? "text-green-700" : "text-beto-gray"}>
+            Marge : {margin.toLocaleString("fr-CA", { style: "currency", currency: "CAD" })}
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
+
 /** Génère un lien Stripe à usage unique que Rayane colle lui-même dans son courriel. */
 export function PaymentLinkControls({ clientId, depositAmount }: { clientId: string; depositAmount: number }) {
   const [deposit, setDeposit] = useState(String(depositAmount));
