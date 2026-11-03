@@ -2,15 +2,14 @@
 
 import Script from "next/script";
 
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+// Identifiant public (visible dans le code de n'importe quel site), comme l'ID du pixel Meta.
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "G-VG3PL11RYQ";
 
 /**
- * Google Analytics 4. Ne s'affiche que si NEXT_PUBLIC_GA_ID est défini (Vercel) et
- * seulement après le consentement (voir Analytics.tsx). La mesure améliorée de GA4
- * suit elle-même les changements de page du routeur Next.
+ * Google Analytics 4, chargé seulement après le consentement (voir Analytics.tsx).
+ * La mesure améliorée de GA4 suit elle-même les changements de page du routeur Next.
  */
 export default function GoogleAnalytics() {
-  if (!GA_ID) return null;
   return (
     <>
       <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
