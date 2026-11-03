@@ -34,6 +34,12 @@ export const t = {
       body: "You'll receive a confirmation email from Calendly with all the details. To make the most of our time together, reply to it with what you have in mind: type of jewelry, stone (natural or lab), metal (14k or 18k), and an inspiration photo if you have one. Rayane prepares a first 3D design before you meet.",
       cta: "Back to the site",
     },
+    consent: {
+      body: "We use measurement cookies (Google Analytics, Meta) to understand how the site is used and improve our ads. Nothing is loaded until you accept.",
+      accept: "Accept",
+      decline: "Decline",
+      learnMore: "Privacy policy",
+    },
     nav: {
       collections: "Collections",
       collectionsDesc: "Browse our work",
@@ -786,6 +792,12 @@ export const t = {
       titleWithName: "merci — votre consultation est confirmée.",
       body: "Vous recevrez un courriel de confirmation de Calendly avec tous les détails. Pour profiter au maximum de notre rencontre, répondez-y avec ce que vous avez en tête : type de bijou, pierre (naturelle ou de laboratoire), métal (14k ou 18k), et une photo d'inspiration si vous en avez une. Rayane prépare un premier design 3D avant votre rencontre.",
       cta: "Retour au site",
+    },
+    consent: {
+      body: "Nous utilisons des témoins de mesure (Google Analytics, Meta) pour comprendre l'utilisation du site et améliorer nos publicités. Rien n'est chargé avant votre accord.",
+      accept: "Accepter",
+      decline: "Refuser",
+      learnMore: "Politique de confidentialité",
     },
     nav: {
       collections: "Collections",

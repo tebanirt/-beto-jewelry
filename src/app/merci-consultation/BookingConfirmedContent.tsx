@@ -26,11 +26,27 @@ export default function BookingConfirmedContent() {
     const key = eventId ? `beto_schedule_tracked_${eventId}` : null;
     try {
       if (key && sessionStorage.getItem(key)) return;
-      if (key) sessionStorage.setItem(key, "1");
     } catch {
       // Stockage bloqué (navigation privée, navigateur intégré) : on suit quand même.
     }
-    trackMetaSchedule("calendly-consultation");
+
+    // Le pixel et GA ne se chargent qu'après le consentement (Loi 25) : on attend qu'ils
+    // soient là, y compris si le visiteur accepte la bannière sur cette page.
+    let tries = 0;
+    const timer = window.setInterval(() => {
+      if (typeof window.fbq !== "function" && typeof window.gtag !== "function") {
+        if (++tries > 120) window.clearInterval(timer); // ≈ 1 min, puis on abandonne
+        return;
+      }
+      window.clearInterval(timer);
+      trackMetaSchedule("calendly-consultation");
+      try {
+        if (key) sessionStorage.setItem(key, "1");
+      } catch {
+        // idem
+      }
+    }, 500);
+    return () => window.clearInterval(timer);
   }, [params]);
 
   return (
