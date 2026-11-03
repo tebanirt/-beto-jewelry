@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getSupabaseAdmin, type Client, type Submission } from "@/lib/supabase";
-import { StatusSelect, FollowupControls } from "../ClientRowControls";
+import { StatusSelect, FollowupControls, PaymentLinkControls } from "../ClientRowControls";
+import { DEPOSIT_AMOUNT_CAD } from "@/lib/stripe";
 import FollowupBadge from "../FollowupBadge";
 import { followupState } from "@/lib/followups";
 import NotesEditor from "./NotesEditor";
@@ -58,6 +59,7 @@ export default async function AdminClientDetailPage({ params }: { params: Promis
             followupsPaused={client.followups_paused}
             followupCount={client.followup_count}
           />
+          <PaymentLinkControls clientId={client.id} depositAmount={DEPOSIT_AMOUNT_CAD} />
         </div>
 
         <h2 className="text-label text-beto-gold mb-4">Historique ({submissions.length})</h2>

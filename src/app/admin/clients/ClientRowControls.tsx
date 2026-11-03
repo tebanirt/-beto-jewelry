@@ -138,6 +138,82 @@ export function FollowupControls({
   );
 }
 
+/** Génère un lien Stripe à usage unique que Rayane colle lui-même dans son courriel. */
+export function PaymentLinkControls({ clientId, depositAmount }: { clientId: string; depositAmount: number }) {
+  const [amount, setAmount] = useState("");
+  const [reference, setReference] = useState("");
+  const [link, setLink] = useState("");
+  const [busy, setBusy] = useState(false);
+
+  async function create(kind: "depot" | "solde") {
+    setBusy(true);
+    setLink("");
+    try {
+      const res = await fetch(`/api/admin/clients/${clientId}/payment-link`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ kind, amount: Number(amount), reference }),
+      });
+      const data = (await res.json()) as { url?: string; error?: string };
+      if (!res.ok || !data.url) throw new Error(data.error || String(res.status));
+      setLink(data.url);
+    } catch (err) {
+      alert(`Le lien n'a pas été créé (${err instanceof Error ? err.message : "erreur"}). Réessayez.`);
+    }
+    setBusy(false);
+  }
+
+  return (
+    <div className="flex flex-col gap-3 border-t border-beto-gray-subtle/40 pt-5 mt-5">
+      <label className="text-xs font-medium text-beto-black tracking-wide">Lien de paiement Stripe</label>
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+        <button
+          type="button"
+          disabled={busy}
+          onClick={() => create("depot")}
+          className="text-xs font-medium uppercase tracking-widest text-beto-gold hover:text-beto-black disabled:opacity-40"
+        >
+          Dépôt de design ({depositAmount} $)
+        </button>
+        <div className="flex flex-wrap gap-2">
+          <input
+            type="number"
+            min={1}
+            step="0.01"
+            placeholder="Solde ($)"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            className="w-28 px-3 py-2 border border-beto-gray-subtle/60 bg-beto-offwhite text-sm focus:outline-none focus:border-beto-gold"
+          />
+          <input
+            type="text"
+            placeholder="No facture (ex. BJ-2026-1103)"
+            value={reference}
+            onChange={(e) => setReference(e.target.value)}
+            className="w-56 px-3 py-2 border border-beto-gray-subtle/60 bg-beto-offwhite text-sm focus:outline-none focus:border-beto-gold"
+          />
+          <button
+            type="button"
+            disabled={busy || !amount}
+            onClick={() => create("solde")}
+            className="text-xs font-medium uppercase tracking-widest text-beto-gold hover:text-beto-black disabled:opacity-40"
+          >
+            Lien pour le solde
+          </button>
+        </div>
+      </div>
+      {link && (
+        <div className="flex flex-wrap items-center gap-3 text-xs">
+          <input readOnly value={link} onFocus={(e) => e.target.select()} className="flex-1 min-w-0 px-3 py-2 border border-beto-gold/60 bg-beto-white" />
+          <button type="button" onClick={() => navigator.clipboard.writeText(link)} className="font-medium uppercase tracking-widest text-beto-gold hover:text-beto-black">
+            Copier
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function LogoutButton() {
   const router = useRouter();
   return (
