@@ -29,12 +29,15 @@ export default function CalendlyNextStep({
   email,
   autoRedirect = false,
   fallback,
+  onCtaClick,
 }: {
   name?: string;
   email?: string;
   autoRedirect?: boolean;
   /** Replaces the default "we'll reply within 1 business day" line. */
   fallback?: string;
+  /** Called when the visitor clicks the booking button (funnel tracking). */
+  onCtaClick?: () => void;
 }) {
   const c = useTranslation().bookingNextStep;
   const url = buildCalendlyUrl(name, email);
@@ -63,6 +66,7 @@ export default function CalendlyNextStep({
 
       <a
         href={url}
+        onClick={onCtaClick}
         className="block text-center text-sm font-medium uppercase tracking-widest px-4 py-4 bg-beto-gold text-beto-black hover:bg-beto-gold-dark transition-colors duration-300"
       >
         {c.cta}

@@ -44,7 +44,7 @@ const serviceJsonLd = {
       minPrice: 2000,
       priceCurrency: "CAD",
       description:
-        "Custom engagement rings typically start around $2,000 CAD including the diamond. A $200 CAD design deposit — credited in full toward your piece — secures your project.",
+        "Custom engagement rings typically start around $2,000 CAD including the diamond. A $250 CAD design deposit — credited in full toward your piece — secures your project.",
     },
   },
 };

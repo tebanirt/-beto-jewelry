@@ -41,7 +41,12 @@ export default async function AdminClientsPage() {
             <p className="text-label text-beto-gold mb-1">Beto Jewelry</p>
             <h1 className="text-2xl font-medium text-beto-black">Clients ({clients.length})</h1>
           </div>
-          <LogoutButton />
+          <div className="flex items-center gap-3">
+            <Link href="/admin/funnel" className="text-xs px-3 py-1.5 border border-beto-gray-subtle text-beto-gray hover:text-beto-black">
+              Formulaire : où les clients s&apos;arrêtent
+            </Link>
+            <LogoutButton />
+          </div>
         </div>
 
         {clients.length > 0 && (

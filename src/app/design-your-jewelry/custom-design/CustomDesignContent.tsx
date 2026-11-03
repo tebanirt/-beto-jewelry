@@ -10,12 +10,19 @@ import {
   type ReactNode,
 } from "react";
 import { motion, AnimatePresence, useReducedMotion, type Variants } from "framer-motion";
-import { AlertCircle, Check, CheckCircle2, Clock, Loader2, Upload, X } from "lucide-react";
+import { AlertCircle, Check, CheckCircle2, Clock, ExternalLink, Loader2, Upload, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Magnetic from "@/components/ui/Magnetic";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useStore } from "@/store/useStore";
 import { trackMetaLead } from "@/lib/metaPixel";
+import { trackFunnel } from "@/lib/funnel";
+import {
+  BUSINESS_PHONE_DISPLAY,
+  BUSINESS_PHONE_TEL,
+  DEPOSIT_PAYMENT_URL,
+  GOOGLE_REVIEW_URL,
+} from "@/lib/constants";
 import { submitLeadForm } from "@/lib/submitForm";
 import {
   MAX_INSPIRATION_IMAGES,
@@ -53,6 +60,8 @@ const STYLE_CHOICES: StyleChoice[] = [...RING_STYLES, "unsure"];
 const CONTACTS: ContactId[] = ["email", "phone", "whatsapp", "any"];
 const CARAT_CHOICES: CaratChoice[] = [...ENGAGEMENT_CARATS, "unsure"];
 const ENGAGEMENT_INDEX = 0;
+// Language-neutral ids for the funnel data (same order as cd.projectTypes).
+const PROJECT_IDS = ["engagement", "wedding_band", "necklace", "pendant", "earrings", "bracelet", "grillz", "other"];
 const GRILLZ_INDEX = 6;
 const CONTACT_STEP = 3;
 const SUCCESS_STEP = 4;
@@ -285,6 +294,11 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
 
   const d = draft;
   const set = <K extends keyof Draft>(key: K, value: Draft[K]) => setDraft((prev) => ({ ...prev, [key]: value }));
+  /** Same as set(), for answer chips: also records the choice (ids only, never free text). */
+  const pick = <K extends keyof Draft>(key: K, value: Draft[K]) => {
+    trackFunnel("choice", step, { field: String(key), value: String(value ?? "") });
+    set(key, value);
+  };
 
   // Draft kept for the session: a reload, or a trip back from Instagram's
   // in-app browser, doesn't wipe the visitor's choices. Images aren't kept.
@@ -297,6 +311,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
       setStep(saved.step);
     }
     setRestored(true);
+    trackFunnel("view", saved?.step ?? 0, { restored: !!saved });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -325,6 +340,40 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
     }
   }, []);
 
+  // ── Funnel: which step people reach, and where they leave ──
+  const stepRef = useRef(step);
+  const statusRef = useRef(status);
+  const stepStartedAt = useRef(0);
+  useEffect(() => {
+    statusRef.current = status;
+  }, [status]);
+  useEffect(() => {
+    if (!restored) return;
+    stepRef.current = step;
+    stepStartedAt.current = Date.now();
+    trackFunnel("step_view", step);
+  }, [step, restored]);
+  useEffect(() => {
+    let sentForThisHide = false;
+    const onHide = () => {
+      if (document.visibilityState === "visible") {
+        sentForThisHide = false;
+        return;
+      }
+      if (sentForThisHide || statusRef.current === "success") return;
+      sentForThisHide = true;
+      trackFunnel("leave", stepRef.current, { secs: Math.round((Date.now() - stepStartedAt.current) / 1000) });
+    };
+    document.addEventListener("visibilitychange", onHide);
+    window.addEventListener("pagehide", onHide);
+    return () => {
+      document.removeEventListener("visibilitychange", onHide);
+      window.removeEventListener("pagehide", onHide);
+    };
+  }, []);
+  const trackChoice = (field: string, value: string | number) =>
+    trackFunnel("choice", stepRef.current, { field, value: String(value) });
+
   const isEngagement = d.projectIndex === ENGAGEMENT_INDEX;
   const isDiamond = d.stone === "natural" || d.stone === "lab";
   const askCarat = isEngagement && isDiamond;
@@ -347,6 +396,22 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
       : "day";
   const hourPromise = responseMode === "hour";
 
+  useEffect(() => {
+    if (step !== 2) return;
+    trackFunnel("price_shown", 2, {
+      mode: responseMode,
+      price: quote?.prices[0]?.price ?? 0,
+      from: !!quote?.startingFrom,
+      project: d.projectIndex !== null ? PROJECT_IDS[d.projectIndex] ?? "" : "",
+      stone: pricedStone ?? d.stone ?? "",
+      carat: String(d.carat ?? ""),
+      style: d.ringStyle ?? "",
+      karat: d.karat ?? "",
+    });
+    // Only when the estimate step is shown.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
+
   const budgetOptions: readonly string[] =
     isEngagement && d.stone === "natural"
       ? cd.budgetsNatural
@@ -363,6 +428,16 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
   const priceText = quote
     ? quote.prices.map((p) => `${money(p.price)} ${cd.estimateIn.replace("{k}", cd.metalKarats[p.karat])}`).join(" · ")
     : "";
+  // Live price while choosing (step 2 of 5), like a ring builder's running total.
+  const showLivePrice = step === 1 && isEngagement && d.stone === "lab";
+  const livePriceText =
+    images.length > 0
+      ? cd.livePriceImage
+      : quote
+        ? quote.prices.length > 1 || quote.startingFrom
+          ? `${cd.estimateFrom} ${money(Math.min(...quote.prices.map((p) => p.price)))}`
+          : `${money(quote.prices[0].price)} ${cd.estimateIn.replace("{k}", cd.metalKarats[quote.prices[0].karat])}`
+        : cd.livePriceHint;
   const caratText = (c: EngagementCarat) => `${language === "fr" ? String(c).replace(".", ",") : c} ct`;
 
   // Labels used in the recap and in Rayane's email.
@@ -383,6 +458,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
     .join(d.karat === "unsure" ? ", " : " ");
 
   function chooseProject(index: number) {
+    trackChoice("project", PROJECT_IDS[index] ?? String(index));
     setDraft((prev) => ({
       ...prev,
       projectIndex: index,
@@ -394,6 +470,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
   }
 
   function chooseStone(next: StoneId) {
+    trackChoice("stone", next);
     setDraft((prev) => ({
       ...prev,
       stone: next,
@@ -423,8 +500,10 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
           ...prev,
           { ...prepared, id: `${Date.now()}-${Math.random().toString(36).slice(2)}`, previewUrl: URL.createObjectURL(file) },
         ]);
+        trackFunnel("image_added", 0, { type: prepared.contentType });
       } catch {
         setUploadMessage(cd.uploadError);
+        trackFunnel("image_error", 0, { type: file.type || "unknown" });
       } finally {
         setPreparing((n) => n - 1);
       }
@@ -507,6 +586,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
     const errors = stepErrors(step);
     if (errors.length > 0) {
       setAttempted((a) => ({ ...a, [step]: true }));
+      trackFunnel("blocked", step, { fields: errors.map(([k]) => k).join(",") });
       focusFirstError(errors);
       return;
     }
@@ -519,9 +599,11 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
     const errors = stepErrors(CONTACT_STEP);
     if (errors.length > 0) {
       setAttempted((a) => ({ ...a, [CONTACT_STEP]: true }));
+      trackFunnel("blocked", CONTACT_STEP, { fields: errors.map(([k]) => k).join(",") });
       focusFirstError(errors);
       return;
     }
+    trackFunnel("submit", CONTACT_STEP, { mode: responseMode, images: images.length });
     setStatus("sending");
     const shownPrice = showPrice ? `${quote?.startingFrom ? `${cd.estimateFrom} ` : ""}${priceText}` : "";
     const fields: Record<string, string> = {
@@ -558,9 +640,11 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
       clearDraft();
       setStatus("success");
       trackMetaLead("custom-design");
+      trackFunnel("submit_ok", CONTACT_STEP, { mode: responseMode });
       goTo(SUCCESS_STEP);
     } else {
       setStatus("error");
+      trackFunnel("submit_error", CONTACT_STEP);
     }
   }
 
@@ -600,6 +684,38 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
   const stepLabels = cd.steps.map((s, i) => (i === 2 && d.projectIndex !== null && !isEngagement ? cd.stepSummary : s));
   const progress = step / (totalSteps - 1);
   const stepHeading = "font-display text-beto-black text-3xl font-light mb-2 text-balance outline-none";
+
+  const [helpBefore, helpAfter] = cd.helpLine.split("{phone}");
+  const helpLine = (
+    <p className="text-xs text-beto-gray/80 mt-10 leading-relaxed">
+      {helpBefore}
+      <a href={`tel:${BUSINESS_PHONE_TEL}`} className={cn("text-beto-black underline underline-offset-2 whitespace-nowrap", focusRing)}>
+        {BUSINESS_PHONE_DISPLAY}
+      </a>
+      {helpAfter}
+    </p>
+  );
+  const trustRow = (
+    <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-beto-gray">
+      {cd.trustItems.map((t) => (
+        <li key={t} className="inline-flex items-center gap-1.5">
+          <Check size={12} className="text-beto-gold-dark shrink-0" aria-hidden />
+          {t}
+        </li>
+      ))}
+      <li>
+        <a
+          href={GOOGLE_REVIEW_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={cn("inline-flex items-center gap-1 underline underline-offset-2 hover:text-beto-black", focusRing)}
+        >
+          {cd.reviewsLink}
+          <ExternalLink size={11} aria-hidden />
+        </a>
+      </li>
+    </ul>
+  );
 
   const textFields = [
     { id: "fullName", label: cd.fullName, type: "text", placeholder: cd.fullNamePlaceholder, autoComplete: "name", required: true, inputMode: "text" },
@@ -826,7 +942,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                     <ChoiceGroup id="labColor" legend={cd.labColorLabel} error={errorFor("labColor")}>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {LAB_COLORS.map((id) => (
-                          <Chip key={id} selected={d.labColor === id} onClick={() => set("labColor", id)}>
+                          <Chip key={id} selected={d.labColor === id} onClick={() => pick("labColor", id)}>
                             {cd.labColorOptions[id]}
                           </Chip>
                         ))}
@@ -854,7 +970,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                   <ChoiceGroup id="shape" legend={cd.shapeLabel} optional={cd.shapeOpt}>
                     <div className="flex flex-wrap gap-2.5">
                       {cd.shapes.map((s) => (
-                        <Chip key={s} compact selected={d.shape === s} onClick={() => set("shape", d.shape === s ? "" : s)}>
+                        <Chip key={s} compact selected={d.shape === s} onClick={() => pick("shape", d.shape === s ? "" : s)}>
                           {s}
                         </Chip>
                       ))}
@@ -866,11 +982,11 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                   <ChoiceGroup id="carat" legend={cd.caratLabel} error={errorFor("carat")}>
                     <div className="flex flex-wrap gap-2.5">
                       {ENGAGEMENT_CARATS.map((c) => (
-                        <Chip key={c} compact selected={d.carat === c} onClick={() => set("carat", c)}>
+                        <Chip key={c} compact selected={d.carat === c} onClick={() => pick("carat", c)}>
                           {caratText(c)}
                         </Chip>
                       ))}
-                      <Chip compact selected={d.carat === "unsure"} onClick={() => set("carat", "unsure")}>
+                      <Chip compact selected={d.carat === "unsure"} onClick={() => pick("carat", "unsure")}>
                         {cd.caratUnsure}
                       </Chip>
                     </div>
@@ -881,7 +997,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                   <ChoiceGroup id="ringStyle" legend={cd.ringStyleLabel} error={errorFor("ringStyle")}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {STYLE_CHOICES.map((id) => (
-                        <Chip key={id} selected={d.ringStyle === id} onClick={() => set("ringStyle", id)}>
+                        <Chip key={id} selected={d.ringStyle === id} onClick={() => pick("ringStyle", id)}>
                           <span className="block font-medium text-beto-black">{cd.ringStyles[id].label}</span>
                           <span className="block text-xs text-beto-gray mt-1 leading-snug">{cd.ringStyles[id].desc}</span>
                         </Chip>
@@ -893,7 +1009,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                 <ChoiceGroup id="metalColor" legend={cd.metalColorLabel} error={errorFor("metalColor")}>
                   <div className="grid grid-cols-1 min-[420px]:grid-cols-3 gap-3">
                     {METAL_COLORS.map((id) => (
-                      <Chip key={id} selected={d.metalColor === id} onClick={() => set("metalColor", id)}>
+                      <Chip key={id} selected={d.metalColor === id} onClick={() => pick("metalColor", id)}>
                         {cd.metalColors[id]}
                       </Chip>
                     ))}
@@ -903,7 +1019,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                 <ChoiceGroup id="karat" legend={cd.metalKaratLabel} error={errorFor("karat")}>
                   <div className="flex flex-wrap gap-2.5">
                     {(d.projectIndex === GRILLZ_INDEX ? KARATS_GRILLZ : KARATS).map((id) => (
-                      <Chip key={id} compact selected={d.karat === id} onClick={() => set("karat", id)}>
+                      <Chip key={id} compact selected={d.karat === id} onClick={() => pick("karat", id)}>
                         {cd.metalKarats[id]}
                       </Chip>
                     ))}
@@ -914,7 +1030,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                 <ChoiceGroup id="budget" legend={cd.budgetLabel} error={errorFor("budget")}>
                   <div className="flex flex-wrap gap-2.5">
                     {budgetOptions.map((b) => (
-                      <Chip key={b} compact selected={d.budget === b} onClick={() => set("budget", b)}>
+                      <Chip key={b} compact selected={d.budget === b} onClick={() => pick("budget", b)}>
                         {b}
                       </Chip>
                     ))}
@@ -927,12 +1043,13 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                 <ChoiceGroup id="timeline" legend={cd.timelineLabel} optional={cd.timelineOpt}>
                   <div className="flex flex-wrap gap-2.5">
                     {cd.timelines.map((t) => (
-                      <Chip key={t} compact selected={d.timeline === t} onClick={() => set("timeline", d.timeline === t ? "" : t)}>
+                      <Chip key={t} compact selected={d.timeline === t} onClick={() => pick("timeline", d.timeline === t ? "" : t)}>
                         {t}
                       </Chip>
                     ))}
                   </div>
                 </ChoiceGroup>
+                {helpLine}
               </>
             )}
 
@@ -1029,6 +1146,8 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                     ))}
                   </ol>
                 </div>
+                <div className="mt-6">{trustRow}</div>
+                {helpLine}
               </>
             )}
 
@@ -1037,6 +1156,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
               <form id={CONTACT_FORM_ID} noValidate onSubmit={handleSubmit}>
                 <h2 ref={headingRef} tabIndex={-1} className={stepHeading}>{cd.step3Title}</h2>
                 <p className="text-sm text-beto-gray mb-2">{cd.step3Desc}</p>
+                <p className="text-xs text-beto-gray mb-2">{cd.privacyNote}</p>
                 <p className="text-xs text-beto-gray/80 mb-10">
                   <span aria-hidden className="text-beto-gold-dark">*</span> {cd.required}
                 </p>
@@ -1083,7 +1203,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                     <legend className="text-xs font-medium text-beto-black tracking-wide mb-3">{cd.contactMethodLabel}</legend>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {CONTACTS.map((id) => (
-                        <Chip key={id} compact selected={d.contact === id} onClick={() => set("contact", id)}>
+                        <Chip key={id} compact selected={d.contact === id} onClick={() => pick("contact", id)}>
                           {cd.contacts[id]}
                         </Chip>
                       ))}
@@ -1091,7 +1211,8 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                   </fieldset>
                 </div>
 
-                <p className="text-xs text-beto-gray/80 mt-8 text-center">{cd.secureNote}</p>
+                <div className="mt-10">{trustRow}</div>
+                <p className="text-xs text-beto-gray/80 mt-6">{cd.secureNote}</p>
                 <div aria-live="assertive">
                   {status === "error" && (
                     <div role="alert" className="text-sm text-red-800 bg-red-50 border border-red-200 px-4 py-3 mt-4 text-center leading-relaxed">
@@ -1125,7 +1246,25 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                   name={d.fullName}
                   email={d.email}
                   fallback={showPrice ? undefined : hourPromise ? cd.successFallbackHour : cd.successFallbackDay}
+                  onCtaClick={() => trackFunnel("cta_click", SUCCESS_STEP, { target: "calendly" })}
                 />
+                {DEPOSIT_PAYMENT_URL && (
+                  <div className="border border-beto-gray-subtle/60 bg-beto-white p-6 sm:p-8">
+                    <h3 className="font-display text-2xl font-light text-beto-black mb-2 text-balance">{cd.depositCtaTitle}</h3>
+                    <p className="text-sm text-beto-gray leading-relaxed mb-5">{cd.depositCtaBody}</p>
+                    <a
+                      href={`${DEPOSIT_PAYMENT_URL}${DEPOSIT_PAYMENT_URL.includes("?") ? "&" : "?"}prefilled_email=${encodeURIComponent(d.email.trim())}`}
+                      onClick={() => trackFunnel("cta_click", SUCCESS_STEP, { target: "deposit" })}
+                      className={cn(
+                        "inline-flex min-h-12 items-center justify-center px-8 border border-beto-black text-xs font-medium uppercase tracking-widest text-beto-black hover:bg-beto-black hover:text-white transition-colors duration-300",
+                        pressable,
+                        focusRing
+                      )}
+                    >
+                      {cd.depositCtaButton}
+                    </a>
+                  </div>
+                )}
               </div>
             )}
           </motion.div>
@@ -1134,6 +1273,14 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
         {/* Navigation: sticky in the thumb zone on mobile, inline on desktop */}
         {step < SUCCESS_STEP && (
           <div className="sticky bottom-0 z-20 -mx-6 px-6 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] mt-10 bg-beto-offwhite/95 backdrop-blur-sm border-t border-beto-gray-subtle md:static md:mx-0 md:px-0 md:pt-8 md:pb-0 md:bg-transparent md:backdrop-blur-none">
+            {showLivePrice && (
+              <p className="flex items-baseline justify-between gap-3 text-xs text-beto-gray mb-2.5" aria-live="polite">
+                <span>{cd.livePriceLabel}</span>
+                <span className={cn("text-right lining-nums", quote && images.length === 0 && "text-sm font-medium text-beto-black")}>
+                  {livePriceText}
+                </span>
+              </p>
+            )}
             <div className="flex items-center justify-between gap-4">
               <button
                 type="button"

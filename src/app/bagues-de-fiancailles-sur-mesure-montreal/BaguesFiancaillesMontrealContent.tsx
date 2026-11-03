@@ -44,7 +44,7 @@ const PROCESS_STEPS = [
 
 const FAQS = [
   { q: "Combien de temps faut-il pour créer une bague de fiançailles sur mesure à Montréal ?", a: "Généralement 3 à 6 semaines de l'approbation du design à la livraison, selon la complexité et le volume de production en cours. Nous vous donnons un calendrier précis au début de votre projet." },
-  { q: "Qu'est-ce que le dépôt de design de 200$ ?", a: "Le dépôt de design de 200 CAD sécurise votre projet et initie le processus de design. Il est non remboursable, mais crédité à 100% vers le prix final de votre bague si vous procédez." },
+  { q: "Qu'est-ce que le dépôt de design de 250 $ ?", a: "Le dépôt de design de 250 $ CAD sécurise votre projet et initie le processus de design. Il est non remboursable, mais crédité à 100% vers le prix final de votre bague si vous procédez." },
 ];
 
 const serviceJsonLd = {
