@@ -9,6 +9,7 @@ Rayane Tebani, fondateur de Beto Jewelry — 438-874-5759, Montréal. **Courriel
 ## 2. Règles absolues (jamais sans confirmation explicite, à chaque fois)
 
 - **Jamais pousser (`git push`) vers GitHub sans confirmation explicite et séparée de Rayane**, même après une confirmation antérieure pour un autre changement.
+  - **Seule exception préautorisée (confirmée par Rayane le 2 nov. 2026)** : les deux agents techniques programmés « Beto Jewelry — Optimisation continue » (quotidien) et « Optimisation SEO hebdomadaire » peuvent pousser eux-mêmes sur `main`, **uniquement** pour des corrections techniques objectivement sans risque et vérifiables (performance/images, liens cassés, SEO technique : canonical, JSON-LD, sitemap, metadata ; accessibilité technique ; code mort), et seulement après un `npm run build` réussi. Jamais pour du contenu (textes, prix, délais, promesses), le design visuel, la stratégie, les secrets ou les réglages (Vercel, Meta, Resend, etc.) : ceux-là restent soumis à la confirmation de Rayane. Toute autre session, y compris les conversations avec Rayane, reste soumise à la règle générale.
 - **Jamais envoyer un vrai courriel à un client** (`send_message`/`reply`/`forward`) — uniquement des brouillons Gmail (`create_draft`) que Rayane valide et envoie lui-même.
 - **Jamais confirmer/envoyer une facture sans que Rayane la confirme explicitement d'abord** — toujours lui montrer le PDF généré avant.
 - **Jamais changer le logo, la palette ou la mise en page des documents officiels** sans instruction explicite, même pour une « amélioration ».
@@ -16,7 +17,7 @@ Rayane Tebani, fondateur de Beto Jewelry — 438-874-5759, Montréal. **Courriel
 
 ## 3. Positionnement de marque (résumé — voir `docs/design-brief.md` pour la direction visuelle complète)
 
-Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un tunnel de conversion basé sur un service : consultation → dépôt de design (250$ — passé de 200$ à 250$ le 3 nov. 2026, confirmé par Rayane ; **les clients ayant déjà reçu une soumission ou un courriel à 200$ gardent 200$ s’ils confirment** (ex. Sabrina Montembeault) ; lien de paiement Stripe généré depuis /admin/clients, montant du dépôt modifiable pour ces cas) → design 3D 48h → révisions → production ~1,5 semaine → livraison.
+Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un tunnel de conversion basé sur un service : consultation → dépôt de design (250$ — passé de 200$ à 250$ le 3 nov. 2026, confirmé par Rayane ; **les clients ayant déjà reçu une soumission ou un courriel à 200$ gardent 200$ s’ils confirment** (ex. Sabrina Montembeault) ; lien de paiement Stripe généré depuis /admin/clients, montant du dépôt modifiable pour ces cas) → design 3D 48h → révisions → production ~2 semaines → livraison.
 
 ## 4. CRM (Supabase)
 
@@ -64,12 +65,12 @@ Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un 
 6. **Relances** : gérées par la tâche programmée quotidienne « Relances clients — Beto Jewelry » (8h37, voir §7ter) pour tout client déjà présent dans le CRM — ne pas dupliquer cette logique ici. Pour un fil Claude/Clients qui n'a PAS de ligne CRM correspondante (cas rare depuis que l'étape 3 upsert systématiquement) : recherche légère `search_threads label:"Claude/Clients"`, et si le dernier message date de 3+ jours sans réponse, créer un rappel calendrier (pas un brouillon) pour que Rayane vérifie manuellement.
 7. **Résumé final TRÈS court** : « Rien de nouveau. » si rien, sinon nombre de clients traités (en précisant FB/IG, site, ou Calendly), nombre à vérifier, nombre d'événements créés — max 4-5 lignes.
 
-**Faits entreprise pour les brouillons** (en plus des règles de salutation/sujet/lien/lieu ci-dessus) : consultation gratuite (1 h) → design 3D ~48h → révisions incluses → production ~1,5 semaine après approbation → livraison en mains propres ou expédition assurée. Dépôt design 250$, entièrement crédité sur la pièce finale. Rayane : joaillier diplômé, 500+ créations, communication bilingue directe. Diamants naturels certifiés OU de laboratoire selon le budget, jamais de jugement entre les deux. Ne jamais inventer un prix précis, une date de rendez-vous ou une promesse spécifique non confirmée.
+**Faits entreprise pour les brouillons** (en plus des règles de salutation/sujet/lien/lieu ci-dessus) : consultation gratuite (1 h) → design 3D ~48h → révisions incluses → production ~2 semaines après approbation (corrigé par Rayane le 29 oct. 2026 : tout diamant de laboratoire peut être fourni et la bague fabriquée en 2 semaines) → livraison en mains propres ou expédition assurée. Dépôt design 250$, entièrement crédité sur la pièce finale. Rayane : joaillier diplômé, 500+ créations, communication bilingue directe. Diamants naturels certifiés OU de laboratoire selon le budget, jamais de jugement entre les deux. Ne jamais inventer un prix précis, une date de rendez-vous ou une promesse spécifique non confirmée.
 
 **Repères confirmés par Rayane le 3 nov. 2026** :
 - Prix indicatif : bague 2 ct diamant de laboratoire rond, or blanc 18k ≈ **2 300–2 400 $** (avant taxes). Toujours une fourchette, jamais un prix ferme sans sa confirmation.
 - **Premier rendu 3D avant la consultation** : Rayane prépare toujours un premier rendu avant la rencontre, **à condition que le client ait rempli le formulaire** (type de bijou, coupe, carat, métal 14k/18k, couleur, inspiration) — sans ces infos, pas de rendu.
-- Parcours en transition (site en cours de modification par Rayane) : **formulaire → dépôt → consultation** pour qualifier les clients ; un lien de réservation seul (Calendly) reste offert à ceux qui veulent juste explorer. Ne pas changer les courriels automatiques avant que le site soit mis à jour.
+- Parcours (décision de Rayane le 3 nov. 2026) : **la consultation reste gratuite**, en personne comme en vidéo (pas de consultation payante, pas de dépôt à la réservation Calendly) ; le dépôt de 250 $ vient après, pour lancer le design. Le formulaire sert à qualifier et à préparer le premier rendu.
 - Politique de remboursement du dépôt (confirmée le 3 nov. 2026) : le dépôt est **toujours de 250 $**, non remboursable une fois le design lancé ; **si aucun design ne convient, Rayane garde 150 $ et rembourse 100 $.** Dans les pubs : seulement « crédité à 100 % sur votre bague » ; le remboursement partiel va dans la FAQ et les conditions.
 
 **Infos à demander pour préparer une soumission** (confirmé le 26 oct. 2026, à réutiliser pour tout message de suivi à un prospect, quelle que soit la plateforme — Instagram, SMS, courriel) : type de bijou, type de coupe, carat/grosseur de la pierre, **carat du métal (14k ou 18k — Rayane travaille seulement avec ces deux)** même si le prospect a déjà précisé le type de métal (or blanc/jaune/rose) sans préciser le carat, couleur du métal, et une photo de référence/inspiration si possible. Toujours vérifier ces éléments avant de considérer l'information complète pour une soumission.
@@ -89,6 +90,9 @@ Quand quelqu'un réserve via Calendly, Calendly envoie une notification « New E
 - Consultation passée mais statut encore `consultation_reservee` : signalé dans le résumé (Rayane met `consultation_faite` ou `depot_recu`).
 - Ton : chaleureux, court, jamais pressant ; toujours les deux chemins (soumission ou consultation via https://calendly.com/betojewlz) ; mentionner les deux bureaux privés (centre-ville, avenue Union / Saint-Laurent, Cavendish) ; salutation selon l'heure.
 - Remplace l'étape 6 du triage horaire pour les clients présents dans le CRM (le triage garde les rappels calendrier pour les fils hors CRM — et alimente le CRM pour les leads FB/IG/site, voir étape 3).
+- **Contact récent (2 nov. 2026)** : pas de relance si Rayane a appelé, texté ou écrit au client dans les 3 derniers jours (notes du CRM ou courriel envoyé). Si le client préfère le texto, l'agent donne le texte à copier au lieu d'un courriel. Rayane dicte ses appels et textos dans le chat, ou plus tard via Quo (ligne d'affaires avec transcription, essai prévu ; textos après un appel sans réponse = brouillons seulement).
+- **Brouillons inutiles (règle de Rayane, 2 nov. 2026)** : supprimer **sans le lui dire** un brouillon de premier contact ou de relance inutile à 100 % (le client a un rendez-vous ou un statut plus avancé, ou Rayane l'a déjà relancé autrement après la date du brouillon), avec une note dans le CRM. Ne jamais supprimer une préparation de rencontre, une confirmation, une facture ou soumission, un brouillon à un fournisseur ou un brouillon commencé par Rayane. **Dans le moindre doute, lui demander.** Les clients restent toujours dans le CRM.
+- **Relances saisonnières (2 nov. 2026)** : tous les leads dormants sont relancés 2 semaines avant Noël (vers le 11 déc.) et 2 semaines avant la Saint-Valentin (vers le 31 janv.), après validation de Rayane.
 
 ## 7bis. À construire (spécifié le 24 oct. 2026 — rythme de relance et CRM enrichi faits le 26 oct., voir §7ter)
 
@@ -113,8 +117,14 @@ Quand quelqu'un réserve via Calendly, Calendly envoie une notification « New E
 - Les décisions impliquant de l'argent (budget pub, dépenses) restent toujours entre les mains de Rayane — jamais exécutées de façon autonome.
 
 **Écosystème d'agents autonomes (vision long terme)** : Rayane veut des agents qui travaillent pour lui en continu, même pendant qu'il dort — pas seulement un assistant réactif. Déjà en place :
-- Triage Gmail/Calendar horaire (agent "acquisition/service client").
-- Routine d'audit du site (`AUDIT_LOG.md`) — agent "codage/qualité".
+- Triage Gmail/Calendar horaire, 6 h à 22 h (agent "acquisition/service client").
+- Relances clients quotidiennes (§7ter) et résumé de la boîte matin/soir.
+- Pipeline et production, quotidien (ajouté le 2 nov. 2026) : synchronise les courriels envoyés → `last_contact_at`, signale les rencontres des prochaines 36 h sans confirmation, les statuts à mettre à jour, les productions de 12 jours et plus, les promesses faites aux clients sans suivi et les brouillons qui dorment. Aucune écriture hors `last_contact_at`, aucun changement de statut, aucun brouillon client.
+- Rétro hebdo et amélioration continue, dimanche soir (ajouté le 2 nov. 2026) : chiffres de la semaine vs semaine précédente et vs objectif, table ronde, et **propositions** d'amélioration des autres agents. Lecture seule : les agents proposent, Rayane accepte, puis on applique. Aucun agent ne modifie lui-même ses règles.
+- Routine d'audit du site (`AUDIT_LOG.md`) — agent "codage/qualité", avec l'exception de push technique décrite au §2.
+- Juge design hebdomadaire (propose seulement) et SEO hebdomadaire.
+
+Fiabilité (décidé le 2 nov. 2026) : les agents doivent tourner en sessions indépendantes (une nouvelle session à chaque passage, avec les connecteurs Gmail, Google Calendar et Supabase attachés à la tâche), pas dans une seule conversation qui peut être fermée ou archivée. Leurs prompts doivent se suffire à eux-mêmes, parce qu'une session indépendante n'a pas forcément ce dépôt ni ce brief sous la main.
 
 Prochaines briques (en attente que Rayane connecte les outils sur claude.ai, je ne peux pas les connecter moi-même) :
 - Supermetrics (lecture des performances publicitaires réelles Facebook/Instagram) → agent "marketing".
