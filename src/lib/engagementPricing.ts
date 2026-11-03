@@ -1,51 +1,49 @@
 /**
- * Starting prices shown in the "Commencer mon design" form, for ENGAGEMENT
- * RINGS ONLY (Rayane, 3 nov. 2026: "les seuls prix qu'on va pouvoir donner,
- * c'est sur bague de fiançailles").
+ * Engagement-ring price lookup, safe for the browser.
  *
- * Never invent a number here. Every amount must come from Rayane. Until
- * PRICING_CONFIRMED_BY_RAYANE is true and a carat has a price, the form shows
- * "votre prix en moins d'une heure" instead of a number. Leaving a value
- * out is always safe.
+ * The browser only ever receives FINAL public prices (CAD, before tax). They
+ * are computed on the server from Rayane's internal costs and profit targets,
+ * which live in a private Supabase table and are never sent to the client nor
+ * stored in this (public) repository. See engagementPriceTable.server.ts.
  *
- * Amounts are CAD, "à partir de" (starting price) for that stone and gold.
+ * Prices are shown for engagement rings only (Rayane, 3 nov. 2026).
  */
 
 export const ENGAGEMENT_CARATS = [1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6] as const;
 export type EngagementCarat = (typeof ENGAGEMENT_CARATS)[number];
 
-export type PricedStone = "natural" | "lab" | "labColored";
+export const RING_STYLES = ["solitaire", "haloHalf", "haloThreeQuarter"] as const;
+export type RingStyle = (typeof RING_STYLES)[number];
+
+export type PricedStone = "lab" | "labColored";
 export type GoldKarat = "14k" | "18k";
 
-type PriceRow = Partial<Record<GoldKarat, number>>;
+/** stone → carat (as a string key) → style → karat → final price. */
+export type EngagementPriceTable = Partial<
+  Record<PricedStone, Record<string, Record<RingStyle, Record<GoldKarat, number>>>>
+>;
 
-export const PRICING_CONFIRMED_BY_RAYANE = false;
-
-export const FROM_PRICES: Record<PricedStone, Partial<Record<EngagementCarat, PriceRow>>> = {
-  lab: {},
-  labColored: {},
-  natural: {},
+export type Quote = {
+  prices: { karat: GoldKarat; price: number }[];
+  /** True when no style was chosen: the solitaire price is shown as a starting price. */
+  startingFrom: boolean;
 };
 
-export type FromPrice = { karat: GoldKarat; price: number };
-
-/**
- * Returns the starting price(s) to show, or null when nothing confirmed exists
- * for this combination. When the visitor doesn't know the gold karat yet, both
- * 14K and 18K are returned so they can compare.
- */
-export function getFromPrices(
+export function lookupQuote(
+  table: EngagementPriceTable | null,
   stone: PricedStone | null,
   carat: EngagementCarat | null,
-  karat: GoldKarat | "unsure" | ""
-): FromPrice[] | null {
-  if (!PRICING_CONFIRMED_BY_RAYANE || !stone || carat === null || !karat) return null;
-  const row = FROM_PRICES[stone][carat];
+  style: RingStyle | "unsure" | null,
+  karat: GoldKarat | "unsure" | null
+): Quote | null {
+  if (!table || !stone || carat === null || !style || !karat) return null;
+  const startingFrom = style === "unsure";
+  const row = table[stone]?.[String(carat)]?.[startingFrom ? "solitaire" : style];
   if (!row) return null;
   const karats: GoldKarat[] = karat === "unsure" ? ["14k", "18k"] : [karat];
   const prices = karats.flatMap((k) => {
     const price = row[k];
     return typeof price === "number" && price > 0 ? [{ karat: k, price }] : [];
   });
-  return prices.length > 0 ? prices : null;
+  return prices.length > 0 ? { prices, startingFrom } : null;
 }

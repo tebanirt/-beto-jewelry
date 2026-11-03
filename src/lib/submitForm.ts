@@ -3,8 +3,8 @@ import type { LeadAttachment } from "@/lib/imageAttachments";
 export type LeadFormOptions = {
   /** Inspiration images, attached to the email sent to Rayane. */
   attachments?: LeadAttachment[];
-  /** The visitor was promised a price within the hour: flagged in the email subject. */
-  priority?: "1h";
+  /** Answer promised to the visitor (price within 1 h, or quote within 24 h): flagged in the email subject. */
+  priority?: "1h" | "24h";
 };
 
 /**

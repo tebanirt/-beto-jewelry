@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import CustomDesignContent from "./CustomDesignContent";
+import { getEngagementPriceTable } from "@/lib/engagementPriceTable.server";
 
 export const metadata: Metadata = {
   title: "Start Your Custom Design",
@@ -13,6 +14,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function CustomDesignPage() {
-  return <CustomDesignContent />;
+// Prices are recomputed from the private cost table at most once an hour.
+export const revalidate = 3600;
+
+export default async function CustomDesignPage() {
+  // Only final prices reach the browser: costs and margins stay on the server.
+  const priceTable = await getEngagementPriceTable();
+  return <CustomDesignContent priceTable={priceTable} />;
 }

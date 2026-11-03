@@ -24,10 +24,13 @@ import {
 } from "@/lib/imageAttachments";
 import {
   ENGAGEMENT_CARATS,
-  getFromPrices,
+  RING_STYLES,
+  lookupQuote,
   type EngagementCarat,
+  type EngagementPriceTable,
   type GoldKarat,
   type PricedStone,
+  type RingStyle,
 } from "@/lib/engagementPricing";
 import CalendlyNextStep from "@/components/shared/CalendlyNextStep";
 
@@ -35,7 +38,8 @@ type Status = "idle" | "sending" | "success" | "error";
 type StoneId = "natural" | "lab" | "gemstone" | "none";
 type LabColor = "white" | "colored";
 type MetalColor = "yellow" | "white" | "rose";
-type KaratChoice = GoldKarat | "unsure";
+type KaratChoice = "10k" | GoldKarat | "unsure";
+type StyleChoice = RingStyle | "unsure";
 type CaratChoice = EngagementCarat | "unsure";
 type ContactId = "email" | "phone" | "whatsapp" | "any";
 
@@ -43,9 +47,13 @@ const STONES: StoneId[] = ["natural", "lab", "gemstone", "none"];
 const LAB_COLORS: LabColor[] = ["white", "colored"];
 const METAL_COLORS: MetalColor[] = ["yellow", "white", "rose"];
 const KARATS: KaratChoice[] = ["14k", "18k", "unsure"];
+// Grillz are also made in 10K (Rayane, 3 nov. 2026).
+const KARATS_GRILLZ: KaratChoice[] = ["10k", "14k", "18k", "unsure"];
+const STYLE_CHOICES: StyleChoice[] = [...RING_STYLES, "unsure"];
 const CONTACTS: ContactId[] = ["email", "phone", "whatsapp", "any"];
 const CARAT_CHOICES: CaratChoice[] = [...ENGAGEMENT_CARATS, "unsure"];
 const ENGAGEMENT_INDEX = 0;
+const GRILLZ_INDEX = 6;
 const CONTACT_STEP = 3;
 const SUCCESS_STEP = 4;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -59,6 +67,7 @@ type Draft = {
   labColorDetail: string;
   shape: string;
   carat: CaratChoice | null;
+  ringStyle: StyleChoice | null;
   metalColor: MetalColor | null;
   karat: KaratChoice | null;
   budget: string;
@@ -77,6 +86,7 @@ const EMPTY_DRAFT: Draft = {
   labColorDetail: "",
   shape: "",
   carat: null,
+  ringStyle: null,
   metalColor: null,
   karat: null,
   budget: "",
@@ -111,8 +121,9 @@ function readDraft(projectCount: number): { draft: Draft; step: number } | null 
       labColorDetail: str(d.labColorDetail),
       shape: str(d.shape),
       carat: oneOf(d.carat, CARAT_CHOICES),
+      ringStyle: oneOf(d.ringStyle, STYLE_CHOICES),
       metalColor: oneOf(d.metalColor, METAL_COLORS),
-      karat: oneOf(d.karat, KARATS),
+      karat: oneOf(d.karat, KARATS_GRILLZ),
       budget: str(d.budget),
       timeline: str(d.timeline),
       notes: str(d.notes),
@@ -249,7 +260,7 @@ function Reveal({ show, id, children }: { show: boolean; id: string; children: R
   );
 }
 
-export default function CustomDesignContent() {
+export default function CustomDesignContent({ priceTable }: { priceTable: EngagementPriceTable | null }) {
   const tr = useTranslation();
   const cd = tr.pages.customDesign;
   const language = useStore((s) => s.language);
@@ -318,21 +329,23 @@ export default function CustomDesignContent() {
   const isDiamond = d.stone === "natural" || d.stone === "lab";
   const askCarat = isEngagement && isDiamond;
 
+  // Instant price: lab-grown engagement rings only, without an inspiration image
+  // (a specific inspiration is priced by Rayane himself).
   const pricedStone: PricedStone | null =
-    d.stone === "natural"
-      ? "natural"
-      : d.stone === "lab" && d.labColor
-        ? d.labColor === "colored"
-          ? "labColored"
-          : "lab"
-        : null;
-  const fromPrices =
-    isEngagement && images.length === 0
-      ? getFromPrices(pricedStone, typeof d.carat === "number" ? d.carat : null, d.karat ?? "")
+    d.stone === "lab" && d.labColor ? (d.labColor === "colored" ? "labColored" : "lab") : null;
+  const quote =
+    isEngagement && images.length === 0 && d.karat !== "10k"
+      ? lookupQuote(priceTable, pricedStone, typeof d.carat === "number" ? d.carat : null, d.ringStyle, d.karat)
       : null;
-  const showPrice = fromPrices !== null;
-  // Engagement ring without an instant price: Rayane replies with one within the hour.
-  const hourPromise = isEngagement && !showPrice;
+  const showPrice = quote !== null;
+  // Otherwise: lab-grown engagement ring → price within the hour (9 h–21 h);
+  // natural or other stone, and every other piece → quote within 24 h.
+  const responseMode: "price" | "hour" | "day" = showPrice
+    ? "price"
+    : isEngagement && d.stone === "lab"
+      ? "hour"
+      : "day";
+  const hourPromise = responseMode === "hour";
 
   const budgetOptions: readonly string[] =
     isEngagement && d.stone === "natural"
@@ -347,8 +360,8 @@ export default function CustomDesignContent() {
       currency: "CAD",
       maximumFractionDigits: 0,
     }).format(n);
-  const priceText = fromPrices
-    ? fromPrices.map((p) => `${money(p.price)} ${cd.estimateIn.replace("{k}", cd.metalKarats[p.karat])}`).join(" · ")
+  const priceText = quote
+    ? quote.prices.map((p) => `${money(p.price)} ${cd.estimateIn.replace("{k}", cd.metalKarats[p.karat])}`).join(" · ")
     : "";
   const caratText = (c: EngagementCarat) => `${language === "fr" ? String(c).replace(".", ",") : c} ct`;
 
@@ -374,6 +387,8 @@ export default function CustomDesignContent() {
       ...prev,
       projectIndex: index,
       carat: index === ENGAGEMENT_INDEX ? prev.carat : null,
+      ringStyle: index === ENGAGEMENT_INDEX ? prev.ringStyle : null,
+      karat: prev.karat === "10k" && index !== GRILLZ_INDEX ? null : prev.karat,
       budget: prev.projectIndex === index ? prev.budget : "",
     }));
   }
@@ -441,6 +456,7 @@ export default function CustomDesignContent() {
       if (!d.stone) errors.push(["stone", cd.errorChoose]);
       else if (d.stone === "lab" && !d.labColor) errors.push(["labColor", cd.errorChoose]);
       if (askCarat && d.carat === null) errors.push(["carat", cd.errorChoose]);
+      if (isEngagement && d.stone && !d.ringStyle) errors.push(["ringStyle", cd.errorChoose]);
       if (!d.metalColor) errors.push(["metalColor", cd.errorChoose]);
       if (!d.karat) errors.push(["karat", cd.errorChoose]);
       if (!d.budget) errors.push(["budget", cd.errorChoose]);
@@ -507,23 +523,25 @@ export default function CustomDesignContent() {
       return;
     }
     setStatus("sending");
-    const shownPrice = showPrice ? `${cd.estimateFrom} ${priceText}` : "";
+    const shownPrice = showPrice ? `${quote?.startingFrom ? `${cd.estimateFrom} ` : ""}${priceText}` : "";
     const fields: Record<string, string> = {
       "Type de projet": projectLabel,
       "Pierre": stoneLabel,
       "Forme": d.shape,
       "Carat (pierre centrale)": caratLabel,
+      "Style de monture": isEngagement && d.ringStyle ? cd.ringStyles[d.ringStyle].label : "",
       "Métal": metalLabel,
       "Budget": d.budget,
       "Échéancier": d.timeline,
       "Notes": d.notes,
       "Images d'inspiration": images.length > 0 ? `${images.length} en pièce jointe` : "",
       "Prix affiché au client": shownPrice,
-      "Réponse promise au client": hourPromise
-        ? "Prix en moins d'une heure"
-        : isEngagement
-          ? ""
-          : "Soumission d'ici 1 à 2 jours ouvrables",
+      "Réponse promise au client":
+        responseMode === "hour"
+          ? "Prix en moins d'une heure (9 h à 21 h)"
+          : responseMode === "day"
+            ? "Soumission en 24 h maximum"
+            : "",
       "Nom complet": d.fullName.trim(),
       "Courriel": d.email.trim(),
       "Téléphone": d.phone.trim(),
@@ -534,7 +552,7 @@ export default function CustomDesignContent() {
 
     const ok = await submitLeadForm("custom-design", fields, {
       attachments: images.map(({ filename, contentType, content }) => ({ filename, contentType, content })),
-      priority: hourPromise ? "1h" : undefined,
+      priority: responseMode === "hour" ? "1h" : responseMode === "day" ? "24h" : undefined,
     });
     if (ok) {
       clearDraft();
@@ -552,6 +570,7 @@ export default function CustomDesignContent() {
     { label: sl.stone, value: stoneLabel },
     { label: sl.shape, value: d.shape || sl.notSpecified },
     ...(askCarat ? [{ label: sl.carat, value: caratLabel }] : []),
+    ...(isEngagement && d.ringStyle ? [{ label: sl.style, value: cd.ringStyles[d.ringStyle].label }] : []),
     { label: sl.metal, value: metalLabel },
     { label: sl.budget, value: d.budget },
     { label: sl.timeline, value: d.timeline || sl.notSpecified },
@@ -559,10 +578,10 @@ export default function CustomDesignContent() {
   ];
 
   const successText = showPrice
-    ? cd.successPrice.replace("{price}", `${cd.estimateFrom.toLowerCase()} ${priceText}`)
+    ? cd.successPrice.replace("{price}", `${quote?.startingFrom ? `${cd.estimateFrom.toLowerCase()} ` : ""}${priceText}`)
     : hourPromise
       ? cd.successHour
-      : cd.successOther;
+      : cd.successDay;
 
   // Forward slides in from the right, Back from the left; exit is quicker than
   // enter. Reduced motion: a short crossfade only.
@@ -577,6 +596,8 @@ export default function CustomDesignContent() {
   };
 
   const totalSteps = cd.steps.length;
+  // Step 3 is an estimate for engagement rings, a summary + deposit for other pieces.
+  const stepLabels = cd.steps.map((s, i) => (i === 2 && d.projectIndex !== null && !isEngagement ? cd.stepSummary : s));
   const progress = step / (totalSteps - 1);
   const stepHeading = "font-display text-beto-black text-3xl font-light mb-2 text-balance outline-none";
 
@@ -599,8 +620,8 @@ export default function CustomDesignContent() {
       <div className="bg-beto-white border-b border-beto-gray-subtle/40">
         <div className="container-beto py-5">
           <ol className="flex items-center justify-between max-w-2xl mx-auto" aria-label={cd.title}>
-            {cd.steps.map((s, i) => (
-              <li key={s} className="flex items-center gap-2" aria-current={i === step ? "step" : undefined}>
+            {stepLabels.map((s, i) => (
+              <li key={i} className="flex items-center gap-2" aria-current={i === step ? "step" : undefined}>
                 <div
                   className={cn(
                     "w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium transition-[background-color,color,transform] duration-300 shrink-0",
@@ -634,7 +655,7 @@ export default function CustomDesignContent() {
             ))}
           </ol>
           <p className="md:hidden text-center text-xs text-beto-gray mt-3" aria-live="polite">
-            {cd.stepOf.replace("{n}", String(step + 1)).replace("{total}", String(totalSteps))} · {cd.steps[step]}
+            {cd.stepOf.replace("{n}", String(step + 1)).replace("{total}", String(totalSteps))} · {stepLabels[step]}
           </p>
         </div>
         <div className="h-0.5 bg-beto-gray-subtle/60" aria-hidden>
@@ -856,6 +877,19 @@ export default function CustomDesignContent() {
                   </ChoiceGroup>
                 </Reveal>
 
+                <Reveal show={isEngagement && !!d.stone} id="ring-style">
+                  <ChoiceGroup id="ringStyle" legend={cd.ringStyleLabel} error={errorFor("ringStyle")}>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {STYLE_CHOICES.map((id) => (
+                        <Chip key={id} selected={d.ringStyle === id} onClick={() => set("ringStyle", id)}>
+                          <span className="block font-medium text-beto-black">{cd.ringStyles[id].label}</span>
+                          <span className="block text-xs text-beto-gray mt-1 leading-snug">{cd.ringStyles[id].desc}</span>
+                        </Chip>
+                      ))}
+                    </div>
+                  </ChoiceGroup>
+                </Reveal>
+
                 <ChoiceGroup id="metalColor" legend={cd.metalColorLabel} error={errorFor("metalColor")}>
                   <div className="grid grid-cols-1 min-[420px]:grid-cols-3 gap-3">
                     {METAL_COLORS.map((id) => (
@@ -868,7 +902,7 @@ export default function CustomDesignContent() {
 
                 <ChoiceGroup id="karat" legend={cd.metalKaratLabel} error={errorFor("karat")}>
                   <div className="flex flex-wrap gap-2.5">
-                    {KARATS.map((id) => (
+                    {(d.projectIndex === GRILLZ_INDEX ? KARATS_GRILLZ : KARATS).map((id) => (
                       <Chip key={id} compact selected={d.karat === id} onClick={() => set("karat", id)}>
                         {cd.metalKarats[id]}
                       </Chip>
@@ -902,24 +936,44 @@ export default function CustomDesignContent() {
               </>
             )}
 
-            {/* STEP 2: Estimate (before contact details) */}
+            {/* STEP 2: estimate for engagement rings; summary + deposit for other pieces */}
             {step === 2 && (
               <>
-                <h2 ref={headingRef} tabIndex={-1} className={stepHeading}>{cd.step2Title}</h2>
-                <p className="text-sm text-beto-gray mb-10">{cd.step2Desc}</p>
+                <h2 ref={headingRef} tabIndex={-1} className={stepHeading}>
+                  {isEngagement ? cd.step2Title : cd.summaryTitle}
+                </h2>
+                <p className="text-sm text-beto-gray mb-10">{isEngagement ? cd.step2Desc : cd.summaryDesc}</p>
 
-                {showPrice ? (
+                {!isEngagement ? (
                   <div className="bg-beto-black text-white p-8 sm:p-10 mb-8">
-                    <p className="text-label text-beto-gold mb-4">{cd.estimateLabel}</p>
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5">
+                      <div>
+                        <p className="text-label text-beto-gold mb-2">{cd.depositLabel}</p>
+                        <div className="font-display text-3xl font-light lining-nums">{cd.depositAmount}</div>
+                      </div>
+                      <div className="sm:text-right">
+                        <p className="text-xs text-white/70">{cd.depositNonRefundable}</p>
+                        <p className="text-xs text-beto-gold mt-1">{cd.depositCredited}</p>
+                      </div>
+                    </div>
+                    <p className="text-sm text-white/75 leading-relaxed">{cd.depositDesc}</p>
+                  </div>
+                ) : quote ? (
+                  <div className="bg-beto-black text-white p-8 sm:p-10 mb-8">
+                    <p className="text-label text-beto-gold mb-4">
+                      {quote.startingFrom ? cd.estimateLabel : cd.estimateLabelExact}
+                    </p>
                     <div className="flex flex-col gap-2 mb-6">
-                      {(fromPrices ?? []).map((p, i) => (
+                      {quote.prices.map((p, i) => (
                         <motion.div
                           key={p.karat}
                           initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
                           animate={{ opacity: 1, y: 0, transition: { duration: 0.4, ease: EASE_OUT, delay: 0.15 + i * 0.08 } }}
                           className="font-display text-3xl sm:text-4xl font-light lining-nums"
                         >
-                          <span className="text-white/70 text-base font-sans mr-2">{cd.estimateFrom}</span>
+                          {quote.startingFrom && (
+                            <span className="text-white/70 text-base font-sans mr-2">{cd.estimateFrom}</span>
+                          )}
                           {money(p.price)}
                           <span className="text-white/70 text-base font-sans ml-2">
                             {cd.estimateIn.replace("{k}", cd.metalKarats[p.karat])}
@@ -927,6 +981,9 @@ export default function CustomDesignContent() {
                         </motion.div>
                       ))}
                     </div>
+                    {quote.startingFrom && (
+                      <p className="text-xs text-white/70 leading-relaxed mb-3">{cd.estimateSolitaireNote}</p>
+                    )}
                     <p className="text-xs text-white/70 leading-relaxed mb-3">{cd.estimateDisclaimer}</p>
                     <p className="text-xs text-beto-gold leading-relaxed">{cd.estimateIncludes}</p>
                   </div>
@@ -941,8 +998,12 @@ export default function CustomDesignContent() {
                   </div>
                 ) : (
                   <div className="bg-beto-black text-white p-8 sm:p-10 mb-8">
-                    <h3 className="font-display text-2xl sm:text-3xl font-light mb-3 text-balance">{cd.estimateOtherTitle}</h3>
-                    <p className="text-sm text-white/75 leading-relaxed">{cd.estimateOtherBody}</p>
+                    <Clock size={22} className="text-beto-gold mb-4" aria-hidden />
+                    <h3 className="font-display text-2xl sm:text-3xl font-light mb-3 text-balance">{cd.estimateDayTitle}</h3>
+                    <p className="text-sm text-white/75 leading-relaxed mb-4">
+                      {d.stone === "natural" ? cd.estimateNaturalBody : cd.estimateDayBody}
+                    </p>
+                    <p className="text-xs text-beto-gold leading-relaxed">{cd.estimateIncludes}</p>
                   </div>
                 )}
 
@@ -1063,7 +1124,7 @@ export default function CustomDesignContent() {
                 <CalendlyNextStep
                   name={d.fullName}
                   email={d.email}
-                  fallback={hourPromise ? cd.successFallbackHour : undefined}
+                  fallback={showPrice ? undefined : hourPromise ? cd.successFallbackHour : cd.successFallbackDay}
                 />
               </div>
             )}

@@ -92,10 +92,14 @@ export async function POST(request: Request) {
     }
 
     const baseSubject = FORM_LABELS[formType] || `Nouvelle demande — ${escapeHtml(formType)}`;
-    // The visitor was told they'd get a price within the hour: make that
-    // impossible to miss in Rayane's inbox.
+    // The visitor was promised an answer (price within the hour, or quote
+    // within 24 h): make that impossible to miss in Rayane's inbox.
     const subject =
-      priority === "1h" ? `${baseSubject} · PRIX PROMIS EN MOINS D'1 H` : baseSubject;
+      priority === "1h"
+        ? `${baseSubject} · PRIX PROMIS EN MOINS D'1 H`
+        : priority === "24h"
+          ? `${baseSubject} · SOUMISSION PROMISE EN 24 H`
+          : baseSubject;
 
     const rows = Object.entries(fields)
       .filter(([, value]) => value && value.toString().trim().length > 0)
