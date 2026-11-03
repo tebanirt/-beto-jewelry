@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getSupabaseAdmin, type Client, type Submission } from "@/lib/supabase";
-import { StatusSelect } from "../ClientRowControls";
+import { StatusSelect, FollowupControls } from "../ClientRowControls";
+import FollowupBadge from "../FollowupBadge";
+import { followupState } from "@/lib/followups";
 import NotesEditor from "./NotesEditor";
 
 export const dynamic = "force-dynamic";
@@ -42,8 +44,20 @@ export default async function AdminClientDetailPage({ params }: { params: Promis
           </div>
           <p className="text-xs text-beto-gray-light mb-4">
             Source : {client.source || "—"} · Créé le {new Date(client.created_at).toLocaleDateString("fr-CA")}
+            {client.last_contact_at && (
+              <> · Dernier contact de ta part : {new Date(client.last_contact_at).toLocaleDateString("fr-CA")}</>
+            )}
           </p>
+          <div className="mb-4">
+            <FollowupBadge state={followupState(client)} />
+          </div>
           <NotesEditor clientId={client.id} initialNotes={client.notes || ""} />
+          <FollowupControls
+            clientId={client.id}
+            consultationAt={client.consultation_at}
+            followupsPaused={client.followups_paused}
+            followupCount={client.followup_count}
+          />
         </div>
 
         <h2 className="text-label text-beto-gold mb-4">Historique ({submissions.length})</h2>

@@ -48,7 +48,7 @@ const serviceJsonLd = {
   availableChannel: {
     "@type": "ServiceChannel",
     availableLanguage: ["en", "fr"],
-    description: "In person at the Montréal atelier by appointment, or by video consultation anywhere in Canada.",
+    description: "In person by appointment at one of our two private offices (downtown Montréal or Saint-Laurent), or by video consultation anywhere in Canada.",
   },
   provider: {
     "@type": "JewelryStore",

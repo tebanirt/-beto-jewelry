@@ -36,7 +36,7 @@ const STYLES = [
 ];
 
 const PROCESS_STEPS = [
-  { step: "01", title: "Consultation", body: "Nous commençons par une consultation de 30 à 45 minutes — virtuelle ou en personne à Montréal. Nous apprenons à vous connaître, votre vision, votre délai et votre budget." },
+  { step: "01", title: "Consultation", body: "Nous commençons par une consultation gratuite — virtuelle ou en personne à Montréal. Nous apprenons à vous connaître, votre vision, votre délai et votre budget." },
   { step: "02", title: "Design 3D", body: "En ~48 heures, vous recevez un rendu 3D précis de votre bague. Vous pouvez réviser, ajuster et valider avant qu'un seul gramme de métal soit touché." },
   { step: "03", title: "Production", body: "Une fois votre design approuvé, la production commence. Chaque bague est fabriquée à la main avec des métaux sourcés éthiquement et des diamants certifiés." },
   { step: "04", title: "Livraison", body: "Votre bague arrive dans un emballage premium Beto Jewelry — accompagnée de la documentation complète et d'un certificat d'authenticité." },

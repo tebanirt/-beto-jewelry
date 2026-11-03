@@ -35,3 +35,12 @@ create index if not exists clients_phone_idx on clients(phone);
 -- are needed or created here.
 alter table clients enable row level security;
 alter table submissions enable row level security;
+
+-- 2026-10-26 — Suivi client plus précis + relances (voir docs/business-ops-brief.md §7ter).
+-- Statuts : nouveau | consultation_reservee | consultation_faite | depot_recu | design | production | livre | perdu
+-- ("consultation" seul est l'ancien statut, migré vers consultation_reservee.)
+alter table clients add column if not exists consultation_at timestamptz;     -- date/heure de la consultation
+alter table clients add column if not exists last_contact_at timestamptz;     -- dernier message envoyé PAR Beto au client
+alter table clients add column if not exists followup_count int not null default 0; -- relances préparées dans l'étape actuelle
+alter table clients add column if not exists followups_paused boolean not null default false; -- arrêter les relances pour ce client
+update clients set status = 'consultation_reservee' where status = 'consultation';

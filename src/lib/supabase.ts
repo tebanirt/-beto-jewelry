@@ -18,7 +18,8 @@ export function getSupabaseAdmin() {
 
 export type ClientStatus =
   | "nouveau"
-  | "consultation"
+  | "consultation_reservee"
+  | "consultation_faite"
   | "depot_recu"
   | "design"
   | "production"
@@ -33,6 +34,10 @@ export interface Client {
   source: string | null;
   notes: string | null;
   status: ClientStatus;
+  consultation_at: string | null;
+  last_contact_at: string | null;
+  followup_count: number;
+  followups_paused: boolean;
   created_at: string;
   updated_at: string;
 }

@@ -43,6 +43,23 @@ export default function Navigation() {
     return () => { document.body.style.overflow = ""; };
   }, [mobileMenuOpen]);
 
+  // The desktop dropdowns only open/close on mouseenter/mouseleave. On a
+  // touchscreen or a trackpad that emulates hover on tap, "enter" can fire
+  // with no matching "leave" ever following, leaving the dropdown stuck
+  // open — and since it lives inside the fixed header, it then overlaps
+  // whatever the visitor scrolls to, intercepting clicks there. Closing it
+  // on scroll or on any click outside it means it can never get stuck.
+  useEffect(() => {
+    if (!activeDropdown) return;
+    const close = () => setActiveDropdown(null);
+    window.addEventListener("scroll", close, { passive: true });
+    document.addEventListener("click", close);
+    return () => {
+      window.removeEventListener("scroll", close);
+      document.removeEventListener("click", close);
+    };
+  }, [activeDropdown]);
+
   const openDropdown = (name: string) => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     setActiveDropdown(name);

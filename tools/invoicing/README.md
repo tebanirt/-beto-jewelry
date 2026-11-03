@@ -12,3 +12,9 @@ et imprime un avertissement — ne jamais envoyer un document à un client dans 
 **Règle** : tout document généré doit être montré à Rayane pour confirmation avant
 d'être envoyé à un client. Ne jamais changer la palette, la mise en page ou le logo
 sans instruction explicite.
+
+**Soumission à options multiples + références visuelles** : voir
+`soumission_multi_option.py` — gabarit confirmé le 27 oct. 2026 (première utilisation :
+soumission Amanda, bague cathédrale 14k/18k). Réutiliser pour toute soumission avec
+plusieurs options de prix et des photos de référence (modèle souhaité, détails de
+style). Supporte le français et l'anglais (`lang="fr"` / `"en"`).

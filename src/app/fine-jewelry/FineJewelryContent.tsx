@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import AnimatedSection from "@/components/ui/AnimatedSection";
@@ -13,6 +14,17 @@ const SLIDESHOW_IMAGES = [
   { src: "/blog/earrings-guide-hero.jpg", alt: "A pair of gold huggie earrings set with baguette diamonds" },
   { src: "/blog/initial-symbol-pendants-hero.jpg", alt: "Several delicate gold necklaces displayed on white" },
   { src: "/jewelry/bracelet-tennis-diamond.jpg", alt: "A white gold diamond tennis bracelet" },
+];
+
+// Matches the real pages under src/lib/style-pages.ts (category: "fine-jewelry"),
+// in slug order, so this grid actually links to them — previously this page had
+// no on-site link to /fine-jewelry/pendentifs, /boucles-oreilles or /bracelets
+// at all, leaving them reachable only by direct URL or crawl.
+const STYLE_SLUGS = ["pendentifs", "boucles-oreilles", "bracelets"];
+const STYLE_IMAGES = [
+  "/jewelry/pendant-bee.jpg",
+  "/jewelry/earrings-hoops.jpg",
+  "/jewelry/bracelet-tennis-diamond.jpg",
 ];
 
 export default function FineJewelryContent() {
@@ -111,6 +123,37 @@ export default function FineJewelryContent() {
                   {item.title}
                 </h3>
                 <p className="text-sm text-beto-gray leading-relaxed">{item.body}</p>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <AnimatedSection className="mb-12 pt-16 border-t border-beto-gray-subtle/40">
+            <p className="text-label text-beto-gold mb-3">{p.ourStyles}</p>
+            <h2 className="font-display text-beto-black text-3xl lg:text-4xl font-light">
+              {p.findDirection}
+            </h2>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-beto-gray-subtle/20 mb-16 lg:mb-20">
+            {p.styles.map((style, i) => (
+              <AnimatedSection key={style.name} delay={i * 0.06}>
+                <Link href={`/fine-jewelry/${STYLE_SLUGS[i]}`} className="group bg-beto-white hover:bg-beto-offwhite transition-colors duration-300 flex flex-col">
+                  <div className="w-full aspect-square relative overflow-hidden bg-beto-offwhite">
+                    <Image
+                      src={STYLE_IMAGES[i] ?? ""}
+                      alt={style.name}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  </div>
+                  <div className="p-8">
+                    <h3 className="font-display text-beto-black text-xl font-normal mb-1 group-hover:text-beto-gold transition-colors">
+                      {style.name}
+                    </h3>
+                    <p className="text-sm text-beto-gray">{style.desc}</p>
+                  </div>
+                </Link>
               </AnimatedSection>
             ))}
           </div>

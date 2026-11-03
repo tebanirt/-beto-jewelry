@@ -8,6 +8,7 @@ import Magnetic from "@/components/ui/Magnetic";
 import { useTranslation } from "@/hooks/useTranslation";
 import { trackMetaLead } from "@/lib/metaPixel";
 import { submitLeadForm } from "@/lib/submitForm";
+import CalendlyNextStep from "@/components/shared/CalendlyNextStep";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -306,7 +307,10 @@ export default function CustomDesignContent() {
               </div>
 
               {status === "success" ? (
-                <p className="text-sm text-green-700 bg-green-50 border border-green-200 px-4 py-4 text-center">{cd.successMessage}</p>
+                <div className="flex flex-col gap-4">
+                  <p className="text-sm text-green-700 bg-green-50 border border-green-200 px-4 py-4 text-center">{cd.successMessage}</p>
+                  <CalendlyNextStep name={data.fullName} email={data.email} />
+                </div>
               ) : (
                 <>
                   <Magnetic className="block w-full" strength={0.15}>
