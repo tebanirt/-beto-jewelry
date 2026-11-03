@@ -132,6 +132,8 @@ Prochaines briques (en attente que Rayane connecte les outils sur claude.ai, je 
 - Bird (envoi WhatsApp/SMS) → canal de notification proactive.
 - Une fois ces deux connectés : une routine programmée (ex. quotidienne) qui vérifie performance pub + pipeline CRM, et envoie un résumé "table ronde" proactif par WhatsApp.
 
+**⛔ Publicités Meta en pause (ordre de Rayane, 3 nov. 2026)** : les deux campagnes (« BETO JEWELRY | LEADS | OCT 2026 | V1 » et « BETO | WEBSITE BOOKING | OCT 2026 | V1 ») sont en pause **jusqu'à ce que la comptabilité soit en place** (numéros TPS/TVQ, comptable). Aucun agent ne les relance ni ne propose de les relancer ; seul un ordre explicite de Rayane les remet en marche. La table ronde continue l'analyse et le CRM, sans proposition de budget.
+
 **Table ronde du matin** (active depuis le 3 nov. 2026, approuvée par Rayane — tâche programmée « Table ronde du matin — Beto Jewelry », tous les jours 7 h 52, notification push) : croise la performance Facebook/Instagram (Supermetrics) avec le pipeline CRM (Supabase : nouveaux leads par `attribution`, statuts, dépôts, marges `sale_price - production_cost`) et produit un résumé court par expert (Marketing / Ventes / Finances). **Les changements de budget pub sont seulement proposés** (montant actuel → proposé, et pourquoi) — Rayane approuve avant toute mise en marche ; la tâche n'utilise jamais d'outil d'écriture publicitaire (`manage_campaign` ou autre) et n'envoie jamais de message.
 
 **Colonnes CRM ajoutées le 3 nov. 2026** : `attribution` (noms Meta du lead), `sale_price` et `production_cost` (interne seulement, saisis dans `/admin/clients/[id]`, section « Marge »). La marge par pièce se mesure contre l'objectif de ~1 000 $.
