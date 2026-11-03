@@ -84,6 +84,9 @@ Quand quelqu'un réserve via Calendly, Calendly envoie une notification « New E
 - Consultation passée mais statut encore `consultation_reservee` : signalé dans le résumé (Rayane met `consultation_faite` ou `depot_recu`).
 - Ton : chaleureux, court, jamais pressant ; toujours les deux chemins (soumission ou consultation via https://calendly.com/betojewlz) ; mentionner les deux bureaux privés (centre-ville, avenue Union / Saint-Laurent, Cavendish) ; salutation selon l'heure.
 - Remplace l'étape 6 du triage horaire pour les clients présents dans le CRM (le triage garde les rappels calendrier pour les fils hors CRM — et alimente le CRM pour les leads FB/IG/site, voir étape 3).
+- **Contact récent (2 nov. 2026)** : pas de relance si Rayane a appelé, texté ou écrit au client dans les 3 derniers jours (notes du CRM ou courriel envoyé). Si le client préfère le texto, l'agent donne le texte à copier au lieu d'un courriel. Rayane dicte ses appels et textos dans le chat, ou plus tard via Quo (ligne d'affaires avec transcription, essai prévu ; textos après un appel sans réponse = brouillons seulement).
+- **Brouillons inutiles (règle de Rayane, 2 nov. 2026)** : supprimer **sans le lui dire** un brouillon de premier contact ou de relance inutile à 100 % (le client a un rendez-vous ou un statut plus avancé, ou Rayane l'a déjà relancé autrement après la date du brouillon), avec une note dans le CRM. Ne jamais supprimer une préparation de rencontre, une confirmation, une facture ou soumission, un brouillon à un fournisseur ou un brouillon commencé par Rayane. **Dans le moindre doute, lui demander.** Les clients restent toujours dans le CRM.
+- **Relances saisonnières (2 nov. 2026)** : tous les leads dormants sont relancés 2 semaines avant Noël (vers le 11 déc.) et 2 semaines avant la Saint-Valentin (vers le 31 janv.), après validation de Rayane.
 
 ## 7bis. À construire (spécifié le 24 oct. 2026 — rythme de relance et CRM enrichi faits le 26 oct., voir §7ter)
 
