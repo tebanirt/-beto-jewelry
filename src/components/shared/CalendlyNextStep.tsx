@@ -28,10 +28,13 @@ export default function CalendlyNextStep({
   name,
   email,
   autoRedirect = false,
+  fallback,
 }: {
   name?: string;
   email?: string;
   autoRedirect?: boolean;
+  /** Replaces the default "we'll reply within 1 business day" line. */
+  fallback?: string;
 }) {
   const c = useTranslation().bookingNextStep;
   const url = buildCalendlyUrl(name, email);
@@ -78,7 +81,7 @@ export default function CalendlyNextStep({
         </p>
       )}
 
-      <p className="text-xs text-white/50 mt-6 text-center leading-relaxed">{c.fallback}</p>
+      <p className="text-xs text-white/50 mt-6 text-center leading-relaxed">{fallback ?? c.fallback}</p>
     </div>
   );
 }

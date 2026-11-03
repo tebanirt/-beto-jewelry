@@ -1,3 +1,12 @@
+import type { LeadAttachment } from "@/lib/imageAttachments";
+
+export type LeadFormOptions = {
+  /** Inspiration images, attached to the email sent to Rayane. */
+  attachments?: LeadAttachment[];
+  /** The visitor was promised a price within the hour: flagged in the email subject. */
+  priority?: "1h";
+};
+
 /**
  * Posts a lead form to /api/send-email, retrying once after a transient
  * failure (e.g. a serverless cold-start timeout) before reporting a real
@@ -6,14 +15,21 @@
  */
 export async function submitLeadForm(
   formType: string,
-  fields: Record<string, string>
+  fields: Record<string, string>,
+  options: LeadFormOptions = {}
 ): Promise<boolean> {
+  const body = JSON.stringify({
+    formType,
+    fields,
+    ...(options.attachments?.length ? { attachments: options.attachments } : {}),
+    ...(options.priority ? { priority: options.priority } : {}),
+  });
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
       const res = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ formType, fields }),
+        body,
       });
       if (res.ok) return true;
     } catch {
