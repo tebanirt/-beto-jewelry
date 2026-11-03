@@ -95,15 +95,6 @@ const STYLE_CHOICES: StyleChoice[] = [
   "unsure",
   "other",
 ];
-/** 3D renders of Rayane's CAD parts, in public/images/form-styles/{name}-{metal}.webp. */
-const STYLE_IMAGES: Partial<Record<StyleChoice, string>> = {
-  solitaire: "solitaire",
-  cathedral: "cathedral",
-  haloHalf: "hidden-halo-half",
-  cathedralHaloHalf: "cathedral-hidden-halo-half",
-  haloThreeQuarter: "hidden-halo-three-quarter",
-  cathedralHaloThreeQuarter: "cathedral-hidden-halo-three-quarter",
-};
 /** Style used for the price ("other" has no instant price: Rayane quotes it). */
 const PRICE_STYLE: Record<StyleChoice, RingStyle | "unsure" | null> = {
   solitaire: "solitaire",
@@ -1176,73 +1167,10 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
 
                 <SectionTitle>{cd.sectionSetting}</SectionTitle>
 
-                <ChoiceGroup id="metalColor" legend={cd.metalColorLabel} error={errorFor("metalColor")}>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    {METAL_COLORS.map((id) => (
-                      <Chip key={id} swatch={METAL_SWATCH[id]} selected={d.metalColor === id} onClick={() => chooseMetal(id)}>
-                        {cd.metalColors[id]}
-                      </Chip>
-                    ))}
-                  </div>
-                </ChoiceGroup>
-
                 <Reveal show={isEngagement && !!d.stone} id="ring-style">
                   <ChoiceGroup id="ringStyle" legend={cd.ringStyleLabel} error={errorFor("ringStyle")}>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                      {STYLE_CHOICES.filter((id) => STYLE_IMAGES[id]).map((id) => {
-                        const selected = d.ringStyle === id;
-                        return (
-                          <button
-                            key={id}
-                            type="button"
-                            onClick={() => pick("ringStyle", id)}
-                            aria-pressed={selected}
-                            className={cn(
-                              "group relative flex flex-col border text-left transition-[border-color,box-shadow] duration-200 ease-out",
-                              pressable,
-                              focusRing,
-                              selected
-                                ? "border-beto-gold shadow-[inset_0_0_0_1px_var(--color-beto-gold)]"
-                                : "border-beto-gray-subtle hover:border-beto-gold/60"
-                            )}
-                          >
-                            <Image
-                              src={`/images/form-styles/${STYLE_IMAGES[id]}-${d.metalColor ?? "yellow"}.webp`}
-                              alt=""
-                              width={360}
-                              height={360}
-                              sizes="(max-width: 640px) 45vw, 220px"
-                              className="w-full h-auto aspect-square bg-[#f7f7f7]"
-                            />
-                            {id === "solitaire" && (
-                              <span className="absolute left-2 top-2 bg-beto-white/90 px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] text-beto-black">
-                                {cd.styleTagPopular}
-                              </span>
-                            )}
-                            <span
-                              className={cn(
-                                "flex-1 px-3 py-2.5 text-xs sm:text-[13px] font-medium leading-snug transition-colors duration-200",
-                                selected ? "bg-beto-gold/10 text-beto-black" : "bg-beto-white text-beto-black"
-                              )}
-                            >
-                              {cd.ringStyles[id].label}
-                            </span>
-                            <span
-                              aria-hidden
-                              className={cn(
-                                "absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-beto-black text-white transition-[opacity,transform] duration-200 ease-out",
-                                selected ? "opacity-100 scale-100" : "opacity-0 scale-75"
-                              )}
-                            >
-                              <Check size={13} strokeWidth={2.5} />
-                            </span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                    <p className="text-[11px] text-beto-gray/80 mt-3 leading-relaxed">{cd.styleImagesNote}</p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
-                      {STYLE_CHOICES.filter((id) => !STYLE_IMAGES[id]).map((id) => (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {STYLE_CHOICES.map((id) => (
                         <Chip key={id} selected={d.ringStyle === id} onClick={() => pick("ringStyle", id)}>
                           <span className="block font-medium text-beto-black">{cd.ringStyles[id].label}</span>
                           <span className="block text-xs text-beto-gray mt-1 leading-snug">{cd.ringStyles[id].desc}</span>
@@ -1275,6 +1203,16 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                     </Reveal>
                   </ChoiceGroup>
                 </Reveal>
+
+                <ChoiceGroup id="metalColor" legend={cd.metalColorLabel} error={errorFor("metalColor")}>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {METAL_COLORS.map((id) => (
+                      <Chip key={id} swatch={METAL_SWATCH[id]} selected={d.metalColor === id} onClick={() => chooseMetal(id)}>
+                        {cd.metalColors[id]}
+                      </Chip>
+                    ))}
+                  </div>
+                </ChoiceGroup>
 
                 <Reveal show={d.metalColor !== "platinum"} id="karat">
                   <ChoiceGroup id="karat" legend={cd.metalKaratLabel} error={errorFor("karat")}>
