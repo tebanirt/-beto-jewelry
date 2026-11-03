@@ -42,7 +42,9 @@ import {
 import CalendlyNextStep from "@/components/shared/CalendlyNextStep";
 
 type Status = "idle" | "sending" | "success" | "error";
-type StoneId = "natural" | "lab" | "gemstone" | "none";
+type StoneId = "natural" | "lab" | "gemstone" | "birthstone" | "none";
+type GemId = (typeof GEM_TYPES)[number];
+type MonthId = (typeof BIRTH_MONTHS)[number];
 type LabColor = "white" | "colored";
 type MetalColor = "yellow" | "white" | "rose";
 type KaratChoice = "10k" | GoldKarat | "unsure";
@@ -50,7 +52,9 @@ type StyleChoice = RingStyle | "unsure";
 type CaratChoice = EngagementCarat | "unsure";
 type ContactId = "email" | "phone" | "whatsapp" | "any";
 
-const STONES: StoneId[] = ["natural", "lab", "gemstone", "none"];
+const STONES: StoneId[] = ["natural", "lab", "gemstone", "birthstone", "none"];
+const GEM_TYPES = ["sapphire", "ruby", "emerald", "morganite", "aquamarine", "tanzanite", "alexandrite", "spinel", "tourmaline", "other"] as const;
+const BIRTH_MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"] as const;
 const LAB_COLORS: LabColor[] = ["white", "colored"];
 const METAL_COLORS: MetalColor[] = ["yellow", "white", "rose"];
 const KARATS: KaratChoice[] = ["14k", "18k", "unsure"];
@@ -74,6 +78,8 @@ type Draft = {
   stone: StoneId | null;
   labColor: LabColor | null;
   labColorDetail: string;
+  gemType: GemId | null;
+  birthMonths: MonthId[];
   shape: string;
   carat: CaratChoice | null;
   ringStyle: StyleChoice | null;
@@ -93,6 +99,8 @@ const EMPTY_DRAFT: Draft = {
   stone: null,
   labColor: null,
   labColorDetail: "",
+  gemType: null,
+  birthMonths: [],
   shape: "",
   carat: null,
   ringStyle: null,
@@ -128,6 +136,10 @@ function readDraft(projectCount: number): { draft: Draft; step: number } | null 
       stone: oneOf(d.stone, STONES),
       labColor: oneOf(d.labColor, LAB_COLORS),
       labColorDetail: str(d.labColorDetail),
+      gemType: oneOf(d.gemType, GEM_TYPES),
+      birthMonths: Array.isArray(d.birthMonths)
+        ? BIRTH_MONTHS.filter((m) => (d.birthMonths as unknown[]).includes(m))
+        : [],
       shape: str(d.shape),
       carat: oneOf(d.carat, CARAT_CHOICES),
       ringStyle: oneOf(d.ringStyle, STYLE_CHOICES),
@@ -448,8 +460,24 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
       ? `${cd.labColorOptions.colored}${d.labColorDetail.trim() ? ` (${d.labColorDetail.trim()})` : ""}`
       : d.stone === "lab" && d.labColor === "white"
         ? `${cd.stoneOptions.lab}, ${cd.labColorOptions.white.toLowerCase()}`
-        : cd.stoneOptions[d.stone]
+        : d.stone === "gemstone" && d.gemType
+          ? `${cd.stoneOptions.gemstone} : ${cd.gemTypes[d.gemType]}`
+          : d.stone === "birthstone" && d.birthMonths.length > 0
+            ? `${cd.stoneOptions.birthstone} : ${d.birthMonths
+                .map((m) => `${cd.birthMonths[m].month} (${cd.birthMonths[m].stone.toLowerCase()})`)
+                .join(", ")}`
+            : cd.stoneOptions[d.stone]
     : "";
+
+  function toggleMonth(m: MonthId) {
+    trackFunnel("choice", stepRef.current, { field: "birthMonths", value: m });
+    setDraft((prev) => ({
+      ...prev,
+      birthMonths: prev.birthMonths.includes(m)
+        ? prev.birthMonths.filter((x) => x !== m)
+        : BIRTH_MONTHS.filter((x) => x === m || prev.birthMonths.includes(x)),
+    }));
+  }
   const caratLabel = d.carat === null ? "" : d.carat === "unsure" ? cd.caratUnsure : caratText(d.carat);
   const metalLabel = [
     d.metalColor ? cd.metalColors[d.metalColor] : "",
@@ -477,6 +505,8 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
       stone: next,
       labColor: next === "lab" ? prev.labColor : null,
       labColorDetail: next === "lab" ? prev.labColorDetail : "",
+      gemType: next === "gemstone" ? prev.gemType : null,
+      birthMonths: next === "birthstone" ? prev.birthMonths : [],
       carat: isEngagement && (next === "natural" || next === "lab") ? prev.carat : null,
       // Budget ranges differ by stone for engagement rings.
       budget: prev.stone === next ? prev.budget : "",
@@ -535,6 +565,8 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
     if (s === 1) {
       if (!d.stone) errors.push(["stone", cd.errorChoose]);
       else if (d.stone === "lab" && !d.labColor) errors.push(["labColor", cd.errorChoose]);
+      else if (d.stone === "gemstone" && !d.gemType) errors.push(["gemType", cd.errorChoose]);
+      else if (d.stone === "birthstone" && d.birthMonths.length === 0) errors.push(["birthMonths", cd.errorChoose]);
       if (askCarat && d.carat === null) errors.push(["carat", cd.errorChoose]);
       if (isEngagement && d.stone && !d.ringStyle) errors.push(["ringStyle", cd.errorChoose]);
       if (!d.metalColor) errors.push(["metalColor", cd.errorChoose]);
@@ -942,12 +974,44 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                 <ChoiceGroup id="stone" legend={cd.stoneLabel} error={errorFor("stone")}>
                   <div className="grid grid-cols-2 gap-3">
                     {STONES.map((id) => (
-                      <Chip key={id} selected={d.stone === id} onClick={() => chooseStone(id)}>
-                        {cd.stoneOptions[id]}
-                      </Chip>
+                      <div key={id} className={id === "none" ? "col-span-2" : undefined}>
+                        <Chip selected={d.stone === id} onClick={() => chooseStone(id)}>
+                          {cd.stoneOptions[id]}
+                        </Chip>
+                      </div>
                     ))}
                   </div>
                 </ChoiceGroup>
+
+                <Reveal show={d.stone === "gemstone"} id="gem-type">
+                  <div className="-mt-4 mb-10 pl-4 border-l-2 border-beto-gold/50">
+                    <ChoiceGroup id="gemType" legend={cd.gemTypeLabel} error={errorFor("gemType")}>
+                      <div className="flex flex-wrap gap-2.5">
+                        {GEM_TYPES.map((id) => (
+                          <Chip key={id} compact selected={d.gemType === id} onClick={() => pick("gemType", id)}>
+                            {cd.gemTypes[id]}
+                          </Chip>
+                        ))}
+                      </div>
+                    </ChoiceGroup>
+                  </div>
+                </Reveal>
+
+                <Reveal show={d.stone === "birthstone"} id="birth-months">
+                  <div className="-mt-4 mb-10 pl-4 border-l-2 border-beto-gold/50">
+                    <ChoiceGroup id="birthMonths" legend={cd.birthMonthsLabel} error={errorFor("birthMonths")}>
+                      <p className="text-xs text-beto-gray/80 -mt-2 mb-4 leading-relaxed">{cd.birthMonthsHint}</p>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                        {BIRTH_MONTHS.map((m) => (
+                          <Chip key={m} selected={d.birthMonths.includes(m)} onClick={() => toggleMonth(m)}>
+                            <span className="block font-medium text-beto-black">{cd.birthMonths[m].month}</span>
+                            <span className="block text-xs text-beto-gray mt-0.5 leading-snug">{cd.birthMonths[m].stone}</span>
+                          </Chip>
+                        ))}
+                      </div>
+                    </ChoiceGroup>
+                  </div>
+                </Reveal>
 
                 <Reveal show={d.stone === "lab"} id="lab-color">
                   <div className="-mt-4 mb-10 pl-4 border-l-2 border-beto-gold/50">

@@ -13,7 +13,7 @@ type Row = { session_id: string; form: string; event: string; step: number | nul
 
 const STEP_NAMES = ["Projet", "Détails", "Estimation", "Coordonnées"];
 const FIELD_NAMES: Record<string, string> = {
-  project: "Type de projet", stone: "Pierre", labColor: "Couleur du labo", carat: "Carat", ringStyle: "Style",
+  project: "Type de projet", stone: "Pierre", labColor: "Couleur du labo", gemType: "Pierre précieuse", birthMonths: "Pierres de naissance", carat: "Carat", ringStyle: "Style",
   metalColor: "Couleur du métal", karat: "Carat de l'or", budget: "Budget", fullName: "Nom", email: "Courriel", phone: "Téléphone",
 };
 
