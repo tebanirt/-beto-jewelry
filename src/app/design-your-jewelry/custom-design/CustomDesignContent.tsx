@@ -11,6 +11,7 @@ import {
 } from "react";
 import { motion, AnimatePresence, useReducedMotion, type Variants } from "framer-motion";
 import { AlertCircle, Check, CheckCircle2, Clock, ExternalLink, Loader2, Upload, X } from "lucide-react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import Magnetic from "@/components/ui/Magnetic";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -59,7 +60,8 @@ type StyleChoice =
 type CaratChoice = EngagementCarat | "unsure";
 type ContactId = "email" | "phone" | "whatsapp" | "any";
 
-const STONES: StoneId[] = ["natural", "lab", "gemstone", "birthstone"];
+// Lab-grown first: most chosen (The Knot 2026: 61 %) and the only stone with an instant price.
+const STONES: StoneId[] = ["lab", "natural", "gemstone", "birthstone"];
 // The only colored lab-grown diamond colors Rayane offers (3 nov. 2026).
 const LAB_SHADES = ["pink", "yellow", "blue", "champagne", "green"] as const;
 const LAB_SHADE_SWATCH: Record<LabShade, string> = {
@@ -93,6 +95,15 @@ const STYLE_CHOICES: StyleChoice[] = [
   "unsure",
   "other",
 ];
+/** 3D renders of Rayane's CAD parts, in public/images/form-styles/{name}-{metal}.webp. */
+const STYLE_IMAGES: Partial<Record<StyleChoice, string>> = {
+  solitaire: "solitaire",
+  cathedral: "cathedral",
+  haloHalf: "hidden-halo-half",
+  cathedralHaloHalf: "cathedral-hidden-halo-half",
+  haloThreeQuarter: "hidden-halo-three-quarter",
+  cathedralHaloThreeQuarter: "cathedral-hidden-halo-three-quarter",
+};
 /** Style used for the price ("other" has no instant price: Rayane quotes it). */
 const PRICE_STYLE: Record<StyleChoice, RingStyle | "unsure" | null> = {
   solitaire: "solitaire",
@@ -522,6 +533,11 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
       ? "hour"
       : "day";
   const hourPromise = responseMode === "hour";
+  // The budget question is useless when the visitor gets an instant price
+  // (lab-grown engagement ring, a listed style, no inspiration image).
+  const budgetNeeded = !(
+    isEngagement && d.stone === "lab" && !!priceTable && d.ringStyle !== "other" && d.carat !== "unsure" && images.length === 0
+  );
 
   useEffect(() => {
     if (step !== 2) return;
@@ -617,6 +633,8 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
       karat: prev.karat === "10k" && index !== GRILLZ_INDEX ? null : prev.karat,
       budget: prev.projectIndex === index ? prev.budget : "",
     }));
+    // One tap is enough on the first step: move on once the choice is visible.
+    if (step === 0) window.setTimeout(() => goTo(1), reduceMotion ? 0 : 280);
   }
 
   function chooseStone(next: StoneId) {
@@ -624,7 +642,8 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
     setDraft((prev) => ({
       ...prev,
       stone: next,
-      labColor: next === "lab" ? prev.labColor : null,
+      // White preselected: 83 % of center stones are colorless (The Knot 2026).
+      labColor: next === "lab" ? (prev.labColor ?? "white") : null,
       labShade: next === "lab" ? prev.labShade : null,
       gemType: next === "gemstone" ? prev.gemType : null,
       birthMonths: next === "birthstone" ? prev.birthMonths : [],
@@ -658,10 +677,10 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
           ...prev,
           { ...prepared, id: `${Date.now()}-${Math.random().toString(36).slice(2)}`, previewUrl: URL.createObjectURL(file) },
         ]);
-        trackFunnel("image_added", 0, { type: prepared.contentType });
+        trackFunnel("image_added", stepRef.current, { type: prepared.contentType });
       } catch {
         setUploadMessage(cd.uploadError);
-        trackFunnel("image_error", 0, { type: file.type || "unknown" });
+        trackFunnel("image_error", stepRef.current, { type: file.type || "unknown" });
       } finally {
         setPreparing((n) => n - 1);
       }
@@ -701,7 +720,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
         errors.push(["ringStyleOther", cd.errorStyleOther]);
       if (!d.metalColor) errors.push(["metalColor", cd.errorChoose]);
       if (!d.karat && d.metalColor !== "platinum") errors.push(["karat", cd.errorChoose]);
-      if (!d.budget) errors.push(["budget", cd.errorChoose]);
+      if (budgetNeeded && !d.budget) errors.push(["budget", cd.errorChoose]);
     }
     if (s === CONTACT_STEP) {
       if (!d.fullName.trim()) errors.push(["fullName", cd.errorName]);
@@ -776,7 +795,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
       "Carat (pierre centrale)": caratLabel,
       "Style de monture": isEngagement && d.ringStyle ? styleLabel : "",
       "Métal": metalLabel,
-      "Budget": d.budget,
+      "Budget": budgetNeeded ? d.budget : "",
       "Échéancier": d.timeline,
       "Notes": d.notes,
       "Images d'inspiration": images.length > 0 ? `${images.length} en pièce jointe` : "",
@@ -820,7 +839,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
     ...(askCarat ? [{ label: sl.carat, value: caratLabel }] : []),
     ...(isEngagement && d.ringStyle ? [{ label: sl.style, value: styleLabel }] : []),
     { label: sl.metal, value: metalLabel },
-    { label: sl.budget, value: d.budget },
+    ...(budgetNeeded ? [{ label: sl.budget, value: d.budget }] : []),
     { label: sl.timeline, value: d.timeline || sl.notSpecified },
     ...(images.length > 0 ? [{ label: sl.images, value: String(images.length) }] : []),
   ];
@@ -902,10 +921,10 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
   return (
     <div className="min-h-screen bg-beto-offwhite" style={{ paddingTop: "var(--nav-height)" }}>
       {/* Header */}
-      <div className="bg-beto-black py-12 px-6 text-center">
-        <p className="text-label text-beto-gold mb-3">{cd.eyebrow}</p>
-        <h1 className="font-display text-white text-4xl lg:text-5xl font-light text-balance">{cd.title}</h1>
-        <p className="text-white/70 text-sm mt-3 max-w-md mx-auto leading-relaxed">{cd.subtitle}</p>
+      <div className="bg-beto-black py-7 sm:py-12 px-6 text-center">
+        <p className="text-label text-beto-gold mb-2 sm:mb-3">{cd.eyebrow}</p>
+        <h1 className="font-display text-white text-3xl sm:text-4xl lg:text-5xl font-light text-balance">{cd.title}</h1>
+        <p className="hidden sm:block text-white/70 text-sm mt-3 max-w-md mx-auto leading-relaxed">{cd.subtitle}</p>
       </div>
 
       {/* Progress */}
@@ -990,11 +1009,52 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                 >
                   <legend className="sr-only">{cd.step0Title}</legend>
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-                    {cd.projectTypes.map((type, i) => (
-                      <Chip key={type} selected={d.projectIndex === i} onClick={() => chooseProject(i)}>
-                        <span className="font-medium">{type}</span>
-                      </Chip>
-                    ))}
+                    {cd.projectTypes.map((type, i) => {
+                      const selected = d.projectIndex === i;
+                      return (
+                        <button
+                          key={type}
+                          type="button"
+                          onClick={() => chooseProject(i)}
+                          aria-pressed={selected}
+                          className={cn(
+                            "relative flex flex-col border text-left transition-[border-color,box-shadow] duration-200 ease-out",
+                            pressable,
+                            focusRing,
+                            selected
+                              ? "border-beto-gold shadow-[inset_0_0_0_1px_var(--color-beto-gold)]"
+                              : "border-beto-gray-subtle hover:border-beto-gold/60"
+                          )}
+                        >
+                          <Image
+                            src={`/images/form-projects/${PROJECT_IDS[i] ?? "other"}.webp`}
+                            alt=""
+                            width={320}
+                            height={320}
+                            sizes="(max-width: 640px) 45vw, 200px"
+                            priority={i < 2}
+                            className="w-full h-auto aspect-[4/3] object-cover bg-beto-white"
+                          />
+                          <span
+                            className={cn(
+                              "flex-1 px-3 py-3 text-sm font-medium leading-snug text-beto-black transition-colors duration-200",
+                              selected ? "bg-beto-gold/10" : "bg-beto-white"
+                            )}
+                          >
+                            {type}
+                          </span>
+                          <span
+                            aria-hidden
+                            className={cn(
+                              "absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-beto-black text-white transition-[opacity,transform] duration-200 ease-out",
+                              selected ? "opacity-100 scale-100" : "opacity-0 scale-75"
+                            )}
+                          >
+                            <Check size={13} strokeWidth={2.5} />
+                          </span>
+                        </button>
+                      );
+                    })}
                   </div>
                   <FieldError id="project-error" message={errorFor("project")} />
                   <p id="project-help" className="text-xs text-beto-gray/80 mt-4 leading-relaxed">
@@ -1002,6 +1062,264 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                   </p>
                 </fieldset>
 
+              </>
+            )}
+
+            {/* STEP 1: Design details, in three short sections */}
+            {step === 1 && (
+              <>
+                <h2 ref={headingRef} tabIndex={-1} className={stepHeading}>{cd.step1Title}</h2>
+                <p className="text-sm text-beto-gray mb-10">{cd.step1Desc}</p>
+
+                <SectionTitle>{cd.sectionStone}</SectionTitle>
+
+                <ChoiceGroup id="stone" legend={cd.stoneLabel} error={errorFor("stone")}>
+                  <div className="grid grid-cols-2 gap-3">
+                    {STONES.map((id) => (
+                      <Chip key={id} selected={d.stone === id} onClick={() => chooseStone(id)}>
+                        {isEngagement ? (
+                          <>
+                            <span className="block font-medium text-beto-black">{cd.stoneOptions[id]}</span>
+                            <span className={cn("block text-xs mt-1 leading-snug", id === "lab" && priceTable ? "text-beto-gold-dark" : "text-beto-gray")}>
+                              {id === "lab" ? (priceTable ? cd.stoneHints.lab : cd.stoneHints.labNoPrice) : cd.stoneHints[id]}
+                            </span>
+                          </>
+                        ) : (
+                          cd.stoneOptions[id]
+                        )}
+                      </Chip>
+                    ))}
+                  </div>
+                </ChoiceGroup>
+
+                <Reveal show={d.stone === "lab"} id="lab-color">
+                  <div className="-mt-4 mb-10 pl-4 border-l-2 border-beto-gold/50">
+                    <ChoiceGroup id="labColor" legend={cd.labColorLabel} error={errorFor("labColor")}>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {LAB_COLORS.map((id) => (
+                          <Chip key={id} selected={d.labColor === id} onClick={() => pick("labColor", id)}>
+                            {cd.labColorOptions[id]}
+                          </Chip>
+                        ))}
+                      </div>
+                    </ChoiceGroup>
+                    <Reveal show={d.labColor === "colored"} id="lab-shade">
+                      <ChoiceGroup id="labShade" legend={cd.labShadeLabel} error={errorFor("labShade")}>
+                        <div className="flex flex-wrap gap-2.5">
+                          {LAB_SHADES.map((id) => (
+                            <Chip key={id} compact swatch={LAB_SHADE_SWATCH[id]} selected={d.labShade === id} onClick={() => pick("labShade", id)}>
+                              {cd.labShades[id]}
+                            </Chip>
+                          ))}
+                        </div>
+                      </ChoiceGroup>
+                    </Reveal>
+                  </div>
+                </Reveal>
+
+                <Reveal show={d.stone === "gemstone"} id="gem-type">
+                  <div className="-mt-4 mb-10 pl-4 border-l-2 border-beto-gold/50">
+                    <ChoiceGroup id="gemType" legend={cd.gemTypeLabel} error={errorFor("gemType")}>
+                      <div className="flex flex-wrap gap-2.5">
+                        {GEM_TYPES.map((id) => (
+                          <Chip key={id} compact selected={d.gemType === id} onClick={() => pick("gemType", id)}>
+                            {cd.gemTypes[id]}
+                          </Chip>
+                        ))}
+                      </div>
+                    </ChoiceGroup>
+                  </div>
+                </Reveal>
+
+                <Reveal show={d.stone === "birthstone"} id="birth-months">
+                  <div className="-mt-4 mb-10 pl-4 border-l-2 border-beto-gold/50">
+                    <ChoiceGroup id="birthMonths" legend={cd.birthMonthsLabel} error={errorFor("birthMonths")}>
+                      <p className="text-xs text-beto-gray/80 -mt-2 mb-4 leading-relaxed">{cd.birthMonthsHint}</p>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                        {BIRTH_MONTHS.map((m) => (
+                          <Chip key={m} selected={d.birthMonths.includes(m)} onClick={() => toggleMonth(m)}>
+                            <span className="block font-medium text-beto-black">{cd.birthMonths[m].month}</span>
+                            <span className="block text-xs text-beto-gray mt-0.5 leading-snug">{cd.birthMonths[m].stone}</span>
+                          </Chip>
+                        ))}
+                      </div>
+                    </ChoiceGroup>
+                  </div>
+                </Reveal>
+
+                <Reveal show={!!d.stone} id="shape">
+                  <ChoiceGroup id="shape" legend={cd.shapeLabel} optional={cd.shapeOpt}>
+                    <div className="grid grid-cols-4 sm:grid-cols-5 gap-2.5">
+                      {cd.shapes.map((s, i) => (
+                        <Chip key={s} tile icon={SHAPE_ICONS[i]} selected={d.shape === s} onClick={() => pick("shape", d.shape === s ? "" : s)}>
+                          {s}
+                        </Chip>
+                      ))}
+                    </div>
+                  </ChoiceGroup>
+                </Reveal>
+
+                <Reveal show={askCarat} id="carat">
+                  <ChoiceGroup id="carat" legend={cd.caratLabel} error={errorFor("carat")}>
+                    <div className="flex flex-wrap gap-2.5">
+                      {ENGAGEMENT_CARATS.map((c) => (
+                        <Chip key={c} compact selected={d.carat === c} onClick={() => pick("carat", c)}>
+                          {caratText(c)}
+                        </Chip>
+                      ))}
+                      <Chip compact selected={d.carat === "unsure"} onClick={() => pick("carat", "unsure")}>
+                        {cd.caratUnsure}
+                      </Chip>
+                    </div>
+                  </ChoiceGroup>
+                </Reveal>
+
+                <SectionTitle>{cd.sectionSetting}</SectionTitle>
+
+                <ChoiceGroup id="metalColor" legend={cd.metalColorLabel} error={errorFor("metalColor")}>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {METAL_COLORS.map((id) => (
+                      <Chip key={id} swatch={METAL_SWATCH[id]} selected={d.metalColor === id} onClick={() => chooseMetal(id)}>
+                        {cd.metalColors[id]}
+                      </Chip>
+                    ))}
+                  </div>
+                </ChoiceGroup>
+
+                <Reveal show={isEngagement && !!d.stone} id="ring-style">
+                  <ChoiceGroup id="ringStyle" legend={cd.ringStyleLabel} error={errorFor("ringStyle")}>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                      {STYLE_CHOICES.filter((id) => STYLE_IMAGES[id]).map((id) => {
+                        const selected = d.ringStyle === id;
+                        return (
+                          <button
+                            key={id}
+                            type="button"
+                            onClick={() => pick("ringStyle", id)}
+                            aria-pressed={selected}
+                            className={cn(
+                              "group relative flex flex-col border text-left transition-[border-color,box-shadow] duration-200 ease-out",
+                              pressable,
+                              focusRing,
+                              selected
+                                ? "border-beto-gold shadow-[inset_0_0_0_1px_var(--color-beto-gold)]"
+                                : "border-beto-gray-subtle hover:border-beto-gold/60"
+                            )}
+                          >
+                            <Image
+                              src={`/images/form-styles/${STYLE_IMAGES[id]}-${d.metalColor ?? "yellow"}.webp`}
+                              alt=""
+                              width={360}
+                              height={360}
+                              sizes="(max-width: 640px) 45vw, 220px"
+                              className="w-full h-auto aspect-square bg-[#f7f7f7]"
+                            />
+                            {id === "solitaire" && (
+                              <span className="absolute left-2 top-2 bg-beto-white/90 px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] text-beto-black">
+                                {cd.styleTagPopular}
+                              </span>
+                            )}
+                            <span
+                              className={cn(
+                                "flex-1 px-3 py-2.5 text-xs sm:text-[13px] font-medium leading-snug transition-colors duration-200",
+                                selected ? "bg-beto-gold/10 text-beto-black" : "bg-beto-white text-beto-black"
+                              )}
+                            >
+                              {cd.ringStyles[id].label}
+                            </span>
+                            <span
+                              aria-hidden
+                              className={cn(
+                                "absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-beto-black text-white transition-[opacity,transform] duration-200 ease-out",
+                                selected ? "opacity-100 scale-100" : "opacity-0 scale-75"
+                              )}
+                            >
+                              <Check size={13} strokeWidth={2.5} />
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <p className="text-[11px] text-beto-gray/80 mt-3 leading-relaxed">{cd.styleImagesNote}</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
+                      {STYLE_CHOICES.filter((id) => !STYLE_IMAGES[id]).map((id) => (
+                        <Chip key={id} selected={d.ringStyle === id} onClick={() => pick("ringStyle", id)}>
+                          <span className="block font-medium text-beto-black">{cd.ringStyles[id].label}</span>
+                          <span className="block text-xs text-beto-gray mt-1 leading-snug">{cd.ringStyles[id].desc}</span>
+                        </Chip>
+                      ))}
+                    </div>
+                    <Reveal show={d.ringStyle === "other"} id="ring-style-other">
+                      <div className="mt-4">
+                        <label htmlFor="field-ringStyleOther" className="text-xs font-medium text-beto-black tracking-wide mb-2 block">
+                          {cd.ringStyleOtherLabel}
+                          <span aria-hidden className="text-beto-gold-dark ml-0.5">*</span>
+                        </label>
+                        <textarea
+                          id="field-ringStyleOther"
+                          rows={3}
+                          required
+                          aria-invalid={errorFor("ringStyleOther") ? true : undefined}
+                          aria-describedby={errorFor("ringStyleOther") ? "ringStyleOther-error" : undefined}
+                          value={d.ringStyleOther}
+                          onChange={(e) => set("ringStyleOther", e.target.value)}
+                          placeholder={cd.ringStyleOtherPlaceholder}
+                          className={cn(
+                            inputClass,
+                            "resize-none",
+                            errorFor("ringStyleOther") ? "border-red-600 shadow-[inset_0_0_0_1px_#dc2626]" : inputIdle
+                          )}
+                        />
+                        <FieldError id="ringStyleOther-error" message={errorFor("ringStyleOther")} />
+                      </div>
+                    </Reveal>
+                  </ChoiceGroup>
+                </Reveal>
+
+                <Reveal show={d.metalColor !== "platinum"} id="karat">
+                  <ChoiceGroup id="karat" legend={cd.metalKaratLabel} error={errorFor("karat")}>
+                    <div className="flex flex-wrap gap-2.5">
+                      {(d.projectIndex === GRILLZ_INDEX ? KARATS_GRILLZ : KARATS).map((id) => (
+                        <Chip key={id} compact selected={d.karat === id} onClick={() => pick("karat", id)}>
+                          {cd.metalKarats[id]}
+                        </Chip>
+                      ))}
+                    </div>
+                    <p className="text-xs text-beto-gray/80 mt-3 leading-relaxed">{cd.metalKaratHint}</p>
+                  </ChoiceGroup>
+                </Reveal>
+
+                <SectionTitle>{budgetNeeded ? cd.sectionBudget : cd.sectionTimeline}</SectionTitle>
+
+                {budgetNeeded && (
+                <ChoiceGroup id="budget" legend={cd.budgetLabel} error={errorFor("budget")}>
+                  <div className="flex flex-wrap gap-2.5">
+                    {budgetOptions.map((b) => (
+                      <Chip key={b} compact selected={d.budget === b} onClick={() => pick("budget", b)}>
+                        {b}
+                      </Chip>
+                    ))}
+                  </div>
+                  {isEngagement && d.stone === "natural" && (
+                    <p className="text-xs text-beto-gray/80 mt-3 leading-relaxed">{cd.naturalBudgetNote}</p>
+                  )}
+                </ChoiceGroup>
+                )}
+
+                <ChoiceGroup id="timeline" legend={cd.timelineLabel} optional={cd.timelineOpt}>
+                  <div className="flex flex-wrap gap-2.5">
+                    {cd.timelines.map((t) => (
+                      <Chip key={t} compact selected={d.timeline === t} onClick={() => pick("timeline", d.timeline === t ? "" : t)}>
+                        {t}
+                      </Chip>
+                    ))}
+                  </div>
+                </ChoiceGroup>
+
+                <SectionTitle>{cd.sectionInspiration}</SectionTitle>
+                {isEngagement && images.length === 0 && d.stone === "lab" && (
+                  <p className="text-xs text-beto-gray -mt-2 mb-5 leading-relaxed">{cd.uploadHourNote}</p>
+                )}
                 <div className="mb-10">
                   <p className="text-xs font-medium text-beto-black tracking-wide mb-3">
                     {cd.uploadLabel} <span className="text-beto-gray/80 font-normal">{cd.uploadOpt}</span>
@@ -1098,195 +1416,6 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                     className={cn(inputClass, inputIdle, "resize-none")}
                   />
                 </div>
-              </>
-            )}
-
-            {/* STEP 1: Design details, in three short sections */}
-            {step === 1 && (
-              <>
-                <h2 ref={headingRef} tabIndex={-1} className={stepHeading}>{cd.step1Title}</h2>
-                <p className="text-sm text-beto-gray mb-10">{cd.step1Desc}</p>
-
-                <SectionTitle>{cd.sectionStone}</SectionTitle>
-
-                <ChoiceGroup id="stone" legend={cd.stoneLabel} error={errorFor("stone")}>
-                  <div className="grid grid-cols-2 gap-3">
-                    {STONES.map((id) => (
-                      <Chip key={id} selected={d.stone === id} onClick={() => chooseStone(id)}>
-                        {cd.stoneOptions[id]}
-                      </Chip>
-                    ))}
-                  </div>
-                </ChoiceGroup>
-
-                <Reveal show={d.stone === "lab"} id="lab-color">
-                  <div className="-mt-4 mb-10 pl-4 border-l-2 border-beto-gold/50">
-                    <ChoiceGroup id="labColor" legend={cd.labColorLabel} error={errorFor("labColor")}>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        {LAB_COLORS.map((id) => (
-                          <Chip key={id} selected={d.labColor === id} onClick={() => pick("labColor", id)}>
-                            {cd.labColorOptions[id]}
-                          </Chip>
-                        ))}
-                      </div>
-                    </ChoiceGroup>
-                    <Reveal show={d.labColor === "colored"} id="lab-shade">
-                      <ChoiceGroup id="labShade" legend={cd.labShadeLabel} error={errorFor("labShade")}>
-                        <div className="flex flex-wrap gap-2.5">
-                          {LAB_SHADES.map((id) => (
-                            <Chip key={id} compact swatch={LAB_SHADE_SWATCH[id]} selected={d.labShade === id} onClick={() => pick("labShade", id)}>
-                              {cd.labShades[id]}
-                            </Chip>
-                          ))}
-                        </div>
-                      </ChoiceGroup>
-                    </Reveal>
-                  </div>
-                </Reveal>
-
-                <Reveal show={d.stone === "gemstone"} id="gem-type">
-                  <div className="-mt-4 mb-10 pl-4 border-l-2 border-beto-gold/50">
-                    <ChoiceGroup id="gemType" legend={cd.gemTypeLabel} error={errorFor("gemType")}>
-                      <div className="flex flex-wrap gap-2.5">
-                        {GEM_TYPES.map((id) => (
-                          <Chip key={id} compact selected={d.gemType === id} onClick={() => pick("gemType", id)}>
-                            {cd.gemTypes[id]}
-                          </Chip>
-                        ))}
-                      </div>
-                    </ChoiceGroup>
-                  </div>
-                </Reveal>
-
-                <Reveal show={d.stone === "birthstone"} id="birth-months">
-                  <div className="-mt-4 mb-10 pl-4 border-l-2 border-beto-gold/50">
-                    <ChoiceGroup id="birthMonths" legend={cd.birthMonthsLabel} error={errorFor("birthMonths")}>
-                      <p className="text-xs text-beto-gray/80 -mt-2 mb-4 leading-relaxed">{cd.birthMonthsHint}</p>
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                        {BIRTH_MONTHS.map((m) => (
-                          <Chip key={m} selected={d.birthMonths.includes(m)} onClick={() => toggleMonth(m)}>
-                            <span className="block font-medium text-beto-black">{cd.birthMonths[m].month}</span>
-                            <span className="block text-xs text-beto-gray mt-0.5 leading-snug">{cd.birthMonths[m].stone}</span>
-                          </Chip>
-                        ))}
-                      </div>
-                    </ChoiceGroup>
-                  </div>
-                </Reveal>
-
-                <Reveal show={!!d.stone} id="shape">
-                  <ChoiceGroup id="shape" legend={cd.shapeLabel} optional={cd.shapeOpt}>
-                    <div className="grid grid-cols-4 sm:grid-cols-5 gap-2.5">
-                      {cd.shapes.map((s, i) => (
-                        <Chip key={s} tile icon={SHAPE_ICONS[i]} selected={d.shape === s} onClick={() => pick("shape", d.shape === s ? "" : s)}>
-                          {s}
-                        </Chip>
-                      ))}
-                    </div>
-                  </ChoiceGroup>
-                </Reveal>
-
-                <Reveal show={askCarat} id="carat">
-                  <ChoiceGroup id="carat" legend={cd.caratLabel} error={errorFor("carat")}>
-                    <div className="flex flex-wrap gap-2.5">
-                      {ENGAGEMENT_CARATS.map((c) => (
-                        <Chip key={c} compact selected={d.carat === c} onClick={() => pick("carat", c)}>
-                          {caratText(c)}
-                        </Chip>
-                      ))}
-                      <Chip compact selected={d.carat === "unsure"} onClick={() => pick("carat", "unsure")}>
-                        {cd.caratUnsure}
-                      </Chip>
-                    </div>
-                  </ChoiceGroup>
-                </Reveal>
-
-                <SectionTitle>{cd.sectionSetting}</SectionTitle>
-
-                <Reveal show={isEngagement && !!d.stone} id="ring-style">
-                  <ChoiceGroup id="ringStyle" legend={cd.ringStyleLabel} error={errorFor("ringStyle")}>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {STYLE_CHOICES.map((id) => (
-                        <Chip key={id} selected={d.ringStyle === id} onClick={() => pick("ringStyle", id)}>
-                          <span className="block font-medium text-beto-black">{cd.ringStyles[id].label}</span>
-                          <span className="block text-xs text-beto-gray mt-1 leading-snug">{cd.ringStyles[id].desc}</span>
-                        </Chip>
-                      ))}
-                    </div>
-                    <Reveal show={d.ringStyle === "other"} id="ring-style-other">
-                      <div className="mt-4">
-                        <label htmlFor="field-ringStyleOther" className="text-xs font-medium text-beto-black tracking-wide mb-2 block">
-                          {cd.ringStyleOtherLabel}
-                          <span aria-hidden className="text-beto-gold-dark ml-0.5">*</span>
-                        </label>
-                        <textarea
-                          id="field-ringStyleOther"
-                          rows={3}
-                          required
-                          aria-invalid={errorFor("ringStyleOther") ? true : undefined}
-                          aria-describedby={errorFor("ringStyleOther") ? "ringStyleOther-error" : undefined}
-                          value={d.ringStyleOther}
-                          onChange={(e) => set("ringStyleOther", e.target.value)}
-                          placeholder={cd.ringStyleOtherPlaceholder}
-                          className={cn(
-                            inputClass,
-                            "resize-none",
-                            errorFor("ringStyleOther") ? "border-red-600 shadow-[inset_0_0_0_1px_#dc2626]" : inputIdle
-                          )}
-                        />
-                        <FieldError id="ringStyleOther-error" message={errorFor("ringStyleOther")} />
-                      </div>
-                    </Reveal>
-                  </ChoiceGroup>
-                </Reveal>
-
-                <ChoiceGroup id="metalColor" legend={cd.metalColorLabel} error={errorFor("metalColor")}>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    {METAL_COLORS.map((id) => (
-                      <Chip key={id} swatch={METAL_SWATCH[id]} selected={d.metalColor === id} onClick={() => chooseMetal(id)}>
-                        {cd.metalColors[id]}
-                      </Chip>
-                    ))}
-                  </div>
-                </ChoiceGroup>
-
-                <Reveal show={d.metalColor !== "platinum"} id="karat">
-                  <ChoiceGroup id="karat" legend={cd.metalKaratLabel} error={errorFor("karat")}>
-                    <div className="flex flex-wrap gap-2.5">
-                      {(d.projectIndex === GRILLZ_INDEX ? KARATS_GRILLZ : KARATS).map((id) => (
-                        <Chip key={id} compact selected={d.karat === id} onClick={() => pick("karat", id)}>
-                          {cd.metalKarats[id]}
-                        </Chip>
-                      ))}
-                    </div>
-                    <p className="text-xs text-beto-gray/80 mt-3 leading-relaxed">{cd.metalKaratHint}</p>
-                  </ChoiceGroup>
-                </Reveal>
-
-                <SectionTitle>{cd.sectionBudget}</SectionTitle>
-
-                <ChoiceGroup id="budget" legend={cd.budgetLabel} error={errorFor("budget")}>
-                  <div className="flex flex-wrap gap-2.5">
-                    {budgetOptions.map((b) => (
-                      <Chip key={b} compact selected={d.budget === b} onClick={() => pick("budget", b)}>
-                        {b}
-                      </Chip>
-                    ))}
-                  </div>
-                  {isEngagement && d.stone === "natural" && (
-                    <p className="text-xs text-beto-gray/80 mt-3 leading-relaxed">{cd.naturalBudgetNote}</p>
-                  )}
-                </ChoiceGroup>
-
-                <ChoiceGroup id="timeline" legend={cd.timelineLabel} optional={cd.timelineOpt}>
-                  <div className="flex flex-wrap gap-2.5">
-                    {cd.timelines.map((t) => (
-                      <Chip key={t} compact selected={d.timeline === t} onClick={() => pick("timeline", d.timeline === t ? "" : t)}>
-                        {t}
-                      </Chip>
-                    ))}
-                  </div>
-                </ChoiceGroup>
                 {helpLine}
               </>
             )}
