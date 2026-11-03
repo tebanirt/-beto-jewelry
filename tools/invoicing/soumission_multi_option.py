@@ -198,6 +198,13 @@ def _draw_image_row(c, row, y, target_h=230, gap=24):
         widths.append(target_h * (iw / ih))
 
     total_w = sum(widths) + gap * (len(row) - 1)
+    # Images larges (ex. vue de face paysage) : reduire la rangee pour tenir dans les marges
+    max_w = X1 - X0
+    if total_w > max_w:
+        scale = (max_w - gap * (len(row) - 1)) / sum(widths)
+        widths = [w * scale for w in widths]
+        target_h *= scale
+        total_w = max_w
     x = X0 + (X1 - X0 - total_w) / 2
     img_top = y
     for (path, caption), w in zip(row, widths):
