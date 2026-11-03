@@ -137,6 +137,18 @@ Prochaines briques (en attente que Rayane connecte les outils sur claude.ai, je 
 
 Ne pas ajouter n8n ou un autre orchestrateur externe sans raison précise — l'approche de triggers programmés Claude Code fait déjà ce travail et évite la complexité/maintenance d'un deuxième système parallèle.
 
+## 8bis. Autonomie graduée des messages (approuvée par Rayane le 3 nov. 2026)
+
+But : automatiser le plus possible, **sans jamais faire d'erreur critique**. Chaque type de message gagne sa liberté avec des preuves, et la perd à la première erreur.
+
+- **Journal** : chaque brouillon préparé par un agent est enregistré dans Supabase `agent_actions` (type, client, texte proposé, texte réellement envoyé, résultat : `sent_unchanged` / `minor_edit` / `major_edit` / `deleted` / `critical_error`, puis la suite : réponse, réservation, dépôt). Les niveaux sont dans `agent_autonomy`, **un compteur par type de message**, jamais global (types actuels : `premier_contact`, `preparation_rencontre`, `relance_1`, `relance_2`, `confirmation_depot`).
+- **Niveaux** : 0 = brouillon, Rayane envoie (niveau actuel de tout) ; 1 = envoi programmé dans 2 h, annulable ; 2 = envoi automatique avec résumé.
+- **Promotion** : **30 envois d'affilée tels quels ou avec retouche mineure, et 0 erreur critique** → la rétro du dimanche le **propose** ; seul Rayane approuve, et l'exception est alors écrite ici pour ce seul type. Un agent ne se promeut jamais lui-même et ne modifie jamais ses propres règles. Cette section ne lève **pas** la règle absolue du §2 (« jamais envoyer un vrai courriel à un client ») tant qu'aucune exception n'y est inscrite par type.
+- **Rétrogradation automatique** : une erreur critique ou une correction de Rayane → ce type revient au niveau 0, compteur à 0. Bouton d'arrêt général (`paused`) → tout au niveau 0.
+- **Jamais automatisé** : tout message avec un prix, un montant, une date de livraison ou une promesse hors modèle approuvé ; factures, soumissions, reçus, remboursements, liens de paiement ; plaintes, annulations, problèmes de qualité ; juridique (garantie, litige) ; toute question à laquelle le modèle ne répond pas (signaler à Rayane, ne jamais improviser).
+- **Erreur critique** = mauvais destinataire ou prénom, prix/date/montant faux, message à quelqu'un qui a demandé d'arrêter, doublon, mauvaise salutation (heure) ou mauvaise langue, pièce jointe manquante ou illisible.
+- **Garde-fous permanents** : envois du lundi au samedi, 9 h à 20 h (America/Toronto) ; maximum 15 envois automatiques par jour ; contrôle aléatoire de 1 message sur 10 même au niveau 2 ; **LCAP** (loi anti-pourriel) : consentement tacite 6 mois après la dernière demande du client, possibilité de refuser dans chaque message, et tout « arrête » stoppe définitivement (à faire confirmer par le comptable/avocat) ; changer le texte d'un modèle remet son compteur à 0 ; optimisation lente : une seule variation testée à la fois, au moins 20 envois avant de proposer de garder la meilleure.
+
 ## 9. Boucle d'amélioration
 
 Ce fichier doit être mis à jour à chaque nouvelle règle ou correction durable que Rayane donne — pas seulement retenue en mémoire de conversation, qui disparaît. Si une instruction est censée s'appliquer « toujours » ou « à partir de maintenant », elle appartient ici, pas seulement au chat.
