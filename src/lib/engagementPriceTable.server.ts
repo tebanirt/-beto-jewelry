@@ -3,8 +3,9 @@ import { getSupabaseAdmin } from "@/lib/supabase";
 import {
   ENGAGEMENT_CARATS,
   RING_STYLES,
+  METAL_GRADES,
   type EngagementPriceTable,
-  type GoldKarat,
+  type MetalGrade,
   type PricedStone,
   type RingStyle,
 } from "@/lib/engagementPricing";
@@ -29,7 +30,7 @@ type Tier = [maxCarat: number, profit: number];
 type PricingConfig = {
   centerSetting: number;
   smallStoneSetting: number;
-  casting: Record<GoldKarat, number>;
+  casting: Partial<Record<MetalGrade, number>>;
   perCarat: Record<PricedStone, number>;
   fixed: Record<string, number>;
   styles: Record<RingStyle, { smallStones: number; smallStonesMaterial: number }>;
@@ -39,7 +40,9 @@ type PricingConfig = {
 
 const isAmount = (v: unknown): v is number => typeof v === "number" && Number.isFinite(v) && v >= 0;
 const STONES: PricedStone[] = ["lab", "labColored"];
-const KARATS: GoldKarat[] = ["14k", "18k"];
+// 14K and 18K are required; a metal without a casting cost (e.g. platinum
+// before it was added) simply has no price shown.
+const REQUIRED_GRADES: MetalGrade[] = ["14k", "18k"];
 
 function parseConfig(raw: unknown): PricingConfig | null {
   if (!raw || typeof raw !== "object") return null;
@@ -55,7 +58,7 @@ function parseConfig(raw: unknown): PricingConfig | null {
     isAmount(c.smallStoneSetting) &&
     isAmount(c.roundUpTo) &&
     c.roundUpTo > 0 &&
-    !!casting && KARATS.every((k) => isAmount(casting[k])) &&
+    !!casting && REQUIRED_GRADES.every((k) => isAmount(casting[k])) &&
     !!perCarat && STONES.every((s) => isAmount(perCarat[s])) &&
     !!fixed && Object.values(fixed).every(isAmount) &&
     !!styles && RING_STYLES.every((s) => isAmount(styles[s]?.smallStones) && isAmount(styles[s]?.smallStonesMaterial)) &&
@@ -116,16 +119,18 @@ export async function getEngagementPriceTable(): Promise<EngagementPriceTable | 
   const fixed = Object.values(cfg.fixed).reduce((sum, v) => sum + v, 0);
   const table: EngagementPriceTable = {};
   for (const stone of STONES) {
-    const byCarat: Record<string, Record<RingStyle, Record<GoldKarat, number>>> = {};
+    const byCarat: Record<string, Record<RingStyle, Partial<Record<MetalGrade, number>>>> = {};
     for (const carat of ENGAGEMENT_CARATS) {
-      const byStyle = {} as Record<RingStyle, Record<GoldKarat, number>>;
+      const byStyle = {} as Record<RingStyle, Partial<Record<MetalGrade, number>>>;
       for (const style of RING_STYLES) {
         const s = cfg.styles[style];
-        const byKarat = {} as Record<GoldKarat, number>;
-        for (const karat of KARATS) {
+        const byKarat: Partial<Record<MetalGrade, number>> = {};
+        for (const karat of METAL_GRADES) {
+          const casting = cfg.casting[karat];
+          if (!isAmount(casting)) continue;
           const total =
             cfg.perCarat[stone] * carat +
-            cfg.casting[karat] +
+            casting +
             cfg.centerSetting +
             s.smallStones * cfg.smallStoneSetting +
             s.smallStonesMaterial +

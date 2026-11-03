@@ -35,28 +35,44 @@ import {
   lookupQuote,
   type EngagementCarat,
   type EngagementPriceTable,
-  type GoldKarat,
+  type MetalGrade,
   type PricedStone,
   type RingStyle,
 } from "@/lib/engagementPricing";
 import CalendlyNextStep from "@/components/shared/CalendlyNextStep";
 
 type Status = "idle" | "sending" | "success" | "error";
-type StoneId = "natural" | "lab" | "gemstone" | "birthstone" | "none";
+type StoneId = "natural" | "lab" | "gemstone" | "birthstone";
 type GemId = (typeof GEM_TYPES)[number];
 type MonthId = (typeof BIRTH_MONTHS)[number];
 type LabColor = "white" | "colored";
-type MetalColor = "yellow" | "white" | "rose";
-type KaratChoice = "10k" | GoldKarat | "unsure";
+type MetalColor = "yellow" | "white" | "rose" | "platinum";
+type KaratChoice = "10k" | "14k" | "18k" | "unsure";
+type LabShade = (typeof LAB_SHADES)[number];
 type StyleChoice = RingStyle | "unsure";
 type CaratChoice = EngagementCarat | "unsure";
 type ContactId = "email" | "phone" | "whatsapp" | "any";
 
-const STONES: StoneId[] = ["natural", "lab", "gemstone", "birthstone", "none"];
+const STONES: StoneId[] = ["natural", "lab", "gemstone", "birthstone"];
+// The only colored lab-grown diamond colors Rayane offers (3 nov. 2026).
+const LAB_SHADES = ["pink", "yellow", "blue", "champagne", "green"] as const;
+const LAB_SHADE_SWATCH: Record<LabShade, string> = {
+  pink: "linear-gradient(135deg, #f7d3dd, #e79ab0)",
+  yellow: "linear-gradient(135deg, #fbecb0, #f0c94a)",
+  blue: "linear-gradient(135deg, #cfe2f8, #7fa9e0)",
+  champagne: "linear-gradient(135deg, #f3e3c8, #d4b184)",
+  green: "linear-gradient(135deg, #d4efd9, #8cc79a)",
+};
 const GEM_TYPES = ["sapphire", "ruby", "emerald", "morganite", "aquamarine", "tanzanite", "alexandrite", "spinel", "tourmaline", "other"] as const;
 const BIRTH_MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"] as const;
 const LAB_COLORS: LabColor[] = ["white", "colored"];
-const METAL_COLORS: MetalColor[] = ["yellow", "white", "rose"];
+const METAL_COLORS: MetalColor[] = ["yellow", "white", "rose", "platinum"];
+const METAL_SWATCH: Record<MetalColor, string> = {
+  yellow: "linear-gradient(135deg, #f6e3a8, #c9a253)",
+  white: "linear-gradient(135deg, #fafaf8, #c8c8c4)",
+  rose: "linear-gradient(135deg, #f5d2c4, #c98c75)",
+  platinum: "linear-gradient(135deg, #eef0f3, #a9b0b8)",
+};
 const KARATS: KaratChoice[] = ["14k", "18k", "unsure"];
 // Grillz are also made in 10K (Rayane, 3 nov. 2026).
 const KARATS_GRILLZ: KaratChoice[] = ["10k", "14k", "18k", "unsure"];
@@ -77,7 +93,7 @@ type Draft = {
   projectIndex: number | null;
   stone: StoneId | null;
   labColor: LabColor | null;
-  labColorDetail: string;
+  labShade: LabShade | null;
   gemType: GemId | null;
   birthMonths: MonthId[];
   shape: string;
@@ -98,7 +114,7 @@ const EMPTY_DRAFT: Draft = {
   projectIndex: null,
   stone: null,
   labColor: null,
-  labColorDetail: "",
+  labShade: null,
   gemType: null,
   birthMonths: [],
   shape: "",
@@ -135,7 +151,7 @@ function readDraft(projectCount: number): { draft: Draft; step: number } | null 
       projectIndex,
       stone: oneOf(d.stone, STONES),
       labColor: oneOf(d.labColor, LAB_COLORS),
-      labColorDetail: str(d.labColorDetail),
+      labShade: oneOf(d.labShade, LAB_SHADES),
       gemType: oneOf(d.gemType, GEM_TYPES),
       birthMonths: Array.isArray(d.birthMonths)
         ? BIRTH_MONTHS.filter((m) => (d.birthMonths as unknown[]).includes(m))
@@ -188,11 +204,19 @@ function Chip({
   onClick,
   children,
   compact = false,
+  tile = false,
+  icon,
+  swatch,
 }: {
   selected: boolean;
   onClick: () => void;
   children: ReactNode;
   compact?: boolean;
+  /** Square tile with an icon above the label (stone shapes). */
+  tile?: boolean;
+  icon?: ReactNode;
+  /** CSS background for a small color dot before the label (metals, colors). */
+  swatch?: string;
 }) {
   return (
     <button
@@ -203,16 +227,30 @@ function Chip({
         "relative border transition-[border-color,background-color,box-shadow,color,transform] duration-200 ease-out",
         pressable,
         focusRing,
-        compact
-          ? "min-h-11 px-4 py-2 text-xs font-medium tracking-wide whitespace-nowrap"
-          : "min-h-14 w-full pl-4 pr-10 py-3.5 text-sm text-left",
+        tile
+          ? "min-h-[76px] w-full px-1.5 py-2.5 flex flex-col items-center justify-center gap-1.5 text-[11px] sm:text-xs font-medium text-center leading-tight"
+          : compact
+            ? "min-h-11 px-4 py-2 text-xs font-medium tracking-wide whitespace-nowrap inline-flex items-center gap-2"
+            : cn("min-h-14 w-full pl-4 pr-10 py-3.5 text-sm text-left", swatch && "flex items-center gap-3"),
         selected
           ? "border-beto-gold bg-beto-gold/10 text-beto-black shadow-[inset_0_0_0_1px_var(--color-beto-gold)]"
           : "border-beto-gray-subtle bg-beto-white text-beto-gray hover:border-beto-gold/60 hover:text-beto-black"
       )}
     >
-      {children}
-      {!compact && (
+      {icon && (
+        <span aria-hidden className={cn("transition-colors duration-200", selected ? "text-beto-black" : "text-beto-gray")}>
+          {icon}
+        </span>
+      )}
+      {swatch && (
+        <span
+          aria-hidden
+          className="h-4 w-4 shrink-0 rounded-full shadow-[inset_0_0_0_1px_rgba(0,0,0,0.12)]"
+          style={{ background: swatch }}
+        />
+      )}
+      {swatch || icon ? <span className="min-w-0">{children}</span> : children}
+      {!compact && !tile && (
         <span
           aria-hidden
           className={cn(
@@ -236,6 +274,43 @@ function FieldError({ id, message }: { id: string; message?: string }) {
     </p>
   );
 }
+
+function SectionTitle({ children }: { children: ReactNode }) {
+  return (
+    <h3 className="flex items-center gap-4 text-label text-beto-black mb-6 mt-2 after:h-px after:flex-1 after:bg-beto-gray-subtle after:content-['']">
+      {children}
+    </h3>
+  );
+}
+
+/** Outline of each stone shape, in the same order as cd.shapes. */
+const shapeSvg = (children: ReactNode) => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round">
+    {children}
+  </svg>
+);
+const SHAPE_ICONS: ReactNode[] = [
+  // Round
+  shapeSvg(<><circle cx="12" cy="12" r="8.5" /><polygon points="12,6.5 16,8.5 17.5,12 16,15.5 12,17.5 8,15.5 6.5,12 8,8.5" /></>),
+  // Oval
+  shapeSvg(<><ellipse cx="12" cy="12" rx="6" ry="9" /><ellipse cx="12" cy="12" rx="3.2" ry="5.2" /></>),
+  // Cushion
+  shapeSvg(<><rect x="3.8" y="3.8" width="16.4" height="16.4" rx="5" /><rect x="7.6" y="7.6" width="8.8" height="8.8" rx="2.5" /></>),
+  // Emerald
+  shapeSvg(<><polygon points="8.5,3 15.5,3 18.5,6 18.5,18 15.5,21 8.5,21 5.5,18 5.5,6" /><polygon points="9.8,6.5 14.2,6.5 15.5,7.8 15.5,16.2 14.2,17.5 9.8,17.5 8.5,16.2 8.5,7.8" /></>),
+  // Radiant
+  shapeSvg(<><polygon points="7.5,4 16.5,4 19,6.5 19,17.5 16.5,20 7.5,20 5,17.5 5,6.5" /><path d="M5 6.5 19 17.5M19 6.5 5 17.5" /></>),
+  // Pear
+  shapeSvg(<><path d="M12 2.8C15.8 7.4 18.5 11 18.5 14.6a6.5 6.5 0 0 1-13 0C5.5 11 8.2 7.4 12 2.8Z" /><path d="M12 8.2c2 2.6 3.2 4.6 3.2 6.6a3.2 3.2 0 0 1-6.4 0c0-2 1.2-4 3.2-6.6Z" /></>),
+  // Marquise
+  shapeSvg(<><path d="M12 2.2C16.8 6.6 16.8 17.4 12 21.8 7.2 17.4 7.2 6.6 12 2.2Z" /><path d="M12 6.8c2.2 2.4 2.2 8 0 10.4-2.2-2.4-2.2-8 0-10.4Z" /></>),
+  // Princess
+  shapeSvg(<><rect x="4.5" y="4.5" width="15" height="15" /><path d="M4.5 4.5 19.5 19.5M19.5 4.5 4.5 19.5" /></>),
+  // Asscher
+  shapeSvg(<><polygon points="8,4 16,4 20,8 20,16 16,20 8,20 4,16 4,8" /><polygon points="9.6,7.6 14.4,7.6 16.4,9.6 16.4,14.4 14.4,16.4 9.6,16.4 7.6,14.4 7.6,9.6" /></>),
+  // Heart
+  shapeSvg(<><path d="M12 20.2C5.6 15.6 3.2 12 3.2 8.9A4.4 4.4 0 0 1 12 7.1a4.4 4.4 0 0 1 8.8 1.8c0 3.1-2.4 6.7-8.8 11.3Z" /></>),
+];
 
 function ChoiceGroup({
   id,
@@ -395,9 +470,12 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
   // (a specific inspiration is priced by Rayane himself).
   const pricedStone: PricedStone | null =
     d.stone === "lab" && d.labColor ? (d.labColor === "colored" ? "labColored" : "lab") : null;
+  // Platinum has no karat; 10K is for grillz only and never priced.
+  const metalGrade: MetalGrade | "unsure" | null =
+    d.metalColor === "platinum" ? "platinum" : d.karat === "10k" ? null : d.karat;
   const quote =
-    isEngagement && images.length === 0 && d.karat !== "10k"
-      ? lookupQuote(priceTable, pricedStone, typeof d.carat === "number" ? d.carat : null, d.ringStyle, d.karat)
+    isEngagement && images.length === 0
+      ? lookupQuote(priceTable, pricedStone, typeof d.carat === "number" ? d.carat : null, d.ringStyle, metalGrade)
       : null;
   const showPrice = quote !== null;
   // Otherwise: lab-grown engagement ring → price within the hour (9 h–21 h);
@@ -419,7 +497,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
       stone: pricedStone ?? d.stone ?? "",
       carat: String(d.carat ?? ""),
       style: d.ringStyle ?? "",
-      karat: d.karat ?? "",
+      karat: metalGrade ?? "",
     });
     // Only when the estimate step is shown.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -439,7 +517,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
       maximumFractionDigits: 0,
     }).format(n);
   const priceText = quote
-    ? quote.prices.map((p) => `${money(p.price)} ${cd.estimateIn.replace("{k}", cd.metalKarats[p.karat])}`).join(" · ")
+    ? quote.prices.map((p) => `${money(p.price)} ${cd.estimateIn.replace("{k}", cd.gradeLabels[p.karat])}`).join(" · ")
     : "";
   // Live price while choosing (step 2 of 5), like a ring builder's running total.
   const showLivePrice = step === 1 && isEngagement && d.stone === "lab";
@@ -449,7 +527,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
       : quote
         ? quote.prices.length > 1 || quote.startingFrom
           ? `${cd.estimateFrom} ${money(Math.min(...quote.prices.map((p) => p.price)))}`
-          : `${money(quote.prices[0].price)} ${cd.estimateIn.replace("{k}", cd.metalKarats[quote.prices[0].karat])}`
+          : `${money(quote.prices[0].price)} ${cd.estimateIn.replace("{k}", cd.gradeLabels[quote.prices[0].karat])}`
         : cd.livePriceHint;
   const caratText = (c: EngagementCarat) => `${language === "fr" ? String(c).replace(".", ",") : c} ct`;
 
@@ -457,7 +535,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
   const projectLabel = d.projectIndex !== null ? cd.projectTypes[d.projectIndex] : "";
   const stoneLabel = d.stone
     ? d.stone === "lab" && d.labColor === "colored"
-      ? `${cd.labColorOptions.colored}${d.labColorDetail.trim() ? ` (${d.labColorDetail.trim()})` : ""}`
+      ? `${cd.labColorOptions.colored}${d.labShade ? ` (${cd.labShades[d.labShade].toLowerCase()})` : ""}`
       : d.stone === "lab" && d.labColor === "white"
         ? `${cd.stoneOptions.lab}, ${cd.labColorOptions.white.toLowerCase()}`
         : d.stone === "gemstone" && d.gemType
@@ -481,7 +559,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
   const caratLabel = d.carat === null ? "" : d.carat === "unsure" ? cd.caratUnsure : caratText(d.carat);
   const metalLabel = [
     d.metalColor ? cd.metalColors[d.metalColor] : "",
-    d.karat ? (d.karat === "unsure" ? cd.karatToConfirm : cd.metalKarats[d.karat]) : "",
+    d.metalColor !== "platinum" && d.karat ? (d.karat === "unsure" ? cd.karatToConfirm : cd.metalKarats[d.karat]) : "",
   ]
     .filter(Boolean)
     .join(d.karat === "unsure" ? ", " : " ");
@@ -504,13 +582,19 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
       ...prev,
       stone: next,
       labColor: next === "lab" ? prev.labColor : null,
-      labColorDetail: next === "lab" ? prev.labColorDetail : "",
+      labShade: next === "lab" ? prev.labShade : null,
       gemType: next === "gemstone" ? prev.gemType : null,
       birthMonths: next === "birthstone" ? prev.birthMonths : [],
       carat: isEngagement && (next === "natural" || next === "lab") ? prev.carat : null,
       // Budget ranges differ by stone for engagement rings.
       budget: prev.stone === next ? prev.budget : "",
     }));
+  }
+
+  function chooseMetal(next: MetalColor) {
+    trackChoice("metalColor", next);
+    // Platinum has no karat; a 10K choice is cleared when leaving grillz elsewhere.
+    setDraft((prev) => ({ ...prev, metalColor: next, karat: next === "platinum" ? null : prev.karat }));
   }
 
   async function addFiles(files: FileList | File[]) {
@@ -565,12 +649,13 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
     if (s === 1) {
       if (!d.stone) errors.push(["stone", cd.errorChoose]);
       else if (d.stone === "lab" && !d.labColor) errors.push(["labColor", cd.errorChoose]);
+      else if (d.stone === "lab" && d.labColor === "colored" && !d.labShade) errors.push(["labShade", cd.errorChoose]);
       else if (d.stone === "gemstone" && !d.gemType) errors.push(["gemType", cd.errorChoose]);
       else if (d.stone === "birthstone" && d.birthMonths.length === 0) errors.push(["birthMonths", cd.errorChoose]);
       if (askCarat && d.carat === null) errors.push(["carat", cd.errorChoose]);
       if (isEngagement && d.stone && !d.ringStyle) errors.push(["ringStyle", cd.errorChoose]);
       if (!d.metalColor) errors.push(["metalColor", cd.errorChoose]);
-      if (!d.karat) errors.push(["karat", cd.errorChoose]);
+      if (!d.karat && d.metalColor !== "platinum") errors.push(["karat", cd.errorChoose]);
       if (!d.budget) errors.push(["budget", cd.errorChoose]);
     }
     if (s === CONTACT_STEP) {
@@ -729,6 +814,8 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
     const qs = params.toString();
     return qs ? `${DEPOSIT_PAYMENT_URL}${DEPOSIT_PAYMENT_URL.includes("?") ? "&" : "?"}${qs}` : DEPOSIT_PAYMENT_URL;
   })();
+  // A real Google review (from the site's testimonials), shown next to the estimate.
+  const review = tr.testimonials.items[1] ?? tr.testimonials.items[0];
   const [helpBefore, helpAfter] = cd.helpLine.split("{phone}");
   const helpLine = (
     <p className="text-xs text-beto-gray/80 mt-10 leading-relaxed">
@@ -845,7 +932,11 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
             {step === 0 && (
               <>
                 <h2 ref={headingRef} tabIndex={-1} className={stepHeading}>{cd.step0Title}</h2>
-                <p className="text-sm text-beto-gray mb-10">{cd.step0Desc}</p>
+                <p className="text-sm text-beto-gray mb-3">{cd.step0Desc}</p>
+                <p className="inline-flex items-center gap-2 text-xs text-beto-gray mb-10">
+                  <Clock size={13} className="text-beto-gold-dark" aria-hidden />
+                  {cd.timeHint}
+                </p>
 
                 <fieldset
                   id="field-project"
@@ -965,23 +1056,48 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
               </>
             )}
 
-            {/* STEP 1: Design details */}
+            {/* STEP 1: Design details, in three short sections */}
             {step === 1 && (
               <>
                 <h2 ref={headingRef} tabIndex={-1} className={stepHeading}>{cd.step1Title}</h2>
                 <p className="text-sm text-beto-gray mb-10">{cd.step1Desc}</p>
 
+                <SectionTitle>{cd.sectionStone}</SectionTitle>
+
                 <ChoiceGroup id="stone" legend={cd.stoneLabel} error={errorFor("stone")}>
                   <div className="grid grid-cols-2 gap-3">
                     {STONES.map((id) => (
-                      <div key={id} className={id === "none" ? "col-span-2" : undefined}>
-                        <Chip selected={d.stone === id} onClick={() => chooseStone(id)}>
-                          {cd.stoneOptions[id]}
-                        </Chip>
-                      </div>
+                      <Chip key={id} selected={d.stone === id} onClick={() => chooseStone(id)}>
+                        {cd.stoneOptions[id]}
+                      </Chip>
                     ))}
                   </div>
                 </ChoiceGroup>
+
+                <Reveal show={d.stone === "lab"} id="lab-color">
+                  <div className="-mt-4 mb-10 pl-4 border-l-2 border-beto-gold/50">
+                    <ChoiceGroup id="labColor" legend={cd.labColorLabel} error={errorFor("labColor")}>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {LAB_COLORS.map((id) => (
+                          <Chip key={id} selected={d.labColor === id} onClick={() => pick("labColor", id)}>
+                            {cd.labColorOptions[id]}
+                          </Chip>
+                        ))}
+                      </div>
+                    </ChoiceGroup>
+                    <Reveal show={d.labColor === "colored"} id="lab-shade">
+                      <ChoiceGroup id="labShade" legend={cd.labShadeLabel} error={errorFor("labShade")}>
+                        <div className="flex flex-wrap gap-2.5">
+                          {LAB_SHADES.map((id) => (
+                            <Chip key={id} compact swatch={LAB_SHADE_SWATCH[id]} selected={d.labShade === id} onClick={() => pick("labShade", id)}>
+                              {cd.labShades[id]}
+                            </Chip>
+                          ))}
+                        </div>
+                      </ChoiceGroup>
+                    </Reveal>
+                  </div>
+                </Reveal>
 
                 <Reveal show={d.stone === "gemstone"} id="gem-type">
                   <div className="-mt-4 mb-10 pl-4 border-l-2 border-beto-gold/50">
@@ -1013,40 +1129,11 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                   </div>
                 </Reveal>
 
-                <Reveal show={d.stone === "lab"} id="lab-color">
-                  <div className="-mt-4 mb-10 pl-4 border-l-2 border-beto-gold/50">
-                    <ChoiceGroup id="labColor" legend={cd.labColorLabel} error={errorFor("labColor")}>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        {LAB_COLORS.map((id) => (
-                          <Chip key={id} selected={d.labColor === id} onClick={() => pick("labColor", id)}>
-                            {cd.labColorOptions[id]}
-                          </Chip>
-                        ))}
-                      </div>
-                      <Reveal show={d.labColor === "colored"} id="lab-color-detail">
-                        <div className="mt-4">
-                          <label htmlFor="lab-color-detail" className="text-xs font-medium text-beto-black tracking-wide mb-2 block">
-                            {cd.labColorDetailLabel} <span className="text-beto-gray/80 font-normal">{cd.notesOpt}</span>
-                          </label>
-                          <input
-                            id="lab-color-detail"
-                            type="text"
-                            value={d.labColorDetail}
-                            onChange={(e) => set("labColorDetail", e.target.value)}
-                            placeholder={cd.labColorDetailPlaceholder}
-                            className={cn(inputClass, inputIdle)}
-                          />
-                        </div>
-                      </Reveal>
-                    </ChoiceGroup>
-                  </div>
-                </Reveal>
-
-                <Reveal show={!!d.stone && (isEngagement || d.stone !== "none")} id="shape">
+                <Reveal show={!!d.stone} id="shape">
                   <ChoiceGroup id="shape" legend={cd.shapeLabel} optional={cd.shapeOpt}>
-                    <div className="flex flex-wrap gap-2.5">
-                      {cd.shapes.map((s) => (
-                        <Chip key={s} compact selected={d.shape === s} onClick={() => pick("shape", d.shape === s ? "" : s)}>
+                    <div className="grid grid-cols-4 sm:grid-cols-5 gap-2.5">
+                      {cd.shapes.map((s, i) => (
+                        <Chip key={s} tile icon={SHAPE_ICONS[i]} selected={d.shape === s} onClick={() => pick("shape", d.shape === s ? "" : s)}>
                           {s}
                         </Chip>
                       ))}
@@ -1069,6 +1156,8 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                   </ChoiceGroup>
                 </Reveal>
 
+                <SectionTitle>{cd.sectionSetting}</SectionTitle>
+
                 <Reveal show={isEngagement && !!d.stone} id="ring-style">
                   <ChoiceGroup id="ringStyle" legend={cd.ringStyleLabel} error={errorFor("ringStyle")}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -1083,25 +1172,29 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                 </Reveal>
 
                 <ChoiceGroup id="metalColor" legend={cd.metalColorLabel} error={errorFor("metalColor")}>
-                  <div className="grid grid-cols-1 min-[420px]:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     {METAL_COLORS.map((id) => (
-                      <Chip key={id} selected={d.metalColor === id} onClick={() => pick("metalColor", id)}>
+                      <Chip key={id} swatch={METAL_SWATCH[id]} selected={d.metalColor === id} onClick={() => chooseMetal(id)}>
                         {cd.metalColors[id]}
                       </Chip>
                     ))}
                   </div>
                 </ChoiceGroup>
 
-                <ChoiceGroup id="karat" legend={cd.metalKaratLabel} error={errorFor("karat")}>
-                  <div className="flex flex-wrap gap-2.5">
-                    {(d.projectIndex === GRILLZ_INDEX ? KARATS_GRILLZ : KARATS).map((id) => (
-                      <Chip key={id} compact selected={d.karat === id} onClick={() => pick("karat", id)}>
-                        {cd.metalKarats[id]}
-                      </Chip>
-                    ))}
-                  </div>
-                  <p className="text-xs text-beto-gray/80 mt-3 leading-relaxed">{cd.metalKaratHint}</p>
-                </ChoiceGroup>
+                <Reveal show={d.metalColor !== "platinum"} id="karat">
+                  <ChoiceGroup id="karat" legend={cd.metalKaratLabel} error={errorFor("karat")}>
+                    <div className="flex flex-wrap gap-2.5">
+                      {(d.projectIndex === GRILLZ_INDEX ? KARATS_GRILLZ : KARATS).map((id) => (
+                        <Chip key={id} compact selected={d.karat === id} onClick={() => pick("karat", id)}>
+                          {cd.metalKarats[id]}
+                        </Chip>
+                      ))}
+                    </div>
+                    <p className="text-xs text-beto-gray/80 mt-3 leading-relaxed">{cd.metalKaratHint}</p>
+                  </ChoiceGroup>
+                </Reveal>
+
+                <SectionTitle>{cd.sectionBudget}</SectionTitle>
 
                 <ChoiceGroup id="budget" legend={cd.budgetLabel} error={errorFor("budget")}>
                   <div className="flex flex-wrap gap-2.5">
@@ -1169,7 +1262,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                           )}
                           {money(p.price)}
                           <span className="text-white/70 text-base font-sans ml-2">
-                            {cd.estimateIn.replace("{k}", cd.metalKarats[p.karat])}
+                            {cd.estimateIn.replace("{k}", cd.gradeLabels[p.karat])}
                           </span>
                         </motion.div>
                       ))}
@@ -1222,7 +1315,19 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                     ))}
                   </ol>
                 </div>
-                <div className="mt-6">{trustRow}</div>
+                {review && (
+                  <figure className="mt-8 border-l-2 border-beto-gold pl-5">
+                    <p className="text-[11px] uppercase tracking-[0.14em] text-beto-gray mb-2">
+                      <span className="text-beto-gold-dark mr-2" aria-label="5 sur 5">★★★★★</span>
+                      {cd.reviewEyebrow}
+                    </p>
+                    <blockquote className="font-display text-xl text-beto-black leading-snug text-pretty">
+                      « {review.quote} »
+                    </blockquote>
+                    <figcaption className="text-xs text-beto-gray mt-2">{review.author}</figcaption>
+                  </figure>
+                )}
+                <div className="mt-8">{trustRow}</div>
                 {helpLine}
               </>
             )}

@@ -16,15 +16,19 @@ export const RING_STYLES = ["solitaire", "haloHalf", "haloThreeQuarter"] as cons
 export type RingStyle = (typeof RING_STYLES)[number];
 
 export type PricedStone = "lab" | "labColored";
-export type GoldKarat = "14k" | "18k";
+/** Metal used for the price: gold karat, or platinum. */
+export type MetalGrade = "14k" | "18k" | "platinum";
+export const METAL_GRADES: MetalGrade[] = ["14k", "18k", "platinum"];
+/** @deprecated kept for older imports; use MetalGrade. */
+export type GoldKarat = MetalGrade;
 
-/** stone → carat (as a string key) → style → karat → final price. */
+/** stone → carat (as a string key) → style → metal → final price. */
 export type EngagementPriceTable = Partial<
-  Record<PricedStone, Record<string, Record<RingStyle, Record<GoldKarat, number>>>>
+  Record<PricedStone, Record<string, Record<RingStyle, Partial<Record<MetalGrade, number>>>>>
 >;
 
 export type Quote = {
-  prices: { karat: GoldKarat; price: number }[];
+  prices: { karat: MetalGrade; price: number }[];
   /** True when no style was chosen: the solitaire price is shown as a starting price. */
   startingFrom: boolean;
 };
@@ -34,13 +38,14 @@ export function lookupQuote(
   stone: PricedStone | null,
   carat: EngagementCarat | null,
   style: RingStyle | "unsure" | null,
-  karat: GoldKarat | "unsure" | null
+  /** "unsure" = gold karat not chosen yet: both 14K and 18K are shown. */
+  karat: MetalGrade | "unsure" | null
 ): Quote | null {
   if (!table || !stone || carat === null || !style || !karat) return null;
   const startingFrom = style === "unsure";
   const row = table[stone]?.[String(carat)]?.[startingFrom ? "solitaire" : style];
   if (!row) return null;
-  const karats: GoldKarat[] = karat === "unsure" ? ["14k", "18k"] : [karat];
+  const karats: MetalGrade[] = karat === "unsure" ? ["14k", "18k"] : [karat];
   const prices = karats.flatMap((k) => {
     const price = row[k];
     return typeof price === "number" && price > 0 ? [{ karat: k, price }] : [];
