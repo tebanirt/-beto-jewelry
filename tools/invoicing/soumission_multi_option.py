@@ -65,7 +65,7 @@ _LABELS = {
         "thanks": "Merci pour votre confiance.",
         "legal_default": [
             "Prix avant taxes; les taxes applicables seront ajoutées, le cas échéant. Soumission valide 30 jours.",
-            "Un dépôt de 200 $ (entièrement crédité sur le prix final) est requis pour lancer le design 3D.",
+            "Un dépôt de 250 $ (entièrement crédité sur le prix final) est requis pour lancer le design 3D.",
         ],
     },
     "en": {
@@ -81,7 +81,7 @@ _LABELS = {
         "thanks": "Thank you for your trust.",
         "legal_default": [
             "Prices before tax; applicable taxes will be added where relevant. Quote valid for 30 days.",
-            "A $200 deposit (fully credited toward the final price) is required to begin the 3D design.",
+            "A $250 deposit (fully credited toward the final price) is required to begin the 3D design.",
         ],
     },
 }

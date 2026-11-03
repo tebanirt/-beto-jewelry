@@ -63,7 +63,7 @@ const serviceJsonLd = {
       "@type": "PriceSpecification",
       minPrice: 2000,
       priceCurrency: "CAD",
-      description: "Custom engagement rings from about $2,000 CAD including the diamond. $200 CAD design deposit, credited in full.",
+      description: "Custom engagement rings from about $2,000 CAD including the diamond. $250 CAD design deposit, credited in full.",
     },
   },
 };

@@ -17,7 +17,7 @@ function extractContact(fields: Record<string, string>) {
 
 const FORM_LABELS: Record<string, string> = {
   contact: "Nouveau message — Formulaire de contact",
-  "custom-design": "Nouvelle demande — Design sur mesure ($200 dépôt)",
+  "custom-design": "Nouvelle demande — Design sur mesure ($250 dépôt)",
   consultation: "Nouvelle demande — Consultation",
   quote: "Nouvelle demande — Devis",
 };

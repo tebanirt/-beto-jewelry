@@ -48,7 +48,7 @@ export const t = {
         { label: "Grillz", href: "/grillz", desc: "Custom gold & diamond dental jewelry" },
       ],
       design_items: [
-        { label: "Start Your Custom Design", href: "/design-your-jewelry/custom-design", desc: "Begin with a $200 design deposit" },
+        { label: "Start Your Custom Design", href: "/design-your-jewelry/custom-design", desc: "Begin with a $250 design deposit" },
         { label: "Book a Consultation", href: "/design-your-jewelry/consultation", desc: "Free, virtual or in-person" },
         { label: "Request a Quote", href: "/design-your-jewelry/quote", desc: "No commitment required" },
       ],
@@ -129,7 +129,7 @@ export const t = {
       headline: "Three ways to start",
       headlineItalic: "creating yours.",
       paths: [
-        { label: "Most Popular", title: "Start Your Custom Design", body: "Begin with our guided questionnaire. Share your vision, upload inspiration, and secure your project with a $200 design deposit — fully credited toward your piece.", href: "/design-your-jewelry/custom-design", cta: "Begin Now" },
+        { label: "Most Popular", title: "Start Your Custom Design", body: "Begin with our guided questionnaire. Share your vision, upload inspiration, and secure your project with a $250 design deposit — fully credited toward your piece.", href: "/design-your-jewelry/custom-design", cta: "Begin Now" },
         { label: "Need Guidance", title: "Book a Consultation", body: "Speak directly with our designer. A free session — virtual or in-person in Montreal — to explore possibilities, discuss budget, and align on a direction.", href: "/design-your-jewelry/consultation", cta: "Schedule Now" },
         { label: "Just Exploring", title: "Request a Quote", body: "Not ready to commit? Share your idea and we'll prepare a personalized estimate. No payment required, no pressure.", href: "/design-your-jewelry/quote", cta: "Get a Quote" },
       ],
@@ -413,7 +413,7 @@ export const t = {
         processHeading: "Four steps, fully transparent",
         process: [
           { n: "01", t: "Consultation", b: "Free, virtual or in person at one of our two private offices (downtown or Saint-Laurent). We talk vision, budget and timeline — no obligation." },
-          { n: "02", t: "Design & quote", b: "Rayane sketches directions and sends a clear quote. A $200 CAD deposit — credited in full to your piece — starts the CAD." },
+          { n: "02", t: "Design & quote", b: "Rayane sketches directions and sends a clear quote. A $250 CAD deposit — credited in full to your piece — starts the CAD." },
           { n: "03", t: "3D CAD render", b: "Within ~48 hours you see your ring from every angle. Unlimited revisions, no fees, until it's exactly right." },
           { n: "04", t: "Handmade & delivered", b: "Cast, set and hand-finished in Montréal. Delivered with certified stones, a certificate of authenticity and a 12-month warranty." },
         ],
@@ -428,7 +428,7 @@ export const t = {
         faq: [
           { q: "Do you work with clients outside Montréal?", a: "Yes. About half of our projects run entirely by video call — consultation, design review and CAD approval — with the finished ring shipped insured anywhere in Canada. Montréal-area clients are welcome at our private offices by appointment." },
           { q: "Where do in-person consultations take place?", a: "In one of our two private offices, by appointment: downtown Montréal (1188, avenue Union) or Saint-Laurent (9900, boul. Cavendish, suite 200). Pick the one closest to you — downtown suits Montréal and the South Shore, Saint-Laurent suits Laval, the North Shore and the West Island. Pieces are made in our Montréal atelier." },
-          { q: "How do we start?", a: "Book a free consultation or start a custom design request online. There's no charge until you and Rayane have agreed on a direction and you place the $200 CAD design deposit, which is credited to your final piece." },
+          { q: "How do we start?", a: "Book a free consultation or start a custom design request online. There's no charge until you and Rayane have agreed on a direction and you place the $250 CAD design deposit, which is credited to your final piece." },
         ],
         seeFullProcess: "See the full custom process",
         relatedLabel: "Helpful reading",
@@ -455,7 +455,7 @@ export const t = {
         includedHeadline: "Transparent from the first conversation.",
         included: [
           { k: "Starting price", v: "Custom engagement rings from about $2,000 CAD, diamond included." },
-          { k: "Design deposit", v: "$200 CAD to begin — credited in full toward your finished piece." },
+          { k: "Design deposit", v: "$250 CAD to begin — credited in full toward your finished piece." },
           { k: "3D CAD rendering", v: "Ready within about 48 hours of design approval." },
           { k: "Revisions", v: "Unlimited, at no extra cost, until the CAD is exactly right." },
           { k: "Engagement ring delivery", v: "About 1½–2 weeks after you approve the CAD." },
@@ -545,7 +545,7 @@ export const t = {
               { q: "How does the custom design process work?", a: "It begins with a consultation (virtual or in-person), followed by a concept discussion, CAD rendering within ~48 hours of design approval, your review and sign-off, then production. You're involved at every step." },
               { q: "How long does it take to create a custom ring?", a: "An engagement ring is typically ready about 1½–2 weeks after you approve the CAD; more complex pieces take 2–4 weeks. Your 3D CAD is ready within about 48 hours of design approval. We give you a firm timeline at the start of your project." },
               { q: "Can I see my ring before it's made?", a: "Yes. We provide a detailed 3D CAD rendering from multiple angles before any metal is cast. You can request adjustments at no extra cost until you're completely satisfied." },
-              { q: "What is the $200 design deposit?", a: "The $200 CAD design deposit secures your project and initiates the design process. It is non-refundable, but 100% credited toward the final price of your piece if you proceed." },
+              { q: "What is the $250 design deposit?", a: "The $250 CAD design deposit secures your project and initiates the design process. It is non-refundable, but 100% credited toward the final price of your piece if you proceed." },
             ],
           },
           {
@@ -577,7 +577,7 @@ export const t = {
       customDesign: {
         eyebrow: "Custom Design Experience",
         title: "Start Your Custom Design",
-        subtitle: "Share your vision. We'll bring it to life. A $200 CAD design deposit — credited in full toward your piece — secures your project.",
+        subtitle: "Share your vision. We'll bring it to life. A $250 CAD design deposit — credited in full toward your piece — secures your project.",
         steps: ["Your Project", "Design Details", "Your Information", "Summary"],
         projectTypes: ["Engagement Ring", "Wedding Band", "Necklace", "Pendant", "Earrings", "Bracelet", "Grillz", "Other"],
         stoneTypes: ["Natural Diamond", "Lab-Grown Diamond", "Colored Gemstone", "No Preference"],
@@ -628,10 +628,10 @@ export const t = {
           notProvided: "Not provided",
         },
         depositLabel: "Design Deposit",
-        depositAmount: "$200 CAD",
+        depositAmount: "$250 CAD",
         depositNonRefundable: "Non-refundable",
         depositCredited: "Credited toward your final piece",
-        depositDesc: "A $200 deposit secures your project once we confirm your design direction together — you won't be charged yet. Submit your request and our designer will reach out within 1–2 business days to begin.",
+        depositDesc: "A $250 deposit secures your project once we confirm your design direction together — you won't be charged yet. Submit your request and our designer will reach out within 1–2 business days to begin.",
         secureButton: "Submit My Project Request",
         secureNote: "No payment is collected now. We'll follow up to arrange your deposit once your project is confirmed.",
         sending: "Sending...",
@@ -688,7 +688,7 @@ export const t = {
           },
           {
             heading: "Deposits & pricing",
-            body: "A $200 CAD design deposit is required to begin your project. This deposit is non-refundable but is fully credited toward the final price of your piece. All prices are listed in Canadian dollars (CAD) and are subject to change based on final material and stone selections, confirmed in writing before production.",
+            body: "A $250 CAD design deposit is required to begin your project. This deposit is non-refundable but is fully credited toward the final price of your piece. All prices are listed in Canadian dollars (CAD) and are subject to change based on final material and stone selections, confirmed in writing before production.",
           },
           {
             heading: "Production & delivery",
@@ -794,7 +794,7 @@ export const t = {
         { label: "Grillz", href: "/grillz", desc: "Bijoux dentaires en or & diamants" },
       ],
       design_items: [
-        { label: "Commencer mon design", href: "/design-your-jewelry/custom-design", desc: "Débuter avec un dépôt de 200$" },
+        { label: "Commencer mon design", href: "/design-your-jewelry/custom-design", desc: "Débuter avec un dépôt de 250$" },
         { label: "Réserver une consultation", href: "/design-your-jewelry/consultation", desc: "Gratuite, virtuel ou en personne" },
         { label: "Demander un devis", href: "/design-your-jewelry/quote", desc: "Sans engagement" },
       ],
@@ -875,7 +875,7 @@ export const t = {
       headline: "Trois façons de",
       headlineItalic: "créer votre pièce.",
       paths: [
-        { label: "Le plus populaire", title: "Commencer mon design", body: "Commencez par notre questionnaire guidé. Partagez votre vision, téléchargez vos inspirations, et sécurisez votre projet avec un dépôt de design de 200$ — entièrement crédité sur votre pièce.", href: "/design-your-jewelry/custom-design", cta: "Commencer" },
+        { label: "Le plus populaire", title: "Commencer mon design", body: "Commencez par notre questionnaire guidé. Partagez votre vision, téléchargez vos inspirations, et sécurisez votre projet avec un dépôt de design de 250$ — entièrement crédité sur votre pièce.", href: "/design-your-jewelry/custom-design", cta: "Commencer" },
         { label: "Besoin de conseils", title: "Réserver une consultation", body: "Parlez directement avec notre designer. Une session gratuite — virtuelle ou en personne à Montréal — pour explorer les possibilités, discuter du budget et aligner la direction.", href: "/design-your-jewelry/consultation", cta: "Réserver" },
         { label: "En exploration", title: "Demander un devis", body: "Pas encore prêt à vous engager ? Partagez votre idée et nous préparerons une estimation personnalisée. Aucun paiement requis, aucune pression.", href: "/design-your-jewelry/quote", cta: "Obtenir un devis" },
       ],
@@ -1159,7 +1159,7 @@ export const t = {
         processHeading: "Quatre étapes, en toute transparence",
         process: [
           { n: "01", t: "Consultation", b: "Gratuite, virtuelle ou en personne dans l'un de nos deux bureaux privés (centre-ville ou Saint-Laurent). On parle vision, budget et délai — sans obligation." },
-          { n: "02", t: "Design et devis", b: "Rayane esquisse des directions et envoie un devis clair. Un dépôt de 200 $ CAD — crédité en entier à votre pièce — lance le CAD." },
+          { n: "02", t: "Design et devis", b: "Rayane esquisse des directions et envoie un devis clair. Un dépôt de 250 $ CAD — crédité en entier à votre pièce — lance le CAD." },
           { n: "03", t: "Rendu CAD 3D", b: "En environ 48 heures, vous voyez votre bague sous tous les angles. Révisions illimitées, sans frais, jusqu'à ce que ce soit exactement juste." },
           { n: "04", t: "Fait main et livré", b: "Coulé, serti et fini à la main à Montréal. Livré avec des pierres certifiées, un certificat d'authenticité et une garantie de 12 mois." },
         ],
@@ -1174,7 +1174,7 @@ export const t = {
         faq: [
           { q: "Travaillez-vous avec des clients hors de Montréal ?", a: "Oui. Environ la moitié de nos projets se déroulent entièrement par visioconférence — consultation, révision du design et approbation du CAD — et la bague finie est expédiée assurée partout au Canada. Les clients de la grande région de Montréal sont les bienvenus dans nos bureaux privés, sur rendez-vous." },
           { q: "Où se passent les consultations en personne ?", a: "Dans l'un de nos deux bureaux privés, sur rendez-vous : au centre-ville de Montréal (1188, avenue Union) ou à Saint-Laurent (9900, boul. Cavendish, bureau 200). Choisissez le plus près de chez vous : le centre-ville convient bien à Montréal et à la Rive-Sud, Saint-Laurent à Laval, à la Rive-Nord et à l'Ouest-de-l'Île. Les pièces sont fabriquées dans notre atelier de Montréal." },
-          { q: "Comment commencer ?", a: "Réservez une consultation gratuite ou lancez une demande de design sur mesure en ligne. Rien n'est facturé tant que vous et Rayane ne vous êtes pas entendus sur une direction et que vous n'avez pas versé le dépôt de design de 200 $ CAD, crédité à votre pièce finale." },
+          { q: "Comment commencer ?", a: "Réservez une consultation gratuite ou lancez une demande de design sur mesure en ligne. Rien n'est facturé tant que vous et Rayane ne vous êtes pas entendus sur une direction et que vous n'avez pas versé le dépôt de design de 250 $ CAD, crédité à votre pièce finale." },
         ],
         seeFullProcess: "Voir le processus sur mesure complet",
         relatedLabel: "Lectures utiles",
@@ -1201,7 +1201,7 @@ export const t = {
         includedHeadline: "Transparent dès la première conversation.",
         included: [
           { k: "Prix de départ", v: "Bagues de fiançailles sur mesure à partir d'environ 2 000 $ CAD, diamant inclus." },
-          { k: "Dépôt de design", v: "200 $ CAD pour commencer — entièrement crédité vers votre pièce finale." },
+          { k: "Dépôt de design", v: "250 $ CAD pour commencer — entièrement crédité vers votre pièce finale." },
           { k: "Rendu CAD 3D", v: "Prêt dans environ 48 heures après l'approbation du design." },
           { k: "Révisions", v: "Illimitées, sans frais supplémentaires, jusqu'à ce que le CAD soit exactement juste." },
           { k: "Livraison bague de fiançailles", v: "Environ 1½ à 2 semaines après l'approbation du CAD." },
@@ -1291,7 +1291,7 @@ export const t = {
               { q: "Comment fonctionne le processus de design sur mesure ?", a: "Tout commence par une consultation (virtuelle ou en personne), suivie d'une discussion de concept, d'un rendu CAD en ~48 heures après approbation du design, de votre révision et approbation, puis de la production. Vous êtes impliqué à chaque étape." },
               { q: "Combien de temps faut-il pour créer une bague sur mesure ?", a: "Une bague de fiançailles est généralement prête environ 1½ à 2 semaines après l'approbation du CAD ; les pièces plus complexes prennent de 2 à 4 semaines. Votre rendu CAD 3D est prêt dans environ 48 heures après l'approbation du design. Nous vous donnons un calendrier ferme au début de votre projet." },
               { q: "Puis-je voir ma bague avant qu'elle soit fabriquée ?", a: "Oui. Nous fournissons un rendu CAD 3D détaillé depuis plusieurs angles avant qu'un seul métal soit coulé. Vous pouvez demander des ajustements sans frais supplémentaires jusqu'à ce que vous soyez entièrement satisfait." },
-              { q: "Qu'est-ce que le dépôt de design de 200$ ?", a: "Le dépôt de design de 200 CAD sécurise votre projet et initie le processus de design. Il est non remboursable, mais crédité à 100% vers le prix final de votre pièce si vous procédez." },
+              { q: "Qu'est-ce que le dépôt de design de 250$ ?", a: "Le dépôt de design de 250 CAD sécurise votre projet et initie le processus de design. Il est non remboursable, mais crédité à 100% vers le prix final de votre pièce si vous procédez." },
             ],
           },
           {
@@ -1323,7 +1323,7 @@ export const t = {
       customDesign: {
         eyebrow: "Expérience design sur mesure",
         title: "Commencer votre design sur mesure",
-        subtitle: "Partagez votre vision. Nous la concrétiserons. Un dépôt de design de 200 CAD — crédité en totalité vers votre pièce — sécurise votre projet.",
+        subtitle: "Partagez votre vision. Nous la concrétiserons. Un dépôt de design de 250 CAD — crédité en totalité vers votre pièce — sécurise votre projet.",
         steps: ["Votre projet", "Détails du design", "Vos informations", "Résumé"],
         projectTypes: ["Bague de fiançailles", "Alliance", "Collier", "Pendentif", "Boucles d'oreilles", "Bracelet", "Grillz", "Autre"],
         stoneTypes: ["Diamant naturel", "Diamant de laboratoire", "Pierre précieuse colorée", "Sans préférence"],
@@ -1374,10 +1374,10 @@ export const t = {
           notProvided: "Non fourni",
         },
         depositLabel: "Dépôt de design",
-        depositAmount: "200$ CAD",
+        depositAmount: "250$ CAD",
         depositNonRefundable: "Non remboursable",
         depositCredited: "Crédité vers votre pièce finale",
-        depositDesc: "Un dépôt de 200$ sécurise votre projet une fois qu'on aura confirmé ensemble l'orientation du design — vous ne serez pas facturé maintenant. Soumettez votre demande et notre designer vous contactera dans 1 à 2 jours ouvrables pour commencer.",
+        depositDesc: "Un dépôt de 250$ sécurise votre projet une fois qu'on aura confirmé ensemble l'orientation du design — vous ne serez pas facturé maintenant. Soumettez votre demande et notre designer vous contactera dans 1 à 2 jours ouvrables pour commencer.",
         secureButton: "Soumettre ma demande de projet",
         secureNote: "Aucun paiement n'est prélevé maintenant. Nous vous recontacterons pour organiser votre dépôt une fois votre projet confirmé.",
         sending: "Envoi en cours...",
@@ -1434,7 +1434,7 @@ export const t = {
           },
           {
             heading: "Dépôts et tarification",
-            body: "Un dépôt de design de 200$ CAD est requis pour commencer votre projet. Ce dépôt est non remboursable mais entièrement crédité vers le prix final de votre pièce. Tous les prix sont affichés en dollars canadiens (CAD) et peuvent varier selon les matériaux et pierres finaux sélectionnés, confirmés par écrit avant la production.",
+            body: "Un dépôt de design de 250$ CAD est requis pour commencer votre projet. Ce dépôt est non remboursable mais entièrement crédité vers le prix final de votre pièce. Tous les prix sont affichés en dollars canadiens (CAD) et peuvent varier selon les matériaux et pierres finaux sélectionnés, confirmés par écrit avant la production.",
           },
           {
             heading: "Production et livraison",
