@@ -5,6 +5,8 @@
  * Events go to /api/track, which stores them in Supabase (funnel_events).
  */
 
+import { getAttribution } from "@/lib/attribution";
+
 export type FunnelEvent =
   | "view"
   | "step_view"
@@ -47,17 +49,10 @@ function context(): Props {
   if (baseContext) return baseContext;
   const ctx: Props = {};
   try {
-    const params = new URLSearchParams(window.location.search);
-    const utmSource = params.get("utm_source");
-    const utmCampaign = params.get("utm_campaign");
-    if (utmSource) ctx.src = utmSource.slice(0, 40);
-    else if (params.has("fbclid")) ctx.src = "facebook";
-    else if (params.has("gclid")) ctx.src = "google-ads";
-    else if (document.referrer) {
-      const host = new URL(document.referrer).hostname.replace(/^www\./, "");
-      ctx.src = host === window.location.hostname.replace(/^www\./, "") ? "site" : host.slice(0, 40);
-    } else ctx.src = "direct";
-    if (utmCampaign) ctx.campaign = utmCampaign.slice(0, 60);
+    // The visit's first page (an ad click on the home page still counts once the visitor opens the form).
+    const a = getAttribution();
+    ctx.src = (a?.source ?? "direct").slice(0, 40);
+    if (a?.campaign) ctx.campaign = a.campaign.slice(0, 60);
     ctx.device = window.matchMedia("(max-width: 767px)").matches ? "mobile" : "desktop";
     ctx.lang = (navigator.language || "").slice(0, 2).toLowerCase();
   } catch {

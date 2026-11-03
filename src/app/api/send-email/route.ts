@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { recordSubmission, upsertClient } from "@/lib/supabase";
 import { escapeHtml } from "@/lib/escapeHtml";
+import { formatAttribution, parseAttribution } from "@/lib/attribution";
 import {
   ALLOWED_ATTACHMENT_TYPES,
   MAX_ATTACHMENT_BYTES,
@@ -80,16 +81,22 @@ export async function POST(request: Request) {
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     const body = await request.json();
-    const { formType, fields, priority } = body as {
+    const { formType, fields: rawFields, priority } = body as {
       formType: string;
       fields: Record<string, string>;
       priority?: unknown;
     };
     const { attachments, dropped } = parseAttachments((body as { attachments?: unknown }).attachments);
 
-    if (!formType || !fields) {
+    if (!formType || !rawFields) {
       return NextResponse.json({ error: "Missing formType or fields" }, { status: 400 });
     }
+
+    // Which ad or site brought the lead (see src/lib/attribution.ts): shown in
+    // the email, kept with the submission, and stored on the CRM client.
+    const attributionParsed = parseAttribution((body as { attribution?: unknown }).attribution);
+    const attribution = attributionParsed ? formatAttribution(attributionParsed) : undefined;
+    const fields: Record<string, string> = attribution ? { ...rawFields, Provenance: attribution } : rawFields;
 
     const baseSubject = FORM_LABELS[formType] || `Nouvelle demande — ${escapeHtml(formType)}`;
     // The visitor was promised an answer (price within the hour, or quote
@@ -142,7 +149,7 @@ export async function POST(request: Request) {
     let ref: string | undefined;
     try {
       const contact = extractContact(fields);
-      const client = await upsertClient({ ...contact, source: `site-${formType}` });
+      const client = await upsertClient({ ...contact, source: `site-${formType}`, attribution });
       ref = client?.id;
       await recordSubmission({
         clientId: client?.id ?? null,

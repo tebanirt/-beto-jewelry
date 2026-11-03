@@ -1,4 +1,5 @@
 import type { LeadAttachment } from "@/lib/imageAttachments";
+import { getAttribution } from "@/lib/attribution";
 
 export type LeadFormOptions = {
   /** Inspiration images, attached to the email sent to Rayane. */
@@ -20,9 +21,11 @@ export async function submitLeadForm(
   fields: Record<string, string>,
   options: LeadFormOptions = {}
 ): Promise<boolean> {
+  const attribution = getAttribution();
   const body = JSON.stringify({
     formType,
     fields,
+    ...(attribution ? { attribution } : {}),
     ...(options.attachments?.length ? { attachments: options.attachments } : {}),
     ...(options.priority ? { priority: options.priority } : {}),
   });

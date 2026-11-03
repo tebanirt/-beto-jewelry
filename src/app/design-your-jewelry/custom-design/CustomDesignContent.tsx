@@ -38,7 +38,7 @@ import {
   type PricedStone,
   type RingStyle,
 } from "@/lib/engagementPricing";
-import CalendlyNextStep from "@/components/shared/CalendlyNextStep";
+import CalendlyNextStep, { buildCalendlyUrl } from "@/components/shared/CalendlyNextStep";
 
 type Status = "idle" | "sending" | "success" | "error";
 type StoneId = "natural" | "lab" | "gemstone" | "birthstone";
@@ -1307,7 +1307,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                         <div className="font-display text-3xl font-light lining-nums">{cd.depositAmount}</div>
                       </div>
                       <div className="sm:text-right">
-                        <p className="text-xs text-white/70">{cd.depositNonRefundable}</p>
+                        <p className="text-xs text-white/70">{cd.depositNoPaymentNow}</p>
                         <p className="text-xs text-beto-gold mt-1">{cd.depositCredited}</p>
                       </div>
                     </div>
@@ -1374,7 +1374,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                 <div className="border border-beto-gray-subtle/60 bg-beto-white p-6 sm:p-8">
                   <h3 className="text-label text-beto-black mb-4">{cd.nextStepsTitle}</h3>
                   <ol className="flex flex-col gap-3">
-                    {cd.nextSteps.map((s, i) => (
+                    {(DEPOSIT_PAYMENT_URL ? cd.nextStepsDepositFirst : cd.nextSteps).map((s, i) => (
                       <li key={s} className="flex gap-3 text-sm text-beto-gray leading-relaxed">
                         <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-beto-gold text-[11px] font-medium text-beto-black">
                           {i + 1}
@@ -1462,7 +1462,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                 </div>
 
                 <div className="mt-10">{trustRow}</div>
-                <p className="text-xs text-beto-gray/80 mt-6">{cd.secureNote}</p>
+                <p className="text-xs text-beto-gray/80 mt-6">{DEPOSIT_PAYMENT_URL ? cd.secureNoteDeposit : cd.secureNote}</p>
                 <div aria-live="assertive">
                   {status === "error" && (
                     <div role="alert" className="text-sm text-red-800 bg-red-50 border border-red-200 px-4 py-3 mt-4 text-center leading-relaxed">
@@ -1492,28 +1492,55 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                   <CheckCircle2 size={18} className="shrink-0 mt-px" aria-hidden />
                   {successText}
                 </p>
-                <CalendlyNextStep
-                  name={d.fullName}
-                  email={d.email}
-                  fallback={showPrice ? undefined : hourPromise ? cd.successFallbackHour : cd.successFallbackDay}
-                  onCtaClick={() => trackFunnel("cta_click", SUCCESS_STEP, { target: "calendly" })}
-                />
-                {DEPOSIT_PAYMENT_URL && (
-                  <div className="border border-beto-gray-subtle/60 bg-beto-white p-6 sm:p-8">
-                    <h3 className="font-display text-2xl font-light text-beto-black mb-2 text-balance">{cd.depositCtaTitle}</h3>
-                    <p className="text-sm text-beto-gray leading-relaxed mb-5">{cd.depositCtaBody}</p>
-                    <a
-                      href={depositHref}
-                      onClick={() => trackFunnel("cta_click", SUCCESS_STEP, { target: "deposit" })}
-                      className={cn(
-                        "inline-flex min-h-12 items-center justify-center px-8 border border-beto-black text-xs font-medium uppercase tracking-widest text-beto-black hover:bg-beto-black hover:text-white transition-colors duration-300",
-                        pressable,
-                        focusRing
+                {DEPOSIT_PAYMENT_URL ? (
+                  <>
+                    <div className="bg-beto-black text-white p-8 sm:p-10 text-left">
+                      <p className="text-label text-beto-gold mb-4">{cd.depositCtaEyebrow}</p>
+                      <h3 className="font-display text-2xl sm:text-3xl font-normal leading-tight mb-4 text-balance">
+                        {d.fullName.trim() ? `${d.fullName.trim().split(/\s+/)[0]}, ${cd.depositCtaTitle.toLowerCase()}` : cd.depositCtaTitle}
+                      </h3>
+                      <p className="text-sm text-white/75 leading-relaxed mb-8">{cd.depositCtaBody}</p>
+                      <a
+                        href={depositHref}
+                        onClick={() => trackFunnel("cta_click", SUCCESS_STEP, { target: "deposit" })}
+                        className={cn(
+                          "block text-center text-sm font-medium uppercase tracking-widest px-4 py-4 bg-beto-gold text-beto-black hover:bg-beto-gold-dark transition-colors duration-300",
+                          pressable,
+                          focusRing
+                        )}
+                      >
+                        {cd.depositCtaButton}
+                      </a>
+                      <p className="text-xs text-white/60 mt-4 text-center leading-relaxed">{cd.depositCtaNote}</p>
+                    </div>
+                    <div className="border border-beto-gray-subtle/60 bg-beto-white p-6 sm:p-8">
+                      <h3 className="font-display text-xl font-light text-beto-black mb-1 text-balance">{cd.exploreTitle}</h3>
+                      <p className="text-sm text-beto-gray leading-relaxed mb-5">{cd.exploreBody}</p>
+                      <a
+                        href={buildCalendlyUrl(d.fullName, d.email)}
+                        onClick={() => trackFunnel("cta_click", SUCCESS_STEP, { target: "calendly" })}
+                        className={cn(
+                          "inline-flex min-h-12 items-center justify-center px-8 border border-beto-black text-xs font-medium uppercase tracking-widest text-beto-black hover:bg-beto-black hover:text-white transition-colors duration-300",
+                          pressable,
+                          focusRing
+                        )}
+                      >
+                        {cd.exploreCta}
+                      </a>
+                      {!showPrice && (
+                        <p className="text-xs text-beto-gray/80 mt-5 leading-relaxed">
+                          {hourPromise ? cd.successFallbackHour : cd.successFallbackDay}
+                        </p>
                       )}
-                    >
-                      {cd.depositCtaButton}
-                    </a>
-                  </div>
+                    </div>
+                  </>
+                ) : (
+                  <CalendlyNextStep
+                    name={d.fullName}
+                    email={d.email}
+                    fallback={showPrice ? undefined : hourPromise ? cd.successFallbackHour : cd.successFallbackDay}
+                    onCtaClick={() => trackFunnel("cta_click", SUCCESS_STEP, { target: "calendly" })}
+                  />
                 )}
               </div>
             )}

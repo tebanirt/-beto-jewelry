@@ -59,6 +59,8 @@ export async function upsertClient(input: {
   email?: string;
   phone?: string;
   source: string;
+  /** Where the lead came from (ad, site). Set once: never overwrites an existing value. */
+  attribution?: string;
 }): Promise<Client | null> {
   const email = input.email?.trim().toLowerCase() || undefined;
   const phone = input.phone?.trim() || undefined;
@@ -88,6 +90,9 @@ export async function upsertClient(input: {
         full_name: input.fullName?.trim() || existing.full_name,
         email: email || existing.email,
         phone: phone || existing.phone,
+        ...(input.attribution && !(existing as { attribution?: string | null }).attribution
+          ? { attribution: input.attribution }
+          : {}),
         updated_at: new Date().toISOString(),
       })
       .eq("id", existing.id)
@@ -104,6 +109,7 @@ export async function upsertClient(input: {
       email: email || null,
       phone: phone || null,
       source: input.source,
+      ...(input.attribution ? { attribution: input.attribution } : {}),
     })
     .select("*")
     .single();
