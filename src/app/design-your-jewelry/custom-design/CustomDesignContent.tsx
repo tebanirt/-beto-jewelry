@@ -1,8 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState, type DragEvent, type ReactNode } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Check, Clock, Upload, X } from "lucide-react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type DragEvent,
+  type FormEvent,
+  type ReactNode,
+} from "react";
+import { motion, AnimatePresence, useReducedMotion, type Variants } from "framer-motion";
+import { AlertCircle, Check, CheckCircle2, Clock, Loader2, Upload, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Magnetic from "@/components/ui/Magnetic";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -36,17 +44,112 @@ const LAB_COLORS: LabColor[] = ["white", "colored"];
 const METAL_COLORS: MetalColor[] = ["yellow", "white", "rose"];
 const KARATS: KaratChoice[] = ["14k", "18k", "unsure"];
 const CONTACTS: ContactId[] = ["email", "phone", "whatsapp", "any"];
+const CARAT_CHOICES: CaratChoice[] = [...ENGAGEMENT_CARATS, "unsure"];
 const ENGAGEMENT_INDEX = 0;
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const CONTACT_STEP = 3;
+const SUCCESS_STEP = 4;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const DRAFT_KEY = "beto-custom-design-draft-v1";
+const CONTACT_FORM_ID = "cd-contact-form";
+
+type Draft = {
+  projectIndex: number | null;
+  stone: StoneId | null;
+  labColor: LabColor | null;
+  labColorDetail: string;
+  shape: string;
+  carat: CaratChoice | null;
+  metalColor: MetalColor | null;
+  karat: KaratChoice | null;
+  budget: string;
+  timeline: string;
+  notes: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  contact: ContactId | null;
+};
+
+const EMPTY_DRAFT: Draft = {
+  projectIndex: null,
+  stone: null,
+  labColor: null,
+  labColorDetail: "",
+  shape: "",
+  carat: null,
+  metalColor: null,
+  karat: null,
+  budget: "",
+  timeline: "",
+  notes: "",
+  fullName: "",
+  email: "",
+  phone: "",
+  contact: null,
+};
+
+function oneOf<T>(value: unknown, allowed: readonly T[]): T | null {
+  return allowed.includes(value as T) ? (value as T) : null;
+}
+const str = (value: unknown) => (typeof value === "string" ? value.slice(0, 2000) : "");
+
+/** Restores a saved draft defensively: anything unexpected falls back to empty. */
+function readDraft(projectCount: number): { draft: Draft; step: number } | null {
+  try {
+    const raw = window.sessionStorage.getItem(DRAFT_KEY);
+    if (!raw) return null;
+    const saved = JSON.parse(raw) as { draft?: Record<string, unknown>; step?: unknown };
+    const d = saved.draft ?? {};
+    const projectIndex =
+      typeof d.projectIndex === "number" && d.projectIndex >= 0 && d.projectIndex < projectCount
+        ? d.projectIndex
+        : null;
+    const draft: Draft = {
+      projectIndex,
+      stone: oneOf(d.stone, STONES),
+      labColor: oneOf(d.labColor, LAB_COLORS),
+      labColorDetail: str(d.labColorDetail),
+      shape: str(d.shape),
+      carat: oneOf(d.carat, CARAT_CHOICES),
+      metalColor: oneOf(d.metalColor, METAL_COLORS),
+      karat: oneOf(d.karat, KARATS),
+      budget: str(d.budget),
+      timeline: str(d.timeline),
+      notes: str(d.notes),
+      fullName: str(d.fullName),
+      email: str(d.email),
+      phone: str(d.phone),
+      contact: oneOf(d.contact, CONTACTS),
+    };
+    const step =
+      typeof saved.step === "number" && saved.step >= 0 && saved.step <= CONTACT_STEP ? saved.step : 0;
+    return { draft, step: draft.projectIndex === null ? 0 : step };
+  } catch {
+    return null;
+  }
+}
+
+function clearDraft() {
+  try {
+    window.sessionStorage.removeItem(DRAFT_KEY);
+  } catch {
+    // storage unavailable (private mode): nothing to clear
+  }
+}
 
 type InspirationImage = LeadAttachment & { id: string; previewUrl: string };
 
-const stepMotion = {
-  initial: { opacity: 0, x: 30 },
-  animate: { opacity: 1, x: 0 },
-  exit: { opacity: 0, x: -30 },
-  transition: { duration: 0.35 },
-};
+const EASE_OUT = [0.22, 1, 0.36, 1] as const;
+const EASE_IN = [0.4, 0, 1, 1] as const;
+
+const focusRing =
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-beto-black";
+const pressable =
+  "cursor-pointer select-none touch-manipulation [-webkit-tap-highlight-color:transparent] active:scale-[0.98] motion-reduce:active:scale-100";
+const inputClass =
+  "w-full min-h-[52px] px-5 py-3.5 border bg-beto-white text-base sm:text-sm text-beto-black placeholder:text-beto-gray-light transition-[border-color,box-shadow] duration-200 focus:outline-none";
+const inputIdle =
+  "border-beto-gray-subtle focus:border-beto-black focus:shadow-[inset_0_0_0_1px_var(--color-beto-black)]";
 
 function Chip({
   selected,
@@ -65,25 +168,84 @@ function Chip({
       onClick={onClick}
       aria-pressed={selected}
       className={cn(
-        "border transition-all duration-200",
+        "relative border transition-[border-color,background-color,box-shadow,color,transform] duration-200 ease-out",
+        pressable,
+        focusRing,
         compact
-          ? "px-4 py-2.5 text-xs font-medium tracking-wide whitespace-nowrap"
-          : "px-4 py-4 text-sm text-left",
+          ? "min-h-11 px-4 py-2 text-xs font-medium tracking-wide whitespace-nowrap"
+          : "min-h-14 w-full pl-4 pr-10 py-3.5 text-sm text-left",
         selected
-          ? "border-beto-gold bg-beto-gold/10 text-beto-black"
-          : "border-beto-gray-subtle bg-beto-white text-beto-gray hover:border-beto-gold/60"
+          ? "border-beto-gold bg-beto-gold/10 text-beto-black shadow-[inset_0_0_0_1px_var(--color-beto-gold)]"
+          : "border-beto-gray-subtle bg-beto-white text-beto-gray hover:border-beto-gold/60 hover:text-beto-black"
       )}
     >
       {children}
+      {!compact && (
+        <span
+          aria-hidden
+          className={cn(
+            "absolute right-3 top-1/2 -translate-y-1/2 flex h-5 w-5 items-center justify-center rounded-full bg-beto-black text-white transition-[opacity,transform] duration-200 ease-out",
+            selected ? "opacity-100 scale-100" : "opacity-0 scale-75"
+          )}
+        >
+          <Check size={12} strokeWidth={2.5} />
+        </span>
+      )}
     </button>
   );
 }
 
-function FieldLabel({ children, optional }: { children: ReactNode; optional?: string }) {
+function FieldError({ id, message }: { id: string; message?: string }) {
+  if (!message) return null;
   return (
-    <p className="text-xs font-medium text-beto-black tracking-wide mb-4">
-      {children} {optional && <span className="text-beto-gray-light font-normal">{optional}</span>}
+    <p id={id} className="flex items-start gap-1.5 text-xs text-red-700 mt-3 leading-relaxed">
+      <AlertCircle size={14} className="shrink-0 mt-px" aria-hidden />
+      {message}
     </p>
+  );
+}
+
+function ChoiceGroup({
+  id,
+  legend,
+  optional,
+  error,
+  children,
+}: {
+  id: string;
+  legend: ReactNode;
+  optional?: string;
+  error?: string;
+  children: ReactNode;
+}) {
+  const errorId = `${id}-error`;
+  return (
+    <fieldset id={`field-${id}`} aria-describedby={error ? errorId : undefined} className="mb-10 min-w-0">
+      <legend className="text-xs font-medium text-beto-black tracking-wide mb-4">
+        {legend} {optional && <span className="text-beto-gray/80 font-normal">{optional}</span>}
+      </legend>
+      {children}
+      <FieldError id={errorId} message={error} />
+    </fieldset>
+  );
+}
+
+/** Progressive disclosure: sub-choices fade in instead of popping into place. */
+function Reveal({ show, id, children }: { show: boolean; id: string; children: ReactNode }) {
+  const reduce = useReducedMotion();
+  return (
+    <AnimatePresence initial={false}>
+      {show && (
+        <motion.div
+          key={id}
+          initial={{ opacity: 0, y: reduce ? 0 : 8 }}
+          animate={{ opacity: 1, y: 0, transition: { duration: 0.28, ease: EASE_OUT } }}
+          exit={{ opacity: 0, transition: { duration: 0.12, ease: EASE_IN } }}
+        >
+          {children}
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
@@ -91,25 +253,15 @@ export default function CustomDesignContent() {
   const tr = useTranslation();
   const cd = tr.pages.customDesign;
   const language = useStore((s) => s.language);
+  const reduceMotion = useReducedMotion();
 
   const [step, setStep] = useState(0);
+  const [direction, setDirection] = useState(1);
   const [status, setStatus] = useState<Status>("idle");
-
-  const [projectIndex, setProjectIndex] = useState<number | null>(null);
-  const [stone, setStone] = useState<StoneId | null>(null);
-  const [labColor, setLabColor] = useState<LabColor | null>(null);
-  const [labColorDetail, setLabColorDetail] = useState("");
-  const [shape, setShape] = useState("");
-  const [carat, setCarat] = useState<CaratChoice | null>(null);
-  const [metalColor, setMetalColor] = useState<MetalColor | null>(null);
-  const [karat, setKarat] = useState<KaratChoice | null>(null);
-  const [budget, setBudget] = useState("");
-  const [timeline, setTimeline] = useState("");
-  const [notes, setNotes] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [contact, setContact] = useState<ContactId | null>(null);
+  const [draft, setDraft] = useState<Draft>(EMPTY_DRAFT);
+  const [restored, setRestored] = useState(false);
+  const [attempted, setAttempted] = useState<Record<number, boolean>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   const [images, setImages] = useState<InspirationImage[]>([]);
   const [preparing, setPreparing] = useState(0);
@@ -118,6 +270,34 @@ export default function CustomDesignContent() {
 
   const formTopRef = useRef<HTMLDivElement>(null);
   const imagesRef = useRef<InspirationImage[]>([]);
+  const pendingFocus = useRef(false);
+
+  const d = draft;
+  const set = <K extends keyof Draft>(key: K, value: Draft[K]) => setDraft((prev) => ({ ...prev, [key]: value }));
+
+  // Draft kept for the session: a reload, or a trip back from Instagram's
+  // in-app browser, doesn't wipe the visitor's choices. Images aren't kept.
+  useEffect(() => {
+    const saved = readDraft(cd.projectTypes.length);
+    if (saved) {
+      // Restoring persisted browser state once, after mount (avoids a hydration mismatch).
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setDraft(saved.draft);
+      setStep(saved.step);
+    }
+    setRestored(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (!restored || status === "success") return;
+    try {
+      window.sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ draft, step }));
+    } catch {
+      // storage unavailable: the form still works, just without the draft
+    }
+  }, [draft, step, restored, status]);
+
   useEffect(() => {
     imagesRef.current = images;
   }, [images]);
@@ -125,22 +305,41 @@ export default function CustomDesignContent() {
   // Free the preview URLs when the visitor leaves the page.
   useEffect(() => () => imagesRef.current.forEach((img) => URL.revokeObjectURL(img.previewUrl)), []);
 
-  const isEngagement = projectIndex === ENGAGEMENT_INDEX;
-  const isDiamond = stone === "natural" || stone === "lab";
+  // Each new step's heading takes focus, so keyboard and screen-reader users
+  // start at the top of the step, not on a button that no longer exists.
+  const headingRef = useCallback((el: HTMLHeadingElement | null) => {
+    if (el && pendingFocus.current) {
+      pendingFocus.current = false;
+      el.focus({ preventScroll: true });
+    }
+  }, []);
+
+  const isEngagement = d.projectIndex === ENGAGEMENT_INDEX;
+  const isDiamond = d.stone === "natural" || d.stone === "lab";
   const askCarat = isEngagement && isDiamond;
 
   const pricedStone: PricedStone | null =
-    stone === "natural" ? "natural" : stone === "lab" ? (labColor === "colored" ? "labColored" : labColor === "white" ? "lab" : null) : null;
+    d.stone === "natural"
+      ? "natural"
+      : d.stone === "lab" && d.labColor
+        ? d.labColor === "colored"
+          ? "labColored"
+          : "lab"
+        : null;
   const fromPrices =
     isEngagement && images.length === 0
-      ? getFromPrices(pricedStone, typeof carat === "number" ? carat : null, karat ?? "")
+      ? getFromPrices(pricedStone, typeof d.carat === "number" ? d.carat : null, d.karat ?? "")
       : null;
   const showPrice = fromPrices !== null;
   // Engagement ring without an instant price: Rayane replies with one within the hour.
   const hourPromise = isEngagement && !showPrice;
 
   const budgetOptions: readonly string[] =
-    isEngagement && stone === "natural" ? cd.budgetsNatural : isEngagement && stone === "lab" ? cd.budgetsLab : cd.budgets;
+    isEngagement && d.stone === "natural"
+      ? cd.budgetsNatural
+      : isEngagement && d.stone === "lab"
+        ? cd.budgetsLab
+        : cd.budgets;
 
   const money = (n: number) =>
     new Intl.NumberFormat(language === "fr" ? "fr-CA" : "en-CA", {
@@ -151,40 +350,44 @@ export default function CustomDesignContent() {
   const priceText = fromPrices
     ? fromPrices.map((p) => `${money(p.price)} ${cd.estimateIn.replace("{k}", cd.metalKarats[p.karat])}`).join(" · ")
     : "";
-
-  // ── Labels used in the recap and in Rayane's email ──
-  const projectLabel = projectIndex !== null ? cd.projectTypes[projectIndex] : "";
-  const stoneLabel = stone
-    ? stone === "lab" && labColor === "colored"
-      ? `${cd.labColorOptions.colored}${labColorDetail.trim() ? ` (${labColorDetail.trim()})` : ""}`
-      : stone === "lab" && labColor === "white"
-        ? `${cd.stoneOptions.lab}, ${cd.labColorOptions.white.toLowerCase()}`
-        : cd.stoneOptions[stone]
-    : "";
   const caratText = (c: EngagementCarat) => `${language === "fr" ? String(c).replace(".", ",") : c} ct`;
-  const caratLabel = carat === null ? "" : carat === "unsure" ? cd.caratUnsure : caratText(carat);
+
+  // Labels used in the recap and in Rayane's email.
+  const projectLabel = d.projectIndex !== null ? cd.projectTypes[d.projectIndex] : "";
+  const stoneLabel = d.stone
+    ? d.stone === "lab" && d.labColor === "colored"
+      ? `${cd.labColorOptions.colored}${d.labColorDetail.trim() ? ` (${d.labColorDetail.trim()})` : ""}`
+      : d.stone === "lab" && d.labColor === "white"
+        ? `${cd.stoneOptions.lab}, ${cd.labColorOptions.white.toLowerCase()}`
+        : cd.stoneOptions[d.stone]
+    : "";
+  const caratLabel = d.carat === null ? "" : d.carat === "unsure" ? cd.caratUnsure : caratText(d.carat);
   const metalLabel = [
-    metalColor ? cd.metalColors[metalColor] : "",
-    karat ? (karat === "unsure" ? cd.karatToConfirm : cd.metalKarats[karat]) : "",
+    d.metalColor ? cd.metalColors[d.metalColor] : "",
+    d.karat ? (d.karat === "unsure" ? cd.karatToConfirm : cd.metalKarats[d.karat]) : "",
   ]
     .filter(Boolean)
-    .join(karat === "unsure" ? ", " : " ");
-
-  function chooseStone(next: StoneId) {
-    setStone(next);
-    if (next !== "lab") {
-      setLabColor(null);
-      setLabColorDetail("");
-    }
-    if (!(isEngagement && (next === "natural" || next === "lab"))) setCarat(null);
-    // Budget ranges differ by stone for engagement rings.
-    setBudget("");
-  }
+    .join(d.karat === "unsure" ? ", " : " ");
 
   function chooseProject(index: number) {
-    setProjectIndex(index);
-    if (index !== ENGAGEMENT_INDEX) setCarat(null);
-    setBudget("");
+    setDraft((prev) => ({
+      ...prev,
+      projectIndex: index,
+      carat: index === ENGAGEMENT_INDEX ? prev.carat : null,
+      budget: prev.projectIndex === index ? prev.budget : "",
+    }));
+  }
+
+  function chooseStone(next: StoneId) {
+    setDraft((prev) => ({
+      ...prev,
+      stone: next,
+      labColor: next === "lab" ? prev.labColor : null,
+      labColorDetail: next === "lab" ? prev.labColorDetail : "",
+      carat: isEngagement && (next === "natural" || next === "lab") ? prev.carat : null,
+      // Budget ranges differ by stone for engagement rings.
+      budget: prev.stone === next ? prev.budget : "",
+    }));
   }
 
   async function addFiles(files: FileList | File[]) {
@@ -228,41 +431,92 @@ export default function CustomDesignContent() {
     if (e.dataTransfer.files?.length) void addFiles(e.dataTransfer.files);
   }
 
-  const phoneNeeded = contact === "phone" || contact === "whatsapp";
+  const phoneNeeded = d.contact === "phone" || d.contact === "whatsapp";
 
-  const isStepValid = () => {
-    if (step === 0) return projectIndex !== null && preparing === 0;
-    if (step === 1) {
-      if (!stone || !metalColor || !karat || !budget) return false;
-      if (stone === "lab" && !labColor) return false;
-      if (askCarat && carat === null) return false;
-      return true;
+  /** Missing answers for a step, in on-screen order: [field id, message]. */
+  function stepErrors(s: number): [string, string][] {
+    const errors: [string, string][] = [];
+    if (s === 0 && d.projectIndex === null) errors.push(["project", cd.errorChoose]);
+    if (s === 1) {
+      if (!d.stone) errors.push(["stone", cd.errorChoose]);
+      else if (d.stone === "lab" && !d.labColor) errors.push(["labColor", cd.errorChoose]);
+      if (askCarat && d.carat === null) errors.push(["carat", cd.errorChoose]);
+      if (!d.metalColor) errors.push(["metalColor", cd.errorChoose]);
+      if (!d.karat) errors.push(["karat", cd.errorChoose]);
+      if (!d.budget) errors.push(["budget", cd.errorChoose]);
     }
-    if (step === 3) {
-      return !!fullName.trim() && EMAIL_RE.test(email.trim()) && (!phoneNeeded || phone.trim().length >= 7);
+    if (s === CONTACT_STEP) {
+      if (!d.fullName.trim()) errors.push(["fullName", cd.errorName]);
+      if (!EMAIL_RE.test(d.email.trim())) errors.push(["email", cd.errorEmail]);
+      if (phoneNeeded && d.phone.replace(/\D/g, "").length < 10) errors.push(["phone", cd.errorPhone]);
     }
-    return true;
-  };
-
-  function goTo(next: number) {
-    setStep(next);
-    const top = formTopRef.current?.getBoundingClientRect().top;
-    if (top !== undefined && top < 0) formTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    return errors;
   }
 
-  async function handleSubmit() {
-    if (!isStepValid()) return;
+  const currentErrors = stepErrors(step);
+  // Errors show after a Continue attempt, or after leaving a filled contact
+  // field: never while the visitor is still typing.
+  const errorFor = (key: string) => {
+    const hit = currentErrors.find(([k]) => k === key);
+    if (!hit) return undefined;
+    return attempted[step] || touched[key] ? hit[1] : undefined;
+  };
+
+  function scrollToFormTop() {
+    const top = formTopRef.current?.getBoundingClientRect().top;
+    if (top !== undefined && top < 0) {
+      formTopRef.current?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    }
+  }
+
+  function goTo(next: number) {
+    setDirection(next > step ? 1 : -1);
+    pendingFocus.current = true;
+    setStep(next);
+    scrollToFormTop();
+  }
+
+  function focusFirstError(errors: [string, string][]) {
+    const first = errors[0]?.[0];
+    if (!first) return;
+    const field = document.getElementById(`field-${first}`);
+    const control = field?.matches("input, textarea")
+      ? field
+      : field?.querySelector<HTMLElement>("button, input, textarea");
+    control?.focus({ preventScroll: true });
+    field?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+  }
+
+  function handleContinue() {
+    const errors = stepErrors(step);
+    if (errors.length > 0) {
+      setAttempted((a) => ({ ...a, [step]: true }));
+      focusFirstError(errors);
+      return;
+    }
+    goTo(step + 1);
+  }
+
+  async function handleSubmit(e?: FormEvent) {
+    e?.preventDefault();
+    if (status === "sending") return;
+    const errors = stepErrors(CONTACT_STEP);
+    if (errors.length > 0) {
+      setAttempted((a) => ({ ...a, [CONTACT_STEP]: true }));
+      focusFirstError(errors);
+      return;
+    }
     setStatus("sending");
     const shownPrice = showPrice ? `${cd.estimateFrom} ${priceText}` : "";
     const fields: Record<string, string> = {
       "Type de projet": projectLabel,
       "Pierre": stoneLabel,
-      "Forme": shape,
+      "Forme": d.shape,
       "Carat (pierre centrale)": caratLabel,
       "Métal": metalLabel,
-      "Budget": budget,
-      "Échéancier": timeline,
-      "Notes": notes,
+      "Budget": d.budget,
+      "Échéancier": d.timeline,
+      "Notes": d.notes,
       "Images d'inspiration": images.length > 0 ? `${images.length} en pièce jointe` : "",
       "Prix affiché au client": shownPrice,
       "Réponse promise au client": hourPromise
@@ -270,12 +524,12 @@ export default function CustomDesignContent() {
         : isEngagement
           ? ""
           : "Soumission d'ici 1 à 2 jours ouvrables",
-      "Nom complet": fullName.trim(),
-      "Courriel": email.trim(),
-      "Téléphone": phone.trim(),
-      "Méthode de contact préférée": contact ? cd.contacts[contact] : "",
+      "Nom complet": d.fullName.trim(),
+      "Courriel": d.email.trim(),
+      "Téléphone": d.phone.trim(),
+      "Méthode de contact préférée": d.contact ? cd.contacts[d.contact] : "",
       "Langue": language === "fr" ? "Français" : "Anglais",
-      email: email.trim(),
+      email: d.email.trim(),
     };
 
     const ok = await submitLeadForm("custom-design", fields, {
@@ -283,10 +537,10 @@ export default function CustomDesignContent() {
       priority: hourPromise ? "1h" : undefined,
     });
     if (ok) {
+      clearDraft();
       setStatus("success");
-      setStep(4);
       trackMetaLead("custom-design");
-      formTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      goTo(SUCCESS_STEP);
     } else {
       setStatus("error");
     }
@@ -296,11 +550,11 @@ export default function CustomDesignContent() {
   const recap = [
     { label: sl.projectType, value: projectLabel },
     { label: sl.stone, value: stoneLabel },
-    { label: sl.shape, value: shape || sl.notSpecified },
+    { label: sl.shape, value: d.shape || sl.notSpecified },
     ...(askCarat ? [{ label: sl.carat, value: caratLabel }] : []),
     { label: sl.metal, value: metalLabel },
-    { label: sl.budget, value: budget },
-    { label: sl.timeline, value: timeline || sl.notSpecified },
+    { label: sl.budget, value: d.budget },
+    { label: sl.timeline, value: d.timeline || sl.notSpecified },
     ...(images.length > 0 ? [{ label: sl.images, value: String(images.length) }] : []),
   ];
 
@@ -310,13 +564,35 @@ export default function CustomDesignContent() {
       ? cd.successHour
       : cd.successOther;
 
+  // Forward slides in from the right, Back from the left; exit is quicker than
+  // enter. Reduced motion: a short crossfade only.
+  const stepVariants: Variants = {
+    enter: (dir: number) => ({ opacity: 0, x: reduceMotion ? 0 : 28 * dir }),
+    center: { opacity: 1, x: 0, transition: { duration: reduceMotion ? 0.15 : 0.38, ease: EASE_OUT } },
+    exit: (dir: number) => ({
+      opacity: 0,
+      x: reduceMotion ? 0 : -20 * dir,
+      transition: { duration: reduceMotion ? 0.1 : 0.2, ease: EASE_IN },
+    }),
+  };
+
+  const totalSteps = cd.steps.length;
+  const progress = step / (totalSteps - 1);
+  const stepHeading = "font-display text-beto-black text-3xl font-light mb-2 text-balance outline-none";
+
+  const textFields = [
+    { id: "fullName", label: cd.fullName, type: "text", placeholder: cd.fullNamePlaceholder, autoComplete: "name", required: true, inputMode: "text" },
+    { id: "email", label: cd.emailAddress, type: "email", placeholder: cd.emailPlaceholder, autoComplete: "email", required: true, inputMode: "email" },
+    { id: "phone", label: cd.phoneNumber, type: "tel", placeholder: cd.phonePlaceholder, autoComplete: "tel", required: phoneNeeded, inputMode: "tel" },
+  ] as const;
+
   return (
     <div className="min-h-screen bg-beto-offwhite" style={{ paddingTop: "var(--nav-height)" }}>
       {/* Header */}
       <div className="bg-beto-black py-12 px-6 text-center">
         <p className="text-label text-beto-gold mb-3">{cd.eyebrow}</p>
-        <h1 className="font-display text-white text-4xl lg:text-5xl font-light">{cd.title}</h1>
-        <p className="text-white/50 text-sm mt-3 max-w-md mx-auto leading-relaxed">{cd.subtitle}</p>
+        <h1 className="font-display text-white text-4xl lg:text-5xl font-light text-balance">{cd.title}</h1>
+        <p className="text-white/70 text-sm mt-3 max-w-md mx-auto leading-relaxed">{cd.subtitle}</p>
       </div>
 
       {/* Progress */}
@@ -327,448 +603,531 @@ export default function CustomDesignContent() {
               <li key={s} className="flex items-center gap-2" aria-current={i === step ? "step" : undefined}>
                 <div
                   className={cn(
-                    "w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium transition-all duration-300 shrink-0",
+                    "w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium transition-[background-color,color,transform] duration-300 shrink-0",
                     i < step
                       ? "bg-beto-gold text-beto-black"
                       : i === step
-                        ? "bg-beto-black text-white"
-                        : "bg-beto-gray-subtle text-beto-gray-light"
+                        ? "bg-beto-black text-white scale-110"
+                        : "bg-beto-gray-subtle text-beto-gray"
                   )}
                 >
                   {i < step ? <Check size={12} aria-hidden /> : i + 1}
+                  {i < step && <span className="sr-only">{i + 1}</span>}
                 </div>
                 <span
                   className={cn(
-                    "text-xs font-medium hidden md:block",
-                    i === step ? "text-beto-black" : "text-beto-gray-light"
+                    "text-xs font-medium hidden md:block transition-colors duration-300",
+                    i === step ? "text-beto-black" : "text-beto-gray/80"
                   )}
                 >
                   {s}
                 </span>
-                {i < cd.steps.length - 1 && (
-                  <div
-                    className={cn(
-                      "h-px flex-1 min-w-[12px] sm:min-w-[32px] transition-all duration-500",
-                      i < step ? "bg-beto-gold" : "bg-beto-gray-subtle"
-                    )}
-                  />
+                {i < totalSteps - 1 && (
+                  <div className="h-px flex-1 min-w-[12px] sm:min-w-[32px] bg-beto-gray-subtle overflow-hidden" aria-hidden>
+                    <div
+                      className="h-full bg-beto-gold origin-left transition-transform duration-500 ease-out"
+                      style={{ transform: `scaleX(${i < step ? 1 : 0})` }}
+                    />
+                  </div>
                 )}
               </li>
             ))}
           </ol>
+          <p className="md:hidden text-center text-xs text-beto-gray mt-3" aria-live="polite">
+            {cd.stepOf.replace("{n}", String(step + 1)).replace("{total}", String(totalSteps))} · {cd.steps[step]}
+          </p>
+        </div>
+        <div className="h-0.5 bg-beto-gray-subtle/60" aria-hidden>
+          <div
+            className="h-full bg-beto-gold origin-left transition-transform duration-500 ease-out"
+            style={{ transform: `scaleX(${progress})` }}
+          />
         </div>
       </div>
 
       {/* Form */}
-      <div ref={formTopRef} className="container-beto py-16 max-w-3xl mx-auto" style={{ scrollMarginTop: "var(--nav-height)" }}>
-        <AnimatePresence mode="wait">
-          {/* STEP 0: Project type + inspiration */}
-          {step === 0 && (
-            <motion.div key="step0" {...stepMotion}>
-              <h2 className="font-display text-beto-black text-3xl font-light mb-2">{cd.step0Title}</h2>
-              <p className="text-sm text-beto-gray mb-10">{cd.step0Desc}</p>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mb-4">
-                {cd.projectTypes.map((type, i) => (
-                  <button
-                    key={type}
-                    type="button"
-                    onClick={() => chooseProject(i)}
-                    aria-pressed={projectIndex === i}
+      <div
+        ref={formTopRef}
+        className="container-beto pt-14 pb-10 md:py-16 max-w-3xl mx-auto"
+        style={{ scrollMarginTop: "var(--nav-height)" }}
+      >
+        <AnimatePresence mode="wait" custom={direction} initial={false}>
+          <motion.div
+            key={`step-${step}`}
+            custom={direction}
+            variants={stepVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+          >
+            {/* STEP 0: Project type + inspiration */}
+            {step === 0 && (
+              <>
+                <h2 ref={headingRef} tabIndex={-1} className={stepHeading}>{cd.step0Title}</h2>
+                <p className="text-sm text-beto-gray mb-10">{cd.step0Desc}</p>
+
+                <fieldset
+                  id="field-project"
+                  aria-describedby={errorFor("project") ? "project-error project-help" : "project-help"}
+                  className="mb-12 min-w-0"
+                >
+                  <legend className="sr-only">{cd.step0Title}</legend>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                    {cd.projectTypes.map((type, i) => (
+                      <Chip key={type} selected={d.projectIndex === i} onClick={() => chooseProject(i)}>
+                        <span className="font-medium">{type}</span>
+                      </Chip>
+                    ))}
+                  </div>
+                  <FieldError id="project-error" message={errorFor("project")} />
+                  <p id="project-help" className="text-xs text-beto-gray/80 mt-4 leading-relaxed">
+                    {cd.priceOnlyEngagement}
+                  </p>
+                </fieldset>
+
+                <div className="mb-10">
+                  <p className="text-xs font-medium text-beto-black tracking-wide mb-3">
+                    {cd.uploadLabel} <span className="text-beto-gray/80 font-normal">{cd.uploadOpt}</span>
+                  </p>
+                  <label
+                    htmlFor="inspiration-images"
+                    onDragOver={(e) => {
+                      e.preventDefault();
+                      setDragging(true);
+                    }}
+                    onDragLeave={() => setDragging(false)}
+                    onDrop={onDrop}
                     className={cn(
-                      "px-4 py-5 border text-sm font-medium text-left transition-all duration-200",
-                      projectIndex === i
-                        ? "border-beto-gold bg-beto-gold/10 text-beto-black"
-                        : "border-beto-gray-subtle bg-beto-white text-beto-gray hover:border-beto-gold/60"
+                      "block border-2 border-dashed p-8 sm:p-10 text-center bg-beto-white cursor-pointer transition-[border-color,background-color] duration-200",
+                      "focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-beto-black",
+                      dragging ? "border-beto-gold bg-beto-gold/5" : "border-beto-gray-subtle hover:border-beto-gold/60"
                     )}
                   >
-                    {type}
-                  </button>
-                ))}
-              </div>
-              <p className="text-xs text-beto-gray-light mb-12 leading-relaxed">{cd.priceOnlyEngagement}</p>
+                    <Upload size={20} className="text-beto-gray mx-auto mb-3" aria-hidden />
+                    <span className="block text-sm text-beto-black mb-1">{cd.uploadDrop}</span>
+                    <span className="block text-xs text-beto-gray/80">{cd.uploadHint}</span>
+                    <input
+                      id="inspiration-images"
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      className="sr-only"
+                      onChange={(e) => {
+                        if (e.target.files?.length) void addFiles(e.target.files);
+                        e.target.value = "";
+                      }}
+                    />
+                  </label>
 
-              <div className="mb-10">
-                <p className="text-xs font-medium text-beto-black tracking-wide mb-3">
-                  {cd.uploadLabel} <span className="text-beto-gray-light font-normal">{cd.uploadOpt}</span>
-                </p>
-                <label
-                  htmlFor="inspiration-images"
-                  onDragOver={(e) => {
-                    e.preventDefault();
-                    setDragging(true);
-                  }}
-                  onDragLeave={() => setDragging(false)}
-                  onDrop={onDrop}
-                  className={cn(
-                    "block border-2 border-dashed p-10 text-center transition-colors bg-beto-white cursor-pointer focus-within:border-beto-gold",
-                    dragging ? "border-beto-gold" : "border-beto-gray-subtle/60 hover:border-beto-gold/40"
+                  {(images.length > 0 || preparing > 0) && (
+                    <ul className="flex flex-wrap gap-4 mt-5">
+                      <AnimatePresence initial={false}>
+                        {images.map((img) => (
+                          <motion.li
+                            key={img.id}
+                            layout={!reduceMotion}
+                            initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.92 }}
+                            animate={{ opacity: 1, scale: 1, transition: { duration: 0.25, ease: EASE_OUT } }}
+                            exit={{ opacity: 0, scale: reduceMotion ? 1 : 0.92, transition: { duration: 0.15, ease: EASE_IN } }}
+                            className="relative w-24 h-24 border border-beto-gray-subtle bg-beto-white"
+                          >
+                            {/* eslint-disable-next-line @next/next/no-img-element -- local blob preview */}
+                            <img src={img.previewUrl} alt="" className="w-full h-full object-cover" />
+                            <button
+                              type="button"
+                              onClick={() => removeImage(img.id)}
+                              aria-label={cd.uploadRemove}
+                              className={cn(
+                                "absolute -top-3 -right-3 w-8 h-8 rounded-full bg-beto-black text-white flex items-center justify-center hover:bg-beto-gold hover:text-beto-black transition-colors duration-200",
+                                "after:absolute after:-inset-1.5 after:content-['']",
+                                pressable,
+                                focusRing
+                              )}
+                            >
+                              <X size={14} aria-hidden />
+                            </button>
+                          </motion.li>
+                        ))}
+                      </AnimatePresence>
+                      {preparing > 0 && (
+                        <li className="w-24 h-24 border border-dashed border-beto-gray-subtle flex flex-col items-center justify-center gap-2 px-2 text-center text-[11px] text-beto-gray">
+                          <Loader2 size={16} className="motion-safe:animate-spin" aria-hidden />
+                          {cd.uploadPreparing}
+                        </li>
+                      )}
+                    </ul>
                   )}
-                >
-                  <Upload size={20} className="text-beto-gray-light mx-auto mb-3" aria-hidden />
-                  <span className="block text-sm text-beto-gray mb-1">{cd.uploadDrop}</span>
-                  <span className="block text-xs text-beto-gray-light">{cd.uploadHint}</span>
-                  <input
-                    id="inspiration-images"
-                    type="file"
-                    accept="image/*"
-                    multiple
-                    className="sr-only"
-                    onChange={(e) => {
-                      if (e.target.files?.length) void addFiles(e.target.files);
-                      e.target.value = "";
-                    }}
-                  />
-                </label>
-
-                {(images.length > 0 || preparing > 0) && (
-                  <ul className="flex flex-wrap gap-3 mt-4">
-                    {images.map((img) => (
-                      <li key={img.id} className="relative w-24 h-24 border border-beto-gray-subtle/60 bg-beto-white">
-                        {/* eslint-disable-next-line @next/next/no-img-element -- local blob preview */}
-                        <img src={img.previewUrl} alt="" className="w-full h-full object-cover" />
-                        <button
-                          type="button"
-                          onClick={() => removeImage(img.id)}
-                          aria-label={cd.uploadRemove}
-                          className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-beto-black text-white flex items-center justify-center hover:bg-beto-gold hover:text-beto-black transition-colors"
-                        >
-                          <X size={12} aria-hidden />
-                        </button>
-                      </li>
-                    ))}
-                    {preparing > 0 && (
-                      <li className="w-24 h-24 border border-dashed border-beto-gray-subtle flex items-center justify-center px-2 text-center text-[11px] text-beto-gray-light">
-                        {cd.uploadPreparing}
-                      </li>
+                  <div aria-live="polite">
+                    <FieldError id="upload-error" message={uploadMessage || undefined} />
+                    {isEngagement && images.length > 0 && (
+                      <p className="flex items-start gap-2 text-xs text-beto-black mt-4 leading-relaxed">
+                        <Clock size={14} className="text-beto-gold-dark shrink-0 mt-px" aria-hidden />
+                        {cd.uploadHourNote}
+                      </p>
                     )}
-                  </ul>
-                )}
-                <div aria-live="polite">
-                  {uploadMessage && <p className="text-xs text-red-700 mt-3">{uploadMessage}</p>}
-                  {isEngagement && images.length > 0 && (
-                    <p className="flex items-center gap-2 text-xs text-beto-black mt-3">
-                      <Clock size={14} className="text-beto-gold shrink-0" aria-hidden />
-                      {cd.uploadHourNote}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className="mb-10">
-                <label htmlFor="design-notes" className="text-xs font-medium text-beto-black tracking-wide mb-2 block">
-                  {cd.additionalNotes} <span className="text-beto-gray-light font-normal">{cd.notesOpt}</span>
-                </label>
-                <textarea
-                  id="design-notes"
-                  rows={4}
-                  value={notes}
-                  onChange={(e) => setNotes(e.target.value)}
-                  placeholder={cd.notesPlaceholder}
-                  className="w-full px-5 py-4 border border-beto-gray-subtle/60 bg-beto-white text-sm text-beto-black placeholder:text-beto-gray-light focus:outline-none focus:border-beto-gold transition-colors resize-none"
-                />
-              </div>
-            </motion.div>
-          )}
-
-          {/* STEP 1: Design details */}
-          {step === 1 && (
-            <motion.div key="step1" {...stepMotion}>
-              <h2 className="font-display text-beto-black text-3xl font-light mb-2">{cd.step1Title}</h2>
-              <p className="text-sm text-beto-gray mb-10">{cd.step1Desc}</p>
-
-              <div className="mb-10">
-                <FieldLabel>{cd.stoneLabel}</FieldLabel>
-                <div className="grid grid-cols-2 gap-3">
-                  {STONES.map((id) => (
-                    <Chip key={id} selected={stone === id} onClick={() => chooseStone(id)}>
-                      {cd.stoneOptions[id]}
-                    </Chip>
-                  ))}
+                  </div>
                 </div>
 
-                {stone === "lab" && (
-                  <div className="mt-6 pl-4 border-l-2 border-beto-gold/40">
-                    <FieldLabel>{cd.labColorLabel}</FieldLabel>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {LAB_COLORS.map((id) => (
-                        <Chip key={id} selected={labColor === id} onClick={() => setLabColor(id)}>
-                          {cd.labColorOptions[id]}
+                <div>
+                  <label htmlFor="design-notes" className="text-xs font-medium text-beto-black tracking-wide mb-2 block">
+                    {cd.additionalNotes} <span className="text-beto-gray/80 font-normal">{cd.notesOpt}</span>
+                  </label>
+                  <textarea
+                    id="design-notes"
+                    rows={4}
+                    value={d.notes}
+                    onChange={(e) => set("notes", e.target.value)}
+                    placeholder={cd.notesPlaceholder}
+                    className={cn(inputClass, inputIdle, "resize-none")}
+                  />
+                </div>
+              </>
+            )}
+
+            {/* STEP 1: Design details */}
+            {step === 1 && (
+              <>
+                <h2 ref={headingRef} tabIndex={-1} className={stepHeading}>{cd.step1Title}</h2>
+                <p className="text-sm text-beto-gray mb-10">{cd.step1Desc}</p>
+
+                <ChoiceGroup id="stone" legend={cd.stoneLabel} error={errorFor("stone")}>
+                  <div className="grid grid-cols-2 gap-3">
+                    {STONES.map((id) => (
+                      <Chip key={id} selected={d.stone === id} onClick={() => chooseStone(id)}>
+                        {cd.stoneOptions[id]}
+                      </Chip>
+                    ))}
+                  </div>
+                </ChoiceGroup>
+
+                <Reveal show={d.stone === "lab"} id="lab-color">
+                  <div className="-mt-4 mb-10 pl-4 border-l-2 border-beto-gold/50">
+                    <ChoiceGroup id="labColor" legend={cd.labColorLabel} error={errorFor("labColor")}>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {LAB_COLORS.map((id) => (
+                          <Chip key={id} selected={d.labColor === id} onClick={() => set("labColor", id)}>
+                            {cd.labColorOptions[id]}
+                          </Chip>
+                        ))}
+                      </div>
+                      <Reveal show={d.labColor === "colored"} id="lab-color-detail">
+                        <div className="mt-4">
+                          <label htmlFor="lab-color-detail" className="text-xs font-medium text-beto-black tracking-wide mb-2 block">
+                            {cd.labColorDetailLabel} <span className="text-beto-gray/80 font-normal">{cd.notesOpt}</span>
+                          </label>
+                          <input
+                            id="lab-color-detail"
+                            type="text"
+                            value={d.labColorDetail}
+                            onChange={(e) => set("labColorDetail", e.target.value)}
+                            placeholder={cd.labColorDetailPlaceholder}
+                            className={cn(inputClass, inputIdle)}
+                          />
+                        </div>
+                      </Reveal>
+                    </ChoiceGroup>
+                  </div>
+                </Reveal>
+
+                <Reveal show={!!d.stone && (isEngagement || d.stone !== "none")} id="shape">
+                  <ChoiceGroup id="shape" legend={cd.shapeLabel} optional={cd.shapeOpt}>
+                    <div className="flex flex-wrap gap-2.5">
+                      {cd.shapes.map((s) => (
+                        <Chip key={s} compact selected={d.shape === s} onClick={() => set("shape", d.shape === s ? "" : s)}>
+                          {s}
                         </Chip>
                       ))}
                     </div>
-                    {labColor === "colored" && (
-                      <div className="mt-4">
-                        <label htmlFor="lab-color-detail" className="text-xs font-medium text-beto-black tracking-wide mb-2 block">
-                          {cd.labColorDetailLabel} <span className="text-beto-gray-light font-normal">{cd.notesOpt}</span>
+                  </ChoiceGroup>
+                </Reveal>
+
+                <Reveal show={askCarat} id="carat">
+                  <ChoiceGroup id="carat" legend={cd.caratLabel} error={errorFor("carat")}>
+                    <div className="flex flex-wrap gap-2.5">
+                      {ENGAGEMENT_CARATS.map((c) => (
+                        <Chip key={c} compact selected={d.carat === c} onClick={() => set("carat", c)}>
+                          {caratText(c)}
+                        </Chip>
+                      ))}
+                      <Chip compact selected={d.carat === "unsure"} onClick={() => set("carat", "unsure")}>
+                        {cd.caratUnsure}
+                      </Chip>
+                    </div>
+                  </ChoiceGroup>
+                </Reveal>
+
+                <ChoiceGroup id="metalColor" legend={cd.metalColorLabel} error={errorFor("metalColor")}>
+                  <div className="grid grid-cols-1 min-[420px]:grid-cols-3 gap-3">
+                    {METAL_COLORS.map((id) => (
+                      <Chip key={id} selected={d.metalColor === id} onClick={() => set("metalColor", id)}>
+                        {cd.metalColors[id]}
+                      </Chip>
+                    ))}
+                  </div>
+                </ChoiceGroup>
+
+                <ChoiceGroup id="karat" legend={cd.metalKaratLabel} error={errorFor("karat")}>
+                  <div className="flex flex-wrap gap-2.5">
+                    {KARATS.map((id) => (
+                      <Chip key={id} compact selected={d.karat === id} onClick={() => set("karat", id)}>
+                        {cd.metalKarats[id]}
+                      </Chip>
+                    ))}
+                  </div>
+                  <p className="text-xs text-beto-gray/80 mt-3 leading-relaxed">{cd.metalKaratHint}</p>
+                </ChoiceGroup>
+
+                <ChoiceGroup id="budget" legend={cd.budgetLabel} error={errorFor("budget")}>
+                  <div className="flex flex-wrap gap-2.5">
+                    {budgetOptions.map((b) => (
+                      <Chip key={b} compact selected={d.budget === b} onClick={() => set("budget", b)}>
+                        {b}
+                      </Chip>
+                    ))}
+                  </div>
+                  {isEngagement && d.stone === "natural" && (
+                    <p className="text-xs text-beto-gray/80 mt-3 leading-relaxed">{cd.naturalBudgetNote}</p>
+                  )}
+                </ChoiceGroup>
+
+                <ChoiceGroup id="timeline" legend={cd.timelineLabel} optional={cd.timelineOpt}>
+                  <div className="flex flex-wrap gap-2.5">
+                    {cd.timelines.map((t) => (
+                      <Chip key={t} compact selected={d.timeline === t} onClick={() => set("timeline", d.timeline === t ? "" : t)}>
+                        {t}
+                      </Chip>
+                    ))}
+                  </div>
+                </ChoiceGroup>
+              </>
+            )}
+
+            {/* STEP 2: Estimate (before contact details) */}
+            {step === 2 && (
+              <>
+                <h2 ref={headingRef} tabIndex={-1} className={stepHeading}>{cd.step2Title}</h2>
+                <p className="text-sm text-beto-gray mb-10">{cd.step2Desc}</p>
+
+                {showPrice ? (
+                  <div className="bg-beto-black text-white p-8 sm:p-10 mb-8">
+                    <p className="text-label text-beto-gold mb-4">{cd.estimateLabel}</p>
+                    <div className="flex flex-col gap-2 mb-6">
+                      {(fromPrices ?? []).map((p, i) => (
+                        <motion.div
+                          key={p.karat}
+                          initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
+                          animate={{ opacity: 1, y: 0, transition: { duration: 0.4, ease: EASE_OUT, delay: 0.15 + i * 0.08 } }}
+                          className="font-display text-3xl sm:text-4xl font-light lining-nums"
+                        >
+                          <span className="text-white/70 text-base font-sans mr-2">{cd.estimateFrom}</span>
+                          {money(p.price)}
+                          <span className="text-white/70 text-base font-sans ml-2">
+                            {cd.estimateIn.replace("{k}", cd.metalKarats[p.karat])}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
+                    <p className="text-xs text-white/70 leading-relaxed mb-3">{cd.estimateDisclaimer}</p>
+                    <p className="text-xs text-beto-gold leading-relaxed">{cd.estimateIncludes}</p>
+                  </div>
+                ) : hourPromise ? (
+                  <div className="bg-beto-black text-white p-8 sm:p-10 mb-8">
+                    <Clock size={22} className="text-beto-gold mb-4" aria-hidden />
+                    <h3 className="font-display text-2xl sm:text-3xl font-light mb-3 text-balance">{cd.estimateHourTitle}</h3>
+                    <p className="text-sm text-white/75 leading-relaxed mb-4">
+                      {images.length > 0 ? cd.estimateHourImage : cd.estimateHourGeneric}
+                    </p>
+                    <p className="text-xs text-beto-gold leading-relaxed">{cd.estimateIncludes}</p>
+                  </div>
+                ) : (
+                  <div className="bg-beto-black text-white p-8 sm:p-10 mb-8">
+                    <h3 className="font-display text-2xl sm:text-3xl font-light mb-3 text-balance">{cd.estimateOtherTitle}</h3>
+                    <p className="text-sm text-white/75 leading-relaxed">{cd.estimateOtherBody}</p>
+                  </div>
+                )}
+
+                <dl className="bg-beto-white border border-beto-gray-subtle/60 divide-y divide-beto-gray-subtle/50 mb-8">
+                  {recap.map((row) => (
+                    <div key={row.label} className="flex justify-between items-center gap-6 px-6 py-4">
+                      <dt className="text-xs font-medium tracking-wide text-beto-gray/80">{row.label}</dt>
+                      <dd className="text-sm text-beto-black font-medium text-right">{row.value || "—"}</dd>
+                    </div>
+                  ))}
+                </dl>
+
+                <div className="border border-beto-gray-subtle/60 bg-beto-white p-6 sm:p-8">
+                  <h3 className="text-label text-beto-black mb-4">{cd.nextStepsTitle}</h3>
+                  <ol className="flex flex-col gap-3">
+                    {cd.nextSteps.map((s, i) => (
+                      <li key={s} className="flex gap-3 text-sm text-beto-gray leading-relaxed">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-beto-gold text-[11px] font-medium text-beto-black">
+                          {i + 1}
+                        </span>
+                        {s}
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              </>
+            )}
+
+            {/* STEP 3: Contact details (Enter submits) */}
+            {step === CONTACT_STEP && (
+              <form id={CONTACT_FORM_ID} noValidate onSubmit={handleSubmit}>
+                <h2 ref={headingRef} tabIndex={-1} className={stepHeading}>{cd.step3Title}</h2>
+                <p className="text-sm text-beto-gray mb-2">{cd.step3Desc}</p>
+                <p className="text-xs text-beto-gray/80 mb-10">
+                  <span aria-hidden className="text-beto-gold-dark">*</span> {cd.required}
+                </p>
+                <div className="flex flex-col gap-6">
+                  {textFields.map((field) => {
+                    const error = errorFor(field.id);
+                    const value = d[field.id];
+                    return (
+                      <div key={field.id}>
+                        <label htmlFor={`field-${field.id}`} className="text-xs font-medium text-beto-black tracking-wide mb-2 block">
+                          {field.label}
+                          {field.required ? (
+                            <span aria-hidden className="text-beto-gold-dark ml-0.5">*</span>
+                          ) : (
+                            <span className="text-beto-gray/80 font-normal"> {cd.notesOpt}</span>
+                          )}
                         </label>
                         <input
-                          id="lab-color-detail"
-                          type="text"
-                          value={labColorDetail}
-                          onChange={(e) => setLabColorDetail(e.target.value)}
-                          placeholder={cd.labColorDetailPlaceholder}
-                          className="w-full px-5 py-3.5 border border-beto-gray-subtle/60 bg-beto-white text-sm text-beto-black placeholder:text-beto-gray-light focus:outline-none focus:border-beto-gold transition-colors"
+                          id={`field-${field.id}`}
+                          type={field.type}
+                          inputMode={field.inputMode}
+                          autoComplete={field.autoComplete}
+                          enterKeyHint={field.id === "phone" ? "send" : "next"}
+                          required={field.required}
+                          aria-invalid={error ? true : undefined}
+                          aria-describedby={error ? `${field.id}-error` : undefined}
+                          value={value}
+                          onChange={(e) => set(field.id, e.target.value)}
+                          onBlur={() => {
+                            if (value.trim()) setTouched((t) => ({ ...t, [field.id]: true }));
+                          }}
+                          placeholder={field.placeholder}
+                          className={cn(
+                            inputClass,
+                            error ? "border-red-600 shadow-[inset_0_0_0_1px_#dc2626]" : inputIdle
+                          )}
                         />
+                        <FieldError id={`${field.id}-error`} message={error} />
                       </div>
-                    )}
-                  </div>
-                )}
-              </div>
+                    );
+                  })}
 
-              {stone && (isEngagement || stone !== "none") && (
-                <div className="mb-10">
-                  <FieldLabel optional={cd.shapeOpt}>{cd.shapeLabel}</FieldLabel>
-                  <div className="flex flex-wrap gap-3">
-                    {cd.shapes.map((s) => (
-                      <Chip key={s} compact selected={shape === s} onClick={() => setShape(shape === s ? "" : s)}>
-                        {s}
-                      </Chip>
-                    ))}
-                  </div>
+                  <fieldset className="min-w-0">
+                    <legend className="text-xs font-medium text-beto-black tracking-wide mb-3">{cd.contactMethodLabel}</legend>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      {CONTACTS.map((id) => (
+                        <Chip key={id} compact selected={d.contact === id} onClick={() => set("contact", id)}>
+                          {cd.contacts[id]}
+                        </Chip>
+                      ))}
+                    </div>
+                  </fieldset>
                 </div>
-              )}
 
-              {askCarat && (
-                <div className="mb-10">
-                  <FieldLabel>{cd.caratLabel}</FieldLabel>
-                  <div className="flex flex-wrap gap-3">
-                    {ENGAGEMENT_CARATS.map((c) => (
-                      <Chip key={c} compact selected={carat === c} onClick={() => setCarat(c)}>
-                        {caratText(c)}
-                      </Chip>
-                    ))}
-                    <Chip compact selected={carat === "unsure"} onClick={() => setCarat("unsure")}>
-                      {cd.caratUnsure}
-                    </Chip>
-                  </div>
-                </div>
-              )}
-
-              <div className="mb-10">
-                <FieldLabel>{cd.metalColorLabel}</FieldLabel>
-                <div className="grid grid-cols-3 gap-3">
-                  {METAL_COLORS.map((id) => (
-                    <Chip key={id} selected={metalColor === id} onClick={() => setMetalColor(id)}>
-                      {cd.metalColors[id]}
-                    </Chip>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mb-10">
-                <FieldLabel>{cd.metalKaratLabel}</FieldLabel>
-                <div className="flex flex-wrap gap-3">
-                  {KARATS.map((id) => (
-                    <Chip key={id} compact selected={karat === id} onClick={() => setKarat(id)}>
-                      {cd.metalKarats[id]}
-                    </Chip>
-                  ))}
-                </div>
-                <p className="text-xs text-beto-gray-light mt-3 leading-relaxed">{cd.metalKaratHint}</p>
-              </div>
-
-              <div className="mb-10">
-                <FieldLabel>{cd.budgetLabel}</FieldLabel>
-                <div className="flex flex-wrap gap-3">
-                  {budgetOptions.map((b) => (
-                    <Chip key={b} compact selected={budget === b} onClick={() => setBudget(b)}>
-                      {b}
-                    </Chip>
-                  ))}
-                </div>
-                {isEngagement && stone === "natural" && (
-                  <p className="text-xs text-beto-gray-light mt-3 leading-relaxed">{cd.naturalBudgetNote}</p>
-                )}
-              </div>
-
-              <div className="mb-10">
-                <FieldLabel optional={cd.timelineOpt}>{cd.timelineLabel}</FieldLabel>
-                <div className="flex flex-wrap gap-3">
-                  {cd.timelines.map((t) => (
-                    <Chip key={t} compact selected={timeline === t} onClick={() => setTimeline(timeline === t ? "" : t)}>
-                      {t}
-                    </Chip>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          )}
-
-          {/* STEP 2: Estimate (before contact details) */}
-          {step === 2 && (
-            <motion.div key="step2" {...stepMotion}>
-              <h2 className="font-display text-beto-black text-3xl font-light mb-2">{cd.step2Title}</h2>
-              <p className="text-sm text-beto-gray mb-10">{cd.step2Desc}</p>
-
-              {showPrice ? (
-                <div className="bg-beto-black text-white p-8 sm:p-10 mb-8">
-                  <p className="text-label text-beto-gold mb-4">{cd.estimateLabel}</p>
-                  <div className="flex flex-col gap-2 mb-6">
-                    {(fromPrices ?? []).map((p) => (
-                      <div key={p.karat} className="font-display text-3xl sm:text-4xl font-light lining-nums">
-                        <span className="text-white/60 text-base font-sans mr-2">{cd.estimateFrom}</span>
-                        {money(p.price)}
-                        <span className="text-white/60 text-base font-sans ml-2">
-                          {cd.estimateIn.replace("{k}", cd.metalKarats[p.karat])}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="text-xs text-white/60 leading-relaxed mb-3">{cd.estimateDisclaimer}</p>
-                  <p className="text-xs text-beto-gold leading-relaxed">{cd.estimateIncludes}</p>
-                </div>
-              ) : hourPromise ? (
-                <div className="bg-beto-black text-white p-8 sm:p-10 mb-8">
-                  <Clock size={22} className="text-beto-gold mb-4" aria-hidden />
-                  <h3 className="font-display text-2xl sm:text-3xl font-light mb-3">{cd.estimateHourTitle}</h3>
-                  <p className="text-sm text-white/70 leading-relaxed mb-4">
-                    {images.length > 0 ? cd.estimateHourImage : cd.estimateHourGeneric}
-                  </p>
-                  <p className="text-xs text-beto-gold leading-relaxed">{cd.estimateIncludes}</p>
-                </div>
-              ) : (
-                <div className="bg-beto-black text-white p-8 sm:p-10 mb-8">
-                  <h3 className="font-display text-2xl sm:text-3xl font-light mb-3">{cd.estimateOtherTitle}</h3>
-                  <p className="text-sm text-white/70 leading-relaxed">{cd.estimateOtherBody}</p>
-                </div>
-              )}
-
-              <div className="bg-beto-white border border-beto-gray-subtle/40 divide-y divide-beto-gray-subtle/30 mb-8">
-                {recap.map((row) => (
-                  <div key={row.label} className="flex justify-between items-center gap-6 px-6 py-4">
-                    <span className="text-xs font-medium tracking-wide text-beto-gray-light">{row.label}</span>
-                    <span className="text-sm text-beto-black font-medium text-right">{row.value || "—"}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="border border-beto-gray-subtle/40 bg-beto-white p-6 sm:p-8">
-                <p className="text-label text-beto-gold mb-4">{cd.nextStepsTitle}</p>
-                <ol className="flex flex-col gap-3">
-                  {cd.nextSteps.map((s, i) => (
-                    <li key={s} className="flex gap-3 text-sm text-beto-gray leading-relaxed">
-                      <span className="text-beto-gold font-medium shrink-0">{i + 1}.</span>
-                      {s}
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </motion.div>
-          )}
-
-          {/* STEP 3: Contact details + submit */}
-          {step === 3 && (
-            <motion.div key="step3" {...stepMotion}>
-              <h2 className="font-display text-beto-black text-3xl font-light mb-2">{cd.step3Title}</h2>
-              <p className="text-sm text-beto-gray mb-10">{cd.step3Desc}</p>
-              <div className="flex flex-col gap-5">
-                {[
-                  { id: "fullName", label: cd.fullName, type: "text", value: fullName, set: setFullName, placeholder: cd.fullNamePlaceholder, autoComplete: "name" },
-                  { id: "email", label: cd.emailAddress, type: "email", value: email, set: setEmail, placeholder: cd.emailPlaceholder, autoComplete: "email" },
-                  { id: "phone", label: cd.phoneNumber, type: "tel", value: phone, set: setPhone, placeholder: cd.phonePlaceholder, autoComplete: "tel" },
-                ].map((field) => (
-                  <div key={field.id}>
-                    <label htmlFor={`cd-${field.id}`} className="text-xs font-medium text-beto-black tracking-wide mb-2 block">
-                      {field.label}
-                    </label>
-                    <input
-                      id={`cd-${field.id}`}
-                      type={field.type}
-                      autoComplete={field.autoComplete}
-                      value={field.value}
-                      onChange={(e) => field.set(e.target.value)}
-                      placeholder={field.placeholder}
-                      className="w-full px-5 py-4 border border-beto-gray-subtle/60 bg-beto-white text-sm text-beto-black placeholder:text-beto-gray-light focus:outline-none focus:border-beto-gold transition-colors"
-                    />
-                    {field.id === "phone" && phoneNeeded && (
-                      <p className="text-xs text-beto-gray-light mt-2">{cd.phoneRequired}</p>
-                    )}
-                  </div>
-                ))}
-
-                <div>
-                  <p className="text-xs font-medium text-beto-black tracking-wide mb-3">{cd.contactMethodLabel}</p>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    {CONTACTS.map((id) => (
-                      <button
-                        key={id}
-                        type="button"
-                        onClick={() => setContact(id)}
-                        aria-pressed={contact === id}
-                        className={cn(
-                          "px-4 py-3 border text-sm transition-all duration-200",
-                          contact === id
-                            ? "border-beto-gold bg-beto-gold/10 text-beto-black"
-                            : "border-beto-gray-subtle bg-beto-white text-beto-gray hover:border-beto-gold/60"
-                        )}
+                <p className="text-xs text-beto-gray/80 mt-8 text-center">{cd.secureNote}</p>
+                <div aria-live="assertive">
+                  {status === "error" && (
+                    <div role="alert" className="text-sm text-red-800 bg-red-50 border border-red-200 px-4 py-3 mt-4 text-center leading-relaxed">
+                      <p>{cd.errorMessage}</p>
+                      <a
+                        href="mailto:betojewlz@gmail.com"
+                        className={cn("inline-block mt-1 underline underline-offset-2 font-medium", focusRing)}
                       >
-                        {cd.contacts[id]}
-                      </button>
-                    ))}
-                  </div>
+                        {cd.errorEmailCta}
+                      </a>
+                    </div>
+                  )}
                 </div>
-              </div>
+              </form>
+            )}
 
-              <div className="mt-10">
-                <Magnetic className="block w-full" strength={0.15}>
+            {/* STEP 4: Booking right away */}
+            {step === SUCCESS_STEP && status === "success" && (
+              <div className="flex flex-col gap-4">
+                <h2 ref={headingRef} tabIndex={-1} className="sr-only">
+                  {cd.steps[SUCCESS_STEP]}
+                </h2>
+                <p
+                  role="status"
+                  className="flex items-start gap-2.5 text-sm text-green-800 bg-green-50 border border-green-200 px-5 py-4 leading-relaxed"
+                >
+                  <CheckCircle2 size={18} className="shrink-0 mt-px" aria-hidden />
+                  {successText}
+                </p>
+                <CalendlyNextStep
+                  name={d.fullName}
+                  email={d.email}
+                  fallback={hourPromise ? cd.successFallbackHour : undefined}
+                />
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation: sticky in the thumb zone on mobile, inline on desktop */}
+        {step < SUCCESS_STEP && (
+          <div className="sticky bottom-0 z-20 -mx-6 px-6 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] mt-10 bg-beto-offwhite/95 backdrop-blur-sm border-t border-beto-gray-subtle md:static md:mx-0 md:px-0 md:pt-8 md:pb-0 md:bg-transparent md:backdrop-blur-none">
+            <div className="flex items-center justify-between gap-4">
+              <button
+                type="button"
+                onClick={() => goTo(Math.max(0, step - 1))}
+                className={cn(
+                  "min-h-11 min-w-11 px-1 text-xs font-medium tracking-widest uppercase text-beto-gray hover:text-beto-black transition-colors duration-200 shrink-0",
+                  pressable,
+                  focusRing,
+                  step === 0 && "invisible"
+                )}
+              >
+                {step === CONTACT_STEP ? (
+                  <>
+                    <span className="sm:hidden" aria-hidden>
+                      ←
+                    </span>
+                    <span className="max-sm:sr-only">{cd.backButton}</span>
+                  </>
+                ) : (
+                  cd.backButton
+                )}
+              </button>
+
+              {step < CONTACT_STEP ? (
+                <button
+                  type="button"
+                  onClick={handleContinue}
+                  disabled={preparing > 0}
+                  className={cn(
+                    "min-h-12 px-8 bg-beto-black text-white text-xs font-medium uppercase tracking-widest hover:bg-beto-gold hover:text-beto-black transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed",
+                    pressable,
+                    focusRing
+                  )}
+                >
+                  {preparing > 0 ? cd.uploadPreparing : cd.continueButton}
+                </button>
+              ) : (
+                <Magnetic className="flex-1 md:flex-none" strength={0.15}>
                   <button
-                    type="button"
-                    onClick={handleSubmit}
-                    disabled={status === "sending" || !isStepValid()}
-                    className="w-full py-5 bg-beto-gold text-beto-black text-xs font-medium uppercase tracking-[0.2em] hover:bg-beto-gold-light transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    type="submit"
+                    form={CONTACT_FORM_ID}
+                    disabled={status === "sending"}
+                    aria-busy={status === "sending"}
+                    className={cn(
+                      "w-full min-h-12 px-3 md:px-10 bg-beto-gold text-beto-black text-[11px] sm:text-xs font-medium uppercase tracking-[0.06em] sm:tracking-[0.2em] leading-snug hover:bg-beto-gold-light transition-colors duration-300 disabled:opacity-60 disabled:cursor-wait inline-flex items-center justify-center gap-2",
+                      pressable,
+                      focusRing
+                    )}
                   >
+                    {status === "sending" && <Loader2 size={14} className="motion-safe:animate-spin" aria-hidden />}
                     {status === "sending" ? cd.sending : cd.secureButton}
                   </button>
                 </Magnetic>
-                <p className="text-xs text-beto-gray-light mt-4 text-center">{cd.secureNote}</p>
-                {status === "error" && (
-                  <p className="text-sm text-red-700 bg-red-50 border border-red-200 px-4 py-3 mt-4 text-center">
-                    {cd.errorMessage}
-                  </p>
-                )}
-              </div>
-            </motion.div>
-          )}
-
-          {/* STEP 4: Booking right away */}
-          {step === 4 && status === "success" && (
-            <motion.div key="step4" {...stepMotion} className="flex flex-col gap-4">
-              <p className="text-sm text-green-800 bg-green-50 border border-green-200 px-4 py-4 text-center">
-                {successText}
-              </p>
-              <CalendlyNextStep
-                name={fullName}
-                email={email}
-                fallback={hourPromise ? cd.successFallbackHour : undefined}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Navigation */}
-        {step < 4 && (
-          <div className="flex items-center justify-between mt-10 pt-8 border-t border-beto-gray-subtle/40">
-            <button
-              type="button"
-              onClick={() => goTo(Math.max(0, step - 1))}
-              className={cn(
-                "text-xs font-medium tracking-widest uppercase text-beto-gray hover:text-beto-black transition-colors",
-                step === 0 && "invisible"
               )}
-            >
-              {cd.backButton}
-            </button>
-
-            {step < 3 && (
-              <button
-                type="button"
-                onClick={() => goTo(step + 1)}
-                disabled={!isStepValid()}
-                className="px-8 py-3.5 bg-beto-black text-white text-xs font-medium uppercase tracking-widest disabled:opacity-40 disabled:cursor-not-allowed hover:bg-beto-gold transition-colors duration-300"
-              >
-                {cd.continueButton}
-              </button>
-            )}
+            </div>
           </div>
         )}
       </div>
