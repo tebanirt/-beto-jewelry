@@ -27,6 +27,13 @@ export const t = {
       stay: "Stay on this page",
       fallback: "Prefer to wait? We'll still reply personally within 1 business day.",
     },
+    bookingConfirmed: {
+      eyebrow: "Consultation booked",
+      title: "Thank you — your consultation is confirmed.",
+      titleWithName: "thank you — your consultation is confirmed.",
+      body: "You'll receive a confirmation email from Calendly with all the details. To make the most of our time together, reply to it with what you have in mind: type of jewelry, stone (natural or lab), metal (14k or 18k), and an inspiration photo if you have one. Rayane prepares a first 3D design before you meet.",
+      cta: "Back to the site",
+    },
     nav: {
       collections: "Collections",
       collectionsDesc: "Browse our work",
@@ -772,6 +779,13 @@ export const t = {
       redirecting: "Redirection vers le calendrier dans {s} s…",
       stay: "Rester sur cette page",
       fallback: "Vous préférez attendre ? Nous vous répondrons personnellement d'ici 1 jour ouvrable.",
+    },
+    bookingConfirmed: {
+      eyebrow: "Consultation réservée",
+      title: "Merci — votre consultation est confirmée.",
+      titleWithName: "merci — votre consultation est confirmée.",
+      body: "Vous recevrez un courriel de confirmation de Calendly avec tous les détails. Pour profiter au maximum de notre rencontre, répondez-y avec ce que vous avez en tête : type de bijou, pierre (naturelle ou de laboratoire), métal (14k ou 18k), et une photo d'inspiration si vous en avez une. Rayane prépare un premier design 3D avant votre rencontre.",
+      cta: "Retour au site",
     },
     nav: {
       collections: "Collections",
