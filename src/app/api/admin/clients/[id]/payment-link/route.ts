@@ -12,7 +12,8 @@ export async function POST(request: Request, ctx: RouteContext<"/api/admin/clien
   const body = (await request.json()) as { kind?: string; amount?: number; reference?: string };
 
   const kind: PaymentKind = body.kind === "solde" ? "solde" : "depot";
-  const amount = kind === "depot" ? DEPOSIT_AMOUNT_CAD : Number(body.amount);
+  // Le dépôt peut différer du montant standard (ex. client honoré à l'ancien prix de 200 $).
+  const amount = kind === "depot" && body.amount === undefined ? DEPOSIT_AMOUNT_CAD : Number(body.amount);
   if (!Number.isFinite(amount) || amount < 1 || amount > 100000) {
     return NextResponse.json({ error: "Montant invalide" }, { status: 400 });
   }

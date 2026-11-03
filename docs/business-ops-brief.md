@@ -16,7 +16,7 @@ Rayane Tebani, fondateur de Beto Jewelry — 438-874-5759, Montréal. **Courriel
 
 ## 3. Positionnement de marque (résumé — voir `docs/design-brief.md` pour la direction visuelle complète)
 
-Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un tunnel de conversion basé sur un service : consultation → dépôt de design (250$ — passé de 200$ à 250$ le 3 nov. 2026, confirmé par Rayane ; lien de paiement Stripe généré depuis /admin/clients) → design 3D 48h → révisions → production ~1,5 semaine → livraison.
+Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un tunnel de conversion basé sur un service : consultation → dépôt de design (250$ — passé de 200$ à 250$ le 3 nov. 2026, confirmé par Rayane ; **les clients ayant déjà reçu une soumission ou un courriel à 200$ gardent 200$ s’ils confirment** (ex. Sabrina Montembeault) ; lien de paiement Stripe généré depuis /admin/clients, montant du dépôt modifiable pour ces cas) → design 3D 48h → révisions → production ~1,5 semaine → livraison.
 
 ## 4. CRM (Supabase)
 

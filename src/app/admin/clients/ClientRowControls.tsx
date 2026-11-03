@@ -140,6 +140,7 @@ export function FollowupControls({
 
 /** Génère un lien Stripe à usage unique que Rayane colle lui-même dans son courriel. */
 export function PaymentLinkControls({ clientId, depositAmount }: { clientId: string; depositAmount: number }) {
+  const [deposit, setDeposit] = useState(String(depositAmount));
   const [amount, setAmount] = useState("");
   const [reference, setReference] = useState("");
   const [link, setLink] = useState("");
@@ -152,7 +153,7 @@ export function PaymentLinkControls({ clientId, depositAmount }: { clientId: str
       const res = await fetch(`/api/admin/clients/${clientId}/payment-link`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ kind, amount: Number(amount), reference }),
+        body: JSON.stringify({ kind, amount: Number(kind === "depot" ? deposit : amount), reference }),
       });
       const data = (await res.json()) as { url?: string; error?: string };
       if (!res.ok || !data.url) throw new Error(data.error || String(res.status));
@@ -167,14 +168,26 @@ export function PaymentLinkControls({ clientId, depositAmount }: { clientId: str
     <div className="flex flex-col gap-3 border-t border-beto-gray-subtle/40 pt-5 mt-5">
       <label className="text-xs font-medium text-beto-black tracking-wide">Lien de paiement Stripe</label>
       <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-        <button
-          type="button"
-          disabled={busy}
-          onClick={() => create("depot")}
-          className="text-xs font-medium uppercase tracking-widest text-beto-gold hover:text-beto-black disabled:opacity-40"
-        >
-          Dépôt de design ({depositAmount} $)
-        </button>
+        <div className="flex flex-wrap items-center gap-2">
+          <input
+            type="number"
+            min={1}
+            step="1"
+            value={deposit}
+            onChange={(e) => setDeposit(e.target.value)}
+            aria-label="Montant du dépôt ($)"
+            title="250 $ par défaut — 200 $ pour un client déjà soumissionné à l'ancien prix"
+            className="w-20 px-3 py-2 border border-beto-gray-subtle/60 bg-beto-offwhite text-sm focus:outline-none focus:border-beto-gold"
+          />
+          <button
+            type="button"
+            disabled={busy || !deposit}
+            onClick={() => create("depot")}
+            className="text-xs font-medium uppercase tracking-widest text-beto-gold hover:text-beto-black disabled:opacity-40"
+          >
+            Lien pour le dépôt
+          </button>
+        </div>
         <div className="flex flex-wrap gap-2">
           <input
             type="number"
