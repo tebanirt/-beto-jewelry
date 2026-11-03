@@ -137,9 +137,13 @@ export async function POST(request: Request) {
 
     // Best-effort CRM sync: never fail or slow down the lead's email because
     // Supabase isn't configured yet or is briefly unreachable.
+    // The CRM id lets the deposit payment (Stripe client_reference_id) land on
+    // the right client automatically.
+    let ref: string | undefined;
     try {
       const contact = extractContact(fields);
       const client = await upsertClient({ ...contact, source: `site-${formType}` });
+      ref = client?.id;
       await recordSubmission({
         clientId: client?.id ?? null,
         formType,
@@ -149,7 +153,7 @@ export async function POST(request: Request) {
       console.error("CRM sync error:", crmError);
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, ...(ref ? { ref } : {}) });
   } catch (err) {
     console.error("Send email error:", err);
     return NextResponse.json({ error: "Server error" }, { status: 500 });

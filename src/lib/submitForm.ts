@@ -5,6 +5,8 @@ export type LeadFormOptions = {
   attachments?: LeadAttachment[];
   /** Answer promised to the visitor (price within 1 h, or quote within 24 h): flagged in the email subject. */
   priority?: "1h" | "24h";
+  /** Receives the CRM client id when the server returns one (used for the deposit payment link). */
+  onRef?: (ref: string) => void;
 };
 
 /**
@@ -31,7 +33,13 @@ export async function submitLeadForm(
         headers: { "Content-Type": "application/json" },
         body,
       });
-      if (res.ok) return true;
+      if (res.ok) {
+        if (options.onRef) {
+          const data = (await res.json().catch(() => null)) as { ref?: unknown } | null;
+          if (typeof data?.ref === "string") options.onRef(data.ref);
+        }
+        return true;
+      }
     } catch {
       // network error — fall through to retry
     }

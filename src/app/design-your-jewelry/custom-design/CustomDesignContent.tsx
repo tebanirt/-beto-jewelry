@@ -278,6 +278,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(1);
   const [status, setStatus] = useState<Status>("idle");
+  const [crmRef, setCrmRef] = useState("");
   const [draft, setDraft] = useState<Draft>(EMPTY_DRAFT);
   const [restored, setRestored] = useState(false);
   const [attempted, setAttempted] = useState<Record<number, boolean>>({});
@@ -635,6 +636,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
     const ok = await submitLeadForm("custom-design", fields, {
       attachments: images.map(({ filename, contentType, content }) => ({ filename, contentType, content })),
       priority: responseMode === "hour" ? "1h" : responseMode === "day" ? "24h" : undefined,
+      onRef: setCrmRef,
     });
     if (ok) {
       clearDraft();
@@ -685,6 +687,16 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
   const progress = step / (totalSteps - 1);
   const stepHeading = "font-display text-beto-black text-3xl font-light mb-2 text-balance outline-none";
 
+  // Stripe Payment Link: email prefilled, and the CRM id so the payment is
+  // matched to this client automatically (client_reference_id).
+  const depositHref = (() => {
+    if (!DEPOSIT_PAYMENT_URL) return "";
+    const params = new URLSearchParams();
+    if (d.email.trim()) params.set("prefilled_email", d.email.trim());
+    if (crmRef) params.set("client_reference_id", crmRef);
+    const qs = params.toString();
+    return qs ? `${DEPOSIT_PAYMENT_URL}${DEPOSIT_PAYMENT_URL.includes("?") ? "&" : "?"}${qs}` : DEPOSIT_PAYMENT_URL;
+  })();
   const [helpBefore, helpAfter] = cd.helpLine.split("{phone}");
   const helpLine = (
     <p className="text-xs text-beto-gray/80 mt-10 leading-relaxed">
@@ -1253,7 +1265,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                     <h3 className="font-display text-2xl font-light text-beto-black mb-2 text-balance">{cd.depositCtaTitle}</h3>
                     <p className="text-sm text-beto-gray leading-relaxed mb-5">{cd.depositCtaBody}</p>
                     <a
-                      href={`${DEPOSIT_PAYMENT_URL}${DEPOSIT_PAYMENT_URL.includes("?") ? "&" : "?"}prefilled_email=${encodeURIComponent(d.email.trim())}`}
+                      href={depositHref}
                       onClick={() => trackFunnel("cta_click", SUCCESS_STEP, { target: "deposit" })}
                       className={cn(
                         "inline-flex min-h-12 items-center justify-center px-8 border border-beto-black text-xs font-medium uppercase tracking-widest text-beto-black hover:bg-beto-black hover:text-white transition-colors duration-300",

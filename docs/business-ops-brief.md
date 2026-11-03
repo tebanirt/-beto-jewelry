@@ -19,6 +19,14 @@ Rayane Tebani, fondateur de Beto Jewelry — 438-874-5759, Montréal. **Courriel
 
 Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un tunnel de conversion basé sur un service : consultation → dépôt de design (200$) → design 3D 48h → révisions → production ~2 semaines → livraison.
 
+## 3bis. Site web — formulaire « Commencer mon design » (confirmé par Rayane le 3 nov. 2026)
+
+- **Prix affichés seulement pour les bagues de fiançailles en diamant de laboratoire** (blanc ou de couleur), selon le carat, le style (solitaire, hidden halo + demi-éternité, hidden halo + trois-quarts éternité) et l'or (14K ou 18K). Ils sont calculés côté serveur à partir des coûts et des marges de Rayane, gardés dans la table privée Supabase `pricing_config` — **jamais dans ce dépôt (public) ni dans le navigateur**. Pour changer un coût ou une marge : modifier cette table, pas le code.
+- **Diamant naturel** : aucun prix, « à partir de 6 000 $ », soumission en 24 h maximum. **Avec une image d'inspiration** : prix en moins d'une heure, de 9 h à 21 h. **Autres pièces** : résumé + dépôt, soumission en 24 h maximum. Grillz : 10K, 14K ou 18K.
+- **Clients du site web** : dépôt de design de **250 $** (lien de paiement Stripe), **50 % à l'approbation du rendu 3D**, puis le solde à la remise.
+- **Consultation vidéo** (Zoom) réactivée dans Calendly le 3 nov. 2026, en plus des deux bureaux privés.
+- **Suivi anonyme des étapes** du formulaire (table `funnel_events`, sans nom, courriel, téléphone, IP ni témoin) ; tableau de bord `/admin/funnel` ; la rétro du dimanche analyse l'entonnoir et propose une modification du formulaire à tester chaque semaine.
+
 ## 4. CRM (Supabase)
 
 - Tables `clients` (statuts : `nouveau → consultation_reservee → consultation_faite → depot_recu → design → production → livre → perdu`) et `submissions`. Colonnes de suivi (26 oct. 2026) : `consultation_at`, `last_contact_at` (dernier message envoyé par Beto), `followup_count` (relances dans l'étape actuelle, remis à 0 à chaque changement de statut), `followups_paused`. Règles de relance codées dans `src/lib/followups.ts` (badge « Relance due » dans `/admin/clients`).
