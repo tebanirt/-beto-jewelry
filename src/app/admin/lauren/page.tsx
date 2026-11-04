@@ -100,7 +100,7 @@ export default async function TodayPage({ searchParams }: PageProps<"/admin/laur
                     messengerUrl={client?.messenger_url}
                     initial={order.status === "ready" ? "ready" : balance && balance > 0 && order.status === "delivered" ? "balance" : "update"}
                     orderStatus={order.status}
-                    balance={balance && balance > 0 ? money(balance) : undefined}
+                    balance={balance && balance > 0 ? balance : undefined}
                   />
                 </li>
               );

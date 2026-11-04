@@ -1,0 +1,41 @@
+import { NextResponse } from "next/server";
+import { getAdminSession } from "@/lib/adminSession";
+import { paymentsForMonth, validMonth } from "@/lib/paymentsReport";
+
+/** Month of payments as CSV for the accountant (opens in Excel / Numbers). */
+export async function GET(request: Request) {
+  const session = await getAdminSession();
+  if (!session) return NextResponse.json({ error: "Not signed in" }, { status: 401 });
+  const month = validMonth(new URL(request.url).searchParams.get("m"));
+  const { rows, error } = await paymentsForMonth(month);
+  if (error) return NextResponse.json({ error }, { status: 500 });
+
+  // Quotes every cell; a leading = + - @ is neutralised so a spreadsheet never runs it as a formula.
+  const cell = (v: unknown) => {
+    let s = v === null || v === undefined ? "" : String(v);
+    if (/^[=+\-@]/.test(s)) s = `'${s}`;
+    return `"${s.replace(/"/g, '""')}"`;
+  };
+  const lines = [
+    ["Date", "Client", "Order", "Type", "Method", "Amount (CAD)", "Receipt", "Recorded by", "Note"],
+    ...rows.map((p) => [
+      p.received_at,
+      p.order?.client?.full_name,
+      p.order?.description,
+      p.kind,
+      p.method,
+      Number(p.amount).toFixed(2),
+      p.receipt_number,
+      p.recorded_by,
+      p.note,
+    ]),
+  ];
+  const csv = "﻿" + lines.map((l) => l.map(cell).join(",")).join("\r\n");
+  return new NextResponse(csv, {
+    headers: {
+      "Content-Type": "text/csv; charset=utf-8",
+      "Content-Disposition": `attachment; filename="beto-payments-${month}.csv"`,
+      "Cache-Control": "no-store",
+    },
+  });
+}

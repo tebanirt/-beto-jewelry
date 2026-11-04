@@ -7,6 +7,7 @@ const TABS = [
   { href: "/admin/lauren", label: "Today" },
   { href: "/admin/lauren/price", label: "Price" },
   { href: "/admin/lauren/clients", label: "Clients" },
+  { href: "/admin/lauren/money", label: "Money" },
 ];
 
 export default function WorkspaceNav({ name, isOwner }: { name: string; isOwner: boolean }) {
@@ -39,7 +40,7 @@ export default function WorkspaceNav({ name, isOwner }: { name: string; isOwner:
           </button>
         </div>
       </div>
-      <nav className="grid grid-cols-3 border border-beto-gray-subtle bg-beto-white" aria-label="Workspace">
+      <nav className="grid grid-cols-4 border border-beto-gray-subtle bg-beto-white" aria-label="Workspace">
         {TABS.map((t) => (
           <Link
             key={t.href}

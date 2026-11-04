@@ -166,9 +166,15 @@ export function orderAlerts(orders: Order[], clients: Client[], now: Date): Orde
   return alerts.sort((a, b) => Number(b.urgent) - Number(a.urgent));
 }
 
-export function money(n: number | null | undefined) {
+/** "$2,400" in English, "2 400 $" in French; cents only when there are some. */
+export function money(n: number | null | undefined, lang: "en" | "fr" = "en") {
   if (n === null || n === undefined) return "—";
-  return new Intl.NumberFormat("en-CA", { style: "currency", currency: "CAD", maximumFractionDigits: 2 }).format(n);
+  return new Intl.NumberFormat(lang === "fr" ? "fr-CA" : "en-CA", {
+    style: "currency",
+    currency: "CAD",
+    minimumFractionDigits: Number.isInteger(n) ? 0 : 2,
+    maximumFractionDigits: 2,
+  }).format(n);
 }
 
 export function firstName(client: Pick<Client, "full_name"> | undefined) {

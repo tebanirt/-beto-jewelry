@@ -28,7 +28,7 @@ export default async function AdminClientDetailPage({ params }: { params: Promis
   const { client, submissions } = result;
 
   return (
-    <section className="min-h-screen bg-beto-offwhite px-5 py-10" style={{ paddingTop: "calc(var(--nav-height, 0px) + 2.5rem)" }}>
+    <section className="min-h-screen bg-beto-offwhite px-5 py-10" style={{ paddingTop: "2.5rem" }}>
       <div className="max-w-3xl mx-auto">
         <Link href="/admin/clients" className="text-xs text-beto-gray-light hover:text-beto-black transition-colors">
           ← Retour à la liste

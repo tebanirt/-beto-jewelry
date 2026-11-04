@@ -135,7 +135,7 @@ export default async function ClientCard({ params }: PageProps<"/admin/lauren/cl
                 messengerUrl={client.messenger_url}
                 initial={o.status === "ready" ? "ready" : "update"}
                 orderStatus={o.status}
-                balance={balance && balance > 0 ? money(balance) : undefined}
+                balance={balance && balance > 0 ? balance : undefined}
               />
             </article>
           );

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { TEMPLATE_IDS, renderTemplate, templateLabel, STATUS_WORDS, type Lang, type TemplateId } from "@/lib/laurenTemplates";
-import { ORDER_STATUSES, PAYMENT_METHODS, MARKETPLACE_DEPOSIT, type Order, type OrderStatus } from "@/lib/workspace";
+import { ORDER_STATUSES, PAYMENT_METHODS, MARKETPLACE_DEPOSIT, money, type Order, type OrderStatus } from "@/lib/workspace";
 
 export const input =
   "w-full px-3 py-3 border border-beto-gray-subtle bg-beto-white text-base sm:text-sm text-beto-black placeholder:text-beto-gray-light focus:outline-none focus:border-beto-gold";
@@ -85,13 +85,13 @@ export function MessagePicker({
   messengerUrl?: string | null;
   initial?: TemplateId;
   orderStatus?: OrderStatus;
-  balance?: string;
+  balance?: number;
 }) {
   const [id, setId] = useState<TemplateId>(initial);
   const [lang, setLang] = useState<Lang>("en");
   const status = orderStatus ? STATUS_WORDS[orderStatus]?.[lang] : undefined;
   const [edited, setEdited] = useState<string | null>(null);
-  const text = edited ?? renderTemplate(id, lang, { name, status, balance });
+  const text = edited ?? renderTemplate(id, lang, { name, status, balance: balance ? money(balance, lang) : undefined });
 
   return (
     <div className="mt-3 border-t border-beto-gray-subtle pt-3">

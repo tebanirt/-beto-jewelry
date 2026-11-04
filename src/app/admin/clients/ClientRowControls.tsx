@@ -3,17 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { ClientStatus } from "@/lib/supabase";
-
-export const STATUS_OPTIONS: { value: ClientStatus; label: string }[] = [
-  { value: "nouveau", label: "Nouveau (pas réservé)" },
-  { value: "consultation_reservee", label: "Consultation réservée" },
-  { value: "consultation_faite", label: "Consultation faite, pas acheté" },
-  { value: "depot_recu", label: "Dépôt reçu" },
-  { value: "design", label: "Design en cours" },
-  { value: "production", label: "Production" },
-  { value: "livre", label: "Livré" },
-  { value: "perdu", label: "Perdu" },
-];
+import { STATUS_OPTIONS } from "@/lib/clientStatus";
 
 /** PATCH a client and report failures instead of failing silently. */
 async function patchClient(clientId: string, body: Record<string, unknown>): Promise<boolean> {

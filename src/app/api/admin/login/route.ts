@@ -32,7 +32,11 @@ export async function POST(request: Request) {
     }
   }
 
-  if (!session) return NextResponse.json({ error: "Mot de passe incorrect" }, { status: 401 });
+  if (!session) {
+    // Slows down password guessing (scrypt already costs time on staff logins).
+    await new Promise((r) => setTimeout(r, 800));
+    return NextResponse.json({ error: "Mot de passe incorrect" }, { status: 401 });
+  }
 
   const response = NextResponse.json({ success: true, role: session.role });
   response.cookies.set(ADMIN_SESSION_COOKIE, createSessionToken(session), {

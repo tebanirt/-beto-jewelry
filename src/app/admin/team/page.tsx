@@ -19,7 +19,7 @@ export default async function TeamPage() {
   const staff = (data ?? []) as StaffRow[];
 
   return (
-    <section className="min-h-screen bg-beto-offwhite px-5 py-10" style={{ paddingTop: "calc(var(--nav-height, 0px) + 2.5rem)" }}>
+    <section className="min-h-screen bg-beto-offwhite px-5 py-10" style={{ paddingTop: "2.5rem" }}>
       <div className="max-w-xl mx-auto">
         <Link href="/admin/clients" className="text-xs text-beto-gray-light hover:text-beto-gold">← Clients</Link>
         <p className="text-label text-beto-gold mt-6 mb-1">Beto Jewelry</p>

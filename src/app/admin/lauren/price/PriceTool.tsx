@@ -16,9 +16,9 @@ import { CopyText, ghostBtn, input } from "../ui";
 /** Rayane's business line (brief §1) — "Ask Rayane" opens a prefilled text. */
 const RAYANE_SMS = "+14388745759";
 
-const STONES: { value: PricedStone; en: string; fr: string }[] = [
-  { value: "lab", en: "Lab-grown diamond (white)", fr: "diamant de laboratoire" },
-  { value: "labColored", en: "Lab-grown coloured diamond", fr: "diamant de laboratoire de couleur" },
+const STONES: { value: PricedStone; en: string; msg: string; fr: string }[] = [
+  { value: "lab", en: "Lab-grown diamond (white)", msg: "lab-grown diamond", fr: "diamant de laboratoire" },
+  { value: "labColored", en: "Lab-grown coloured diamond", msg: "lab-grown coloured diamond", fr: "diamant de laboratoire de couleur" },
 ];
 const STYLES: { value: RingStyle; label: string; en: string; fr: string; hint: string }[] = [
   { value: "solitaire", label: "Solitaire", en: "solitaire", fr: "solitaire", hint: "Also the price for a cathedral solitaire." },
@@ -102,8 +102,8 @@ export default function PriceTool({ table }: { table: EngagementPriceTable | nul
     price === null || carat === null
       ? ""
       : lang === "en"
-        ? `For a ${carat} ct ${s.en} ${st.en}, in ${m.en}, the price is ${money(price)} (before tax). The stone is E colour, VVS2 clarity, with an IGI certificate. It includes one free resizing after you receive it, and cleaning and polishing for life. We start with a 3D design in about 48 hours, and the ring is ready about ${metal === "platinum" ? "3" : "2"} weeks after you approve it. The $${MARKETPLACE_DEPOSIT} deposit goes 100% toward your ring.`
-        : `Pour un ${s.fr} de ${String(carat).replace(".", ",")} ct, ${st.fr === "solitaire" ? "en solitaire" : st.fr}, en ${m.fr}, le prix est de ${money(price)} (avant taxes). La pierre est de couleur E, pureté VVS2, avec certificat IGI. Ça inclut une mise à grandeur gratuite après réception, et le nettoyage et polissage à vie. On commence par un design 3D en environ 48 heures, et la bague est prête environ ${metal === "platinum" ? "3" : "2"} semaines après votre approbation. Le dépôt de ${MARKETPLACE_DEPOSIT} $ est crédité à 100 % sur votre bague.`;
+        ? `For a ${carat} ct ${s.msg} ${st.en}, in ${m.en}, the price is ${money(price)} (before tax). The stone is E colour, VVS2 clarity, with an IGI certificate. It includes one free resizing after you receive it, and cleaning and polishing for life. We start with a 3D design in about 48 hours, and the ring is ready about ${metal === "platinum" ? "3" : "2"} weeks after you approve it. The $${MARKETPLACE_DEPOSIT} deposit goes 100% toward your ring.`
+        : `Pour un ${s.fr} de ${String(carat).replace(".", ",")} ct, ${st.fr === "solitaire" ? "en solitaire" : st.fr}, en ${m.fr}, le prix est de ${money(price, "fr")} (avant taxes). La pierre est de couleur E, pureté VVS2, avec certificat IGI. Ça inclut une mise à grandeur gratuite après réception, et le nettoyage et polissage à vie. On commence par un design 3D en environ 48 heures, et la bague est prête environ ${metal === "platinum" ? "3" : "2"} semaines après votre approbation. Le dépôt de ${MARKETPLACE_DEPOSIT} $ est crédité à 100 % sur votre bague.`;
 
   const askBody = `Price question from Lauren: ${askText || "(describe the ring)"}`;
 

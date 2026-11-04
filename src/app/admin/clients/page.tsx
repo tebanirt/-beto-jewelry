@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getSupabaseAdmin, type Client } from "@/lib/supabase";
-import { StatusSelect, LogoutButton, STATUS_OPTIONS } from "./ClientRowControls";
+import { StatusSelect, LogoutButton } from "./ClientRowControls";
+import { STATUS_OPTIONS } from "@/lib/clientStatus";
 import FollowupBadge from "./FollowupBadge";
 import { followupState } from "@/lib/followups";
 
@@ -34,14 +35,18 @@ export default async function AdminClientsPage() {
   })).filter((s) => s.count > 0);
 
   return (
-    <section className="min-h-screen bg-beto-offwhite px-5 py-10" style={{ paddingTop: "calc(var(--nav-height, 0px) + 2.5rem)" }}>
+    <section className="min-h-screen bg-beto-offwhite px-5 py-10" style={{ paddingTop: "2.5rem" }}>
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
             <p className="text-label text-beto-gold mb-1">Beto Jewelry</p>
             <h1 className="text-2xl font-medium text-beto-black">Clients ({clients.length})</h1>
           </div>
-          <LogoutButton />
+          <div className="flex items-center gap-4 text-xs">
+            <Link href="/admin/lauren" className="text-beto-gray-light hover:text-beto-black underline">Espace Lauren</Link>
+            <Link href="/admin/team" className="text-beto-gray-light hover:text-beto-black underline">Équipe</Link>
+            <LogoutButton />
+          </div>
         </div>
 
         {clients.length > 0 && (
