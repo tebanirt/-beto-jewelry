@@ -20,6 +20,8 @@ export async function PATCH(request: Request, ctx: RouteContext<"/api/admin/clie
     consultationAt?: string | null;
     followupsPaused?: boolean;
     logFollowup?: boolean;
+    salePrice?: number | null;
+    productionCost?: number | null;
   };
 
   const supabase = getSupabaseAdmin();
@@ -42,6 +44,16 @@ export async function PATCH(request: Request, ctx: RouteContext<"/api/admin/clie
     update.consultation_at = d.toISOString();
   }
   if (typeof body.followupsPaused === "boolean") update.followups_paused = body.followupsPaused;
+  for (const [key, column] of [["salePrice", "sale_price"], ["productionCost", "production_cost"]] as const) {
+    const value = body[key];
+    if (value === null) update[column] = null;
+    else if (value !== undefined) {
+      if (typeof value !== "number" || !Number.isFinite(value) || value < 0) {
+        return NextResponse.json({ error: "Montant invalide" }, { status: 400 });
+      }
+      update[column] = Math.round(value * 100) / 100;
+    }
+  }
 
   if (body.logFollowup) {
     // Relance faite à la main (SMS, Instagram, appel) : compte comme une relance.

@@ -1,6 +1,7 @@
 declare global {
   interface Window {
     fbq?: (...args: unknown[]) => void;
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
@@ -13,6 +14,10 @@ export function trackMetaLead(formType: string) {
   if (typeof window !== "undefined" && typeof window.fbq === "function") {
     window.fbq("track", "Lead", { content_name: formType });
   }
+  // Même événement dans Google Analytics, si le visiteur a accepté la mesure.
+  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    window.gtag("event", "generate_lead", { form_type: formType });
+  }
 }
 
 /**
@@ -24,5 +29,8 @@ export function trackMetaLead(formType: string) {
 export function trackMetaSchedule(contentName: string) {
   if (typeof window !== "undefined" && typeof window.fbq === "function") {
     window.fbq("track", "Schedule", { content_name: contentName });
+  }
+  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    window.gtag("event", "book_consultation", { content_name: contentName });
   }
 }

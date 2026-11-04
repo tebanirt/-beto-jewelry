@@ -65,7 +65,7 @@ _LABELS = {
         "thanks": "Merci pour votre confiance.",
         "legal_default": [
             "Prix avant taxes; les taxes applicables seront ajoutées, le cas échéant. Soumission valide 30 jours.",
-            "Un dépôt de 200 $ (entièrement crédité sur le prix final) est requis pour lancer le design 3D.",
+            "Un dépôt de 250 $ (entièrement crédité sur le prix final) est requis pour lancer le design 3D.",
         ],
     },
     "en": {
@@ -81,7 +81,7 @@ _LABELS = {
         "thanks": "Thank you for your trust.",
         "legal_default": [
             "Prices before tax; applicable taxes will be added where relevant. Quote valid for 30 days.",
-            "A $200 deposit (fully credited toward the final price) is required to begin the 3D design.",
+            "A $250 deposit (fully credited toward the final price) is required to begin the 3D design.",
         ],
     },
 }
@@ -198,6 +198,13 @@ def _draw_image_row(c, row, y, target_h=230, gap=24):
         widths.append(target_h * (iw / ih))
 
     total_w = sum(widths) + gap * (len(row) - 1)
+    # Images larges (ex. vue de face paysage) : reduire la rangee pour tenir dans les marges
+    max_w = X1 - X0
+    if total_w > max_w:
+        scale = (max_w - gap * (len(row) - 1)) / sum(widths)
+        widths = [w * scale for w in widths]
+        target_h *= scale
+        total_w = max_w
     x = X0 + (X1 - X0 - total_w) / 2
     img_top = y
     for (path, caption), w in zip(row, widths):

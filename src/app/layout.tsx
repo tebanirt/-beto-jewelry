@@ -3,8 +3,9 @@ import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
-import MetaPixel from "@/components/analytics/MetaPixel";
+import Analytics from "@/components/analytics/Analytics";
 import AttributionCapture from "@/components/analytics/AttributionCapture";
+import HideOnAdmin from "@/components/layout/HideOnAdmin";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -173,15 +174,21 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="bg-beto-white text-beto-black antialiased">
-        <MetaPixel />
-        <AttributionCapture />
+        <HideOnAdmin>
+          <Analytics />
+          <AttributionCapture />
+        </HideOnAdmin>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <Navigation />
+        <HideOnAdmin>
+          <Navigation />
+        </HideOnAdmin>
         <main>{children}</main>
-        <Footer />
+        <HideOnAdmin>
+          <Footer />
+        </HideOnAdmin>
       </body>
     </html>
   );

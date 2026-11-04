@@ -17,6 +17,12 @@ create table if not exists clients (
   unique (phone)
 );
 
+-- 3 nov. 2026 : attribution Meta + marge par pièce (interne seulement, jamais visible des clients).
+alter table clients
+  add column if not exists attribution text,
+  add column if not exists sale_price numeric(10,2),
+  add column if not exists production_cost numeric(10,2);
+
 create table if not exists submissions (
   id uuid primary key default gen_random_uuid(),
   client_id uuid references clients(id) on delete set null,
