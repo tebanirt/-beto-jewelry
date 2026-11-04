@@ -13,7 +13,7 @@ Rayane Tebani, fondateur de Beto Jewelry — 438-874-5759, Montréal. **Courriel
 - **Jamais envoyer un vrai courriel à un client** (`send_message`/`reply`/`forward`) — uniquement des brouillons Gmail (`create_draft`) que Rayane valide et envoie lui-même.
 - **Jamais confirmer/envoyer une facture sans que Rayane la confirme explicitement d'abord** — toujours lui montrer le PDF généré avant.
 - **Jamais changer le logo, la palette ou la mise en page des documents officiels** sans instruction explicite, même pour une « amélioration ».
-- Les marges et données financières internes ne sont **jamais visibles par les clients** — seulement par Rayane (dashboard admin protégé par mot de passe).
+- Les marges et données financières internes ne sont **jamais visibles par les clients** — seulement par Rayane **et Lauren** (décision de Rayane le 4 nov. 2026 : Lauren doit pouvoir tout voir), dans le dashboard admin protégé.
 
 ## 3. Positionnement de marque (résumé — voir `docs/design-brief.md` pour la direction visuelle complète)
 
@@ -73,6 +73,8 @@ Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un 
 - **Premier rendu 3D avant la consultation** : Rayane prépare toujours un premier rendu avant la rencontre, **à condition que le client ait rempli le formulaire** (type de bijou, coupe, carat, métal 14k/18k, couleur, inspiration) — sans ces infos, pas de rendu.
 - Parcours (décision de Rayane le 3 nov. 2026) : **la consultation reste gratuite**, en personne comme en vidéo (pas de consultation payante, pas de dépôt à la réservation Calendly) ; le dépôt de 250 $ vient après, pour lancer le design. Le formulaire sert à qualifier et à préparer le premier rendu.
 - **Date limite de commande pour Noël** (confirmée le 3 nov. 2026) : **2 semaines avant Noël, soit le 11 décembre** (design approuvé et dépôt reçu) ; **platine : vers le 4 décembre** (production de 3 semaines). Saint-Valentin (confirmé le 3 nov. 2026) : 31 janvier (or) et 24 janvier (platine). Textes de pub approuvés : « Une bague sur mesure sous le sapin ? Design 3D en 48 h, bague prête en 2 semaines. Commandez avant le 11 décembre. » / « A custom ring under the tree? 3D design in 48 h, ready in 2 weeks. Order by December 11. » Toujours écrire « commandez avant le … » sans promettre une date de livraison précise.
+- **Dépôt Facebook Marketplace = 150 $** (confirmé par Rayane le 4 nov. 2026) : pour les clients de Lauren sur Marketplace, le dépôt reste à 150 $ (Interac ou comptant en personne), parce que la confiance est plus faible sur Marketplace et qu'un petit dépôt passe mieux. Les autres canaux (site, pubs, Calendly) restent à 250 $.
+- **Tous les paiements sont enregistrés, comptant compris** : aucun revenu n'est gardé hors de la comptabilité transmise au comptable.
 - Politique de remboursement du dépôt (confirmée le 3 nov. 2026) : le dépôt est **toujours de 250 $**, non remboursable une fois le design lancé ; **si aucun design ne convient, Rayane garde 150 $ et rembourse 100 $.** Dans les pubs : seulement « crédité à 100 % sur votre bague » ; le remboursement partiel va dans la FAQ et les conditions.
 
 **Infos à demander pour préparer une soumission** (confirmé le 26 oct. 2026, à réutiliser pour tout message de suivi à un prospect, quelle que soit la plateforme — Instagram, SMS, courriel) : type de bijou, type de coupe, carat/grosseur de la pierre, **carat du métal (14k ou 18k — Rayane travaille seulement avec ces deux)** même si le prospect a déjà précisé le type de métal (or blanc/jaune/rose) sans préciser le carat, couleur du métal, et une photo de référence/inspiration si possible. Toujours vérifier ces éléments avant de considérer l'information complète pour une soumission.
@@ -140,6 +142,14 @@ Prochaines briques (en attente que Rayane connecte les outils sur claude.ai, je 
 **Colonnes CRM ajoutées le 3 nov. 2026** : `attribution` (noms Meta du lead), `sale_price` et `production_cost` (interne seulement, saisis dans `/admin/clients/[id]`, section « Marge »). La marge par pièce se mesure contre l'objectif de ~1 000 $.
 
 Ne pas ajouter n8n ou un autre orchestrateur externe sans raison précise — l'approche de triggers programmés Claude Code fait déjà ce travail et évite la complexité/maintenance d'un deuxième système parallèle.
+
+## 8quater. Lauren (confirmé par Rayane et Lauren le 4 nov. 2026)
+
+- Lauren Kennedy gère les ventes **Facebook Marketplace depuis son profil personnel** (environ 40 bagues en annonce, nouvelles publications environ tous les 3 jours ; 3–4 nouveaux messages par jour, environ 1 client sérieux par jour ou tous les 2–3 jours), le suivi des clients par Messenger, et note tout sur son iPad. Elle répond en anglais et en français ; ses échanges avec l'assistant se font en **anglais**.
+- Elle est **beaucoup plus disponible que Rayane, surtout le matin** : toute tâche urgente qui ne demande pas Rayane lui est envoyée en premier.
+- Son plus gros blocage : **les prix** (elle attend Rayane pour presque chaque prix). Ses besoins prioritaires : (a) une liste chaque matin de qui relancer et qui attend une mise à jour, (b) un outil de prix approuvé par Rayane, (c) une vue unique par client et commande (quoi, prix, payé, solde, statut).
+- Rayane paie les coûts (pierres, casting, sertissage, pubs, logiciels) et envoie les photos de reçus ; il remet les bagues aux clients.
+- Aucune connexion au profil Facebook personnel de Lauren (pas d'API officielle pour les profils personnels, et jamais son mot de passe) : les prospects Marketplace entrent dans le CRM par une saisie rapide.
 
 ## 8bis. Autonomie graduée des messages (approuvée par Rayane le 3 nov. 2026)
 
