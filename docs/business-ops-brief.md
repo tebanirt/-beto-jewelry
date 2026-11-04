@@ -36,6 +36,14 @@ Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un 
 - `/nouveau-client` : formulaire public d'intake (après dépôt hors plateforme, ex. Facebook Marketplace).
 - `/admin/clients` : dashboard protégé par mot de passe (session HMAC), jamais indexé (robots.txt + noindex).
 - Toujours vérifier les erreurs Supabase (`error`) sur chaque requête — ne jamais laisser un échec d'écriture silencieux.
+- **Synchro courriels/messages → CRM : automatique, sans jamais demander (règle de Rayane, 4 nov. 2026)**. Ses mots : « Ne me demande plus jamais l'autorisation… Tout ce qui est juste connecté, ce qui se passe dans les courriels et les messages au CRM, il faut que tu le fasses par toi-même sans mon autorisation. »
+  - **Ce qui se fait seul**, par le tri horaire, les autres agents et les conversations : notes, `last_contact_at`, `consultation_at`, pause des relances, fusion des doublons.
+  - **Le statut change seul** dès qu'un fait le prouve : réservation, annulation, rendu envoyé, client plus intéressé, etc.
+  - **Toujours demander à Rayane** pour ce qui touche l'argent : prix, soumissions, factures, reçus, montants, paiements et dépôts dans `orders`/`payments`, budgets.
+- **Limite technique : les suppressions dans Supabase**. Supabase demande une confirmation avant toute suppression (`DELETE`), et personne ne peut y répondre pendant une tâche programmée. Les agents ne suppriment donc jamais une fiche :
+  - ils fusionnent les notes et les soumissions dans la fiche gardée ;
+  - ils mettent le doublon en pause avec la note « DOUBLON fusionné, fiche à supprimer » ;
+  - ils le signalent dans le résumé.
 
 ## 5. Facturation (`tools/invoicing/`)
 
@@ -124,7 +132,7 @@ Quand quelqu'un réserve via Calendly, Calendly envoie une notification « New E
 **Écosystème d'agents autonomes (vision long terme)** : Rayane veut des agents qui travaillent pour lui en continu, même pendant qu'il dort — pas seulement un assistant réactif. Déjà en place :
 - Triage Gmail/Calendar horaire, 6 h à 22 h (agent "acquisition/service client").
 - Relances clients quotidiennes (§7ter) et résumé de la boîte matin/soir.
-- Pipeline et production, quotidien (ajouté le 2 nov. 2026) : synchronise les courriels envoyés → `last_contact_at`, signale les rencontres des prochaines 36 h sans confirmation, les statuts à mettre à jour, les productions de 12 jours et plus, les promesses faites aux clients sans suivi et les brouillons qui dorment. Aucune écriture hors `last_contact_at`, aucun changement de statut, aucun brouillon client.
+- Pipeline et production, quotidien (ajouté le 2 nov. 2026) : synchronise les courriels envoyés → `last_contact_at`, signale les rencontres des prochaines 36 h sans confirmation, les statuts à mettre à jour, les productions de 12 jours et plus, les promesses faites aux clients sans suivi et les brouillons qui dorment. Depuis le 4 nov. 2026, il met aussi le CRM à jour lui-même (notes, statut prouvé par un fait, doublons ; voir §4), toujours sans brouillon client et sans rien qui touche l'argent.
 - Rétro hebdo et amélioration continue, dimanche soir (ajouté le 2 nov. 2026) : chiffres de la semaine vs semaine précédente et vs objectif, table ronde, et **propositions** d'amélioration des autres agents. Lecture seule : les agents proposent, Rayane accepte, puis on applique. Aucun agent ne modifie lui-même ses règles.
 - Routine d'audit du site (`AUDIT_LOG.md`) — agent "codage/qualité", avec l'exception de push technique décrite au §2.
 - Juge design hebdomadaire (propose seulement) et SEO hebdomadaire.
