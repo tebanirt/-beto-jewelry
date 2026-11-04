@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 export default function AdminLoginPage() {
   const router = useRouter();
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -16,11 +17,12 @@ export default function AdminLoginPage() {
     const res = await fetch("/api/admin/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
+      body: JSON.stringify({ email, password }),
     });
     setLoading(false);
     if (res.ok) {
-      router.push("/admin/clients");
+      const { role } = (await res.json()) as { role?: string };
+      router.push(role === "assistant" ? "/admin/lauren" : "/admin/clients");
       router.refresh();
     } else {
       setError(true);
@@ -33,7 +35,16 @@ export default function AdminLoginPage() {
         <p className="text-label text-beto-gold mb-3">Beto Jewelry</p>
         <h1 className="text-xl font-medium text-beto-black mb-6">Accès CRM</h1>
         <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Courriel (Lauren) — vide pour Rayane"
+          autoComplete="username"
+          className="w-full px-4 py-3.5 border border-beto-gray-subtle/60 bg-beto-white text-sm text-beto-black placeholder:text-beto-gray-light focus:outline-none focus:border-beto-gold transition-colors mb-3"
+        />
+        <input
           type="password"
+          autoComplete="current-password"
           required
           autoFocus
           value={password}
