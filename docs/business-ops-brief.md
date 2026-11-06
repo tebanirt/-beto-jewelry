@@ -208,3 +208,5 @@ Rayane envoie ses notes, fichiers et demandes **dans un chat Claude** (comme une
 ## 9. Boucle d'amélioration
 
 Ce fichier doit être mis à jour à chaque nouvelle règle ou correction durable que Rayane donne — pas seulement retenue en mémoire de conversation, qui disparaît. Si une instruction est censée s'appliquer « toujours » ou « à partir de maintenant », elle appartient ici, pas seulement au chat.
+
+**Vérifier au lieu de demander (Rayane, 4 nov. 2026)** : quand Rayane dit qu'il a fait quelque chose (courriel envoyé, reçu ou facture envoyé, paiement reçu, rendez-vous fixé), le vérifier soi-même (Gmail envoyés, CRM, calendrier) et mettre le dossier à jour, sans lui redemander ni lui proposer de le refaire. Ne signaler que ce que la vérification contredit ou ne trouve pas. Les règles absolues du §2 (confirmation avant d'envoyer un document, avant un push) restent en vigueur.
