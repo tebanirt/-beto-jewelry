@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import GalleryContent from "./GalleryContent";
+import GalleryContent from "@/components/site/pages/WorkPage";
 
 export const metadata: Metadata = {
   title: "Gallery",
-  description: "Browse Beto Jewelry's portfolio of custom engagement rings, wedding bands, and fine jewelry created for clients in Montreal.",
+  description: "Custom engagement rings designed by Rayane Tebani and made in Montreal: solitaires, hidden halos, three stones, toi et moi.",
   alternates: { canonical: "/gallery" },
   openGraph: {
     title: "Gallery | Beto Jewelry",

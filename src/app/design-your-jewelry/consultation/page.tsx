@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ConsultationContent from "./ConsultationContent";
+import ConsultationContent from "@/components/site/pages/BookPage";
 
 export const metadata: Metadata = {
   title: "Book a Consultation",
