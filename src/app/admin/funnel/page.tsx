@@ -227,7 +227,7 @@ export default async function AdminFunnelPage({ searchParams }: { searchParams: 
             <h2 className="text-sm font-medium uppercase tracking-wide text-beto-black">Estimation affichée</h2>
             <Table
               head={["Réponse", "Fois"]}
-              rows={sortDesc(modes, (n) => n).map(([m, n]) => [m === "price" ? "Prix affiché" : m === "hour" ? "Prix en moins d'1 h" : m === "day" ? "Soumission 24 h" : m, n])}
+              rows={sortDesc(modes, (n) => n).map(([m, n]) => [m === "price" ? "Prix affiché" : m === "hour" ? "Prix en 24 h" : m === "day" ? "Soumission 24 h" : m, n])}
             />
             {avgPrice > 0 && <p className="text-xs text-beto-gray">Prix moyen affiché : {money(avgPrice)}</p>}
           </div>

@@ -4,8 +4,8 @@ import { getAttribution } from "@/lib/attribution";
 export type LeadFormOptions = {
   /** Inspiration images, attached to the email sent to Rayane. */
   attachments?: LeadAttachment[];
-  /** Answer promised to the visitor (price within 1 h, or quote within 24 h): flagged in the email subject. */
-  priority?: "1h" | "24h";
+  /** Answer promised to the visitor (price or quote within 24 h): flagged in the email subject. */
+  priority?: "price24h" | "24h";
   /** Receives the CRM client id when the server returns one (used for the deposit payment link). */
   onRef?: (ref: string) => void;
 };

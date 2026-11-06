@@ -516,7 +516,8 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
         )
       : null;
   const showPrice = quote !== null;
-  // Otherwise: lab-grown engagement ring → price within the hour (9 h–21 h);
+  // Otherwise: lab-grown engagement ring → price within 24 h (changed from
+  // « within the hour » by Rayane on 6 Nov 2026: a request can arrive at 7 a.m.);
   // natural or other stone, and every other piece → quote within 24 h.
   const responseMode: "price" | "hour" | "day" = showPrice
     ? "price"
@@ -793,7 +794,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
       "Prix affiché au client": shownPrice,
       "Réponse promise au client":
         responseMode === "hour"
-          ? "Prix en moins d'une heure (9 h à 21 h)"
+          ? "Prix en 24 h"
           : responseMode === "day"
             ? "Soumission en 24 h maximum"
             : "",
@@ -807,7 +808,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
 
     const ok = await submitLeadForm("custom-design", fields, {
       attachments: images.map(({ filename, contentType, content }) => ({ filename, contentType, content })),
-      priority: responseMode === "hour" ? "1h" : responseMode === "day" ? "24h" : undefined,
+      priority: responseMode === "hour" ? "price24h" : responseMode === "day" ? "24h" : undefined,
       onRef: setCrmRef,
     });
     if (ok) {

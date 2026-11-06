@@ -103,7 +103,7 @@ async function loadConfig(): Promise<PricingConfig | null> {
     if (!config) console.error("pricing_config row missing or invalid: prices hidden");
     return config;
   } catch (err) {
-    // Supabase not configured (e.g. local build): the form falls back to "price within the hour".
+    // Supabase not configured (e.g. local build): the form falls back to "price within 24 h".
     console.error("pricing_config unavailable:", err);
     return null;
   }

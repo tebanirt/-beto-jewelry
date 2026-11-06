@@ -307,7 +307,7 @@ const fr = {
     prices: [
       { title: "Diamant de laboratoire", body: "Votre prix s’affiche en deux minutes dans le formulaire, selon le carat, le style et le métal." },
       { title: "Diamant naturel", body: "À partir de 6 000 $. Votre soumission personnalisée arrive en 24 heures au maximum." },
-      { title: "Avec votre photo d’inspiration", body: "Un prix précis en moins d’une heure, de 9 h à 21 h." },
+      { title: "Avec votre photo d’inspiration", body: "Un prix précis en 24 h." },
       { title: "Pierres précieuses et de naissance", body: "Soumission personnalisée en 24 heures au maximum." },
     ],
     includedEyebrow: "Inclus avec chaque bague",
@@ -427,7 +427,7 @@ const fr = {
           { q: "Quand vais-je voir le design de ma bague ?", a: "Votre rendu 3D est prêt en environ 48 h, présenté sous plusieurs angles. Vous voyez votre bague avant qu’un seul gramme de métal soit coulé." },
           { q: "Combien de temps prend la fabrication ?", a: "Environ 2 semaines après l’approbation de votre rendu 3D, pierre comprise : tout diamant de laboratoire peut être fourni dans ce délai. Les pièces plus complexes prennent de 2 à 4 semaines. Vous avez un calendrier clair dès le départ." },
           { q: "J’ai une date précise en tête. Est-ce possible ?", a: "Dites-nous votre date dès le premier échange : on vous dit tout de suite, honnêtement, si elle est réaliste." },
-          { q: "En combien de temps me répondez-vous ?", a: "En général dans un jour ouvrable. Si vous envoyez une image d’inspiration pour une bague en diamant de laboratoire, le prix vous parvient en moins d’une heure, de 9 h à 21 h." },
+          { q: "En combien de temps me répondez-vous ?", a: "En général dans un jour ouvrable. Si vous envoyez une image d’inspiration pour une bague en diamant de laboratoire, vous recevez votre prix en 24 h." },
         ],
       },
       {
@@ -782,7 +782,7 @@ const en: SiteContent = {
     prices: [
       { title: "Lab-grown diamond", body: "Your price appears in two minutes in the form, based on the carat, the style and the metal." },
       { title: "Natural diamond", body: "From $6,000. Your personalised quote arrives within 24 hours at most." },
-      { title: "With your inspiration photo", body: "An exact price in under an hour, from 9 a.m. to 9 p.m." },
+      { title: "With your inspiration photo", body: "An exact price within 24 hours." },
       { title: "Precious stones and birthstones", body: "A personalised quote within 24 hours at most." },
     ],
     includedEyebrow: "Included with every ring",
@@ -902,7 +902,7 @@ const en: SiteContent = {
           { q: "When will I see my ring’s design?", a: "Your 3D render is ready in about 48 hours, shown from several angles. You see your ring before a single gram of metal is cast." },
           { q: "How long does making the ring take?", a: "About 2 weeks after you approve your 3D render, stone included: any lab-grown diamond can be sourced in that time. More complex pieces take 2 to 4 weeks. You get a clear timeline from the start." },
           { q: "I have a specific date in mind. Is that possible?", a: "Tell us your date in your first message: we’ll tell you right away, honestly, whether it is realistic." },
-          { q: "How quickly do you reply?", a: "Usually within one business day. If you send an inspiration image for a lab-grown diamond ring, the price reaches you in under an hour, from 9 a.m. to 9 p.m." },
+          { q: "How quickly do you reply?", a: "Usually within one business day. If you send an inspiration image for a lab-grown diamond ring, you receive your price within 24 hours." },
         ],
       },
       {
