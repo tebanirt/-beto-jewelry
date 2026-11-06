@@ -454,7 +454,7 @@ const fr = {
         id: "qualite",
         title: "Qualité et entretien",
         items: [
-          { q: "Mes pierres sont-elles certifiées ?", a: "Oui. Toute pierre de 1 carat et plus, donc la pierre centrale de votre bague de fiançailles, est accompagnée d’un certificat IGI, qui confirme de façon indépendante sa taille, sa couleur, sa pureté et son poids en carats. Les petites pierres d’accompagnement n’ont pas de certificat individuel. Pour faire assurer votre bague, nous préparons aussi un certificat d’authenticité de la bague complète, avec la documentation des matériaux (poids, carats totaux, détail de chaque pierre) : offert pour tout achat de plus de 2 500 $, sinon 50 $." },
+          { q: "Mes pierres sont-elles certifiées ?", a: "Oui. Toute pierre de 1 carat et plus, donc la pierre centrale de votre bague de fiançailles, est accompagnée d’un certificat IGI, qui confirme de façon indépendante sa taille, sa couleur, sa pureté et son poids en carats. Les petites pierres d’accompagnement n’ont pas de certificat individuel. Pour faire assurer votre bague, vous recevez aussi un certificat d’authenticité gemmologique de la pièce complète, avec la documentation des matériaux (poids, carats totaux, détail de chaque pierre). Il est compris dans le prix." },
           { q: "Quels métaux utilisez-vous ?", a: "L’or 14K et 18K, en jaune, blanc ou rose, et le platine. On vous conseille selon votre style de vie et votre budget." },
           { q: "Qu’est-ce qui est inclus après la remise ?", a: "Le nettoyage et le polissage de votre bague, à vie. Un ajustement de grandeur vous est aussi offert après la réception de votre bague." },
           { q: "Offrez-vous une garantie ?", a: "Oui : 12 mois sur les défauts de fabrication. L’usure normale et les accidents ne sont pas couverts, mais on vous donnera toujours une évaluation honnête." },
@@ -929,7 +929,7 @@ const en: SiteContent = {
         id: "qualite",
         title: "Quality and care",
         items: [
-          { q: "Are my stones certified?", a: "Yes. Every stone of 1 carat and up, so the centre stone of your engagement ring, comes with an IGI certificate, which independently confirms its cut, colour, clarity and carat weight. Small accent stones don’t have an individual certificate. To insure your ring, we also prepare a certificate of authenticity for the complete ring, with full material documentation (weight, total carats, details of every stone): included with any purchase over $2,500, otherwise $50." },
+          { q: "Are my stones certified?", a: "Yes. Every stone of 1 carat and up, so the centre stone of your engagement ring, comes with an IGI certificate, which independently confirms its cut, colour, clarity and carat weight. Small accent stones don’t have an individual certificate. To insure your ring, you also receive a gemmological certificate of authenticity for the complete piece, with full material documentation (weight, total carats, details of every stone). It is included in the price." },
           { q: "Which metals do you use?", a: "14K and 18K gold, in yellow, white or rose, and platinum. We advise you based on your lifestyle and your budget." },
           { q: "What is included after delivery?", a: "Cleaning and polishing of your ring, for life. One resizing is also offered after you receive your ring." },
           { q: "Do you offer a warranty?", a: "Yes: 12 months on manufacturing defects. Normal wear and accidents are not covered, but we’ll always give you an honest assessment." },
