@@ -8,6 +8,7 @@ const routes = [
   "",
   "/bagues-de-fiancailles-sur-mesure-montreal",
   "/montreal",
+  "/process",
   "/engagement-rings",
   "/wedding-bands",
   "/fine-jewelry",

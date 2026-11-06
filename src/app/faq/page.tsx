@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { t } from "@/lib/translations";
-import FAQContent from "./FAQContent";
+import { SITE } from "@/lib/site-content";
+import FAQContent from "@/components/site/pages/FaqPage";
 
 export const metadata: Metadata = {
   title: "FAQ",
@@ -17,11 +17,12 @@ export const metadata: Metadata = {
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: t.en.pages.faq.sections.flatMap((section) =>
+  mainEntity: SITE.en.faq.sections.flatMap((section) =>
     section.items.map((item) => ({
       "@type": "Question",
       name: item.q,
-      acceptedAnswer: { "@type": "Answer", text: item.a },
+      // Le balisage [libellé](lien) du contenu devient du texte simple.
+      acceptedAnswer: { "@type": "Answer", text: item.a.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") },
     }))
   ),
 };
