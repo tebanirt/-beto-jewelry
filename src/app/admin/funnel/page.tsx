@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getSupabaseAdmin } from "@/lib/supabase";
+import AdminShell from "../AdminShell";
 
 export const dynamic = "force-dynamic";
 
@@ -146,23 +147,22 @@ export default async function AdminFunnelPage({ searchParams }: { searchParams: 
   const money = (n: number) => new Intl.NumberFormat("fr-CA", { style: "currency", currency: "CAD", maximumFractionDigits: 0 }).format(n);
 
   return (
-    <section className="min-h-screen bg-beto-offwhite px-5 py-10" style={{ paddingTop: "calc(var(--nav-height, 0px) + 2.5rem)" }}>
-      <div className="max-w-4xl mx-auto flex flex-col gap-10">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-label text-beto-gold-dark mb-1">Beto Jewelry</p>
-            <h1 className="text-2xl font-medium text-beto-black">Formulaire « Commencer mon design »</h1>
-            <p className="text-sm text-beto-gray mt-1">Où les visiteurs s&apos;arrêtent, sur les {days} derniers jours. Données anonymes.</p>
-          </div>
-          <nav className="flex gap-2 text-xs">
-            {[7, 30, 90].map((d) => (
-              <Link key={d} href={`/admin/funnel?days=${d}`} className={`px-3 py-1.5 border ${d === days ? "border-beto-black bg-beto-black text-white" : "border-beto-gray-subtle text-beto-gray hover:text-beto-black"}`}>
-                {d} jours
-              </Link>
-            ))}
-            <Link href="/admin/clients" className="px-3 py-1.5 border border-beto-gray-subtle text-beto-gray hover:text-beto-black">Clients</Link>
-          </nav>
-        </div>
+    <AdminShell
+      active="funnel"
+      eyebrow="Formulaire « Commencer mon design »"
+      title="Où les visiteurs s'arrêtent"
+      subtitle={`Sur les ${days} derniers jours. Données anonymes.`}
+      actions={
+        <nav className="flex gap-2 text-xs" aria-label="Période">
+          {[7, 30, 90].map((d) => (
+            <Link key={d} href={`/admin/funnel?days=${d}`} aria-current={d === days ? "page" : undefined} className={`px-3 py-1.5 border ${d === days ? "border-beto-black bg-beto-black text-white" : "border-beto-gray-subtle bg-beto-white text-beto-gray hover:text-beto-black"}`}>
+              {d} jours
+            </Link>
+          ))}
+        </nav>
+      }
+    >
+      <div className="flex flex-col gap-10">
 
         {error && (
           <p className="text-sm text-red-700 bg-red-50 border border-red-200 px-4 py-3">Lecture impossible : {error}</p>
@@ -233,6 +233,6 @@ export default async function AdminFunnelPage({ searchParams }: { searchParams: 
           </div>
         </div>
       </div>
-    </section>
+    </AdminShell>
   );
 }
