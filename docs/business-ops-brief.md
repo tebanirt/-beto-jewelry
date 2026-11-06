@@ -77,6 +77,17 @@ Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un 
 
 ### Procédure complète du triage horaire (référencée par le trigger programmé — gardée ici pour ne pas répéter un prompt géant à chaque déclenchement)
 
+**CLASSEMENT OBLIGATOIRE À CHAQUE PASSAGE (règle de Rayane du 6 nov. 2026 : « tu tries mes e-mails, tu n'as pas besoin de mon autorisation »)** — chaque vérification horaire classe TOUS les courriels de la boîte, sans rien demander, avec ces libellés (la tâche programmée « [Indépendant] Tri automatique des courriels » applique cette liste ; elle prime sur les anciens libellés des étapes ci-dessous) :
+- **Claude/Clients** sur tout fil client (toujours, les autres agents le cherchent) + un sous-libellé selon le statut CRM : **Claude/Clients/Nouveau client** (nouveau, consultation_faite), **Claude/Clients/Consultation réservée** (consultation_reservee, réservations Calendly), **Claude/Clients/En cours** (depot_recu, design, production, livre). Le sous-libellé change avec le statut.
+- **Claude/Fournisseurs** (fonderie Fonte LB, pierres : PDCgems, Naaz, Vatsal, gemmologue ; offres de fournisseurs) — reste dans la boîte.
+- **Claude/Comptabilité** (reçus et factures payées, paiements, banque, taxes) — archivé, sauf paiement refusé ou facture à payer.
+- **Claude/Outils et logiciels** (Google, Vercel, GitHub, Supabase, Zapier, Stripe, Calendly hors réservation, Zoom, Bird, Canva ; formulaires de TEST du site et de Calendly) — archivé.
+- **Claude/Partenaires et marketing** (Meta et pubs, Pages Jaunes, WeddingWire, salons, partenaires comme Benny) — archivé, sauf message personnel d'un partenaire.
+- **Claude/Infolettres** (promotions, webinaires, prospection de logiciels) — archivé.
+- **Claude/Pas pour moi** (mauvais destinataire, autre métier, pourriels SEO, ARNAQUES : faux « Verified Identity », « badge bleu », « Official demand » Meta depuis gmail.com, googlegroups ou mail.ru) — archivé ; les arnaques sont signalées, leurs liens jamais ouverts.
+- **Claude/À vérifier** seulement pour ce qui demande l'œil de Rayane : alerte de sécurité inhabituelle, courriel à un client non livré (mailer-daemon), cas douteux.
+Jamais de suppression ni de « spam » : seulement étiqueter et archiver. Premier tri complet de la boîte fait le 6 nov. 2026.
+
 1. **Labels** (`list_labels`) : « Claude/Clients », « Claude/Infolettres », « Claude/À vérifier » — utiliser leurs IDs réels.
 2. **Trois recherches séparées**, combinées sans doublons :
    - a) `in:inbox is:unread -label:"Claude/Clients" -label:"Claude/Infolettres" -label:"Claude/À vérifier"`
