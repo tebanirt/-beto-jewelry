@@ -79,7 +79,7 @@ Luxe moderne, épuré, confiance avant tout. Pas un e-commerce catalogue — un 
 
 **CLASSEMENT OBLIGATOIRE À CHAQUE PASSAGE (règle de Rayane du 6 nov. 2026 : « tu tries mes e-mails, tu n'as pas besoin de mon autorisation »)** — chaque vérification horaire classe TOUS les courriels de la boîte, sans rien demander, avec ces libellés (la tâche programmée « [Indépendant] Tri automatique des courriels » applique cette liste ; elle prime sur les anciens libellés des étapes ci-dessous) :
 - **Claude/Clients** sur tout fil client (toujours, les autres agents le cherchent) + un sous-libellé selon le statut CRM : **Claude/Clients/Nouveau client** (nouveau, consultation_faite), **Claude/Clients/Consultation réservée** (consultation_reservee, réservations Calendly), **Claude/Clients/En cours** (depot_recu, design, production, livre). Le sous-libellé change avec le statut.
-- **Claude/Fournisseurs** (fonderie Fonte LB, pierres : PDCgems, Naaz, Vatsal, gemmologue ; offres de fournisseurs) — reste dans la boîte.
+- **Claude/Fournisseurs** (fonderie Fonte LB, pierres : PDCgems, Naaz, Vatsal, Divine Diamond Inc (divinediamondinc@gmail.com, Montréal), gemmologue ; offres de fournisseurs) — reste dans la boîte.
 - **Claude/Comptabilité** (reçus et factures payées, paiements, banque, taxes) — archivé, sauf paiement refusé ou facture à payer.
 - **Claude/Outils et logiciels** (Google, Vercel, GitHub, Supabase, Zapier, Stripe, Calendly hors réservation, Zoom, Bird, Canva ; formulaires de TEST du site et de Calendly) — archivé.
 - **Claude/Partenaires et marketing** (Meta et pubs, Pages Jaunes, WeddingWire, salons, partenaires comme Benny) — archivé, sauf message personnel d'un partenaire.
