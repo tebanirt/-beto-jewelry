@@ -104,6 +104,9 @@ def target_angles(shape, src, L, W, rot90=False):
         elif rot90 and shape in ('ovale',):  # est-ouest : les griffes tournent avec la pierre
             tgt = np.where(np.abs(src) < np.pi / 2, np.pi / 2 - np.abs(src), 1.5 * np.pi - np.abs(src)) * np.sign(src)
         else: return src, []
+    elif n == 6 and shape in ('rond', 'ovale'):  # six griffes régulières : rond tous les 60°, ovale une à chaque bout
+        order = np.argsort(_wrap(src)); base = np.radians([-120, -60, 0, 60, 120, 180] if shape == 'rond' else [-125, -55, 0, 55, 125, 180])
+        tgt = src.copy(); tgt[order] = base
     elif n == 6 and shape in ('marquise', 'poire'):
         tgt = src.copy(); k0 = int(np.argmin(np.abs(_wrap(src)))); tgt[k0] = 0
         if shape == 'marquise': k1 = int(np.argmin(np.abs(_wrap(src - np.pi)))); tgt[k1] = np.pi
