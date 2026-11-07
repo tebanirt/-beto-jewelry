@@ -8,7 +8,32 @@ def gem_frame(V):
     p = (V - c) @ h; r = np.linalg.norm((V - c) - np.outer(p, h), axis=1)
     g = p[np.argmax(r)]; top, bot = p.max(), p.min()
     if (top - g) > (g - bot): h, p, g, top, bot = -h, -p, -g, -bot, -top
-    return dict(c=c, h=h, girdle=g, top=top, bot=bot, R=float(r.max()), crown=float(top - g))
+    e1 = W[int(np.argmax(ext))]; e1 = e1 - (e1 @ h) * h; e1 /= np.linalg.norm(e1); e2 = np.cross(h, e1)
+    # contour de la pierre (rayon selon l'angle) : une pierre allongée n'a pas une zone ronde
+    ang = np.arctan2((V - c) @ e2, (V - c) @ e1); bins = ((ang + np.pi) / (2 * np.pi) * 72).astype(int) % 72
+    rb = np.zeros(72); np.maximum.at(rb, bins, r)
+    for _ in range(3): rb = np.where(rb > 0, rb, np.maximum(np.roll(rb, 1), np.roll(rb, -1)))
+    rb = np.maximum(rb, np.maximum(np.roll(rb, 1), np.roll(rb, -1)))  # un peu plus large que les sommets (arêtes entre sommets)
+    def Rfun(dv):
+        a = np.arctan2(dv @ e2, dv @ e1); return rb[((a + np.pi) / (2 * np.pi) * 72).astype(int) % 72]
+    Rw = float(np.percentile(rb, 5)); Rm = float(np.sqrt(r.max() * Rw))
+    return dict(c=c, h=h, girdle=g, top=top, bot=bot, R=float(r.max()), Rw=Rw, Rm=Rm, Rfun=Rfun, crown=float(top - g))
+
+def _clusters(M, eps):
+    """Groupes de points distants de moins de eps (liaison simple), mémoire linéaire : grille puis composantes connexes."""
+    from scipy.spatial import cKDTree
+    from scipy.sparse import coo_matrix
+    from scipy.sparse.csgraph import connected_components
+    key = np.floor(M / (eps / 2.5)).astype(np.int64)
+    _, rep, inv = np.unique(key, axis=0, return_index=True, return_inverse=True)
+    Q = M[rep]; pairs = cKDTree(Q).query_pairs(eps, output_type='ndarray')
+    n = len(Q)
+    if len(pairs) == 0: lab = np.arange(n)
+    else:
+        A = coo_matrix((np.ones(len(pairs)), (pairs[:, 0], pairs[:, 1])), shape=(n, n))
+        _, lab = connected_components(A, directed=False)
+    return lab[inv.ravel()] + 1
+
 
 def finish(metal, gems, tip=0.38, cyl=1.22, min_gem=0.6, bend=0.42):
     """Modifie les maillages métal sur place ; renvoie la liste des bouts arrondis (centre, rayon)."""
@@ -24,12 +49,13 @@ def finish(metal, gems, tip=0.38, cyl=1.22, min_gem=0.6, bend=0.42):
             V = part['V']; d = V - c; p = d @ h
             radial = np.linalg.norm(d - np.outer(p, h), axis=1)
             # zone limitée : autour de la pierre et jusqu'à une hauteur raisonnable de griffe (jamais à travers la bague)
-            reach = f['top'] + max(1.2, 0.9 * R)
-            near = (radial <= R * (cyl + (0.13 if R > 2 else 0.0)) + 0.25) & (p <= reach) & (p >= f['bot'])
+            reach = f['top'] + max(1.2, 0.9 * f['Rw'])
+            Rth = f['Rfun'](d - np.outer(p, h)) if R >= 1.5 else R  # grande pierre : la zone suit son contour
+            near = (radial <= Rth * (cyl + (0.13 if f['Rm'] > 2 else 0.0)) + 0.25) & (p <= reach) & (p >= f['bot'])
             if R < 1.5:  # tige de sertissage longue d'une petite pierre : seulement une petite pièce isolée (jamais une griffe de la tête)
-                cg = V.mean(0) - c; pc = cg @ h; rc_ = np.linalg.norm(cg - pc * h)
-                if np.ptp(V, 0).max() < 4.0 and rc_ <= R * cyl + 0.25 and pc > f['girdle']:
-                    near = near | ((radial <= R * cyl + 0.25) & (p >= f['bot']) & (p <= f['top'] + max(3.0, 1.5 * R)))
+                ex = np.sort(np.ptp(V, 0))[::-1]; pin = ex[0] < 4.0 and ex[0] > 2.0 * ex[1]  # tige : petite pièce longue et fine
+                if pin and np.linalg.norm(V.mean(0) - c) < 2.5 * R + 0.5:
+                    near = near | ((radial <= 2.0 * R + 0.4) & (p >= f['bot'] - 1.5) & (p <= f['top'] + max(3.0, 1.5 * R)))
             # griffe rabattue sur la couronne : au-dessus du rondiste, le métal se rapproche de l'axe de la pierre
             up = near & (p > f['girdle'])
             if near.any(): part['N'] = None; part['resharp'] = True  # normales recalculées (sinon ombrage taché)
@@ -63,13 +89,13 @@ def finish(metal, gems, tip=0.38, cyl=1.22, min_gem=0.6, bend=0.42):
         M = np.vstack(moved)
         if len(M) == 1: groups = np.array([1])
         else:
-            eps = max(0.06, 0.15 * R)
-            groups = fcluster(linkage(M, 'single'), eps, 'distance')
+            eps = max(0.06, 0.15 * f['Rm'])
+            groups = _clusters(M, eps)
         for gid in np.unique(groups):
             P = M[groups == gid]
             if len(P) < 3: continue
             ctr = P.mean(0); rad = float(np.linalg.norm(P - ctr, axis=1).max())
             if R < 1.5: rad = min(max(1.1 * rad, 0.08), 0.42 * R)  # grain du pavé : bille qui couvre tout le bout coupé
-            else: rad = min(max(rad, 0.06), 0.16 * R + 0.15)
+            else: rad = min(max(rad, 0.06), 0.16 * f['Rm'] + 0.15)
             caps.append((ctr - h * 0.45 * rad, rad))
     return caps
