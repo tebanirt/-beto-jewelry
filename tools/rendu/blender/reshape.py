@@ -89,16 +89,20 @@ def prong_angles(metal, local, Rs, fr):
     return sorted(out)
 
 
-def target_angles(shape, src, L, W):
+def target_angles(shape, src, L, W, rot90=False):
     """Où le métier place les griffes pour cette forme. Renvoie (angles cibles des griffes existantes, griffes ajoutées)."""
     n = len(src); src = np.array(src); extra = []
     if n == 4:
         if shape in ('princesse', 'emeraude', 'radiant', 'coussin'):
-            a = np.arctan2(W / 2, L / 2); tgt = np.where(np.abs(src) < np.pi / 2, a, np.pi - a) * np.sign(src)
+            a = np.arctan2(L / 2, W / 2) if rot90 else np.arctan2(W / 2, L / 2); tgt = np.where(np.abs(src) < np.pi / 2, a, np.pi - a) * np.sign(src)
         elif shape == 'marquise':  # 6 griffes : une à chaque pointe, quatre sur les flancs
             tgt = np.where(np.abs(src) < np.pi / 2, np.radians(58), np.radians(122)) * np.sign(src); extra = [0.0, np.pi]
         elif shape == 'poire':  # 5 griffes : une à la pointe, deux aux épaules, deux au bout arrondi
             tgt = np.where(np.abs(src) < np.pi / 2, np.radians(68), np.abs(src)) * np.sign(src); extra = [0.0]
+        elif shape == 'rond':  # rond à 4 griffes : griffes à 45°, symétriques
+            tgt = np.where(np.abs(src) < np.pi / 2, np.pi / 4, 3 * np.pi / 4) * np.sign(src)
+        elif rot90 and shape in ('ovale',):  # est-ouest : les griffes tournent avec la pierre
+            tgt = np.where(np.abs(src) < np.pi / 2, np.pi / 2 - np.abs(src), 1.5 * np.pi - np.abs(src)) * np.sign(src)
         else: return src, []
     elif n == 6 and shape in ('marquise', 'poire'):
         tgt = src.copy(); k0 = int(np.argmin(np.abs(_wrap(src)))); tgt[k0] = 0
@@ -139,7 +143,7 @@ def reshape(parts, shape, ct=None, dims=None, rotate_deg=0.0):
     k_pav = tgt_pav / max(src_pav, 1e-6)
     # griffes déplacées vers leur place pour la nouvelle forme (chaque griffe tourne d'un bloc, l'écart absorbe le reste)
     src_a = prong_angles(parts['metal'], local, Rs, fr)
-    tgt_a, extra = target_angles(shape, src_a, L, Wd) if len(src_a) else ([], [])
+    tgt_a, extra = target_angles(shape, src_a, L, Wd, rot90=abs(abs(rotate_deg) - 90) < 1) if len(src_a) else ([], [])
     added = []
     for ea in extra:  # griffe ajoutée : copie d'une vraie griffe de la tête, tournée jusqu'à la pointe
         k = int(np.argmin(np.abs(_wrap(np.array(src_a) - ea)))); rot = _wrap(ea - src_a[k])
