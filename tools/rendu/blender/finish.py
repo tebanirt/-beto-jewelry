@@ -104,12 +104,13 @@ def _bend(X, base, D0, I, W, sig, oa, ob, L, theta, sigb, pw, ka, kb, theta0=0.0
     return base + Ci + ext + (oa * ka)[:, None] * Nb + (ob * kb)[:, None] * W
 
 
-def _crown_z(xy_pts, c, h, Hh, zmax):
+def _crown_z(xy_pts, c, h, Hh, zmax, zfloor=None):
     """Hauteur (selon h) de la surface de la pierre à la verticale de points : lancer de rayon vers le bas dans l'enveloppe."""
     up = Hh[:, :3] @ h > 1e-6; Hu = Hh[up]
     p0 = xy_pts + np.outer(zmax - (xy_pts - c) @ h, h)
-    t = (p0 @ Hu[:, :3].T + Hu[:, 3]) / (Hu[:, :3] @ h)
-    return zmax - t.max(1)
+    t = (p0 @ Hu[:, :3].T + Hu[:, 3]) / (Hu[:, :3] @ h); tm = t.max(1)
+    pe = p0 - np.outer(tm, h); inside = (pe @ Hh[:, :3].T + Hh[:, 3]).max(1) < 1e-3  # le rayon touche vraiment la pierre
+    return np.where(inside, zmax - tm, zfloor if zfloor is not None else -1e9)
 
 
 def _talon(Y, f, Hh, s0, De, wpr=None):
@@ -131,7 +132,7 @@ def _talon(Y, f, Hh, s0, De, wpr=None):
     bw = rt + (b0 - rt) * og; bt = 0.075 + (t0 - 0.075) * og ** 1.1
     base = Ct - h * ((Ct - c) @ h)  # au niveau du centre, sans hauteur
     xy = base[None] + np.outer(x, I)
-    zc = _crown_z(xy, c, h, Hh, f['top'] + 2.0)
+    zc = np.clip(_crown_z(xy, c, h, Hh, f['top'] + 2.0, f['girdle']), f['girdle'], f['top'])  # hors de la pierre : niveau du rondiste
     hs = top - t0 - 0.02  # centre de départ : le dessus du bec continue le dessus de la griffe
     rest = zc + bt + 0.02  # posé sur la couronne (hauteurs relatives au centre de la pierre)
     bl = np.clip(t / 0.40, 0, 1); bl = bl * bl * (3 - 2 * bl)
@@ -315,6 +316,26 @@ def press_prongs(metal, f, style='rond', cyl=1.22, gemV=None, others=()):
             pm = metal[pi].get('pressed', np.zeros(len(metal[pi]['V']), bool)); pm[idx[mv]] = True; metal[pi]['pressed'] = pm
             metal[pi]['N'] = None; metal[pi]['resharp'] = True
         o += n
+    # pli au siège lissé (une griffe redressée puis rabattue ne doit pas faire de bosse au rondiste)
+    if n_pr:
+        for part in metal:
+            pm = part.get('pressed')
+            if pm is None or not pm.any() or not len(part['F']): continue
+            V = part['V']; d = V - c; p = d @ h; dp = d - np.outer(p, h); rad = np.linalg.norm(dp, axis=1)
+            band = (np.abs(p - f['girdle']) < 0.45) & (rad <= f['Rfun'](dp) * cyl + 2.2)
+            if not band.any(): continue
+            from scipy.spatial import cKDTree
+            tr = cKDTree(V[pm]); dd, _ = tr.query(V[band], distance_upper_bound=0.6)
+            sel = np.zeros(len(V), bool); sel[np.where(band)[0][np.isfinite(dd)]] = True
+            if not sel.any(): continue
+            E = np.r_[part['F'][:, [0, 1]], part['F'][:, [1, 2]], part['F'][:, [2, 0]]]
+            for _ in range(6):
+                acc = np.zeros_like(V); cnt = np.zeros(len(V))
+                np.add.at(acc, E[:, 0], V[E[:, 1]]); np.add.at(cnt, E[:, 0], 1)
+                np.add.at(acc, E[:, 1], V[E[:, 0]]); np.add.at(cnt, E[:, 1], 1)
+                avg = acc / np.maximum(cnt, 1)[:, None]; w = np.clip(1 - np.abs(p - f['girdle']) / 0.45, 0, 1)[:, None] * 0.5
+                V[sel] = V[sel] + w[sel] * (avg[sel] - V[sel])
+            part['N'] = None; part['resharp'] = True
     metal += talons
     return n_pr
 

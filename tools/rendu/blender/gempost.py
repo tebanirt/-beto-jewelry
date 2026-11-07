@@ -53,6 +53,7 @@ def apply_match(src, mask, dst, gemsrc=None, strength=1.0, sharp=0.0, neutral=0.
         if small.sum() > 400 and center.sum() > 400: regions = [center, small]
     g = rgb.copy()
     for ri, reg in enumerate(regions):
+        if reg.sum() < 16: continue  # pierre invisible dans cette vue : rien à retoucher
         st = strength if (len(regions) == 1 or ri == 0) else 0.65 * strength  # petites pierres : courbe adoucie (moins de grain)
         q_src = np.quantile(lum[reg], np.linspace(0, 1, 257))
         q_src = np.maximum.accumulate(q_src + np.arange(257) * 1e-6)
