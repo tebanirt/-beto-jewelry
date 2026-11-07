@@ -160,7 +160,9 @@ def render_frame(out):
                 n.inputs[0].default_value = 1.0
         hm = [o for o in sc.objects if o.name.startswith('hmetal')]
         for o in hm: o.hide_render = True
+        spp0 = sc.cycles.samples; sc.cycles.samples = int(spp0 * float(_os.environ.get('BETO_GEM_SPP', 1.0)))  # pierres : plus d'échantillons (moins de grain)
         gemraw = raw.replace('_raw', '_gem'); _render(gemraw)
+        sc.cycles.samples = spp0
         for o in hm: o.hide_render = False
         for fs, ts in saved: wt.links.new(fs, ts)
         for o in sc.objects:
