@@ -52,13 +52,14 @@ def apply_match(src, mask, dst, gemsrc=None, strength=1.0, sharp=0.0, neutral=0.
         center = lab == big; small = sel & ~center
         if small.sum() > 400 and center.sum() > 400: regions = [center, small]
     g = rgb.copy()
-    for reg in regions:
+    for ri, reg in enumerate(regions):
+        st = strength if (len(regions) == 1 or ri == 0) else 0.65 * strength  # petites pierres : courbe adoucie (moins de grain)
         q_src = np.quantile(lum[reg], np.linspace(0, 1, 257))
         q_src = np.maximum.accumulate(q_src + np.arange(257) * 1e-6)
         lut = np.interp(rgb, q_src, q_ref)  # même courbe sur les trois canaux : la pierre reste incolore
         w = reg[..., None] if len(regions) > 1 else 1.0
         if len(regions) > 1:  # bords adoucis : chaque région s'étend d'un pixel
             w = ndimage.binary_dilation(reg, iterations=2)[..., None]
-        g = np.where(w, rgb * (1 - strength) + lut * strength, g)
+        g = np.where(w, rgb * (1 - st) + lut * st, g)
     out = base * (1 - m) + g * m
     Image.fromarray((np.concatenate([out, al], -1) * 255 + 0.5).clip(0, 255).astype(np.uint8), 'RGBA').save(dst)

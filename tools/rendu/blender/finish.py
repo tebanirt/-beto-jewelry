@@ -39,8 +39,12 @@ def finish(metal, gems, tip=0.38, cyl=1.22, min_gem=0.6, bend=0.42):
             V[sel] -= np.outer(p[sel] - zc, h)  # coupe au niveau du bout de griffe
             moved.append(V[sel].copy())
         # jamais de métal dans la pierre : un point entré dans la pierre est ramené à sa surface (+ 0,02 mm)
-        H = ConvexHull(gm['V']).equations; lo_, hi_ = gm['V'].min(0) - 0.05, gm['V'].max(0) + 0.05
-        for part in metal:
+        try: H = ConvexHull(gm['V']).equations
+        except Exception:
+            try: H = ConvexHull(gm['V'], qhull_options='QJ').equations
+            except Exception: H = None  # pierre au maillage plat : rien à repousser
+        lo_, hi_ = gm['V'].min(0) - 0.05, gm['V'].max(0) + 0.05
+        for part in (metal if H is not None else []):
             V = part['V']; box = np.all((V >= lo_) & (V <= hi_), axis=1)
             if not box.any(): continue
             idx = np.where(box)[0]; d = V[idx] @ H[:, :3].T + H[:, 3]
@@ -59,6 +63,7 @@ def finish(metal, gems, tip=0.38, cyl=1.22, min_gem=0.6, bend=0.42):
             P = M[groups == gid]
             if len(P) < 3: continue
             ctr = P.mean(0); rad = float(np.linalg.norm(P - ctr, axis=1).max())
-            rad = min(max(rad, 0.06), 0.30 * R if R < 1.5 else 0.16 * R + 0.15)
+            if R < 1.5: rad = min(max(1.1 * rad, 0.08), 0.42 * R)  # grain du pavé : bille qui couvre tout le bout coupé
+            else: rad = min(max(rad, 0.06), 0.16 * R + 0.15)
             caps.append((ctr - h * 0.45 * rad, rad))
     return caps
