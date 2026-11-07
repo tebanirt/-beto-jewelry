@@ -103,7 +103,10 @@ if TENT > 0:  # tente de lumière (photo joaillerie) : le métal reflète surtou
         if n.type != 'OUTPUT_MATERIAL': tn.nodes.remove(n)
     te = tn.nodes.new('ShaderNodeEmission'); te.inputs[1].default_value = TENT; tn.links.new(te.outputs[0], tn.nodes['Material Output'].inputs['Surface'])
     tg = Vector(rc); cv = sc.camera.location - tg; az0 = math.atan2(cv.y, cv.x)
-    for k, (daz, el, sz) in enumerate([(45, 30, 1.0), (135, 30, 1.0), (225, 30, 1.0), (315, 30, 1.0), (0, 85, 1.2), (180, 10, 0.8)]):
+    panels = [(45, 30, 1.0), (135, 30, 1.0), (225, 30, 1.0), (315, 30, 1.0), (0, 85, 1.2), (180, 10, 0.8)]
+    if _os.environ.get('BETO_TENT_BACK', '1') != '0':  # boîte à lumière derrière la bague, en hauteur : dessus plats (griffes, jonc) jamais noirs
+        panels += [(180, 40, 0.75), (180, 64, 0.75)]
+    for k, (daz, el, sz) in enumerate(panels):
         az = az0 + math.radians(daz); e = math.radians(el); R_ = 1.25 * camd
         loc = tg + Vector((R_ * math.cos(e) * math.cos(az), R_ * math.cos(e) * math.sin(az), R_ * math.sin(e)))
         pn = scene._panel(f'hmetal_tent{k}', tuple(loc), (0.95 * sz * camd, 0.7 * sz * camd), tm, tuple(tg))
