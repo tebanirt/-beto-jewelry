@@ -17,7 +17,8 @@ export async function GET(request: Request) {
     return `"${s.replace(/"/g, '""')}"`;
   };
   const lines = [
-    ["Date", "Client", "Order", "Type", "Method", "Amount (CAD)", "Receipt", "Recorded by", "Note"],
+    // Amount = before taxes (applied to the order); GST/QST collected on top since Nov 6, 2026.
+    ["Date", "Client", "Order", "Type", "Method", "Amount before taxes (CAD)", "GST/TPS", "QST/TVQ", "Total received", "Receipt", "Recorded by", "Note"],
     ...rows.map((p) => [
       p.received_at,
       p.order?.client?.full_name,
@@ -25,6 +26,9 @@ export async function GET(request: Request) {
       p.kind,
       p.method,
       Number(p.amount).toFixed(2),
+      Number(p.tps ?? 0).toFixed(2),
+      Number(p.tvq ?? 0).toFixed(2),
+      (Number(p.amount) + Number(p.tps ?? 0) + Number(p.tvq ?? 0)).toFixed(2),
       p.receipt_number,
       p.recorded_by,
       p.note,

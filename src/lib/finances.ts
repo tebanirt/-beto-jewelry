@@ -26,7 +26,10 @@ export type Mois = {
   profit_moyen: number | null;
   panier_moyen: number | null;
   cout_echanges: number;
+  /** Encaissé avant taxes ; la TPS et la TVQ perçues sont à part (à remettre). */
   encaisse: number;
+  tps_percue: number;
+  tvq_percue: number;
 };
 
 export type Canal = {
@@ -83,6 +86,8 @@ export async function loadFinances(): Promise<{ mois: Mois[]; canaux: Canal[]; v
       panier_moyen: num(r.panier_moyen),
       cout_echanges: n0(r.cout_echanges),
       encaisse: n0(r.encaisse),
+      tps_percue: n0(r.tps_percue),
+      tvq_percue: n0(r.tvq_percue),
     }));
     const canaux: Canal[] = (c.data ?? []).map((r) => ({
       canal: String(r.canal),

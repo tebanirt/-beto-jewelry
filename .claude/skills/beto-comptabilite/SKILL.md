@@ -11,6 +11,7 @@ Règles décidées par Rayane. Elles priment sur tout conseil comptable généri
 - **TPS 5 %** et **TVQ 9,975 %** (total 14,975 %), calculées sur le prix avant taxes, arrondies au cent.
 - Taxes **perçues dès maintenant sur chaque paiement** (dépôt, 50 % à l'approbation, solde), même avant la réception des numéros TPS/TVQ (Abraham, 6 nov. 2026).
 - Les prix aux clients s'annoncent **avant taxes**, avec le total taxes incluses quand le client le demande (ex. 2 600 $ + 130,00 $ TPS + 259,35 $ TVQ = 2 989,35 $).
+- Dépôt de design en ligne (option A de Rayane, 6 nov. 2026) : 250 $ + 12,50 $ TPS + 24,94 $ TVQ = **287,44 $**. Les liens Stripe ajoutent la TPS et la TVQ en lignes séparées (`src/lib/taxes.ts`, calcul en cents entiers).
 - Une soumission ou une facture déjà envoyée garde son montant : on ne la change pas après coup sans l'accord de Rayane.
 - **Question ouverte (6 nov. 2026)** : taxes sur les ventes Facebook Marketplace. Rayane a dit « seulement les clients du site ». Une fois l'entreprise inscrite, la loi applique les taxes à toutes les ventes. Ne rien appliquer de différent sans la confirmation d'Abraham ; le rappeler à Rayane si le sujet revient.
 
@@ -23,7 +24,7 @@ Règles décidées par Rayane. Elles priment sur tout conseil comptable généri
 
 ## Enregistrer l'argent (Supabase)
 - **Tout paiement est enregistré, comptant compris.** Aucun revenu hors de la comptabilité transmise au comptable.
-- Commandes dans `orders`, paiements dans `payments`. Le coût d'une commande va dans `orders.production_cost` ; les colonnes `sale_price` et `production_cost` du client sont la somme de ses commandes.
+- Commandes dans `orders`, paiements dans `payments`. `payments.amount` = montant **avant taxes** ; la TPS et la TVQ perçues vont dans `payments.tps` et `payments.tvq` (totaux mensuels dans `v_mois`). Les paiements Stripe sont écrits par le webhook, une fois par session. Le coût d'une commande va dans `orders.production_cost` ; les colonnes `sale_price` et `production_cost` du client sont la somme de ses commandes.
 - Un coût partiel (ex. seulement la fonte) reste dans les notes de la commande, pas dans `production_cost`, tant qu'il est incomplet. Quand une estimation est remplacée par un vrai coût, noter l'ancien et le nouveau montant et la marge qui en découle.
 - Les chiffres officiels (chiffre d'affaires, coûts, marge par mois, provenance) viennent des vues `v_ventes`, `v_mois` et `v_canaux`. Ne pas recalculer autrement.
 - Toute écriture d'argent (prix, montants, paiements, dépôts, factures, reçus) se fait seulement avec l'accord de Rayane, sauf l'enregistrement d'un coût fournisseur qu'il envoie lui-même avec #argent.

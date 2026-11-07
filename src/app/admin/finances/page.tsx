@@ -209,7 +209,7 @@ export default async function FinancesPage() {
                 <th className="px-3 py-3 font-medium text-right">Profit</th>
                 <th className="px-3 py-3 font-medium text-right">Marge</th>
                 <th className="px-3 py-3 font-medium text-right">Par pièce</th>
-                <th className="px-3 py-3 font-medium text-right">Encaissé</th>
+                <th className="px-3 py-3 font-medium text-right" title="Avant taxes">Encaissé (avant taxes)</th>
                 <th className="px-4 py-3 font-medium text-right">Nouveaux contacts</th>
               </tr>
             </thead>
@@ -247,7 +247,14 @@ export default async function FinancesPage() {
                     <td className={`px-3 py-3 text-right ${m.profit_moyen !== null && m.profit_moyen >= OBJECTIF_PAR_PIECE ? "text-emerald-700" : "text-beto-gray"}`}>
                       {argent(m.profit_moyen)}
                     </td>
-                    <td className="px-3 py-3 text-right text-beto-gray">{argent(m.encaisse)}</td>
+                    <td className="px-3 py-3 text-right text-beto-gray">
+                      {argent(m.encaisse)}
+                      {m.tps_percue + m.tvq_percue > 0 && (
+                        <div className="text-xs text-beto-gray-light whitespace-nowrap" title="Taxes perçues en plus, à remettre aux gouvernements">
+                          + TPS {argent(m.tps_percue)} · TVQ {argent(m.tvq_percue)}
+                        </div>
+                      )}
+                    </td>
                     <td className="px-4 py-3 text-right text-beto-gray">
                       {m.nouveaux_contacts}
                       {m.contacts_pubs > 0 && <div className="text-xs text-beto-gray-light">dont {m.contacts_pubs} des pubs</div>}
