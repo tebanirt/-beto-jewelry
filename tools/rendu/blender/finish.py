@@ -10,10 +10,17 @@ def gem_frame(V):
     if (top - g) > (g - bot): h, p, g, top, bot = -h, -p, -g, -bot, -top
     e1 = W[int(np.argmax(ext))]; e1 = e1 - (e1 @ h) * h; e1 /= np.linalg.norm(e1); e2 = np.cross(h, e1)
     # contour de la pierre (rayon selon l'angle) : une pierre allongée n'a pas une zone ronde
-    ang = np.arctan2((V - c) @ e2, (V - c) @ e1); bins = ((ang + np.pi) / (2 * np.pi) * 72).astype(int) % 72
-    rb = np.zeros(72); np.maximum.at(rb, bins, r)
-    for _ in range(3): rb = np.where(rb > 0, rb, np.maximum(np.roll(rb, 1), np.roll(rb, -1)))
-    rb = np.maximum(rb, np.maximum(np.roll(rb, 1), np.roll(rb, -1)))  # un peu plus large que les sommets (arêtes entre sommets)
+    P2 = np.c_[(V - c) @ e1, (V - c) @ e2]
+    try:
+        from scipy.spatial import ConvexHull
+        hv = P2[ConvexHull(P2).vertices]; nxt = np.roll(hv, -1, 0)
+        t = np.linspace(0, 1, 40, endpoint=False)[:, None, None]
+        P2 = (hv[None] * (1 - t) + nxt[None] * t).reshape(-1, 2)  # contour suivi le long des arêtes (tailles à degrés : peu de sommets)
+    except Exception: pass
+    ang = np.arctan2(P2[:, 1], P2[:, 0]); bins = ((ang + np.pi) / (2 * np.pi) * 72).astype(int) % 72
+    rb = np.zeros(72); np.maximum.at(rb, bins, np.hypot(P2[:, 0], P2[:, 1]))
+    for _ in range(6): rb = np.where(rb > 0, rb, np.maximum(np.roll(rb, 1), np.roll(rb, -1)))
+    rb = np.maximum(rb, np.maximum(np.roll(rb, 1), np.roll(rb, -1)))  # un peu plus large (entre deux tranches)
     def Rfun(dv):
         a = np.arctan2(dv @ e2, dv @ e1); return rb[((a + np.pi) / (2 * np.pi) * 72).astype(int) % 72]
     Rw = float(np.percentile(rb, 5)); Rm = float(np.sqrt(r.max() * Rw))
