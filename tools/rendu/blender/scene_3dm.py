@@ -31,6 +31,7 @@ for k, (ctr, rad) in enumerate(caps):
 import brilliant as BR, gems as GM
 big = max(P['gems'], key=lambda x: np.ptp(x['V'], 0).max()) if P['gems'] else None
 for k, x in enumerate(P['gems']):
+    if _os.environ.get('BETO_ONLY_CENTER') and x is not big: continue  # diagnostic : pierre centrale seule
     V, F = x['V'], x['F']
     if a.regem and x is big:
         import finish as FIN

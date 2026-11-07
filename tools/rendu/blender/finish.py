@@ -77,14 +77,19 @@ def finish(metal, gems, tip=0.38, cyl=1.22, min_gem=0.6, bend=0.42):
         for part in (metal if H is not None else []):
             V = part['V']; box = np.all((V >= lo_) & (V <= hi_), axis=1)
             if not box.any(): continue
-            idx = np.where(box)[0]; moved_any = False
+            idx = np.where(box)[0]; moved_any = False; deep = []
             for s0 in range(0, len(idx), 8000):  # par paquets : mémoire bornée même pour une tête très détaillée
                 ch = idx[s0:s0 + 8000]; d = V[ch] @ H[:, :3].T + H[:, 3]
                 inside = np.all(d < -0.02, axis=1)
                 if not inside.any(): continue
-                ii = ch[inside]; dd = d[inside]; k = np.argmax(dd, axis=1)
-                V[ii] += H[k, :3] * (-dd[np.arange(len(ii)), k] + 0.02)[:, None]; moved_any = True
+                ii = ch[inside]; dd = d[inside]; k = np.argmax(dd, axis=1); depth = -dd[np.arange(len(ii)), k]
+                sh = depth < 0.3  # contact : métal ramené à la surface de la pierre
+                V[ii[sh]] += H[k[sh], :3] * (depth[sh] + 0.02)[:, None]; deep.append(ii[~sh]); moved_any = True
             if moved_any: part['N'] = None; part['resharp'] = True
+            deep = np.concatenate(deep) if deep else np.zeros(0, int)
+            if len(deep):  # métal enfoui dans la pierre : retiré, comme le siège creusé par le sertisseur
+                kill = np.zeros(len(V), bool); kill[deep] = True
+                part['F'] = part['F'][~kill[part['F']].any(axis=1)]
         if not moved: continue
         M = np.vstack(moved)
         if len(M) == 1: groups = np.array([1])
