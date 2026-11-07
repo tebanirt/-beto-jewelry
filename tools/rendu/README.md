@@ -50,8 +50,20 @@ poids de métal = volume du jonc (−12 % pour les sièges) × densité ; coûts
 Les fichiers .3dm de Rayane restent hors du dépôt (`BETO_3DM_DIR`). Étapes d'un rendu :
 1. `load3dm.py` lit le métal (calques Metal, Object::Setting, Extra) et les pierres (blocs MatrixGold), écarte la bibliothèque
    de pierres posée à côté ; `--layers` force les calques d'un fichier mal rangé (ex. jonc sur « Render::Ground Plane »).
-2. `finish.py` finit la pièce préparée pour le sertissage : griffes rabattues et coupées au-dessus de la couronne, bouts
-   arrondis, et **aucun métal dans la pierre** (ramené à sa surface) — le métal qui traversait la pierre la rendait laiteuse.
+2. `finish.py` finit la pièce préparée pour le sertissage, comme le fait le sertisseur (`--prongs rond` ou `--prongs aigle`) :
+   - maillage des griffes subdivisé (arêtes ≤ 0,1 mm) : un fût maillé en longs triangles ne peut pas se cintrer ;
+   - chaque griffe est **coupée** à la bonne longueur (le bout arrondi du fichier est gardé), **limée** (largeur finale
+     ≈ 12,5 % du diamètre de la pierre, 0,75 à 1,25 mm) et **rabattue** : pliage au siège (charnière au rondiste, une griffe
+     ouverte est d'abord redressée) puis légère courbure du bout ; la face intérieure suit les facettes de la couronne ;
+   - repères (recherche GIA, JCK, Ganoksin, Stuller) : dessus ≈ 0,45 × hauteur de couronne + 0,35 mm au-dessus du rondiste,
+     jamais au-dessus de la table ; avance sur la couronne ≈ 9,5 % du diamètre ; pas de boule ni de bout écrasé ;
+   - **griffe d'aigle** : même griffe fine, prolongée par un bec en ogive posé sur la couronne, qui s'effile jusqu'à une
+     pointe arrondie (≈ 0,2 mm) environ 12 % du diamètre plus loin vers la table ;
+   - ce qui n'est pas une griffe n'est pas touché : serti clos, rail, pétales déjà finis, griffes d'une autre pierre
+     (trois pierres) ;
+   - **aucun métal dans la pierre** (ramené à sa surface) — le métal qui traversait la pierre la rendait laiteuse.
+   Contrôle rapide sans Cycles : `headview.py` (tête, trois vues), `hvzoom.py` (une griffe, plusieurs réglages),
+   `prongstats.py` (hauteur, largeur, avance de chaque griffe) ; `BETO_PRONG_DEBUG=1` affiche les réglages choisis.
 3. `reshape.py` (`--shape ovale --ct 2`) adapte une tête à une autre forme : métal déformé selon le contour de la nouvelle
    pierre, profondeur du pavillon suivie, halo caché déplacé avec la tête ; dimensions selon le carat (usage du métier).
    Griffes placées comme le veut le métier : coins pour princesse, émeraude, radiant, coussin ; marquise à 6 griffes et

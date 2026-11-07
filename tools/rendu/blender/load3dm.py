@@ -77,6 +77,13 @@ def load(path, metal_layers=None):
     run(not main_hidden and not metal_layers)
     if not parts['metal']:
         parts['gems'].clear(); run(False)
+    # même pièce en double sur deux calques visibles (ancienne et nouvelle version) : une seule gardée
+    seen_p, keep_m = set(), []
+    for x in parts['metal']:
+        key = (len(x['V']), tuple(np.round(x['V'].min(0), 2)), tuple(np.round(x['V'].max(0), 2)))
+        if key in seen_p: continue
+        seen_p.add(key); keep_m.append(x)
+    parts['metal'] = keep_m
     # pierres hors de la bague (bibliothèque de pierres posée à côté) : écartées
     if parts['metal'] and parts['gems']:
         from scipy.spatial import cKDTree
@@ -84,15 +91,22 @@ def load(path, metal_layers=None):
         kept, seen = [], []
         for g in parts['gems']:
             c = g['V'].mean(0); size = float(np.ptp(g['V'], 0).max())
+            if size < 0.6: continue  # reste de construction (aucune vraie pierre ne fait moins de 0,6 mm)
             # pierre posée sur la bague : un point de la pierre touche presque le métal
             dmin = tree.query(g['V'][:: max(1, len(g['V']) // 60)])[0].min()
             if dmin > 0.35: continue
             if any(np.linalg.norm(c - c2) < 0.3 * max(size, s2) and abs(size - s2) < 0.25 * max(size, s2) for c2, s2 in seen): continue
-            # orientation : volume signé positif (bloc en miroir -> faces retournées)
+            if any(np.linalg.norm(c - c2) < 0.35 * (size + s2) for c2, s2 in seen if s2 < 3 and size < 3): continue  # petites pierres qui se chevauchent
+            # orientation : chaque face tournée vers l'extérieur (pierre convexe ; blocs en miroir ou maillages mélangés)
             a, b, d = g['V'][g['F'][:, 0]], g['V'][g['F'][:, 1]], g['V'][g['F'][:, 2]]
-            if np.einsum('ij,ij->i', a, np.cross(b, d)).sum() < 0: g['F'] = g['F'][:, ::-1]
+            inward = np.einsum('ij,ij->i', np.cross(b - a, d - a), (a + b + d) / 3 - c) < 0
+            g['F'][inward] = g['F'][inward][:, ::-1]
             kept.append(g); seen.append((c, size))
         parts['gems'] = kept
+    # copie d'une pierre rangée sur un calque de métal (même boîte que la pierre) : ce n'est pas du métal
+    if parts['gems']:
+        gb = np.array([np.r_[g['V'].min(0), g['V'].max(0)] for g in parts['gems']])
+        parts['metal'] = [x for x in parts['metal'] if not np.any(np.all(np.abs(gb - np.r_[x['V'].min(0), x['V'].max(0)]) < 0.05, axis=1))]
     return parts
 
 if __name__ == '__main__':

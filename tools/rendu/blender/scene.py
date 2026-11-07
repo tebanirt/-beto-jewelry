@@ -333,7 +333,9 @@ def studio_hdri(hdri, view='hero', res=800, samples=128, ring_center=(0, 0, 3.5)
     for e in KEY_PENDING:  # boîte derrière l'objectif, vue seulement à travers les pierres (éclat)
         kb = _panel('hkey', tuple(target + (cam.location - target) * 2.2), (60, 60), _emit_mat('hkey', e), tuple(target))
         kb.visible_glossy = False; kb.visible_diffuse = False; kb.visible_camera = False; kb.visible_shadow = False
-        ps = float(_os.environ.get('HYB_PHOTO', 14)); ph = _panel('hphoto', tuple(target + (cam.location - target) * 1.12), (ps, ps), bpy.data.materials['blackcard'], tuple(target))
+        # le photographe et l'objectif vus dans la pierre : gris foncé, jamais un trou noir
+        pm = bpy.data.materials.get('photocard') or _emit_mat('photocard', float(_os.environ.get('HYB_PHOTO_GREY', 0.25)))
+        ps = float(_os.environ.get('HYB_PHOTO', 14)); ph = _panel('hphoto', tuple(target + (cam.location - target) * 1.12), (ps, ps), pm, tuple(target))
         ph.visible_glossy = False; ph.visible_diffuse = False; ph.visible_camera = False; ph.visible_shadow = False
     KEY_PENDING.clear()
     return cam

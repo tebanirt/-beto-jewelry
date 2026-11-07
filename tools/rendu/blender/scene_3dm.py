@@ -6,7 +6,7 @@ from mathutils import Matrix
 argv = sys.argv[sys.argv.index('--') + 1:]
 ap = argparse.ArgumentParser(); ap.add_argument('path'); ap.add_argument('out'); ap.add_argument('--metal', default='blanc')
 ap.add_argument('--view', default='hero'); ap.add_argument('--res', type=int, default=800); ap.add_argument('--samples', type=int, default=128)
-ap.add_argument('--dist', type=float, default=None); ap.add_argument('--fire', action='store_true'); ap.add_argument('--center', default='diamond'); ap.add_argument('--hdri', default=None); ap.add_argument('--rot', type=float, default=0); ap.add_argument('--strength', type=float, default=1.0); ap.add_argument('--exposure', type=float, default=0.0); ap.add_argument('--regem', action='store_true'); ap.add_argument('--tint', default=None); ap.add_argument('--finish', action='store_true'); ap.add_argument('--border', default=None); ap.add_argument('--nodenoise', action='store_true'); ap.add_argument('--mask', action='store_true'); ap.add_argument('--gempost', default=None); ap.add_argument('--layers', default=None); ap.add_argument('--shape', default=None); ap.add_argument('--ct', type=float, default=2.0); ap.add_argument('--rotate', type=float, default=0.0); ap.add_argument('--gempass', action='store_true'); ap.add_argument('--turntable', type=int, default=0); ap.add_argument('--gemmatch', type=float, default=0.0)
+ap.add_argument('--dist', type=float, default=None); ap.add_argument('--fire', action='store_true'); ap.add_argument('--center', default='diamond'); ap.add_argument('--hdri', default=None); ap.add_argument('--rot', type=float, default=0); ap.add_argument('--strength', type=float, default=1.0); ap.add_argument('--exposure', type=float, default=0.0); ap.add_argument('--regem', action='store_true'); ap.add_argument('--tint', default=None); ap.add_argument('--finish', action='store_true'); ap.add_argument('--border', default=None); ap.add_argument('--nodenoise', action='store_true'); ap.add_argument('--mask', action='store_true'); ap.add_argument('--gempost', default=None); ap.add_argument('--layers', default=None); ap.add_argument('--shape', default=None); ap.add_argument('--ct', type=float, default=2.0); ap.add_argument('--rotate', type=float, default=0.0); ap.add_argument('--gempass', action='store_true'); ap.add_argument('--turntable', type=int, default=0); ap.add_argument('--gemmatch', type=float, default=0.0); ap.add_argument('--prongs', default=None)
 a = ap.parse_args(argv)
 scene.reset()
 P = load3dm.load(a.path, a.layers.split(',') if a.layers else None)
@@ -17,7 +17,7 @@ mm = scene.mat_metal(a.metal); dm = scene.mat_diamond()
 caps = []
 if a.finish:
     import finish as FIN
-    caps = FIN.finish(P['metal'], P['gems'])
+    caps = FIN.finish(P['metal'], P['gems'], prong_style=a.prongs)
     print('bouts arrondis', len(caps))
 allV = np.vstack([x['V'] for x in P['metal'] + P['gems']]); lo, hi = allV.min(0), allV.max(0)
 for k, x in enumerate(P['metal']):
@@ -68,6 +68,9 @@ def autofit(fill):
         if o.type == 'MESH' and o.name.startswith(('metal_', 'gem_', 'Sphere')):
             vs = o.data.vertices; st = max(1, len(vs) // 400)
             pts += [o.matrix_world @ vs[i].co for i in range(0, len(vs), st)]
+    if _os.environ.get('BETO_FOCUS') == 'tete' and big is not None:  # gros plan sur la tête (revue des griffes)
+        bc = Vector(big['V'].mean(0)); br = float(np.ptp(big['V'], 0).max())
+        pts = [p for p in pts if (p - bc).length < 0.85 * br]
     for _ in range(4):
         bpy.context.view_layer.update()
         q = [world_to_camera_view(sc, cam, p) for p in pts]
@@ -143,8 +146,9 @@ def render_frame(out):
     gemraw = None
     if a.gempass:  # passe des pierres : même les reflets extérieurs voient le studio du diamant (pas le softbox du métal)
         from bpy_extras.object_utils import world_to_camera_view
-        dg = bpy.context.evaluated_depsgraph_get()
+        from mathutils import Vector
         pts = [world_to_camera_view(sc, sc.camera, o.matrix_world @ v.co) for o in sc.objects if o.name.startswith('gem_') for v in o.data.vertices]
+        if not pts: pts = [Vector((0, 0, 0)), Vector((1, 1, 0))]  # bague sans pierre : passe des pierres sur toute l'image
         xs = [q.x for q in pts]; ys = [q.y for q in pts]
         bx0, bx1, by0, by1 = max(0, min(xs) - 0.01), min(1, max(xs) + 0.01), max(0, min(ys) - 0.01), min(1, max(ys) + 0.01)
         R = sc.render; keep = (R.use_border, R.use_crop_to_border, R.border_min_x, R.border_min_y, R.border_max_x, R.border_max_y)
