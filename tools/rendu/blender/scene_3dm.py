@@ -6,10 +6,16 @@ from mathutils import Matrix
 argv = sys.argv[sys.argv.index('--') + 1:]
 ap = argparse.ArgumentParser(); ap.add_argument('path'); ap.add_argument('out'); ap.add_argument('--metal', default='blanc')
 ap.add_argument('--view', default='hero'); ap.add_argument('--res', type=int, default=800); ap.add_argument('--samples', type=int, default=128)
-ap.add_argument('--dist', type=float, default=None); ap.add_argument('--fire', action='store_true'); ap.add_argument('--center', default='diamond'); ap.add_argument('--hdri', default=None); ap.add_argument('--rot', type=float, default=0); ap.add_argument('--strength', type=float, default=1.0); ap.add_argument('--exposure', type=float, default=0.0); ap.add_argument('--regem', action='store_true'); ap.add_argument('--tint', default=None); ap.add_argument('--finish', action='store_true'); ap.add_argument('--border', default=None); ap.add_argument('--nodenoise', action='store_true'); ap.add_argument('--mask', action='store_true'); ap.add_argument('--gempost', default=None); ap.add_argument('--layers', default=None); ap.add_argument('--shape', default=None); ap.add_argument('--ct', type=float, default=2.0); ap.add_argument('--rotate', type=float, default=0.0); ap.add_argument('--gempass', action='store_true'); ap.add_argument('--turntable', type=int, default=0); ap.add_argument('--gemmatch', type=float, default=0.0); ap.add_argument('--prongs', default=None)
+ap.add_argument('--dist', type=float, default=None); ap.add_argument('--fire', action='store_true'); ap.add_argument('--center', default='diamond'); ap.add_argument('--hdri', default=None); ap.add_argument('--rot', type=float, default=0); ap.add_argument('--strength', type=float, default=1.0); ap.add_argument('--exposure', type=float, default=0.0); ap.add_argument('--regem', action='store_true'); ap.add_argument('--tint', default=None); ap.add_argument('--finish', action='store_true'); ap.add_argument('--border', default=None); ap.add_argument('--nodenoise', action='store_true'); ap.add_argument('--mask', action='store_true'); ap.add_argument('--gempost', default=None); ap.add_argument('--layers', default=None); ap.add_argument('--shape', default=None); ap.add_argument('--ct', type=float, default=2.0); ap.add_argument('--rotate', type=float, default=0.0); ap.add_argument('--gempass', action='store_true'); ap.add_argument('--turntable', type=int, default=0); ap.add_argument('--gemmatch', type=float, default=0.0); ap.add_argument('--prongs', default=None); ap.add_argument('--crop', default=None)
 a = ap.parse_args(argv)
 scene.reset()
 P = load3dm.load(a.path, a.layers.split(',') if a.layers else None)
+if a.crop:  # fichier qui contient d'autres objets (support, deuxième jonc) : seule la bague, dans cette boîte (axe:min:max)
+    lim = {ax: tuple(float(v) for v in r.split(':')) for ax, *r in [c.split(':', 1) for c in a.crop.split(',')]}
+    def inside(x):
+        lo, hi = x['V'].min(0), x['V'].max(0)
+        return all(lo['xyz'.index(ax)] >= mn and hi['xyz'.index(ax)] <= mx for ax, (mn, mx) in lim.items())
+    P['metal'] = [x for x in P['metal'] if inside(x)]; P['gems'] = [x for x in P['gems'] if inside(x)]
 if a.shape:  # tête de Rayane adaptée à une autre forme de pierre
     import reshape
     info = reshape.reshape(P, a.shape, ct=a.ct, rotate_deg=a.rotate); print('nouvelle pierre', a.shape, a.ct, 'ct', round(info['L'], 2), 'x', round(info['W'], 2), 'mm')
