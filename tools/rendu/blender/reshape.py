@@ -57,6 +57,66 @@ def outline_fn(P2):
     return r
 
 
+def _wrap(a): return (a + np.pi) % (2 * np.pi) - np.pi
+
+
+def prong_angles(metal, local, Rs, fr):
+    """Angles des griffes de la tête d'origine : métal au-dessus du rondiste, près du contour de la pierre."""
+    A = []
+    for part in metal:
+        uu, vv, pp = local(part['V'])
+        th = np.arctan2(vv, uu); rr = np.hypot(uu, vv); rs = Rs(th)
+        sel = (pp > fr['girdle'] + 0.25 * (fr['top'] - fr['girdle'])) & (rr > 0.7 * rs) & (rr < 1.4 * rs)
+        A.append(th[sel])
+    A = np.concatenate(A) if A else np.zeros(0)
+    if len(A) < 8: return []
+    hist = np.bincount(((np.degrees(A) % 360) // 2).astype(int), minlength=180)
+    occ = hist > max(2, 0.004 * len(A))
+    if occ.all() or not occ.any(): return []
+    k0 = int(np.argmin(occ))  # départ sur un intervalle vide : les groupes ne sont pas coupés en deux
+    order = [(k0 + k) % 180 for k in range(180)]; groups, cur, gap = [], [], 0
+    for b in order:
+        if occ[b]: cur.append(b); gap = 0
+        else:
+            gap += 1
+            if cur and gap > 3: groups.append(cur); cur = []
+    if cur: groups.append(cur)
+    out = []
+    for g in groups:
+        wgt = hist[g].astype(float)
+        if wgt.sum() < 0.03 * len(A): continue
+        ang = np.radians(np.array(g) * 2 + 1); out.append(float(np.arctan2((wgt * np.sin(ang)).sum(), (wgt * np.cos(ang)).sum())))
+    return sorted(out)
+
+
+def target_angles(shape, src, L, W):
+    """Où le métier place les griffes pour cette forme. Renvoie (angles cibles des griffes existantes, griffes ajoutées)."""
+    n = len(src); src = np.array(src); extra = []
+    if n == 4:
+        if shape in ('princesse', 'emeraude', 'radiant', 'coussin'):
+            a = np.arctan2(W / 2, L / 2); tgt = np.where(np.abs(src) < np.pi / 2, a, np.pi - a) * np.sign(src)
+        elif shape == 'marquise':  # 6 griffes : une à chaque pointe, quatre sur les flancs
+            tgt = np.where(np.abs(src) < np.pi / 2, np.radians(58), np.radians(122)) * np.sign(src); extra = [0.0, np.pi]
+        elif shape == 'poire':  # 5 griffes : une à la pointe, deux aux épaules, deux au bout arrondi
+            tgt = np.where(np.abs(src) < np.pi / 2, np.radians(68), np.abs(src)) * np.sign(src); extra = [0.0]
+        else: return src, []
+    elif n == 6 and shape in ('marquise', 'poire'):
+        tgt = src.copy(); k0 = int(np.argmin(np.abs(_wrap(src)))); tgt[k0] = 0
+        if shape == 'marquise': k1 = int(np.argmin(np.abs(_wrap(src - np.pi)))); tgt[k1] = np.pi
+    else: return src, []
+    return np.array([_wrap(t) for t in tgt]), extra
+
+
+def prong_parts(metal, local, ang, fr):
+    """Morceaux de métal qui forment une griffe (angle donné) : étroits autour de cet angle, montant au-dessus du rondiste."""
+    out = []
+    for part in metal:
+        uu, vv, pp = local(part['V']); th = np.arctan2(vv, uu); d = _wrap(th - ang)
+        if np.abs(d).max() < np.radians(28) and pp.max() > fr['girdle'] and pp.min() > fr['bot'] - 2.5 * (fr['girdle'] - fr['bot']):
+            out.append(part)
+    return out
+
+
 def reshape(parts, shape, ct=None, dims=None, rotate_deg=0.0):
     """parts = load3dm.load(...) ; remplace la pierre centrale par `shape` et déforme la tête. Modifie sur place."""
     gems = parts['gems']; big = max(gems, key=lambda x: np.ptp(x['V'], 0).max())
@@ -77,9 +137,27 @@ def reshape(parts, shape, ct=None, dims=None, rotate_deg=0.0):
     Rt = outline_fn(G[:, [1, 0]])  # (u = longueur, v = largeur)
     tgt_pav = -G[:, 2].min()
     k_pav = tgt_pav / max(src_pav, 1e-6)
+    # griffes déplacées vers leur place pour la nouvelle forme (chaque griffe tourne d'un bloc, l'écart absorbe le reste)
+    src_a = prong_angles(parts['metal'], local, Rs, fr)
+    tgt_a, extra = target_angles(shape, src_a, L, Wd) if len(src_a) else ([], [])
+    added = []
+    for ea in extra:  # griffe ajoutée : copie d'une vraie griffe de la tête, tournée jusqu'à la pointe
+        k = int(np.argmin(np.abs(_wrap(np.array(src_a) - ea)))); rot = _wrap(ea - src_a[k])
+        # copie symétrique (miroir par rapport à l'axe de la griffe d'origine) pour une griffe de pointe bien centrée
+        for part in prong_parts(parts['metal'], local, src_a[k], fr):
+            uu, vv, pp = local(part['V']); th = np.arctan2(vv, uu); rr = np.hypot(uu, vv)
+            th2 = th + rot
+            V2 = c + np.outer(rr * np.cos(th2), l) + np.outer(rr * np.sin(th2), w) + np.outer(pp, h)
+            added.append({'V': V2, 'F': part['F'].copy(), 'N': None, 'layer': part['layer'], 'resharp': True, 'added': True})
+    offs = [_wrap(t - s_) for s_, t in zip(src_a, tgt_a)]
+    if len(src_a) > 1:
+        sa = np.array(src_a); gaps = np.diff(np.r_[np.sort(sa), np.sort(sa)[0] + 2 * np.pi]); sig = 0.45 * gaps.min()
+    def ang_offset(th):
+        if not len(src_a) or max(abs(o) for o in offs) < 1e-3: return np.zeros_like(th)
+        W_ = np.stack([np.exp(-(np.abs(_wrap(th - s_)) / sig) ** 4) + 1e-9 for s_ in src_a]); return (W_ * np.array(offs)[:, None]).sum(0) / W_.sum(0)
     # déformation de la tête
     head_lo = fr['bot'] - 0.9 * src_pav  # sous le culet : la tige du panier se fond dans le jonc
-    def warp(V):
+    def warp(V, fixed_angle=False):
         uu, vv, pp = local(V)
         th = np.arctan2(vv, uu); rr = np.hypot(uu, vv)
         rs = Rs(th); rt = Rt(th)
@@ -87,12 +165,14 @@ def reshape(parts, shape, ct=None, dims=None, rotate_deg=0.0):
         x = (rr / rs - 1.25) / 0.6; wr = 1 - np.clip(x, 0, 1); wr = wr * wr * (3 - 2 * wr)
         wgt = wp * wr
         if not np.any(wgt > 1e-4): return None
-        fac = 1 + wgt * (rt / rs - 1)
+        th2 = th if fixed_angle else th + wgt * ang_offset(th)
+        rr2 = rr * (1 + wgt * (Rt(th2) / rs - 1))
         below = pp < fr['girdle']
         pp2 = np.where(below, fr['girdle'] - (fr['girdle'] - pp) * (1 + wgt * (k_pav - 1)), pp)
-        return c + np.outer(uu * fac, l) + np.outer(vv * fac, w) + np.outer(pp2, h)
+        return c + np.outer(rr2 * np.cos(th2), l) + np.outer(rr2 * np.sin(th2), w) + np.outer(pp2, h)
+    parts['metal'].extend(added)
     for part in parts['metal']:
-        V2 = warp(part['V'])
+        V2 = warp(part['V'], fixed_angle=part.get('added', False))
         if V2 is None: continue
         part['V'] = V2; part['N'] = None; part['resharp'] = True
     # petites pierres de la tête (halo caché, pierres de la galerie) : déplacées d'un bloc avec le métal qui les tient
@@ -100,10 +180,23 @@ def reshape(parts, shape, ct=None, dims=None, rotate_deg=0.0):
         if g is big: continue
         ctr = g['V'].mean(0)[None]; ctr2 = warp(ctr)
         if ctr2 is not None: g['V'] = g['V'] + (ctr2 - ctr)
+    # petites pierres qui se chevauchent après déplacement, ou qui touchent une griffe ajoutée : retirées
+    if added or extra:
+        from scipy.spatial import cKDTree
+        pts = np.vstack([p_['V'] for p_ in parts['metal'] if p_.get('added')]) if added else np.zeros((0, 3))
+        tree = cKDTree(pts) if len(pts) else None
+        keep, kept_c = [], []
+        for g in sorted(gems, key=lambda x: -np.ptp(x['V'], 0).max()):
+            if g is big: keep.append(g); continue
+            cg = g['V'].mean(0); rg = 0.5 * float(np.ptp(g['V'], 0).max())
+            if any(np.linalg.norm(cg - c2) < 0.9 * (rg + r2) for c2, r2 in kept_c): continue
+            if tree is not None and tree.query(cg)[0] < 0.8 * rg: continue
+            keep.append(g); kept_c.append((cg, rg))
+        parts['gems'][:] = keep
     # pierre posée au même rondiste
     newV = c + np.outer(G[:, 1], l) + np.outer(G[:, 0], w) + np.outer(G[:, 2] + fr['girdle'], h)
     F = GF  # orientation : volume signé positif
     a_, b_, d_ = newV[F[:, 0]], newV[F[:, 1]], newV[F[:, 2]]
     if np.einsum('ij,ij->i', a_, np.cross(b_, d_)).sum() < 0: F = F[:, ::-1]
     big['V'], big['F'], big['N'] = newV, F, None
-    return dict(L=L, W=Wd, k_pav=k_pav)
+    return dict(L=L, W=Wd, k_pav=k_pav, griffes=[round(float(np.degrees(a)), 1) for a in src_a], vers=[round(float(np.degrees(a)), 1) for a in tgt_a], ajoutees=[round(float(np.degrees(a)), 1) for a in extra], pierres=len(parts['gems']))

@@ -54,6 +54,8 @@ Les fichiers .3dm de Rayane restent hors du dépôt (`BETO_3DM_DIR`). Étapes d'
    arrondis, et **aucun métal dans la pierre** (ramené à sa surface) — le métal qui traversait la pierre la rendait laiteuse.
 3. `reshape.py` (`--shape ovale --ct 2`) adapte une tête à une autre forme : métal déformé selon le contour de la nouvelle
    pierre, profondeur du pavillon suivie, halo caché déplacé avec la tête ; dimensions selon le carat (usage du métier).
+   Griffes placées comme le veut le métier : coins pour princesse, émeraude, radiant, coussin ; marquise à 6 griffes et
+   poire à 5 griffes (griffe de pointe copiée d'une vraie griffe de la tête) ; petites pierres qui se chevauchent retirées.
 4. Rendu Cycles : studio HDRI pour le métal, tente de lumière et boîte derrière l'objectif vues seulement par le métal ;
    passe séparée des pierres (studio du diamant irrégulier, fond sombre) ; masque des pierres.
 5. `gempost.py` : retouche des pierres seulement, courbe tonale de référence (fichier `tone_ref.npy`, hors dépôt),
