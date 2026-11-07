@@ -43,7 +43,7 @@ def finish(metal, gems, tip=0.38, cyl=1.22, min_gem=0.6, bend=0.42):
             V[sel] -= np.outer(p[sel] - zc, h)  # coupe au niveau du bout de griffe
             moved.append(V[sel].copy())
         # jamais de métal dans la pierre : un point entré dans la pierre est ramené à sa surface (+ 0,02 mm)
-        try: H = ConvexHull(gm['V']).equations
+        try: H = np.unique(np.round(ConvexHull(gm['V']).equations, 6), axis=0)  # faces coplanaires fusionnées
         except Exception:
             try: H = ConvexHull(gm['V'], qhull_options='QJ').equations
             except Exception: H = None  # pierre au maillage plat : rien à repousser
@@ -51,12 +51,14 @@ def finish(metal, gems, tip=0.38, cyl=1.22, min_gem=0.6, bend=0.42):
         for part in (metal if H is not None else []):
             V = part['V']; box = np.all((V >= lo_) & (V <= hi_), axis=1)
             if not box.any(): continue
-            idx = np.where(box)[0]; d = V[idx] @ H[:, :3].T + H[:, 3]
-            inside = np.all(d < -0.02, axis=1)
-            if not inside.any(): continue
-            ii = idx[inside]; dd = d[inside]; k = np.argmax(dd, axis=1)
-            V[ii] += H[k, :3] * (-dd[np.arange(len(ii)), k] + 0.02)[:, None]
-            part['N'] = None; part['resharp'] = True
+            idx = np.where(box)[0]; moved_any = False
+            for s0 in range(0, len(idx), 8000):  # par paquets : mémoire bornée même pour une tête très détaillée
+                ch = idx[s0:s0 + 8000]; d = V[ch] @ H[:, :3].T + H[:, 3]
+                inside = np.all(d < -0.02, axis=1)
+                if not inside.any(): continue
+                ii = ch[inside]; dd = d[inside]; k = np.argmax(dd, axis=1)
+                V[ii] += H[k, :3] * (-dd[np.arange(len(ii)), k] + 0.02)[:, None]; moved_any = True
+            if moved_any: part['N'] = None; part['resharp'] = True
         if not moved: continue
         M = np.vstack(moved)
         if len(M) == 1: groups = np.array([1])
