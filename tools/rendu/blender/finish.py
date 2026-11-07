@@ -26,6 +26,10 @@ def finish(metal, gems, tip=0.38, cyl=1.22, min_gem=0.6, bend=0.42):
             # zone limitée : autour de la pierre et jusqu'à une hauteur raisonnable de griffe (jamais à travers la bague)
             reach = f['top'] + max(1.2, 0.9 * R)
             near = (radial <= R * (cyl + (0.13 if R > 2 else 0.0)) + 0.25) & (p <= reach) & (p >= f['bot'])
+            if R < 1.5:  # tige de sertissage longue d'une petite pierre : seulement une petite pièce isolée (jamais une griffe de la tête)
+                cg = V.mean(0) - c; pc = cg @ h; rc_ = np.linalg.norm(cg - pc * h)
+                if np.ptp(V, 0).max() < 4.0 and rc_ <= R * cyl + 0.25 and pc > f['girdle']:
+                    near = near | ((radial <= R * cyl + 0.25) & (p >= f['bot']) & (p <= f['top'] + max(3.0, 1.5 * R)))
             # griffe rabattue sur la couronne : au-dessus du rondiste, le métal se rapproche de l'axe de la pierre
             up = near & (p > f['girdle'])
             if near.any(): part['N'] = None; part['resharp'] = True  # normales recalculées (sinon ombrage taché)
