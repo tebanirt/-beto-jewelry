@@ -45,3 +45,18 @@ Nombre de pierres = pierres qui tiennent sur l'arc couvert (semi = moitié supé
 du jonc pour la taille de doigt ; diamètre = min(1,95 mm, 95 % de la largeur du jonc) ;
 poids de métal = volume du jonc (−12 % pour les sièges) × densité ; coûts et marge lus dans `pricing_config`
 (`alliance.profit`, calibré sur une vente réelle — à confirmer par Rayane).
+
+## 6. Rendus photoréalistes des fichiers MatrixGold — `blender/scene_3dm.py`
+Les fichiers .3dm de Rayane restent hors du dépôt (`BETO_3DM_DIR`). Étapes d'un rendu :
+1. `load3dm.py` lit le métal (calques Metal, Object::Setting, Extra) et les pierres (blocs MatrixGold), écarte la bibliothèque
+   de pierres posée à côté ; `--layers` force les calques d'un fichier mal rangé (ex. jonc sur « Render::Ground Plane »).
+2. `finish.py` finit la pièce préparée pour le sertissage : griffes rabattues et coupées au-dessus de la couronne, bouts
+   arrondis, et **aucun métal dans la pierre** (ramené à sa surface) — le métal qui traversait la pierre la rendait laiteuse.
+3. `reshape.py` (`--shape ovale --ct 2`) adapte une tête à une autre forme : métal déformé selon le contour de la nouvelle
+   pierre, profondeur du pavillon suivie, halo caché déplacé avec la tête ; dimensions selon le carat (usage du métier).
+4. Rendu Cycles : studio HDRI pour le métal, tente de lumière et boîte derrière l'objectif vues seulement par le métal ;
+   passe séparée des pierres (studio du diamant irrégulier, fond sombre) ; masque des pierres.
+5. `gempost.py` : retouche des pierres seulement, courbe tonale de référence (fichier `tone_ref.npy`, hors dépôt),
+   pierre centrale et petites pierres traitées à part ; `repost.py` refait la retouche sans relancer le rendu.
+Cadrage automatique par vue (silhouette projetée, 80 % de l'image). `--turntable 36` : 360° (la bague tourne, studio fixe).
+`batch_prod.sh` : réglages de production (5 vues, or jaune / blanc / platine).

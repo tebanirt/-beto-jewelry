@@ -18,7 +18,7 @@ def brilliant_for(bb):
 
 METALS = {  # couleurs de réflectance mesurées (approx. F0 sRGB linéaire)
     'blanc': ((0.86, 0.85, 0.83), (0.97, 0.97, 0.96)),
-    'jaune': ((0.95, 0.70, 0.36), (1.0, 0.90, 0.68)),
+    'jaune': ((1.0, 0.71, 0.29), (1.0, 0.86, 0.52)),
     'rose':  ((0.93, 0.60, 0.50), (1.0, 0.82, 0.76)),
     'platine': ((0.80, 0.79, 0.77), (0.95, 0.95, 0.94)),
 }
@@ -26,7 +26,10 @@ METALS = {  # couleurs de réflectance mesurées (approx. F0 sRGB linéaire)
 def reset():
     bpy.ops.wm.read_factory_settings(use_empty=True)
 
+THROUGH_GEM_DESAT = 1.0
 def mat_metal(name):
+    if _os.environ.get('BETO_' + name.upper()):  # réglage de couleur à l'essai
+        METALS[name] = (tuple(float(v) for v in _os.environ['BETO_' + name.upper()].split(',')), METALS[name][1])
     m = bpy.data.materials.new('metal'); m.use_nodes = True
     nt = m.node_tree; b = nt.nodes['Principled BSDF'] if 'Principled BSDF' in nt.nodes else nt.nodes.new('ShaderNodeBsdfPrincipled')
     base, spec = METALS[name]
@@ -35,6 +38,14 @@ def mat_metal(name):
     b.inputs['Roughness'].default_value = 0.07
     if 'Specular Tint' in b.inputs: b.inputs['Specular Tint'].default_value = (*spec, 1)
     out = nt.nodes.get('Material Output') or nt.nodes.new('ShaderNodeOutputMaterial')
+    # métal vu à travers une pierre : couleur adoucie (comme sous l'éclairage fort d'un studio photo)
+    lp = nt.nodes.new('ShaderNodeLightPath'); gt = nt.nodes.new('ShaderNodeMath'); gt.operation = 'GREATER_THAN'; gt.inputs[1].default_value = 0.5
+    nt.links.new(lp.outputs['Transmission Depth'], gt.inputs[0])
+    mix = nt.nodes.new('ShaderNodeMix'); mix.data_type = 'RGBA'
+    mfac = nt.nodes.new('ShaderNodeMath'); mfac.operation = 'MULTIPLY'; mfac.inputs[1].default_value = THROUGH_GEM_DESAT
+    nt.links.new(gt.outputs[0], mfac.inputs[0]); nt.links.new(mfac.outputs[0], mix.inputs['Factor'])
+    mix.inputs['A'].default_value = (*base, 1); mix.inputs['B'].default_value = (0.80, 0.80, 0.79, 1)
+    nt.links.new(mix.outputs['Result'], b.inputs['Base Color'])
     nt.links.new(b.outputs[0], out.inputs['Surface'])
     return m
 
@@ -76,7 +87,11 @@ CARD = 34
 SHADOW_W = 4e5
 HEAD_SCALE = 0.85
 WORLD_GEM = 0.03
+import os as _os
 GEM_SEES_TOP = False
+KEY_IN_GEM = False
+if _os.environ.get('BETO_GEMLIGHT') == 'bright':
+    GEM_SEES_TOP, KEY_IN_GEM, WORLD_GEM, PHOTOG = True, True, 0.12, 22
 GEM_STRIPS, GEM_STRIP_E = 10, 25.0
 Y_UP = Matrix(((1, 0, 0, 0), (0, 0, -1, 0), (0, 1, 0, 0), (0, 0, 0, 1)))  # (x, y, z) -> (x, -z, y)
 
@@ -256,25 +271,103 @@ def studio(view='face', res=1400, samples=256, ring_center=(0, 0, 3.5), dist=Non
     # Boîte à lumière derrière l'objectif + silhouette sombre du photographe (motif des flèches)
     back = target + (cam.location - target) * 2.4
     kb = _panel('key_behind_cam', tuple(back), (KEY_SIZE, KEY_SIZE), _emit_mat('key', KEY_E), T)
-    kb.visible_transmission = False  # éclaire le métal, pas l'intérieur des pierres
+    kb.visible_transmission = KEY_IN_GEM
     ph = _panel('photographer', tuple(target + (cam.location - target) * 1.15), (PHOTOG, PHOTOG), black, T)
     ph.visible_glossy = False; ph.visible_diffuse = False
     return cam
 
-def composite_white(src, dst, bg=(250, 250, 250)):
-    from PIL import Image
+
+GEM_HYBRID = _os.environ.get('BETO_HYBRID', '1') == '1'
+KEY_PENDING = []
+HYB_DARK, HYB_STRIP, HYB_SPARK = float(_os.environ.get('HYB_DARK', 0.07)), float(_os.environ.get('HYB_STRIP', 45)), float(_os.environ.get('HYB_SPARK', 110))
+def studio_hdri(hdri, view='hero', res=800, samples=128, ring_center=(0, 0, 3.5), dist=None, strength=1.0, rot=0.0, exposure=0.0):
+    """Studio photographié (HDRI) : le métal et les pierres reflètent un vrai studio ; fond blanc composité, ombre de contact."""
+    sc = bpy.context.scene
+    sc.render.engine = 'CYCLES'; sc.cycles.device = 'CPU'; sc.cycles.samples = samples; sc.cycles.use_denoising = True
+    sc.cycles.max_bounces = 40; sc.cycles.transmission_bounces = 32; sc.cycles.glossy_bounces = 24
+    sc.cycles.caustics_reflective = False; sc.cycles.caustics_refractive = False; sc.cycles.sample_clamp_indirect = 20
+    sc.render.resolution_x = sc.render.resolution_y = res; sc.render.film_transparent = True
+    sc.view_settings.view_transform = 'AgX'; sc.view_settings.exposure = exposure
+    if _os.environ.get('BETO_LOOK'): sc.view_settings.look = _os.environ['BETO_LOOK']
+    w = bpy.data.worlds.new('w'); sc.world = w; w.use_nodes = True; wt = w.node_tree
+    bg = wt.nodes['Background']; env = wt.nodes.new('ShaderNodeTexEnvironment'); env.image = bpy.data.images.load(hdri)
+    mp = wt.nodes.new('ShaderNodeMapping'); tc = wt.nodes.new('ShaderNodeTexCoord'); mp.inputs['Rotation'].default_value = (0, 0, math.radians(rot))
+    wt.links.new(tc.outputs['Generated'], mp.inputs['Vector']); wt.links.new(mp.outputs['Vector'], env.inputs['Vector']); wt.links.new(env.outputs['Color'], bg.inputs['Color'])
+    bg.inputs['Strength'].default_value = strength
+    if GEM_HYBRID:
+        # à travers les pierres : fond sombre + bandes, points vifs, cartons noirs (contraste des facettes)
+        lp = wt.nodes.new('ShaderNodeLightPath'); gtn = wt.nodes.new('ShaderNodeMath'); gtn.operation = 'GREATER_THAN'; gtn.inputs[1].default_value = 0.5
+        wt.links.new(lp.outputs['Transmission Depth'], gtn.inputs[0])
+        dk = wt.nodes.new('ShaderNodeBackground'); dk.inputs[0].default_value = (1, 1, 1, 1); dk.inputs[1].default_value = HYB_DARK
+        mx = wt.nodes.new('ShaderNodeMixShader'); wt.links.new(gtn.outputs[0], mx.inputs[0]); wt.links.new(bg.outputs[0], mx.inputs[1]); wt.links.new(dk.outputs[0], mx.inputs[2])
+        wt.links.new(mx.outputs[0], wt.nodes['World Output'].inputs['Surface'])
+        T = ring_center
+        gl = _emit_mat('gemlight', HYB_STRIP); sp = _emit_mat('spark', HYB_SPARK)
+        blk = bpy.data.materials.new('blackcard'); blk.use_nodes = True; bb_ = blk.node_tree.nodes['Principled BSDF']; bb_.inputs['Base Color'].default_value = (0.005, 0.005, 0.005, 1)
+        def gem_only(o): o.visible_glossy = False; o.visible_diffuse = False; o.visible_camera = False; o.visible_shadow = False
+        NS = int(_os.environ.get('HYB_NSTRIP', 12)); SW = float(_os.environ.get('HYB_SW', 5))
+        seed = _os.environ.get('HYB_SEED')
+        import random as _rnd; rg = _rnd.Random(int(seed) if seed else 0); J = 1.0 if seed else 0.0  # studio irrégulier (comme un vrai studio photo)
+        for ring_i, (rr, zz) in enumerate(((80, 72), (95, 30))):
+            for k in range(NS):
+                aa = 2 * math.pi * (k + 0.5 + 0.5 * ring_i + J * rg.uniform(-0.35, 0.35)) / NS
+                sw = SW * (1 + J * rg.uniform(-0.5, 0.6)); z_ = zz + J * rg.uniform(-18, 18); ln = 55 * (1 + J * rg.uniform(-0.4, 0.3))
+                gem_only(_panel(f'hstrip_{ring_i}_{k}', (rr * math.cos(aa), rr * math.sin(aa), T[2] + z_), (sw, ln), gl, T))
+        for side in (-1, 1): gem_only(_panel(f'hside_{side}', (side * 90, -25 + J * rg.uniform(-20, 20), T[2] + 50), (12, 110), gl, T))
+        for k in range(36):
+            aa = 2 * math.pi * k / 36; gem_only(_panel(f'hspark_{k}', (85 * math.cos(aa), 85 * math.sin(aa), T[2] + 50 + 35 * math.sin(3 * aa)), (2.2, 2.2), sp, T))
+        cards = [(-60, -75, 95), (60, -75, 95), (0, 70, 115), (-100, 20, 55), (100, 20, 55), (-45, -110, 40), (45, -110, 40)]
+        if seed: cards = [(rg.uniform(-110, 110), rg.uniform(-115, 90), rg.uniform(35, 120)) for _ in range(int(_os.environ.get('HYB_NCARD', 9)))]
+        CS = float(_os.environ.get('HYB_CARD', 30))
+        for k, (x, y, z) in enumerate(cards):
+            gem_only(_panel(f'hcard_{k}', (x, y, T[2] + z), (CS * (1 + J * rg.uniform(-0.3, 0.5)),) * 2, blk, T))
+        HYB_KEY = float(_os.environ.get('HYB_KEY', 3.0))
+        if HYB_KEY > 0: KEY_PENDING.append(HYB_KEY)
+    cam_d = bpy.data.cameras.new('cam'); cam_d.lens = 105; cam_d.clip_start = 1; cam_d.clip_end = 3000
+    cam = bpy.data.objects.new('cam', cam_d); sc.collection.objects.link(cam); sc.camera = cam
+    views = {'hero': (0, 66, 88), 'hero78': (0, 78, 88), 'face': (0, 30, 92), 'trois_quarts': (-35, 26, 96), 'cote': (90, 4, 92), 'dessus': (0, 88, 88), 'tete': (-30, 40, 38)}
+    az, el, dd = views[view]; dd = dist if (dist and view != 'tete') else dd
+    a, e = math.radians(az), math.radians(el); target = Vector(ring_center)
+    cam.location = target + Vector((dd * math.cos(e) * math.sin(a), -dd * math.cos(e) * math.cos(a), dd * math.sin(e)))
+    cam.rotation_euler = (target - cam.location).to_track_quat('-Z', 'Y').to_euler()
+    for e in KEY_PENDING:  # boîte derrière l'objectif, vue seulement à travers les pierres (éclat)
+        kb = _panel('hkey', tuple(target + (cam.location - target) * 2.2), (60, 60), _emit_mat('hkey', e), tuple(target))
+        kb.visible_glossy = False; kb.visible_diffuse = False; kb.visible_camera = False; kb.visible_shadow = False
+        ps = float(_os.environ.get('HYB_PHOTO', 14)); ph = _panel('hphoto', tuple(target + (cam.location - target) * 1.12), (ps, ps), bpy.data.materials['blackcard'], tuple(target))
+        ph.visible_glossy = False; ph.visible_diffuse = False; ph.visible_camera = False; ph.visible_shadow = False
+    KEY_PENDING.clear()
+    return cam
+
+def composite_white(src, dst, bg=(250, 250, 250), contact=False):
+    from PIL import Image, ImageFilter
     im = Image.open(src).convert('RGBA'); base = Image.new('RGBA', im.size, (*bg, 255))
+    if contact:  # ombre de contact douce sous la bague (forme de la silhouette écrasée, floutée)
+        a = im.split()[3]; bb = a.getbbox()
+        if bb:
+            w, h = im.size; sil = a.crop(bb).resize((bb[2] - bb[0], max(2, (bb[3] - bb[1]) // 9)))
+            sh = Image.new('L', im.size, 0); sh.paste(sil, (bb[0], bb[3] - sil.size[1] // 2))
+            sh = sh.filter(ImageFilter.GaussianBlur(w / 60)).point(lambda v: int(v * 0.35))
+            base = Image.composite(Image.new('RGBA', im.size, (120, 120, 120, 255)), base, sh)
     Image.alpha_composite(base, im).convert('RGB').save(dst, quality=95)
 
 if __name__ == '__main__':
     argv = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else sys.argv[1:]
     ap = argparse.ArgumentParser(); ap.add_argument('model'); ap.add_argument('out'); ap.add_argument('--metal', default='blanc')
     ap.add_argument('--view', default='face'); ap.add_argument('--res', type=int, default=1000); ap.add_argument('--samples', type=int, default=128)
-    ap.add_argument('--pave', action='store_true'); ap.add_argument('--fire', action='store_true'); ap.add_argument('--dist', type=float, default=None)
+    ap.add_argument('--turntable', type=int, default=0); ap.add_argument('--pave', action='store_true'); ap.add_argument('--fire', action='store_true'); ap.add_argument('--dist', type=float, default=None)
     a = ap.parse_args(argv)
     PAVE = a.pave
     reset(); build_ring(a.model, a.metal); studio(a.view, a.res, a.samples, dist=a.dist)
     raw = a.out.replace('.png', '_raw.png')
+    if a.turntable:
+        import os
+        root = bpy.data.objects['ring']; base = root.matrix_world.copy()
+        os.makedirs(a.out, exist_ok=True)
+        for k in range(a.turntable):
+            root.matrix_world = Matrix.Rotation(2 * math.pi * k / a.turntable, 4, 'Z') @ base
+            f = os.path.join(a.out, f'{k:03d}_raw.png'); bpy.context.scene.render.filepath = f; bpy.ops.render.render(write_still=True)
+            composite_white(f, os.path.join(a.out, f'{k:03d}.png')); os.remove(f); print('image', k, flush=True)
+        sys.exit(0)
     if not a.fire:
         bpy.context.scene.render.filepath = raw; bpy.ops.render.render(write_still=True)
     else:
