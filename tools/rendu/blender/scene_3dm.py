@@ -14,7 +14,7 @@ def _prepare():
     caps = []
     P = load3dm.load(a.path, a.layers.split(',') if a.layers else None)
     if a.crop:  # fichier qui contient d'autres objets (support, deuxième jonc) : seule la bague, dans cette boîte (axe:min:max)
-        lim = {ax: tuple(float(v) for v in r.split(':')) for ax, *r in [c.split(':', 1) for c in a.crop.split(',')]}
+        lim = {ax: tuple(float(v) for v in r.split(':')) for ax, r in [c.split(':', 1) for c in a.crop.split(',')]}
         def inside(x):
             lo, hi = x['V'].min(0), x['V'].max(0)
             return all(lo['xyz'.index(ax)] >= mn and hi['xyz'.index(ax)] <= mx for ax, (mn, mx) in lim.items())
@@ -40,8 +40,9 @@ try:
 except Exception:
     P, caps = _prepare()
     try:
-        with open(_cf + '.tmp', 'wb') as _fh: pickle.dump((P, caps), _fh, protocol=4)
-        _os.replace(_cf + '.tmp', _cf)
+        _tmp = f'{_cf}.{_os.getpid()}.tmp'  # nom propre à ce rendu : deux rendus en parallèle n'écrivent jamais le même fichier
+        with open(_tmp, 'wb') as _fh: pickle.dump((P, caps), _fh, protocol=4)
+        _os.replace(_tmp, _cf)
     except Exception as e: print('cache', e)
 mm = scene.mat_metal(a.metal); dm = scene.mat_diamond()
 allV = np.vstack([x['V'] for x in P['metal'] + P['gems']]); lo, hi = allV.min(0), allV.max(0)
