@@ -5,6 +5,7 @@ import { useState } from "react";
 import { LINKS } from "@/lib/site-content";
 import { useSite } from "../useSite";
 import { ArrowRight, Eyebrow, FinalCta, PhotoSlot, RingPhoto, T } from "../ui";
+import { SHOW_PHOTO_SLOTS } from "@/lib/constants";
 
 const sectionPad = { paddingTop: "clamp(88px, 10vw, 144px)", paddingBottom: "clamp(88px, 10vw, 144px)" };
 
@@ -75,6 +76,9 @@ export default function WorkPage() {
         </div>
       </section>
 
+      {/* Rendu → bague et bagues portées : seulement avec de vraies photos (SHOW_PHOTO_SLOTS). */}
+      {SHOW_PHOTO_SLOTS && (
+      <>
       {/* ─── Du rendu à la bague ─── */}
       <section aria-labelledby="rendu" className="bj-gutter bg-beto-white" style={sectionPad}>
         <div className="bj-container">
@@ -122,6 +126,8 @@ export default function WorkPage() {
           </div>
         </div>
       </section>
+      </>
+      )}
 
       <FinalCta
         title={p.finalTitle}

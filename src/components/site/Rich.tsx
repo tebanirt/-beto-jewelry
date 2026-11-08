@@ -44,11 +44,32 @@ function keepCompounds(text: string, keyBase: string): ReactNode[] {
   return out;
 }
 
+/**
+ * Le « % » de la police d'affichage en italique ressemble à « ⁰o » : il est
+ * placé dans une petite balise que le CSS affiche dans la police du texte
+ * (seulement dans les textes en italique, voir .bj-pct dans globals.css).
+ */
+function wrapPercent(nodes: ReactNode[], keyBase: string): ReactNode[] {
+  return nodes.flatMap((node, ni) => {
+    if (typeof node !== "string" || !node.includes("%")) return [node];
+    return node.split("%").flatMap((part, pi) =>
+      pi === 0
+        ? [part]
+        : [
+            <span key={`${keyBase}-p${ni}-${pi}`} className="bj-pct">
+              %
+            </span>,
+            part,
+          ]
+    );
+  });
+}
+
 function plain(text: string, lang: "fr" | "en", keyBase: string): ReactNode[] {
   const lines = typo(text, lang).split("\n");
   return lines.flatMap((line, li) => [
     ...(li > 0 ? [<br key={`${keyBase}-br${li}`} />] : []),
-    ...keepCompounds(line, `${keyBase}-l${li}`),
+    ...wrapPercent(keepCompounds(line, `${keyBase}-l${li}`), `${keyBase}-l${li}`),
   ]);
 }
 

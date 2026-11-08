@@ -227,7 +227,7 @@ const fr = {
       },
       {
         title: "Le dépôt de design",
-        body: "Un dépôt de 250 $ réserve votre place auprès de Rayane et lance le travail de design. Il est crédité à 100 % sur le prix de votre bague. Paiement sécurisé par Stripe.",
+        body: "Un dépôt de 250 $ réserve votre place auprès de Rayane et lance le travail de design. Il est crédité à 100 % sur le prix de votre bague.",
         link: { label: "Lire les conditions du dépôt", href: `${LINKS.faq}#prix` },
         meta: "250 $ · crédité à 100 %",
         media: { kind: "deposit" as const, big: "250 $", note: "Crédité à 100 % sur votre bague" },
@@ -702,7 +702,7 @@ const en: SiteContent = {
       },
       {
         title: "The design deposit",
-        body: "A $250 deposit reserves your spot with Rayane and starts the design work. It is 100% credited toward the price of your ring. Secure payment through Stripe.",
+        body: "A $250 deposit reserves your spot with Rayane and starts the design work. It is 100% credited toward the price of your ring.",
         link: { label: "Read the deposit terms", href: `${LINKS.faq}#prix` },
         meta: "$250 · 100% credited",
         media: { kind: "deposit" as const, big: "$250", note: "100% credited toward your ring" },
