@@ -1,4 +1,5 @@
 import { getSupabaseAdmin } from "@/lib/supabase";
+import { entiteDe, type Entite, type VueVentes } from "@/lib/entite";
 
 /**
  * Finances du CRM, lues dans les vues Supabase v_mois, v_canaux et v_ventes
@@ -26,7 +27,10 @@ export type Mois = {
   profit_moyen: number | null;
   panier_moyen: number | null;
   cout_echanges: number;
+  /** Encaissé avant taxes ; la TPS et la TVQ perçues sont à part (à remettre). */
   encaisse: number;
+  tps_percue: number;
+  tvq_percue: number;
 };
 
 export type Canal = {
@@ -54,21 +58,33 @@ export type Vente = {
   reste: number | null;
   vendu_le: string;
   echange: boolean;
+  entite: Entite;
 };
 
+type Ligne = Record<string, unknown>;
 const num = (v: unknown) => (v === null || v === undefined ? null : Number(v));
+const str = (v: unknown) => (v === null || v === undefined ? null : String(v));
 const n0 = (v: unknown) => Number(v ?? 0);
 
-export async function loadFinances(): Promise<{ mois: Mois[]; canaux: Canal[]; ventes: Vente[]; error: string | null }> {
+/**
+ * `vue` = tout, ou un seul côté (société / avant la société). Toujours choisie
+ * avec `vueAutorisee()` : seul Rayane voit autre chose que la société.
+ */
+export async function loadFinances(vue: VueVentes = "tout"): Promise<{ mois: Mois[]; canaux: Canal[]; ventes: Vente[]; error: string | null }> {
   try {
     const supabase = getSupabaseAdmin();
-    const [m, c, v] = await Promise.all([
-      supabase.from("v_mois").select("*").order("mois"),
-      supabase.from("v_canaux").select("*"),
-      supabase.from("v_ventes").select("*").order("vendu_le", { ascending: false }),
-    ]);
+    const ventesQuery = supabase.from("v_ventes").select("*").order("vendu_le", { ascending: false });
+    const [m, c, v] = await Promise.all(
+      vue === "tout"
+        ? [supabase.from("v_mois").select("*").order("mois"), supabase.from("v_canaux").select("*"), ventesQuery]
+        : [
+            supabase.rpc("finances_mois", { p_entite: vue }),
+            supabase.rpc("finances_canaux", { p_entite: vue }),
+            ventesQuery.eq("entite", vue),
+          ]
+    );
     const error = m.error?.message ?? c.error?.message ?? v.error?.message ?? null;
-    const mois: Mois[] = (m.data ?? []).map((r) => ({
+    const mois: Mois[] = ((m.data ?? []) as Ligne[]).map((r) => ({
       mois: String(r.mois),
       nouveaux_contacts: n0(r.nouveaux_contacts),
       contacts_pubs: n0(r.contacts_pubs),
@@ -83,8 +99,10 @@ export async function loadFinances(): Promise<{ mois: Mois[]; canaux: Canal[]; v
       panier_moyen: num(r.panier_moyen),
       cout_echanges: n0(r.cout_echanges),
       encaisse: n0(r.encaisse),
+      tps_percue: n0(r.tps_percue),
+      tvq_percue: n0(r.tvq_percue),
     }));
-    const canaux: Canal[] = (c.data ?? []).map((r) => ({
+    const canaux: Canal[] = ((c.data ?? []) as Ligne[]).map((r) => ({
       canal: String(r.canal),
       contacts: n0(r.contacts),
       ventes: n0(r.ventes),
@@ -92,13 +110,13 @@ export async function loadFinances(): Promise<{ mois: Mois[]; canaux: Canal[]; v
       profit_connu: n0(r.profit_connu),
       ventes_cout_connu: n0(r.ventes_cout_connu),
     }));
-    const ventes: Vente[] = (v.data ?? []).map((r) => ({
+    const ventes: Vente[] = ((v.data ?? []) as Ligne[]).map((r) => ({
       commande_id: String(r.commande_id),
       client_id: String(r.client_id),
-      client: r.client ?? null,
+      client: str(r.client),
       canal: String(r.canal),
-      owner: r.owner ?? null,
-      description: r.description ?? null,
+      owner: str(r.owner),
+      description: str(r.description),
       status: String(r.status),
       prix: num(r.prix),
       cout: num(r.cout),
@@ -108,6 +126,7 @@ export async function loadFinances(): Promise<{ mois: Mois[]; canaux: Canal[]; v
       reste: num(r.reste),
       vendu_le: String(r.vendu_le),
       echange: Boolean(r.echange),
+      entite: entiteDe(r.entite),
     }));
     return { mois, canaux, ventes, error };
   } catch (err) {

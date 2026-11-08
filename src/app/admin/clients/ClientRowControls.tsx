@@ -200,20 +200,26 @@ export function PaymentLinkControls({ clientId, depositAmount }: { clientId: str
   const [amount, setAmount] = useState("");
   const [reference, setReference] = useState("");
   const [link, setLink] = useState("");
+  const [total, setTotal] = useState("");
   const [busy, setBusy] = useState(false);
 
   async function create(kind: "depot" | "solde") {
     setBusy(true);
     setLink("");
+    setTotal("");
     try {
       const res = await fetch(`/api/admin/clients/${clientId}/payment-link`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ kind, amount: Number(kind === "depot" ? deposit : amount), reference }),
       });
-      const data = (await res.json()) as { url?: string; error?: string };
+      const data = (await res.json()) as { url?: string; error?: string; amount?: number; tps?: number; tvq?: number; total?: number };
       if (!res.ok || !data.url) throw new Error(data.error || String(res.status));
       setLink(data.url);
+      if (data.total !== undefined) {
+        const $ = (n?: number) => (n ?? 0).toLocaleString("fr-CA", { style: "currency", currency: "CAD" });
+        setTotal(`${$(data.amount)} + TPS ${$(data.tps)} + TVQ ${$(data.tvq)} = ${$(data.total)}`);
+      }
     } catch (err) {
       alert(`Le lien n'a pas été créé (${err instanceof Error ? err.message : "erreur"}). Réessayez.`);
     }
@@ -223,6 +229,7 @@ export function PaymentLinkControls({ clientId, depositAmount }: { clientId: str
   return (
     <div className="flex flex-col gap-3 border-t border-beto-gray-subtle/40 pt-5 mt-5">
       <label className="text-xs font-medium text-beto-black tracking-wide">Lien de paiement Stripe</label>
+      <p className="text-xs text-beto-gray -mt-1">Montants avant taxes : la TPS et la TVQ s’ajoutent au lien.</p>
       <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
         <div className="flex flex-wrap items-center gap-2">
           <input
@@ -231,7 +238,7 @@ export function PaymentLinkControls({ clientId, depositAmount }: { clientId: str
             step="1"
             value={deposit}
             onChange={(e) => setDeposit(e.target.value)}
-            aria-label="Montant du dépôt ($)"
+            aria-label="Montant du dépôt avant taxes ($)"
             title="250 $ par défaut — 200 $ pour un client déjà soumissionné à l'ancien prix"
             className="w-20 px-3 py-2 border border-beto-gray-subtle/60 bg-beto-offwhite text-sm focus:outline-none focus:border-beto-gold"
           />
@@ -249,10 +256,11 @@ export function PaymentLinkControls({ clientId, depositAmount }: { clientId: str
             type="number"
             min={1}
             step="0.01"
-            placeholder="Solde ($)"
+            placeholder="Solde avant taxes ($)"
+            aria-label="Solde avant taxes ($)"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="w-28 px-3 py-2 border border-beto-gray-subtle/60 bg-beto-offwhite text-sm focus:outline-none focus:border-beto-gold"
+            className="w-44 px-3 py-2 border border-beto-gray-subtle/60 bg-beto-offwhite text-sm focus:outline-none focus:border-beto-gold"
           />
           <input
             type="text"
@@ -271,6 +279,7 @@ export function PaymentLinkControls({ clientId, depositAmount }: { clientId: str
           </button>
         </div>
       </div>
+      {total && <p className="text-xs text-beto-black">Le client paiera : {total}</p>}
       {link && (
         <div className="flex flex-wrap items-center gap-3 text-xs">
           <input readOnly value={link} onFocus={(e) => e.target.select()} className="flex-1 min-w-0 px-3 py-2 border border-beto-gold/60 bg-beto-white" />

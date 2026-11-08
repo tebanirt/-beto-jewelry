@@ -2,12 +2,22 @@ import Link from "next/link";
 import { PAYMENT_METHODS, balanceDue, money } from "@/lib/workspace";
 import { paymentsForMonth, shiftMonth, validMonth } from "@/lib/paymentsReport";
 import { loadWorkspace } from "../data";
+import VueToggle from "../../VueToggle";
+import { getAdminSession } from "@/lib/adminSession";
+import { entiteDe, taxesManquantes, vueAutorisee, type VueVentes } from "@/lib/entite";
 
 export const metadata = { title: "Money — Beto Jewelry" };
 
 export default async function MoneyPage({ searchParams }: PageProps<"/admin/lauren/money">) {
-  const month = validMonth((await searchParams).m);
-  const [{ rows, error }, { clients, orders, error: wsError }] = await Promise.all([paymentsForMonth(month), loadWorkspace()]);
+  const sp = await searchParams;
+  const month = validMonth(sp.m);
+  const session = await getAdminSession();
+  const isOwner = session?.role === "owner";
+  // Decided on the server: anyone but Rayane sees the company's sales only, whatever the URL says.
+  const vue = vueAutorisee(session, sp.vue);
+  const [{ rows, error }, { clients, orders, error: wsError }] = await Promise.all([paymentsForMonth(month, vue), loadWorkspace()]);
+  const link = (m: string, v: VueVentes = vue) => `/admin/lauren/money?m=${m}${isOwner && v !== "tout" ? `&vue=${v}` : ""}`;
+  const missingTaxes = rows.filter((p) => entiteDe(p.order?.entite) === "societe" && taxesManquantes(p)).length;
   const label = new Date(`${month}-15T12:00:00`).toLocaleDateString("en-CA", { month: "long", year: "numeric" });
 
   const total = rows.reduce((s, p) => s + Number(p.amount), 0);
@@ -28,16 +38,33 @@ export default async function MoneyPage({ searchParams }: PageProps<"/admin/laur
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-medium text-beto-black">Money</h1>
         <div className="flex items-center gap-3 text-sm">
-          <Link href={`/admin/lauren/money?m=${shiftMonth(month, -1)}`} aria-label="Previous month" className="px-2">
+          <Link href={link(shiftMonth(month, -1))} aria-label="Previous month" className="px-2">
             ←
           </Link>
           <span className="capitalize">{label}</span>
-          <Link href={`/admin/lauren/money?m=${shiftMonth(month, 1)}`} aria-label="Next month" className="px-2">
+          <Link href={link(shiftMonth(month, 1))} aria-label="Next month" className="px-2">
             →
           </Link>
         </div>
       </div>
+      {isOwner && (
+        <div className="space-y-1.5">
+          <VueToggle compact vue={vue} href={(v) => link(month, v)} />
+          <p className="text-xs text-beto-gray-light">
+            {vue === "personnel"
+              ? "Ventes faites avant la société : toi seulement, hors du rapport de la société."
+              : vue === "societe"
+                ? "Ventes de la société, comptant compris : ce qui va au comptable."
+                : "Tout, pour toi. Lauren voit seulement la société."}
+          </p>
+        </div>
+      )}
       {(error || wsError) && <p role="alert" className="text-sm text-red-700">Could not load everything: {error ?? wsError}</p>}
+      {missingTaxes > 0 && (
+        <p role="alert" className="text-sm text-red-700 bg-red-50 border border-red-200 px-3 py-2">
+          {missingTaxes} company payment{missingTaxes > 1 ? "s" : ""} without GST/QST this month. Check with Rayane before sending to the accountant.
+        </p>
+      )}
 
       <div className="grid grid-cols-2 gap-2">
         <Box label="Received this month" value={money(total)} strong />
@@ -50,9 +77,16 @@ export default async function MoneyPage({ searchParams }: PageProps<"/admin/laur
       <section>
         <div className="flex items-baseline justify-between mb-2">
           <h2 className="text-label text-beto-gold">Payments</h2>
-          <a href={`/api/admin/workspace/payments/export?m=${month}`} className="text-xs underline text-beto-gray-light">
-            Download for the accountant (CSV)
-          </a>
+          <span className="flex flex-col items-end gap-1">
+            <a href={`/api/admin/workspace/payments/export?m=${month}`} className="text-xs underline text-beto-gray-light">
+              Download for the accountant (CSV)
+            </a>
+            {isOwner && (
+              <a href={`/api/admin/workspace/payments/export?m=${month}&vue=personnel`} className="text-xs underline text-beto-gray-light">
+                Avant la société (CSV, toi seulement)
+              </a>
+            )}
+          </span>
         </div>
         {rows.length === 0 ? (
           <p className="text-sm text-beto-gray-light bg-beto-white border border-beto-gray-subtle p-4">No payment recorded this month.</p>
@@ -73,7 +107,11 @@ export default async function MoneyPage({ searchParams }: PageProps<"/admin/laur
                   <span className="block text-xs text-beto-gray-light">
                     {p.received_at} · <span className="capitalize">{p.kind}</span> · {PAYMENT_METHODS.find((m) => m.value === p.method)?.label}
                     {p.recorded_by ? ` · by ${p.recorded_by}` : ""}
+                    {vue === "tout" && entiteDe(p.order?.entite) === "personnel" && " · avant la société"}
                   </span>
+                  {entiteDe(p.order?.entite) === "societe" && taxesManquantes(p) && (
+                    <span className="block text-xs text-red-700">No GST/QST charged</span>
+                  )}
                 </span>
                 <span className="font-medium whitespace-nowrap">{money(Number(p.amount))}</span>
               </li>
@@ -101,7 +139,7 @@ export default async function MoneyPage({ searchParams }: PageProps<"/admin/laur
       </section>
 
       <p className="text-xs text-beto-gray-light">
-        Every payment is recorded here, cash included, so the accountant sees the full picture. GST/QST will be added once the tax numbers arrive.
+        Every payment is recorded here, cash included. The accountant file holds every company sale, with GST/QST on each payment.
       </p>
     </div>
   );

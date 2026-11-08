@@ -73,7 +73,7 @@ export async function loadCalculatorConfig(): Promise<CalculatorConfig | null> {
   return cfg;
 }
 
-const FIXED_LABELS: Record<string, string> = { box: "Box", meeting: "Client meeting", engraving: "Engraving" };
+const FIXED_LABELS: Record<string, string> = { box: "Box", meeting: "Client meeting", engraving: "Engraving", certificate: "Gemological certificate" };
 
 export function calculate(cfg: CalculatorConfig, input: CalcInput): CalcResult {
   const grams = cfg.ringGrams[input.metal];
