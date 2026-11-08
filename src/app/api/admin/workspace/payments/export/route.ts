@@ -1,14 +1,24 @@
 import { NextResponse } from "next/server";
-import { getAdminSession } from "@/lib/adminSession";
+import { getAdminSession, logActivity } from "@/lib/adminSession";
 import { paymentsForMonth, validMonth } from "@/lib/paymentsReport";
+import { vueAutorisee } from "@/lib/entite";
 
-/** Month of payments as CSV for the accountant (opens in Excel / Numbers). */
+/**
+ * Month of payments as CSV (opens in Excel / Numbers).
+ * By default: the company's sales, cash included — the file for the accountant.
+ * `vue=personnel` (sales made before the company) works for Rayane only; any
+ * other session always gets the company file, whatever the URL says.
+ */
 export async function GET(request: Request) {
   const session = await getAdminSession();
   if (!session) return NextResponse.json({ error: "Not signed in" }, { status: 401 });
-  const month = validMonth(new URL(request.url).searchParams.get("m"));
-  const { rows, error } = await paymentsForMonth(month);
+  const params = new URL(request.url).searchParams;
+  const month = validMonth(params.get("m"));
+  const asked = vueAutorisee(session, params.get("vue"), "societe");
+  const vue = asked === "personnel" ? "personnel" : "societe";
+  const { rows, error } = await paymentsForMonth(month, vue);
   if (error) return NextResponse.json({ error }, { status: 500 });
+  await logActivity(session, "export_paiements", undefined, `${vue === "personnel" ? "Avant la société" : "Société"} · ${month} · ${rows.length} paiements`);
 
   // Quotes every cell; a leading = + - @ is neutralised so a spreadsheet never runs it as a formula.
   const cell = (v: unknown) => {
@@ -38,7 +48,7 @@ export async function GET(request: Request) {
   return new NextResponse(csv, {
     headers: {
       "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="beto-payments-${month}.csv"`,
+      "Content-Disposition": `attachment; filename="${vue === "personnel" ? "beto-avant-societe" : "beto-societe"}-${month}.csv"`,
       "Cache-Control": "no-store",
     },
   });

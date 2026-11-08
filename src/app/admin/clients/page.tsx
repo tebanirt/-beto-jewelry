@@ -6,18 +6,21 @@ import FollowupBadge from "./FollowupBadge";
 import { followupState } from "@/lib/followups";
 import AdminShell, { Card, Stat } from "../AdminShell";
 import { argent } from "@/lib/finances";
+import { getAdminSession } from "@/lib/adminSession";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Clients — CRM" };
 
 type Argent = { prix: number; paye: number; reste: number; profit: number | null; commandes: number };
 
-async function getData(): Promise<{ clients: Client[]; argentParClient: Map<string, Argent>; canalParClient: Map<string, string>; error: string | null }> {
+async function getData(seulementSociete: boolean): Promise<{ clients: Client[]; argentParClient: Map<string, Argent>; canalParClient: Map<string, string>; error: string | null }> {
   try {
     const supabase = getSupabaseAdmin();
+    const ventes = supabase.from("v_ventes").select("client_id, canal, prix, paye, reste, profit, cout, echange");
     const [c, v] = await Promise.all([
       supabase.from("clients").select("*").order("updated_at", { ascending: false }),
-      supabase.from("v_ventes").select("client_id, canal, prix, paye, reste, profit, cout, echange"),
+      // Les montants des ventes d'avant la société : Rayane seulement.
+      seulementSociete ? ventes.eq("entite", "societe") : ventes,
     ]);
     if (c.error) throw c.error;
     const argentParClient = new Map<string, Argent>();
@@ -55,7 +58,8 @@ const TONS: Partial<Record<Client["status"], string>> = {
 
 export default async function AdminClientsPage({ searchParams }: PageProps<"/admin/clients">) {
   const { filtre, q } = await searchParams;
-  const { clients: tous, argentParClient, canalParClient, error } = await getData();
+  const session = await getAdminSession();
+  const { clients: tous, argentParClient, canalParClient, error } = await getData(session?.role !== "owner");
   const notConfigured = !process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY;
   const now = new Date();
   const allClients = tous.filter((c) => !enDouble(c));

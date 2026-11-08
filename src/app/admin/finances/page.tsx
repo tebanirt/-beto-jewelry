@@ -1,6 +1,9 @@
 import Link from "next/link";
 import AdminShell, { Card, SectionTitle, Stat } from "../AdminShell";
 import MonthlyChart from "./MonthlyChart";
+import VueToggle from "../VueToggle";
+import { getAdminSession } from "@/lib/adminSession";
+import { vueAutorisee, type VueVentes } from "@/lib/entite";
 import {
   MOIS_EN_COURS,
   OBJECTIF_MOIS_BAS,
@@ -45,8 +48,20 @@ function Barre({ valeur, max, couleur = "bg-beto-gold" }: { valeur: number; max:
   );
 }
 
-export default async function FinancesPage() {
-  const { mois, canaux, ventes, error } = await loadFinances();
+const SOUS_TITRES: Record<VueVentes, string> = {
+  tout: "Ventes, coûts et marges, mois par mois. Montants avant taxes. Données internes : jamais visibles des clients.",
+  societe:
+    "Ventes de la société seulement (vendues depuis le 6 novembre 2026), comptant compris : c'est ce qui va au comptable. Montants avant taxes.",
+  personnel:
+    "Ventes faites avant la société (jusqu'au 5 novembre 2026). Visible par toi seulement, hors du rapport de la société. Montants avant taxes.",
+};
+
+export default async function FinancesPage({ searchParams }: PageProps<"/admin/finances">) {
+  const session = await getAdminSession();
+  const estRayane = session?.role === "owner";
+  // Décidé côté serveur : une autre session que Rayane voit la société, quoi que dise l'adresse.
+  const vue = vueAutorisee(session, (await searchParams).vue);
+  const { mois, canaux, ventes, error } = await loadFinances(vue);
   const enCours = MOIS_EN_COURS();
 
   // Totaux depuis le début.
@@ -98,9 +113,10 @@ export default async function FinancesPage() {
   return (
     <AdminShell
       active="finances"
-      eyebrow="Depuis le début · en direct"
+      eyebrow={vue === "societe" ? "Société · en direct" : vue === "personnel" ? "Avant la société · Rayane seulement" : "Depuis le début · en direct"}
       title="Finances"
-      subtitle="Ventes, coûts et marges, mois par mois. Montants avant taxes. Données internes : jamais visibles des clients."
+      subtitle={SOUS_TITRES[vue]}
+      actions={estRayane ? <VueToggle vue={vue} href={(v) => (v === "tout" ? "/admin/finances" : `/admin/finances?vue=${v}`)} /> : undefined}
     >
       {error && (
         <p role="alert" className="text-sm text-red-700 bg-red-50 border border-red-200 px-4 py-3 mb-6">
@@ -340,7 +356,10 @@ export default async function FinancesPage() {
                         {v.client || "Sans nom"}
                       </Link>
                       <div className="text-xs text-beto-gray-light mt-0.5 max-w-xs">{v.description}</div>
-                      <div className="text-[11px] text-beto-gray-light mt-0.5">{v.echange ? "Échange marketing" : v.canal}</div>
+                      <div className="text-[11px] text-beto-gray-light mt-0.5">
+                        {v.echange ? "Échange marketing" : v.canal}
+                        {vue === "tout" && v.entite === "personnel" && <span className="ml-2 text-beto-gray">· Avant la société</span>}
+                      </div>
                     </td>
                     <td className="px-3 py-3 whitespace-nowrap text-beto-gray">
                       {new Date(`${v.vendu_le}T12:00:00Z`).toLocaleDateString("fr-CA", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" })}

@@ -23,12 +23,12 @@ Règles décidées par Rayane. Elles priment sur tout conseil comptable généri
 - Coûts et prix réels : jamais dans ce dépôt public. Ils vivent dans Supabase (`pricing_config`, `orders`, `payments`).
 
 ## Enregistrer l'argent (Supabase)
-- **Tout paiement est enregistré, comptant compris.** Aucun revenu hors de la comptabilité transmise au comptable.
+- **Tout paiement est enregistré, comptant compris.** Chaque commande a un côté (`orders.entite`, fixé dans la base) : `societe` = toute vente faite depuis le 6 nov. 2026, comptant compris, dans le rapport du comptable de la société ; `personnel` = les ventes faites avant la société, gardées à part et visibles par Rayane seulement (elles relèvent de sa déclaration personnelle, à régler avec Abraham). Une nouvelle commande est toujours `societe` et ne change jamais de côté.
 - Commandes dans `orders`, paiements dans `payments`. `payments.amount` = montant **avant taxes** ; la TPS et la TVQ perçues vont dans `payments.tps` et `payments.tvq` (totaux mensuels dans `v_mois`). Les paiements Stripe sont écrits par le webhook, une fois par session. Le coût d'une commande va dans `orders.production_cost` ; les colonnes `sale_price` et `production_cost` du client sont la somme de ses commandes.
 - Un coût partiel (ex. seulement la fonte) reste dans les notes de la commande, pas dans `production_cost`, tant qu'il est incomplet. Quand une estimation est remplacée par un vrai coût, noter l'ancien et le nouveau montant et la marge qui en découle.
-- Les chiffres officiels (chiffre d'affaires, coûts, marge par mois, provenance) viennent des vues `v_ventes`, `v_mois` et `v_canaux`. Ne pas recalculer autrement.
+- Les chiffres officiels (chiffre d'affaires, coûts, marge par mois, provenance) viennent des vues `v_ventes`, `v_mois` et `v_canaux` (tout). Pour un seul côté : `finances_mois(p_entite)` et `finances_canaux(p_entite)`. Le rapport ou le bilan pour le comptable de la société utilise toujours `'societe'`. Ne pas recalculer autrement.
 - Toute écriture d'argent (prix, montants, paiements, dépôts, factures, reçus) se fait seulement avec l'accord de Rayane, sauf l'enregistrement d'un coût fournisseur qu'il envoie lui-même avec #argent.
-- Les marges et coûts ne sont jamais visibles par un client : seulement Rayane et Lauren.
+- Les marges et coûts ne sont jamais visibles par un client : seulement Rayane et Lauren. Les ventes d'avant la société : Rayane seulement.
 
 ## Repères de l'entreprise
 - Dépôt de design : 250 $ (site, pubs, Calendly), 150 $ sur Facebook Marketplace, crédité à 100 % sur la pièce. Si aucun design ne convient : 150 $ gardés, 100 $ remboursés.
