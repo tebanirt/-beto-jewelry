@@ -9,22 +9,41 @@ ap.add_argument('--view', default='hero'); ap.add_argument('--res', type=int, de
 ap.add_argument('--dist', type=float, default=None); ap.add_argument('--fire', action='store_true'); ap.add_argument('--center', default='diamond'); ap.add_argument('--hdri', default=None); ap.add_argument('--rot', type=float, default=0); ap.add_argument('--strength', type=float, default=1.0); ap.add_argument('--exposure', type=float, default=0.0); ap.add_argument('--regem', action='store_true'); ap.add_argument('--tint', default=None); ap.add_argument('--finish', action='store_true'); ap.add_argument('--border', default=None); ap.add_argument('--nodenoise', action='store_true'); ap.add_argument('--mask', action='store_true'); ap.add_argument('--gempost', default=None); ap.add_argument('--layers', default=None); ap.add_argument('--shape', default=None); ap.add_argument('--ct', type=float, default=2.0); ap.add_argument('--rotate', type=float, default=0.0); ap.add_argument('--gempass', action='store_true'); ap.add_argument('--turntable', type=int, default=0); ap.add_argument('--gemmatch', type=float, default=0.0); ap.add_argument('--prongs', default=None); ap.add_argument('--crop', default=None)
 a = ap.parse_args(argv)
 scene.reset()
-P = load3dm.load(a.path, a.layers.split(',') if a.layers else None)
-if a.crop:  # fichier qui contient d'autres objets (support, deuxième jonc) : seule la bague, dans cette boîte (axe:min:max)
-    lim = {ax: tuple(float(v) for v in r.split(':')) for ax, *r in [c.split(':', 1) for c in a.crop.split(',')]}
-    def inside(x):
-        lo, hi = x['V'].min(0), x['V'].max(0)
-        return all(lo['xyz'.index(ax)] >= mn and hi['xyz'.index(ax)] <= mx for ax, (mn, mx) in lim.items())
-    P['metal'] = [x for x in P['metal'] if inside(x)]; P['gems'] = [x for x in P['gems'] if inside(x)]
-if a.shape:  # tête de Rayane adaptée à une autre forme de pierre
-    import reshape
-    info = reshape.reshape(P, a.shape, ct=a.ct, rotate_deg=a.rotate); print('nouvelle pierre', a.shape, a.ct, 'ct', round(info['L'], 2), 'x', round(info['W'], 2), 'mm')
+def _prepare():
+    """Lecture du fichier, adaptation de forme et finition des griffes (le plus long hors rendu)."""
+    caps = []
+    P = load3dm.load(a.path, a.layers.split(',') if a.layers else None)
+    if a.crop:  # fichier qui contient d'autres objets (support, deuxième jonc) : seule la bague, dans cette boîte (axe:min:max)
+        lim = {ax: tuple(float(v) for v in r.split(':')) for ax, *r in [c.split(':', 1) for c in a.crop.split(',')]}
+        def inside(x):
+            lo, hi = x['V'].min(0), x['V'].max(0)
+            return all(lo['xyz'.index(ax)] >= mn and hi['xyz'.index(ax)] <= mx for ax, (mn, mx) in lim.items())
+        P['metal'] = [x for x in P['metal'] if inside(x)]; P['gems'] = [x for x in P['gems'] if inside(x)]
+    if a.shape:  # tête de Rayane adaptée à une autre forme de pierre
+        import reshape
+        info = reshape.reshape(P, a.shape, ct=a.ct, rotate_deg=a.rotate); print('nouvelle pierre', a.shape, a.ct, 'ct', round(info['L'], 2), 'x', round(info['W'], 2), 'mm')
+    if a.finish:
+        import finish as FIN
+        caps = FIN.finish(P['metal'], P['gems'], prong_style=a.prongs)
+        print('bouts arrondis', len(caps))
+    return P, caps
+# même bague, autre vue : la préparation est calculée une seule fois et relue (résultat identique, octet pour octet)
+import hashlib, pickle
+_here = _os.path.dirname(_os.path.abspath(__file__))
+_key = repr((_os.path.abspath(a.path), _os.path.getmtime(a.path), a.layers, a.crop, a.shape, a.ct, a.rotate, a.finish, a.prongs,
+             [_os.path.getmtime(_os.path.join(_here, m)) for m in ('load3dm.py', 'finish.py', 'reshape.py')]))
+_cdir = _os.environ.get('BETO_PREP_CACHE', _os.path.join(_here, '..', 'prep_cache')); _os.makedirs(_cdir, exist_ok=True)
+_cf = _os.path.join(_cdir, hashlib.sha1(_key.encode()).hexdigest() + '.pkl')
+try:
+    with open(_cf, 'rb') as _fh: P, caps = pickle.load(_fh)
+    print('préparation relue', flush=True)
+except Exception:
+    P, caps = _prepare()
+    try:
+        with open(_cf + '.tmp', 'wb') as _fh: pickle.dump((P, caps), _fh, protocol=4)
+        _os.replace(_cf + '.tmp', _cf)
+    except Exception as e: print('cache', e)
 mm = scene.mat_metal(a.metal); dm = scene.mat_diamond()
-caps = []
-if a.finish:
-    import finish as FIN
-    caps = FIN.finish(P['metal'], P['gems'], prong_style=a.prongs)
-    print('bouts arrondis', len(caps))
 allV = np.vstack([x['V'] for x in P['metal'] + P['gems']]); lo, hi = allV.min(0), allV.max(0)
 for k, x in enumerate(P['metal']):
     ob = scene.mesh_obj(f'metal_{k}', x['V'], x['F'], x['N'], mm, smooth=True)
@@ -64,6 +83,10 @@ if a.dist is None:  # cadrage automatique : la bague occupe ~72 % de l'image, av
 if a.hdri: scene.studio_hdri(a.hdri, a.view, a.res, a.samples, ring_center=rc, dist=a.dist, strength=a.strength, rot=a.rot, exposure=a.exposure)
 else: scene.studio(a.view, a.res, a.samples, ring_center=rc, dist=a.dist)
 sc = bpy.context.scene
+if _os.environ.get('BETO_THREADS'):  # plusieurs rendus en parallèle : chacun sur une part des processeurs (même image)
+    sc.render.threads_mode = 'FIXED'; sc.render.threads = int(_os.environ['BETO_THREADS'])
+if _os.environ.get('BETO_PERSIST', '1') != '0':  # données de scène gardées entre la passe du métal, celle des pierres et les images du 360°
+    sc.render.use_persistent_data = True
 def autofit(fill):
     """Recul de la caméra et décentrement de l'objectif selon la silhouette projetée de la bague, pour chaque vue."""
     from bpy_extras.object_utils import world_to_camera_view
