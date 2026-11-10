@@ -214,7 +214,7 @@ def build(spec, out_dir=None):
     fc += (f";[{ai}:a]aformat=sample_rates=48000:channel_layouts=stereo,afade=t=in:d=0.04,"
            f"afade=t=out:st={total - 0.9:.3f}:d=0.9,volume=1.0[mus];"
            f"[{ai + 1}:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=0.55[fx];"
-           f"[mus][fx]amix=inputs=2:normalize=0:duration=first,loudnorm=I=-14:TP=-1.5:LRA=11[aout]")
+           f"[mus][fx]amix=inputs=2:normalize=0:duration=first,loudnorm=I=-14:TP=-1.5:LRA=11,alimiter=limit=0.84:level=false[aout]")
     out_dir = out_dir or f"{E}/pro"
     os.makedirs(out_dir, exist_ok=True)
     out = f"{out_dir}/{name}.mp4"
