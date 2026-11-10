@@ -16,6 +16,7 @@ Règles de contenu et autorisations : voir `docs/business-ops-brief.md` §10.
 | `layers2.js` | Cartes de texte (PNG transparents) aux couleurs de la marque |
 | `reels.py` | Lot 1 : 10 reels sur les diamants de labo de couleur (R01 à R10) |
 | `reels_b.py` | Lot 2 : 10 reels faits avec le B-roll de la consultation (B01 à B10) |
+| `reels_c.py` | Lot 3 : making-of de la bague marquise, du rendu 3D à la fonte (C01 à C05) |
 | `review.sh` | Planche de contrôle (`NOM fps colonnes`) + loudness |
 | `put_upload.sh` | Envoie un mp4 vers l'URL signée Supermetrics (`create_upload_url`) |
 
@@ -38,7 +39,7 @@ curl -sSL -o "$BETO_WORK_DIR/broll/<titre>.mov" "https://drive.usercontent.googl
 
 Le connecteur Google Drive (`search_files` avec `parentId = '<dossier>'`) donne la liste des `fileId`.
 - **B-roll de la consultation** : dossier « Frame » `1w-XwO_5-ELvI2BD7lWnYFFrcDo9zTJsX` (fichiers `FrameXXXXXXXX.mov`), dans `$BETO_WORK_DIR/broll`.
-- **Clips iPhone HDR** (`IMG_xxxx.mov`) : dans `$BETO_WORK_DIR/footage`.
+- **Clips iPhone HDR** (`IMG_xxxx.mov`), **rendus** (`*.jpg`) et **animations CAD** (`*.mp4`) : dans `$BETO_WORK_DIR/footage`. Le moteur trouve un fichier par la fin de son nom (`u:<fichier>` pour une vidéo, `img:<fichier>` pour une image fixe).
 
 ## Rendre
 

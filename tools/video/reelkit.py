@@ -11,11 +11,12 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 # Working dirs (override with env vars). Nothing heavy is written inside the repo.
 WORK = os.environ.get("BETO_WORK_DIR", "/tmp/beto-video")
 E = WORK
-FOOTAGE = os.environ.get("BETO_FOOTAGE_DIR", f"{WORK}/footage")      # iPhone HDR clips (IMG_xxxx.mov)
+FOOTAGE = os.environ.get("BETO_FOOTAGE_DIR", f"{WORK}/footage")      # iPhone clips, renders, CAD videos (any name)
 BROLL = os.environ.get("BETO_BROLL_DIR", f"{WORK}/broll")            # videographer b-roll (FrameXXXXXXXX.mov)
 FONTS = os.environ.get("BETO_FONTS_DIR", f"{WORK}/fonts_pkg")         # npm pack @fontsource/bodoni-moda @fontsource/jost
 PY = os.environ.get("BETO_PY", "python3")                            # python with numpy + scipy (for sfx.py)
 LOGO = f"{REPO}/tools/invoicing/assets/logo.png"                      # official logo, never modified
+U = FOOTAGE
 for d in (WORK, f"{WORK}/audio", f"{WORK}/layers", f"{WORK}/trials"):
     os.makedirs(d, exist_ok=True)
 
@@ -43,10 +44,43 @@ CLIP = _Clips()
 _INFO = {}
 
 
+def _upload(suffix):
+    import glob as _g
+    hits = sorted(_g.glob(f"{U}/*{suffix}"))
+    if not hits:
+        raise SystemExit(f"file not found: {suffix}")
+    return hits[0]
+
+
+def _probe(p):
+    o = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
+                        "stream=width,height,r_frame_rate,color_transfer:stream_side_data=rotation", "-of", "json", p],
+                       capture_output=True, text=True).stdout
+    st = json.loads(o)["streams"][0]
+    w, h = int(st["width"]), int(st["height"])
+    rot = 0
+    for sd in st.get("side_data_list", []):
+        rot = int(sd.get("rotation", rot) or 0)
+    if abs(rot) == 90:
+        w, h = h, w
+    num, den = st["r_frame_rate"].split("/")
+    kind = "hdr" if st.get("color_transfer") == "arib-std-b67" else "sdr"
+    return w, h, int(num) / int(den), kind
+
+
 def src_info(clip):
-    """(path, kind, width, height, rate). iPhone clips are HLG/HDR 2160x3840 after rotation; b-roll 'b<id>' is SDR."""
+    """(path, kind, width, height, rate). Named iPhone clips are HLG/HDR 2160x3840; 'b<id>' = b-roll (SDR);
+    'u:<file>' = any uploaded video (probed); 'img:<file>' = still image (render, photo)."""
     if clip in CLIP:
         return CLIP[clip], "hdr", 2160, 3840, 30000 / 1001
+    if clip.startswith("u:") or clip.startswith("img:"):
+        if clip not in _INFO:
+            p = _upload(clip.split(":", 1)[1])
+            w, h, rate, kind = _probe(p)
+            if clip.startswith("img:"):
+                kind, rate = "still", 30.0
+            _INFO[clip] = (p, kind, w, h, rate)
+        return _INFO[clip]
     if clip not in _INFO:
         p = f"{BROLL}/Frame0{clip[1:]}.mov"
         o = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height,r_frame_rate",
@@ -78,16 +112,21 @@ def run(cmd):
     return r
 
 
-def S(clip, start, dur, zoom=None, cx=None, cy=None, speed=1.0, fx=(), size=(W, H), slowmo=False, reveal=None):
-    """Shot spec. fx: punch, kenburns, kenburns_out, shake, rgb, flash, flash_out, blurin, whip, bw."""
-    if not clip.startswith("b"):  # iPhone clips keep their historical defaults (cache keys)
+def S(clip, start, dur, zoom=None, cx=None, cy=None, speed=1.0, fx=(), size=(W, H), slowmo=False, reveal=None,
+      fit=False, yoff=60):
+    """Shot spec. fx: punch, kenburns, kenburns_out, shake, rgb, flash, flash_out, blurin, whip, bw.
+    fit=True: show the whole frame (square video, render) over a blurred copy of itself."""
+    if clip in CLIP:  # named iPhone clips keep their historical defaults (cache keys)
         zoom = 1.3 if zoom is None else zoom
         cx = 1080 if cx is None else cx
         cy = 1920 if cy is None else cy
     else:
         zoom = 1.0 if zoom is None else zoom
-    return dict(clip=clip, start=start, dur=dur, zoom=zoom, cx=cx, cy=cy, speed=speed,
-                fx=list(fx), size=list(size), slowmo=slowmo, reveal=reveal)
+    d = dict(clip=clip, start=start, dur=dur, zoom=zoom, cx=cx, cy=cy, speed=speed,
+             fx=list(fx), size=list(size), slowmo=slowmo, reveal=reveal)
+    if fit:
+        d["fit"] = True; d["yoff"] = yoff
+    return d
 
 
 def render_shot(s):
@@ -107,13 +146,25 @@ def render_shot(s):
         cw = SW // 2 * 2; ch = int(cw / aspect) // 2 * 2
     x = max(0, min(SW - cw, cx - cw // 2)); y = max(0, min(SH - ch, cy - ch // 2))
     n_out = round(s["dur"] * FPS)
-    zr = "30000/1001" if kind == "hdr" else f"{src_rate:.6f}"
+    zr = "30000/1001" if (kind == "hdr" and abs(src_rate - 29.97) < 0.01) else f"{src_rate:.6f}"
     eff_speed = s["speed"] * (0.5 if s["slowmo"] else 1.0)
     src_dur = s["dur"] * eff_speed + 0.25
     n_in = int(src_dur * src_rate)
-    f = ([TM] if kind == "hdr" else []) + [f"crop={cw}:{ch}:{x}:{y}"]
+    f = ([TM] if kind == "hdr" else [])
     fx = s["fx"]
-    if "punch" in fx:
+    if s.get("fit"):
+        f.append(f"split[fa][fb];[fa]scale={ow}:{oh}:force_original_aspect_ratio=increase,crop={ow}:{oh},gblur=sigma=30,"
+                 f"eq=brightness=0.03:saturation=0.9[fbg];[fb]scale={ow - 40}:-2:flags=lanczos[ffg];"
+                 f"[fbg][ffg]overlay=(W-w)/2:(H-h)/2+{s['yoff']}")
+        if "kenburns" in fx:
+            f.append(f"zoompan=z='1+0.07*in/{n_in}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={ow}x{oh}:fps={zr}")
+        elif "punch" in fx:
+            f.append(f"zoompan=z='if(lt(in,8),1+0.08*pow(1-in/8,2),1)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={ow}x{oh}:fps={zr}")
+    else:
+        f.append(f"crop={cw}:{ch}:{x}:{y}")
+    if s.get("fit"):
+        pass
+    elif "punch" in fx:
         f.append(f"zoompan=z='if(lt(in,8),1+0.08*pow(1-in/8,2),1)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={ow}x{oh}:fps={zr}")
     elif "kenburns" in fx:
         f.append(f"zoompan=z='1+0.10*in/{n_in}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={ow}x{oh}:fps={zr}")
@@ -122,8 +173,10 @@ def render_shot(s):
     else:
         f.append(f"scale={ow}:{oh}:flags=lanczos")
     f.append(GRADE if kind == "hdr" else GRADE_SDR)
+    if kind == "still":
+        f.insert(0, "format=yuv420p")
     if s["slowmo"]:
-        mr = "60000/1001" if kind == "hdr" else f"{2 * src_rate:.6f}"
+        mr = "60000/1001" if (kind == "hdr" and abs(src_rate - 29.97) < 0.01) else f"{2 * src_rate:.6f}"
         f.append(f"minterpolate=fps={mr}:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1")
         f.append("setpts=2*(PTS-STARTPTS)")
     if s["speed"] != 1.0:
@@ -149,7 +202,9 @@ def render_shot(s):
         f.append("fade=t=in:st=0:d=0.2:color=black")
     f.append("setsar=1")
     vf = ",".join(f)
-    run(["ffmpeg", "-v", "error", "-y", "-ss", f"{s['start']:.3f}", "-t", f"{src_dur:.3f}", "-i", path,
+    inp = (["-loop", "1", "-framerate", "30", "-t", f"{src_dur:.3f}", "-i", path] if kind == "still"
+           else ["-ss", f"{s['start']:.3f}", "-t", f"{src_dur:.3f}", "-i", path])
+    run(["ffmpeg", "-v", "error", "-y", *inp,
          "-an", "-vf", vf, "-frames:v", str(n_out), *ENC, out])
     return out
 
@@ -172,6 +227,23 @@ def render_grid(cells, dur, fx=()):
         fc += ",fade=t=in:st=0:d=0.12:color=white"
     fc += "[v]"
     run(["ffmpeg", "-v", "error", "-y", *inp, "-filter_complex", fc, "-map", "[v]",
+         "-frames:v", str(round(dur * FPS)), *ENC, out])
+    return out
+
+
+def render_stack(top, bottom, dur):
+    """Two shots stacked vertically (each 1080x957, 6 px ivory divider)."""
+    key = hashlib.md5(json.dumps([top, bottom, dur, GRADE], sort_keys=True).encode()).hexdigest()[:14]
+    out = f"{CACHE}/stack_{key}.mp4"
+    if os.path.exists(out):
+        return out
+    files = []
+    for c in (top, bottom):
+        c = dict(c); c["size"] = [1080, 956]; c["dur"] = dur
+        files.append(render_shot(c))
+    fc = (f"[0:v]settb=1/{FPS},setpts=N/({FPS}*TB)[t];[1:v]settb=1/{FPS},setpts=N/({FPS}*TB)[b];"
+          f"[t][b]xstack=inputs=2:layout=0_0|0_964:fill=0xF6F3EE,scale={W}:{H},setsar=1[v]")
+    run(["ffmpeg", "-v", "error", "-y", "-i", files[0], "-i", files[1], "-filter_complex", fc, "-map", "[v]",
          "-frames:v", str(round(dur * FPS)), *ENC, out])
     return out
 
@@ -207,6 +279,8 @@ def build(name, items, layers=None, timeline=(), audio=None, out_dir=None, total
             files.append((render_shot(sp), sp["dur"]))
         elif kind == "grid":
             files.append((render_grid(*sp), sp[1]))
+        elif kind == "stack":
+            files.append((render_stack(*sp), sp[2]))
         elif kind == "solid":
             files.append((solid(*sp), sp[1]))
     total = total or sum(d for _, d in files)
