@@ -46,7 +46,7 @@ _INFO = {}
 
 def _upload(suffix):
     import glob as _g
-    hits = sorted(_g.glob(f"{U}/*{suffix}"))
+    hits = sorted(_g.glob(f"{U}/*{suffix}")) + sorted(_g.glob(f"{E}/assets/*{suffix}"))
     if not hits:
         raise SystemExit(f"file not found: {suffix}")
     return hits[0]
