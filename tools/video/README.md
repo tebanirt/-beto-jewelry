@@ -1,0 +1,70 @@
+# Studio vidéo Beto Jewelry (reels et trial reels)
+
+Moteur de montage automatique : ffmpeg + Chromium (Playwright) pour les textes + son synthétisé, donc libre de droits. Il fait des reels 1080×1920 à 30 i/s, à −14 LUFS, avec :
+- les polices du site (Bodoni Moda, Jost) ;
+- le vrai logo (`tools/invoicing/assets/logo.png`, jamais modifié) ;
+- l'étalonnage « Beto Lux v2 ».
+
+Règles de contenu et autorisations : voir `docs/business-ops-brief.md` §10.
+
+## Fichiers
+
+| Fichier | Rôle |
+|---|---|
+| `reelkit.py` | Moteur : plans (étalonnage, recadrage 9:16, effets), grille 2×2, textes, assemblage, son |
+| `sfx.py` | Sound design synthétisé : bases `lux`, `velocity`, `ambient`, `edu`, plus whoosh, impact, scintillement, tick |
+| `layers2.js` | Cartes de texte (PNG transparents) aux couleurs de la marque |
+| `reels.py` | Lot 1 : 10 reels sur les diamants de labo de couleur (R01 à R10) |
+| `reels_b.py` | Lot 2 : 10 reels faits avec le B-roll de la consultation (B01 à B10) |
+| `review.sh` | Planche de contrôle (`NOM fps colonnes`) + loudness |
+| `put_upload.sh` | Envoie un mp4 vers l'URL signée Supermetrics (`create_upload_url`) |
+
+## Installation (nouvelle session)
+
+```bash
+export BETO_WORK_DIR=/tmp/beto-video
+mkdir -p $BETO_WORK_DIR/{footage,broll,fonts_pkg}
+(cd $BETO_WORK_DIR/fonts_pkg && npm pack @fontsource/bodoni-moda @fontsource/jost --silent \
+  && for t in *.tgz; do tar xzf $t && mv package ${t%.tgz}; done)
+python3 -m venv $BETO_WORK_DIR/venv && $BETO_WORK_DIR/venv/bin/pip install -q numpy scipy
+export BETO_PY=$BETO_WORK_DIR/venv/bin/python
+```
+
+**Vidéos brutes** : téléchargées depuis Google Drive (l'hôte `drive.usercontent.google.com` est autorisé dans l'environnement « -beto-jewelry ») :
+
+```bash
+curl -sSL -o "$BETO_WORK_DIR/broll/<titre>.mov" "https://drive.usercontent.google.com/download?id=<fileId>&export=download&confirm=t"
+```
+
+Le connecteur Google Drive (`search_files` avec `parentId = '<dossier>'`) donne la liste des `fileId`.
+- **B-roll de la consultation** : dossier « Frame » `1w-XwO_5-ELvI2BD7lWnYFFrcDo9zTJsX` (fichiers `FrameXXXXXXXX.mov`), dans `$BETO_WORK_DIR/broll`.
+- **Clips iPhone HDR** (`IMG_xxxx.mov`) : dans `$BETO_WORK_DIR/footage`.
+
+## Rendre
+
+```bash
+cd tools/video
+python3 reels.py R01_blanc_ou_rose      # ou sans argument : tout le lot
+python3 reels_b.py                      # lot 2
+./review.sh R01_blanc_ou_rose 5 9       # vérifier image par image avant de publier
+```
+
+Avant toute publication, vérifier chaque reel :
+- le texte est dans la zone sûre (ni dans le haut 14 %, ni dans le bas 35 %) ;
+- aucun reflet de Rayane dans la vitre ;
+- aucune image vide ou figée ;
+- la loudness est autour de −14 LUFS.
+
+## Publier en trial reel (Supermetrics, compte IG 17841453213405228)
+
+1. `creative_picker` → `action: create_upload_url`, `ds_id: IGI`, `params: {content_type: "video/mp4", filename, size}`.
+2. `./put_upload.sh <fichier.mp4> "<upload_url>"` doit répondre HTTP 200.
+3. `manage_social_media` → `action: publish`, avec :
+   - `content_type: VIDEO`, `upload_ref`, `caption` (5 hashtags max) ;
+   - `platform_options: {trial_reel: {graduation_strategy: "SS_PERFORMANCE"}, thumb_offset: 0}` ;
+   - `publish_at` et `timezone: America/Toronto`.
+   Espacer les publications d'au moins 60 minutes, et en faire 3 à 5 par jour au maximum.
+4. Noter chaque publication dans Supabase `public.social_reels` (statut, heure, `ig_media_id`).
+5. Après 72 h : relever le taux de saut, le temps regardé, les vues, les partages et les abonnements (`instagram_insights`, ds_id IGI, rapport `AccountMediaVideo`), puis mettre à jour `metrics` et `score`.
+
+Si `manage_social_media` répond `SCOPE_UPGRADE_REQUIRED`, Rayane doit reconnecter Instagram dans Supermetrics avec la permission de publier. Ne pas réessayer en boucle.
