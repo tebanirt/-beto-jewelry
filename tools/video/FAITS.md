@@ -16,6 +16,9 @@ N'écrire à l'écran ou en description **que** ces faits. Tout nouveau prix, d�
 - Couleurs de diamant de laboratoire offertes : rose, jaune, bleu, champagne, vert.
 - Les pierres des vidéos du 9 nov. 2026 (IMG_5762 à 5766) sont toutes des diamants de laboratoire.
 - Le lien de réservation est dans la bio Instagram.
+- **Noël** : texte de pub approuvé (brief §6), à reprendre mot pour mot : « Une bague sur mesure sous le sapin ? Design 3D en 48 h, bague prête en 2 semaines. Commandez avant le 11 décembre. » / « A custom ring under the tree? 3D design in 48 h, ready in 2 weeks. Order by December 11. » En platine : commander vers le 4 décembre. Ne jamais promettre de date de livraison.
+- **Saint-Valentin** : commander avant le 31 janvier (or) ou le 24 janvier (platine).
+- Pièces offertes aussi : alliances (dont éternité) et boucles d'oreilles, sur mesure (soumission en 24 h).
 - **Interdit** : un prix précis sans l'accord de Rayane ; « non remboursable » dans un reel ; un prix « en moins d'une heure » ; une photo ou un rendu inventé ou fait par IA ; un rendu du configurateur 3D.
 
 ## Science (source : GIA)
