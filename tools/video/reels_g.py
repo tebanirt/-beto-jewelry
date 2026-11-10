@@ -64,7 +64,7 @@ def G03_details_caches():
              end_solid(2.5)]
     L = {"h": card("Le dessous de ta bague,<br><i>aussi beau</i> que le dessus.", size="s72"),
          "l1": label(1, "Halo caché"), "l2": label(2, "Vue de côté"), "l3": label(3, "Griffes en pétales")}
-    L.update(endcard("Chaque détail, <i>sur mesure.</i>", None, **FR_END))
+    L.update(endcard("Chaque détail,<br><i>sur mesure.</i>", None, **FR_END))
     tl = [("h", 0, 0, 2.5, 0, 0), ("l1", 2.5, 0.1, 4.25, 0, 10), ("l2", 4.25, 0.1, 6.0, 0, 10), ("l3", 6.0, 0.1, 7.5, 0, 10)] + end_tl(7.5, 10.0)
     au = ([(0.2, "sparkle", 0.5), (2.5, "whoosh_rev", 0.5), (2.55, "sparkle", 0.5), (4.25, "tick"), (6.0, "tick"),
            (7.5, "impact", 0.5)], "lux")
@@ -91,7 +91,7 @@ def G05_marquise_3_styles():
     L = {"h": card("La marquise,<br><i>3 styles</i>.", size="s100"),
          "l1": label(1, "Solitaire"), "l2": label(2, "Anneau large"), "l3": label(3, "Pierres alternées"),
          "q": card("Ta préférée ? <i>1, 2 ou 3</i>", size="s72")}
-    L.update(endcard("Ta marquise, <i>sur mesure.</i>", None, **FR_END))
+    L.update(endcard("Ta marquise,<br><i>sur mesure.</i>", None, **FR_END))
     tl = [("h", 0, 0, 1.0, 0, 0), ("l1", 1.0, 0.1, 2.0, 0, 10), ("l2", 2.0, 0.1, 3.5, 0, 10), ("l3", 3.5, 0.1, 5.0, 0, 10),
           ("q", 5.0, 0.12, 6.5, 0, 10)] + end_tl(6.5, 9.0)
     au = ([(0.1, "sparkle", 0.5), (2.0, "impact", 0.6), (3.5, "impact", 0.6), (5.0, "whoosh_rev", 0.5), (5.0, "sparkle"),

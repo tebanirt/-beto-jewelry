@@ -44,7 +44,7 @@ def _rvr(r1, p1, r2, p2, over, lang="fr"):
         L.update(endcard("Du rendu <i>à ta main.</i>", None, **FR_END))
     else:
         L = {"h": card("The 3D <i>render</i>…", over=over, size="s100"), "c": card("… the real <i>ring</i>.", size="s100")}
-        L.update(endcard("From render <i>to reality.</i>", None, **EN_END))
+        L.update(endcard("From render<br><i>to reality.</i>", None, **EN_END))
     tl = [("h", 0, 0, 2.0, 0, 0), ("c", 2.0, 0.08, 6.5, 0, 0)] + end_tl(6.5, 9.0)
     au = ([(0.1, "sparkle", 0.5), (1.98, "whoosh_rev"), (2.0, "impact", 0.8), (2.05, "sparkle"), (4.0, "tick"),
            (5.0, "tick"), (6.5, "impact", 0.5)], "lux")

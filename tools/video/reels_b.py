@@ -153,7 +153,7 @@ def B09_EN_steps():
          "c1": card("We choose your <i>stone</i>.", over="01 — Free consultation", det="In person in Montréal or by video"),
          "c2": card("We design your <i>ring</i>.", over="02 — 3D design in 48 h", det="Revisions included"),
          "c3": card("It’s <i>yours</i>.", over="03 — Ready in 2 weeks")}
-    L.update(endcard("Your ring, <i>made to measure.</i>", None, **EN_END))
+    L.update(endcard("Your ring,<br><i>made to measure.</i>", None, **EN_END))
     tl = [("h", 0, 0, 2.0, 0, 0), ("c1", 2.0, 0.18, 5.0, 0, 12), ("c2", 5.0, 0.18, 8.0, 0, 12),
           ("c3", 8.0, 0.18, 10.5, 0, 12)] + end_tl(11.5, 14.0)
     au = ([(2.0, "whoosh_rev", 0.6), (5.0, "whoosh_rev", 0.6), (5.05, "sparkle", 0.5), (8.0, "whoosh_rev", 0.6),
