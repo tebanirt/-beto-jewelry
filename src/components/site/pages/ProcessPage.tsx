@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { LINKS } from "@/lib/site-content";
 import { useSite } from "../useSite";
@@ -79,6 +80,10 @@ export default function ProcessPage() {
                   <p className="bj-eyebrow bj-eyebrow-light">
                     <T text={s.media.note} />
                   </p>
+                </div>
+              ) : s.media.kind === "still" ? (
+                <div className="bj-settle relative w-full min-w-0 overflow-hidden bg-beto-sand" style={{ flex: "1 1 440px", aspectRatio: "4 / 3" }}>
+                  <Image src={s.media.src} alt={s.media.alt} fill sizes="(max-width: 1000px) 100vw, 600px" className="object-cover" />
                 </div>
               ) : SHOW_PHOTO_SLOTS ? (
                 <PhotoSlot code={s.media.code} label={s.media.label} className="bj-reveal min-w-0" style={{ flex: "1 1 440px", aspectRatio: "4 / 3" }} />
