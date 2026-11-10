@@ -8,7 +8,7 @@ from reels import card, label, endcard, end_tl, end_solid, FR_END
 REELS = {}
 T_OVPAVE, T_MQALT, T_MQSIDE, T_OVPLAIN = ("img:761f226b-image.jpg", "img:4e1768ba-image.jpg",
                                           "img:21e5b775-image.jpg", "img:8e1064f9-image.jpg")   # outdoor lifestyle
-R_LOTUS = "img:555ac6e3-image.jpg"     # render: marquise solitaire, petal (lotus) basket
+R_LOTUS = "img:lotuscrop-image.jpg"   # render (555ac6e3, black bottom strip cropped): petal (lotus) basket
 P_LOTUS = "img:60c85281-image.jpg"     # photo: same design, end view
 P_UNDER = "img:002c71b8-image.jpg"     # photo: openwork underside of a marquise setting
 P_SIDE_ALT = "img:6643f215-image.jpg"  # photo: marquise, alternating band, side (hidden halo)

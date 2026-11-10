@@ -19,6 +19,7 @@ Règles de contenu et autorisations : voir `docs/business-ops-brief.md` §10.
 | `reels_c.py` | Lot 3 : making-of de la bague marquise, du rendu 3D à la fonte (C01 à C05) |
 | `review.sh` | Planche de contrôle (`NOM fps colonnes`) + loudness |
 | `put_upload.sh` | Envoie un mp4 vers l'URL signée Supermetrics (`create_upload_url`) |
+| `make_assets.sh` | Recrée les fichiers dérivés : gravure IGI floutée, rendu du lotus recadré |
 
 ## Installation (nouvelle session)
 

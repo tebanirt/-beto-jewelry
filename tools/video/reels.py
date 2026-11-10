@@ -1,5 +1,5 @@
 """10 trial reels — colored lab-grown diamonds. Usage: python3 reels.py [R01 R02 ...]"""
-import sys, os
+import sys, os, re
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from reelkit import S, build
 
@@ -56,8 +56,10 @@ def num(n, x, y):
 def endcard(title, sub=None, details=None, cta=None, place="Montréal · ou en vidéo"):
     """returns layers dict for an ivory end card (ids e_logo, e_t, e_d, e_c)."""
     L = {"e_logo": '<img class="logo" style="top:330px" src="%LOGO%">'}
-    t = f'<div class="ctr e1" style="top:630px">{title}</div>'
-    y = 770 if "<br>" not in title else 840
+    longest = max(len(re.sub(r"<[^>]+>", "", ln)) for ln in title.split("<br>"))
+    big = longest <= 20
+    t = f'<div class="ctr e1" style="top:630px{"" if big else ";font-size:76px"}">{title}</div>'
+    y = 770 if "<br>" not in title else (840 if big else 830)
     if sub:
         t += f'<div class="ctr e1s" style="top:{y}px">{sub}</div>'
         y += 130 if "<br>" in sub else 80
