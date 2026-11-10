@@ -693,6 +693,11 @@ export const t = {
         budgetsNatural: ["$6,000–$8,000", "$8,000–$10,000", "$10,000–$15,000", "$15,000–$20,000", "$20,000+"],
         naturalBudgetNote: "Natural diamond engagement rings start at $6,000. For a smaller budget, a lab-grown diamond offers the same sparkle and the same composition.",
         timelines: ["As soon as possible", "1–2 months", "2–4 months", "4–6 months", "No rush"],
+        // Seasonal timeline choice, shown only before the order deadline (see seasonNow()).
+        seasonHolidays: "For the holidays",
+        seasonHolidaysNote: "For the holidays, order by December 11 (December 4 for platinum).",
+        seasonValentine: "For Valentine’s Day",
+        seasonValentineNote: "For Valentine’s Day, order by January 31 (January 24 for platinum).",
         contacts: {
           email: "Email",
           phone: "Phone",
@@ -1627,6 +1632,11 @@ export const t = {
         budgetsNatural: ["6 000–8 000 $", "8 000–10 000 $", "10 000–15 000 $", "15 000–20 000 $", "20 000 $ et plus"],
         naturalBudgetNote: "Les bagues de fiançailles en diamant naturel commencent à 6 000 $. Pour un budget plus petit, le diamant de laboratoire offre le même éclat et la même composition.",
         timelines: ["Le plus tôt possible", "1–2 mois", "2–4 mois", "4–6 mois", "Pas de délai précis"],
+        // Choix de délai saisonnier, affiché seulement avant la date limite (voir seasonNow()).
+        seasonHolidays: "Pour les Fêtes",
+        seasonHolidaysNote: "Pour les Fêtes, commandez avant le 11 décembre (le 4 décembre en platine).",
+        seasonValentine: "Pour la Saint-Valentin",
+        seasonValentineNote: "Pour la Saint-Valentin, commandez avant le 31 janvier (le 24 janvier en platine).",
         contacts: {
           email: "Courriel",
           phone: "Téléphone",
