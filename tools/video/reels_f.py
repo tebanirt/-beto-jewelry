@@ -63,7 +63,7 @@ def F02_marquise_rendu_vs_reel():
 
 @reel
 def F03_ovale_pave():
-    items = [("shot", S(CAD2, 0.0, 2.0, fit=True, fx=["kenburns"])), render(R_PAVE, 1.5, fx=["flash", "punch"]),
+    items = [("shot", S(CAD2, 0.0, 2.0, fit=True, fitbg="0xFFFFFF", fx=["kenburns"])), render(R_PAVE, 1.5, fx=["flash", "punch"]),
              photo(POV_PAVE, 2.5, fx=["flash", "kenburns", "flash_out"]), end_solid(2.5)]
     L = {"h": card("De l’animation <i>3D</i>…", over="Ovale · anneau pavé", size="s86"),
          "c": card("… à la vraie <i>bague</i>.", size="s100")}

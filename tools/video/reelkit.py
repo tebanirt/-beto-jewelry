@@ -113,7 +113,7 @@ def run(cmd):
 
 
 def S(clip, start, dur, zoom=None, cx=None, cy=None, speed=1.0, fx=(), size=(W, H), slowmo=False, reveal=None,
-      fit=False, yoff=60):
+      fit=False, yoff=60, fitbg=None):
     """Shot spec. fx: punch, kenburns, kenburns_out, shake, rgb, flash, flash_out, blurin, whip, bw.
     fit=True: show the whole frame (square video, render) over a blurred copy of itself."""
     if clip in CLIP:  # named iPhone clips keep their historical defaults (cache keys)
@@ -126,6 +126,8 @@ def S(clip, start, dur, zoom=None, cx=None, cy=None, speed=1.0, fx=(), size=(W, 
              fx=list(fx), size=list(size), slowmo=slowmo, reveal=reveal)
     if fit:
         d["fit"] = True; d["yoff"] = yoff
+        if fitbg:
+            d["fitbg"] = fitbg  # solid background colour (CAD videos on plain white)
     return d
 
 
@@ -153,8 +155,12 @@ def render_shot(s):
     f = ([TM] if kind == "hdr" else [])
     fx = s["fx"]
     if s.get("fit"):
-        f.append(f"split[fa][fb];[fa]scale={ow}:{oh}:force_original_aspect_ratio=increase,crop={ow}:{oh},gblur=sigma=30,"
-                 f"eq=brightness=0.03:saturation=0.9[fbg];[fb]scale={ow - 40}:-2:flags=lanczos[ffg];"
+        if s.get("fitbg"):
+            bg = f"[fa]scale={ow}:{oh},drawbox=x=0:y=0:w=iw:h=ih:color={s['fitbg']}@1:t=fill[fbg];"
+        else:
+            bg = (f"[fa]scale={ow}:{oh}:force_original_aspect_ratio=increase,crop={ow}:{oh},gblur=sigma=30,"
+                  f"eq=brightness=0.03:saturation=0.9[fbg];")
+        f.append(f"split[fa][fb];{bg}[fb]scale={ow - 40}:-2:flags=lanczos[ffg];"
                  f"[fbg][ffg]overlay=(W-w)/2:(H-h)/2+{s['yoff']}")
         if "kenburns" in fx:
             f.append(f"zoompan=z='1+0.07*in/{n_in}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={ow}x{oh}:fps={zr}")

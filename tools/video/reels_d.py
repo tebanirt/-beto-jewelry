@@ -39,9 +39,9 @@ def D01_rendu_vs_realite():
 
 @reel
 def D02_angles_3d():
-    items = [s(CAD2, 0.0, 2.5, fit=True, fx=["kenburns"]),
-             s(CAD2, 6.0, 2.0, fit=True, fx=["flash"]),
-             s(CAD2, 18.2, 1.5, fit=True, fx=["punch"]),
+    items = [s(CAD2, 0.0, 2.5, fit=True, fitbg="0xFFFFFF", fx=["kenburns"]),
+             s(CAD2, 6.0, 2.0, fit=True, fitbg="0xFFFFFF", fx=["flash"]),
+             s(CAD2, 18.2, 1.5, fit=True, fitbg="0xFFFFFF", fx=["punch"]),
              s(R_PAVE, 0, 2.0, fit=True, fx=["flash", "kenburns", "flash_out"]),
              end_solid(2.5)]
     L = {"h": card("Ta bague, vue sous<br>tous les <i>angles</i>.", over="Avant la fabrication", size="s86"),
@@ -55,8 +55,8 @@ def D02_angles_3d():
 
 @reel
 def D03_halo_cache():
-    items = [s(P_SIDE, 0, 2.5, zoom=1.35, cx=660, cy=760, fx=["kenburns"]),
-             s(CAD2, 6.2, 2.5, fit=True, fx=["flash"]),
+    items = [s(P_SIDE, 0, 2.5, zoom=1.35, cx=700, cy=1000, fx=["kenburns"]),
+             s(CAD2, 6.2, 2.5, fit=True, fitbg="0xFFFFFF", fx=["flash"]),
              s(P_FRONT, 0, 2.0, fx=["flash", "kenburns", "flash_out"]),
              end_solid(2.5)]
     L = {"h": card("Le halo <i>caché</i>,<br>c’est quoi ?", over="Bague de fiançailles", size="s86"),
