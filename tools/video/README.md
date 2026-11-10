@@ -20,7 +20,9 @@ Règles de contenu et autorisations : voir `docs/business-ops-brief.md` §10.
 | `reels_d.py` à `reels_i.py` | Lots 4 à 9 (rendus contre vraies bagues, votes, Mont-Tremblant, Noël, etc.) |
 | `beats.py` | Analyse de la musique : tempo, temps, premiers temps de mesure, passage le plus énergique |
 | `pro.py` | Montage « pro » : vraie musique, coupes sur le temps, transitions, texte mot par mot, scintillements |
-| `reels_pro.py` | Reels pro validés par Rayane le 10 nov. 2026 (P01 rendu → vraie bague, P02 couleurs, P03 Noël) |
+| `reels_pro.py` | Premier reel pro validé par Rayane le 10 nov. 2026 (P02, 4 couleurs) |
+| `reels_pro2.py` | Vague 11 : concepts des lots 1 à 9 refaits en montage pro (P04 à P07, P10, P11) |
+| `reels_pro3.py` | Vague 11 : Noël FR et EN, du rendu à l'or en anglais, designs 3D, sans bague portée au doigt |
 | `review.sh` | Planche de contrôle (`NOM fps colonnes`) + loudness |
 | `put_upload.sh` | Envoie un mp4 vers l'URL signée Supermetrics (`create_upload_url`) |
 | `make_assets.sh` | Recrée les fichiers dérivés : gravure IGI floutée, rendu du lotus recadré |

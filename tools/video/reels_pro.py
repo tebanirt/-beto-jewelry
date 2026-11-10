@@ -1,4 +1,4 @@
-"""Showcase pro edits (real licensed music, beat-synced). Usage: python3 reels_pro.py [P01 ...]"""
+"""Showcase pro edit validated by Rayane on 10 Nov 2026 (P01 and P03 dropped: rings worn on the pinky; P03b in reels_pro3.py). Usage: python3 reels_pro.py [P01 ...]"""
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from reelkit import S
@@ -27,24 +27,6 @@ def sh(base, **kw):
 
 
 @reel
-def P01_rendu_a_reel():
-    shots = [
-        dict(shot=S(CAD2, 0.0, 1, fit=True, fitbg="0xFFFFFF", fx=["kenburns"]), beats=8, tr="zoomin"),
-        dict(shot=S(R_PAVE, 0, 1, fit=True, fx=["kenburns", "glow"]), beats=4, tr="fadewhite"),
-        dict(shot=S(POV_PAVE, 0, 1, zoom=1.3, cx=680, cy=950, fx=["kenburns", "glow"]), beats=6, tr="smoothleft"),
-        dict(shot=S(T_OVPAVE, 0, 1, zoom=1.0, fx=["kenburns", "glow"]), beats=6, tr="fade"),
-    ]
-    texts = [
-        dict(html=pro.card_words("Le rendu 3D…", over="Ovale · anneau pavé", size="s100"), at=0, until=12),
-        dict(html=pro.card_words("… la vraie bague.", size="s100"), at=12, until=18),
-        dict(html=pro.card_words("Et le moment | où elle la porte.", size="s86"), at=18, until=24),
-    ]
-    end = dict(beats=8, layers=endcard("Du rendu <i>à ta main.</i>", None, **FR_END), reveal=[0, 1, 2, 3])
-    return dict(name="P01_rendu_a_reel", music="470", shots=shots, texts=texts, end=end,
-                glints=[dict(at=13, x=560, y=860, s=0.9), dict(at=15, x=470, y=1000, s=0.6)])
-
-
-@reel
 def P02_couleurs_velocity():
     shots = [
         dict(shot=sh(VERT_EM, start=0.2, fx=["punch", "glow"]), beats=2, tr="cut"),
@@ -67,26 +49,6 @@ def P02_couleurs_velocity():
                reveal=[0, 1, 2, 3])
     return dict(name="P02_couleurs_velocity", music="399", shots=shots, texts=texts, end=end,
                 glints=[dict(at=12, x=470, y=1080, s=0.9), dict(at=14, x=610, y=1180, s=0.6), dict(at=18, x=540, y=1000, s=0.8)])
-
-
-@reel
-def P03_noel():
-    shots = [
-        dict(shot=S(BOX2, 0, 1, zoom=1.0, fx=["kenburns", "glow"]), beats=6, tr="zoomin"),
-        dict(shot=S(CUS_F, 0, 1, zoom=1.35, cx=790, cy=1000, fx=["punch", "glow"]), beats=2, tr="smoothleft"),
-        dict(shot=S(EM_F, 0, 1, zoom=1.35, cx=810, cy=900, fx=["punch", "glow"]), beats=2, tr="smoothleft"),
-        dict(shot=S(PEAR, 0, 1, zoom=1.35, cx=730, cy=910, fx=["punch", "glow"]), beats=2, tr="smoothleft"),
-        dict(shot=S(VIN_F, 0, 1, zoom=1.05, cx=790, cy=900, fx=["punch", "glow"]), beats=2, tr="fadewhite"),
-        dict(shot=S(BOX1, 0, 1, zoom=1.1, cx=760, cy=1000, fx=["kenburns", "glow"]), beats=6, tr="fade"),
-    ]
-    texts = [
-        dict(html=pro.card_words("Une bague sur mesure | sous le sapin ?", over="Noël 2026", size="s86"), at=0, until=6),
-        dict(html=pro.card_words("Design 3D en 48 h, | bague prête en 2 semaines.", size="s72"), at=6, until=14),
-        dict(html=pro.card_words("Commandez avant | le 11 décembre.", size="s86"), at=14, until=20),
-    ]
-    end = dict(beats=8, layers=endcard("Commandez avant<br>le <i>11 décembre.</i>", None, **FR_END), reveal=[0, 1, 2, 3])
-    return dict(name="P03_noel", music="866", shots=shots, texts=texts, end=end,
-                glints=[dict(at=2, x=540, y=930, s=0.8), dict(at=15, x=540, y=940, s=0.8)])
 
 
 if __name__ == "__main__":

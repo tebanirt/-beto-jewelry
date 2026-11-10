@@ -168,7 +168,10 @@ def build(spec, out_dir=None):
     gpath = glint_asset() if gl else None
     for g in gl:
         inputs += ["-i", gpath]
-    fc = "".join(f"[{i}:v]fps={FPS},setsar=1,settb=1/{FPS},setpts=N/({FPS}*TB),format=yuv420p[v{i}];" for i in range(n))
+    # each shot is padded (last frame cloned): xfade needs the first input to last at least offset + duration,
+    # and frame rounding can leave a shot one frame short, which silently drops every later shot.
+    fc = "".join(f"[{i}:v]fps={FPS},setsar=1,settb=1/{FPS},setpts=N/({FPS}*TB),format=yuv420p,"
+                 f"tpad=stop_mode=clone:stop_duration=0.25[v{i}];" for i in range(n))
     prev, D = "v0", bounds[1] + (Ts[0] / 2 if Ts else 0)
     for i in range(1, n):
         tr = tr_list[i - 1] if i - 1 < len(tr_list) else "fade"
