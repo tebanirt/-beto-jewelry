@@ -239,7 +239,7 @@ def bed(kind, total):
     return L, R
 
 
-def render(total, events, bed_kind, out_wav, master_gain=1.0):
+def render(total, events, bed_kind, out_wav, master_gain=1.0, normalize=None):
     n = int(total * SR)
     if bed_kind:
         L, R = bed(bed_kind, total)
@@ -274,8 +274,13 @@ def render(total, events, bed_kind, out_wav, master_gain=1.0):
     fade = int(0.05 * SR)
     st[:fade] *= np.linspace(0, 1, fade)[:, None]
     st[-fade:] *= np.linspace(1, 0, fade)[:, None]
-    rms = np.sqrt(np.mean(st ** 2)) + 1e-9
-    st *= (0.16 / rms) * master_gain
+    if normalize is None:
+        normalize = bool(bed_kind)  # a SFX-only track (no bed) keeps its real level under the music
+    if normalize:
+        rms = np.sqrt(np.mean(st ** 2)) + 1e-9
+        st *= (0.16 / rms) * master_gain
+    else:
+        st *= master_gain
     st = np.tanh(st * 1.15) / np.tanh(1.15)
     st = np.clip(st * 0.95, -1, 1)
     pcm = (st * 32767).astype(np.int16)

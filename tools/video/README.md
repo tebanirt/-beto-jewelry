@@ -17,6 +17,10 @@ Règles de contenu et autorisations : voir `docs/business-ops-brief.md` §10.
 | `reels.py` | Lot 1 : 10 reels sur les diamants de labo de couleur (R01 à R10) |
 | `reels_b.py` | Lot 2 : 10 reels faits avec le B-roll de la consultation (B01 à B10) |
 | `reels_c.py` | Lot 3 : making-of de la bague marquise, du rendu 3D à la fonte (C01 à C05) |
+| `reels_d.py` à `reels_i.py` | Lots 4 à 9 (rendus contre vraies bagues, votes, Mont-Tremblant, Noël, etc.) |
+| `beats.py` | Analyse de la musique : tempo, temps, premiers temps de mesure, passage le plus énergique |
+| `pro.py` | Montage « pro » : vraie musique, coupes sur le temps, transitions, texte mot par mot, scintillements |
+| `reels_pro.py` | Reels pro validés par Rayane le 10 nov. 2026 (P01 rendu → vraie bague, P02 couleurs, P03 Noël) |
 | `review.sh` | Planche de contrôle (`NOM fps colonnes`) + loudness |
 | `put_upload.sh` | Envoie un mp4 vers l'URL signée Supermetrics (`create_upload_url`) |
 | `make_assets.sh` | Recrée les fichiers dérivés : gravure IGI floutée, rendu du lotus recadré |
@@ -30,7 +34,17 @@ mkdir -p $BETO_WORK_DIR/{footage,broll,fonts_pkg}
   && for t in *.tgz; do tar xzf $t && mv package ${t%.tgz}; done)
 python3 -m venv $BETO_WORK_DIR/venv && $BETO_WORK_DIR/venv/bin/pip install -q numpy scipy
 export BETO_PY=$BETO_WORK_DIR/venv/bin/python
+export BETO_MUSIC_DIR=$BETO_WORK_DIR/music
 ```
+
+**Musique (montage pro)** : des pistes Mixkit, enregistrées sous leur numéro (`470.mp3`). L'hôte `assets.mixkit.co` est autorisé dans l'environnement « -beto-jewelry ».
+
+```bash
+mkdir -p $BETO_MUSIC_DIR
+for id in 470 399 866; do curl -sSL -o $BETO_MUSIC_DIR/$id.mp3 https://assets.mixkit.co/music/$id/$id.mp3; done
+```
+
+Licence Mixkit (Stock Music Free License) : usage commercial permis sur les réseaux sociaux, sans mention obligatoire. Interdit : redistribuer la musique seule (jamais de mp3 dans ce dépôt), l'enregistrer dans un service de droits (Content ID) ou la présenter comme la nôtre.
 
 **Vidéos brutes** : téléchargées depuis Google Drive (l'hôte `drive.usercontent.google.com` est autorisé dans l'environnement « -beto-jewelry ») :
 
@@ -49,7 +63,10 @@ cd tools/video
 python3 reels.py R01_blanc_ou_rose      # ou sans argument : tout le lot
 python3 reels_b.py                      # lot 2
 ./review.sh R01_blanc_ou_rose 5 9       # vérifier image par image avant de publier
+$BETO_PY reels_pro.py P02_couleurs_velocity   # montage pro (numpy + scipy) -> $BETO_WORK_DIR/pro
 ```
+
+**Montage pro** (`pro.py`) : chaque reel donne une piste (`music`), des plans comptés en temps (`beats`) avec une transition (`zoomin`, `hblur`, `fadewhite`, `smoothleft`, `fade` ou `cut`), des textes (`card_words`, un mot à la fois) et une carte de fin. Le moteur trouve le tempo, commence au passage le plus fort de la chanson, place chaque coupe sur un temps, ajoute une légère lueur (`glow`) et des scintillements, puis mixe la musique et les effets à −14 LUFS.
 
 Avant toute publication, vérifier chaque reel :
 - le texte est dans la zone sûre (ni dans le haut 14 %, ni dans le bas 35 %) ;

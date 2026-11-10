@@ -132,8 +132,9 @@ def S(clip, start, dur, zoom=None, cx=None, cy=None, speed=1.0, fx=(), size=(W, 
 
 
 def render_shot(s):
-    key = hashlib.md5(json.dumps([s, GRADE, TM], sort_keys=True).encode()).hexdigest()[:14]
-    out = f"{CACHE}/{s['clip']}_{key}.mp4"
+    kparts = [s, GRADE, TM] + (["glow3"] if "glow" in s.get("fx", []) else [])
+    key = hashlib.md5(json.dumps(kparts, sort_keys=True).encode()).hexdigest()[:14]
+    out = f"{CACHE}/{s['clip'].replace(':', '_')}_{key}.mp4"
     if os.path.exists(out):
         return out
     ow, oh = s["size"]
@@ -179,6 +180,9 @@ def render_shot(s):
     else:
         f.append(f"scale={ow}:{oh}:flags=lanczos")
     f.append(GRADE if kind == "hdr" else GRADE_SDR)
+    if "glow" in fx:  # soft bloom on highlights: diamonds sparkle more (in RGB, else the colours shift)
+        f.append("format=gbrp,split[ga][gb];[gb]curves=master='0/0 0.62/0.04 1/1',gblur=sigma=16[gc];"
+                 "[ga][gc]blend=all_mode=screen:all_opacity=0.22,format=yuv420p")
     if kind == "still":
         f.insert(0, "format=yuv420p")
     if s["slowmo"]:
