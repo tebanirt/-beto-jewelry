@@ -4,10 +4,12 @@ export const GOOGLE_REVIEW_URL = "https://share.google/3Hj8w8Aal4iav1yPN";
  * Bouton du dépôt de design de 250 $ + taxes (clients du site) : la route
  * /api/depot crée la page de paiement Stripe à chaque clic (montant, TPS et
  * TVQ calculés par le site) et revient sur /design-your-jewelry/depot-recu.
- * Mettre "" pour cacher le bouton (la réservation Calendly repasse en premier).
- * Exige STRIPE_SECRET_KEY et STRIPE_WEBHOOK_SECRET dans Vercel.
+ * Le bouton reste caché tant que STRIPE_SECRET_KEY et STRIPE_WEBHOOK_SECRET
+ * ne sont pas dans Vercel (drapeau STRIPE_DEPOSIT_READY de next.config.ts) :
+ * la réservation Calendly reste alors en premier. Après l'ajout des clés,
+ * redéployer pour que le bouton apparaisse.
  */
-export const DEPOSIT_PAYMENT_URL: string = "/api/depot";
+export const DEPOSIT_PAYMENT_URL: string = process.env.STRIPE_DEPOSIT_READY ? "/api/depot" : "";
 
 /**
  * Emplacements « Photo à fournir » (PhotoSlot) : cachés sur le site tant que
