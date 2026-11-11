@@ -19,7 +19,11 @@ export async function POST(request: Request, ctx: RouteContext<"/api/admin/clien
   const { id } = await ctx.params;
   const body = (await request.json()) as { kind?: string; amount?: number; reference?: string };
 
-  const kind: PaymentKind = body.kind === "solde" ? "solde" : "depot";
+  // « approbation » = le paiement de 50 % à l'approbation du rendu 3D : pour le
+  // webhook et les Finances, c'est un paiement sur le solde (kind « solde »),
+  // seul le nom affiché au client change.
+  const stage = body.kind === "approbation" ? "approbation" : "";
+  const kind: PaymentKind = body.kind === "solde" || stage ? "solde" : "depot";
   // Le dépôt peut différer du montant standard (ex. client honoré à l'ancien prix de 200 $).
   const amount = kind === "depot" && body.amount === undefined ? DEPOSIT_AMOUNT_CAD : Number(body.amount);
   if (!Number.isFinite(amount) || amount < 1 || amount > 100000) {
@@ -34,10 +38,13 @@ export async function POST(request: Request, ctx: RouteContext<"/api/admin/clien
     return NextResponse.json({ error: "Client introuvable" }, { status: 404 });
   }
 
+  const suffix = reference ? ` (${reference})` : "";
   const name =
     kind === "depot"
       ? "Dépôt de design — Beto Jewelry"
-      : `Solde de votre création — Beto Jewelry${reference ? ` (${reference})` : ""}`;
+      : stage
+        ? `Paiement à l'approbation du design (50 %) — Beto Jewelry${suffix}`
+        : `Solde de votre création — Beto Jewelry${suffix}`;
 
   const taxed = addTaxes(amount);
   const line = (label: string, value: number, description?: string) => ({
@@ -48,6 +55,7 @@ export async function POST(request: Request, ctx: RouteContext<"/api/admin/clien
   const metadata = {
     client_id: client.id,
     kind,
+    ...(stage ? { stage } : {}),
     reference,
     base: taxed.base.toFixed(2),
     tps: taxed.tps.toFixed(2),
@@ -68,6 +76,10 @@ export async function POST(request: Request, ctx: RouteContext<"/api/admin/clien
       ],
       metadata,
       payment_intent_data: { metadata },
+      // Dépôt : cartes seulement (Apple Pay et Google Pay compris). Les autres
+      // paiements suivent les modes activés dans Stripe (Paramètres > Moyens de
+      // paiement) : un paiement en versements activé là y apparaît.
+      ...(kind === "depot" ? { payment_method_types: ["card" as const] } : {}),
       // Un seul paiement par lien : il se désactive dès que le client a payé.
       restrictions: { completed_sessions: { limit: 1 } },
       after_completion: {
@@ -86,7 +98,7 @@ export async function POST(request: Request, ctx: RouteContext<"/api/admin/clien
       session,
       "payment_link_created",
       { type: "client", id: client.id },
-      `${kind} : ${taxed.base.toFixed(2)} $ + TPS ${taxed.tps.toFixed(2)} $ + TVQ ${taxed.tvq.toFixed(2)} $ = ${taxed.total.toFixed(2)} $`
+      `${stage || kind} : ${taxed.base.toFixed(2)} $ + TPS ${taxed.tps.toFixed(2)} $ + TVQ ${taxed.tvq.toFixed(2)} $ = ${taxed.total.toFixed(2)} $`
     );
     return NextResponse.json({ url: url.toString(), amount: taxed.base, tps: taxed.tps, tvq: taxed.tvq, total: taxed.total, kind });
   } catch (err) {

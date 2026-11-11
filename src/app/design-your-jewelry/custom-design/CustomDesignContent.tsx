@@ -884,6 +884,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
     const params = new URLSearchParams();
     if (d.email.trim()) params.set("prefilled_email", d.email.trim());
     if (crmRef) params.set("client_reference_id", crmRef);
+    if (language === "en") params.set("lang", "en");
     const qs = params.toString();
     return qs ? `${DEPOSIT_PAYMENT_URL}${DEPOSIT_PAYMENT_URL.includes("?") ? "&" : "?"}${qs}` : DEPOSIT_PAYMENT_URL;
   })();

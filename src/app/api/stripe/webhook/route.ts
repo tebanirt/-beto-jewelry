@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
-import { getSupabaseAdmin } from "@/lib/supabase";
+import { getSupabaseAdmin, upsertClient } from "@/lib/supabase";
 import { getStripe } from "@/lib/stripe";
 import { syncClientFromOrders } from "@/lib/workspaceSync";
 
@@ -162,7 +162,20 @@ async function recordPayment(stripe: Stripe, session: Stripe.Checkout.Session) {
     metadata = (await stripe.paymentLinks.retrieve(linkId)).metadata;
   }
 
-  const clientId = session.client_reference_id || metadata.client_id;
+  // Dépôt payé depuis le site sans fiche connue (bouton de la page
+  // consultation) : la fiche est retrouvée, ou créée, avec le courriel et le
+  // téléphone saisis dans Stripe. Une fiche existante n'est jamais écrasée.
+  let clientId = session.client_reference_id || metadata.client_id || "";
+  if (!clientId) {
+    const details = session.customer_details;
+    const found = await upsertClient({
+      fullName: details?.name ?? undefined,
+      email: details?.email ?? session.customer_email ?? undefined,
+      phone: details?.phone ?? undefined,
+      source: "site-depot-stripe",
+    });
+    clientId = found?.id ?? "";
+  }
   if (!clientId) {
     console.error("Stripe payment without client reference:", session.id);
     return;
@@ -212,7 +225,7 @@ async function recordPayment(stripe: Stripe, session: Stripe.Checkout.Session) {
 
   // 2. La note dans la fiche du client, une seule fois aussi.
   const money = (n: number) => n.toLocaleString("fr-CA", { style: "currency", currency: "CAD" });
-  const label = kind === "solde" ? "solde" : "dépôt";
+  const label = metadata.stage === "approbation" ? "paiement de 50 % à l’approbation" : kind === "solde" ? "solde" : "dépôt";
   const detail = taxes.detailed ? `${money(taxes.base)} + TPS ${money(taxes.tps)} + TVQ ${money(taxes.tvq)}` : "taxes à vérifier";
   const total = money((session.amount_total ?? 0) / 100);
   if (!client.notes?.includes(session.id)) {

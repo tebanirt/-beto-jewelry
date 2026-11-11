@@ -1,11 +1,13 @@
 export const GOOGLE_REVIEW_URL = "https://share.google/3Hj8w8Aal4iav1yPN";
 
 /**
- * Stripe Payment Link for the 250 $ design deposit (website clients). Leave
- * empty until Rayane creates it: the deposit button stays hidden. In Stripe,
- * set "After payment" to redirect to /design-your-jewelry/depot-recu.
+ * Bouton du dépôt de design de 250 $ + taxes (clients du site) : la route
+ * /api/depot crée la page de paiement Stripe à chaque clic (montant, TPS et
+ * TVQ calculés par le site) et revient sur /design-your-jewelry/depot-recu.
+ * Mettre "" pour cacher le bouton (la réservation Calendly repasse en premier).
+ * Exige STRIPE_SECRET_KEY et STRIPE_WEBHOOK_SECRET dans Vercel.
  */
-export const DEPOSIT_PAYMENT_URL: string = "";
+export const DEPOSIT_PAYMENT_URL: string = "/api/depot";
 
 /**
  * Emplacements « Photo à fournir » (PhotoSlot) : cachés sur le site tant que

@@ -203,7 +203,7 @@ export function PaymentLinkControls({ clientId, depositAmount }: { clientId: str
   const [total, setTotal] = useState("");
   const [busy, setBusy] = useState(false);
 
-  async function create(kind: "depot" | "solde") {
+  async function create(kind: "depot" | "approbation" | "solde") {
     setBusy(true);
     setLink("");
     setTotal("");
@@ -256,8 +256,8 @@ export function PaymentLinkControls({ clientId, depositAmount }: { clientId: str
             type="number"
             min={1}
             step="0.01"
-            placeholder="Solde avant taxes ($)"
-            aria-label="Solde avant taxes ($)"
+            placeholder="Montant avant taxes ($)"
+            aria-label="Montant avant taxes ($), pour le 50 % ou le solde"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             className="w-44 px-3 py-2 border border-beto-gray-subtle/60 bg-beto-offwhite text-sm focus:outline-none focus:border-beto-gold"
@@ -269,6 +269,14 @@ export function PaymentLinkControls({ clientId, depositAmount }: { clientId: str
             onChange={(e) => setReference(e.target.value)}
             className="w-56 px-3 py-2 border border-beto-gray-subtle/60 bg-beto-offwhite text-sm focus:outline-none focus:border-beto-gold"
           />
+          <button
+            type="button"
+            disabled={busy || !amount}
+            onClick={() => create("approbation")}
+            className="text-xs font-medium uppercase tracking-widest text-beto-gold hover:text-beto-black disabled:opacity-40"
+          >
+            Lien 50 % (approbation)
+          </button>
           <button
             type="button"
             disabled={busy || !amount}
