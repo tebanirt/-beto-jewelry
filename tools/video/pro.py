@@ -31,7 +31,7 @@ T_DEF = 0.24
 BANNED = {
     # consultation B-roll: test ring or stone strip on the client's fingers (pinky)
     "b1632222", "b1632324", "b1632578", "b1632718", "b1632967", "b1631022", "b1617830", "b1618811",
-    "b1631850", "b1630568", "b1628298",
+    "b1631850", "b1630568", "b1628298", "b1619751",
     # photos: ring worn on a finger of the black glove
     "img:1c6e1795-image.jpg", "img:761f226b-image.jpg", "img:2637c0bf-image.jpg", "img:e9997fda-image.jpg",
     "img:0590e1e4-image.jpg", "img:ce39d97b-image.jpg", "img:37721e80-image.jpg", "img:bd2f379f-image.jpg",

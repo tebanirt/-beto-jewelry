@@ -37,7 +37,7 @@ def _avis(lang):
     fr = lang == "fr"
     shots = [
         dict(shot=b(1620314, 0.5, fx=["kenburns"]), beats=4, tr="cut"),
-        dict(shot=b(1619751, 0.3, fx=["kenburns"]), beats=3, tr="smoothleft"),
+        dict(shot=b(1619438, 0.2, fx=["kenburns"]), beats=3, tr="smoothleft"),
         dict(shot=b(1626012, 1.0, fx=["kenburns", "glow"]), beats=3, tr="cut"),      # loose stones, tweezers
         dict(shot=b(1621466, 0.1, fx=["kenburns", "glow"]), beats=3, tr="fadewhite"),  # rings on the velvet tray
         dict(shot=b(1657215, 0.1, slowmo=True, fx=["kenburns", "glow"]), beats=3, tr="fade"),
@@ -77,7 +77,7 @@ def T02_EN_reviews():
 def J01_journee():
     shots = [
         dict(shot=b(1620314, 0.5, fx=["kenburns"]), beats=3, tr="cut"),
-        dict(shot=b(1619751, 0.3, fx=["kenburns"]), beats=3, tr="smoothleft"),
+        dict(shot=b(1619438, 0.2, fx=["kenburns"]), beats=3, tr="smoothleft"),
         dict(shot=b(1626012, 1.0, fx=["kenburns", "glow"]), beats=3, tr="smoothleft"),
         dict(shot=b(1626602, 0.2, fx=["kenburns"]), beats=3, tr="fadewhite"),        # 3D design on the laptop
         dict(shot=S(CAST, 0.2, 1, zoom=1.8, cx=532, cy=1248, fx=["kenburns"]), beats=3, tr="smoothleft"),
