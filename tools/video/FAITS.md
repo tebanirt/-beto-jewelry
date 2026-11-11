@@ -21,6 +21,17 @@ N'écrire à l'écran ou en description **que** ces faits. Tout nouveau prix, d�
 - Pièces offertes aussi : alliances (dont éternité) et boucles d'oreilles, sur mesure (soumission en 24 h).
 - **Interdit** : un prix précis sans l'accord de Rayane ; « non remboursable » dans un reel ; un prix « en moins d'une heure » ; une photo ou un rendu inventé ou fait par IA ; un rendu du configurateur 3D.
 
+## Avis Google (source : fiche Google « Beto Jewelry », relevé du 11 nov. 2026)
+- 17 avis, moyenne de 5 étoiles. Toujours dater le chiffre (« 17 avis Google ») : le mettre à jour avant de le réutiliser.
+- Citations exactes, utilisables sans le nom de la personne :
+  - « Vous êtes vraiment à l'écoute. »
+  - « C'est exactement ce que je souhaitais. »
+  - « Au-dessus de mes attentes. »
+  - « He took the time to listen to what I wanted. »
+  - « They made such an important purchase feel special and stress-free. »
+  - « 5 stars isn't enough. »
+- Ne jamais inventer ni reformuler un avis. Une citation coupée ne change pas son sens.
+
 ## Science (source : GIA)
 - Jaune : des atomes d'azote dans le cristal absorbent la lumière bleue (gia.edu/fancy-color-diamond).
 - Bleu : du bore, moins d'un atome par million d'atomes de carbone (gia.edu/fancy-color-diamond).

@@ -22,6 +22,8 @@ Règles de contenu et autorisations : voir `docs/business-ops-brief.md` §10.
 | `pro.py` | Montage « pro » : vraie musique, coupes sur le temps, transitions, texte mot par mot, scintillements |
 | `reels_pro.py` | Premier reel pro validé par Rayane le 10 nov. 2026 (P02, 4 couleurs) |
 | `reels_pro2.py` | Vague 11 : concepts des lots 1 à 9 refaits en montage pro (P04 à P07, P10, P11) |
+| `reels_pro4.py` | Vague 12 : avis Google, « une journée avec ton joaillier », vote sur la forme, Noël « tu fais ta demande ? », avec la carte de fin par-dessus la dernière image |
+| `DONNEES.md` | Ce que disent les données (Instagram, pubs Meta, CRM, avis, concurrents) et les règles qui en découlent : à lire avant chaque montage |
 | `reels_pro3.py` | Vague 11 : Noël FR et EN, du rendu à l'or en anglais, designs 3D, sans bague portée au doigt |
 | `review.sh` | Planche de contrôle (`NOM fps colonnes`) + loudness |
 | `put_upload.sh` | Envoie un mp4 vers l'URL signée Supermetrics (`create_upload_url`) |
@@ -68,7 +70,9 @@ python3 reels_b.py                      # lot 2
 $BETO_PY reels_pro.py P02_couleurs_velocity   # montage pro (numpy + scipy) -> $BETO_WORK_DIR/pro
 ```
 
-**Montage pro** (`pro.py`) : chaque reel donne une piste (`music`), des plans comptés en temps (`beats`) avec une transition (`zoomin`, `hblur`, `fadewhite`, `smoothleft`, `fade` ou `cut`), des textes (`card_words`, un mot à la fois) et une carte de fin. Le moteur trouve le tempo, commence au passage le plus fort de la chanson, place chaque coupe sur un temps, ajoute une légère lueur (`glow`) et des scintillements, puis mixe la musique et les effets à −14 LUFS.
+**Avant de monter**, lire `DONNEES.md` (formats qui marchent, audience, heures, règles).
+
+**Montage pro** (`pro.py`) : chaque reel donne une piste (`music`), des plans comptés en temps (`beats`) avec une transition (`zoomin`, `hblur`, `fadewhite`, `smoothleft`, `fade` ou `cut`), des textes (`card_words`, un mot à la fois) et une carte de fin. Le moteur trouve le tempo, commence au passage le plus fort de la chanson, place chaque coupe sur un temps, ajoute une légère lueur (`glow`) et des scintillements, puis mixe la musique et les effets à −14 LUFS. Avec `end=dict(beats=5, overlay=True, layers=pro.end_overlay(titre, cta=…, place=…))`, la carte de fin s'affiche par-dessus le dernier plan au lieu d'un fond crème.
 
 Avant toute publication, vérifier chaque reel :
 - le texte est dans la zone sûre (ni dans le haut 14 %, ni dans le bas 35 %) ;

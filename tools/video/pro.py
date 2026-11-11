@@ -91,6 +91,22 @@ def card_words(text, over=None, size="s86", top=300, det=None):
     return stages
 
 
+def end_overlay(title, cta, place, top=270):
+    """Compact end card drawn OVER the last shot (the ring stays visible below it).
+    Layers: e_logo (ivory panel + logo), e_t (title), e_c (button + place). Keeps the 14 % top safe zone."""
+    lines = title.count("<br>") + 1
+    t_y = top + 175
+    c_y = t_y + 78 * lines + 34
+    h = c_y + 150 - top
+    return {
+        "e_logo": (f'<div class="card" style="top:{top}px;width:820px;height:{h}px"></div>'
+                   f'<img class="logo" style="top:{top + 42}px;width:250px" src="%LOGO%">'),
+        "e_t": f'<div class="ctr e1" style="top:{t_y}px;font-size:66px">{title}</div>',
+        "e_c": (f'<div class="btn" style="top:{c_y}px;font-size:28px;padding:18px 38px">{cta}</div>'
+                f'<div class="ctr e4" style="top:{c_y + 100}px;font-size:18px">{place}</div>'),
+    }
+
+
 # ---------------- build ----------------
 def _run(cmd):
     return rk.run(cmd)
@@ -118,11 +134,17 @@ def build(spec, out_dir=None):
     for s in spec["shots"]:
         acc += s["beats"]; cuts.append(acc)
     total = t_of(total_beats)
+    overlay = bool(spec["end"].get("overlay"))
     # render shots with overlap T
     files, trs = [], []
-    nshots = len(spec["shots"]) + 1  # + end card
-    bounds = [0] + [t_of(c) for c in cuts] + [total]
-    tr_list = [s.get("tr", "fade") for s in spec["shots"]]
+    if overlay:  # the last shot continues under the end card: no ivory solid
+        nshots = len(spec["shots"])
+        bounds = [0] + [t_of(c) for c in cuts[:-1]] + [total]
+        tr_list = [s.get("tr", "fade") for s in spec["shots"][:-1]]
+    else:
+        nshots = len(spec["shots"]) + 1  # + end card
+        bounds = [0] + [t_of(c) for c in cuts] + [total]
+        tr_list = [s.get("tr", "fade") for s in spec["shots"]]
     Ts = [(0.034 if tr == "cut" else spec.get("T", T_DEF)) for tr in tr_list]
     for i in range(nshots):
         a, b = bounds[i], bounds[i + 1]
@@ -207,7 +229,7 @@ def build(spec, out_dir=None):
             sfx_events.append((tcut, "impact", 0.35))
     for g in gl:
         sfx_events.append((t_of(g["at"]), "sparkle", 0.45))
-    sfx_events.append((bounds[-2], "impact", 0.3))
+    sfx_events.append((t_of(cuts[-1]), "impact", 0.3))
     wav = f"{E}/audio/{name}_sfx.wav"
     _run([rk.PY, "-I", "-c",
           f"import sys; sys.path.insert(0, {os.path.dirname(os.path.abspath(__file__))!r}); import sfx, json; "
