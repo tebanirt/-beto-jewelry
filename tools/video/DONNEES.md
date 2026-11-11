@@ -76,3 +76,54 @@ Ce qu'on en tire :
 - **Partager les reels sur Facebook** : Instagram, Paramètres, Espace Comptes, Partage entre profils. Les Reels Facebook ont donné environ 4 fois plus de leads que les Reels Instagram dans les pubs. Ça vaut pour les reels normaux ; les trial reels restent sur Instagram.
 - **Suivre les concurrents** : il faut connecter « Instagram Public Data » dans Supermetrics.
 - **Mesurer les visites du site venues d'Instagram** : Web Analytics n'est pas activé sur le projet Vercel « beto-jewelry ». Une fois activé, on verra combien de gens passent du lien en bio au site, puis au formulaire.
+
+## 8. Tendances de novembre 2026 (sources : SocialPilot, Buffer, Later, CreatorDB ; tempos : Tunebat et SongBPM)
+
+**Sons à la une**
+
+| Son | Tempo | Ce que les bijoutiers en font |
+|---|---|---|
+| « Angel Of My Dreams », JADE | 128 BPM | En hausse, 211 k reels. Les bijoutiers l'utilisent pour **l'ouverture d'écrin au ralenti, tourné vers la lumière** |
+| « Housewife », Tate McRae | 133 BPM | Le n° 1 du moment. Une nouvelle couleur ou une nouvelle bague à chaque temps fort |
+| « All I Want for Christmas Is You », Mariah Carey | environ 150 BPM | 5,8 M reels. Noël : « cadeau ou… ? » |
+| « The Blue Danube Waltz » | valse | Tendance « Every girl for absolutely no reason » : un comportement attachant |
+| « November Rain » et « Linger » | – | Montages cinématographiques et nostalgiques |
+
+**La musique et Instagram**
+- Une chanson de la bibliothèque Instagram ne peut pas être ajoutée par l'API. Une chanson connue intégrée dans le fichier se fait couper.
+- La solution :
+  - les fichiers `*_APP` (dans `reels_trend.py`) sont coupés au tempo exact de la chanson, sans musique ;
+  - Rayane les publie depuis l'app Instagram : Nouveau reel, puis la vidéo, puis Audio, puis la chanson, en la faisant commencer sur un temps fort, et enfin « Trial ». Environ 1 minute par reel.
+  - Si un compte professionnel n'a pas accès à la chanson, prendre l'« audio original » de la tendance, souvent disponible.
+- Les autres fichiers gardent une piste Mixkit et sont publiés automatiquement.
+
+**Le format qui explose en ce moment chez un bijoutier canadien comme nous**
+- C'est @varali_jewelry (Vaughan, en Ontario) : 4 M de vues en une semaine avec un seul reel.
+- Le reel :
+  - dure 60 s, filmé en très haute qualité (1440 × 2560) ;
+  - montre **une seule bague, lentement**, avec son propre son ;
+  - a une légende pleine de détails : carat, couleur E, pureté VVS2, or 14K, avec des mots-clés.
+- Les autres reels du même compte dépassent 100 k vues.
+
+**Le style des reels de bijoux qui marchent**
+- Lent et en gros plan.
+- Ralenti (60 ou 120 i/s au tournage).
+- Balayages de lumière sur la pierre et étincelles.
+- Couleurs fidèles.
+- Peu de texte, des transitions simples.
+- Le contraire d'un montage chargé.
+
+**Appliqué dans `reels_trend.py`**
+- A01 : l'écrin au ralenti (« POV : elle ouvre la boîte »).
+- A02 : la vitrine lente d'une pierre rose.
+- A03 : « Toutes les filles, sans aucune raison : regarder leur bague 400 fois par jour » (valse).
+- A04 : Noël « Cadeau de Noël… ou demande ? » (Mariah Carey).
+- A05 : une couleur par temps fort (« Housewife »).
+- `pro.py` : effet `sweeps` (balayage de lumière) et versions sans musique au tempo voulu (`bpm` sans `music`).
+
+**À filmer pour copier le format qui fait des millions de vues**
+- Chaque bague finie, avant la remise :
+  - 30 à 60 s de vidéo en gros plan ;
+  - iPhone en 4K à 60 i/s, ou en ralenti à 120 i/s ;
+  - la bague tourne lentement près d'une fenêtre ou sous une lampe, puis portée à l'annulaire (jamais à l'auriculaire).
+- C'est la matière qui manque le plus.

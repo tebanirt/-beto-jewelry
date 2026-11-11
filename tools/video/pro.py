@@ -61,6 +61,25 @@ def glint_asset():
     return out
 
 
+def sweep_asset():
+    """A soft diagonal band of light (RGBA PNG, 700x1920) that slides across the frame: the 'light sweep' of jewelry reels."""
+    out = f"{rk.CACHE}/sweep.png"
+    if os.path.exists(out):
+        return out
+    W, H = 700, 1920
+    yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+    d = (xx - W / 2) - 0.32 * (yy - H / 2)          # tilted band
+    a = np.exp(-(d ** 2) / (2 * 70.0 ** 2)) * 0.85 + np.exp(-(d ** 2) / (2 * 14.0 ** 2)) * 0.15
+    rgba = np.zeros((H, W, 4), np.uint8)
+    rgba[..., :3] = (255, 252, 244)
+    rgba[..., 3] = (np.clip(a, 0, 1) * 255).astype(np.uint8)
+    p = subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgba", "-s", f"{W}x{H}", "-i", "-",
+                        "-frames:v", "1", out], input=rgba.tobytes(), capture_output=True)
+    if p.returncode:
+        print(p.stderr.decode()[-2000:]); raise SystemExit(1)
+    return out
+
+
 # ---------------- text ----------------
 def card_words(text, over=None, size="s86", top=300, det=None):
     """Return list of HTML stages revealing `text` word by word (words separated by spaces; '|' = line break)."""
@@ -114,8 +133,14 @@ def _run(cmd):
 
 def build(spec, out_dir=None):
     name = spec["name"]
-    mp3 = os.path.join(MUSIC_DIR, f"{spec['music']}.mp3")
-    info = bt.analyze(mp3)
+    if spec.get("music"):
+        mp3 = os.path.join(MUSIC_DIR, f"{spec['music']}.mp3")
+        info = bt.analyze(mp3)
+    else:  # "app" version: grid at the BPM of a trending song added later in the Instagram app
+        mp3 = None
+        bpm = float(spec["bpm"])
+        info = dict(bpm=bpm, beats=list(np.arange(0, 600) * 60.0 / bpm))
+        spec.setdefault("start", 0.0)
     beats = np.array(info["beats"])
     total_beats = sum(s["beats"] for s in spec["shots"]) + spec["end"]["beats"]
     approx = total_beats * 60 / info["bpm"]
@@ -190,6 +215,10 @@ def build(spec, out_dir=None):
     gpath = glint_asset() if gl else None
     for g in gl:
         inputs += ["-i", gpath]
+    sw = spec.get("sweeps", [])
+    swpath = sweep_asset() if sw else None
+    for w in sw:
+        inputs += ["-loop", "1", "-framerate", str(FPS), "-t", f"{total:.3f}", "-i", swpath]
     # each shot is padded (last frame cloned): xfade needs the first input to last at least offset + duration,
     # and frame rounding can leave a shot one frame short, which silently drops every later shot.
     fc = "".join(f"[{i}:v]fps={FPS},setsar=1,settb=1/{FPS},setpts=N/({FPS}*TB),format=yuv420p,"
@@ -218,6 +247,14 @@ def build(spec, out_dir=None):
         fc += (f"[{g0 + gi}:v]format=argb,scale={sz}:{sz},setpts=PTS-STARTPTS+{st:.3f}/TB[gl{gi}];"
                f"[{prev}][gl{gi}]overlay=x={g['x'] - sz // 2}:y={g['y'] - sz // 2}:eof_action=pass[g{gi}];")
         prev = f"g{gi}"
+    s0 = g0 + len(gl)
+    for si, w in enumerate(sw):  # light sweeps: band slides left to right over `beats`
+        st = t_of(w["at"]); en = t_of(w["at"] + w.get("beats", 2)); dur = max(en - st, 0.3)
+        al = w.get("alpha", 0.32)
+        fc += (f"[{s0 + si}:v]format=rgba,colorchannelmixer=aa={al}[sw{si}];"
+               f"[{prev}][sw{si}]overlay=x='-700+(t-{st:.3f})/{dur:.3f}*1780':y=0:eval=frame:"
+               f"enable='between(t,{st:.3f},{en:.3f})'[w{si}];")
+        prev = f"w{si}"
     fc += f"[{prev}]noise=alls=3:allf=t,format=yuv420p[vout]"
     # audio: music segment + light sfx
     sfx_events = []
@@ -234,12 +271,16 @@ def build(spec, out_dir=None):
     _run([rk.PY, "-I", "-c",
           f"import sys; sys.path.insert(0, {os.path.dirname(os.path.abspath(__file__))!r}); import sfx, json; "
           f"sfx.render({total + 0.2}, json.loads({json.dumps(json.dumps(sfx_events))}), None, {wav!r}, master_gain=0.6)"])
-    ai = g0 + len(gl)
-    inputs += ["-ss", f"{beats[b0]:.3f}", "-t", f"{total + 0.5:.3f}", "-i", mp3, "-i", wav]
-    fc += (f";[{ai}:a]aformat=sample_rates=48000:channel_layouts=stereo,afade=t=in:d=0.04,"
-           f"afade=t=out:st={total - 0.9:.3f}:d=0.9,volume=1.0[mus];"
-           f"[{ai + 1}:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=0.55[fx];"
-           f"[mus][fx]amix=inputs=2:normalize=0:duration=first,loudnorm=I=-14:TP=-1.5:LRA=11,alimiter=limit=0.84:level=false[aout]")
+    ai = g0 + len(gl) + len(sw)
+    if mp3 is None:  # app version: silent track, the song is chosen in Instagram
+        inputs += ["-f", "lavfi", "-t", f"{total + 0.5:.3f}", "-i", "anullsrc=r=48000:cl=stereo"]
+        fc += f";[{ai}:a]anull[aout]"
+    else:
+        inputs += ["-ss", f"{beats[b0]:.3f}", "-t", f"{total + 0.5:.3f}", "-i", mp3, "-i", wav]
+        fc += (f";[{ai}:a]aformat=sample_rates=48000:channel_layouts=stereo,afade=t=in:d=0.04,"
+               f"afade=t=out:st={total - 0.9:.3f}:d=0.9,volume=1.0[mus];"
+               f"[{ai + 1}:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=0.55[fx];"
+               f"[mus][fx]amix=inputs=2:normalize=0:duration=first,loudnorm=I=-14:TP=-1.5:LRA=11,alimiter=limit=0.84:level=false[aout]")
     out_dir = out_dir or f"{E}/pro"
     os.makedirs(out_dir, exist_ok=True)
     out = f"{out_dir}/{name}.mp4"

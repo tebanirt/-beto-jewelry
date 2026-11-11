@@ -23,6 +23,7 @@ Règles de contenu et autorisations : voir `docs/business-ops-brief.md` §10.
 | `reels_pro.py` | Premier reel pro validé par Rayane le 10 nov. 2026 (P02, 4 couleurs) |
 | `reels_pro2.py` | Vague 11 : concepts des lots 1 à 9 refaits en montage pro (P04 à P07, P10, P11) |
 | `reels_pro4.py` | Vague 12 : avis Google, « une journée avec ton joaillier », vote sur la forme, Noël « tu fais ta demande ? », avec la carte de fin par-dessus la dernière image |
+| `reels_trend.py` | Vague 13 : copies des formats à la mode (écrin au ralenti, vitrine lente, valse, Noël, une couleur par temps fort). Les fichiers `*_APP` sont sans musique : la chanson à la une s'ajoute dans l'app Instagram |
 | `DONNEES.md` | Ce que disent les données (Instagram, pubs Meta, CRM, avis, concurrents) et les règles qui en découlent : à lire avant chaque montage |
 | `reels_pro3.py` | Vague 11 : Noël FR et EN, du rendu à l'or en anglais, designs 3D, sans bague portée au doigt |
 | `review.sh` | Planche de contrôle (`NOM fps colonnes`) + loudness |
