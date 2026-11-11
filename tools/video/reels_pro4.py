@@ -54,7 +54,7 @@ def _avis(lang):
         over, end = "Google review", pro.end_overlay("Your ring, <i>custom made.</i>", **EN)
         name, music = "T02_EN_reviews", "664"
     texts = [
-        dict(html=pro.card_words(q[0], over=over, size="s72"), at=0, until=7),
+        dict(html=pro.card_words(q[0], over=over, size="s72", top=820), at=0, until=7),   # below Rayane's face
         dict(html=pro.card_words(q[1], over=over, size="s72"), at=7, until=13),
         dict(html=pro.card_words(q[2], over=over, size="s72"), at=13, until=16),
         dict(html=pro.card_words(q[3], size="s86"), at=16, until=18),
@@ -84,7 +84,7 @@ def J01_journee():
         dict(shot=b(1621466, 0.1, fx=["punch", "glow"]), beats=2, tr="fade"),
         dict(shot=b(1656836, 0.1, slowmo=True, fx=["kenburns", "glow"]), beats=2),
     ]
-    texts = [dict(html=pro.card_words("Une journée avec | ton joaillier.", over="Beto Jewelry · Montréal", size="s86"), at=0, until=3)]
+    texts = [dict(html=pro.card_words("Une journée avec | ton joaillier.", over="Beto Jewelry · Montréal", size="s86", top=820), at=0, until=3)]
     for i, (t, a, u) in enumerate([("Consultation", 3, 6), ("Les pierres", 6, 9), ("Le design 3D", 9, 12),
                                    ("La fonte", 12, 15), ("L’écrin", 15, 19)]):
         texts.append(dict(html=[label(i + 1, t)], at=a, until=u))
