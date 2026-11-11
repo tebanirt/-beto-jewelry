@@ -209,7 +209,7 @@ function messageFor(kind: LinkKind, total: string, url: string) {
       return `Votre bague est prête ! Voici le lien pour le solde (${total} taxes incluses) : ${url}`;
     case "plan":
       // Jamais le nom d'Affirm dans un texto sans son accord écrit (conditions Affirm) : message neutre.
-      return `Comme convenu, voici le lien pour régler le montant restant de votre bague (${total} taxes incluses) en versements, sous réserve de l'approbation du prêteur. Vous choisissez la durée et voyez toutes les conditions avant d'accepter. Votre bague étant fabriquée sur mesure, elle vous est remise environ 2 semaines après ce paiement (3 en platine) : ${url}`;
+      return `Comme convenu, voici le lien pour régler le montant restant de votre bague (${total} taxes incluses) en versements, sous réserve de l'approbation du prêteur. Vous choisissez parmi les durées que le prêteur vous offre et voyez toutes ses conditions avant d'accepter. Votre bague étant fabriquée sur mesure, elle vous est remise environ 2 semaines après ce paiement (3 en platine) : ${url}`;
   }
 }
 
