@@ -118,6 +118,21 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const DRAFT_KEY = "beto-custom-design-draft-v1";
 const CONTACT_FORM_ID = "cd-contact-form";
 
+type Season = "holidays" | "valentine" | null;
+/**
+ * Seasonal order deadline shown in the timeline question (confirmed by Rayane
+ * on 3 Nov 2026): holidays → order by Dec 11 (Dec 4 in platinum), Valentine's
+ * Day → order by Jan 31 (Jan 24 in platinum). Visitor's local date, read after
+ * mount so the static page never shows a stale deadline.
+ */
+function seasonNow(now: Date): Season {
+  const month = now.getMonth();
+  const day = now.getDate();
+  if (month === 10 || (month === 11 && day <= 11)) return "holidays";
+  if ((month === 11 && day >= 12) || month === 0) return "valentine";
+  return null;
+}
+
 type Draft = {
   projectIndex: number | null;
   stone: StoneId | null;
@@ -400,6 +415,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
   const [crmRef, setCrmRef] = useState("");
   const [draft, setDraft] = useState<Draft>(EMPTY_DRAFT);
   const [restored, setRestored] = useState(false);
+  const [season, setSeason] = useState<Season>(null);
   const [attempted, setAttempted] = useState<Record<number, boolean>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
@@ -431,6 +447,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
       setStep(saved.step);
     }
     setRestored(true);
+    setSeason(seasonNow(new Date()));
     trackFunnel("view", saved?.step ?? 0, { restored: !!saved });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -712,7 +729,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
         errors.push(["ringStyleOther", cd.errorStyleOther]);
       if (!d.metalColor) errors.push(["metalColor", cd.errorChoose]);
       if (!d.karat && d.metalColor !== "platinum") errors.push(["karat", cd.errorChoose]);
-      if (budgetNeeded && !d.budget) errors.push(["budget", cd.errorChoose]);
+      // Budget is optional since 10 Nov 2026: it was the top blocker at step 2 (funnel_events).
     }
     if (s === CONTACT_STEP) {
       if (!d.fullName.trim()) errors.push(["fullName", cd.errorName]);
@@ -831,7 +848,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
     ...(askCarat ? [{ label: sl.carat, value: caratLabel }] : []),
     ...(isEngagement && d.ringStyle ? [{ label: sl.style, value: styleLabel }] : []),
     { label: sl.metal, value: metalLabel },
-    ...(budgetNeeded ? [{ label: sl.budget, value: d.budget }] : []),
+    ...(budgetNeeded ? [{ label: sl.budget, value: d.budget || sl.notSpecified }] : []),
     { label: sl.timeline, value: d.timeline || sl.notSpecified },
     ...(images.length > 0 ? [{ label: sl.images, value: String(images.length) }] : []),
   ];
@@ -867,6 +884,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
     const params = new URLSearchParams();
     if (d.email.trim()) params.set("prefilled_email", d.email.trim());
     if (crmRef) params.set("client_reference_id", crmRef);
+    if (language === "en") params.set("lang", "en");
     const qs = params.toString();
     return qs ? `${DEPOSIT_PAYMENT_URL}${DEPOSIT_PAYMENT_URL.includes("?") ? "&" : "?"}${qs}` : DEPOSIT_PAYMENT_URL;
   })();
@@ -1231,10 +1249,10 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                 <SectionTitle>{budgetNeeded ? cd.sectionBudget : cd.sectionTimeline}</SectionTitle>
 
                 {budgetNeeded && (
-                <ChoiceGroup id="budget" legend={cd.budgetLabel} error={errorFor("budget")}>
+                <ChoiceGroup id="budget" legend={cd.budgetLabel} optional={cd.timelineOpt}>
                   <div className="flex flex-wrap gap-2.5">
                     {budgetOptions.map((b) => (
-                      <Chip key={b} compact selected={d.budget === b} onClick={() => pick("budget", b)}>
+                      <Chip key={b} compact selected={d.budget === b} onClick={() => pick("budget", d.budget === b ? "" : b)}>
                         {b}
                       </Chip>
                     ))}
@@ -1247,12 +1265,17 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
 
                 <ChoiceGroup id="timeline" legend={cd.timelineLabel} optional={cd.timelineOpt}>
                   <div className="flex flex-wrap gap-2.5">
-                    {cd.timelines.map((t) => (
+                    {[...(season === "holidays" ? [cd.seasonHolidays] : season === "valentine" ? [cd.seasonValentine] : []), ...cd.timelines].map((t) => (
                       <Chip key={t} compact selected={d.timeline === t} onClick={() => pick("timeline", d.timeline === t ? "" : t)}>
                         {t}
                       </Chip>
                     ))}
                   </div>
+                  {season && (
+                    <p className="text-xs text-beto-gray/80 mt-3 leading-relaxed">
+                      {season === "holidays" ? cd.seasonHolidaysNote : cd.seasonValentineNote}
+                    </p>
+                  )}
                 </ChoiceGroup>
 
                 <SectionTitle>{cd.sectionInspiration}</SectionTitle>

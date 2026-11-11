@@ -4,6 +4,7 @@ import { LINKS } from "@/lib/site-content";
 import Rich from "../Rich";
 import { useSite } from "../useSite";
 import { Eyebrow, FinalCta, PhotoSlot, RuledList, T } from "../ui";
+import { SHOW_PHOTO_SLOTS } from "@/lib/constants";
 
 const sectionPad = { paddingTop: "clamp(88px, 10vw, 144px)", paddingBottom: "clamp(88px, 10vw, 144px)" };
 
@@ -21,7 +22,9 @@ export default function AboutPage() {
         style={{ paddingTop: "calc(var(--nav-height) + clamp(64px, 8vw, 120px))", paddingBottom: "clamp(64px, 8vw, 120px)" }}
       >
         <div className="bj-container flex flex-wrap items-center gap-y-12" style={{ columnGap: "clamp(48px, 7vw, 112px)" }}>
-          <PhotoSlot code={p.portrait.code} label={p.portrait.label} className="bj-reveal min-w-0" style={{ flex: "1 1 400px", aspectRatio: "4 / 5", padding: 20 }} />
+          {SHOW_PHOTO_SLOTS && (
+            <PhotoSlot code={p.portrait.code} label={p.portrait.label} className="bj-reveal min-w-0" style={{ flex: "1 1 400px", aspectRatio: "4 / 5", padding: 20 }} />
+          )}
           <div className="bj-reveal min-w-0" style={{ flex: "1.15 1 460px" }}>
             <Eyebrow className="mb-6">{p.eyebrow}</Eyebrow>
             <h1 id="titre" className="bj-serif text-beto-black" style={{ fontSize: "clamp(44px, 5vw, 76px)", lineHeight: 1.04, letterSpacing: "-0.01em" }}>
@@ -69,7 +72,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ─── Atelier ─── */}
+      {/* ─── Atelier : seulement avec de vraies photos (SHOW_PHOTO_SLOTS) ─── */}
+      {SHOW_PHOTO_SLOTS && (
       <section aria-labelledby="atelier" className="bj-gutter bg-beto-white" style={sectionPad}>
         <div className="bj-container">
           <div className="bj-reveal" style={{ maxWidth: 720, marginBottom: "clamp(48px, 6vw, 72px)" }}>
@@ -88,6 +92,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      )}
 
       {/* ─── Avis ─── */}
       <section aria-label={p.reviewLabel} className="bj-gutter text-center" style={sectionPad}>

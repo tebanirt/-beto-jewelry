@@ -199,7 +199,7 @@ export default function BookPage() {
                   </div>
                 ))}
               </dl>
-              <a href={DEPOSIT_PAYMENT_URL} className="bj-btn bj-btn-gold mt-8 w-full">
+              <a href={language === "en" ? `${DEPOSIT_PAYMENT_URL}?lang=en` : DEPOSIT_PAYMENT_URL} className="bj-btn bj-btn-gold mt-8 w-full">
                 {p.depositCta}
               </a>
               <p className="mt-3.5 text-center text-[13px] leading-[1.6] text-[#8F897F]">{p.depositNote}</p>

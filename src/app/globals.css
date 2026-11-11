@@ -477,6 +477,9 @@ video[data-hero-video]::-webkit-media-controls-panel {
   .bj-site .bj-btn:not(.bj-btn-keep) { width: 100%; white-space: normal; }
 }
 
+/* « % » dans un texte en italique (avis) : la police d'affichage le dessine comme « ⁰o ». */
+.italic .bj-pct, em .bj-pct { font-family: var(--font-jost), ui-sans-serif, system-ui, sans-serif; font-style: normal; font-size: 0.8em; letter-spacing: 0; }
+
 /* Accueil : vidéo à droite sur ordinateur, au-dessus du texte sur tablette et téléphone. */
 .bj-hero-wrap { display: flex; flex-wrap: wrap-reverse; align-items: center; gap: 0 32px; min-height: clamp(700px, 58vw, 860px); }
 .bj-hero-text { flex: 1 1 500px; min-width: 0; position: relative; z-index: 2; padding: clamp(40px, 5vw, 80px) 0 clamp(56px, 6vw, 96px); }
@@ -496,7 +499,8 @@ video[data-hero-video]::-webkit-media-controls-panel {
   .bj-hero-text { padding-top: 8px; }
 }
 @media (max-width: 760px) {
-  .bj-hero-media { aspect-ratio: 1 / 1; }
+  /* 4:3 plutôt que carré : le titre et « Réserver » restent dans le premier écran (revue design du 8 nov. 2026). */
+  .bj-hero-media { aspect-ratio: 4 / 3; }
   .bj-hero-media video { object-position: 43% 50% !important; }
   .bj-hero-text { display: flex; flex-direction: column; margin-top: -24px; }
   .bj-hero-cta { order: 1; margin-top: 32px !important; }
