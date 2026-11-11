@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AboutContent from "./AboutContent";
+import AboutContent from "@/components/site/pages/AboutPage";
 
 export const metadata: Metadata = {
   title: "About Beto Jewelry",

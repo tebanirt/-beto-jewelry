@@ -1,22 +1,26 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Bodoni_Moda, Jost } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
 import Analytics from "@/components/analytics/Analytics";
+import AttributionCapture from "@/components/analytics/AttributionCapture";
 import HideOnAdmin from "@/components/layout/HideOnAdmin";
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+// Système visuel « Site 50 000 $ » : Bodoni Moda pour les titres (avec l'axe
+// de taille optique), Jost pour le texte et l'interface.
+const bodoni = Bodoni_Moda({
+  variable: "--font-bodoni",
+  subsets: ["latin", "latin-ext"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+const jost = Jost({
+  variable: "--font-jost",
+  subsets: ["latin", "latin-ext"],
+  weight: ["300", "400", "500"],
   display: "swap",
 });
 
@@ -74,7 +78,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#111111",
+  themeColor: "#0F0E0C",
   width: "device-width",
   initialScale: 1,
 };
@@ -169,12 +173,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${inter.variable}`}
+      className={`${bodoni.variable} ${jost.variable}`}
       suppressHydrationWarning
     >
-      <body className="bg-beto-white text-beto-black antialiased">
+      <head>
+        {/* Les apparitions au défilement ne masquent le contenu que si JavaScript tourne. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('bj-js')" }} />
+      </head>
+      <body className="bj-site bg-beto-offwhite text-beto-black antialiased">
         <HideOnAdmin>
           <Analytics />
+          <AttributionCapture />
         </HideOnAdmin>
         <script
           type="application/ld+json"
@@ -183,7 +192,7 @@ export default function RootLayout({
         <HideOnAdmin>
           <Navigation />
         </HideOnAdmin>
-        <main>{children}</main>
+        <main id="contenu" tabIndex={-1} className="outline-none">{children}</main>
         <HideOnAdmin>
           <Footer />
         </HideOnAdmin>

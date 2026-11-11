@@ -4,19 +4,24 @@
 
 @theme {
   /* Colors */
+  /* Système visuel « Site 50 000 $ » (canevas confirmé par Rayane le 6 nov. 2026).
+     Les anciens noms sont gardés : toutes les pages suivent la même palette. */
   --color-beto-white: #FFFFFF;
-  --color-beto-offwhite: #F8F8F6;
-  --color-beto-black: #111111;
-  --color-beto-gray: #444444;
-  --color-beto-gray-light: #888888;
-  --color-beto-gray-subtle: #E8E8E6;
+  --color-beto-offwhite: #F6F3EE;   /* ivoire, fond principal */
+  --color-beto-black: #1B1A17;      /* encre texte, 15,7:1 sur ivoire */
+  --color-beto-ink: #0F0E0C;        /* encre, fonds sombres */
+  --color-beto-gray: #5C574F;       /* gris texte, 6,5:1 sur ivoire */
+  --color-beto-gray-light: #706A62; /* gris discret, 4,8:1 sur ivoire */
+  --color-beto-stone: #ABA59B;      /* gris sur encre, 7,9:1 */
+  --color-beto-gray-subtle: #DED8CD;/* filets et bordures, jamais du texte */
+  --color-beto-sand: #E7E1D7;       /* fond des photos */
   --color-beto-gold: #C9A86A;
-  --color-beto-gold-light: #D9BC8A;
-  --color-beto-gold-dark: #A88840;
+  --color-beto-gold-light: #DABD86;
+  --color-beto-gold-dark: #7D5F2B;  /* surtitres et liens sur fond clair, 5,4:1 */
 
   /* Fonts */
-  --font-display: var(--font-cormorant);
-  --font-sans: var(--font-inter);
+  --font-display: var(--font-bodoni);
+  --font-sans: var(--font-jost);
 
   /* Spacing scale */
   --spacing-18: 4.5rem;
@@ -32,12 +37,15 @@
 /* ─── CSS Custom Properties ────────────────────────────────── */
 
 :root {
-  --nav-height: 80px;
+  /* En-tête fixe : 92 px en haut de page, 72 px au défilement (76 / 68 px sur téléphone). */
+  --bj-header-top: 92px;
+  --bj-header: 72px;
+  --nav-height: var(--bj-header-top);
   --transition-base: 300ms cubic-bezier(0.25, 0.1, 0.25, 1);
   --transition-slow: 600ms cubic-bezier(0.25, 0.1, 0.25, 1);
   --gold: #C9A86A;
-  --black: #111111;
-  --offwhite: #F8F8F6;
+  --black: #1B1A17;
+  --offwhite: #F6F3EE;
 }
 
 /* ─── Base Styles ───────────────────────────────────────────── */
@@ -48,7 +56,15 @@
   box-sizing: border-box;
 }
 
+@media (max-width: 560px) {
+  :root {
+    --bj-header-top: 76px;
+    --bj-header: 68px;
+  }
+}
+
 html {
+  scroll-padding-top: calc(var(--bj-header) + 16px);
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -56,9 +72,9 @@ html {
 }
 
 body {
-  background-color: var(--beto-white, #FFFFFF);
+  background-color: var(--offwhite);
   color: var(--black);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-jost), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   overflow-x: hidden;
   line-height: 1.6;
 }
@@ -66,22 +82,28 @@ body {
 /* ─── Selection Color ───────────────────────────────────────── */
 
 ::selection {
-  background-color: rgba(201, 168, 106, 0.2);
-  color: #111111;
+  background-color: rgba(201, 168, 106, 0.28);
+  color: #1B1A17;
 }
 
 /* ─── Typography Base ───────────────────────────────────────── */
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-cormorant), Georgia, serif;
-  font-weight: 300;
-  letter-spacing: -0.01em;
-  line-height: 1.1;
-}
+/* Dans la couche « base » : les classes utilitaires (leading-*, font-*) et
+   les classes du système (.bj-*) l'emportent toujours sur ces valeurs. */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-bodoni), "Didot", "Bodoni 72", Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    font-optical-sizing: none;
+    font-variation-settings: "opsz" 30;
+    font-variant-numeric: lining-nums;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
 
-p {
-  font-family: var(--font-inter), system-ui, sans-serif;
-  line-height: 1.75;
+  p {
+    line-height: 1.75;
+  }
 }
 
 /* ─── Scrollbar ─────────────────────────────────────────────── */
@@ -91,7 +113,7 @@ p {
 }
 
 ::-webkit-scrollbar-track {
-  background: #F8F8F6;
+  background: #F6F3EE;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -103,13 +125,13 @@ p {
 
 /* Semantic typography classes */
 .text-display-class {
-  font-family: var(--font-cormorant), Georgia, serif;
-  font-weight: 300;
+  font-family: var(--font-bodoni), Georgia, serif;
+  font-weight: 400;
   letter-spacing: -0.02em;
 }
 
 .text-label {
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-jost), system-ui, sans-serif;
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.2em;
@@ -193,4 +215,358 @@ p {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ─── Système visuel « Site 50 000 $ » ─────────────────────────
+   Repris du canevas (planche « Système visuel ») : deux familles,
+   encre / ivoire / une touche d'or, boutons de 52 px, filets fins. */
+
+.bj-serif {
+  font-family: var(--font-bodoni), "Didot", "Bodoni 72", Georgia, "Times New Roman", serif;
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 30;
+  font-variant-numeric: lining-nums;
+  font-weight: 400;
+}
+/* Taille optique : 30 au-dessus de 34 px, 18 de 24 à 33 px, 11 sous 24 px. */
+.bj-opsz-18 { font-variation-settings: "opsz" 18; }
+.bj-opsz-11 { font-variation-settings: "opsz" 11; }
+
+.bj-eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--color-beto-gold-dark);
+}
+.bj-eyebrow-light { color: var(--color-beto-gold); }
+
+.bj-container {
+  width: 100%;
+  max-width: 1248px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.bj-gutter {
+  padding-left: clamp(20px, 4vw, 56px);
+  padding-right: clamp(20px, 4vw, 56px);
+}
+
+.bj-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 0 30px;
+  font-family: var(--font-jost), sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1.2;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+.bj-btn-gold { background: #C9A86A; border-color: #C9A86A; color: #0F0E0C; }
+.bj-btn-gold:hover { background: #DABD86; border-color: #DABD86; color: #0F0E0C; }
+.bj-btn-ink { background: #0F0E0C; border-color: #0F0E0C; color: #F6F3EE; }
+.bj-btn-ink:hover { background: #2C2A26; border-color: #2C2A26; color: #F6F3EE; }
+.bj-btn-line { border-color: #1B1A17; color: #1B1A17; background: transparent; }
+.bj-btn-line:hover { background: #1B1A17; color: #F6F3EE; }
+.bj-btn-line-light { border-color: rgba(246, 243, 238, 0.55); color: #F6F3EE; background: transparent; }
+.bj-btn-line-light:hover { background: #F6F3EE; border-color: #F6F3EE; color: #0F0E0C; }
+.bj-btn-sm { min-height: 44px; padding: 0 22px; }
+/* Bouton « Réserver » de l'en-tête : masqué sur téléphone (le menu l'offre). */
+.bj-nav-cta { display: none; }
+@media (min-width: 561px) { .bj-nav-cta { display: inline-flex; } }
+.bj-btn[aria-disabled="true"], .bj-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.bj-tlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #1B1A17;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 6px;
+  transition: color 0.2s ease;
+}
+.bj-tlink:hover { color: #7D5F2B; }
+.bj-tlink-light { color: #F6F3EE; }
+.bj-tlink-light:hover { color: #C9A86A; }
+.bj-tlink svg { flex: none; transition: transform 0.25s ease; }
+.bj-tlink:hover svg { transform: translateX(3px); }
+
+/* Liens dans le texte courant */
+.bj-prose-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+.bj-prose-link:hover { color: #7D5F2B; }
+
+/* Espace réservé pour photo : toujours étiqueté, jamais présenté comme une vraie image. */
+.bj-ph {
+  background-color: #E7E1D7;
+  background-image: repeating-linear-gradient(135deg, rgba(15, 14, 12, 0.045) 0 1px, transparent 1px 14px);
+}
+.bj-ph-tag {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: #3E3A34;
+  background: #F6F3EE;
+  padding: 8px 12px;
+}
+
+.bj-site :where(a, button, summary, input, select, textarea, label):focus-visible {
+  outline: 2px solid #C9A86A;
+  outline-offset: 4px;
+}
+
+/* Apparition au défilement : fondu et montée de 16 px, 700 ms ; les photos
+   se posent avec un léger recul (104 % → 100 %). Seulement si JavaScript
+   tourne (classe bj-js) et si l'appareil n'a pas demandé moins de mouvement. */
+@media (prefers-reduced-motion: no-preference) {
+  .bj-js .bj-reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transition-delay: var(--bj-delay, 0ms);
+  }
+  .bj-js .bj-reveal.is-in { opacity: 1; transform: none; }
+  .bj-js .bj-settle img { transform: scale(1.04); transition: transform 1.4s cubic-bezier(0.22, 0.61, 0.36, 1); }
+  .bj-js .bj-settle.is-in img { transform: scale(1); }
+}
+
+/* Vidéo d'accueil : jamais de contrôles natifs par-dessus (iOS). */
+video[data-hero-video]::-webkit-media-controls,
+video[data-hero-video]::-webkit-media-controls-start-playback-button,
+video[data-hero-video]::-webkit-media-controls-overlay-play-button,
+video[data-hero-video]::-webkit-media-controls-panel {
+  display: none !important;
+  -webkit-appearance: none;
+  opacity: 0;
+}
+
+/* Questions fréquentes (planche FAQ) */
+.bj-faq-item { border-top: 1px solid #DED8CD; }
+.bj-faq-item:last-of-type { border-bottom: 1px solid #DED8CD; }
+.bj-faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 28px;
+  padding: 26px 0;
+  font-family: var(--font-bodoni), "Didot", "Bodoni 72", Georgia, serif;
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 11;
+  font-variant-numeric: lining-nums;
+  font-size: clamp(18px, 1.5vw, 21px);
+  line-height: 1.4;
+  color: #1B1A17;
+  transition: color 0.2s ease;
+}
+.bj-faq-item summary::-webkit-details-marker { display: none; }
+.bj-faq-item summary:hover { color: #7D5F2B; }
+.bj-faq-icon { position: relative; flex: 0 0 18px; width: 18px; height: 18px; margin-top: 6px; }
+.bj-faq-icon::before,
+.bj-faq-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8.5px;
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+  transition: transform 0.3s ease;
+}
+.bj-faq-icon::after { transform: rotate(90deg); }
+.bj-faq-item[open] .bj-faq-icon::after { transform: rotate(0deg); }
+.bj-faq-answer { font-size: 16px; line-height: 1.8; color: #5C574F; max-width: 40em; padding: 0 46px 30px 0; }
+@media (max-width: 560px) { .bj-faq-answer { padding-right: 0; } }
+
+/* Carte de choix (lieu de la consultation) */
+.bj-choice {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 22px;
+  background: #FFFFFF;
+  border: 1px solid #DED8CD;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.bj-choice:hover { border-color: #8F897F; }
+.bj-choice input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.bj-choice-dot { flex: 0 0 18px; width: 18px; height: 18px; margin-top: 2px; border: 1px solid #8F897F; border-radius: 50%; position: relative; }
+.bj-choice:has(input:checked) { border-color: #1B1A17; box-shadow: inset 0 0 0 1px #1B1A17; }
+.bj-choice:has(input:checked) .bj-choice-dot { border-color: #1B1A17; }
+.bj-choice:has(input:checked) .bj-choice-dot::after { content: ""; position: absolute; inset: 4px; border-radius: 50%; background: #1B1A17; }
+.bj-choice:has(input:focus-visible) { outline: 2px solid #C9A86A; outline-offset: 3px; }
+
+/* Champs de formulaire */
+.bj-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.bj-field label { font-size: 13px; font-weight: 500; letter-spacing: 0.04em; color: #1B1A17; }
+.bj-field input,
+.bj-field select,
+.bj-field textarea {
+  font: inherit;
+  font-size: 16px;
+  color: #1B1A17;
+  background: #F6F3EE;
+  border: 1px solid #8F897F;
+  border-radius: 0;
+  padding: 0 16px;
+  min-height: 52px;
+  width: 100%;
+}
+.bj-field textarea { padding: 14px 16px; resize: vertical; line-height: 1.6; }
+.bj-field select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 44px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%231B1A17' stroke-width='1.3'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+}
+.bj-field textarea::placeholder { color: #706A62; }
+.bj-field input:focus,
+.bj-field select:focus,
+.bj-field textarea:focus { outline: 2px solid #C9A86A; outline-offset: 1px; border-color: #1B1A17; }
+
+/* Filtres de la galerie */
+.bj-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid #CFC8BC;
+  background: transparent;
+  color: #1B1A17;
+  font-family: var(--font-jost), sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+.bj-chip:hover { border-color: #1B1A17; }
+.bj-chip[aria-pressed="true"] { background: #1B1A17; border-color: #1B1A17; color: #F6F3EE; }
+
+/* Sur téléphone, les boutons prennent toute la largeur. */
+@media (max-width: 560px) {
+  .bj-site .bj-btn:not(.bj-btn-keep) { width: 100%; white-space: normal; }
+}
+
+/* « % » dans un texte en italique (avis) : la police d'affichage le dessine comme « ⁰o ». */
+.italic .bj-pct, em .bj-pct { font-family: var(--font-jost), ui-sans-serif, system-ui, sans-serif; font-style: normal; font-size: 0.8em; letter-spacing: 0; }
+
+/* Accueil : vidéo à droite sur ordinateur, au-dessus du texte sur tablette et téléphone. */
+.bj-hero-wrap { display: flex; flex-wrap: wrap-reverse; align-items: center; gap: 0 32px; min-height: clamp(700px, 58vw, 860px); }
+.bj-hero-text { flex: 1 1 500px; min-width: 0; position: relative; z-index: 2; padding: clamp(40px, 5vw, 80px) 0 clamp(56px, 6vw, 96px); }
+.bj-hero-media { flex: 1.25 1 560px; min-width: 0; align-self: stretch; position: relative; min-height: 420px; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16%); mask-image: linear-gradient(90deg, transparent 0, #000 16%); }
+.bj-hero-toggle { position: absolute; right: 20px; bottom: 20px; z-index: 2; width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(246, 243, 238, 0.35); border-radius: 50%; background: rgba(15, 14, 12, 0.45); color: #F6F3EE; cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease; }
+.bj-hero-toggle:hover { background: rgba(15, 14, 12, 0.75); border-color: rgba(246, 243, 238, 0.7); }
+@media (max-width: 1100px) {
+  .bj-hero-wrap { min-height: 0; }
+  .bj-hero-media { flex: 1 1 100%; align-self: auto; min-height: 0; margin: 0 calc(-1 * clamp(20px, 4vw, 56px)); aspect-ratio: 16 / 9;
+    -webkit-mask-image: none; mask-image: none; }
+  .bj-hero-media::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, #0F0E0C 0, rgba(15, 14, 12, 0) 14%, rgba(15, 14, 12, 0) 70%, #0F0E0C 100%); }
+  .bj-hero-toggle { top: 16px; bottom: auto; right: 16px; }
+  .bj-hero-text { padding-top: 8px; }
+}
+@media (max-width: 760px) {
+  /* 4:3 plutôt que carré : le titre et « Réserver » restent dans le premier écran (revue design du 8 nov. 2026). */
+  .bj-hero-media { aspect-ratio: 4 / 3; }
+  .bj-hero-media video { object-position: 43% 50% !important; }
+  .bj-hero-text { display: flex; flex-direction: column; margin-top: -24px; }
+  .bj-hero-cta { order: 1; margin-top: 32px !important; }
+  .bj-hero-sub { order: 2; }
+  .bj-hero-trust { order: 3; margin-top: 36px !important; }
+}
+
+/* Grilles du canevas entre 561 et 1100 px */
+@media (min-width: 561px) and (max-width: 1100px) {
+  .bj-t2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .bj-t3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  .bj-t1 { grid-template-columns: minmax(0, 1fr) !important; max-width: 680px; }
+  .bj-pair { grid-template-columns: minmax(0, 1fr) !important; }
+  .bj-offices > article:last-child { grid-column: 1 / -1; display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; align-content: start; }
+  .bj-offices > article:last-child > * { grid-column: 2; }
+  .bj-offices > article:last-child > :first-child { grid-column: 1; grid-row: 1 / span 6; }
+  .bj-offices > article:last-child > h3 { margin-top: 0 !important; }
+}
+
+/* FAQ : catégories à gauche (collées au défilement sur grand écran), en pastilles sur téléphone. */
+.bj-faq-cats { display: flex; flex-direction: column; border-top: 1px solid #DED8CD; }
+.bj-faq-cat { display: flex; justify-content: space-between; gap: 16px; padding: 15px 0; border-bottom: 1px solid #DED8CD; font-size: 15px; text-decoration: none; color: #1B1A17; transition: color 0.2s ease; }
+.bj-faq-cat span:last-child { color: #706A62; font-size: 13px; }
+.bj-faq-cat:hover { color: #7D5F2B; }
+@media (min-width: 1081px) { .bj-faq-aside { position: sticky; top: calc(var(--bj-header) + 32px); } }
+@media (max-width: 860px) {
+  .bj-faq-aside { max-width: none !important; }
+  .bj-faq-help { display: none; }
+  .bj-faq-cats { flex-direction: row; flex-wrap: wrap; gap: 8px; border-top: 0; }
+  .bj-faq-cat { border: 1px solid #DED8CD; padding: 10px 16px; min-height: 44px; align-items: center; background: #FFFFFF; }
+  .bj-faq-cat span:last-child { display: none; }
+}
+
+/* Réserver : lieu et déroulement à gauche, réservation à droite. */
+.bj-book { display: grid; grid-template-columns: minmax(0, 440px) minmax(0, 1fr); grid-template-areas: "lieu cal" "how cal"; column-gap: clamp(40px, 5vw, 80px); row-gap: 56px; align-items: start; }
+@media (max-width: 900px) { .bj-book { grid-template-columns: minmax(0, 1fr); grid-template-areas: "lieu" "cal" "how"; } }
+@media (max-width: 1100px) { .bj-checks { display: grid !important; grid-template-columns: repeat(2, max-content); gap: 12px 36px !important; } }
+@media (max-width: 560px) { .bj-checks { grid-template-columns: minmax(0, 1fr); } }
+
+/* Sur téléphone, les grilles de bagues passent à deux colonnes (moins de défilement). */
+@media (max-width: 560px) {
+  .bj-grid-2m { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 32px 14px !important; }
+  .bj-grid-2m .bj-span-2m { grid-column: 1 / -1; aspect-ratio: auto !important; min-height: 240px; }
+  .bj-grid-2m figcaption .bj-serif { font-size: 20px !important; }
+}
+
+/* Liens soulignés : au moins 44 px de haut au doigt, le trait reste collé au texte. */
+@media (max-width: 560px) {
+  .bj-tlink { min-height: 44px; align-items: flex-end; }
+}
+
+/* FAQ : les trois repères passent en lignes sur les très petits écrans. */
+@media (max-width: 400px) {
+  .bj-faq-stats { grid-template-columns: minmax(0, 1fr) !important; }
+  .bj-faq-stats > div { display: flex; align-items: baseline; gap: 16px; padding: 16px 0 !important; border-left: 0 !important; }
+  .bj-faq-stats > div + div { border-top: 1px solid #DED8CD; }
+  .bj-faq-stats dt { flex: 0 0 96px; }
+  .bj-faq-stats dd { margin-top: 0 !important; }
+}
+
+/* Grilles de 4 et 5 éléments : jamais une carte seule sur la dernière ligne. */
+@media (min-width: 561px) and (max-width: 1280px) {
+  .bj-g4 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .bj-g5 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+}
+@media (min-width: 1281px) {
+  .bj-g4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+  .bj-g5 { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }
 }

@@ -1,196 +1,93 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { Mail, Phone, MapPin } from "lucide-react";
-import { useTranslation } from "@/hooks/useTranslation";
-import { GOOGLE_REVIEW_URL } from "@/lib/constants";
+import { EMAIL_DISPLAY, LINKS, PHONE_DISPLAY } from "@/lib/site-content";
+import { useSite } from "@/components/site/useSite";
+import { T } from "@/components/site/ui";
 
-function IconInstagram({ size = 18 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
-    </svg>
-  );
+const linkClass =
+  "inline-flex min-h-9 items-center text-[14px] leading-normal text-beto-stone no-underline transition-colors hover:text-beto-offwhite sm:min-h-0";
+
+function ColTitle({ children }: { children: React.ReactNode }) {
+  return <p className="mb-2 text-[12px] font-medium uppercase tracking-[.22em] text-beto-offwhite">{children}</p>;
 }
 
-function IconFacebook({ size = 18 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-    </svg>
-  );
-}
-
-function IconGoogleReview({ size = 18 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 2.5l2.6 5.6 6.1.8-4.5 4.3 1.1 6.1L12 16.3l-5.3 2.9 1.1-6.1L3.3 8.9l6.1-.8L12 2.5z" />
-    </svg>
-  );
-}
-
+/** Pied de page du site (planches du canevas), sur fond encre. */
 export default function Footer() {
-  const tr = useTranslation();
-
-  const companyLinks = [
-    { label: tr.footer.about, href: "/about" },
-    { label: tr.footer.montrealLink, href: "/montreal" },
-    { label: tr.footer.education, href: "/education" },
-    { label: tr.footer.faq, href: "/faq" },
-    { label: tr.footer.contactPage, href: "/contact" },
-  ];
-
+  const { c, language, setLanguage } = useSite();
+  const f = c.footer;
   return (
-    <footer className="bg-beto-black text-beto-white">
-      {/* Top bar */}
-      <div className="border-b border-white/10">
-        <div className="container-beto py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand column */}
-          <div className="lg:col-span-1">
-            <div className="mb-6">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/logo.png"
-                alt="Beto Jewelry"
-                style={{ height: "40px", width: "auto" }}
-                className="object-contain brightness-0 invert"
-              />
-            </div>
-            <p className="text-sm text-white/50 leading-relaxed mb-6 max-w-xs">
-              {tr.footer.tagline}
+    <footer className="bj-gutter border-t border-beto-offwhite/10 bg-beto-ink text-beto-stone" style={{ paddingTop: "clamp(64px, 7vw, 96px)", paddingBottom: 40 }}>
+      <div className="bj-container">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-12 sm:gap-x-10 lg:grid-cols-[minmax(0,1.3fr)_repeat(4,minmax(0,1fr))]">
+          <div className="col-span-2 max-w-[340px] lg:col-span-1">
+            <Image src="/brand/logo-mark.png" alt="Beto Jewelry" width={1096} height={616} style={{ height: 40, width: "auto", filter: "brightness(0) invert(1)" }} />
+            <p className="mt-6 text-[14px] leading-[1.7]">
+              <T text={f.blurb} />
             </p>
-            <div className="flex items-center gap-4">
-              <a
-                href="https://instagram.com/betojewelry"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/40 hover:text-beto-gold transition-colors duration-200"
-                aria-label="Instagram @betojewelry"
-              >
-                <IconInstagram size={18} />
-              </a>
-              <a
-                href="https://facebook.com/betojewelry"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/40 hover:text-beto-gold transition-colors duration-200"
-                aria-label="Facebook betojewelry"
-              >
-                <IconFacebook size={18} />
-              </a>
-              <a
-                href={GOOGLE_REVIEW_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/40 hover:text-beto-gold transition-colors duration-200"
-                aria-label="Google Reviews"
-              >
-                <IconGoogleReview size={18} />
-              </a>
-            </div>
           </div>
-
-          {/* Collections */}
-          <div>
-            <p className="text-label text-beto-gold mb-5">{tr.footer.collections}</p>
-            <ul className="flex flex-col gap-3">
-              {tr.nav.collections_items.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-white/50 hover:text-white transition-colors duration-200"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link
-                  href="/bagues-de-fiancailles-sur-mesure-montreal"
-                  className="text-sm text-white/50 hover:text-white transition-colors duration-200"
-                >
-                  Bagues de fiançailles sur mesure à Montréal
-                </Link>
-              </li>
-            </ul>
+          <nav aria-label={f.footerNav} className="flex min-w-0 flex-col gap-3">
+            <ColTitle>{f.siteTitle}</ColTitle>
+            {f.site.map((l) => (
+              <Link key={l.href} href={l.href} className={linkClass}>
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+          <div className="flex min-w-0 flex-col gap-3">
+            <ColTitle>{f.moreTitle}</ColTitle>
+            {f.more.map((l) => (
+              <Link key={l.href} href={l.href} className={linkClass}>
+                {l.label}
+              </Link>
+            ))}
           </div>
-
-          {/* Design Journey */}
-          <div>
-            <p className="text-label text-beto-gold mb-5">{tr.footer.journey}</p>
-            <ul className="flex flex-col gap-3">
-              {tr.footer.journeyItems.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-white/50 hover:text-white transition-colors duration-200"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <div className="flex min-w-0 flex-col gap-3">
+            <ColTitle>{f.contactTitle}</ColTitle>
+            <a href={LINKS.phoneTel} className={`${linkClass} whitespace-nowrap`}>
+              {PHONE_DISPLAY}
+            </a>
+            <a href={LINKS.email} className={`${linkClass} break-all`}>
+              {EMAIL_DISPLAY}
+            </a>
+            <a href={LINKS.whatsapp} className={linkClass}>
+              WhatsApp
+            </a>
+            <a href={LINKS.instagram} className={linkClass}>
+              Instagram
+            </a>
+            <a href={LINKS.facebook} className={linkClass}>
+              Facebook
+            </a>
           </div>
-
-          {/* Company + Contact */}
-          <div>
-            <p className="text-label text-beto-gold mb-5">{tr.footer.company}</p>
-            <ul className="flex flex-col gap-3 mb-8">
-              {companyLinks.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-white/50 hover:text-white transition-colors duration-200"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            <p className="text-label text-beto-gold mb-4">{tr.footer.contact}</p>
-            <ul className="flex flex-col gap-3">
-              <li className="flex items-center gap-2.5 text-sm text-white/50">
-                <MapPin size={14} className="text-beto-gold flex-shrink-0" />
-                Montréal, Québec, Canada
-              </li>
-              <li>
-                <a
-                  href="mailto:betojewlz@gmail.com"
-                  className="flex items-center gap-2.5 text-sm text-white/50 hover:text-white transition-colors"
-                >
-                  <Mail size={14} className="text-beto-gold flex-shrink-0" />
-                  betojewlz@gmail.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+14388745759"
-                  className="flex items-center gap-2.5 text-sm text-white/50 hover:text-white transition-colors"
-                >
-                  <Phone size={14} className="text-beto-gold flex-shrink-0" />
-                  +1 (438) 874-5759
-                </a>
-              </li>
-            </ul>
+          <div className="flex min-w-0 flex-col gap-3">
+            <ColTitle>{f.officesTitle}</ColTitle>
+            {f.offices.map((o) => (
+              <p key={o} className="text-[14px] leading-[1.6]">
+                <T text={o} />
+              </p>
+            ))}
           </div>
         </div>
-      </div>
-
-      {/* Bottom bar */}
-      <div className="container-beto py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-xs text-white/30 tracking-wide">
-          © {new Date().getFullYear()} {tr.footer.copyright}
-        </p>
-        <div className="flex items-center gap-6">
-          <Link href="/privacy" className="text-xs text-white/30 hover:text-white/60 transition-colors">
-            {tr.footer.privacy}
-          </Link>
-          <Link href="/terms" className="text-xs text-white/30 hover:text-white/60 transition-colors">
-            {tr.footer.terms}
-          </Link>
+        <div className="mt-[72px] flex flex-wrap items-center justify-between gap-x-8 gap-y-4 border-t border-beto-offwhite/10 pt-7 text-[13px] text-[#8F897F]">
+          <p>{f.rights}</p>
+          <div className="flex flex-wrap items-center gap-x-7 gap-y-1">
+            <Link href={LINKS.privacy} className={`${linkClass} !text-[13px]`}>
+              {f.privacy}
+            </Link>
+            <Link href={LINKS.terms} className={`${linkClass} !text-[13px]`}>
+              {f.terms}
+            </Link>
+            <button
+              type="button"
+              lang={language === "fr" ? "en" : "fr"}
+              onClick={() => setLanguage(language === "fr" ? "en" : "fr")}
+              className={`${linkClass} min-h-11 !text-[13px] cursor-pointer sm:min-h-0`}
+            >
+              {f.switchLang}
+            </button>
+          </div>
         </div>
       </div>
     </footer>

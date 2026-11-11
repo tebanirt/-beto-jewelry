@@ -69,6 +69,8 @@ export async function upsertClient(input: {
   email?: string;
   phone?: string;
   source: string;
+  /** Where the lead came from (ad, site). Set once: never overwrites an existing value. */
+  attribution?: string;
 }): Promise<Client | null> {
   const email = input.email?.trim().toLowerCase() || undefined;
   const phone = input.phone?.trim() || undefined;
@@ -92,12 +94,34 @@ export async function upsertClient(input: {
   }
 
   if (existing) {
+    // A public form only fills what is missing: a typo, or someone typing
+    // another client's email or phone, must never replace the name, email or
+    // phone already on file (drafts would go to the wrong person). A
+    // different value is kept in the notes so Rayane can decide.
+    const fullName = input.fullName?.trim() || undefined;
+    const differs = (incoming: string | undefined, current: string | null, normalize: (v: string) => string) =>
+      incoming !== undefined && current !== null && current !== "" && normalize(incoming) !== normalize(current);
+    const lower = (v: string) => v.trim().toLowerCase().replace(/\s+/g, " ");
+    const digits = (v: string) => v.replace(/\D/g, "").replace(/^1(?=\d{10}$)/, "");
+    const conflicts = [
+      differs(fullName, existing.full_name, lower) ? `nom « ${fullName} »` : null,
+      differs(email, existing.email, lower) ? `courriel « ${email} »` : null,
+      differs(phone, existing.phone, digits) ? `téléphone « ${phone} »` : null,
+    ].filter(Boolean);
+    const note = conflicts.length
+      ? `[${new Date().toLocaleDateString("fr-CA", { timeZone: "America/Toronto" })}] Formulaire (${input.source}) reçu avec un autre ${conflicts.join(", ")} : fiche non modifiée, à vérifier.`
+      : null;
+
     const { data: updated, error: updateError } = await supabase
       .from("clients")
       .update({
-        full_name: input.fullName?.trim() || existing.full_name,
-        email: email || existing.email,
-        phone: phone || existing.phone,
+        full_name: existing.full_name || fullName || null,
+        email: existing.email || email || null,
+        phone: existing.phone || phone || null,
+        ...(note ? { notes: existing.notes ? `${existing.notes}\n${note}` : note } : {}),
+        ...(input.attribution && !(existing as { attribution?: string | null }).attribution
+          ? { attribution: input.attribution }
+          : {}),
         updated_at: new Date().toISOString(),
       })
       .eq("id", existing.id)
@@ -114,6 +138,7 @@ export async function upsertClient(input: {
       email: email || null,
       phone: phone || null,
       source: input.source,
+      ...(input.attribution ? { attribution: input.attribution } : {}),
     })
     .select("*")
     .single();

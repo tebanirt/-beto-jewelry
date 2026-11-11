@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import EngagementRingsContent from "./EngagementRingsContent";
+import EngagementRingsContent from "@/components/site/pages/CustomRingsPage";
 
 export const metadata: Metadata = {
-  title: "Engagement Rings",
+  title: "Custom Engagement Rings",
   description: "Custom engagement rings designed and crafted in Montreal. Every ring is created exclusively for you — from CAD design to final production.",
   alternates: { canonical: "/engagement-rings" },
   openGraph: {

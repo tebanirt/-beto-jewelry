@@ -30,7 +30,12 @@ export const PAYMENT_METHODS: { value: PaymentMethod; label: string }[] = [
 export interface Payment {
   id: string;
   order_id: string;
+  /** Before taxes, applied to the order. */
   amount: number;
+  /** GST (TPS) and QST (TVQ) collected on top of `amount`. */
+  tps?: number;
+  tvq?: number;
+  stripe_session_id?: string | null;
   method: PaymentMethod;
   kind: PaymentKind;
   received_at: string;
