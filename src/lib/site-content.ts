@@ -421,7 +421,7 @@ const fr = {
           { q: "Pourquoi aucun prix n’est affiché pour un diamant naturel ?", a: "Le prix d’un diamant naturel varie beaucoup d’une pierre à l’autre. Comptez à partir de 6 000 $ : nous vous envoyons une soumission écrite en 24 h maximum, avec les pierres que nous vous proposons." },
           { q: "Comment se fait le paiement ?", a: "En trois temps : un dépôt de design de 250 $ pour lancer votre projet, 50 % à l’approbation de votre rendu 3D, puis le solde à la remise de votre bague. Le dépôt est crédité à 100 % sur le prix final. Nos prix sont avant taxes : la TPS et la TVQ s’ajoutent à chaque paiement." },
           { q: "Que se passe-t-il si aucun design ne me convient ?", a: "Les révisions sont incluses, et on ajuste le design jusqu’à ce qu’il vous ressemble. Si malgré tout aucun design ne vous convient, nous vous remboursons 100 $ du dépôt et conservons 150 $ pour le travail de design déjà fait." },
-          { q: "Quels modes de paiement acceptez-vous ?", a: "La carte de crédit et le virement bancaire. Les modes acceptés pour votre projet vous sont confirmés pendant la consultation." },
+          { q: "Quels modes de paiement acceptez-vous ?", a: "La carte de crédit (ou de débit Visa et Mastercard), Apple Pay et Google Pay, en ligne et en toute sécurité, ainsi que le virement Interac. Le financement est disponible : pour le paiement de 50 % et le solde, vous pouvez choisir de payer en versements avec Affirm ou Klarna, sous réserve de leur approbation. Ils vous présentent leurs conditions avant que vous acceptiez, et Beto Jewelry n’ajoute aucuns frais. Le dépôt de design se paie par carte." },
         ],
       },
       {
@@ -898,7 +898,7 @@ const en: SiteContent = {
           { q: "Why is there no price shown for a natural diamond?", a: "The price of a natural diamond varies a lot from one stone to another. Expect from $6,000: we send you a written quote within 24 hours at most, with the stones we suggest." },
           { q: "How does payment work?", a: "In three steps: a $250 design deposit to start your project, 50% when you approve your 3D render, then the balance when you receive your ring. The deposit is 100% credited toward the final price. Our prices are before taxes: GST and QST are added to each payment." },
           { q: "What happens if no design suits me?", a: "Revisions are included, and we adjust the design until it feels like you. If no design suits you after all, we refund $100 of the deposit and keep $150 for the design work already done." },
-          { q: "Which payment methods do you accept?", a: "Credit card and bank transfer. The methods accepted for your project are confirmed during the consultation." },
+          { q: "Which payment methods do you accept?", a: "Credit cards (or Visa and Mastercard debit), Apple Pay and Google Pay, securely online, as well as Interac e-Transfer. Financing is available: for the 50% payment and the balance, you can choose to pay in instalments with Affirm or Klarna, subject to their approval. They show you their terms before you accept, and Beto Jewelry adds no fees. The design deposit is paid by card." },
         ],
       },
       {
