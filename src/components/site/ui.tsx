@@ -280,9 +280,11 @@ export function SectionHead({
 }
 
 /**
- * Étapes de paiement + option de financement (Affirm ou Klarna). Règle de
- * l'OPC : jamais de montant par mois ni de taux ici, seulement « Financement
- * disponible » et le fonctionnement général.
+ * Étapes de paiement + possibilité de crédit (Affirm ou Klarna). Loi sur la
+ * protection du consommateur (art. 244, 245 et 247, règlement art. 80) : dans
+ * une publicité, seulement « Crédit offert », « Possibilité de crédit » ou le
+ * nom du prêteur ; jamais de montant par mois, de taux ou de durée, jamais
+ * d'incitation à acheter à crédit, et pas de photo de bague à côté.
  */
 export function PaymentOptions({ id = "paiement", ctaHref, ctaLabel }: { id?: string; ctaHref: string; ctaLabel: string }) {
   const { c } = useSite();

@@ -80,7 +80,7 @@ export async function POST(request: Request, ctx: RouteContext<"/api/admin/clien
           kind === "depot"
             ? "Lance votre design 3D. Entièrement crédité sur le prix final de votre pièce."
             : stage === "plan"
-              ? "Montant restant après le dépôt. Payez-le en versements avec Affirm ou Klarna, sous réserve de leur approbation, ou par carte."
+              ? "Montant restant après le dépôt. Payez-le en versements avec Affirm ou Klarna, sous réserve de leur approbation, ou par carte. Bague fabriquée sur mesure : remise environ 2 semaines après ce paiement (3 en platine)."
               : undefined
         ),
         line(TPS_LABEL, taxed.tps),
