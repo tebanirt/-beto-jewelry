@@ -25,6 +25,25 @@ FPS = rk.FPS
 T_DEF = 0.24
 
 
+# Never a ring or a stone on the little finger (Rayane, 10 and 11 Nov 2026: « pas de pierre sur le petit doigt »).
+# Every clip or photo where a ring or loose stones sit on a client's finger, or a ring is on a gloved finger, is banned:
+# build() refuses them. Allowed: rings in their box, held between fingers, Rayane, renders, CAD, castings, loose stones.
+BANNED = {
+    # consultation B-roll: test ring or stone strip on the client's fingers (pinky)
+    "b1632222", "b1632324", "b1632578", "b1632718", "b1632967", "b1631022", "b1617830", "b1618811",
+    "b1631850", "b1630568", "b1628298",
+    # photos: ring worn on a finger of the black glove
+    "img:1c6e1795-image.jpg", "img:761f226b-image.jpg", "img:2637c0bf-image.jpg", "img:e9997fda-image.jpg",
+    "img:0590e1e4-image.jpg", "img:ce39d97b-image.jpg", "img:37721e80-image.jpg", "img:bd2f379f-image.jpg",
+    "img:6785b0ea-image.jpg", "img:14712e3f-image.jpg", "img:3b236e76-image.jpg", "img:18ea6566-image.jpg",
+    "img:8dfe3461-image.jpg", "img:143bf367-image.jpg", "img:650d2b9f-image.jpg", "img:6643f215-image.jpg",
+    "img:70e308db-image.jpg", "img:8e1064f9-image.jpg", "img:4e1768ba-image.jpg", "img:21e5b775-image.jpg",
+    "img:cc29454f-image.jpg", "img:fdfd8b36-image.jpg", "img:f513086b-image.jpg", "img:589b7947-image.jpg",
+    "img:241cce9f-image.jpg", "img:24415bb1-image.jpg", "img:54566917-image.jpg", "img:60c85281-image.jpg",
+    "img:783455ee-image.jpg", "img:ba0c6f27-image.jpg", "img:31bb3b32-image.jpg", "img:002c71b8-image.jpg",
+}
+
+
 # ---------------- assets ----------------
 def glint_asset():
     out = f"{rk.CACHE}/glint.mov"
@@ -133,6 +152,9 @@ def _run(cmd):
 
 def build(spec, out_dir=None):
     name = spec["name"]
+    bad = [s["shot"]["clip"] for s in spec["shots"] if s["shot"]["clip"] in BANNED]
+    if bad:
+        raise SystemExit(f"{name}: refused, banned footage (ring or stone on a finger): {bad}")
     if spec.get("music"):
         mp3 = os.path.join(MUSIC_DIR, f"{spec['music']}.mp3")
         info = bt.analyze(mp3)

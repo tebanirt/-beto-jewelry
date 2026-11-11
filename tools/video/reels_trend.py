@@ -20,7 +20,6 @@ FR = dict(cta="Consultation gratuite — lien en bio", place="Montréal · ou en
 ANGEL = 128.0      # « Angel Of My Dreams » — JADE (jewelers: ring box opening in slow motion, turned toward the light)
 HOUSEWIFE = 133.0  # « Housewife » — Tate McRae (one look per beat drop)
 MARIAH = 150.0     # « All I Want for Christmas Is You » — Mariah Carey (5.8 M reels)
-WALTZ = 58.0       # « The Blue Danube Waltz » (trend « Every girl for absolutely no reason »): one cut per bar
 
 
 def reel(fn):
@@ -103,24 +102,7 @@ def A02_vitrine_rose_APP():
     return _vitrine(True)
 
 
-# ---- A03: « Toutes les filles, sans aucune raison : » (trend « Every girl for absolutely no reason », Blue Danube Waltz)
-@reel
-def A03_toutes_les_filles_APP():
-    shots = [
-        dict(shot=b(1632324, 0.0, slowmo=True, fx=["kenburns", "glow"]), beats=2, tr="fade"),
-        dict(shot=b(1631022, 0.2, slowmo=True, fx=["kenburns", "glow"]), beats=2, tr="fade"),
-        dict(shot=b(1632578, 0.1, slowmo=True, fx=["kenburns", "glow"]), beats=2, tr="fade"),
-        dict(shot=b(1632718, 0.0, slowmo=True, fx=["kenburns", "glow"]), beats=2),   # ring at the ring finger
-    ]
-    texts = [
-        dict(html=pro.card_words("Toutes les filles, | sans aucune raison :", size="s72"), at=0, until=2),
-        dict(html=pro.card_words("regarder leur bague | 400 fois par jour.", size="s72"), at=2, until=8),
-    ]
-    spec = dict(name="A03_toutes_les_filles", shots=shots, texts=texts,
-                end=dict(beats=2, overlay=True, layers=pro.end_overlay("Ta bague, <i>sur mesure.</i>", **FR)),
-                glints=[dict(at=1, x=600, y=1150, s=0.8), dict(at=4, x=560, y=1100, s=0.7)],
-                sweeps=[dict(at=0.5, beats=2), dict(at=3.5, beats=2)])
-    return _audio(spec, None, WALTZ, True)
+# ---- A03 dropped on 11 Nov 2026: its try-on shots show a ring on the little finger (pro.BANNED).
 
 
 # ---- A04: Christmas « cadeau ou demande ? » (Mariah Carey, 5.8 M reels; approved Christmas copy)

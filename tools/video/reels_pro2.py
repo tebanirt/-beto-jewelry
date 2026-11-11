@@ -76,27 +76,7 @@ def P05_couleur_science():
                 glints=[dict(at=3, x=540, y=1150, s=0.7), dict(at=7, x=540, y=1100, s=0.7), dict(at=15, x=540, y=1150, s=0.7)])
 
 
-@reel
-def P06_etapes():
-    shots = [
-        dict(shot=b(1617419, 0.2, fx=["kenburns"]), beats=4, tr="smoothleft"),
-        dict(shot=b(1619438, 0.2, fx=["punch"]), beats=3, tr="cut"),
-        dict(shot=b(1618811, 0.3, fx=["kenburns"]), beats=3, tr="zoomin"),
-        dict(shot=b(1626602, 0.2, fx=["kenburns"]), beats=4, tr="cut"),
-        dict(shot=b(1627599, 0.1, fx=["punch"]), beats=2, tr="fadewhite"),
-        dict(shot=b(1632578, 0.1, fx=["kenburns", "glow"]), beats=3, tr="cut"),
-        dict(shot=b(1632222, 0.0, fx=["punch", "glow"]), beats=2, tr="cut"),
-        dict(shot=b(1630385, 0.0, fx=["glow"]), beats=2, tr="fade"),
-    ]
-    texts = [
-        dict(html=pro.card_words("Ta bague de fiançailles, | étape par <i>étape</i>.", over="Beto Jewelry · Montréal", size="s72"), at=0, until=4),
-        dict(html=[card("On choisit ta <i>pierre</i>.", over="01 — Consultation gratuite", det="En personne à Montréal ou en vidéo")], at=4, until=10),
-        dict(html=[card("On dessine ta <i>bague</i>.", over="02 — Design 3D en 48 h", det="Révisions incluses")], at=10, until=16),
-        dict(html=[card("Elle est <i>à toi</i>.", over="03 — Prête en 2 semaines")], at=16, until=23),
-    ]
-    end = dict(beats=8, layers=endcard("Ta bague, <i>sur mesure.</i>", None, **FR_END))
-    return dict(name="P06_etapes", music="1001", shots=shots, texts=texts, end=end)
-
+# P06_etapes dropped on 11 Nov 2026: test ring and stone strip on the client's little finger (pro.BANNED).
 
 @reel
 def P07_ouverture_boite():

@@ -4,7 +4,7 @@
 - shape vote (the most viewed format of the big engagement-ring brands);
 - Christmas aimed at the person who proposes;
 - end card drawn over the last shot (end_overlay), shorter.
-Never a ring worn on the pinky (brief §10). Usage: python3 reels_pro4.py [T01_avis_google ...]"""
+Never a ring or a stone on the little finger (brief §10; pro.BANNED refuses that footage). Usage: python3 reels_pro4.py [T01_avis_google ...]"""
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from reelkit import S
@@ -37,9 +37,9 @@ def _avis(lang):
     fr = lang == "fr"
     shots = [
         dict(shot=b(1620314, 0.5, fx=["kenburns"]), beats=4, tr="cut"),
-        dict(shot=b(1631850, 0.3, fx=["kenburns"]), beats=3, tr="smoothleft"),
-        dict(shot=b(1632324, 0.0, slowmo=True, fx=["kenburns", "glow"]), beats=3, tr="cut"),
-        dict(shot=b(1631022, 0.2, fx=["kenburns"]), beats=3, tr="fadewhite"),
+        dict(shot=b(1619751, 0.3, fx=["kenburns"]), beats=3, tr="smoothleft"),
+        dict(shot=b(1626012, 1.0, fx=["kenburns", "glow"]), beats=3, tr="cut"),      # loose stones, tweezers
+        dict(shot=b(1621466, 0.1, fx=["kenburns", "glow"]), beats=3, tr="fadewhite"),  # rings on the velvet tray
         dict(shot=b(1657215, 0.1, slowmo=True, fx=["kenburns", "glow"]), beats=3, tr="fade"),
         dict(shot=b(1656960, 0.1, slowmo=True, fx=["kenburns", "glow"]), beats=2),
     ]
@@ -76,10 +76,10 @@ def T02_EN_reviews():
 @reel
 def J01_journee():
     shots = [
-        dict(shot=b(1630568, 0.0, slowmo=True, fx=["kenburns"]), beats=3, tr="cut"),
+        dict(shot=b(1620314, 0.5, fx=["kenburns"]), beats=3, tr="cut"),
         dict(shot=b(1619751, 0.3, fx=["kenburns"]), beats=3, tr="smoothleft"),
         dict(shot=b(1626012, 1.0, fx=["kenburns", "glow"]), beats=3, tr="smoothleft"),
-        dict(shot=b(1628298, 0.2, fx=["kenburns"]), beats=3, tr="fadewhite"),
+        dict(shot=b(1626602, 0.2, fx=["kenburns"]), beats=3, tr="fadewhite"),        # 3D design on the laptop
         dict(shot=S(CAST, 0.2, 1, zoom=1.8, cx=532, cy=1248, fx=["kenburns"]), beats=3, tr="smoothleft"),
         dict(shot=b(1621466, 0.1, fx=["punch", "glow"]), beats=2, tr="fade"),
         dict(shot=b(1656836, 0.1, slowmo=True, fx=["kenburns", "glow"]), beats=2),
