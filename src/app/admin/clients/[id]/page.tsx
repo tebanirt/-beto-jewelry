@@ -125,6 +125,8 @@ export default async function AdminClientDetailPage({ params }: { params: Promis
   const totalPaye = vraies.reduce((s, o) => s + (o.payments ?? []).reduce((t, p) => t + Number(p.amount), 0), 0);
   const avecCout = vraies.filter((o) => o.total_price !== null && o.production_cost !== null);
   const totalProfit = avecCout.length ? avecCout.reduce((s, o) => s + Number(o.total_price) - Number(o.production_cost), 0) : null;
+  // Commande la plus récente pas encore livrée : sert à proposer les montants des liens de paiement.
+  const enCours = orders.find((o) => o.status !== "cancelled" && o.status !== "delivered") ?? null;
 
   return (
     <AdminShell
@@ -160,7 +162,12 @@ export default async function AdminClientDetailPage({ params }: { params: Promis
               followupCount={client.followup_count}
             />
             {orders.length === 0 && <MarginControls clientId={client.id} salePrice={client.sale_price} productionCost={client.production_cost} />}
-            <PaymentLinkControls clientId={client.id} depositAmount={DEPOSIT_AMOUNT_CAD} />
+            <PaymentLinkControls
+              clientId={client.id}
+              depositAmount={DEPOSIT_AMOUNT_CAD}
+              orderTotal={enCours?.total_price === null || enCours?.total_price === undefined ? null : Number(enCours.total_price)}
+              orderPaid={(enCours?.payments ?? []).reduce((t, p) => t + Number(p.amount), 0)}
+            />
           </Card>
 
           <section>

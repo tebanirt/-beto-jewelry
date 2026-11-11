@@ -5,7 +5,7 @@ import Link from "next/link";
 import { LINKS } from "@/lib/site-content";
 import Rich from "../Rich";
 import { useSite } from "../useSite";
-import { ArrowRight, Eyebrow, FinalCta, PhotoSlot, RingPhoto, RuledList, SectionHead, T } from "../ui";
+import { ArrowRight, Eyebrow, FinalCta, PaymentOptions, PhotoSlot, RingPhoto, RuledList, SectionHead, T } from "../ui";
 import { SHOW_PHOTO_SLOTS } from "@/lib/constants";
 
 const sectionPad = { paddingTop: "clamp(88px, 10vw, 144px)", paddingBottom: "clamp(88px, 10vw, 144px)" };
@@ -172,6 +172,9 @@ export default function CustomRingsPage() {
           </div>
         </div>
       </section>
+
+      {/* ─── Paiement : étapes + financement ─── */}
+      <PaymentOptions ctaHref={LINKS.form} ctaLabel={c.common.seePrice} />
 
       {/* ─── Inclus ─── */}
       <section aria-labelledby="inclus" className="bj-gutter bg-beto-ink text-beto-offwhite" style={sectionPad}>

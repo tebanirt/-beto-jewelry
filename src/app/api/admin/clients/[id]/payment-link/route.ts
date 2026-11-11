@@ -5,9 +5,15 @@ import { getStripe, DEPOSIT_AMOUNT_CAD, type PaymentKind } from "@/lib/stripe";
 import { addTaxes, toCents, TPS_LABEL, TVQ_LABEL } from "@/lib/taxes";
 
 /**
- * Crée un lien de paiement Stripe à usage unique pour un client (dépôt ou
- * solde). Rayane le colle lui-même dans son courriel ou sous le PDF officiel —
- * rien n'est envoyé au client automatiquement.
+ * Crée un lien de paiement Stripe à usage unique pour un client (dépôt, 50 %
+ * à l'approbation, solde ou plan de paiement). Rayane le colle lui-même dans
+ * son courriel ou son texto — rien n'est envoyé au client automatiquement.
+ *
+ * Plan de paiement (règle de Rayane, 11 nov. 2026) : un client qui veut payer
+ * en versements règle d'un coup, après le dépôt, le montant complet restant
+ * avec Affirm ou Klarna ; ce sont eux qui étalent ses paiements. Le 50 % et le
+ * solde se paient donc par carte seulement, pour ne jamais ouvrir deux
+ * financements sur la même bague.
  *
  * Le montant reçu est avant taxes : la TPS et la TVQ s'ajoutent en deux lignes
  * séparées (option A de Rayane, 6 nov. 2026 : 250 $ + taxes = 287,44 $).
@@ -22,7 +28,7 @@ export async function POST(request: Request, ctx: RouteContext<"/api/admin/clien
   // « approbation » = le paiement de 50 % à l'approbation du rendu 3D : pour le
   // webhook et les Finances, c'est un paiement sur le solde (kind « solde »),
   // seul le nom affiché au client change.
-  const stage = body.kind === "approbation" ? "approbation" : "";
+  const stage = body.kind === "approbation" || body.kind === "plan" ? body.kind : "";
   const kind: PaymentKind = body.kind === "solde" || stage ? "solde" : "depot";
   // Le dépôt peut différer du montant standard (ex. client honoré à l'ancien prix de 200 $).
   const amount = kind === "depot" && body.amount === undefined ? DEPOSIT_AMOUNT_CAD : Number(body.amount);
@@ -42,9 +48,11 @@ export async function POST(request: Request, ctx: RouteContext<"/api/admin/clien
   const name =
     kind === "depot"
       ? "Dépôt de design — Beto Jewelry"
-      : stage
+      : stage === "approbation"
         ? `Paiement à l'approbation du design (50 %) — Beto Jewelry${suffix}`
-        : `Solde de votre création — Beto Jewelry${suffix}`;
+        : stage === "plan"
+          ? `Paiement complet de votre création — Beto Jewelry${suffix}`
+          : `Solde de votre création — Beto Jewelry${suffix}`;
 
   const taxed = addTaxes(amount);
   const line = (label: string, value: number, description?: string) => ({
@@ -69,17 +77,21 @@ export async function POST(request: Request, ctx: RouteContext<"/api/admin/clien
         line(
           name,
           taxed.base,
-          kind === "depot" ? "Lance votre design 3D. Entièrement crédité sur le prix final de votre pièce." : undefined
+          kind === "depot"
+            ? "Lance votre design 3D. Entièrement crédité sur le prix final de votre pièce."
+            : stage === "plan"
+              ? "Montant restant après le dépôt. Payez-le en versements avec Affirm ou Klarna, sous réserve de leur approbation, ou par carte."
+              : undefined
         ),
         line(TPS_LABEL, taxed.tps),
         line(TVQ_LABEL, taxed.tvq),
       ],
       metadata,
       payment_intent_data: { metadata },
-      // Dépôt : cartes seulement (Apple Pay et Google Pay compris). Les autres
-      // paiements suivent les modes activés dans Stripe (Paramètres > Moyens de
-      // paiement) : un paiement en versements activé là y apparaît.
-      ...(kind === "depot" ? { payment_method_types: ["card" as const] } : {}),
+      // Dépôt, 50 % et solde : cartes seulement (Apple Pay et Google Pay
+      // compris). Plan de paiement : Affirm ou Klarna pour le montant complet,
+      // avec la carte en secours si le financement est refusé.
+      payment_method_types: stage === "plan" ? ["affirm" as const, "klarna" as const, "card" as const] : ["card" as const],
       // Un seul paiement par lien : il se désactive dès que le client a payé.
       restrictions: { completed_sessions: { limit: 1 } },
       after_completion: {

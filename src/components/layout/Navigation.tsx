@@ -143,10 +143,10 @@ export default function Navigation() {
           <div className="flex items-center gap-4 sm:gap-5">
             <LangToggle language={language} setLanguage={setLanguage} light={overHero} label={c.common.languageLabel} />
             <Link
-              href={LINKS.book}
+              href={LINKS.form}
               className={`bj-btn bj-btn-sm bj-btn-keep bj-nav-cta ${overHero ? "bj-btn-line-light" : "bj-btn-line"}`}
             >
-              {c.common.book}
+              {c.common.navPrice}
             </Link>
             <button
               ref={burgerRef}
@@ -208,11 +208,11 @@ export default function Navigation() {
               ))}
             </ul>
             <div className="mt-10 flex flex-col gap-3">
-              <Link href={LINKS.book} onClick={() => setOpen(false)} className="bj-btn bj-btn-gold">
-                {c.common.bookConsultation}
-              </Link>
-              <Link href={LINKS.form} onClick={() => setOpen(false)} className="bj-btn bj-btn-line-light">
+              <Link href={LINKS.form} onClick={() => setOpen(false)} className="bj-btn bj-btn-gold">
                 {c.common.seePrice}
+              </Link>
+              <Link href={LINKS.book} onClick={() => setOpen(false)} className="bj-btn bj-btn-line-light">
+                {c.common.bookConsultation}
               </Link>
             </div>
             <div className="mt-auto flex flex-wrap items-center justify-between gap-4 pt-10 text-sm text-beto-stone">

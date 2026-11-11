@@ -6,7 +6,7 @@ import { GOOGLE_REVIEW_URL } from "@/lib/constants";
 import { LINKS, PHONE_DISPLAY } from "@/lib/site-content";
 import Rich from "../Rich";
 import { useSite } from "../useSite";
-import { ArrowRight, ArrowUpRight, Check, Eyebrow, FinalCta, OfficeCards, RingPhoto, RuledList, SectionHead, T } from "../ui";
+import { ArrowRight, ArrowUpRight, Check, Eyebrow, FinalCta, OfficeCards, PaymentOptions, RingPhoto, RuledList, SectionHead, T } from "../ui";
 
 const sectionPad = { paddingTop: "clamp(88px, 10vw, 144px)", paddingBottom: "clamp(88px, 10vw, 144px)" };
 
@@ -103,11 +103,14 @@ export default function HomePage() {
               <T text={h.heroBody} />
             </p>
             <div className="bj-hero-cta mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
-              <Link href={LINKS.book} className="bj-btn bj-btn-gold">
+              <div className="flex flex-col gap-2.5">
+                <Link href={LINKS.form} className="bj-btn bj-btn-gold">
+                  {c.common.seePrice}
+                </Link>
+                <span className="text-[12px] tracking-[.04em] text-beto-stone">{c.common.priceMicro}</span>
+              </div>
+              <Link href={LINKS.book} className="bj-tlink bj-tlink-light">
                 {c.common.bookConsultation}
-              </Link>
-              <Link href={LINKS.form} className="bj-tlink bj-tlink-light">
-                {c.common.seePrice}
                 <ArrowRight />
               </Link>
             </div>
@@ -169,6 +172,9 @@ export default function HomePage() {
           </ol>
         </div>
       </section>
+
+      {/* ─── Paiement : étapes + financement ─── */}
+      <PaymentOptions ctaHref={LINKS.form} ctaLabel={c.common.seePrice} />
 
       {/* ─── Réalisations ─── */}
       <section aria-labelledby="realisations" className="bj-gutter" style={sectionPad}>
@@ -293,8 +299,8 @@ export default function HomePage() {
         eyebrow={c.finalCta.home.eyebrow}
         title={c.finalCta.home.title}
         body={c.finalCta.home.body}
-        primary={{ href: LINKS.book, label: c.common.bookConsultation }}
-        secondary={{ href: LINKS.form, label: c.common.seePrice }}
+        primary={{ href: LINKS.form, label: c.common.seePrice }}
+        secondary={{ href: LINKS.book, label: c.common.bookConsultation }}
       >
         <p className="mt-9 text-[14px] leading-[1.6] text-[#8F897F]">
           <T text={c.common.questionCall} />{" "}

@@ -194,105 +194,165 @@ export function MarginControls({
   );
 }
 
-/** Génère un lien Stripe à usage unique que Rayane colle lui-même dans son courriel. */
-export function PaymentLinkControls({ clientId, depositAmount }: { clientId: string; depositAmount: number }) {
+type LinkKind = "depot" | "approbation" | "solde" | "plan";
+
+const money = (n?: number) => (n ?? 0).toLocaleString("fr-CA", { style: "currency", currency: "CAD" });
+
+/** Texte prêt à coller dans un courriel ou un texto, après la salutation. */
+function messageFor(kind: LinkKind, total: string, url: string) {
+  switch (kind) {
+    case "depot":
+      return `Voici le lien pour votre dépôt de design de 250 $ + taxes, crédité à 100 % sur le prix de votre bague : ${url}`;
+    case "approbation":
+      return `Merci d'avoir approuvé votre design ! Voici le lien pour le paiement de 50 % (${total} taxes incluses), qui lance la fabrication de votre bague : ${url}`;
+    case "solde":
+      return `Votre bague est prête ! Voici le lien pour le solde (${total} taxes incluses) : ${url}`;
+    case "plan":
+      return `Comme convenu, voici le lien pour régler le montant restant de votre bague (${total} taxes incluses) en versements avec Affirm ou Klarna, sous réserve de leur approbation. Vous choisissez la durée et voyez toutes leurs conditions avant d'accepter : ${url}`;
+  }
+}
+
+/**
+ * Génère un lien Stripe à usage unique que Rayane colle lui-même dans son
+ * courriel ou son texto. Les montants proposés viennent de la commande en
+ * cours (prix total et paiements reçus, avant taxes) ; un montant saisi à la
+ * main les remplace toujours.
+ */
+export function PaymentLinkControls({
+  clientId,
+  depositAmount,
+  orderTotal = null,
+  orderPaid = 0,
+}: {
+  clientId: string;
+  depositAmount: number;
+  orderTotal?: number | null;
+  orderPaid?: number;
+}) {
   const [deposit, setDeposit] = useState(String(depositAmount));
   const [amount, setAmount] = useState("");
   const [reference, setReference] = useState("");
   const [link, setLink] = useState("");
   const [total, setTotal] = useState("");
+  const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
 
-  async function create(kind: "depot" | "approbation" | "solde") {
+  const round2 = (n: number) => Math.round(n * 100) / 100;
+  const half = orderTotal ? round2(orderTotal * 0.5) : null;
+  const rest = orderTotal ? round2(Math.max(orderTotal - orderPaid, 0)) : null;
+  const typed = amount.trim() ? Number(amount) : null;
+  const amountFor = (kind: LinkKind) =>
+    kind === "depot" ? Number(deposit) : typed ?? (kind === "approbation" ? half : rest);
+
+  async function create(kind: LinkKind) {
+    const value = amountFor(kind);
+    if (!value || !Number.isFinite(value) || value < 1) {
+      alert("Indique d'abord le montant avant taxes.");
+      return;
+    }
     setBusy(true);
     setLink("");
     setTotal("");
+    setMessage("");
     try {
       const res = await fetch(`/api/admin/clients/${clientId}/payment-link`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ kind, amount: Number(kind === "depot" ? deposit : amount), reference }),
+        body: JSON.stringify({ kind, amount: value, reference }),
       });
       const data = (await res.json()) as { url?: string; error?: string; amount?: number; tps?: number; tvq?: number; total?: number };
       if (!res.ok || !data.url) throw new Error(data.error || String(res.status));
       setLink(data.url);
       if (data.total !== undefined) {
-        const $ = (n?: number) => (n ?? 0).toLocaleString("fr-CA", { style: "currency", currency: "CAD" });
-        setTotal(`${$(data.amount)} + TPS ${$(data.tps)} + TVQ ${$(data.tvq)} = ${$(data.total)}`);
+        setTotal(`${money(data.amount)} + TPS ${money(data.tps)} + TVQ ${money(data.tvq)} = ${money(data.total)}`);
       }
+      setMessage(messageFor(kind, money(data.total), data.url));
     } catch (err) {
       alert(`Le lien n'a pas été créé (${err instanceof Error ? err.message : "erreur"}). Réessayez.`);
     }
     setBusy(false);
   }
 
+  const label = (text: string, kind: LinkKind) => {
+    const v = amountFor(kind);
+    return v ? `${text} · ${money(v)}` : text;
+  };
+  const btn = "text-xs font-medium uppercase tracking-widest text-beto-gold hover:text-beto-black disabled:opacity-40 text-left";
+
   return (
     <div className="flex flex-col gap-3 border-t border-beto-gray-subtle/40 pt-5 mt-5">
       <label className="text-xs font-medium text-beto-black tracking-wide">Lien de paiement Stripe</label>
-      <p className="text-xs text-beto-gray -mt-1">Montants avant taxes : la TPS et la TVQ s’ajoutent au lien.</p>
-      <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-        <div className="flex flex-wrap items-center gap-2">
-          <input
-            type="number"
-            min={1}
-            step="1"
-            value={deposit}
-            onChange={(e) => setDeposit(e.target.value)}
-            aria-label="Montant du dépôt avant taxes ($)"
-            title="250 $ par défaut — 200 $ pour un client déjà soumissionné à l'ancien prix"
-            className="w-20 px-3 py-2 border border-beto-gray-subtle/60 bg-beto-offwhite text-sm focus:outline-none focus:border-beto-gold"
-          />
-          <button
-            type="button"
-            disabled={busy || !deposit}
-            onClick={() => create("depot")}
-            className="text-xs font-medium uppercase tracking-widest text-beto-gold hover:text-beto-black disabled:opacity-40"
-          >
-            Lien pour le dépôt
-          </button>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <input
-            type="number"
-            min={1}
-            step="0.01"
-            placeholder="Montant avant taxes ($)"
-            aria-label="Montant avant taxes ($), pour le 50 % ou le solde"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            className="w-44 px-3 py-2 border border-beto-gray-subtle/60 bg-beto-offwhite text-sm focus:outline-none focus:border-beto-gold"
-          />
-          <input
-            type="text"
-            placeholder="No facture (ex. BJ-2026-1103)"
-            value={reference}
-            onChange={(e) => setReference(e.target.value)}
-            className="w-56 px-3 py-2 border border-beto-gray-subtle/60 bg-beto-offwhite text-sm focus:outline-none focus:border-beto-gold"
-          />
-          <button
-            type="button"
-            disabled={busy || !amount}
-            onClick={() => create("approbation")}
-            className="text-xs font-medium uppercase tracking-widest text-beto-gold hover:text-beto-black disabled:opacity-40"
-          >
-            Lien 50 % (approbation)
-          </button>
-          <button
-            type="button"
-            disabled={busy || !amount}
-            onClick={() => create("solde")}
-            className="text-xs font-medium uppercase tracking-widest text-beto-gold hover:text-beto-black disabled:opacity-40"
-          >
-            Lien pour le solde
-          </button>
-        </div>
+      <p className="text-xs text-beto-gray -mt-1">
+        Montants avant taxes : la TPS et la TVQ s’ajoutent au lien.
+        {orderTotal ? (
+          <> Commande : {money(orderTotal)} · reçu {money(orderPaid)} · reste {money(rest ?? 0)}.</>
+        ) : (
+          <> Aucune commande avec un prix : saisis le montant.</>
+        )}
+      </p>
+      <div className="flex flex-wrap items-center gap-2">
+        <input
+          type="number"
+          min={1}
+          step="1"
+          value={deposit}
+          onChange={(e) => setDeposit(e.target.value)}
+          aria-label="Montant du dépôt avant taxes ($)"
+          title="250 $ par défaut — 200 $ pour un client déjà soumissionné à l'ancien prix"
+          className="w-20 px-3 py-2 border border-beto-gray-subtle/60 bg-beto-offwhite text-sm focus:outline-none focus:border-beto-gold"
+        />
+        <button type="button" disabled={busy || !deposit} onClick={() => create("depot")} className={btn}>
+          Lien pour le dépôt
+        </button>
       </div>
+      <div className="flex flex-wrap gap-2">
+        <input
+          type="number"
+          min={1}
+          step="0.01"
+          placeholder={orderTotal ? "Autre montant ($)" : "Montant avant taxes ($)"}
+          aria-label="Montant avant taxes ($), si différent du montant proposé"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          className="w-44 px-3 py-2 border border-beto-gray-subtle/60 bg-beto-offwhite text-sm focus:outline-none focus:border-beto-gold"
+        />
+        <input
+          type="text"
+          placeholder="No facture (ex. BJ-2026-1103)"
+          value={reference}
+          onChange={(e) => setReference(e.target.value)}
+          className="w-56 px-3 py-2 border border-beto-gray-subtle/60 bg-beto-offwhite text-sm focus:outline-none focus:border-beto-gold"
+        />
+      </div>
+      <div className="flex flex-col gap-2">
+        <button type="button" disabled={busy} onClick={() => create("approbation")} className={btn}>
+          {label("Lien 50 % (approbation du design)", "approbation")}
+        </button>
+        <button type="button" disabled={busy} onClick={() => create("plan")} className={btn}>
+          {label("Lien plan de paiement (montant complet, Affirm ou Klarna)", "plan")}
+        </button>
+        <button type="button" disabled={busy} onClick={() => create("solde")} className={btn}>
+          {label("Lien pour le solde (remise)", "solde")}
+        </button>
+      </div>
+      <p className="text-xs text-beto-gray">
+        Le 50 % et le solde se paient par carte. Un client qui veut des versements prend le lien « plan de paiement » pour tout le
+        montant restant, après le dépôt.
+      </p>
       {total && <p className="text-xs text-beto-black">Le client paiera : {total}</p>}
       {link && (
         <div className="flex flex-wrap items-center gap-3 text-xs">
           <input readOnly value={link} onFocus={(e) => e.target.select()} className="flex-1 min-w-0 px-3 py-2 border border-beto-gold/60 bg-beto-white" />
           <button type="button" onClick={() => navigator.clipboard.writeText(link)} className="font-medium uppercase tracking-widest text-beto-gold hover:text-beto-black">
-            Copier
+            Copier le lien
+          </button>
+        </div>
+      )}
+      {message && (
+        <div className="flex flex-col gap-2 text-xs">
+          <textarea readOnly value={message} rows={4} onFocus={(e) => e.target.select()} className="w-full px-3 py-2 border border-beto-gold/60 bg-beto-white" />
+          <button type="button" onClick={() => navigator.clipboard.writeText(message)} className="self-start font-medium uppercase tracking-widest text-beto-gold hover:text-beto-black">
+            Copier le message (courriel ou texto)
           </button>
         </div>
       )}

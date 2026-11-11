@@ -1432,6 +1432,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                     )}
                     <p className="text-xs text-white/70 leading-relaxed mb-3">{cd.estimateDisclaimer}</p>
                     <p className="text-xs text-beto-gold leading-relaxed">{cd.estimateIncludes}</p>
+                    <p className="text-xs text-white leading-relaxed mt-3">{cd.financingShort}</p>
                   </div>
                 ) : hourPromise ? (
                   <div className="bg-beto-black text-white p-8 sm:p-10 mb-8">
@@ -1474,6 +1475,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                       </li>
                     ))}
                   </ol>
+                  {isEngagement && <p className="text-xs text-beto-gray leading-relaxed mt-5">{cd.financingNote}</p>}
                 </div>
                 {review && (
                   <figure className="mt-8 border-l-2 border-beto-gold pl-5">
