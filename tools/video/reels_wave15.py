@@ -7,6 +7,7 @@ Facts only from FAITS.md. Never a ring on the little finger (pro.BANNED). Usage:
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from reelkit import S, WORK
+from reels import ROSE_PEAR
 import pro
 
 CUT = os.environ.get("BETO_CUT_DIR", f"{WORK}/cut")   # cut-outs from cutout.py: <photo id>_bir.png
@@ -138,6 +139,57 @@ def P01_paiement_DRAFT():
     return dict(name="P01_paiement_DRAFT", music="1073", shots=shots, texts=[], motion=dict(elements=el),
                 end=dict(beats=5, overlay=True, layers=pro.end_overlay("On en parle <i>en consultation.</i>", **FR)),
                 glints=[dict(at=1.5, x=540, y=920, s=0.8), dict(at=18.5, x=540, y=930, s=0.9)])
+
+
+def sh(base, **kw):
+    d = dict(base); d.update(kw); clip = d.pop("clip"); start = d.pop("start")
+    return S(clip, start, 1.0, **d)
+
+
+def chapter(at, until, name, era, line, y=230):
+    """educational chapter card: small label, big gold era, one sentence that appears word by word"""
+    return [
+        dict(type="kicker", at=at, until=until, out="cut", t=name, y=y, size=34, color="#F6F3EE", shadow=True),
+        dict(type="stack", at=at + 0.3, until=until, out="cut", y=y + 60, lines=[BI(era, 150, anim="pop")]),
+        dict(type="text", at=at + 1.2, until=until, out="cut", anim="words", every=0.25, y=y + 250, size=58, color="#F6F3EE", t=line),
+    ]
+
+
+# ---- E03: « Chaque forme a une histoire » — marquise, poire, halo, alliance; facts from FAITS.md (legends marked)
+@reel
+def E03_histoires():
+    shots = [
+        dict(shot=b(1621466, 0.1), beats=6, tr="cut"),                                         # under the motion background
+        dict(shot=sh(ROSE_PEAR, slowmo=True, fx=["kenburns", "glow"]), beats=5, tr="cut"),    # Rayane's pink lab-grown pear
+        dict(shot=b(1621466, 0.1), beats=5, tr="cut"),                                         # under the motion background
+        dict(shot=S("img:e4df707d-image.jpg", 0, 1, zoom=1.1, cx=756, cy=1100, fx=["kenburns", "glow"]), beats=5, tr="fadewhite"),
+        dict(shot=b(1656960, 0.1, slowmo=True, fx=["kenburns", "glow"]), beats=2),
+    ]
+    el = [
+        # HOOK + marquise (legend)
+        dict(type="bg", at=-1, until=6, out="cut", css=SPOT),
+        dict(type="marquee", at=-1, until=6, out="cut", t="MARQUISE", sep="  ·  ", y=980, size=230, f="jost", w=900, speed=120, dir=1, alpha=0.85),
+        ring("2330f1a8", -1, 6, y=880, w=640, anim="fade", float=10, reflect=True, glow=True, zoom=[1.0, 1.06]),
+        dict(type="stack", at=-0.9, until=3, out="up", y=230, every=0.3, lines=[J("Chaque forme", 100), J("a une", 100), BI("histoire.", 150, anim="pop")]),
+        dict(type="text", at=3, until=6, out="cut", anim="words", every=0.22, y=250, size=60, color="#F6F3EE",
+             t="On raconte que Louis XV l’a fait tailler pour la marquise de Pompadour."),
+        dict(type="flash", beats=[6, 11, 16], alpha=0.35, decay=14),
+        # poire
+        dict(type="scrim", at=6, until=11, out="cut", grad="top", h=1000),
+        *chapter(6, 11, "La poire", "XVe siècle", "Attribuée à Lodewyk van Bercken, l’inventeur de la meule de polissage."),
+        # halo
+        dict(type="bg", at=11, until=16, out="cut", css=SPOT),
+        dict(type="marquee", at=11, until=16, out="cut", t="ART DÉCO", sep="  ·  ", y=1000, size=230, f="jost", w=900, speed=120, dir=-1, alpha=0.85),
+        ring("14677909", 11, 16, y=820, w=520, anim="scale", float=8, reflect=True, glow=True),
+        *chapter(11, 16, "Le halo", "Années 1920", "Popularisé à l’époque Art déco. Ici, un halo caché, sous la pierre."),
+        # alliance
+        dict(type="scrim", at=16, until=21, out="cut", grad="top", h=1000),
+        *chapter(16, 21, "L’alliance", "Sans fin", "Un cercle sans début ni fin : le symbole de l’éternité."),
+    ]
+    return dict(name="E03_histoires", music="659", shots=shots, texts=[], motion=dict(elements=el),
+                end=dict(beats=5, overlay=True, layers=pro.end_overlay("Ta bague aura <i>son histoire.</i>", **FR)),
+                glints=[dict(at=2, x=560, y=900, s=0.8), dict(at=8, x=560, y=1080, s=0.7), dict(at=13, x=540, y=900, s=0.7),
+                        dict(at=22.5, x=540, y=930, s=0.9)])
 
 
 if __name__ == "__main__":

@@ -27,7 +27,7 @@ Règles de contenu et autorisations : voir `docs/business-ops-brief.md` §10.
 | `motion_lib.js`, `motion.js`, `motion.py` | Motion design : typo géante, lignes en contour, défilé de mots, compteurs, coins de cadrage, étapes, tableau comparatif, cristal de carbone en 3D, sceau IGI, neige, images détourées avec reflet. Tout est calé sur les temps de la musique et rendu image par image (PNG transparents) par-dessus le montage (`spec["motion"]`) |
 | `cutout.py` | Détourage des photos et rendus (rembg + BiRefNet, en local) pour poser la bague sur un fond de marque |
 | `reels_motion.py` | Vague 14 : style de la référence de Rayane (N&B + couleur, typo géante, cadres), demande en mariage, Noël, explicatifs « vrai diamant ? » et « 4 étapes » |
-| `reels_wave15.py` | Vague 15 : les bagues de Rayane détourées, « Pourquoi faire ta bague à Montréal ? » (accroche, 4 raisons, appel à l'action), brouillon du paiement en 3 étapes (non publié) |
+| `reels_wave15.py` | Vague 15 : les bagues de Rayane détourées, « Pourquoi faire ta bague à Montréal ? » (accroche, 4 raisons, appel à l'action), brouillon du paiement en 3 étapes (non publié), éducatif « Chaque forme a une histoire » (marquise, poire, halo, alliance) |
 | `TOURNAGE.md` | Ce que Rayane filme pour chaque pièce, sa voix, la banque du jour, et ce que l'agent en fait |
 | `DONNEES.md` | Ce que disent les données (Instagram, pubs Meta, CRM, avis, concurrents) et les règles qui en découlent : à lire avant chaque montage |
 | `reels_pro3.py` | Vague 11 : Noël FR et EN, du rendu à l'or en anglais, designs 3D, sans bague portée au doigt |
