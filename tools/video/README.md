@@ -24,6 +24,11 @@ Règles de contenu et autorisations : voir `docs/business-ops-brief.md` §10.
 | `reels_pro2.py` | Vague 11 : concepts des lots 1 à 9 refaits en montage pro (P04 à P07, P10, P11) |
 | `reels_pro4.py` | Vague 12 : avis Google, « une journée avec ton joaillier », vote sur la forme, Noël « tu fais ta demande ? », avec la carte de fin par-dessus la dernière image |
 | `reels_trend.py` | Vague 13 : copies des formats à la mode (écrin au ralenti, vitrine lente, valse, Noël, une couleur par temps fort). Les fichiers `*_APP` sont sans musique : la chanson à la une s'ajoute dans l'app Instagram |
+| `motion_lib.js`, `motion.js`, `motion.py` | Motion design : typo géante, lignes en contour, défilé de mots, compteurs, coins de cadrage, étapes, tableau comparatif, cristal de carbone en 3D, sceau IGI, neige, images détourées avec reflet. Tout est calé sur les temps de la musique et rendu image par image (PNG transparents) par-dessus le montage (`spec["motion"]`) |
+| `cutout.py` | Détourage des photos et rendus (rembg + BiRefNet, en local) pour poser la bague sur un fond de marque |
+| `reels_motion.py` | Vague 14 : style de la référence de Rayane (N&B + couleur, typo géante, cadres), demande en mariage, Noël, explicatifs « vrai diamant ? » et « 4 étapes » |
+| `reels_wave15.py` | Vague 15 : les bagues de Rayane détourées, « Pourquoi faire ta bague à Montréal ? » (accroche, 4 raisons, appel à l'action), brouillon du paiement en 3 étapes (non publié) |
+| `TOURNAGE.md` | Ce que Rayane filme pour chaque pièce, sa voix, la banque du jour, et ce que l'agent en fait |
 | `DONNEES.md` | Ce que disent les données (Instagram, pubs Meta, CRM, avis, concurrents) et les règles qui en découlent : à lire avant chaque montage |
 | `reels_pro3.py` | Vague 11 : Noël FR et EN, du rendu à l'or en anglais, designs 3D, sans bague portée au doigt |
 | `review.sh` | Planche de contrôle (`NOM fps colonnes`) + loudness |
@@ -51,6 +56,25 @@ for id in 470 399 866; do curl -sSL -o $BETO_MUSIC_DIR/$id.mp3 https://assets.mi
 
 Licence Mixkit (Stock Music Free License) : usage commercial permis sur les réseaux sociaux, sans mention obligatoire. Interdit : redistribuer la musique seule (jamais de mp3 dans ce dépôt), l'enregistrer dans un service de droits (Content ID) ou la présenter comme la nôtre.
 
+**Plans de banque d'images (Mixkit, licence gratuite)** : seulement des gens et de l'émotion (demandes, mariages, hiver), toujours en noir et blanc, jamais une bague en gros plan (on la prendrait pour la nôtre), jamais présentés comme Montréal ou comme nos clients. Enregistrés sous `mk<id>.mp4` (jamais dans ce dépôt) :
+
+```bash
+mkdir -p $BETO_WORK_DIR/stock
+for id in 51645 51648 46923 5780 34702; do
+  for r in 2160 1080 720; do curl -sfL -o $BETO_WORK_DIR/stock/mk$id.mp4 https://assets.mixkit.co/videos/$id/$id-$r.mp4 && break; done
+done
+```
+
+**Détourage** (`cutout.py`) : `$BETO_PY -m pip install rembg==2.0.87 onnxruntime`, puis les modèles dans `$BETO_WORK_DIR/models` :
+
+```bash
+mkdir -p $BETO_WORK_DIR/models $BETO_WORK_DIR/cut && cd $BETO_WORK_DIR/models
+curl -sL -o birefnet-general-lite.onnx https://github.com/danielgatis/rembg/releases/download/v0.0.0/BiRefNet-general-bb_swin_v1_tiny-epoch_232.onnx
+$BETO_PY -I tools/video/cutout.py <photo.jpg> $BETO_WORK_DIR/cut/<id>_bir.png
+```
+
+Le détourage marche très bien sur une bague entière (rendus, bague posée). Quand les doigts du gant cachent une partie de l'anneau, garder la photo d'origine : une bague à moitié coupée qui flotte, ça ne passe pas.
+
 **Vidéos brutes** : téléchargées depuis Google Drive (l'hôte `drive.usercontent.google.com` est autorisé dans l'environnement « -beto-jewelry ») :
 
 ```bash
@@ -75,9 +99,14 @@ $BETO_PY reels_pro.py P02_couleurs_velocity   # montage pro (numpy + scipy) -> $
 
 **Montage pro** (`pro.py`) : chaque reel donne une piste (`music`), des plans comptés en temps (`beats`) avec une transition (`zoomin`, `hblur`, `fadewhite`, `smoothleft`, `fade` ou `cut`), des textes (`card_words`, un mot à la fois) et une carte de fin. Le moteur trouve le tempo, commence au passage le plus fort de la chanson, place chaque coupe sur un temps, ajoute une légère lueur (`glow`) et des scintillements, puis mixe la musique et les effets à −14 LUFS. Avec `end=dict(beats=5, overlay=True, layers=pro.end_overlay(titre, cta=…, place=…))`, la carte de fin s'affiche par-dessus le dernier plan au lieu d'un fond crème.
 
+**Motion design** (`spec["motion"] = dict(elements=[...])`) : chaque élément a un `type` (`stack`, `marquee`, `counter`, `brackets`, `kicker`, `text`, `steps`, `compare`, `lattice`, `stamp`, `circle`, `flash`, `scrim`, `bg`, `img`, `snow`, `progress`) et une fenêtre `at` / `until` **en temps de musique**. L'ordre de la liste est l'ordre d'empilement : mettre un `marquee` avant une `img` détourée fait passer le texte derrière la bague. Le plan vidéo continue dessous, ce qui permet les fenêtres (`S(..., box=(x, y, w, h, couleur))`) et les images cadrées (`fit=True, fitw=960`).
+
+**Piège connu (12 nov. 2026)** : une image de la couche motion qui est 100 % opaque est enregistrée par Chrome sans couche alpha. ffmpeg reconstruit alors tout le montage en cours de vidéo, et la suite saute à la fin. Le fond `bg` est donc plafonné à 99,5 % d'opacité, et `motion.py` refuse toute séquence qui contient une image sans alpha.
+
 Avant toute publication, vérifier chaque reel :
 - le texte est dans la zone sûre (ni dans le haut 14 %, ni dans le bas 35 %) ;
 - aucun reflet de Rayane dans la vitre ;
+- aucun écran qui montre le site ou le produit d'une autre marque (les plans b1626602 et b1627599 montrent une page Brilliant Earth : interdits dans `pro.BANNED`) ;
 - aucune image vide ou figée ;
 - la loudness est autour de −14 LUFS.
 

@@ -127,3 +127,59 @@ Ce qu'on en tire :
   - iPhone en 4K à 60 i/s, ou en ralenti à 120 i/s ;
   - la bague tourne lentement près d'une fenêtre ou sous une lampe, puis portée à l'annulaire (jamais à l'auriculaire).
 - C'est la matière qui manque le plus.
+
+## 9. Étude de marché du 12 nov. 2026 : qui filme quoi
+
+Relevé fait à partir des 12 derniers reels de 6 comptes de bijoutiers et des sources ci-dessous. C'est une corrélation, pas une étude contrôlée.
+
+| Compte | Format dominant | Vues médianes | Vues max. |
+|---|---|---|---|
+| @massoyanjewelers | Établi + histoire de client racontée (voix) | 1,3 M | 46,3 M |
+| @thisjewelerjustin | POV à l'établi, musique | 19,8 k | 8,47 M |
+| @ringconcierge | Fondatrice à l'écran, humour, éducation | 70,2 k | 225 k |
+| @varali_jewelry | Vitrine produit, sans voix | 11 k | 4,03 M |
+| @tapasvijewels | Produit seul | 6,8 k | 537 k |
+| @frankdarling | Mixte, making-of | 12,2 k | 114 k |
+
+**Ce qu'on en tire**
+- **Le format le plus fort** est l'atelier, ou le POV, avec une histoire racontée par la voix du joaillier. La vitrine produit seule est une loterie : un succès à quelques millions, mais une médiane basse.
+- **La confiance passe par la personne.** Ring Concierge attribue 70 % de ses revenus à Instagram et dit que voir qui est derrière les pièces règle le problème de confiance (Glossy). Mosseri, fin 2025 : le contenu brut et authentique est une preuve. Rayane doit donc être à l'écran ou à la voix dans une bonne partie des reels.
+- **Les vidéos de banque d'images ne doivent pas être le cœur du contenu.** Instagram favorise le contenu original. Les plans Mixkit restent un ingrédient : gens, émotion, noir et blanc, jamais le sujet principal.
+- **La voix** : il n'y a pas de chiffre public qui compare une voix à « texte + musique » sur Reels. Les indices vont dans le même sens. On ajoute toujours les sous-titres.
+- **Les conversions** (messages privés, réservations) ne sont mesurées publiquement par personne. On les mesure nous-mêmes, reel par reel.
+
+**Répartition visée par semaine**
+
+| Format | Part |
+|---|---|
+| Histoire d'atelier avec la voix de Rayane | 35 % |
+| Vitrine produit | 20 % |
+| Face caméra | 15 % |
+| Éducatif | 15 % |
+| Parcours client | 10 % |
+| Paiement en 3 étapes | 5 % |
+| Banque d'images comme sujet principal | 0 % |
+
+Voir `TOURNAGE.md` pour la liste de plans par pièce et la banque du jour.
+
+**Plans de paiement : règles du Québec (Loi sur la protection du consommateur, OPC)** — à faire valider par un avocat ou par Abraham.
+- Une pub sur une bague ne peut rien dire du crédit, sauf qu'il est disponible (« financement disponible »).
+- Une pub de crédit ne peut pas montrer la bague ni pousser à acheter à crédit (art. 245).
+- Citer un taux, une mensualité ou un nombre de versements oblige à tout afficher : taux, frais, nombre et montant des versements, total (art. 246 et 247, OPC « publicité »).
+- **Le paiement en 3 étapes** (un dépôt, 50 % à l'approbation du 3D, le solde à la remise, sans frais) n'est probablement pas du crédit (art. 1 f), mais l'OPC ne le confirme pas. On le présente comme « en 3 étapes », jamais comme « financement », « versements » ou « payez plus tard ».
+- **À vérifier** : un acompte perçu avant la conclusion du contrat pourrait devoir aller dans un compte en fidéicommis (art. 254, OPC « acompte »). Ça pourrait viser le dépôt de design.
+- Si Affirm, PayBright ou un autre service est ajouté : dans les reels de bagues, seulement « financement disponible ». Les détails vont dans une pub de crédit à part, conforme, sans image de bague.
+
+**Sons émotifs qui marchent pour les mariages (à ajouter dans l'app)**
+- « golden hour (piano instrumental) », Chilled Pig : 2,2 M de reels.
+- « Saturn », SZA : entrées dans l'allée.
+- « Ordinary (Wedding Version) », Alex Warren.
+- « Less Than a Lover », JENNIE.
+- « Linger », The Cranberries.
+- « A Thousand Years ».
+- « Golden Hour », JVKE.
+- « All I Want for Christmas Is You », Mariah Carey, pour Noël.
+
+Une chanson commerciale ne s'intègre jamais dans le fichier : on publie une version `_APP` et Rayane ajoute la chanson dans l'app. Meta documente une « Instagram Audio API » (juin 2026), mais on n'a pas vérifié si Supermetrics y donne accès.
+
+**Sources** : zoomsphere.com (algorithme 2026), om.co (mémo de Mosseri), glossy.co (Ring Concierge), opc.gouv.qc.ca (publicité sur le crédit, acompte), lpc.quebec (art. 1, 245 à 247), businesshub.affirm.ca (Affirm Canada et le Québec), dashsocial.com et creatordb.app (sons), fixthemusic.com (mariages), support.apple.com (réglages iPhone), gemfind.com (photo de bijoux).

@@ -13,6 +13,7 @@ WORK = os.environ.get("BETO_WORK_DIR", "/tmp/beto-video")
 E = WORK
 FOOTAGE = os.environ.get("BETO_FOOTAGE_DIR", f"{WORK}/footage")      # iPhone clips, renders, CAD videos (any name)
 BROLL = os.environ.get("BETO_BROLL_DIR", f"{WORK}/broll")            # videographer b-roll (FrameXXXXXXXX.mov)
+STOCK = os.environ.get("BETO_STOCK_DIR", f"{WORK}/stock")            # Mixkit stock video, mk<id>.mp4 (see README)
 FONTS = os.environ.get("BETO_FONTS_DIR", f"{WORK}/fonts_pkg")         # npm pack @fontsource/bodoni-moda @fontsource/jost
 PY = os.environ.get("BETO_PY", "python3")                            # python with numpy + scipy (for sfx.py)
 LOGO = f"{REPO}/tools/invoicing/assets/logo.png"                      # official logo, never modified
@@ -81,6 +82,12 @@ def src_info(clip):
                 kind, rate = "still", 30.0
             _INFO[clip] = (p, kind, w, h, rate)
         return _INFO[clip]
+    if clip.startswith("mk"):  # Mixkit stock (free licence): people, weddings, city. Never a stock ring close-up.
+        if clip not in _INFO:
+            p = f"{STOCK}/{clip}.mp4"
+            w, h, rate, _k = _probe(p)
+            _INFO[clip] = (p, "sdr", w, h, rate)
+        return _INFO[clip]
     if clip not in _INFO:
         p = f"{BROLL}/Frame0{clip[1:]}.mov"
         o = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height,r_frame_rate",
@@ -113,7 +120,7 @@ def run(cmd):
 
 
 def S(clip, start, dur, zoom=None, cx=None, cy=None, speed=1.0, fx=(), size=(W, H), slowmo=False, reveal=None,
-      fit=False, yoff=60, fitbg=None):
+      fit=False, yoff=60, fitbg=None, fitw=None, box=None):
     """Shot spec. fx: punch, kenburns, kenburns_out, shake, rgb, flash, flash_out, blurin, whip, bw.
     fit=True: show the whole frame (square video, render) over a blurred copy of itself."""
     if clip in CLIP:  # named iPhone clips keep their historical defaults (cache keys)
@@ -128,6 +135,10 @@ def S(clip, start, dur, zoom=None, cx=None, cy=None, speed=1.0, fx=(), size=(W, 
         d["fit"] = True; d["yoff"] = yoff
         if fitbg:
             d["fitbg"] = fitbg  # solid background colour (CAD videos on plain white)
+        if fitw:
+            d["fitw"] = fitw  # width of the framed picture (16:9 stock in a matte, like the reference edits)
+    if box:  # (x, y, w, h, bg): the shot is cropped to w x h and placed at x, y on a solid 1080x1920 background
+        d["box"] = list(box); d["size"] = [box[2], box[3]]
     return d
 
 
@@ -161,7 +172,7 @@ def render_shot(s):
         else:
             bg = (f"[fa]scale={ow}:{oh}:force_original_aspect_ratio=increase,crop={ow}:{oh},gblur=sigma=30,"
                   f"eq=brightness=0.03:saturation=0.9[fbg];")
-        f.append(f"split[fa][fb];{bg}[fb]scale={ow - 40}:-2:flags=lanczos[ffg];"
+        f.append(f"split[fa][fb];{bg}[fb]scale={s.get('fitw', ow - 40)}:-2:flags=lanczos[ffg];"
                  f"[fbg][ffg]overlay=(W-w)/2:(H-h)/2+{s['yoff']}")
         if "kenburns" in fx:
             f.append(f"zoompan=z='1+0.07*in/{n_in}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={ow}x{oh}:fps={zr}")
@@ -194,6 +205,8 @@ def render_shot(s):
     f.append(f"fps={FPS},setsar=1,tpad=stop_mode=clone:stop_duration=2")
     if "bw" in fx:
         f.append("hue=s=0")
+    if "bwc" in fx:  # contrasty black & white (stock), so the colour of our stones pops after it
+        f.append("hue=s=0,eq=contrast=1.22:brightness=-0.03")
     if s["reveal"] is not None:  # black & white -> colour at reveal time (s)
         r = s["reveal"]
         f.append(f"hue=s='if(lt(t,{r}),0,min(1,(t-{r})*5))'")
@@ -210,6 +223,9 @@ def render_shot(s):
         f.append(f"fade=t=out:st={s['dur']-0.1:.3f}:d=0.1:color=white")
     if "dip" in fx:
         f.append("fade=t=in:st=0:d=0.2:color=black")
+    if s.get("box"):
+        bx, by, bw_, bh, bgc = s["box"]
+        f.append(f"pad={W}:{H}:{bx}:{by}:color={bgc}")
     f.append("setsar=1")
     vf = ",".join(f)
     inp = (["-loop", "1", "-framerate", "30", "-t", f"{src_dur:.3f}", "-i", path] if kind == "still"

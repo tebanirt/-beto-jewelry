@@ -13,6 +13,7 @@ import pro
 
 CAST = "u:dec72787-IMG_5717.mov"   # raw gold casting, held between gloved fingers
 TRIO = "img:ee04a118-image.jpg"    # loose pink lab-grown diamonds in a gem jar
+CAD = "u:118b50e3-VIDEO-2026-11-01-11-01-49.mp4"   # Rayane's MatrixGold turntable (574x552)
 
 REELS = {}
 FR = dict(cta="Consultation gratuite — lien en bio", place="Montréal · ou en vidéo")
@@ -79,7 +80,7 @@ def J01_journee():
         dict(shot=b(1620314, 0.5, fx=["kenburns"]), beats=3, tr="cut"),
         dict(shot=b(1619438, 0.2, fx=["kenburns"]), beats=3, tr="smoothleft"),
         dict(shot=b(1626012, 1.0, fx=["kenburns", "glow"]), beats=3, tr="smoothleft"),
-        dict(shot=b(1626602, 0.2, fx=["kenburns"]), beats=3, tr="fadewhite"),        # 3D design on the laptop
+        dict(shot=S(CAD, 10.0, 1, fit=True, fitbg="0xFFFFFF", fx=["kenburns"]), beats=3, tr="fadewhite"),  # real MatrixGold CAD
         dict(shot=S(CAST, 0.2, 1, zoom=1.8, cx=532, cy=1248, fx=["kenburns"]), beats=3, tr="smoothleft"),
         dict(shot=b(1621466, 0.1, fx=["punch", "glow"]), beats=2, tr="fade"),
         dict(shot=b(1656836, 0.1, slowmo=True, fx=["kenburns", "glow"]), beats=2),

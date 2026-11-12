@@ -21,6 +21,10 @@ N'écrire à l'écran ou en description **que** ces faits. Tout nouveau prix, d�
 - Pièces offertes aussi : alliances (dont éternité) et boucles d'oreilles, sur mesure (soumission en 24 h).
 - **Interdit** : un prix précis sans l'accord de Rayane ; « non remboursable » dans un reel ; un prix « en moins d'une heure » ; une photo ou un rendu inventé ou fait par IA ; un rendu du configurateur 3D.
 
+## Paiement (brief §3bis ; règles du Québec dans DONNEES.md §9)
+- Pour les clients du site : un dépôt pour lancer le design, 50 % à l'approbation du rendu 3D, le solde à la remise. À l'écran : « Ta bague en 3 étapes ». Jamais « financement », « versements », « payez plus tard » ni un montant mensuel.
+- Les « plans de paiement » dont Rayane a parlé le 12 nov. 2026 : modalités à confirmer avant tout reel qui en parle (le brouillon `P01_paiement_DRAFT` n'est pas publié).
+
 ## Avis Google (source : fiche Google « Beto Jewelry », relevé du 11 nov. 2026)
 - 17 avis, moyenne de 5 étoiles. Toujours dater le chiffre (« 17 avis Google ») : le mettre à jour avant de le réutiliser.
 - Citations exactes, utilisables sans le nom de la personne :
@@ -42,6 +46,15 @@ N'écrire à l'écran ou en description **que** ces faits. Tout nouveau prix, d�
 - Seulement 1 diamant naturel sur 10 000 est de couleur.
 - Pink Star : 59,60 ct, vendu 71,2 M$ US en 2017.
 - Toujours écrire « diamant de laboratoire », jamais « diamant » seul pour une pierre de labo.
+
+## Histoire des sertissages et des formes (pour les reels éducatifs)
+- Sertissage Tiffany à six griffes : lancé en 1886, il élève le diamant au-dessus de l'anneau (tiffany.com).
+- Sertissage cathédrale : le nom viendrait des arches des cathédrales gothiques. C'est l'explication courante dans l'industrie, sans source GIA : dire « tiendrait son nom ».
+- Halo : popularisé à l'époque Art déco, dans les années 1920. Ses ancêtres sont les bagues « cluster » de l'époque géorgienne. L'origine est débattue.
+- Marquise : **légende** de Louis XV et de la marquise de Pompadour, vers 1740 (GIA la présente comme une légende). Toujours dire « on raconte que ».
+- Poire : attribuée à Lodewyk van Bercken (ou van Berquem), inventeur de la meule de polissage, au XVe siècle. La date exacte est incertaine (gemsociety.org).
+- Alliance : le cercle sans début ni fin symbolise l'éternité, symbole qu'on attribue à l'Égypte ancienne (GIA).
+- « Vena amoris » (une veine qui relierait l'annulaire au cœur) : **légende**.
 
 ## Instagram (sources : Instagram Help, @creators, Mosseri)
 - Trial reels : montrés d'abord aux non-abonnés. Il faut au moins 200 abonnés. Résultats après environ 24 h ; décision à 72 h.

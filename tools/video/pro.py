@@ -32,6 +32,9 @@ BANNED = {
     # consultation B-roll: test ring or stone strip on the client's fingers (pinky)
     "b1632222", "b1632324", "b1632578", "b1632718", "b1632967", "b1631022", "b1617830", "b1618811",
     "b1631850", "b1630568", "b1628298", "b1619751",
+    # laptop screen = a competitor's product page (brilliantearth.com « Secret Garden », « Choose this setting ») with
+    # Rayane's personal browser tabs: never presented as our 3D design (found 12 Nov 2026). Use the real CAD instead.
+    "b1626602", "b1627599",
     # photos: ring worn on a finger of the black glove
     "img:1c6e1795-image.jpg", "img:761f226b-image.jpg", "img:2637c0bf-image.jpg", "img:e9997fda-image.jpg",
     "img:0590e1e4-image.jpg", "img:ce39d97b-image.jpg", "img:37721e80-image.jpg", "img:bd2f379f-image.jpg",
@@ -154,7 +157,7 @@ def build(spec, out_dir=None):
     name = spec["name"]
     bad = [s["shot"]["clip"] for s in spec["shots"] if s["shot"]["clip"] in BANNED]
     if bad:
-        raise SystemExit(f"{name}: refused, banned footage (ring or stone on a finger): {bad}")
+        raise SystemExit(f"{name}: refused, banned footage (ring or stone on a finger, or a competitor's page): {bad}")
     if spec.get("music"):
         mp3 = os.path.join(MUSIC_DIR, f"{spec['music']}.mp3")
         info = bt.analyze(mp3)
@@ -228,6 +231,10 @@ def build(spec, out_dir=None):
         st = t_of(e0 + end.get("reveal", [0, 1, 2, 3])[min(k, 3)])
         tl.append((f"e_{lid}", st, 0.35, total, 0.0, 14))
     ldir = rk.render_layers(name, layers)
+    mdir = None
+    if spec.get("motion"):  # motion-design layer (kinetic type, counters, explainer graphics) on the beat grid
+        import motion
+        mdir = motion.render(name, spec["motion"], [t_of(k) for k in range(total_beats + 3)], total)
     # ffmpeg graph
     inputs = sum((["-i", f] for f in files), [])
     n = len(files)
@@ -241,6 +248,10 @@ def build(spec, out_dir=None):
     swpath = sweep_asset() if sw else None
     for w in sw:
         inputs += ["-loop", "1", "-framerate", str(FPS), "-t", f"{total:.3f}", "-i", swpath]
+    mo_idx = None
+    if mdir:
+        mo_idx = n + len(tl) + len(gl) + len(sw)
+        inputs += ["-framerate", str(FPS), "-i", f"{mdir}/%05d.png"]
     # each shot is padded (last frame cloned): xfade needs the first input to last at least offset + duration,
     # and frame rounding can leave a shot one frame short, which silently drops every later shot.
     fc = "".join(f"[{i}:v]fps={FPS},setsar=1,settb=1/{FPS},setpts=N/({FPS}*TB),format=yuv420p,"
@@ -254,6 +265,9 @@ def build(spec, out_dir=None):
         fc += f"[{prev}][v{i}]xfade=transition={xt}:duration={T:.3f}:offset={off:.3f}[x{i}];"
         prev = f"x{i}"
         D = bounds[i + 1] + (Ts[i] / 2 if i < len(Ts) else 0)
+    if mo_idx is not None:  # above the footage, under the text cards and the end card
+        fc += f"[{mo_idx}:v]format=rgba,setpts=PTS-STARTPTS[mo];[{prev}][mo]overlay=0:0:eof_action=pass:format=auto[mov];"
+        prev = "mov"
     k0 = n
     for k, (lid, st, fi, en, fo, rise) in enumerate(tl):
         idx = k0 + k
@@ -293,7 +307,7 @@ def build(spec, out_dir=None):
     _run([rk.PY, "-I", "-c",
           f"import sys; sys.path.insert(0, {os.path.dirname(os.path.abspath(__file__))!r}); import sfx, json; "
           f"sfx.render({total + 0.2}, json.loads({json.dumps(json.dumps(sfx_events))}), None, {wav!r}, master_gain=0.6)"])
-    ai = g0 + len(gl) + len(sw)
+    ai = g0 + len(gl) + len(sw) + (1 if mo_idx is not None else 0)
     if mp3 is None:  # app version: silent track, the song is chosen in Instagram
         inputs += ["-f", "lavfi", "-t", f"{total + 0.5:.3f}", "-i", "anullsrc=r=48000:cl=stereo"]
         fc += f";[{ai}:a]anull[aout]"
