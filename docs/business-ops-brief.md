@@ -222,6 +222,28 @@ Ne pas ajouter n8n ou un autre orchestrateur externe sans raison précise — l'
 - Règles de l'espace : relance **tous les 3 jours pour un client sérieux, 7 jours sinon** (clients `owner = lauren`) ; tables `orders` et `payments` (tout paiement est enregistré, comptant compris) ; le statut du client avance seul (dépôt → `depot_recu`, production, livré), jamais en arrière ; chaque action va dans `activity_log` ; les reçus restent faits par Rayane. Les agents qui lisent les marges doivent lire `orders` (les colonnes `sale_price`/`production_cost` du client sont recalculées à partir des commandes).
 - **Calculateur de prix de Lauren (décidé par Rayane le 4 nov. 2026, bagues de fiançailles en diamant de laboratoire seulement)** : coût = pierre (carat × prix au carat, blanc ou couleur, toutes couleurs au même prix) + métal (poids moyen × prix au gramme, fonte comprise, **+ 5 $/g de marge de sécurité** faute de cours du jour) + sertissage solitaire + options (halo caché, semi-éternité : pierres + sertissage) + boîte + rencontre client + gravure. Prix donné = coût + 1 000 $ ; plancher = coût + 700 $ (arrondis au 50 $ supérieur). Lauren peut offrir n'importe quel prix entre les deux sans demander ; sous le plancher, elle demande à Rayane. **Les montants sont dans Supabase `pricing_config` (ligne `ring_calculator`), jamais dans ce dépôt public.** Les prix au gramme ne changent que si le marché bouge de façon importante (Rayane garde volontairement une marge au-dessus de son prix réel). Tout le reste (naturel, pierres précieuses, alliances, bijoux, halo complet, trois pierres, éternité complète, homme) : devis par Rayane. Les PDF de soumission restent faits et vérifiés par Rayane. Chaque prix donné est enregistré dans `quotes` (prix visé, plancher, prix offert, langue, réponse du client) pour comparer aux coûts réels et améliorer la formule.
 
+## 8quinquies. Objectif 2028 : formation intensive en sertissage (décidé par Rayane le 12 nov. 2026)
+
+- **But** : suivre une formation intensive de sertissage de 2 à 3 mois vers mi-2028 (dans environ 18 mois), pour :
+  - **monter en gamme** : micro-pavé, éternité complète, haute joaillerie de 5 000 à 30 000 $ ;
+  - **produire du contenu de sertissage** : pièces serties par Rayane, filmées au microscope ;
+  - **renforcer la confiance** : un joaillier qui dessine **et** sertit lui-même.
+  - Ce n'est pas pour économiser sur le sertissage, qui coûte peu : 35 $ la pierre centrale et 3 $ la petite pierre, soit environ 100 à 150 $ par bague. Le sertisseur garde les bagues standard.
+- **Écoles comparées le 12 nov. 2026** (prix à revérifier ; Rayane compare lui-même) :
+  - Gerardi Setting School (Accademia delle Arti Orafe, Rome) : 300 h en 2 mois de sertissage et de micro-sertissage. Prix non publié.
+  - Robert Deda Jewelry Academy (Gjakova, Kosovo) : 5 500 € pour 1 mois, 10 500 € pour 2 mois, 13 000 € pour 3 mois. 5 élèves au maximum, de 9 h à 18 h.
+  - New Approach School (Tennessee) : Graduate Bench Jeweler, 12 semaines, 20 170 $ US. C'est de la bijouterie complète, pas seulement du sertissage.
+  - Moins cher, sans longue absence : des stages d'une semaine, comme GRS Intro to Pavé (1 650 $ US) ou NASJ Advanced Stone Setting (environ 1 650 $ US).
+- **Budget** : environ 15 000 à 30 000 $ CA en tout (cours, voyage, logement). Mettre environ 1 000 $ de côté par mois.
+- **Conditions avant de partir** (le plus gros coût, c'est l'absence de Rayane) :
+  1. Les ventes et les consultations se font sans lui (Lauren ou un vendeur formé). Objectif : environ 50 % des ventes conclues sans Rayane d'ici fin 2027.
+  2. La production est pilotée à distance : une fiche de production standard par commande, et des photos à chaque étape (fonte, sertissage, polissage) que Rayane approuve. Le fondeur, le sertisseur et le polisseur travaillent seuls pendant 2 à 3 mois.
+  3. Le design 3D se fait à distance (MatrixGold sur portable).
+  4. Le marketing continue pendant la formation.
+  5. Partir après la Saint-Valentin, entre février et avril.
+- **Dès maintenant** : un poste de sertissage avec microscope trinoculaire et caméra 4K pour filmer, comme contenu de confiance. La recherche d'équipement se fait quand Rayane la demande.
+- **Suivi** : la part des ventes conclues sans Rayane et l'adoption des fiches et des photos de production sont des indicateurs à ajouter à la rétro du dimanche, avec l'accord de Rayane sur le prompt de la tâche.
+
 ## 8bis. Autonomie graduée des messages (approuvée par Rayane le 3 nov. 2026)
 
 But : automatiser le plus possible, **sans jamais faire d'erreur critique**. Chaque type de message gagne sa liberté avec des preuves, et la perd à la première erreur.
