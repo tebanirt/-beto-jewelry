@@ -235,6 +235,14 @@ Ne pas ajouter n8n ou un autre orchestrateur externe sans raison précise — l'
   - New Approach School (Tennessee) : Graduate Bench Jeweler, 12 semaines, 20 170 $ US. C'est de la bijouterie complète, pas seulement du sertissage.
   - Moins cher, sans longue absence : des stages d'une semaine, comme GRS Intro to Pavé (1 650 $ US) ou NASJ Advanced Stone Setting (environ 1 650 $ US).
 - **Budget** : environ 15 000 à 30 000 $ CA en tout (cours, voyage, logement). Mettre environ 1 000 $ de côté par mois.
+- **Financement possible** (recherche du 12 nov. 2026, à revérifier en 2027) :
+  1. La formation payée par la société est en principe une dépense d'entreprise déductible (cours, voyage, logement). À confirmer avec Abraham.
+  2. Bourse de perfectionnement du CALQ : jusqu'à 15 000 $, en métiers d'art, stages à l'étranger compris, plus une bourse de déplacement. Il faut le statut d'artisan-créateur professionnel. Monter le dossier en 2027 (portfolio de créations originales).
+  3. Services Québec (MFOR) : jusqu'à 50 % des frais de formation, mais surtout pour les entreprises de 6 à 99 employés. Vérifier avec un conseiller.
+  4. Pour l'équipement de sertissage (poste, microscope, caméra) :
+     - PME MTL, Fonds Jeunes Entreprises : jusqu'à 25 000 $ non remboursables, avec un prêt de PME MTL. L'entreprise doit être sur l'île de Montréal : vérifier l'adresse de la société.
+     - Futurpreneur (18 à 39 ans) : prêt jusqu'à 75 000 $ avec mentorat.
+     - Desjardins Créavenir : 18 à 39 ans, entreprise de 3 ans ou moins.
 - **Conditions avant de partir** (le plus gros coût, c'est l'absence de Rayane) :
   1. Les ventes et les consultations se font sans lui (Lauren ou un vendeur formé). Objectif : environ 50 % des ventes conclues sans Rayane d'ici fin 2027.
   2. La production est pilotée à distance : une fiche de production standard par commande, et des photos à chaque étape (fonte, sertissage, polissage) que Rayane approuve. Le fondeur, le sertisseur et le polisseur travaillent seuls pendant 2 à 3 mois.
