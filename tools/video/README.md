@@ -1,5 +1,11 @@
 # Studio vidéo Beto Jewelry (reels et trial reels)
 
+> **Statut au 13 nov. 2026 : en construction, pas encore au point.**
+> - Ce studio est en plein développement : on teste, on mesure et on corrige chaque jour.
+> - Les vidéos publiées jusqu'ici ne sont pas encore assez bonnes pour amener beaucoup de vues, d'abonnés ou de clients. Les premiers trial reels ont fait de 6 à 109 vues, avec 73 à 85 % des gens qui passent dans les 3 premières secondes.
+> - Rien ici n'est un format « final » ou validé par les résultats. Les formats changent à chaque vague selon les données (bilan à 72 h, `DONNEES.md`), le retour de Rayane, et le tournage qu'il commence (`TOURNAGE.md`).
+> - **À ne pas prendre comme référence finie.** Avant de réutiliser un format, regarder ses chiffres dans la table `social_reels`.
+
 Moteur de montage automatique : ffmpeg + Chromium (Playwright) pour les textes + son synthétisé, donc libre de droits. Il fait des reels 1080×1920 à 30 i/s, à −14 LUFS, avec :
 - les polices du site (Bodoni Moda, Jost) ;
 - le vrai logo (`tools/invoicing/assets/logo.png`, jamais modifié) ;
