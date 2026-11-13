@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, type CSSProperties, type ReactNode } from "react";
 import { LINKS, RINGS } from "@/lib/site-content";
+import { SHOW_PHOTO_SLOTS } from "@/lib/constants";
 import Rich from "./Rich";
 import { useSite } from "./useSite";
 
@@ -333,10 +334,14 @@ export function OfficeCards() {
     { key: "video", data: o.video, photo: null },
   ] as const;
   return (
-    <div className="bj-t2 bj-offices grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(320px, 100%), 1fr))", gap: "40px 32px" }}>
+    <div className={`bj-t2 grid ${SHOW_PHOTO_SLOTS ? "bj-offices" : ""}`} style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(320px, 100%), 1fr))", gap: "40px 32px" }}>
       {cards.map((card, i) => (
-        <article key={card.key} className="bj-reveal flex flex-col" style={{ ["--bj-delay" as string]: `${i * 90}ms` }}>
-          {card.photo ? (
+        <article
+          key={card.key}
+          className="bj-reveal flex flex-col"
+          style={{ ["--bj-delay" as string]: `${i * 90}ms`, ...(SHOW_PHOTO_SLOTS ? {} : { borderTop: "1px solid #DED8CD", paddingTop: 28 }) }}
+        >
+          {!SHOW_PHOTO_SLOTS ? null : card.photo ? (
             <PhotoSlot code={card.photo.code} label={card.photo.label} style={{ aspectRatio: "3 / 2" }} />
           ) : (
             <div className="flex items-center justify-center bg-beto-ink" style={{ aspectRatio: "3 / 2" }}>
@@ -346,7 +351,7 @@ export function OfficeCards() {
               </svg>
             </div>
           )}
-          <h3 className="bj-serif bj-opsz-18 text-beto-black" style={{ fontSize: 28, lineHeight: 1.2, marginTop: 28 }}>
+          <h3 className="bj-serif bj-opsz-18 text-beto-black" style={{ fontSize: 28, lineHeight: 1.2, marginTop: SHOW_PHOTO_SLOTS ? 28 : 0 }}>
             <T text={card.data.name} />
           </h3>
           <p className="text-beto-black" style={{ fontSize: 15, lineHeight: 1.7, marginTop: 10 }}>

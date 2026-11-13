@@ -1,10 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { LINKS } from "@/lib/site-content";
 import Rich from "../Rich";
 import { useSite } from "../useSite";
 import { ArrowRight, Eyebrow, FinalCta, PhotoSlot, RingPhoto, RuledList, SectionHead, T } from "../ui";
+import { SHOW_PHOTO_SLOTS } from "@/lib/constants";
 
 const sectionPad = { paddingTop: "clamp(88px, 10vw, 144px)", paddingBottom: "clamp(88px, 10vw, 144px)" };
 
@@ -107,8 +109,15 @@ export default function CustomRingsPage() {
                 </figure>
               );
             })}
+{(p.wornImage || SHOW_PHOTO_SLOTS) && (
             <figure className="bj-reveal" style={{ ["--bj-delay" as string]: "210ms" }}>
-              <PhotoSlot code={p.wornPhoto.code} label={p.wornPhoto.label} style={{ aspectRatio: "4 / 5" }} />
+              {p.wornImage ? (
+                <div className="bj-settle relative overflow-hidden bg-beto-sand" style={{ aspectRatio: "4 / 5" }}>
+                  <Image src={p.wornImage.src} alt={p.wornImage.alt} fill sizes="(max-width: 560px) 50vw, (max-width: 1100px) 33vw, 300px" className="object-cover" />
+                </div>
+              ) : (
+                <PhotoSlot code={p.wornPhoto.code} label={p.wornPhoto.label} style={{ aspectRatio: "4 / 5" }} />
+              )}
               <figcaption className="mt-4">
                 <span className="bj-serif bj-opsz-18 block text-beto-black" style={{ fontSize: 24, lineHeight: 1.2 }}>
                   {p.wornName}
@@ -118,6 +127,7 @@ export default function CustomRingsPage() {
                 </span>
               </figcaption>
             </figure>
+            )}
           </div>
         </div>
       </section>

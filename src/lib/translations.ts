@@ -573,7 +573,7 @@ export const t = {
             category: "Pricing & Payment",
             items: [
               { q: "What's the minimum budget for a custom engagement ring?", a: "Our custom engagement rings typically start around $2,000 CAD, including diamond. The final cost depends on your diamond, setting complexity, and metal. We'll give you an honest estimate before you commit." },
-              { q: "Do you offer financing?", a: "We are exploring financing options and will announce availability soon. In the meantime, reach out to discuss your project — we'll find a way to work within your timeline and budget." },
+              { q: "Do you offer financing?", a: "Yes, financing is available. The design deposit is paid by card. For the following payments (50% when you approve the design, then the balance at pickup), you can choose to pay in instalments with Affirm or Klarna at checkout, subject to their approval. They show you their terms before you accept. Beto Jewelry adds no fees." },
               { q: "What payment methods do you accept?", a: "We accept all major credit cards, bank transfer, and payment by installment for larger projects. We'll confirm accepted methods during your consultation." },
             ],
           },
@@ -693,6 +693,11 @@ export const t = {
         budgetsNatural: ["$6,000–$8,000", "$8,000–$10,000", "$10,000–$15,000", "$15,000–$20,000", "$20,000+"],
         naturalBudgetNote: "Natural diamond engagement rings start at $6,000. For a smaller budget, a lab-grown diamond offers the same sparkle and the same composition.",
         timelines: ["As soon as possible", "1–2 months", "2–4 months", "4–6 months", "No rush"],
+        // Seasonal timeline choice, shown only before the order deadline (see seasonNow()).
+        seasonHolidays: "For the holidays",
+        seasonHolidaysNote: "For the holidays, order by December 11 (December 4 for platinum).",
+        seasonValentine: "For Valentine’s Day",
+        seasonValentineNote: "For Valentine’s Day, order by January 31 (January 24 for platinum).",
         contacts: {
           email: "Email",
           phone: "Phone",
@@ -1507,7 +1512,7 @@ export const t = {
             category: "Prix et paiement",
             items: [
               { q: "Quel est le budget minimum pour une bague de fiançailles sur mesure ?", a: "Nos bagues de fiançailles sur mesure commencent généralement autour de 2 000 CAD, diamant inclus. Le coût final dépend de votre diamant, de la complexité de la monture et du métal. Nous vous donnons une estimation honnête avant que vous vous engagiez." },
-              { q: "Offrez-vous du financement ?", a: "Nous explorons des options de financement et annoncerons leur disponibilité bientôt. En attendant, contactez-nous pour discuter de votre projet — nous trouverons un moyen de travailler dans le cadre de votre calendrier et budget." },
+              { q: "Offrez-vous du financement ?", a: "Oui, le financement est disponible. Le dépôt de design se paie par carte. Pour les paiements suivants (50 % à l’approbation du design, puis le solde à la remise), vous pouvez choisir de payer en versements avec Affirm ou Klarna au moment du paiement, sous réserve de leur approbation. Ils vous présentent leurs conditions avant que vous acceptiez. Beto Jewelry n’ajoute aucuns frais." },
               { q: "Quels modes de paiement acceptez-vous ?", a: "Nous acceptons toutes les principales cartes de crédit, virement bancaire et paiement par versements pour les projets importants. Nous confirmerons les méthodes acceptées lors de votre consultation." },
             ],
           },
@@ -1627,6 +1632,11 @@ export const t = {
         budgetsNatural: ["6 000–8 000 $", "8 000–10 000 $", "10 000–15 000 $", "15 000–20 000 $", "20 000 $ et plus"],
         naturalBudgetNote: "Les bagues de fiançailles en diamant naturel commencent à 6 000 $. Pour un budget plus petit, le diamant de laboratoire offre le même éclat et la même composition.",
         timelines: ["Le plus tôt possible", "1–2 mois", "2–4 mois", "4–6 mois", "Pas de délai précis"],
+        // Choix de délai saisonnier, affiché seulement avant la date limite (voir seasonNow()).
+        seasonHolidays: "Pour les Fêtes",
+        seasonHolidaysNote: "Pour les Fêtes, commandez avant le 11 décembre (le 4 décembre en platine).",
+        seasonValentine: "Pour la Saint-Valentin",
+        seasonValentineNote: "Pour la Saint-Valentin, commandez avant le 31 janvier (le 24 janvier en platine).",
         contacts: {
           email: "Courriel",
           phone: "Téléphone",
