@@ -209,3 +209,27 @@ Une chanson commerciale ne s'intègre jamais dans le fichier : on publie une ver
 - **Contrôle** : le premier rendu de PX01 montrait des mains gantées avec une bague à pierre bleue sous le prix. Corrigé : sous le prix, seulement Rayane et le plateau de pierres seules.
 - **Lisibilité** : T06 sur une musique à 129 BPM ne laissait que 1,4 s pour lire le troisième avis. Refait à 92 BPM (15,4 s). Règle : pour un reel à citations, viser 80 à 95 BPM.
 - **Avis Google** : 20 avis, tous à 5 étoiles (15 nov.). Nouvelles citations dans `FAITS.md`.
+
+## 12. Les vidéos de prix les plus vues de la niche (TikTok, 6 derniers mois, relevé du 15 nov. 2026)
+
+Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden halo engagement ring price », « 2 carat oval solitaire lab grown price ». Triées par vues.
+
+| Compte | Vues | Enregistrements | Durée | Accroche |
+|---|---|---|---|---|
+| @junolabjewelry | 10,2 M | 222 k | 15 s | « 2200 usd for this 3 carat vintage style marquise diamond ring » |
+| @princessbridediamonds | 6,4 M | 36 k | 7 s | « My engagement ring hot take: 1 carat is plenty » |
+| @diamaura | 2,5 M | 85 k | 9 s | « Melia Adorned Marquise with a center 3.2ct diamond set in 18k gold » |
+| @aleni.diamond.cus | 2,4 M | 46 k | 15 s | « $2,600 gets you this. A 6.16ct marquise diamond. » |
+| @givarajewelry | 1,3 M | 17 k | 54 s | « Over 6 carats oval ring $2,995. » |
+
+**Ce qui revient chez tous**
+- **Le prix et la bague exacte dans la même phrase, dès la première seconde** : prix, carat, forme et modèle (« vintage style », « hidden halo », « solitaire », « cathedral »).
+- **Une fiche complète dans la description**, souvent avec « save for reference » : modèle, métal et carat de l'or, largeur de l'anneau, forme, carat, couleur, pureté, certificat, prix. Elle fait monter les enregistrements : 222 k chez Juno Lab.
+- **La vraie bague à l'écran**, sur la main ou qui tourne, en 7 à 15 s.
+- **Une question qui fait commenter** (« Agree or disagree? ») ou un appel à l'envoi (« Send this to him to drop a hint »).
+
+**Appliqué le 15 nov. 2026** : PX01b (français) et PX02 (anglais).
+- Première carte : « Solitaire 2 carats, 2 300 à 2 400 $ ».
+- Puis une ligne à la fois : diamant rond de laboratoire, couleur E et pureté VVS2, certificat IGI, or blanc 18k, design 3D en 48 h, puis un avis Google.
+- La description reprend la fiche de la bague, avec la question « Tu la préfères en solitaire ou avec un halo caché ? ».
+- **Il manque encore la vraie bague, filmée sur le plateau tournant** (`TOURNAGE.md` §2).

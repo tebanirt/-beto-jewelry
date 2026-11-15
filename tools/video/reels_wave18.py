@@ -55,30 +55,52 @@ def _t06():
                 "20 avis Google. | 5 étoiles.")
 
 
+def _prix(lang, name, music):
+    """Price-hook reel built on the niche's winners (15 Nov research: @junolabjewelry 10.2 M views
+    "2200 usd for this 3 carat vintage style marquise diamond ring", @aleni.diamond.cus 2.4 M "$2,600 gets you this",
+    @princessbridediamonds 6.4 M with a full "Ring details" list): the MODEL, the carat and the price in the very first
+    card, then the ring's spec sheet one line at a time. Rayane asked on 15 Nov that the model always be stated clearly.
+    Under the hook and the price: Rayane only. The round six-prong white-gold solitaire (b1656960) illustrates the model."""
+    fr = lang == "fr"
+    spec = _avis(lang)
+    spec["name"] = name
+    spec["music"] = music
+    spec["shots"] = [
+        dict(shot=b(1620314, 0.6, fx=["kenburns"]), beats=5, tr="cut"),           # Rayane, under model + price
+        dict(shot=b(1619438, 1.0, fx=["kenburns"]), beats=3, tr="smoothleft"),     # Rayane shows loose stones
+        dict(shot=b(1656960, 0.1, slowmo=True, fx=["kenburns", "glow"]), beats=3, tr="fadewhite"),  # round solitaire
+        dict(shot=b(1620314, 3.6, fx=["kenburns"]), beats=3, tr="fade"),           # Rayane again
+        dict(shot=b(1657215, 0.1, slowmo=True, fx=["kenburns", "glow"]), beats=4),  # under the review and the end card
+    ]
+    if fr:
+        t = [("Solitaire 2 carats | 2 300 à 2 400&nbsp;$", "Prix indicatif · + taxes", 820, "s86"),
+             ("Diamant rond | de laboratoire.", "Pierre centrale", 1000, "s72"),
+             ("Couleur E · pureté VVS2 | Certificat IGI.", "Qualité", 300, "s72"),
+             ("Or blanc 18k. | Design 3D en 48 h.", "Monture", 1000, "s72"),
+             ("«&nbsp;Prix super abordable | comparé aux compétiteurs.&nbsp;»", "Avis Google", 300, "s72")]
+    else:
+        t = [("2-carat solitaire | $2,300–2,400 CAD", "Estimated price · plus tax", 820, "s86"),
+             ("Round | lab-grown diamond.", "Center stone", 1000, "s72"),
+             ("E color · VVS2 clarity | IGI certified.", "Quality", 300, "s72"),
+             ("18k white gold. | 3D design in 48 h.", "Setting", 1000, "s72"),
+             ("“His pricing is excellent | for the service and final product.”", "Google review", 300, "s72")]
+    at = [(0, 5), (5, 8), (8, 11), (11, 14), (14, 18)]
+    spec["texts"] = [dict(html=pro.card_words(x, over=o, size=sz, top=top), at=a, until=u)
+                     for (x, o, top, sz), (a, u) in zip(t, at)]
+    # The hook card appears whole from the first frame (model + carat + price readable at 0 s, like the niche's winners);
+    # the spec lines keep the word-by-word reveal.
+    spec["texts"][0]["html"] = spec["texts"][0]["html"][-1:]
+    return spec
+
+
 @reel
 def PX01_prix_2ct():
-    spec = _avis("fr")
-    spec["name"] = "PX01_prix_2ct"
-    spec["music"] = "664"
-    # Beats 0-10 (hook and price) stay on Rayane and the tray of loose stones: the first render put the price over
-    # gloved hands holding a blue-stone ring, i.e. another ring under the price (QC 15 Nov). Rings only from beat 10.
-    spec["shots"] = [
-        dict(shot=b(1620314, 0.6, fx=["kenburns"]), beats=7, tr="cut"),          # Rayane (5.96 s clip)
-        dict(shot=b(1619438, 1.0, fx=["kenburns"]), beats=3, tr="smoothleft"),    # Rayane shows loose stones
-        dict(shot=b(1626012, 0.2, fx=["kenburns", "glow"]), beats=3, tr="cut"),
-        dict(shot=b(1656960, 0.1, slowmo=True, fx=["kenburns", "glow"]), beats=3, tr="fade"),
-        dict(shot=b(1657215, 0.1, slowmo=True, fx=["kenburns", "glow"]), beats=2),
-    ]
-    spec["texts"] = [
-        dict(html=pro.card_words("2 carats. | Diamant de laboratoire.", over="Solitaire · or blanc 18k", size="s72", top=820),
-             at=0, until=4),
-        dict(html=pro.card_words("2 300 à 2 400&nbsp;$ | + taxes", over="Prix indicatif", size="s86", top=1000),
-             at=4, until=10),
-        dict(html=pro.card_words("Certificat IGI. | Design 3D en 48 h.", size="s72"), at=10, until=14),
-        dict(html=pro.card_words("«&nbsp;Prix super abordable | comparé aux compétiteurs.&nbsp;»", over="Avis Google", size="s72"),
-             at=14, until=18),
-    ]
-    return spec
+    return _prix("fr", "PX01b_solitaire_2ct", "664")
+
+
+@reel
+def PX02_EN_solitaire_2ct():
+    return _prix("en", "PX02_EN_solitaire_2ct", "480")
 
 
 if __name__ == "__main__":

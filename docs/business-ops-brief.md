@@ -307,6 +307,8 @@ Ce fichier doit être mis à jour à chaque nouvelle règle ou correction durabl
 - **Plan pour viser 100 k abonnés** : `tools/video/PLAN_100K.md` (15 nov. 2026).
 - **Prix dans les vidéos (Rayane, 15 nov. 2026 : « utilise la fourchette de prix dans les vidéos accrocheuses »)** : bague solitaire de 2 carats en diamant de laboratoire, or blanc 18k, « 2 300 à 2 400 $ + taxes ». Le formulaire du site affichait 2 350 $ pour cette bague le 15 nov.
   - Avant chaque nouveau reel de prix, vérifier que le site est toujours dans la fourchette.
+  - **Toujours nommer le modèle en gros** (Rayane, 15 nov. 2026 : « tu dis 2 ct mais pas le modèle, solitaire ou hidden halo… c'est important… il faut être toujours clair ») : la première carte donne le modèle, le carat et le prix (« Solitaire 2 carats, 2 300 à 2 400 $ »). La fiche suit : forme, diamant de laboratoire, couleur E et pureté VVS2, certificat IGI, or blanc 18k. C'est le format des meilleures vidéos de la niche dans le monde (`tools/video/DONNEES.md` §12).
+  - **Recherche poussée avant chaque nouveau format** (même demande) : étudier les vidéos les plus vues de la concurrence, au Canada et ailleurs, et reprendre ce qui les rend claires.
   - L'image sous le prix montre Rayane, des pierres seules ou une bague qui correspond exactement. Jamais une autre bague.
   - Tout autre prix reste à Rayane.
 - **Vidéos de réaction des clients** (Rayane, 15 nov. 2026 : « il y a beaucoup de clients qui ne sont pas confortables ») : on offre trois choix, toujours avec un accord écrit, sans jamais insister :

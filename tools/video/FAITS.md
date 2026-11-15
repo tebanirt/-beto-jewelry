@@ -20,6 +20,8 @@ N'écrire à l'écran ou en description **que** ces faits. Tout nouveau prix, d�
 - **Saint-Valentin** : commander avant le 31 janvier (or) ou le 24 janvier (platine).
 - Pièces offertes aussi : alliances (dont éternité) et boucles d'oreilles, sur mesure (soumission en 24 h).
 - **Prix approuvé pour les reels** (Rayane, 15 nov. 2026 : « utilise la fourchette de prix dans les vidéos accrocheuses ») : bague solitaire de 2 carats en diamant de laboratoire, or blanc 18k : **« 2 300 à 2 400 $ + taxes »**. Le formulaire du site affichait 2 350 $ pour cette bague le 15 nov. 2026 ; vérifier avant chaque nouveau reel de prix qu'il est toujours dans la fourchette. Toujours écrire « + taxes ». L'image sous le prix montre Rayane, des pierres seules ou une bague qui correspond exactement à la description, jamais une autre bague.
+- **Toujours nommer le modèle en gros** (Rayane, 15 nov. 2026 : « tu dis 2 ct mais pas le modèle, solitaire ou hidden halo, c'est important ») : dès la première carte, le modèle (solitaire, halo caché + demi-éternité, halo caché + trois-quarts éternité, version cathédrale), le carat et le prix. Ensuite, la fiche complète : forme, pierre, qualité, certificat, métal.
+- **Qualité standard des diamants de laboratoire** (brief §6, confirmée par Rayane le 3 et le 5 nov. 2026) : couleur E, pureté VVS2, sauf les pierres de couleur.
 - **Interdit** : tout autre prix sans l'accord de Rayane ; « non remboursable » dans un reel ; un prix « en moins d'une heure » ; une photo ou un rendu inventé ou fait par IA ; un rendu du configurateur 3D.
 
 ## Paiement (brief §3bis ; règles du Québec dans DONNEES.md §9)
