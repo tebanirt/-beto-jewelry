@@ -19,6 +19,7 @@ Google Drive du compte betojewlz@gmail.com, dossier **« Beto — Banque vidéo 
 | 08 · Remises et réactions (avec accord écrit) | `17gl1ec2CB-xH1TR-rEOrh0aDljWVouMD` | Avec le niveau d'accord dans le nom du fichier |
 | 09 · Montréal | `1Z-VuQzDOgbluvTQAGa0LZ8xGPmZGPJ7P` | Extérieurs filmés par Rayane |
 | 10 · Photos fond neutre | `1WpOrLjjCgL6X1K6Mseerc4P5xc6zQt8L` | Photos pour le site et les carrousels |
+| 11 · Musique Epidemic Sound | `15Kwr43pOktr49rwRXeX4WjoXvs-kmwe1` | Pistes téléchargées par Rayane (forfait Business) ; l'agent les copie dans `music/epidemic/` avec leur tempo |
 | 99 · Déjà utilisé | `1SCs1ccnESFUCFRixpYAR81Kq5llQ0E2_` | Après usage dans un reel (on peut réutiliser un plan, jamais le même montage) |
 
 L'ancien dossier « Frame » (`1w-XwO_5-ELvI2BD7lWnYFFrcDo9zTJsX`, 41 clips de la consultation) reste où il est.

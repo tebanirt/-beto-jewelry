@@ -58,11 +58,12 @@
 | TikTok | Rayane a un compte et le connecte le 16 nov. |
 | Vidéos de réaction | Oui, mais beaucoup de clients ne sont pas à l'aise : trois choix (visage, mains seulement, voix ou avis écrit), brief §10 |
 | Studio produit | Plateau tournant, fond noir, trépied, lumière, app Blackmagic Camera (`TOURNAGE.md` §2) |
+| Musique (« 1 + 3, je prends Epidemic Sound ») | Le reel normal du jour est envoyé à Rayane sans musique, avec la chanson à la une à ajouter dans l'app ; Epidemic Sound (forfait Business) pour les trial reels automatiques (`DONNEES.md` §13) |
 
 ## 5. Qui fait quoi
 
 | Qui | Quoi |
 |---|---|
 | L'agent vidéo, seul (brief §2) | 5 à 6 trial reels par jour, la règle des 72 h, les variantes des gagnants, la veille de niche, les chiffres, le push sur la branche de travail |
-| Rayane | 15 minutes de tournage par jour (la banque de 7 h 18) et des messages vocaux ; l'abonnement Supermetrics ; épingler les publications ; le studio produit ; connecter TikTok |
+| Rayane | 15 minutes de tournage par jour (la banque de 7 h 18) et des messages vocaux ; publier le reel normal du jour avec la chanson (environ 1 minute) ; l'abonnement Supermetrics ; Epidemic Sound (forfait Business, comptes reliés, pistes téléchargées) ; épingler les publications ; le studio produit ; connecter TikTok |
 | Lauren | La vidéo de réaction à chaque remise, avec l'accord écrit du client |

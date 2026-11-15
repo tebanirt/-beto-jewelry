@@ -127,5 +127,6 @@ L'agent monte la voix sur tes plans, ajoute les sous-titres en français et la m
 
 ## 6. Ce qui reste à Rayane
 
-- Publier les versions `_APP` avec la chanson à la une (environ 1 minute par reel dans l'app).
+- Publier le reel normal du jour (version `_APP`) avec la chanson à la une que l'agent lui indique, à 17 h 10, et l'épingler si demandé (environ 1 minute dans l'app).
+- Télécharger des pistes Epidemic Sound (forfait Business, comptes reliés) et les envoyer dans le chat ou dans « 11 · Musique Epidemic Sound ».
 - Donner les modalités exactes des plans de paiement avant toute vidéo qui en parle (voir `DONNEES.md` §9 pour les règles du Québec).

@@ -241,7 +241,10 @@ Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden ha
 **Ce qui est possible**
 - **Une chanson connue intégrée au fichier** : Instagram coupe le son ou montre moins la vidéo. Règle du brief §10 : jamais.
 - **Par l'outil de publication** : impossible d'ajouter la bibliothèque musicale d'Instagram. « You cannot add Instagram's music library tracks through the API. No trending sounds » (Postproxy, guide 2026 des reels). Meta a une API de musique sous licence pour les tiers, avec connexion Facebook. Elle propose d'autres titres que l'app, et Supermetrics ne la prend pas en charge (`audio_name` sert seulement à nommer le son).
-- **Donc** : la vraie chanson tendance s'ajoute seulement dans l'app, par Rayane. On lui envoie une version sans musique, coupée au rythme de la chanson (option 1 proposée le 15 nov., en attente de sa réponse). Epidemic Sound, payant, est l'option 3 : décision de Rayane.
+- **Donc** : la vraie chanson tendance s'ajoute seulement dans l'app, par Rayane.
+- **Décision de Rayane, 15 nov. 2026 (« 1 + 3, je prends Epidemic Sound »)** :
+  - option 1 : chaque jour, le reel normal lui est envoyé sans musique (version `_APP`, `reels_app.py`), coupé au tempo de la chanson choisie, avec le nom de la chanson, l'heure, la description et la consigne d'épinglage. Il le publie dans l'app avec la chanson. Premiers envois : T06 avis Google sur « Angel of My Dreams » (JADE, 128 BPM) le 16 nov., et « Qui est Rayane » sur « Hold On, We're Going Home » (Drake, 100 BPM) le 18 nov. Tempos vérifiés sur Tunebat et SongBPM ;
+  - option 3 : Epidemic Sound pour les trial reels. Forfaits relevés sur epidemicsound.com/pricing le 15 nov. : Creator 14,99 $ par mois (usage personnel), Pro 24,99 $ par mois (professionnels et pigistes), Business 40 $ par mois ou 480 $ par an (marques et agences, chiffre d'affaires de moins de 10 M$, pubs permises, 3 comptes par plateforme). Le bon forfait pour une marque : Business. Aucun connecteur Epidemic pour l'agent : Rayane télécharge les pistes et les envoie.
 
 **Tendances Instagram de la semaine du 11 nov. 2026** (CreatorDB)
 - « All I Want for Christmas Is You » (Mariah Carey), « Underneath the Tree » (Kelly Clarkson), « Santa Tell Me » (Ariana Grande) : Noël.
