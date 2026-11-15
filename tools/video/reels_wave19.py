@@ -99,7 +99,9 @@ def coupe(lang, cut, name, music, i):
         dict(shot=b(close[0], close[1], slowmo=True, fx=["kenburns"]), beats=4),            # Rayane: review + end card
     ]
     if fr:
-        hook = f"Solitaire {nfr} 2 carats | 2 300 à 2 400&nbsp;$"
+        # a long cut name (« taille émeraude ») overflowed the card (QC 15 Nov): carat goes to the second line
+        hook = (f"Solitaire {nfr} 2 carats | 2 300 à 2 400&nbsp;$" if len(nfr) <= 10
+                else f"Solitaire {nfr} | 2 carats · 2 300 à 2 400&nbsp;$")
         stone = f"Diamant {nfr} | de laboratoire"
         lines = [("Couleur E · pureté VVS2 | Certificat IGI.", "Qualité", 300),
                  ("Or blanc 18k. | Design 3D en 48 h.", "Monture", 1000),
