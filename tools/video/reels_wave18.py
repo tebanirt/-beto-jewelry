@@ -35,7 +35,7 @@ def avis(lang, name, quotes, total):
 @reel
 def T06_avis_parfait():
     spec = _t06()
-    spec["music"] = "470"
+    spec["music"] = "227"   # ~92 BPM: 470 (129 BPM) left only 1.4 s to read the third quote
     spec["shots"] = [
         dict(shot=b(1620314, 1.6, fx=["kenburns"]), beats=4, tr="cut"),
         dict(shot=b(1621466, 0.6, fx=["kenburns", "glow"]), beats=3, tr="smoothleft"),
