@@ -100,7 +100,7 @@ export default function BaguesFiancaillesMontrealContent() {
           </div>
           <div>
             <p className="font-display text-beto-black text-3xl lg:text-4xl font-light">5,0★</p>
-            <p className="text-xs uppercase tracking-widest text-beto-gray-light mt-2">Avis Google</p>
+            <p className="text-xs uppercase tracking-widest text-beto-gray-light mt-2">20 avis Google</p>
           </div>
         </div>
       </section>
