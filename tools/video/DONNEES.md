@@ -233,3 +233,24 @@ Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden ha
 - Puis une ligne à la fois : diamant rond de laboratoire, couleur E et pureté VVS2, certificat IGI, or blanc 18k, design 3D en 48 h, puis un avis Google.
 - La description reprend la fiche de la bague, avec la question « Tu la préfères en solitaire ou avec un halo caché ? ».
 - **Il manque encore la vraie bague, filmée sur le plateau tournant** (`TOURNAGE.md` §2).
+
+## 13. Musique (15 nov. 2026)
+
+**Remarque de Rayane** : « je trouve les musiques plates… sur les vidéos les plus trendy, ils utilisent tous des musiques populaires ».
+
+**Ce qui est possible**
+- **Une chanson connue intégrée au fichier** : Instagram coupe le son ou montre moins la vidéo. Règle du brief §10 : jamais.
+- **Par l'outil de publication** : impossible d'ajouter la bibliothèque musicale d'Instagram. « You cannot add Instagram's music library tracks through the API. No trending sounds » (Postproxy, guide 2026 des reels). Meta a une API de musique sous licence pour les tiers, avec connexion Facebook. Elle propose d'autres titres que l'app, et Supermetrics ne la prend pas en charge (`audio_name` sert seulement à nommer le son).
+- **Donc** : la vraie chanson tendance s'ajoute seulement dans l'app, par Rayane. On lui envoie une version sans musique, coupée au rythme de la chanson (option 1 proposée le 15 nov., en attente de sa réponse). Epidemic Sound, payant, est l'option 3 : décision de Rayane.
+
+**Tendances Instagram de la semaine du 11 nov. 2026** (CreatorDB)
+- « All I Want for Christmas Is You » (Mariah Carey), « Underneath the Tree » (Kelly Clarkson), « Santa Tell Me » (Ariana Grande) : Noël.
+- « Housewife » (Tate McRae) et « Nicole Kidman » (ADÉLA).
+- « Angel of My Dreams » (JADE) : tendance « trop beau pour être vrai », pour dévoiler une bague.
+- « Upside Down » (Diana Ross) : transitions avant / après, du 3D à la bague finie.
+- « Linger » (The Cranberries), « Everlong » (Foo Fighters), « November Rain » (Guns N' Roses).
+
+**Banque gratuite modernisée** : 32 pistes R&B et hip-hop de Mixkit, avec la même licence gratuite, ajoutées le 15 nov. Liste et tempos dans `music/modern_rnb_hiphop.json` (dossier de travail).
+- **Pour les reels à citations ou à prix (80 à 100 BPM)** : 225 « Soulful Serenity », 1176 « Give It To Me Baby », 266 « Trap Sad », 738 et 739 « Hip Hop 02/03 », 485 « Green Chair RnB », 289 « Sensual Pop », 330 « Hippidi Hop », 1141 « Funky Triplets », 434 « Sun-Kissed Skin », 220 « Know Better ».
+- **Pour les reels rythmés (100 à 130 BPM)** : 228 « Fashion », 432 « Angel Watching Me », 783 « Babe », 465 « Watch Me Breezy », 864 « A Night to Remember », 366 « Kid Ink Type ».
+- Les anciennes pistes « ambiance » ou « corporate » ne servent plus.
