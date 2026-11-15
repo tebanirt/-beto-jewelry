@@ -183,3 +183,21 @@ Voir `TOURNAGE.md` pour la liste de plans par pièce et la banque du jour.
 Une chanson commerciale ne s'intègre jamais dans le fichier : on publie une version `_APP` et Rayane ajoute la chanson dans l'app. Meta documente une « Instagram Audio API » (juin 2026), mais on n'a pas vérifié si Supermetrics y donne accès.
 
 **Sources** : zoomsphere.com (algorithme 2026), om.co (mémo de Mosseri), glossy.co (Ring Concierge), opc.gouv.qc.ca (publicité sur le crédit, acompte), lpc.quebec (art. 1, 245 à 247), businesshub.affirm.ca (Affirm Canada et le Québec), dashsocial.com et creatordb.app (sons), fixthemusic.com (mariages), support.apple.com (réglages iPhone), gemfind.com (photo de bijoux).
+
+## 10. Bilan du 15 nov. 2026 (18 trial reels publiés du 10 au 14 nov.)
+
+| Format | Meilleur exemple | Saut | Temps vu |
+|---|---|---|---|
+| Avis Google cité, Rayane en 1re image | « Vous êtes vraiment à l'écoute. » (T01) | 62,4 % | 13 s |
+| Même format, en anglais | « He took the time to listen… » (T02) | 63 % | 2 s |
+| Rayane en consultation, étapes | « Ta bague de fiançailles, étape par étape » | 66,7 % | 7 s |
+| Mythe écrit en citation | « Un diamant de labo, c'est du faux. » | 70 % | 3 s |
+| Contraste en question | « Tout le monde choisit le blanc… » | 70,6 % | 2 s |
+| Écrin, vitrine lente, vote, portfolio, Noël sur produit seul | « Regarde-le dans la lumière », votes, « sous le sapin » | 90 à 100 % | 0 à 1 s |
+
+**Conclusions**
+- **Une personne à l'écran dès la 1re image** est la condition numéro 1. Avec Rayane + un vrai avis, on passe de 90 % à 62 % de saut et de 1 s à 13 s regardées.
+- **Les reels de produit seul ne marchent pas sur ce compte** (vitrine, écrin, vote, portfolio) : 0 à 10 sur 100. On arrête ces formats tant que Rayane n'a pas de vraies bagues finies filmées de près (le format qui marche chez les autres, `TOURNAGE.md`).
+- **Noël sur produit seul** : 92 à 96 % de saut. Noël doit passer par une personne (Rayane face caméra, avis) ou un appel à l'envoi.
+- **Vague 17** (`reels_wave17.py`) : 3 variantes de T01 et T02 (une seule chose change, la citation d’accroche), programmées le 17 nov. à 13 h 45 (T03), 19 h 30 (T05, anglais) et 21 h (T04).
+- Score dans `social_reels` = 100 − taux de saut, en attendant assez de partages et d'abonnements pour les compter.
