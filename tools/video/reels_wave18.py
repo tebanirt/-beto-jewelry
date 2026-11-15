@@ -60,18 +60,20 @@ def PX01_prix_2ct():
     spec = _avis("fr")
     spec["name"] = "PX01_prix_2ct"
     spec["music"] = "664"
+    # Beats 0-10 (hook and price) stay on Rayane and the tray of loose stones: the first render put the price over
+    # gloved hands holding a blue-stone ring, i.e. another ring under the price (QC 15 Nov). Rings only from beat 10.
     spec["shots"] = [
-        dict(shot=b(1620314, 2.4, fx=["kenburns"]), beats=4, tr="cut"),          # Rayane, under the hook
-        dict(shot=b(1619438, 1.6, fx=["kenburns"]), beats=3, tr="smoothleft"),    # under the price: no ring
-        dict(shot=b(1626012, 0.2, fx=["kenburns", "glow"]), beats=3, tr="cut"),  # loose stones, tweezers
-        dict(shot=b(1621466, 1.2, fx=["kenburns", "glow"]), beats=3, tr="fadewhite"),
-        dict(shot=b(1656960, 0.8, slowmo=True, fx=["kenburns", "glow"]), beats=3, tr="fade"),
-        dict(shot=b(1657215, 0.8, slowmo=True, fx=["kenburns", "glow"]), beats=2),
+        dict(shot=b(1620314, 0.6, fx=["kenburns"]), beats=7, tr="cut"),          # Rayane (5.96 s clip)
+        dict(shot=b(1619438, 1.0, fx=["kenburns"]), beats=3, tr="smoothleft"),    # Rayane shows loose stones
+        dict(shot=b(1626012, 0.2, fx=["kenburns", "glow"]), beats=3, tr="cut"),
+        dict(shot=b(1656960, 0.1, slowmo=True, fx=["kenburns", "glow"]), beats=3, tr="fade"),
+        dict(shot=b(1657215, 0.1, slowmo=True, fx=["kenburns", "glow"]), beats=2),
     ]
     spec["texts"] = [
         dict(html=pro.card_words("2 carats. | Diamant de laboratoire.", over="Solitaire · or blanc 18k", size="s72", top=820),
-             at=0, until=5),
-        dict(html=pro.card_words("2 300 à 2 400&nbsp;$ | + taxes", over="Prix indicatif", size="s86"), at=5, until=10),
+             at=0, until=4),
+        dict(html=pro.card_words("2 300 à 2 400&nbsp;$ | + taxes", over="Prix indicatif", size="s86", top=1000),
+             at=4, until=10),
         dict(html=pro.card_words("Certificat IGI. | Design 3D en 48 h.", size="s72"), at=10, until=14),
         dict(html=pro.card_words("«&nbsp;Prix super abordable | comparé aux compétiteurs.&nbsp;»", over="Avis Google", size="s72"),
              at=14, until=18),

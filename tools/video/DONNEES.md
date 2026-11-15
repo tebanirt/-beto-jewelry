@@ -201,3 +201,11 @@ Une chanson commerciale ne s'intègre jamais dans le fichier : on publie une ver
 - **Noël sur produit seul** : 92 à 96 % de saut. Noël doit passer par une personne (Rayane face caméra, avis) ou un appel à l'envoi.
 - **Vague 17** (`reels_wave17.py`) : 3 variantes de T01 et T02 (une seule chose change, la citation d’accroche), programmées le 17 nov. à 13 h 45 (T03), 19 h 30 (T05, anglais) et 21 h (T04).
 - Score dans `social_reels` = 100 − taux de saut, en attendant assez de partages et d'abonnements pour les compter.
+
+## 11. Changements du 15 nov. 2026 (vague 18)
+
+- **Nouveau** : 1 reel normal par jour (accord de Rayane). Premier : T06, les avis Google avec Rayane en première image, le 16 nov. à 17 h 10, à épingler.
+- **Nouveau test** : PX01, premier reel avec prix en accroche (solitaire 2 ct, diamant de laboratoire, or blanc 18k, « 2 300 à 2 400 $ + taxes »), en trial le 16 nov. à 15 h. Le site affichait 2 350 $ pour cette bague.
+- **Contrôle** : le premier rendu de PX01 montrait des mains gantées avec une bague à pierre bleue sous le prix. Corrigé : sous le prix, seulement Rayane et le plateau de pierres seules.
+- **Lisibilité** : T06 sur une musique à 129 BPM ne laissait que 1,4 s pour lire le troisième avis. Refait à 92 BPM (15,4 s). Règle : pour un reel à citations, viser 80 à 95 BPM.
+- **Avis Google** : 20 avis, tous à 5 étoiles (15 nov.). Nouvelles citations dans `FAITS.md`.
