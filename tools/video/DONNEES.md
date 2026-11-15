@@ -254,3 +254,16 @@ Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden ha
 - **Pour les reels à citations ou à prix (80 à 100 BPM)** : 225 « Soulful Serenity », 1176 « Give It To Me Baby », 266 « Trap Sad », 738 et 739 « Hip Hop 02/03 », 485 « Green Chair RnB », 289 « Sensual Pop », 330 « Hippidi Hop », 1141 « Funky Triplets », 434 « Sun-Kissed Skin », 220 « Know Better ».
 - **Pour les reels rythmés (100 à 130 BPM)** : 228 « Fashion », 432 « Angel Watching Me », 783 « Babe », 465 « Watch Me Breezy », 864 « A Night to Remember », 366 « Kid Ink Type ».
 - Les anciennes pistes « ambiance » ou « corporate » ne servent plus.
+
+## 14. Production du 15 nov. 2026 (série des coupes)
+
+- **13 reels programmés du 16 au 20 nov.** : le solitaire 2 ct en 8 coupes (en français), 4 en anglais (rond, ovale, marquise, taille émeraude) et un reel avec toutes les coupes. Une seule chose change d'une coupe à l'autre, pour savoir laquelle retient le mieux.
+- **« Qui est Rayane »**, reel normal le 18 nov. à 17 h 10 : la deuxième publication à épingler.
+- **Contrôles qui ont arrêté un reel avant publication** :
+  - une bague ovale ROSE (b1657215) sous l'avis, à la fin du premier reel de prix ;
+  - un « | » visible au lieu d'un retour à la ligne ;
+  - « taille émeraude » qui dépassait de la carte ;
+  - la petite ligne du reel « toutes les coupes » qui dépassait aussi ;
+  - deux plans de Rayane bloqués par pro.BANNED (bague à l'auriculaire d'une cliente).
+- **Chiffres** : 234 abonnés. T01 reste le meilleur (62,4 % de saut, 13 s regardées). J01 a eu le premier enregistrement. Aucun reel n'a atteint ses 72 h aujourd'hui.
+- **Pas de recherche de niche aujourd'hui** : les crédits Firecrawl du jour étaient presque épuisés. La recherche du matin (§12, LISTE_A_FILMER.md) sert de base.

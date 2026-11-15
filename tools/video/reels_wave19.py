@@ -146,7 +146,7 @@ def C_toutes_coupes():
         dict(shot=b(1621163, 0.0, slowmo=True, fx=["kenburns", "glow"]), beats=4, tr="fadewhite"),
         dict(shot=b(1619438, 0.1, slowmo=True, fx=["kenburns"]), beats=4),
     ]
-    texts = [dict(html=pro.card_words("Solitaire 2 carats | 2 300 à 2 400&nbsp;$", over="Diamant de laboratoire · or blanc 18k · + taxes",
+    texts = [dict(html=pro.card_words("Solitaire 2 carats | 2 300 à 2 400&nbsp;$", over="Diamant de labo · or blanc 18k · + taxes",
                                       size="s86", top=820)[-1:], at=0, until=4)]
     order = ["rond", "ovale", "poire", "marquise", "emeraude", "coussin", "radiant", "princesse"]
     for k, cut in enumerate(order):
