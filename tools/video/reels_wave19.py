@@ -29,8 +29,8 @@ def reel(fn):
 
 
 def _svg(inner, w=200, h=260):
-    return (f'<svg viewBox="0 0 {w} {h}" width="190" height="{int(190 * h / w)}" style="display:block;margin:6px auto 14px" '
-            f'fill="none" stroke="{GOLD}" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">{inner}</svg>')
+    return (f'<svg viewBox="0 0 {w} {h}" width="240" height="{int(240 * h / w)}" style="display:block;margin:6px auto 14px" '
+            f'fill="none" stroke="{GOLD}" stroke-width="3.6" stroke-linejoin="round" stroke-linecap="round">{inner}</svg>')
 
 
 # Top-view line drawings: outline, table and a few facet lines. Diagrams, not photos.
@@ -81,7 +81,7 @@ PAIRS = [((1617419, 0.3, False), (1619438, 0.1)), ((1619438, 0.8, False), (16174
 
 def _card(over, svg, text, top):
     return [f'<div class="card pad" style="top:{top}px"><span class="over">{over}</span>{svg}'
-            f'<div class="serif s72">{text}</div></div>']
+            f'<div class="serif s72">{text.replace(" | ", "<br>").replace("|", "<br>")}</div></div>']
 
 
 def coupe(lang, cut, name, music, i):

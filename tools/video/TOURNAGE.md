@@ -89,7 +89,8 @@ L'agent monte la voix sur tes plans, ajoute les sous-titres en français et la m
 
 ## 4. Comment m'envoyer les fichiers
 
-- Dans le chat Claude, ou dans le dossier Google Drive « Beto — Banque contenu » (à créer).
+- Dans le dossier Google Drive **« Beto — Banque vidéo »** (compte betojewlz@gmail.com), sous-dossier « 00 · À trier ». L'agent trie lui-même : voir `BANQUE.md`. La liste de ce qu'il faut filmer est dans `LISTE_A_FILMER.md`.
+- Tant que ce Drive est plein (15 nov. 2026), dans le chat Claude.
 - Les vidéos **originales** : jamais une capture d'écran ni une vidéo déjà publiée avec un filigrane.
 - Dis-moi en une ligne de quelle pièce il s'agit (forme, métal, pierre). Je n'invente rien sur une pièce.
 
