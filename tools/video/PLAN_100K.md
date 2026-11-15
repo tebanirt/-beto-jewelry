@@ -35,7 +35,7 @@
 1. **Trial reels ou reels normaux.** Instagram classe les deux avec le même système. Mosseri ne fait jamais de trial reels lui-même ; pour lui, ils enlèvent la pression, ce n'est pas une astuce de croissance (Q&R de juin 2026, rapportée par Kontentino).
    - Chez nous, le problème est le profil : un visiteur qui l'ouvre après un trial reel voit une grille ancienne, et il s'abonne moins.
    - Proposition : 1 reel normal par jour, du format qui a passé la barre, et 3 publications épinglées (qui est Beto, les avis, le parcours).
-   - **À valider par Rayane** : tout post qui n'est pas un trial reel lui revient (brief §2).
+   - **Validé par Rayane le 15 nov. 2026.** L'outil ne peut pas épingler : Rayane épingle chaque publication dans l'app.
 2. **TikTok et YouTube Shorts**, avec les mêmes fichiers originaux : les gagnants de la niche sont surtout sur TikTok. Il faut un compte, et aucun outil connecté ne publie sur TikTok pour l'instant.
 3. **Publications collaboratives** avec des photographes de mariage, des organisateurs et des salles de Montréal : le reel apparaît sur les deux comptes. Il faut l'accord du partenaire.
 
@@ -47,10 +47,22 @@
 1. **L'abonnement Supermetrics est indispensable** : sans lui, plus de publication ni de chiffres. L'essai se termine vers le 17 nov. 2026. C'est la décision de Rayane.
 2. **Jamais d'achat d'abonnés.** Les pubs Meta restent en pause jusqu'à un ordre de Rayane (brief §8).
 
-## 4. Qui fait quoi
+## 4. Décisions de Rayane (15 nov. 2026)
+
+| Point | Réponse |
+|---|---|
+| Abonnement Supermetrics | Oui |
+| 1 reel normal par jour et les publications à épingler | Oui, et l'agent s'améliore sans demander (brief §2) |
+| 15 minutes de tournage par jour | Oui |
+| Prix en accroche | Oui, avec la fourchette approuvée (FAITS.md) |
+| TikTok | Rayane a un compte et le connecte le 16 nov. |
+| Vidéos de réaction | Oui, mais beaucoup de clients ne sont pas à l'aise : trois choix (visage, mains seulement, voix ou avis écrit), brief §10 |
+| Studio produit | Plateau tournant, fond noir, trépied, lumière, app Blackmagic Camera (`TOURNAGE.md` §2) |
+
+## 5. Qui fait quoi
 
 | Qui | Quoi |
 |---|---|
 | L'agent vidéo, seul (brief §2) | 5 à 6 trial reels par jour, la règle des 72 h, les variantes des gagnants, la veille de niche, les chiffres, le push sur la branche de travail |
-| Rayane | 15 minutes de tournage par jour (la banque de 7 h 18) et des messages vocaux ; l'abonnement Supermetrics ; les points marqués « à valider » |
+| Rayane | 15 minutes de tournage par jour (la banque de 7 h 18) et des messages vocaux ; l'abonnement Supermetrics ; épingler les publications ; le studio produit ; connecter TikTok |
 | Lauren | La vidéo de réaction à chaque remise, avec l'accord écrit du client |

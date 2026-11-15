@@ -19,21 +19,32 @@ N'écrire à l'écran ou en description **que** ces faits. Tout nouveau prix, d�
 - **Noël** : texte de pub approuvé (brief §6), à reprendre mot pour mot : « Une bague sur mesure sous le sapin ? Design 3D en 48 h, bague prête en 2 semaines. Commandez avant le 11 décembre. » / « A custom ring under the tree? 3D design in 48 h, ready in 2 weeks. Order by December 11. » En platine : commander vers le 4 décembre. Ne jamais promettre de date de livraison.
 - **Saint-Valentin** : commander avant le 31 janvier (or) ou le 24 janvier (platine).
 - Pièces offertes aussi : alliances (dont éternité) et boucles d'oreilles, sur mesure (soumission en 24 h).
-- **Interdit** : un prix précis sans l'accord de Rayane ; « non remboursable » dans un reel ; un prix « en moins d'une heure » ; une photo ou un rendu inventé ou fait par IA ; un rendu du configurateur 3D.
+- **Prix approuvé pour les reels** (Rayane, 15 nov. 2026 : « utilise la fourchette de prix dans les vidéos accrocheuses ») : bague solitaire de 2 carats en diamant de laboratoire, or blanc 18k : **« 2 300 à 2 400 $ + taxes »**. Le formulaire du site affichait 2 350 $ pour cette bague le 15 nov. 2026 ; vérifier avant chaque nouveau reel de prix qu'il est toujours dans la fourchette. Toujours écrire « + taxes ». L'image sous le prix montre Rayane, des pierres seules ou une bague qui correspond exactement à la description, jamais une autre bague.
+- **Interdit** : tout autre prix sans l'accord de Rayane ; « non remboursable » dans un reel ; un prix « en moins d'une heure » ; une photo ou un rendu inventé ou fait par IA ; un rendu du configurateur 3D.
 
 ## Paiement (brief §3bis ; règles du Québec dans DONNEES.md §9)
 - Pour les clients du site : un dépôt pour lancer le design, 50 % à l'approbation du rendu 3D, le solde à la remise. À l'écran : « Ta bague en 3 étapes ». Jamais « financement », « versements », « payez plus tard » ni un montant mensuel.
 - Les « plans de paiement » dont Rayane a parlé le 12 nov. 2026 : modalités à confirmer avant tout reel qui en parle (le brouillon `P01_paiement_DRAFT` n'est pas publié).
 
-## Avis Google (source : fiche Google « Beto Jewelry », relevé du 11 nov. 2026)
-- 17 avis, moyenne de 5 étoiles. Toujours dater le chiffre (« 17 avis Google ») : le mettre à jour avant de le réutiliser.
+## Avis Google (source : fiche Google « Beto Jewelry », lue dans Supermetrics le 15 nov. 2026)
+- **20 avis, tous à 5 étoiles** (15 nov. 2026 ; 17 le 11 nov.). Toujours dater le chiffre et le mettre à jour avant de le réutiliser.
 - Citations exactes, utilisables sans le nom de la personne :
   - « Vous êtes vraiment à l'écoute. »
   - « C'est exactement ce que je souhaitais. »
   - « Au-dessus de mes attentes. »
+  - « Je suis absolument en amour avec ma bague ! »
+  - « Le résultat est parfait ! »
+  - « Rayane très professionnel et courtois. »
+  - « Prix super abordable comparé aux compétiteurs. »
+  - « Le résultat est tout bonnement impeccable et la finition est magnifique. »
+  - « Merci pour la magnifique bague. »
   - « He took the time to listen to what I wanted. »
   - « They made such an important purchase feel special and stress-free. »
   - « 5 stars isn't enough. »
+  - « He made my dream come to life. »
+  - « The best in the business. »
+  - « His pricing is excellent for the service and final product received. »
+  - « Love my ring. »
 - Ne jamais inventer ni reformuler un avis. Une citation coupée ne change pas son sens.
 
 ## Science (source : GIA)

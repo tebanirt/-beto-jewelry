@@ -14,7 +14,10 @@ Rayane Tebani, fondateur de Beto Jewelry — 438-874-5759, Montréal. **Courriel
     - Il monte, publie, programme et retire les trial reels, et lit les chiffres.
     - Il met à jour `social_reels`, `tools/video/` et le §10 de ce brief.
     - Il fait `commit` et `git push` de ce travail sur la branche de travail `claude/confident-newton-e3wbxx`. Jamais sur `main` : c'est le site en ligne.
-    - Restent à Rayane : l'argent (abonnements, budget pub, tout prix montré dans une vidéo), tout post qui n'est pas un trial reel, et les messages aux clients.
+    - Il publie aussi **1 reel normal par jour** (pas un trial reel), d'un format qui a passé la barre des 72 h, et les publications à épingler sur le profil (Rayane, 15 nov. 2026 : « oui »).
+    - **Il s'améliore sans demander** (Rayane, 15 nov. 2026 : « il faut toujours que tu t'améliores et aussi sans mon autorisation… toujours essayer des nouvelles choses, même s'il faut utiliser des nouveaux outils, des nouveaux skills à installer »). Il change les formats, les seuils, les horaires, ses outils et les consignes de ses tâches programmées, et note chaque changement dans `tools/video/DONNEES.md`. Le but : plus d'abonnés et plus de ventes.
+    - Un nouvel outil ou skill est installé seulement s'il est vérifiable : source officielle, licence claire. Jamais une image ou une vidéo faite par IA présentée comme une vraie pièce (`docs/design-brief.md` §6).
+    - Restent à Rayane : l'argent (abonnements, budget pub, tout prix autre que la fourchette approuvée au §10), les pubs payées et les messages aux clients.
 - **Jamais envoyer un vrai courriel à un client** (`send_message`/`reply`/`forward`) — uniquement des brouillons Gmail (`create_draft`) que Rayane valide et envoie lui-même.
 - **Jamais confirmer/envoyer une facture sans que Rayane la confirme explicitement d'abord** — toujours lui montrer le PDF généré avant.
 - **Jamais changer le logo, la palette ou la mise en page des documents officiels** sans instruction explicite, même pour une « amélioration ».
@@ -302,6 +305,16 @@ Ce fichier doit être mis à jour à chaque nouvelle règle ou correction durabl
   - **Suppression** : l'outil de publication (Supermetrics) ne peut pas supprimer un reel publié, seulement annuler un reel programmé. Selon Mosseri, supprimer un reel raté pour le republier n'aide pas (juin 2026), et un vieux trial reel laissé tel quel ne nuit pas au compte, puisqu'il n'est pas sur le profil (juillet 2026). Un reel retiré reste donc sur Instagram, invisible du profil. Rayane peut le supprimer dans l'app s'il le veut : la liste est dans `social_reels`.
   - Première application, le 15 nov. 2026 : 8 reels retirés sur 8 jugés.
 - **Plan pour viser 100 k abonnés** : `tools/video/PLAN_100K.md` (15 nov. 2026).
+- **Prix dans les vidéos (Rayane, 15 nov. 2026 : « utilise la fourchette de prix dans les vidéos accrocheuses »)** : bague solitaire de 2 carats en diamant de laboratoire, or blanc 18k, « 2 300 à 2 400 $ + taxes ». Le formulaire du site affichait 2 350 $ pour cette bague le 15 nov.
+  - Avant chaque nouveau reel de prix, vérifier que le site est toujours dans la fourchette.
+  - L'image sous le prix montre Rayane, des pierres seules ou une bague qui correspond exactement. Jamais une autre bague.
+  - Tout autre prix reste à Rayane.
+- **Vidéos de réaction des clients** (Rayane, 15 nov. 2026 : « il y a beaucoup de clients qui ne sont pas confortables ») : on offre trois choix, toujours avec un accord écrit, sans jamais insister :
+  1. le visage ;
+  2. les mains seulement (la bague passée à l'annulaire, l'écrin qui s'ouvre) ;
+  3. la voix seulement, ou un avis écrit.
+- **Studio produit** (Rayane, 15 nov. 2026) : plateau tournant motorisé, fond noir, trépied, beaucoup de lumière et l'app Blackmagic Camera. Le matériel et les réglages sont dans `tools/video/TOURNAGE.md` §2.
+- **TikTok** : Rayane a un compte et le connecte le 16 nov. 2026. Les mêmes fichiers originaux y sont publiés, avec un texte adapté.
 - **Mix demandé par Rayane (12 nov. 2026)** : du motion design avec beaucoup de vie (typo géante, transitions, explicatifs), de vrais plans de ses bagues (photos retouchées, fonds de marque) et un peu de banque d'images (gens, mariages, hiver). Chaque reel a une accroche, une montée et un appel à l'action. La banque d'images (Mixkit) reste un ingrédient en noir et blanc, jamais une bague en gros plan, jamais présentée comme Montréal ou comme nos clients. Selon l'étude de marché du 12 nov. (`tools/video/DONNEES.md` §9), le format le plus fort est l'atelier raconté par la voix de Rayane : il filme et envoie des messages vocaux (voir `tools/video/TOURNAGE.md`).
 - **Banque de vidéos à filmer** : tâche programmée quotidienne (7 h 18) qui envoie à Rayane les plans du jour, une phrase face caméra et un message vocal à faire (demandé le 12 nov. 2026).
 - **Jamais un écran qui montre le site ou le produit d'une autre marque** (découvert le 12 nov. 2026 : deux plans du B-roll montraient une page Brilliant Earth ; ils sont bannis).

@@ -27,16 +27,30 @@ Le thème change chaque jour :
 
 ## 2. Pour chaque pièce finie (10 à 15 min, avant la remise)
 
-**Réglages iPhone**
-- 4K à 60 i/s.
-- Ralenti à 240 i/s pour l'éclat.
-- **Vidéo HDR désactivée** : sinon, voile blanc.
-- Mise au point et exposition verrouillées par un appui long sur l'écran.
-- Trépied.
+**Matériel du studio produit** (décidé par Rayane le 15 nov. 2026 ; les prix sont à vérifier au moment d'acheter)
+1. **Plateau tournant motorisé**, lent et silencieux, avec un dessus en velours noir. On en trouve sur Amazon.ca (par ex. « Inovat 8" Ultra-Quiet Motorized Rotating Display Stand »).
+2. **Fond noir mat** : un velours noir, qui absorbe la lumière, derrière et sous le plateau.
+3. **Lumière** :
+   - un panneau DEL avec diffuseur, pour le métal ;
+   - deux petites lampes DEL sans diffuseur, pour l'éclat des pierres ;
+   - 5 600 K, et un IRC de 95 ou plus, pour que la couleur des pierres reste vraie.
+4. **Trépied** avec une pince pour le téléphone, et un petit bras pour filmer d'en haut.
+5. Tout-en-un, plus cher : la GemLightbox Mini de GemIQ (1 299 $ en promotion, 1 999 $ au prix courant, sur gemiq.com le 15 nov. 2026). C'est une boîte blanche avec un plateau intégré, plutôt pour les photos de catalogue. Le fond noir, lui, colle mieux au style de la marque.
 
-**Lumière**
-- Une fenêtre à 90°, avec un rideau voilé comme diffuseur.
-- Une petite lampe DEL pour faire briller les pierres.
+**Réglages de l'app Blackmagic Camera** (gratuite, sur l'App Store)
+- **Vertical video** activé : sinon, l'app filme à l'horizontale ou baisse la résolution.
+- 4K à 30 i/s, ou 60 i/s pour ralentir l'éclat au montage.
+- **Shutter 180°** (1/60 à 30 i/s, 1/120 à 60 i/s), avec l'anti-scintillement réglé à **60 Hz** (le courant au Canada) : les lampes DEL ne clignotent pas à l'image.
+- **ISO le plus bas possible** : on ajoute de la lumière plutôt que de monter l'ISO, sinon l'image devient granuleuse.
+- **Balance des blancs fixe** : 5 600 K, ou automatique avec « verrouiller à l'enregistrement ».
+- **Mise au point manuelle**, verrouillée sur la pierre.
+- Espace couleur **Rec.709**, pas Apple Log ni HDR : sinon, voile blanc et travail de couleur en plus.
+- Sources : guide Blackmagic Camera de Silent Eye (Patreon), forum Blackmagic Design.
+
+**Sans ce matériel** (téléphone seul)
+- 4K à 60 i/s, ralenti à 240 i/s pour l'éclat, **vidéo HDR désactivée**.
+- Mise au point et exposition verrouillées par un appui long sur l'écran, et un trépied.
+- Une fenêtre à 90°, avec un rideau voilé comme diffuseur, et une petite lampe DEL pour faire briller les pierres.
 
 **Liste de plans**
 1. Le tour complet de la bague, sur un plateau tournant près de la fenêtre (15 s).
