@@ -5,14 +5,21 @@ const fs = require('fs');
 const [,, F, specPath, outDir, logoPath] = process.argv;
 const spec = JSON.parse(fs.readFileSync(specPath, 'utf8'));
 const d = p => 'data:font/woff2;base64,' + fs.readFileSync(p).toString('base64');
-const pkg = n => F + '/' + fs.readdirSync(F).filter(x => x.startsWith('fontsource-' + n) && !x.endsWith('.tgz')).sort().pop();
-const BOD = pkg('bodoni-moda'), JOS = pkg('jost');
-const FB = d(`${BOD}/files/bodoni-moda-latin-400-normal.woff2`);
-const FBI = d(`${BOD}/files/bodoni-moda-latin-400-italic.woff2`);
-const FJ4 = d(`${JOS}/files/jost-latin-400-normal.woff2`);
-const FJ5 = d(`${JOS}/files/jost-latin-500-normal.woff2`);
+const FB = d(`${F}/fontsource-bodoni-moda-5.3.0/files/bodoni-moda-latin-400-normal.woff2`);
+const FBI = d(`${F}/fontsource-bodoni-moda-5.3.0/files/bodoni-moda-latin-400-italic.woff2`);
+const FJ4 = d(`${F}/fontsource-jost-5.3.0/files/jost-latin-400-normal.woff2`);
+const FJ5 = d(`${F}/fontsource-jost-5.3.0/files/jost-latin-500-normal.woff2`);
+const FTT = d(`${F}/tiktoksans/tiktoksans-latin.woff2`);
+const FTTX = d(`${F}/tiktoksans/tiktoksans-latin-ext.woff2`);
 const LOGO = 'data:image/png;base64,' + fs.readFileSync(logoPath).toString('base64');
 const css = `
+@font-face{font-family:TT;font-weight:300 900;font-style:normal;src:url(${FTT}) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:TT;font-weight:300 900;font-style:normal;src:url(${FTTX}) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+/* native Instagram look (16 Nov 2026): TikTok Sans (OFL, Google Fonts), white captions with a soft outline, white pill */
+.nat{position:absolute;left:70px;right:70px;text-align:center;font-family:TT;font-weight:780;color:#fff;font-size:70px;line-height:1.13;letter-spacing:-.01em;-webkit-text-stroke:7px rgba(0,0,0,.82);paint-order:stroke fill;text-shadow:0 4px 18px rgba(0,0,0,.35)}
+.nat .y{color:#FFE27A}
+.pillw{position:absolute;left:0;right:0;text-align:center;line-height:1.5}
+.pill{display:inline;font-family:TT;font-weight:720;font-size:56px;color:#111;background:#fff;border-radius:16px;padding:6px 22px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 @font-face{font-family:Bodoni;font-weight:400;font-style:normal;src:url(${FB}) format('woff2')}
 @font-face{font-family:Bodoni;font-weight:400;font-style:italic;src:url(${FBI}) format('woff2')}
 @font-face{font-family:Jost;font-weight:400;font-style:normal;src:url(${FJ4}) format('woff2')}
@@ -49,7 +56,7 @@ i{font-style:italic}
   const p = await b.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
   await p.setContent(`<!doctype html><html><head><meta charset="utf-8"><style>${css}</style></head><body><div class="stage" id="s"></div></body></html>`);
   const ok = await p.evaluate(async () => {
-    const specs = ['400 40px Bodoni', 'italic 400 40px Bodoni', '400 40px Jost', '500 40px Jost'];
+    const specs = ['400 40px Bodoni', 'italic 400 40px Bodoni', '400 40px Jost', '500 40px Jost', '780 40px TT'];
     for (const s of specs) await document.fonts.load(s, 'Aàé');
     return specs.every(s => document.fonts.check(s, 'Aàé'));
   });

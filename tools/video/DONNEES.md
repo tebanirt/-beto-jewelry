@@ -270,3 +270,25 @@ Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden ha
   - deux plans de Rayane bloqués par pro.BANNED (bague à l'auriculaire d'une cliente).
 - **Chiffres** : 234 abonnés. T01 reste le meilleur (62,4 % de saut, 13 s regardées). J01 a eu le premier enregistrement. Aucun reel n'a atteint ses 72 h aujourd'hui.
 - **Pas de recherche de niche aujourd'hui** : les crédits Firecrawl du jour étaient presque épuisés. La recherche du matin (§12, LISTE_A_FILMER.md) sert de base.
+
+## 15. Musique gratuite et style « moins IA » (16 nov. 2026)
+
+**Question de Rayane** : « Il n'y a pas une façon gratuite d'aller chercher des musiques trendy et que tu me fasses des edits pro ? Je trouve que ça fait beaucoup trop AI. »
+
+**Musique : ce que dit la recherche** (foximusic.com et hellothematic.com, guides 2026 ; studiobarncreative.com)
+- Un **compte Entreprise** sur Instagram n'a pas accès aux chansons connues : seulement la bibliothèque commerciale (Meta Sound Collection, environ 14 000 titres libres pour Facebook et Instagram). C'est gratuit, sans risque, et elle a ses propres titres populaires.
+- Un **compte Créateur** retrouve presque toute la bibliothèque (chansons tendance), mais « l'accès n'est pas une licence » : pour une marque qui vend, c'est une zone grise (son coupé, réclamation d'un éditeur). Beaucoup de petites entreprises le font quand même. C'est une décision de Rayane.
+- **Epidemic Sound ne donne pas les chansons tendance** : ce sont des pistes de production, comme Mixkit mais de meilleure qualité. Il règle la qualité, pas la tendance.
+- **App Edits d'Instagram** : gratuite, sans filigrane, export 4K, sous-titres automatiques, et les **modèles de reels** (on dépose ses clips, le montage suit la chanson) y sont revenus en novembre 2026 (chatcut.io, guide 2026 ; Google Play).
+
+**Pourquoi nos montages font « IA »** (diagnostic du 16 nov.)
+- La même carte ivoire au milieu de chaque vidéo, le texte serif qui apparaît mot par mot, la carte du logo à la fin, les fondus doux : on reconnaît un gabarit.
+- Les 41 mêmes plans de la séance de consultation dans toutes les vidéos.
+- Pas de voix, pas de parole face caméra, une musique d'ambiance.
+
+**Style « natif » testé (N01_avis_natif, `reels_native.py`)**
+- Accroche en bulle blanche comme le texte d'Instagram, à la première personne.
+- Sous-titres blancs gras avec contour (comme les sous-titres automatiques), un mot clé en jaune.
+- Coupes franches sur le temps toutes les 1 à 2 mesures, petits zooms, aucune carte ivoire, aucune carte de fin : l'appel à l'action est un sous-titre.
+- Police TikTok Sans (licence OFL, Google Fonts).
+- En attente de l'avis de Rayane avant d'en faire le style par défaut.

@@ -49,6 +49,11 @@ export BETO_WORK_DIR=/tmp/beto-video
 mkdir -p $BETO_WORK_DIR/{footage,broll,fonts_pkg}
 (cd $BETO_WORK_DIR/fonts_pkg && npm pack @fontsource/bodoni-moda @fontsource/jost --silent \
   && for t in *.tgz; do tar xzf $t && mv package ${t%.tgz}; done)
+# TikTok Sans (OFL, Google Fonts) for the native-Instagram captions (reels_native.py)
+mkdir -p $BETO_WORK_DIR/fonts_pkg/tiktoksans && (cd $BETO_WORK_DIR/fonts_pkg/tiktoksans && UA='Mozilla/5.0 Chrome/120' \
+  && curl -sA "$UA" 'https://fonts.googleapis.com/css2?family=TikTok+Sans:wght@600' > tt.css \
+  && python3 -c "import re;c=open('tt.css').read();[print(n,re.search(r'url\((.*?)\)',b).group(1)) for n,b in re.findall(r'/\* (latin(?:-ext)?) \*/\s*@font-face \{(.*?)\}',c,re.S)]" \
+  | while read n u; do curl -so tiktoksans-$n.woff2 $u; done)
 python3 -m venv $BETO_WORK_DIR/venv && $BETO_WORK_DIR/venv/bin/pip install -q numpy scipy
 export BETO_PY=$BETO_WORK_DIR/venv/bin/python
 export BETO_MUSIC_DIR=$BETO_WORK_DIR/music
