@@ -169,11 +169,32 @@ Réglages et règles :
 | 1 | Plateau tournant motorisé, vitesse réglable | 38 à 60 $ | les tours de bague |
 | 1 | Plexiglas noir, carton sable, cartons noirs et blancs, cire de musée | quelques dizaines de dollars (DeSerres, quincaillerie) | fonds et reflets |
 | 2 | Amaran 100d S, utilisée sans diffuseur comme point lumineux puissant | 189 $ (Vistek) | éclats plus nets, ralenti à 240 i/s |
-| 3 | Sony ZV-E10 II (boîtier) | 1 399,99 $ (sony.ca) | qualité « studio » |
+| 3 | **Sony a6700** (boîtier), piste proposée par Rayane le 16 nov. 2026 | environ 1 800 $ (Aden Camera) | stabilisation intégrée, viseur, 4K à 120 i/s, S-Cinetone et S-Log3 en 10 bits |
+| 3 | Objectif Sigma 18-50 mm f/2.8 DC DN (monture Sony E) | 730 à 830 $ (AVShop.ca, Aden Camera) | face caméra et atelier |
 | 3 | Objectif Sigma 70 mm f/2.8 DG DN Macro Art (monture Sony E) | environ 706 $ (Kamerastore) | gros plans de griffes et de pierres |
 
 Notes :
+- Moins cher que l'a6700 : la Sony ZV-E10 II (1 399,99 $ sur sony.ca), sans stabilisation intégrée, sans viseur et limitée à 4K à 60 i/s.
 - L'objectif Sony E 30 mm Macro (349,99 $) coûte moins cher, mais il faut être à 2 ou 3 cm de la bague : l'objectif bloque la lumière. Le 70 mm laisse de la place pour éclairer.
 - GemLightbox (boîte de photo pour bijoutiers, environ 900 à 3 700 $ US) : simple, mais donne un look catalogue sur fond blanc. Le plateau ci-dessus coûte beaucoup moins cher et donne le look sombre et cinéma de la marque.
 - Téléprompteur : pas au début (le texte lu sonne faux). Si un jour : le NEEWER X12 fonctionne avec l'iPhone seulement en objectif 2x (focale de plus de 28 mm).
 - Payé par la société : dépense d'entreprise, taxes récupérables. Garder tous les reçus (voir le skill `beto-comptabilite`).
+
+### 7.4 Devenir pro : de l'iPhone à la Sony a6700 (demandé par Rayane le 16 nov. 2026)
+
+Ce qui rend une vidéo « cinéma » : la lumière, le cadrage, des mouvements lents et une couleur constante d'une vidéo à l'autre. Le Log ne fait pas ça tout seul : il donne seulement plus de marge pour travailler la couleur après coup.
+
+**Étape 1 : iPhone + Blackmagic Camera (gratuit), 4 semaines, une compétence par semaine**
+1. **Exposition.** 24 ou 30 i/s ; vitesse d'obturation au double (1/50 s à 24 i/s, 1/60 s à 30 i/s) ; ISO au plus bas ; zébras ou fausses couleurs pour ne jamais brûler les éclats ; balance des blancs fixée en kelvins.
+2. **Lumière.** Lumière principale, débouchage, contre-jour. « Négatif » : un carton noir du côté sombre du visage pour plus de relief.
+3. **Mouvement.** Mouvements lents et réguliers (plateau tournant, travelling), premier plan dans le cadre, règle des tiers, repères de cadrage 9:16 de l'app.
+4. **Couleur.** Le même rendu sur toutes les vidéos. Apple Log seulement sur un iPhone 15 Pro ou plus récent, avec la LUT officielle d'Apple ; comparer avec le mode normal avant de l'adopter.
+
+**Étape 2 : Sony a6700, quand les 4 semaines sont faites et que la demi-journée de tournage hebdomadaire tient**
+- Commencer en **S-Cinetone** : un rendu cinéma directement à la sortie de la caméra, sans étalonnage.
+- Passer au **S-Log3** une fois la lumière maîtrisée. Exposer un peu au-dessus de la normale (sinon, du bruit), et toujours appliquer une LUT. Sur l'a6700, la LUT importée sert seulement à prévisualiser : elle n'est pas gravée dans la vidéo, le montage l'applique.
+- Bagues : vérifier, sur chaque vidéo en Log, que la couleur des pierres est la même que dans la réalité (règle : la teinte des pierres ne change jamais).
+
+**Côté montage (agent vidéo)**
+- Le moteur de montage convertit aujourd'hui la vidéo HDR (HLG) de l'iPhone. **Il ne lit pas encore le Log** : la conversion avec la LUT officielle (Apple Log ou S-Log3) est à ajouter avant le premier tournage en Log, sinon l'image sort grise et délavée.
+- Les fichiers Log (surtout ProRes) sont très lourds : prévoir l'espace de stockage (Google Drive plein le 16 nov. 2026).
