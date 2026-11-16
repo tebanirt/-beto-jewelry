@@ -119,7 +119,11 @@ L'agent monte la voix sur tes plans, ajoute les sous-titres en français et la m
 
 Décision de Rayane du 16 nov. 2026 : le contenu passe avant la formation en sertissage (voir `docs/business-ops-brief.md` §8quinquies). Rayane filme ; l'agent vidéo et l'équipe marketing font le montage. Deux installations fixes, à monter en 2 minutes grâce à des marques au sol (ruban adhésif sous le trépied, la chaise et les pieds des lampes).
 
-Matériel déjà en main : iPhone, trépied JOILCAN 68″ avec télécommande Bluetooth, micro DJI Mic Mini 2.
+Matériel déjà en main (confirmé par Rayane le 16 nov. 2026) :
+- **iPhone 17 Pro Max** : mode macro, téléobjectif 4x (100 mm) et 8x (200 mm), Apple Log 2, ProRes RAW, 4K à 120 i/s (en ProRes, seulement sur un disque externe) ;
+- trépied JOILCAN 68″ avec télécommande Bluetooth ;
+- micro DJI Mic Mini 2 (le récepteur se branche directement dans le port USB-C de l'iPhone) ;
+- une boîte à lumière pour photo de produits, avec lumière intégrée et fonds (Amazon, environ 60 $).
 
 Réglages iPhone communs :
 - Réglages > Appareil photo > Enregistrement vidéo : 4K. **Vidéo HDR désactivée** (sinon, voile blanc).
@@ -151,7 +155,13 @@ Placement :
 - Une ou deux **petites lumières dures** (point lumineux, sans diffuseur) sur le côté et derrière, à la hauteur de la pierre : ce sont elles qui font briller les facettes quand la bague tourne.
 - Des cartons noirs sur les côtés : lignes sombres dans le métal, pour que l'or ait l'air d'or et non d'un blanc plat.
 - Un grand carton noir percé d'un trou pour l'objectif, devant la bague : il cache le téléphone et Rayane dans les reflets.
-- Téléphone sur trépied, à la hauteur de la pierre ou un peu au-dessus, en mode macro (iPhone Pro depuis le 13 Pro, et iPhone depuis le 16) ou avec un objectif macro.
+- Téléphone sur trépied, à la hauteur de la pierre ou un peu au-dessus. À tester sur l'iPhone 17 Pro Max : le mode macro (très près de la bague) contre le téléobjectif 4x à quelques dizaines de centimètres. Le 4x déforme moins la bague et laisse de la place pour éclairer.
+
+Avec la boîte à lumière (Amazon) :
+- Elle sert pour les photos du site (fond clair ou sable) et comme lumière douce.
+- Sa lumière intégrée est diffuse : elle fait peu briller les pierres. Ajouter une petite lumière dure par une ouverture ou sur le côté.
+- Fond noir de la boîte pour les reels. Bague au centre, loin des parois : sinon, les coins et les coutures de la boîte se reflètent dans le métal.
+- Vérifier la couleur des pierres de couleur à l'écran contre la vraie pierre : une lumière bon marché peut fausser les teintes.
 
 Réglages et règles :
 - Balance des blancs bloquée en lumière du jour (environ 5600 K). La teinte des pierres de couleur (rose, jaune, bleu, vert) ne doit jamais changer.
@@ -167,13 +177,14 @@ Réglages et règles :
 | 1 | NEEWER NK103 : 2 boîtes à lumière 60 × 60 cm, ampoules bicolores IRC 95, pieds, télécommande | 119,99 $ en solde (171,99 $ régulier), ca.neewer.com | les deux installations |
 | 1 | 2 petites lampes Ulanzi VL49 (5500 K) | 33 $ chacune, boutique canadienne Ulanzi | les éclats des pierres |
 | 1 | Plateau tournant motorisé, vitesse réglable | 38 à 60 $ | les tours de bague |
-| 1 | Plexiglas noir, carton sable, cartons noirs et blancs, cire de musée | quelques dizaines de dollars (DeSerres, quincaillerie) | fonds et reflets |
+| 1 | Cartons noirs et blancs, cire de musée (la boîte à lumière fournit déjà des fonds) ; plexiglas noir en option | quelques dizaines de dollars (DeSerres, quincaillerie) | reflets et fonds |
 | 2 | Amaran 100d S, utilisée sans diffuseur comme point lumineux puissant | 189 $ (Vistek) | éclats plus nets, ralenti à 240 i/s |
 | 3 | **Sony a6700** (boîtier), piste proposée par Rayane le 16 nov. 2026 | environ 1 800 $ (Aden Camera) | stabilisation intégrée, viseur, 4K à 120 i/s, S-Cinetone et S-Log3 en 10 bits |
 | 3 | Objectif Sigma 18-50 mm f/2.8 DC DN (monture Sony E) | 730 à 830 $ (AVShop.ca, Aden Camera) | face caméra et atelier |
 | 3 | Objectif Sigma 70 mm f/2.8 DG DN Macro Art (monture Sony E) | environ 706 $ (Kamerastore) | gros plans de griffes et de pierres |
 
 Notes :
+- Avec l'iPhone 17 Pro Max, l'étape 3 n'est pas pressée : la caméra apportera surtout le flou d'arrière-plan des vrais objectifs et une vraie macro avec de l'espace pour la lumière.
 - Moins cher que l'a6700 : la Sony ZV-E10 II (1 399,99 $ sur sony.ca), sans stabilisation intégrée, sans viseur et limitée à 4K à 60 i/s.
 - L'objectif Sony E 30 mm Macro (349,99 $) coûte moins cher, mais il faut être à 2 ou 3 cm de la bague : l'objectif bloque la lumière. Le 70 mm laisse de la place pour éclairer.
 - GemLightbox (boîte de photo pour bijoutiers, environ 900 à 3 700 $ US) : simple, mais donne un look catalogue sur fond blanc. Le plateau ci-dessus coûte beaucoup moins cher et donne le look sombre et cinéma de la marque.
@@ -188,7 +199,7 @@ Ce qui rend une vidéo « cinéma » : la lumière, le cadrage, des mouvements l
 1. **Exposition.** 24 ou 30 i/s ; vitesse d'obturation au double (1/50 s à 24 i/s, 1/60 s à 30 i/s) ; ISO au plus bas ; zébras ou fausses couleurs pour ne jamais brûler les éclats ; balance des blancs fixée en kelvins.
 2. **Lumière.** Lumière principale, débouchage, contre-jour. « Négatif » : un carton noir du côté sombre du visage pour plus de relief.
 3. **Mouvement.** Mouvements lents et réguliers (plateau tournant, travelling), premier plan dans le cadre, règle des tiers, repères de cadrage 9:16 de l'app.
-4. **Couleur.** Le même rendu sur toutes les vidéos. Apple Log seulement sur un iPhone 15 Pro ou plus récent, avec la LUT officielle d'Apple ; comparer avec le mode normal avant de l'adopter.
+4. **Couleur.** Le même rendu sur toutes les vidéos. L'iPhone 17 Pro Max de Rayane filme en **Apple Log 2** (dans l'app Blackmagic Camera). Test de départ : la même bague, sous la même lumière, 10 s en mode normal puis 10 s en Apple Log 2. L'agent règle la conversion en comparant les deux, avant toute publication en Log.
 
 **Étape 2 : Sony a6700, quand les 4 semaines sont faites et que la demi-journée de tournage hebdomadaire tient**
 - Commencer en **S-Cinetone** : un rendu cinéma directement à la sortie de la caméra, sans étalonnage.
