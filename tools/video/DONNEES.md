@@ -292,3 +292,41 @@ Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden ha
 - Coupes franches sur le temps toutes les 1 à 2 mesures, petits zooms, aucune carte ivoire, aucune carte de fin : l'appel à l'action est un sous-titre.
 - Police TikTok Sans (licence OFL, Google Fonts).
 - En attente de l'avis de Rayane avant d'en faire le style par défaut.
+
+## 16. Recherche poussée du 16 nov. 2026 : répétition, rythme, musique gratuite, style humain
+
+**Demande de Rayane** : « Fais une recherche poussée là-dessus… ça commence à se répéter, donc si tu vois que c'est trop répétitif, on arrête jusqu'au nouveau plan filmé. »
+
+**Verdict : oui, c'est trop répétitif. Pause de la production après les reels déjà programmés (jusqu'au 20 nov.), jusqu'aux nouveaux plans de Rayane.**
+- Nos chiffres : 8 trial reels jugés sur 8 retirés au 15 nov. Un seul format passe la barre (T01, avis Google avec Rayane).
+- Tous nos reels viennent des 41 mêmes plans d'une seule séance de consultation. La série « toutes les coupes » (12 reels) ne change que le nom de la coupe et le dessin.
+- Le 16 nov., 7 reels programmés ont été annulés (E01, P01, C_rond, M02, W02, W08, E02). Rayane a refusé l'annulation de T03, puis choisi de garder les 17 reels qui restent (17 au 20 nov.).
+
+**Répétition et originalité** (sources : heymark.ai, 30 sept. 2026 ; zoomsphere.com et exemplary.ai, guides 2026 de l'algorithme ; creatortribune.com, mai 2026)
+- Mosseri (30 sept. 2026) : republier le même reel aura « probablement moins de portée ». Pour bâtir sur un reel qui a marché, trois façons : changer le format, répondre à une question des commentaires, ou dire ce qui a changé.
+- Le 30 avril 2026, Instagram a étendu la règle du contenu non original aux photos et carrousels. Un compte qui publie surtout du contenu non original perd les recommandations, et les retrouve quand la plupart de ses publications des 30 derniers jours sont originales.
+- Un montage fait dans une autre app n'est pas pénalisé, s'il n'a pas de filigrane (Mosseri, cité par zoomsphere).
+- Les chiffres de « +40 à 60 % de portée » pour le contenu original circulent sur des blogues, mais rien ne les confirme chez Instagram : à ne pas citer.
+
+**Rythme des trial reels** (socialchamp.com, mai 2026 ; brandid.app, mindwand.com, itsmodernmillie.com, guides 2026)
+- Instagram n'a publié aucune limite officielle. Les guides recommandent 3 à 5 trial reels par semaine. Un blogue parle de 5 par jour au maximum, sans preuve.
+- Plusieurs guides signalent que le contenu en double ou presque identique publié en trial reels est traité comme du pourriel. Instagram dit que les trial reels sont évalués à part et ne nuisent pas aux reels normaux.
+- Notre rythme de 5 à 6 par jour, avec les mêmes plans, était bien au-dessus. **À la reprise : 1 à 2 trial reels par jour au maximum, chacun bâti sur un plan jamais publié.**
+
+**Musique gratuite** (foximusic.com, hellothematic.com, studiobarncreative.com, guides 2026 ; soundstripe.com et Fast Company, mai 2026, pour TikTok)
+- Compte Entreprise Instagram : bibliothèque commerciale seulement (Meta Sound Collection, environ 14 000 titres), gratuite et sans risque. Compte Créateur : presque toutes les chansons tendance, mais pour une marque qui vend, l'accès n'est pas une licence (zone grise). Décision de Rayane.
+- TikTok : la Commercial Music Library est gratuite pour les comptes Entreprise. Elle grossit (20 000 titres ajoutés grâce au partenariat avec Chordal, mai 2026), mais les grands succès viraux n'y sont pas (UMG absent).
+- Le **son original** (la voix de Rayane) est la solution la plus sûre et la plus humaine : aucun problème de droits, et c'est ce que les guides recommandent aux comptes Entreprise.
+- L'app Edits (gratuite, sans filigrane) a maintenant une version Mac (Apple Silicon, 5 nov. 2026) et un espace d'inspiration avec les sons, effets et modèles tendance.
+
+**Ce qui fait « humain » chez les bijoutiers** (Rapaport, oct. 2026 ; tuplestrategy.com ; JCK)
+- Jade Trau : un reel où elle parle de sa propre pile de bagues a fait 127 200 vues, près de 8 fois la moyenne de la marque, et amène des messages et des commandes sur mesure.
+- Annoushka : les photos de vraies clientes fiancées, 225 000 impressions en 4 semaines pour une seule publication ; abonnés +41 % en un an.
+- Shahla Karimi : une série humoristique tournée dans sa salle d'exposition a fait 4 de ses 5 meilleures publications en 3 mois (80 000 $ de tournage : pas pour nous, mais l'idée de la série avec de vrais moments est bonne).
+- Un visage ou des mains qui travaillent battent un objet sur fond blanc. Le public repère vite ce qui est « fabriqué ». Des images faites par IA d'une bague sont un risque de confiance.
+
+**Plan de reprise (quand les nouveaux plans arrivent)**
+1. Le style natif (`reels_native.py`) par défaut, sauf si les chiffres disent le contraire.
+2. La voix de Rayane ou sa parole face caméra dans la plupart des reels (son original).
+3. Chaque reel bâti sur un plan neuf ; un plan déjà publié ne sert plus qu'en complément.
+4. Repartir des avis Google (le seul format gagnant) avec les trois façons de Mosseri : nouveau format, réponse à une question, ce qui a changé.
