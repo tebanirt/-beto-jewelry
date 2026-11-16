@@ -300,7 +300,7 @@ Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden ha
 **Verdict : oui, c'est trop répétitif. Pause de la production après les reels déjà programmés (jusqu'au 20 nov.), jusqu'aux nouveaux plans de Rayane.**
 - Nos chiffres : 8 trial reels jugés sur 8 retirés au 15 nov. Un seul format passe la barre (T01, avis Google avec Rayane).
 - Tous nos reels viennent des 41 mêmes plans d'une seule séance de consultation. La série « toutes les coupes » (12 reels) ne change que le nom de la coupe et le dessin.
-- Le 16 nov., 7 reels programmés ont été annulés (E01, P01, C_rond, M02, W02, W08, E02). Rayane a refusé l'annulation de T03, puis choisi de garder les 17 reels qui restent (17 au 20 nov.).
+- Le 16 nov., 7 reels programmés ont été annulés (E01, P01, C_rond, M02, W02, W08, E02). Rayane a refusé l'annulation de T03 et gardé les 17 autres (17 au 20 nov.). Puis : « même ceux supprimés, on les poste, plus de data ; après, bien sûr, on arrête ». E01, P01, W08 et E02 ont été reprogrammés ; C_rond, M02 et W02 restent annulés (son choix). En tout, 21 reels sortent du 16 au 20 nov., puis la pause commence.
 
 **Répétition et originalité** (sources : heymark.ai, 30 sept. 2026 ; zoomsphere.com et exemplary.ai, guides 2026 de l'algorithme ; creatortribune.com, mai 2026)
 - Mosseri (30 sept. 2026) : republier le même reel aura « probablement moins de portée ». Pour bâtir sur un reel qui a marché, trois façons : changer le format, répondre à une question des commentaires, ou dire ce qui a changé.
