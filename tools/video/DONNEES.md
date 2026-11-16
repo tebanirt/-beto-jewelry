@@ -330,3 +330,26 @@ Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden ha
 2. La voix de Rayane ou sa parole face caméra dans la plupart des reels (son original).
 3. Chaque reel bâti sur un plan neuf ; un plan déjà publié ne sert plus qu'en complément.
 4. Repartir des avis Google (le seul format gagnant) avec les trois façons de Mosseri : nouveau format, réponse à une question, ce qui a changé.
+
+## 17. Production du 16 nov. 2026 (pause) : chiffres, règle des 72 h et veille
+
+**Chiffres** (Supermetrics, 7 derniers jours, lus à 9 h 42)
+- Abonnés : 234, inchangé.
+- La portée monte : les 6 trial reels du 15 nov. ont eu 100 à 165 vues chacun (contre 10 à 30 du 10 au 13 nov.).
+  - Meilleur : W06 en anglais (« Lab diamonds are fake »), 165 vues, 55 % de saut, mais 4 s regardées (la barre est à 5 s).
+  - W04 (POV du design 3D) : 63 % de saut, 3 s regardées.
+- T01 (avis Google avec Rayane) reste le seul à passer : 62 % de saut, 13 s regardées.
+- Seules sauvegardes de la semaine : J01 (une journée avec ton joaillier) et R01 (pourquoi à Montréal), 1 chacun. Aucun partage, aucun abonnement amené par un reel.
+
+**Règle des 72 h** : 4 reels de plus retirés (A01 écrin, P11 mythe du labo, P09b designs 3D, P12b EN sous le sapin), tous au-dessus de 70 % de saut et sous 4 s regardées. Aucun gagnant parmi les reels jugés aujourd'hui.
+
+**Veille** (TikTok, bijoutiers, les plus aimées des 3 derniers mois)
+| Compte | Vues | Durée | Ce que c'est |
+|---|---|---|---|
+| @massoyanjewelers | 4,7 M | 76 s | Histoire d'une cliente racontée : mettre un 5 carats dans la bague de sa grand-mère sans perdre le design |
+| @diamondrensu | 4,3 M | 16 s | « Elle l'aimait, mais détestait la bague » : on garde le diamant, on refait le reste |
+| @brooker_brothers | 2,4 M | 70 s | Le joaillier fabrique une 5 carats de A à Z, en parlant (« Hey, this is Wyatt ») |
+| @thediamondvaulthtx | 2,0 M | 15 s | Bague finie : marquise 3 ct, sertissage cathédrale sur mesure |
+| @prestigiojewelers | 1,5 M | 99 s | Face caméra : « arrête de payer trop cher en grande surface » |
+
+**Ce que ça apprend** : les trois plus vues sont des histoires de 70 à 100 s racontées par le joaillier, ou une histoire de cliente. Des formats impossibles sans la voix de Rayane : les messages vocaux de la liste à filmer (point 6) sont la priorité de la reprise. Les vitrines courtes (15 s) marchent seulement avec une vraie bague finie, filmée de près.
