@@ -114,3 +114,98 @@ L'agent monte la voix sur tes plans, ajoute les sous-titres en français et la m
 
 - Publier les versions `_APP` avec la chanson à la une (environ 1 minute par reel dans l'app).
 - Donner les modalités exactes des plans de paiement avant toute vidéo qui en parle (voir `DONNEES.md` §9 pour les règles du Québec).
+
+## 7. Les deux installations de tournage (16 nov. 2026)
+
+Décision de Rayane du 16 nov. 2026 : le contenu passe avant la formation en sertissage (voir `docs/business-ops-brief.md` §8quinquies). Rayane filme ; l'agent vidéo et l'équipe marketing font le montage. Deux installations fixes, à monter en 2 minutes grâce à des marques au sol (ruban adhésif sous le trépied, la chaise et les pieds des lampes).
+
+Matériel déjà en main (confirmé par Rayane le 16 nov. 2026) :
+- **iPhone 17 Pro Max** : mode macro, téléobjectif 4x (100 mm) et 8x (200 mm), Apple Log 2, ProRes RAW, 4K à 120 i/s (en ProRes, seulement sur un disque externe) ;
+- trépied JOILCAN 68″ avec télécommande Bluetooth ;
+- micro DJI Mic Mini 2 (le récepteur se branche directement dans le port USB-C de l'iPhone) ;
+- une boîte à lumière pour photo de produits, avec lumière intégrée et fonds (Amazon, environ 60 $).
+
+Réglages iPhone communs :
+- Réglages > Appareil photo > Enregistrement vidéo : 4K. **Vidéo HDR désactivée** (sinon, voile blanc).
+- Toutes les lumières à la même température. Plafonnier éteint, jamais une fenêtre dans le dos.
+- Mise au point et exposition verrouillées (appui long sur l'écran). L'app gratuite Blackmagic Camera permet aussi de bloquer la balance des blancs.
+- Une prise test de 5 secondes avant de commencer : cadrage, son, reflets.
+
+### 7.1 Face caméra (vidéos explicatives)
+
+Placement :
+- Téléphone **à hauteur des yeux**, en vertical, objectif **2x** (visage plus naturel qu'en 1x), à environ 1 à 1,5 m.
+- Lumière principale : une boîte à lumière (softbox) à 45° d'un côté, un peu au-dessus des yeux, à environ 1 m du visage.
+- Deuxième boîte de l'autre côté, beaucoup plus faible, ou un mur blanc pour déboucher les ombres.
+- Fond : l'établi ou l'atelier, à 1,5 à 2 m derrière Rayane, avec une petite lampe chaude allumée pour la profondeur.
+- Micro pincé à 15 à 20 cm sous le menton, réduction de bruit activée.
+
+Pendant la prise :
+- Regarder l'objectif, pas l'écran.
+- Pas de texte lu. Une carte avec 3 mots-clés, collée juste sous le téléphone.
+- Structure : une question en accroche, 2 ou 3 points, puis une phrase de fin (« Réserve ta consultation gratuite, le lien est dans ma bio »).
+- 15 à 45 secondes. Une prise ratée, on recommence depuis l'accroche.
+
+### 7.2 Bagues finies (le plateau « vitrine »)
+
+Placement :
+- La bague sur un plateau tournant motorisé, vitesse lente, tenue par une cire de musée transparente.
+- Fond noir brillant (plexiglas noir) pour les reels ; carton mat couleur sable, proche du fond des photos du site, pour les photos du site.
+- Une boîte à lumière au-dessus et un peu derrière la bague : grand reflet doux sur le métal.
+- Une ou deux **petites lumières dures** (point lumineux, sans diffuseur) sur le côté et derrière, à la hauteur de la pierre : ce sont elles qui font briller les facettes quand la bague tourne.
+- Des cartons noirs sur les côtés : lignes sombres dans le métal, pour que l'or ait l'air d'or et non d'un blanc plat.
+- Un grand carton noir percé d'un trou pour l'objectif, devant la bague : il cache le téléphone et Rayane dans les reflets.
+- Téléphone sur trépied, à la hauteur de la pierre ou un peu au-dessus. À tester sur l'iPhone 17 Pro Max : le mode macro (très près de la bague) contre le téléobjectif 4x à quelques dizaines de centimètres. Le 4x déforme moins la bague et laisse de la place pour éclairer.
+
+Avec la boîte à lumière (Amazon) :
+- Elle sert pour les photos du site (fond clair ou sable) et comme lumière douce.
+- Sa lumière intégrée est diffuse : elle fait peu briller les pierres. Ajouter une petite lumière dure par une ouverture ou sur le côté.
+- Fond noir de la boîte pour les reels. Bague au centre, loin des parois : sinon, les coins et les coutures de la boîte se reflètent dans le métal.
+- Vérifier la couleur des pierres de couleur à l'écran contre la vraie pierre : une lumière bon marché peut fausser les teintes.
+
+Réglages et règles :
+- Balance des blancs bloquée en lumière du jour (environ 5600 K). La teinte des pierres de couleur (rose, jaune, bleu, vert) ne doit jamais changer.
+- Exposition un peu sous la normale, pour que les éclats ne deviennent pas des taches blanches.
+- Nettoyer la bague (chiffon microfibre, poire à air) juste avant : la macro montre chaque trace de doigt.
+- Manipuler avec des gants de coton, mais **jamais une bague enfilée sur un doigt de gant**, et **jamais à l'auriculaire** (règle de Rayane). Bague portée : seulement à l'annulaire.
+- Les plans à faire sont ceux du §2.
+
+### 7.3 Matériel recommandé (prix vus le 16 nov. 2026, avant taxes, à revérifier)
+
+| Étape | Matériel | Prix indicatif | Sert à |
+|---|---|---|---|
+| 1 | NEEWER NK103 : 2 boîtes à lumière 60 × 60 cm, ampoules bicolores IRC 95, pieds, télécommande | 119,99 $ en solde (171,99 $ régulier), ca.neewer.com | les deux installations |
+| 1 | 2 petites lampes Ulanzi VL49 (5500 K) | 33 $ chacune, boutique canadienne Ulanzi | les éclats des pierres |
+| 1 | Plateau tournant motorisé, vitesse réglable | 38 à 60 $ | les tours de bague |
+| 1 | Cartons noirs et blancs, cire de musée (la boîte à lumière fournit déjà des fonds) ; plexiglas noir en option | quelques dizaines de dollars (DeSerres, quincaillerie) | reflets et fonds |
+| 2 | Amaran 100d S, utilisée sans diffuseur comme point lumineux puissant | 189 $ (Vistek) | éclats plus nets, ralenti à 240 i/s |
+| 3 | **Sony a6700** (boîtier), piste proposée par Rayane le 16 nov. 2026 | environ 1 800 $ (Aden Camera) | stabilisation intégrée, viseur, 4K à 120 i/s, S-Cinetone et S-Log3 en 10 bits |
+| 3 | Objectif Sigma 18-50 mm f/2.8 DC DN (monture Sony E) | 730 à 830 $ (AVShop.ca, Aden Camera) | face caméra et atelier |
+| 3 | Objectif Sigma 70 mm f/2.8 DG DN Macro Art (monture Sony E) | environ 706 $ (Kamerastore) | gros plans de griffes et de pierres |
+
+Notes :
+- Avec l'iPhone 17 Pro Max, l'étape 3 n'est pas pressée : la caméra apportera surtout le flou d'arrière-plan des vrais objectifs et une vraie macro avec de l'espace pour la lumière.
+- Moins cher que l'a6700 : la Sony ZV-E10 II (1 399,99 $ sur sony.ca), sans stabilisation intégrée, sans viseur et limitée à 4K à 60 i/s.
+- L'objectif Sony E 30 mm Macro (349,99 $) coûte moins cher, mais il faut être à 2 ou 3 cm de la bague : l'objectif bloque la lumière. Le 70 mm laisse de la place pour éclairer.
+- GemLightbox (boîte de photo pour bijoutiers, environ 900 à 3 700 $ US) : simple, mais donne un look catalogue sur fond blanc. Le plateau ci-dessus coûte beaucoup moins cher et donne le look sombre et cinéma de la marque.
+- Téléprompteur : pas au début (le texte lu sonne faux). Si un jour : le NEEWER X12 fonctionne avec l'iPhone seulement en objectif 2x (focale de plus de 28 mm).
+- Payé par la société : dépense d'entreprise, taxes récupérables. Garder tous les reçus (voir le skill `beto-comptabilite`).
+
+### 7.4 Devenir pro : de l'iPhone à la Sony a6700 (demandé par Rayane le 16 nov. 2026)
+
+Ce qui rend une vidéo « cinéma » : la lumière, le cadrage, des mouvements lents et une couleur constante d'une vidéo à l'autre. Le Log ne fait pas ça tout seul : il donne seulement plus de marge pour travailler la couleur après coup.
+
+**Étape 1 : iPhone + Blackmagic Camera (gratuit), 4 semaines, une compétence par semaine**
+1. **Exposition.** 24 ou 30 i/s ; vitesse d'obturation au double (1/50 s à 24 i/s, 1/60 s à 30 i/s) ; ISO au plus bas ; zébras ou fausses couleurs pour ne jamais brûler les éclats ; balance des blancs fixée en kelvins.
+2. **Lumière.** Lumière principale, débouchage, contre-jour. « Négatif » : un carton noir du côté sombre du visage pour plus de relief.
+3. **Mouvement.** Mouvements lents et réguliers (plateau tournant, travelling), premier plan dans le cadre, règle des tiers, repères de cadrage 9:16 de l'app.
+4. **Couleur.** Le même rendu sur toutes les vidéos. L'iPhone 17 Pro Max de Rayane filme en **Apple Log 2** (dans l'app Blackmagic Camera). Test de départ : la même bague, sous la même lumière, 10 s en mode normal puis 10 s en Apple Log 2. L'agent règle la conversion en comparant les deux, avant toute publication en Log.
+
+**Étape 2 : Sony a6700, quand les 4 semaines sont faites et que la demi-journée de tournage hebdomadaire tient**
+- Commencer en **S-Cinetone** : un rendu cinéma directement à la sortie de la caméra, sans étalonnage.
+- Passer au **S-Log3** une fois la lumière maîtrisée. Exposer un peu au-dessus de la normale (sinon, du bruit), et toujours appliquer une LUT. Sur l'a6700, la LUT importée sert seulement à prévisualiser : elle n'est pas gravée dans la vidéo, le montage l'applique.
+- Bagues : vérifier, sur chaque vidéo en Log, que la couleur des pierres est la même que dans la réalité (règle : la teinte des pierres ne change jamais).
+
+**Côté montage (agent vidéo)**
+- Le moteur de montage convertit aujourd'hui la vidéo HDR (HLG) de l'iPhone. **Il ne lit pas encore le Log** : la conversion avec la LUT officielle (Apple Log ou S-Log3) est à ajouter avant le premier tournage en Log, sinon l'image sort grise et délavée.
+- Les fichiers Log (surtout ProRes) sont très lourds : prévoir l'espace de stockage (Google Drive plein le 16 nov. 2026).

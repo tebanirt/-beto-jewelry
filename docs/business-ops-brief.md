@@ -223,35 +223,44 @@ Ne pas ajouter n8n ou un autre orchestrateur externe sans raison précise — l'
 - Règles de l'espace : relance **tous les 3 jours pour un client sérieux, 7 jours sinon** (clients `owner = lauren`) ; tables `orders` et `payments` (tout paiement est enregistré, comptant compris) ; le statut du client avance seul (dépôt → `depot_recu`, production, livré), jamais en arrière ; chaque action va dans `activity_log` ; les reçus restent faits par Rayane. Les agents qui lisent les marges doivent lire `orders` (les colonnes `sale_price`/`production_cost` du client sont recalculées à partir des commandes).
 - **Calculateur de prix de Lauren (décidé par Rayane le 4 nov. 2026, bagues de fiançailles en diamant de laboratoire seulement)** : coût = pierre (carat × prix au carat, blanc ou couleur, toutes couleurs au même prix) + métal (poids moyen × prix au gramme, fonte comprise, **+ 5 $/g de marge de sécurité** faute de cours du jour) + sertissage solitaire + options (halo caché, semi-éternité : pierres + sertissage) + boîte + rencontre client + gravure. Prix donné = coût + 1 000 $ ; plancher = coût + 700 $ (arrondis au 50 $ supérieur). Lauren peut offrir n'importe quel prix entre les deux sans demander ; sous le plancher, elle demande à Rayane. **Les montants sont dans Supabase `pricing_config` (ligne `ring_calculator`), jamais dans ce dépôt public.** Les prix au gramme ne changent que si le marché bouge de façon importante (Rayane garde volontairement une marge au-dessus de son prix réel). Tout le reste (naturel, pierres précieuses, alliances, bijoux, halo complet, trois pierres, éternité complète, homme) : devis par Rayane. Les PDF de soumission restent faits et vérifiés par Rayane. Chaque prix donné est enregistré dans `quotes` (prix visé, plancher, prix offert, langue, réponse du client) pour comparer aux coûts réels et améliorer la formule.
 
-## 8quinquies. Objectif 2028 : formation intensive en sertissage (décidé par Rayane le 12 nov. 2026)
+## 8quinquies. Priorité : contenu et acquisition ; sertissage à réévaluer fin 2027 (décidé par Rayane le 12 nov. 2026, revu le 16 nov. 2026)
 
-- **But** : suivre une formation intensive de sertissage de 2 à 3 mois vers mi-2028 (dans environ 18 mois), pour :
-  - **monter en gamme** : micro-pavé, éternité complète, haute joaillerie de 5 000 à 30 000 $ ;
-  - **produire du contenu de sertissage** : pièces serties par Rayane, filmées au microscope ;
-  - **renforcer la confiance** : un joaillier qui dessine **et** sertit lui-même.
-  - Ce n'est pas pour économiser sur le sertissage, qui coûte peu : 35 $ la pierre centrale et 3 $ la petite pierre, soit environ 100 à 150 $ par bague. Le sertisseur garde les bagues standard.
-- **Écoles comparées le 12 nov. 2026** (prix à revérifier ; Rayane compare lui-même) :
-  - Gerardi Setting School (Accademia delle Arti Orafe, Rome) : 300 h en 2 mois de sertissage et de micro-sertissage. Prix non publié.
-  - Robert Deda Jewelry Academy (Gjakova, Kosovo) : 5 500 € pour 1 mois, 10 500 € pour 2 mois, 13 000 € pour 3 mois. 5 élèves au maximum, de 9 h à 18 h.
-  - New Approach School (Tennessee) : Graduate Bench Jeweler, 12 semaines, 20 170 $ US. C'est de la bijouterie complète, pas seulement du sertissage.
-  - Moins cher, sans longue absence : des stages d'une semaine, comme GRS Intro to Pavé (1 650 $ US) ou NASJ Advanced Stone Setting (environ 1 650 $ US).
-- **Budget** : environ 15 000 à 30 000 $ CA en tout (cours, voyage, logement). Mettre environ 1 000 $ de côté par mois.
-- **Financement possible** (recherche du 12 nov. 2026, à revérifier en 2027) :
-  1. La formation payée par la société est en principe une dépense d'entreprise déductible (cours, voyage, logement). À confirmer avec Abraham.
-  2. Bourse de perfectionnement du CALQ : jusqu'à 15 000 $, en métiers d'art, stages à l'étranger compris, plus une bourse de déplacement. Il faut le statut d'artisan-créateur professionnel. Monter le dossier en 2027 (portfolio de créations originales).
-  3. Services Québec (MFOR) : jusqu'à 50 % des frais de formation, mais surtout pour les entreprises de 6 à 99 employés. Vérifier avec un conseiller.
-  4. Pour l'équipement de sertissage (poste, microscope, caméra) :
-     - PME MTL, Fonds Jeunes Entreprises : jusqu'à 25 000 $ non remboursables, avec un prêt de PME MTL. L'entreprise doit être sur l'île de Montréal : vérifier l'adresse de la société.
-     - Futurpreneur (18 à 39 ans) : prêt jusqu'à 75 000 $ avec mentorat.
-     - Desjardins Créavenir : 18 à 39 ans, entreprise de 3 ans ou moins.
-- **Conditions avant de partir** (le plus gros coût, c'est l'absence de Rayane) :
-  1. Les ventes et les consultations se font sans lui (Lauren ou un vendeur formé). Objectif : environ 50 % des ventes conclues sans Rayane d'ici fin 2027.
-  2. La production est pilotée à distance : une fiche de production standard par commande, et des photos à chaque étape (fonte, sertissage, polissage) que Rayane approuve. Le fondeur, le sertisseur et le polisseur travaillent seuls pendant 2 à 3 mois.
-  3. Le design 3D se fait à distance (MatrixGold sur portable).
-  4. Le marketing continue pendant la formation.
-  5. Partir après la Saint-Valentin, entre février et avril.
-- **Dès maintenant** : un poste de sertissage avec microscope trinoculaire et caméra 4K pour filmer, comme contenu de confiance. La recherche d'équipement se fait quand Rayane la demande.
-- **Suivi** : la part des ventes conclues sans Rayane et l'adoption des fiches et des photos de production sont des indicateurs à ajouter à la rétro du dimanche, avec l'accord de Rayane sur le prompt de la tâche.
+- **Décision du 16 nov. 2026** (Rayane : « Je crois que c'est mieux me structurer et devenir bon en création de contenu aller chercher des abonnés/ ventes que d'aller apprendre le sertissage », puis « Oui modifié ») :
+  - **Le contenu et l'acquisition de clients sont la priorité n° 1 jusqu'à la fin de 2027.**
+  - **La formation intensive en sertissage n'est plus un objectif fixé pour 2028.** Elle est à réévaluer à la fin de 2027, selon les ventes et le temps de Rayane.
+- **Pourquoi** :
+  - Ce qui limite les ventes, c'est le nombre de clients, pas la fabrication. Le sertissage coûte peu (35 $ la pierre centrale, 3 $ la petite pierre, soit environ 100 à 150 $ par bague) et le sertisseur le fait bien.
+  - Le contenu de sertissage s'obtient déjà autrement : une caméra sur le microscope du sertisseur, qui accepte d'être filmé.
+  - La formation coûterait 15 000 à 30 000 $ et 2 à 3 mois d'absence. Le contenu demande moins de 3 000 $ (cours, éclairage, peut-être une caméra) et rapporte en quelques semaines.
+- **Comment** :
+  - Rayane devient bon devant la caméra et au tournage. Le montage reste à l'agent vidéo et à l'équipe marketing (voir §10).
+  - Une routine fixe : une demi-journée de tournage par semaine, toujours le même jour, en plus de la banque de plans envoyée chaque matin.
+  - Deux installations de tournage : face caméra (vidéos explicatives) et bagues finies. Procédure dans `tools/video/TOURNAGE.md`, §7.
+  - Le chiffre suivi : les consultations qui viennent d'Instagram. La provenance est déjà dans le CRM ; noter « Instagram » quand un client arrive par message privé. Regardé chaque dimanche dans la rétro.
+- **Gardé de l'ancien plan, utile dans tous les cas** (ça libère le temps de Rayane pour le contenu) :
+  1. Les ventes et les consultations se font aussi sans lui (Lauren ou un vendeur formé). Objectif : environ 50 % des ventes conclues sans Rayane d'ici la fin de 2027.
+  2. La production est pilotée à distance : une fiche de production standard par commande, et des photos à chaque étape (fonte, sertissage, polissage) que Rayane approuve.
+  3. Le design 3D peut se faire à distance (MatrixGold sur portable).
+- **Plus tard, sans longue absence** : un stage de sertissage d'une semaine (ex. GRS Intro to Pavé, environ 1 650 $ US) pourrait devenir du contenu (« le joaillier qui apprend le micro-pavé »), seulement quand le contenu et les ventes tournent.
+- **L'épargne d'environ 1 000 $ par mois prévue pour la formation** : à décider par Rayane (la garder pour une formation plus tard, ou financer d'abord l'équipement et la formation en contenu).
+- **Suivi** : la part des ventes conclues sans Rayane, l'adoption des fiches et photos de production, et les consultations venues d'Instagram sont des indicateurs à ajouter à la rétro du dimanche, avec l'accord de Rayane sur le prompt de la tâche.
+- **Notes gardées pour la réévaluation de fin 2027** :
+  - Buts de la formation : monter en gamme (micro-pavé, éternité complète, haute joaillerie de 5 000 à 30 000 $), filmer des pièces serties par Rayane au microscope, renforcer la confiance (un joaillier qui dessine **et** sertit lui-même).
+  - Écoles comparées le 12 nov. 2026 (prix à revérifier ; Rayane compare lui-même) :
+    - Gerardi Setting School (Accademia delle Arti Orafe, Rome) : 300 h en 2 mois de sertissage et de micro-sertissage. Prix non publié.
+    - Robert Deda Jewelry Academy (Gjakova, Kosovo) : 5 500 € pour 1 mois, 10 500 € pour 2 mois, 13 000 € pour 3 mois. 5 élèves au maximum, de 9 h à 18 h.
+    - New Approach School (Tennessee) : Graduate Bench Jeweler, 12 semaines, 20 170 $ US. C'est de la bijouterie complète, pas seulement du sertissage.
+    - Moins cher, sans longue absence : des stages d'une semaine, comme GRS Intro to Pavé (1 650 $ US) ou NASJ Advanced Stone Setting (environ 1 650 $ US).
+  - Budget : environ 15 000 à 30 000 $ CA en tout (cours, voyage, logement).
+  - Financement possible (recherche du 12 nov. 2026, à revérifier en 2027) :
+    1. La formation payée par la société est en principe une dépense d'entreprise déductible (cours, voyage, logement). À confirmer avec Abraham.
+    2. Bourse de perfectionnement du CALQ : jusqu'à 15 000 $, en métiers d'art, stages à l'étranger compris, plus une bourse de déplacement. Il faut le statut d'artisan-créateur professionnel. Monter le dossier en 2027 (portfolio de créations originales).
+    3. Services Québec (MFOR) : jusqu'à 50 % des frais de formation, mais surtout pour les entreprises de 6 à 99 employés. Vérifier avec un conseiller.
+    4. Pour l'équipement de sertissage (poste, microscope, caméra) :
+       - PME MTL, Fonds Jeunes Entreprises : jusqu'à 25 000 $ non remboursables, avec un prêt de PME MTL. L'entreprise doit être sur l'île de Montréal : vérifier l'adresse de la société.
+       - Futurpreneur (18 à 39 ans) : prêt jusqu'à 75 000 $ avec mentorat.
+       - Desjardins Créavenir : 18 à 39 ans, entreprise de 3 ans ou moins.
+  - Si la formation est retenue : partir après la Saint-Valentin, entre février et avril, une fois les trois conditions ci-dessus remplies et le marketing capable de continuer sans Rayane.
 
 ## 8bis. Autonomie graduée des messages (approuvée par Rayane le 3 nov. 2026)
 
