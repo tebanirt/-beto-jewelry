@@ -114,3 +114,66 @@ L'agent monte la voix sur tes plans, ajoute les sous-titres en français et la m
 
 - Publier les versions `_APP` avec la chanson à la une (environ 1 minute par reel dans l'app).
 - Donner les modalités exactes des plans de paiement avant toute vidéo qui en parle (voir `DONNEES.md` §9 pour les règles du Québec).
+
+## 7. Les deux installations de tournage (16 nov. 2026)
+
+Décision de Rayane du 16 nov. 2026 : le contenu passe avant la formation en sertissage (voir `docs/business-ops-brief.md` §8quinquies). Rayane filme ; l'agent vidéo et l'équipe marketing font le montage. Deux installations fixes, à monter en 2 minutes grâce à des marques au sol (ruban adhésif sous le trépied, la chaise et les pieds des lampes).
+
+Matériel déjà en main : iPhone, trépied JOILCAN 68″ avec télécommande Bluetooth, micro DJI Mic Mini 2.
+
+Réglages iPhone communs :
+- Réglages > Appareil photo > Enregistrement vidéo : 4K. **Vidéo HDR désactivée** (sinon, voile blanc).
+- Toutes les lumières à la même température. Plafonnier éteint, jamais une fenêtre dans le dos.
+- Mise au point et exposition verrouillées (appui long sur l'écran). L'app gratuite Blackmagic Camera permet aussi de bloquer la balance des blancs.
+- Une prise test de 5 secondes avant de commencer : cadrage, son, reflets.
+
+### 7.1 Face caméra (vidéos explicatives)
+
+Placement :
+- Téléphone **à hauteur des yeux**, en vertical, objectif **2x** (visage plus naturel qu'en 1x), à environ 1 à 1,5 m.
+- Lumière principale : une boîte à lumière (softbox) à 45° d'un côté, un peu au-dessus des yeux, à environ 1 m du visage.
+- Deuxième boîte de l'autre côté, beaucoup plus faible, ou un mur blanc pour déboucher les ombres.
+- Fond : l'établi ou l'atelier, à 1,5 à 2 m derrière Rayane, avec une petite lampe chaude allumée pour la profondeur.
+- Micro pincé à 15 à 20 cm sous le menton, réduction de bruit activée.
+
+Pendant la prise :
+- Regarder l'objectif, pas l'écran.
+- Pas de texte lu. Une carte avec 3 mots-clés, collée juste sous le téléphone.
+- Structure : une question en accroche, 2 ou 3 points, puis une phrase de fin (« Réserve ta consultation gratuite, le lien est dans ma bio »).
+- 15 à 45 secondes. Une prise ratée, on recommence depuis l'accroche.
+
+### 7.2 Bagues finies (le plateau « vitrine »)
+
+Placement :
+- La bague sur un plateau tournant motorisé, vitesse lente, tenue par une cire de musée transparente.
+- Fond noir brillant (plexiglas noir) pour les reels ; carton mat couleur sable, proche du fond des photos du site, pour les photos du site.
+- Une boîte à lumière au-dessus et un peu derrière la bague : grand reflet doux sur le métal.
+- Une ou deux **petites lumières dures** (point lumineux, sans diffuseur) sur le côté et derrière, à la hauteur de la pierre : ce sont elles qui font briller les facettes quand la bague tourne.
+- Des cartons noirs sur les côtés : lignes sombres dans le métal, pour que l'or ait l'air d'or et non d'un blanc plat.
+- Un grand carton noir percé d'un trou pour l'objectif, devant la bague : il cache le téléphone et Rayane dans les reflets.
+- Téléphone sur trépied, à la hauteur de la pierre ou un peu au-dessus, en mode macro (iPhone Pro depuis le 13 Pro, et iPhone depuis le 16) ou avec un objectif macro.
+
+Réglages et règles :
+- Balance des blancs bloquée en lumière du jour (environ 5600 K). La teinte des pierres de couleur (rose, jaune, bleu, vert) ne doit jamais changer.
+- Exposition un peu sous la normale, pour que les éclats ne deviennent pas des taches blanches.
+- Nettoyer la bague (chiffon microfibre, poire à air) juste avant : la macro montre chaque trace de doigt.
+- Manipuler avec des gants de coton, mais **jamais une bague enfilée sur un doigt de gant**, et **jamais à l'auriculaire** (règle de Rayane). Bague portée : seulement à l'annulaire.
+- Les plans à faire sont ceux du §2.
+
+### 7.3 Matériel recommandé (prix vus le 16 nov. 2026, avant taxes, à revérifier)
+
+| Étape | Matériel | Prix indicatif | Sert à |
+|---|---|---|---|
+| 1 | NEEWER NK103 : 2 boîtes à lumière 60 × 60 cm, ampoules bicolores IRC 95, pieds, télécommande | 119,99 $ en solde (171,99 $ régulier), ca.neewer.com | les deux installations |
+| 1 | 2 petites lampes Ulanzi VL49 (5500 K) | 33 $ chacune, boutique canadienne Ulanzi | les éclats des pierres |
+| 1 | Plateau tournant motorisé, vitesse réglable | 38 à 60 $ | les tours de bague |
+| 1 | Plexiglas noir, carton sable, cartons noirs et blancs, cire de musée | quelques dizaines de dollars (DeSerres, quincaillerie) | fonds et reflets |
+| 2 | Amaran 100d S, utilisée sans diffuseur comme point lumineux puissant | 189 $ (Vistek) | éclats plus nets, ralenti à 240 i/s |
+| 3 | Sony ZV-E10 II (boîtier) | 1 399,99 $ (sony.ca) | qualité « studio » |
+| 3 | Objectif Sigma 70 mm f/2.8 DG DN Macro Art (monture Sony E) | environ 706 $ (Kamerastore) | gros plans de griffes et de pierres |
+
+Notes :
+- L'objectif Sony E 30 mm Macro (349,99 $) coûte moins cher, mais il faut être à 2 ou 3 cm de la bague : l'objectif bloque la lumière. Le 70 mm laisse de la place pour éclairer.
+- GemLightbox (boîte de photo pour bijoutiers, environ 900 à 3 700 $ US) : simple, mais donne un look catalogue sur fond blanc. Le plateau ci-dessus coûte beaucoup moins cher et donne le look sombre et cinéma de la marque.
+- Téléprompteur : pas au début (le texte lu sonne faux). Si un jour : le NEEWER X12 fonctionne avec l'iPhone seulement en objectif 2x (focale de plus de 28 mm).
+- Payé par la société : dépense d'entreprise, taxes récupérables. Garder tous les reçus (voir le skill `beto-comptabilite`).
