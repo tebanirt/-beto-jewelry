@@ -34,6 +34,7 @@ Règles de contenu et autorisations : voir `docs/business-ops-brief.md` §10.
 | `cutout.py` | Détourage des photos et rendus (rembg + BiRefNet, en local) pour poser la bague sur un fond de marque |
 | `reels_motion.py` | Vague 14 : style de la référence de Rayane (N&B + couleur, typo géante, cadres), demande en mariage, Noël, explicatifs « vrai diamant ? » et « 4 étapes » |
 | `reels_wave15.py` | Vague 15 : les bagues de Rayane détourées, « Pourquoi faire ta bague à Montréal ? » (accroche, 4 raisons, appel à l'action), brouillon du paiement en 3 étapes (non publié), éducatif « Chaque forme a une histoire » (marquise, poire, halo, alliance) |
+| `reels_wave16.py` | Vague 16 (13 nov. 2026) : formats choisis d'après les chiffres et la veille de niche (« 3 erreurs », vérité sur le labo, POV 3D, « envoyez ça à votre chum », halo caché), en français et en anglais |
 | `TOURNAGE.md` | Ce que Rayane filme pour chaque pièce, sa voix, la banque du jour, et ce que l'agent en fait |
 | `DONNEES.md` | Ce que disent les données (Instagram, pubs Meta, CRM, avis, concurrents) et les règles qui en découlent : à lire avant chaque montage |
 | `reels_pro3.py` | Vague 11 : Noël FR et EN, du rendu à l'or en anglais, designs 3D, sans bague portée au doigt |
@@ -48,6 +49,11 @@ export BETO_WORK_DIR=/tmp/beto-video
 mkdir -p $BETO_WORK_DIR/{footage,broll,fonts_pkg}
 (cd $BETO_WORK_DIR/fonts_pkg && npm pack @fontsource/bodoni-moda @fontsource/jost --silent \
   && for t in *.tgz; do tar xzf $t && mv package ${t%.tgz}; done)
+# TikTok Sans (OFL, Google Fonts) for the native-Instagram captions (reels_native.py)
+mkdir -p $BETO_WORK_DIR/fonts_pkg/tiktoksans && (cd $BETO_WORK_DIR/fonts_pkg/tiktoksans && UA='Mozilla/5.0 Chrome/120' \
+  && curl -sA "$UA" 'https://fonts.googleapis.com/css2?family=TikTok+Sans:wght@600' > tt.css \
+  && python3 -c "import re;c=open('tt.css').read();[print(n,re.search(r'url\((.*?)\)',b).group(1)) for n,b in re.findall(r'/\* (latin(?:-ext)?) \*/\s*@font-face \{(.*?)\}',c,re.S)]" \
+  | while read n u; do curl -so tiktoksans-$n.woff2 $u; done)
 python3 -m venv $BETO_WORK_DIR/venv && $BETO_WORK_DIR/venv/bin/pip install -q numpy scipy
 export BETO_PY=$BETO_WORK_DIR/venv/bin/python
 export BETO_MUSIC_DIR=$BETO_WORK_DIR/music

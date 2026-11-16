@@ -183,3 +183,150 @@ Voir `TOURNAGE.md` pour la liste de plans par pièce et la banque du jour.
 Une chanson commerciale ne s'intègre jamais dans le fichier : on publie une version `_APP` et Rayane ajoute la chanson dans l'app. Meta documente une « Instagram Audio API » (juin 2026), mais on n'a pas vérifié si Supermetrics y donne accès.
 
 **Sources** : zoomsphere.com (algorithme 2026), om.co (mémo de Mosseri), glossy.co (Ring Concierge), opc.gouv.qc.ca (publicité sur le crédit, acompte), lpc.quebec (art. 1, 245 à 247), businesshub.affirm.ca (Affirm Canada et le Québec), dashsocial.com et creatordb.app (sons), fixthemusic.com (mariages), support.apple.com (réglages iPhone), gemfind.com (photo de bijoux).
+
+## 10. Bilan du 15 nov. 2026 (18 trial reels publiés du 10 au 14 nov.)
+
+| Format | Meilleur exemple | Saut | Temps vu |
+|---|---|---|---|
+| Avis Google cité, Rayane en 1re image | « Vous êtes vraiment à l'écoute. » (T01) | 62,4 % | 13 s |
+| Même format, en anglais | « He took the time to listen… » (T02) | 63 % | 2 s |
+| Rayane en consultation, étapes | « Ta bague de fiançailles, étape par étape » | 66,7 % | 7 s |
+| Mythe écrit en citation | « Un diamant de labo, c'est du faux. » | 70 % | 3 s |
+| Contraste en question | « Tout le monde choisit le blanc… » | 70,6 % | 2 s |
+| Écrin, vitrine lente, vote, portfolio, Noël sur produit seul | « Regarde-le dans la lumière », votes, « sous le sapin » | 90 à 100 % | 0 à 1 s |
+
+**Conclusions**
+- **Une personne à l'écran dès la 1re image** est la condition numéro 1. Avec Rayane + un vrai avis, on passe de 90 % à 62 % de saut et de 1 s à 13 s regardées.
+- **Les reels de produit seul ne marchent pas sur ce compte** (vitrine, écrin, vote, portfolio) : 0 à 10 sur 100. On arrête ces formats tant que Rayane n'a pas de vraies bagues finies filmées de près (le format qui marche chez les autres, `TOURNAGE.md`).
+- **Noël sur produit seul** : 92 à 96 % de saut. Noël doit passer par une personne (Rayane face caméra, avis) ou un appel à l'envoi.
+- **Vague 17** (`reels_wave17.py`) : 3 variantes de T01 et T02 (une seule chose change, la citation d’accroche), programmées le 17 nov. à 13 h 45 (T03), 19 h 30 (T05, anglais) et 21 h (T04).
+- Score dans `social_reels` = 100 − taux de saut, en attendant assez de partages et d'abonnements pour les compter.
+
+## 11. Changements du 15 nov. 2026 (vague 18)
+
+- **Nouveau** : 1 reel normal par jour (accord de Rayane). Premier : T06, les avis Google avec Rayane en première image, le 16 nov. à 17 h 10, à épingler.
+- **Nouveau test** : PX01, premier reel avec prix en accroche (solitaire 2 ct, diamant de laboratoire, or blanc 18k, « 2 300 à 2 400 $ + taxes »), en trial le 16 nov. à 15 h. Le site affichait 2 350 $ pour cette bague.
+- **Contrôle** : le premier rendu de PX01 montrait des mains gantées avec une bague à pierre bleue sous le prix. Corrigé : sous le prix, seulement Rayane et le plateau de pierres seules.
+- **Lisibilité** : T06 sur une musique à 129 BPM ne laissait que 1,4 s pour lire le troisième avis. Refait à 92 BPM (15,4 s). Règle : pour un reel à citations, viser 80 à 95 BPM.
+- **Avis Google** : 20 avis, tous à 5 étoiles (15 nov.). Nouvelles citations dans `FAITS.md`.
+
+## 12. Les vidéos de prix les plus vues de la niche (TikTok, 6 derniers mois, relevé du 15 nov. 2026)
+
+Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden halo engagement ring price », « 2 carat oval solitaire lab grown price ». Triées par vues.
+
+| Compte | Vues | Enregistrements | Durée | Accroche |
+|---|---|---|---|---|
+| @junolabjewelry | 10,2 M | 222 k | 15 s | « 2200 usd for this 3 carat vintage style marquise diamond ring » |
+| @princessbridediamonds | 6,4 M | 36 k | 7 s | « My engagement ring hot take: 1 carat is plenty » |
+| @diamaura | 2,5 M | 85 k | 9 s | « Melia Adorned Marquise with a center 3.2ct diamond set in 18k gold » |
+| @aleni.diamond.cus | 2,4 M | 46 k | 15 s | « $2,600 gets you this. A 6.16ct marquise diamond. » |
+| @givarajewelry | 1,3 M | 17 k | 54 s | « Over 6 carats oval ring $2,995. » |
+
+**Ce qui revient chez tous**
+- **Le prix et la bague exacte dans la même phrase, dès la première seconde** : prix, carat, forme et modèle (« vintage style », « hidden halo », « solitaire », « cathedral »).
+- **Une fiche complète dans la description**, souvent avec « save for reference » : modèle, métal et carat de l'or, largeur de l'anneau, forme, carat, couleur, pureté, certificat, prix. Elle fait monter les enregistrements : 222 k chez Juno Lab.
+- **La vraie bague à l'écran**, sur la main ou qui tourne, en 7 à 15 s.
+- **Une question qui fait commenter** (« Agree or disagree? ») ou un appel à l'envoi (« Send this to him to drop a hint »).
+
+**Appliqué le 15 nov. 2026** : PX01b (français) et PX02 (anglais).
+- Première carte : « Solitaire 2 carats, 2 300 à 2 400 $ ».
+- Puis une ligne à la fois : diamant rond de laboratoire, couleur E et pureté VVS2, certificat IGI, or blanc 18k, design 3D en 48 h, puis un avis Google.
+- La description reprend la fiche de la bague, avec la question « Tu la préfères en solitaire ou avec un halo caché ? ».
+- **Il manque encore la vraie bague, filmée sur le plateau tournant** (`TOURNAGE.md` §2).
+
+## 13. Musique (15 nov. 2026)
+
+**Remarque de Rayane** : « je trouve les musiques plates… sur les vidéos les plus trendy, ils utilisent tous des musiques populaires ».
+
+**Ce qui est possible**
+- **Une chanson connue intégrée au fichier** : Instagram coupe le son ou montre moins la vidéo. Règle du brief §10 : jamais.
+- **Par l'outil de publication** : impossible d'ajouter la bibliothèque musicale d'Instagram. « You cannot add Instagram's music library tracks through the API. No trending sounds » (Postproxy, guide 2026 des reels). Meta a une API de musique sous licence pour les tiers, avec connexion Facebook. Elle propose d'autres titres que l'app, et Supermetrics ne la prend pas en charge (`audio_name` sert seulement à nommer le son).
+- **Donc** : la vraie chanson tendance s'ajoute seulement dans l'app, par Rayane.
+- **Décision de Rayane, 15 nov. 2026 (« 1 + 3, je prends Epidemic Sound »)** :
+  - option 1 : chaque jour, le reel normal lui est envoyé sans musique (version `_APP`, `reels_app.py`), coupé au tempo de la chanson choisie, avec le nom de la chanson, l'heure, la description et la consigne d'épinglage. Il le publie dans l'app avec la chanson. Premiers envois : T06 avis Google sur « Angel of My Dreams » (JADE, 128 BPM) le 16 nov., et « Qui est Rayane » sur « Hold On, We're Going Home » (Drake, 100 BPM) le 18 nov. Tempos vérifiés sur Tunebat et SongBPM ;
+  - option 3 : Epidemic Sound pour les trial reels. Forfaits relevés sur epidemicsound.com/pricing le 15 nov. : Creator 14,99 $ par mois (usage personnel), Pro 24,99 $ par mois (professionnels et pigistes), Business 40 $ par mois ou 480 $ par an (marques et agences, chiffre d'affaires de moins de 10 M$, pubs permises, 3 comptes par plateforme). Le bon forfait pour une marque : Business. Aucun connecteur Epidemic pour l'agent : Rayane télécharge les pistes et les envoie.
+
+**Tendances Instagram de la semaine du 11 nov. 2026** (CreatorDB)
+- « All I Want for Christmas Is You » (Mariah Carey), « Underneath the Tree » (Kelly Clarkson), « Santa Tell Me » (Ariana Grande) : Noël.
+- « Housewife » (Tate McRae) et « Nicole Kidman » (ADÉLA).
+- « Angel of My Dreams » (JADE) : tendance « trop beau pour être vrai », pour dévoiler une bague.
+- « Upside Down » (Diana Ross) : transitions avant / après, du 3D à la bague finie.
+- « Linger » (The Cranberries), « Everlong » (Foo Fighters), « November Rain » (Guns N' Roses).
+
+**Banque gratuite modernisée** : 32 pistes R&B et hip-hop de Mixkit, avec la même licence gratuite, ajoutées le 15 nov. Liste et tempos dans `music/modern_rnb_hiphop.json` (dossier de travail).
+- **Pour les reels à citations ou à prix (80 à 100 BPM)** : 225 « Soulful Serenity », 1176 « Give It To Me Baby », 266 « Trap Sad », 738 et 739 « Hip Hop 02/03 », 485 « Green Chair RnB », 289 « Sensual Pop », 330 « Hippidi Hop », 1141 « Funky Triplets », 434 « Sun-Kissed Skin », 220 « Know Better ».
+- **Pour les reels rythmés (100 à 130 BPM)** : 228 « Fashion », 432 « Angel Watching Me », 783 « Babe », 465 « Watch Me Breezy », 864 « A Night to Remember », 366 « Kid Ink Type ».
+- Les anciennes pistes « ambiance » ou « corporate » ne servent plus.
+
+## 14. Production du 15 nov. 2026 (série des coupes)
+
+- **13 reels programmés du 16 au 20 nov.** : le solitaire 2 ct en 8 coupes (en français), 4 en anglais (rond, ovale, marquise, taille émeraude) et un reel avec toutes les coupes. Une seule chose change d'une coupe à l'autre, pour savoir laquelle retient le mieux.
+- **« Qui est Rayane »**, reel normal le 18 nov. à 17 h 10 : la deuxième publication à épingler.
+- **Contrôles qui ont arrêté un reel avant publication** :
+  - une bague ovale ROSE (b1657215) sous l'avis, à la fin du premier reel de prix ;
+  - un « | » visible au lieu d'un retour à la ligne ;
+  - « taille émeraude » qui dépassait de la carte ;
+  - la petite ligne du reel « toutes les coupes » qui dépassait aussi ;
+  - deux plans de Rayane bloqués par pro.BANNED (bague à l'auriculaire d'une cliente).
+- **Chiffres** : 234 abonnés. T01 reste le meilleur (62,4 % de saut, 13 s regardées). J01 a eu le premier enregistrement. Aucun reel n'a atteint ses 72 h aujourd'hui.
+- **Pas de recherche de niche aujourd'hui** : les crédits Firecrawl du jour étaient presque épuisés. La recherche du matin (§12, LISTE_A_FILMER.md) sert de base.
+
+## 15. Musique gratuite et style « moins IA » (16 nov. 2026)
+
+**Question de Rayane** : « Il n'y a pas une façon gratuite d'aller chercher des musiques trendy et que tu me fasses des edits pro ? Je trouve que ça fait beaucoup trop AI. »
+
+**Musique : ce que dit la recherche** (foximusic.com et hellothematic.com, guides 2026 ; studiobarncreative.com)
+- Un **compte Entreprise** sur Instagram n'a pas accès aux chansons connues : seulement la bibliothèque commerciale (Meta Sound Collection, environ 14 000 titres libres pour Facebook et Instagram). C'est gratuit, sans risque, et elle a ses propres titres populaires.
+- Un **compte Créateur** retrouve presque toute la bibliothèque (chansons tendance), mais « l'accès n'est pas une licence » : pour une marque qui vend, c'est une zone grise (son coupé, réclamation d'un éditeur). Beaucoup de petites entreprises le font quand même. C'est une décision de Rayane.
+- **Epidemic Sound ne donne pas les chansons tendance** : ce sont des pistes de production, comme Mixkit mais de meilleure qualité. Il règle la qualité, pas la tendance.
+- **App Edits d'Instagram** : gratuite, sans filigrane, export 4K, sous-titres automatiques, et les **modèles de reels** (on dépose ses clips, le montage suit la chanson) y sont revenus en novembre 2026 (chatcut.io, guide 2026 ; Google Play).
+
+**Pourquoi nos montages font « IA »** (diagnostic du 16 nov.)
+- La même carte ivoire au milieu de chaque vidéo, le texte serif qui apparaît mot par mot, la carte du logo à la fin, les fondus doux : on reconnaît un gabarit.
+- Les 41 mêmes plans de la séance de consultation dans toutes les vidéos.
+- Pas de voix, pas de parole face caméra, une musique d'ambiance.
+
+**Style « natif » testé (N01_avis_natif, `reels_native.py`)**
+- Accroche en bulle blanche comme le texte d'Instagram, à la première personne.
+- Sous-titres blancs gras avec contour (comme les sous-titres automatiques), un mot clé en jaune.
+- Coupes franches sur le temps toutes les 1 à 2 mesures, petits zooms, aucune carte ivoire, aucune carte de fin : l'appel à l'action est un sous-titre.
+- Police TikTok Sans (licence OFL, Google Fonts).
+- En attente de l'avis de Rayane avant d'en faire le style par défaut.
+
+## 16. Recherche poussée du 16 nov. 2026 : répétition, rythme, musique gratuite, style humain
+
+**Demande de Rayane** : « Fais une recherche poussée là-dessus… ça commence à se répéter, donc si tu vois que c'est trop répétitif, on arrête jusqu'au nouveau plan filmé. »
+
+**Verdict : oui, c'est trop répétitif. Pause de la production après les reels déjà programmés (jusqu'au 20 nov.), jusqu'aux nouveaux plans de Rayane.**
+- Nos chiffres : 8 trial reels jugés sur 8 retirés au 15 nov. Un seul format passe la barre (T01, avis Google avec Rayane).
+- Tous nos reels viennent des 41 mêmes plans d'une seule séance de consultation. La série « toutes les coupes » (12 reels) ne change que le nom de la coupe et le dessin.
+- Le 16 nov., 7 reels programmés ont été annulés (E01, P01, C_rond, M02, W02, W08, E02). Rayane a refusé l'annulation de T03 et gardé les 17 autres (17 au 20 nov.). Puis : « même ceux supprimés, on les poste, plus de data ; après, bien sûr, on arrête ». E01, P01, W08 et E02 ont été reprogrammés ; C_rond, M02 et W02 restent annulés (son choix). En tout, 21 reels sortent du 16 au 20 nov., puis la pause commence.
+
+**Répétition et originalité** (sources : heymark.ai, 30 sept. 2026 ; zoomsphere.com et exemplary.ai, guides 2026 de l'algorithme ; creatortribune.com, mai 2026)
+- Mosseri (30 sept. 2026) : republier le même reel aura « probablement moins de portée ». Pour bâtir sur un reel qui a marché, trois façons : changer le format, répondre à une question des commentaires, ou dire ce qui a changé.
+- Le 30 avril 2026, Instagram a étendu la règle du contenu non original aux photos et carrousels. Un compte qui publie surtout du contenu non original perd les recommandations, et les retrouve quand la plupart de ses publications des 30 derniers jours sont originales.
+- Un montage fait dans une autre app n'est pas pénalisé, s'il n'a pas de filigrane (Mosseri, cité par zoomsphere).
+- Les chiffres de « +40 à 60 % de portée » pour le contenu original circulent sur des blogues, mais rien ne les confirme chez Instagram : à ne pas citer.
+
+**Rythme des trial reels** (socialchamp.com, mai 2026 ; brandid.app, mindwand.com, itsmodernmillie.com, guides 2026)
+- Instagram n'a publié aucune limite officielle. Les guides recommandent 3 à 5 trial reels par semaine. Un blogue parle de 5 par jour au maximum, sans preuve.
+- Plusieurs guides signalent que le contenu en double ou presque identique publié en trial reels est traité comme du pourriel. Instagram dit que les trial reels sont évalués à part et ne nuisent pas aux reels normaux.
+- Notre rythme de 5 à 6 par jour, avec les mêmes plans, était bien au-dessus. **À la reprise : 1 à 2 trial reels par jour au maximum, chacun bâti sur un plan jamais publié.**
+
+**Musique gratuite** (foximusic.com, hellothematic.com, studiobarncreative.com, guides 2026 ; soundstripe.com et Fast Company, mai 2026, pour TikTok)
+- Compte Entreprise Instagram : bibliothèque commerciale seulement (Meta Sound Collection, environ 14 000 titres), gratuite et sans risque. Compte Créateur : presque toutes les chansons tendance, mais pour une marque qui vend, l'accès n'est pas une licence (zone grise). Décision de Rayane.
+- TikTok : la Commercial Music Library est gratuite pour les comptes Entreprise. Elle grossit (20 000 titres ajoutés grâce au partenariat avec Chordal, mai 2026), mais les grands succès viraux n'y sont pas (UMG absent).
+- Le **son original** (la voix de Rayane) est la solution la plus sûre et la plus humaine : aucun problème de droits, et c'est ce que les guides recommandent aux comptes Entreprise.
+- L'app Edits (gratuite, sans filigrane) a maintenant une version Mac (Apple Silicon, 5 nov. 2026) et un espace d'inspiration avec les sons, effets et modèles tendance.
+
+**Ce qui fait « humain » chez les bijoutiers** (Rapaport, oct. 2026 ; tuplestrategy.com ; JCK)
+- Jade Trau : un reel où elle parle de sa propre pile de bagues a fait 127 200 vues, près de 8 fois la moyenne de la marque, et amène des messages et des commandes sur mesure.
+- Annoushka : les photos de vraies clientes fiancées, 225 000 impressions en 4 semaines pour une seule publication ; abonnés +41 % en un an.
+- Shahla Karimi : une série humoristique tournée dans sa salle d'exposition a fait 4 de ses 5 meilleures publications en 3 mois (80 000 $ de tournage : pas pour nous, mais l'idée de la série avec de vrais moments est bonne).
+- Un visage ou des mains qui travaillent battent un objet sur fond blanc. Le public repère vite ce qui est « fabriqué ». Des images faites par IA d'une bague sont un risque de confiance.
+
+**Plan de reprise (quand les nouveaux plans arrivent)**
+1. Le style natif (`reels_native.py`) par défaut, sauf si les chiffres disent le contraire.
+2. La voix de Rayane ou sa parole face caméra dans la plupart des reels (son original).
+3. Chaque reel bâti sur un plan neuf ; un plan déjà publié ne sert plus qu'en complément.
+4. Repartir des avis Google (le seul format gagnant) avec les trois façons de Mosseri : nouveau format, réponse à une question, ce qui a changé.
