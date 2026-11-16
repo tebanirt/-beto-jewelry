@@ -58,12 +58,44 @@ const serviceJsonLd = {
     "Conception et fabrication de bagues de fiançailles sur mesure à Montréal, de la consultation au rendu 3D en 48h jusqu'à la livraison.",
 };
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Accueil", item: "https://betojewelry.com" },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Bague de fiançailles sur mesure à Montréal",
+      item: "https://betojewelry.com/bagues-de-fiancailles-sur-mesure-montreal",
+    },
+  ],
+};
+
 export default function BaguesFiancaillesMontrealContent() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       <PageHero
