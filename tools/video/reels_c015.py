@@ -36,11 +36,13 @@ def V1_ovale_cine():
                 end=dict(beats=0, overlay=True, layers={}))
 
 
-G6 = "u:C015_grade_v9.mp4"
+G6 = "u:C015_grade_v10.mp4"   # v10: realism first (no denoise, no 4K sharpening, subtle bloom); render with REEL_FPS=24
 POS6 = {24.8: (1085, 2150), 22.6: (1100, 2010), 3.3: (1090, 2100), 2.2: (1142, 2002), 9.6: (932, 2028), 15.0: (944, 1932), 4.6: (1076, 2120), 26.4: (1076, 2106)}   # find_ring.py on the v9 grade (centre of the motion for 24.8 and 3.3)
 
 
-def s6(t, zoom, fx=("kenburns",), slowmo=False, dy=0):
+def s6(t, zoom, fx=(), slowmo=False, dy=0):
+    """Locked-off crop, lanczos downscale. No Ken Burns: ffmpeg zoompan steps in whole pixels (jitter) and pushes
+    past 1:1. Zoom <= 2.0 keeps at least 1080 source pixels across, so the 4K is never upscaled."""
     cx, cy = POS6.get(t, (1080, 1980))
     return S(G6, t, 1, zoom=zoom, cx=cx, cy=cy + dy, fx=list(fx), slowmo=slowmo)
 
@@ -67,12 +69,12 @@ def end_dark(top=290):
 def V2_ovale_or_jaune():
     """Hook -> reveal -> close (GemIQ 3-asset structure). Grade v9: deep velvet black, light denoise: the stone face-on in frame 1, the angles, a held end frame."""
     shots = [
-        dict(shot=s6(24.8, 2.5, dy=-200), beats=4, tr="cut"),  # HOOK: the oval turns face-on, tight (real speed: interpolated slow-mo smears the facets)
+        dict(shot=s6(24.8, 2.0, dy=-110), beats=4, tr="cut"),  # HOOK: the oval turns face-on (2.0 = 1:1 pixels, no upscale)
         dict(shot=s6(2.2, 1.8), beats=3, tr="cut"),       # side: the band's arc (14k yellow gold), the stone turning in
         dict(shot=s6(9.6, 1.8), beats=3, tr="cut"),       # profile: prongs and basket
-        dict(shot=s6(15.0, 1.75), beats=3, tr="cut"),     # behind: the band, the stone on top
+        dict(shot=s6(15.0, 1.7, dy=70), beats=3, tr="cut"),     # behind: the band, the stone on top (dy: keeps the bright top of the turntable out)
         dict(shot=s6(22.6, 1.8), beats=3, tr="cut"),      # the stone comes back around
-        dict(shot=s6(3.3, 1.9, dy=-120), beats=7),    # turns face-on under the call to action; loops into the hook
+        dict(shot=s6(3.3, 1.85, dy=-70), beats=7),    # turns face-on under the call to action; loops into the hook
     ]
     texts = [
         dict(html=lux("Solitaire ovale", "Diamant blanc,<br><i>or jaune 14k.</i>"), at=0, until=4),

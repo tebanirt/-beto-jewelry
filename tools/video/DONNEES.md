@@ -376,27 +376,30 @@ Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden ha
 
 ## 19. Premier plan du studio en Apple Log 2 (17 nov. 2026)
 
-- **Clip de Rayane** : solitaire ovale sur le plateau tournant, **jonc en or jaune 14 k, diamant blanc** (précisé par Rayane le 17 nov. ; carat, et laboratoire ou naturel : inconnus, donc jamais à l'écran).
+- **Clip de Rayane** : solitaire ovale sur le plateau tournant (noir, en plastique : son grain est normal), **jonc en or jaune 14 k, diamant blanc** (précisé par Rayane le 17 nov. ; carat, et laboratoire ou naturel : inconnus, donc jamais à l'écran).
   - Prise : iPhone 17 Pro Max, 48 mm, Apple Log 2, 24 i/s, 144°, ISO 80, 5 600 K.
   - Fichier : 36 s, 4K vertical, HEVC 4:2:2 10 bits, 163 Mo, déposé dans « Beto — Banque vidéo ».
 - **Transfert** : l'outil Google Drive ne télécharge pas plus de 10 Mo. Pour un gros fichier, Rayane active le partage par lien (lecteur), je télécharge, puis il remet le partage sur « Limité ».
-- **Couleur, version finale (v9)**. Trois scripts dans `tools/video/` : `applelog2_grade.py` (LUT), `stone_mask.py` (masque de la pierre) et `enc_applelog2.sh` (rendu).
+- **Couleur, version finale (v10, « réalisme d'abord », 17 nov. au soir)**. Trois scripts dans `tools/video/` : `applelog2_grade.py` (LUT), `stone_mask.py` (masque de la pierre) et `enc_applelog2.sh` (rendu).
   - Décodage de la courbe Apple Log.
-  - **Blancs réglés sur le velours noir**, jamais sur la pierre ou le jonc, qui renvoient la couleur de l'or. Ses lampes sont plus chaudes que les 5 600 K de l'app (R/V 1,34 sur le velours).
-  - Courbe en S sur la luminance seulement : velours d'un noir profond (moyenne de 9 sur 255 au lieu de 17), pierre lumineuse.
+  - **Blancs réglés sur le fond noir**, jamais sur la pierre ou le jonc, qui renvoient la couleur de l'or. Ses lampes sont plus chaudes que les 5 600 K de l'app (R/V 1,34 sur le fond).
+  - Courbe en S sur la luminance seulement, bague lumineuse (Rayane trouvait la v9 un peu sombre), fond naturel.
   - Couleur plus riche dans les tons moyens (l'or), qui tend vers le blanc dans les facettes les plus claires. Les tons chauds penchent vers le jaune, pas le rose.
   - Les reflets brûlés du jonc deviennent or pâle au lieu d'argent.
   - **Le diamant reste blanc** : un masque suit la pierre image par image, là où les petites arêtes des facettes sont les plus denses. Le jonc, lisse, reste hors du masque ; la pierre y est désaturée à 15 %.
-  - Grain du velours adouci (débruitage léger), netteté en deux passes pour le poli miroir, léger halo sur les éclats.
+  - Réalisme d'abord (Rayane, 17 nov. : « que la bague et la pierre aient l'air le plus ultra réaliste possible ») : aucun débruitage (il adoucissait les facettes) ; aucune netteté sur le 4K (ses halos se voyaient après réduction) ; une seule netteté fine, à la taille finale ; halo des éclats très léger (12 %).
+  - **Jamais d'agrandissement** : zoom de 2 au maximum dans un 4K vertical, donc au moins 1 080 pixels de la prise pour 1 080 à l'écran. Réduction en lanczos. Plus de Ken Burns : le zoompan de ffmpeg avance par pixels entiers (tremblement) et dépasse le 1:1.
+  - **24 i/s comme la prise** (`REEL_FPS=24`) : passer de 24 à 30 i/s répétait une image sur quatre, d'où des saccades sur le plateau.
+  - Pas d'agrandissement par IA (Topaz, Real-ESRGAN) : il invente des facettes, donc une pierre qui n'est pas la vraie (`docs/design-brief.md` §6).
   - **LUT pour l'app et DaVinci** : `tools/video/luts/Beto_AppleLog2_Or14k_33.cube`. C'est la même couleur, sans le masque de la pierre ni le halo. Elle est faite pour son éclairage actuel, avec la balance des blancs de l'app à 5 600 K : si les lampes ou ce réglage changent, il faut la refaire.
 - **Pièges** :
   - une courbe forte appliquée canal par canal rendait l'anneau rosé ;
   - des blancs réglés sur la pierre rendaient le jonc d'or blanc ;
   - un masque de « zones claires » prenait aussi le jonc poli, qui devenait argenté de dos ;
   - un mélange (blend) en 16 bits dans ffmpeg délavait l'image : le halo se fait en 8 bits ;
-  - un velours gris montre le grain et la poussière : passer un rouleau anti-peluches avant chaque prise.
+  - le zoom numérique au-delà de 2 fois et le passage de 24 à 30 i/s font perdre le réalisme : voir `TOURNAGE.md` §7.2 bis pour remplir l'image dès la prise.
 - **Montage V2_ovale_or_jaune** (`reels_c015.py`), structure accroche → révélation → fin :
-  - 13,8 s ; coupes nettes sur le temps (les fondus laissaient une image double) ; plus de faux reflet de lumière, qui faisait une traînée grise sur le velours ; vitesse réelle du plateau (le ralenti calculé, minterpolate, brouillait les facettes du diamant).
+  - 13,8 s ; coupes nettes sur le temps (les fondus laissaient une image double) ; plus de faux reflet de lumière, qui faisait une traînée grise sur le fond ; vitesse réelle du plateau (le ralenti calculé, minterpolate, brouillait les facettes du diamant).
   - **Accroche** : la pierre qui se tourne de face, en gros plan, dès la 1re image.
   - **Révélation** : côté, profil (griffes), arrière, retour.
   - **Fin** : la pierre qui passe de face, sous le logo blanc, « Consultation gratuite », « Lien en bio » et « Montréal · ou en vidéo ». Elle reste à l'écran sans fondu, pour que la vidéo boucle sur l'accroche.

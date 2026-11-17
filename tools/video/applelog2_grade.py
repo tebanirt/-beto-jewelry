@@ -1,7 +1,7 @@
-"""Apple Log 2 -> Rec.709 cinematic grade for Beto's turntable shots (black velvet, 14k yellow gold, white diamond).
-v9 (17 Nov 2026). Usage: python applelog2_grade.py grade.cube   (then stone_mask.py and enc_applelog2.sh: see that script)
-- White balance on the black velvet (neutral), so the gold stays gold (Rayane's lamps are warmer than the app's 5600 K).
-- Luminance-only S-curve (a per-channel curve turned the band pink): black velvet, bright stone.
+"""Apple Log 2 -> Rec.709 cinematic grade for Beto's turntable shots (black plastic turntable, 14k yellow gold, white diamond).
+v10 (17 Nov 2026). Usage: python applelog2_grade.py grade.cube   (then stone_mask.py and enc_applelog2.sh: see that script)
+- White balance on the black turntable (neutral), so the gold stays gold (Rayane's lamps are warmer than the app's 5600 K).
+- Luminance-only S-curve (a per-channel curve turned the band pink): luminous ring, natural background.
 - Chroma richer in the mid-tones (gold), fading to white in the brightest facets; warm hues lean yellow, not pink.
 - Clipped highlights (any Log channel near its ceiling) become pale 14k gold, not silver: the band is yellow gold.
   The diamond is kept white afterwards inside the tracked stone mask (stone_mask.py)."""
@@ -13,7 +13,7 @@ def dec(P): return np.where(P<Pt, np.sqrt(np.clip(P,0,None)/c)+R0, 2**((P-beta)/
 GAINS=np.array([0.746,1.0,1.601])          # neutral on the black velvet
 LUM=np.array([0.2126,0.7152,0.0722])
 TINT=np.array([1.0,0.93,0.74]); TINT=TINT/(TINT@LUM)
-PTS=[(-6,0.0),(-4,0.002),(-2,0.008),(-0.5,0.020),(0.1,0.036),(0.8,0.078),(1.7,0.45),(2.5,0.71),(3.3,0.875),(4.0,0.95),(4.8,0.99),(6.5,1.0)]   # deep velvet black (v9)
+PTS=[(-6,0.0),(-4,0.003),(-2,0.012),(-0.5,0.032),(0.1,0.055),(0.8,0.115),(1.5,0.40),(2.2,0.66),(3.0,0.85),(3.8,0.94),(4.8,0.99),(6.5,1.0)]   # v10: luminous ring, natural turntable
 cur=PchipInterpolator([p[0] for p in PTS],[p[1] for p in PTS],extrapolate=False)
 def ramp(x,a,b_): return np.clip((x-a)/(b_-a),0,1)
 def grade(P):

@@ -97,7 +97,7 @@ def src_info(clip):
     return _INFO[clip]
 
 
-FPS = 30
+FPS = int(os.environ.get("REEL_FPS", 30))   # 24 for 24 fps cinema footage (no 24->30 judder)
 W, H = 1080, 1920
 TM = ("zscale=t=linear:npl=100,format=gbrpf32le,zscale=p=bt709,"
       "tonemap=mobius:param=0.3:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p")
@@ -143,7 +143,7 @@ def S(clip, start, dur, zoom=None, cx=None, cy=None, speed=1.0, fx=(), size=(W, 
 
 
 def render_shot(s):
-    kparts = [s, GRADE, TM] + (["glow3"] if "glow" in s.get("fx", []) else [])
+    kparts = [s, GRADE, TM] + (["glow3"] if "glow" in s.get("fx", []) else []) + ([f"fps{FPS}"] if FPS != 30 else [])
     key = hashlib.md5(json.dumps(kparts, sort_keys=True).encode()).hexdigest()[:14]
     out = f"{CACHE}/{s['clip'].replace(':', '_')}_{key}.mp4"
     if os.path.exists(out):

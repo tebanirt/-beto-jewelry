@@ -193,6 +193,16 @@ Réglages et règles :
 - Manipuler avec des gants de coton, mais **jamais une bague enfilée sur un doigt de gant**, et **jamais à l'auriculaire** (règle de Rayane). Bague portée : seulement à l'annulaire.
 - Les plans à faire sont ceux du §2.
 
+### 7.2 bis Le maximum de détail (leçons du premier clip, 17 nov. 2026)
+
+Mesuré sur le clip C015 : la bague occupait environ 29 % de la largeur de l'image (620 pixels sur 2 160). Pour un gros plan de la pierre, il fallait donc zoomer 2 à 2,5 fois au montage, et la résolution se perd au-delà de 2 fois. Le détail vient de la prise, pas du montage :
+- **Remplir l'image à la prise** : la bague à 60-80 % de la largeur pour les plans larges, et une prise séparée encore plus serrée pour la pierre. Essayer le 4x (100 mm) ; s'il ne fait pas la mise au point, reculer un peu jusqu'à ce qu'il la fasse.
+- **Codec ProRes 422 HQ** plutôt que HEVC. Le HEVC (environ 36 Mb/s pour ce clip) lisse les petites facettes. Le ProRes 422 HQ s'enregistre dans l'iPhone, mais il prend environ 5 Go par minute en 4K : libérer de l'espace avant de tourner. Le ProRes RAW, et le plein capteur (Open Gate), demandent un disque SSD externe : c'est une dépense, la décision revient à Rayane.
+- **Plateau plus lent**, s'il se règle : à 1/60 s, les facettes restent plus nettes quand la pierre tourne lentement.
+- **Zébras à 95 %** : de dos, le jonc était brûlé. Baisser la lumière ou l'exposition d'environ ⅓ jusqu'à ce que les zébras disparaissent du métal (quelques éclats sur la pierre, c'est normal).
+- Le fond est un plateau en plastique noir : son grain est normal, on ne le traite pas au montage (règle de Rayane : rien qui touche la qualité de la bague).
+- **Instagram** : Paramètres > Qualité des médias > **Importer en qualité maximale**, activé. Sans ce réglage, l'app envoie parfois une version plus légère.
+
 ### 7.3 Matériel recommandé (prix vus le 16 nov. 2026, avant taxes, à revérifier)
 
 | Étape | Matériel | Prix indicatif | Sert à |
