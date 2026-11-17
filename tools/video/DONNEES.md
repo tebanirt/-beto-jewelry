@@ -353,3 +353,23 @@ Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden ha
 | @prestigiojewelers | 1,5 M | 99 s | Face caméra : « arrête de payer trop cher en grande surface » |
 
 **Ce que ça apprend** : les trois plus vues sont des histoires de 70 à 100 s racontées par le joaillier, ou une histoire de cliente. Des formats impossibles sans la voix de Rayane : les messages vocaux de la liste à filmer (point 6) sont la priorité de la reprise. Les vitrines courtes (15 s) marchent seulement avec une vraie bague finie, filmée de près.
+
+## 18. Production du 17 nov. 2026 (pause)
+
+**Chiffres** (Supermetrics, lus à 9 h 42)
+- Abonnés : 234, inchangé depuis le 15 nov.
+- Reels du 16 nov. : portée faible (E01 labo 24 vues, W08 halo caché 9, P01 paiement 4), contre 100 à 165 vues pour ceux du 15 nov. Le seul bon signe : E01 à 62,5 % de saut, mais 2 s regardées.
+- T06 (avis Google, reel normal à publier par Rayane le 16 nov. à 17 h 10) n'apparaît pas dans les médias : pas publié.
+
+**Règle des 72 h** : 3 reels retirés (A02 vitrine rose, P08b EN rendu à l'or, N02 demande à Noël), tous au-dessus de 95 % de saut.
+
+**Veille** (TikTok, conseils de joaillier, les plus aimées des 3 derniers mois)
+| Compte | Vues | Durée | Ce que c'est |
+|---|---|---|---|
+| @adam5thave | 10,6 M | 70 s | Joaillier du Diamond District (New York) |
+| @massoyanjewelers | 4,8 M | 76 s | Histoire de cliente racontée (déjà vue le 16 nov.) |
+| @brooker_brothers | 2,4 M | 70 s | Fabrication racontée par le joaillier (déjà vue) |
+| @michaelsjewelers_nj | 1,2 M | 288 s | « Les bagues qu'on refuse de faire, et que tu ne devrais pas acheter » (griffe unique, etc.) |
+| @dougthejeweler | 724 k et 361 k | 75 à 89 s | Série « je note vos bagues de fiançailles » (partie 12) |
+
+**Ce que ça apprend** : deux formats nouveaux pour nous, tous les deux face caméra et faciles à tourner. (1) L'expert franc : « les bagues que je refuse de faire ». (2) Une série qui revient chaque semaine : « je note vos bagues ». Ce dernier suppose des photos envoyées par les abonnés (avec leur accord) ; à démarrer quand le compte aura des commentaires. Ajoutés à `LISTE_A_FILMER.md`.

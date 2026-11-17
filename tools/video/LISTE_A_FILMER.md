@@ -40,6 +40,8 @@ Elle s'appuie sur trois sources :
 8. « Couleur E, pureté VVS2 : ça veut dire quoi ? »
 9. « Pourquoi je fais toujours un design 3D avant de fabriquer. »
 10. « Les filles, envoyez ça à votre chum. »
+11. « Les bagues que je refuse de faire, et pourquoi. » (l'expert franc : 1,2 M de vues chez @michaelsjewelers_nj, 17 nov.)
+12. « Je note ta bague de fiançailles. » Une série, une bague par semaine, seulement avec une photo envoyée par un abonné qui accepte (724 k de vues chez @dougthejeweler).
 
 ## Priorité 2 — le processus, du 3D à la bague
 
