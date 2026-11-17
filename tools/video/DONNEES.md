@@ -376,12 +376,30 @@ Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden ha
 
 ## 19. Premier plan du studio en Apple Log 2 (17 nov. 2026)
 
-- Clip de Rayane : solitaire ovale en métal blanc sur le plateau tournant, iPhone 17 Pro Max, 48 mm, Apple Log 2, 24 i/s, 144°, ISO 80, 5 600 K. 36 s, 4K vertical, HEVC 4:2:2 10 bits (fichier de 163 Mo, déposé dans « Beto — Banque vidéo »).
+- **Clip de Rayane** : solitaire ovale sur le plateau tournant, **jonc en or jaune 14 k, diamant blanc** (précisé par Rayane le 17 nov. ; carat, et laboratoire ou naturel : inconnus, donc jamais à l'écran).
+  - Prise : iPhone 17 Pro Max, 48 mm, Apple Log 2, 24 i/s, 144°, ISO 80, 5 600 K.
+  - Fichier : 36 s, 4K vertical, HEVC 4:2:2 10 bits, 163 Mo, déposé dans « Beto — Banque vidéo ».
 - **Transfert** : l'outil Google Drive ne télécharge pas plus de 10 Mo. Pour un gros fichier, Rayane active le partage par lien (lecteur), je télécharge, puis il remet le partage sur « Limité ».
-- **Couleur** (`applelog2_grade.py`) :
-  - décodage de la courbe Apple Log ;
-  - blancs réglés sur la pierre et l'anneau, qui ont exactement la même couleur dans le Log (rapport R/V 1,334, B/V 0,56) : ses lampes sont plus chaudes que les 5 600 K de l'app ;
-  - courbe en S sur la luminance seulement, pour ne pas amplifier une teinte : velours presque noir, pierre lumineuse, ombres légèrement froides ;
-  - léger halo sur les éclats.
-- **Pièges** : une courbe forte appliquée canal par canal rendait l'anneau rosé. Un mélange (blend) en 16 bits dans ffmpeg délavait l'image : on fait le halo en 8 bits.
-- **Montage** : V1_ovale_cine, 10,8 s, 5 plans (pierre de face, profil, arrière, pierre de face), musique Mixkit 434, textes « Solitaire ovale. Fait sur mesure à Montréal. » et « Consultation gratuite. Lien en bio. ». En attente de l'avis de Rayane.
+- **Couleur, version finale (v9)**. Trois scripts dans `tools/video/` : `applelog2_grade.py` (LUT), `stone_mask.py` (masque de la pierre) et `enc_applelog2.sh` (rendu).
+  - Décodage de la courbe Apple Log.
+  - **Blancs réglés sur le velours noir**, jamais sur la pierre ou le jonc, qui renvoient la couleur de l'or. Ses lampes sont plus chaudes que les 5 600 K de l'app (R/V 1,34 sur le velours).
+  - Courbe en S sur la luminance seulement : velours d'un noir profond (moyenne de 9 sur 255 au lieu de 17), pierre lumineuse.
+  - Couleur plus riche dans les tons moyens (l'or), qui tend vers le blanc dans les facettes les plus claires. Les tons chauds penchent vers le jaune, pas le rose.
+  - Les reflets brûlés du jonc deviennent or pâle au lieu d'argent.
+  - **Le diamant reste blanc** : un masque suit la pierre image par image, là où les petites arêtes des facettes sont les plus denses. Le jonc, lisse, reste hors du masque ; la pierre y est désaturée à 15 %.
+  - Grain du velours adouci (débruitage léger), netteté en deux passes pour le poli miroir, léger halo sur les éclats.
+  - **LUT pour l'app et DaVinci** : `tools/video/luts/Beto_AppleLog2_Or14k_33.cube`. C'est la même couleur, sans le masque de la pierre ni le halo. Elle est faite pour son éclairage actuel, avec la balance des blancs de l'app à 5 600 K : si les lampes ou ce réglage changent, il faut la refaire.
+- **Pièges** :
+  - une courbe forte appliquée canal par canal rendait l'anneau rosé ;
+  - des blancs réglés sur la pierre rendaient le jonc d'or blanc ;
+  - un masque de « zones claires » prenait aussi le jonc poli, qui devenait argenté de dos ;
+  - un mélange (blend) en 16 bits dans ffmpeg délavait l'image : le halo se fait en 8 bits ;
+  - un velours gris montre le grain et la poussière : passer un rouleau anti-peluches avant chaque prise.
+- **Montage V2_ovale_or_jaune** (`reels_c015.py`), structure accroche → révélation → fin :
+  - 13,8 s ; coupes nettes sur le temps (les fondus laissaient une image double) ; plus de faux reflet de lumière, qui faisait une traînée grise sur le velours ; vitesse réelle du plateau (le ralenti calculé, minterpolate, brouillait les facettes du diamant).
+  - **Accroche** : la pierre qui se tourne de face, en gros plan, dès la 1re image.
+  - **Révélation** : côté, profil (griffes), arrière, retour.
+  - **Fin** : la pierre qui passe de face, sous le logo blanc, « Consultation gratuite », « Lien en bio » et « Montréal · ou en vidéo ». Elle reste à l'écran sans fondu, pour que la vidéo boucle sur l'accroche.
+  - Textes : « Solitaire ovale. Diamant blanc, or jaune 14k. » et « Fait sur mesure à Montréal. ».
+  - Version `_APP` sans musique, coupée à 100 BPM, pour une chanson tendance ajoutée dans l'app.
+  - Référence de structure : GemIQ, « The 3-Asset Fix » (accroche de 3 s sans logo, révélation de 6 à 12 s, fin de 4 s avec un seul appel à l'action, dernière image tenue).

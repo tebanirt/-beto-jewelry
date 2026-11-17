@@ -1,6 +1,6 @@
 """Ring centre (bright pixels) in the graded 4K clip at given times -> source pixel coords (2160x3840)."""
 import subprocess, sys, numpy as np
-P = "assets/C015_grade.mp4"
+P = sys.argv.pop(1) if len(sys.argv) > 1 and sys.argv[1].endswith(".mp4") else "assets/C015_grade.mp4"
 for t in [float(x) for x in sys.argv[1:]]:
     raw = subprocess.run(["ffmpeg", "-v", "error", "-ss", str(t), "-i", P, "-frames:v", "1", "-vf", "scale=540:960,format=gray",
                           "-f", "rawvideo", "-"], capture_output=True).stdout
