@@ -373,3 +373,15 @@ Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden ha
 | @dougthejeweler | 724 k et 361 k | 75 à 89 s | Série « je note vos bagues de fiançailles » (partie 12) |
 
 **Ce que ça apprend** : deux formats nouveaux pour nous, tous les deux face caméra et faciles à tourner. (1) L'expert franc : « les bagues que je refuse de faire ». (2) Une série qui revient chaque semaine : « je note vos bagues ». Ce dernier suppose des photos envoyées par les abonnés (avec leur accord) ; à démarrer quand le compte aura des commentaires. Ajoutés à `LISTE_A_FILMER.md`.
+
+## 19. Premier plan du studio en Apple Log 2 (17 nov. 2026)
+
+- Clip de Rayane : solitaire ovale en métal blanc sur le plateau tournant, iPhone 17 Pro Max, 48 mm, Apple Log 2, 24 i/s, 144°, ISO 80, 5 600 K. 36 s, 4K vertical, HEVC 4:2:2 10 bits (fichier de 163 Mo, déposé dans « Beto — Banque vidéo »).
+- **Transfert** : l'outil Google Drive ne télécharge pas plus de 10 Mo. Pour un gros fichier, Rayane active le partage par lien (lecteur), je télécharge, puis il remet le partage sur « Limité ».
+- **Couleur** (`applelog2_grade.py`) :
+  - décodage de la courbe Apple Log ;
+  - blancs réglés sur la pierre et l'anneau, qui ont exactement la même couleur dans le Log (rapport R/V 1,334, B/V 0,56) : ses lampes sont plus chaudes que les 5 600 K de l'app ;
+  - courbe en S sur la luminance seulement, pour ne pas amplifier une teinte : velours presque noir, pierre lumineuse, ombres légèrement froides ;
+  - léger halo sur les éclats.
+- **Pièges** : une courbe forte appliquée canal par canal rendait l'anneau rosé. Un mélange (blend) en 16 bits dans ffmpeg délavait l'image : on fait le halo en 8 bits.
+- **Montage** : V1_ovale_cine, 10,8 s, 5 plans (pierre de face, profil, arrière, pierre de face), musique Mixkit 434, textes « Solitaire ovale. Fait sur mesure à Montréal. » et « Consultation gratuite. Lien en bio. ». En attente de l'avis de Rayane.
