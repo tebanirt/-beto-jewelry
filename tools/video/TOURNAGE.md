@@ -203,6 +203,21 @@ Mesuré sur le clip C015 : la bague occupait environ 29 % de la largeur de l'ima
 - Le fond est un plateau en plastique noir : son grain est normal, on ne le traite pas au montage (règle de Rayane : rien qui touche la qualité de la bague).
 - **Instagram** : Paramètres > Qualité des médias > **Importer en qualité maximale**, activé. Sans ce réglage, l'app envoie parfois une version plus légère.
 
+### 7.2 ter Ton propre plateau de tournage, sur Amazon.ca (17 nov. 2026, à acheter par Rayane)
+
+Le plateau tournant et la lumière du clip C015 sont prêtés par le sertisseur. Liste proposée, vue sur Amazon.ca le 17 nov. 2026. **Vérifier le prix et le logo Prime sur la page avant d'acheter** : les prix bougent. La décision d'achat revient à Rayane.
+
+| Rôle | Produit (Amazon.ca) | Prix vu | Pourquoi |
+|---|---|---|---|
+| Plateau tournant, dessus en velours noir | [Inovat 8", ultra silencieux, velours noir](https://www.amazon.ca/Inovat-Direction-Motorized-Rotating-Collectible/dp/B077NHHKW3) | à vérifier | Le velours absorbe la lumière : fond noir mat, sans la texture grise du plastique. |
+| Ou plateau à dessus miroir noir, 3 vitesses | [Plateau 138 mm, miroir noir, 2, 4 ou 6 tours/min](https://www.amazon.ca/Motorized-Rotating-Turntable-Photography-Adjustable/dp/B0FCB8Y3FX) | à vérifier | Reflet de la bague dans le miroir (look « reflet »). La vitesse lente (2 tours/min) garde les facettes nettes. |
+| Petites lumières dures (les éclats) | [ULANZI VL49, 5 500 K, IRC 95+, ×2 ou 3](https://www.amazon.ca/ULANZI-2000mAh-Mounts-Charging-Mobile/dp/B07YSF3X8K) | environ 23 $ chacune | Des points lumineux font scintiller le diamant. |
+| Grande lumière douce (le dégradé du métal) | [NEEWER NK103, 2 boîtes de 60 × 60 cm, bicolores, IRC 95](https://www.amazon.ca/NEEWER-2900K-7000K-Photography-Continuous-NK103/dp/B0DX9NH1SG) | environ 156 $ | Longs reflets doux sur l'or jaune. |
+| Carte grise 18 %, blanche et noire | [JJC 10 × 8 po](https://www.amazon.ca/Gray-JJC-Exposure-Photography-Calibration/dp/B07B2SRPSZ) | environ 21 $ | Balance des blancs et exposition exactes au début de chaque prise. |
+| Fond en velours noir | [Velours noir 70 × 100 cm](https://www.amazon.ca/Photography-Backdrops-Professional-Reflective-Background/dp/B0C8N1ZMP6) | environ 11 $ | Derrière et sous le plateau : noir uniforme. |
+
+À compléter sans Amazon : des cartons noirs et blancs (Dollarama) pour contrôler les reflets, et de la cire de musée pour tenir la bague. Total d'environ 230 à 260 $ avant taxes, selon le plateau choisi.
+
 ### 7.3 Matériel recommandé (prix vus le 16 nov. 2026, avant taxes, à revérifier)
 
 | Étape | Matériel | Prix indicatif | Sert à |
