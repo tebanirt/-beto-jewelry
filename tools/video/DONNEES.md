@@ -406,3 +406,44 @@ Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden ha
   - Textes : « Solitaire ovale. Diamant blanc, or jaune 14k. » et « Fait sur mesure à Montréal. ».
   - Version `_APP` sans musique, coupée à 100 BPM, pour une chanson tendance ajoutée dans l'app.
   - Référence de structure : GemIQ, « The 3-Asset Fix » (accroche de 3 s sans logo, révélation de 6 à 12 s, fin de 4 s avec un seul appel à l'action, dernière image tenue).
+
+## 20. Étalonnage pro : recherche et 5 looks (17 nov. 2026, soir)
+
+**Refus de Rayane** : il a donné 2 sur 10 à la v10 (« Je crois que tu confonds cinématique avec juste noir »). L'or ne ressemblait pas à du 14k, le diamant pas à un diamant, et l'ensemble faisait l'effet d'un filtre noir et blanc.
+
+**Mesures de la v10, par rapport à la prise brute** :
+- l'or est deux fois moins lumineux : luminosité de 0,51 à 0,27 ;
+- la pierre a été désaturée de force : saturation de 0,18 à 0,10, ce qui a tué son feu ;
+- le fond est presque noir : de 0,50 à 0,06.
+
+**La cause** : le fond (plastique gris moyen) est presque aussi lumineux que l'or. Foncer toute l'image fonçait donc l'or. La solution est de séparer le fond, l'or et la pierre, comme le font les coloristes.
+
+**Recherche faite par deux agents, avec leurs sources** :
+- **Entrée** : OpenColorIO 2.6 a la vraie transformation Apple Log 2 (courbe + gamme Apple Wide Gamut) dans la configuration ACES 2.1 « studio-config-v5.0.0 ». Mon décodage maison oubliait la gamme de couleurs.
+- **Sortie ACES 2.0** : elle place le gris moyen environ 0,8 diaphragme plus bas qu'une vue Rec.709 simple, et les éclats plafonnent à environ 97 %. Il faut compenser l'exposition, sinon « cinématique » veut seulement dire « plus sombre ».
+- **Or 14k mesuré** (fiches techniques des alliages Shapeways/Legor SCA5 et Golden Sun) :
+  - en aplat : L* 85-87, a* +2 à +3, b* 18-19, teinte h 81-84° ;
+  - avec plusieurs reflets : C* 32-46, h 71-76° ;
+  - les erreurs à éviter : rose ou rosé (a* au-dessus d'environ 8), cuivré (h sous 65°), citron ou laiton (h au-dessus d'environ 90°, a* négatif), argenté (or délavé vers le blanc), sale (ombres bleutées).
+- **Diamant** : on retire seulement la teinte de fond (pixels peu saturés) et on garde intacts les éclats saturés (le feu). Quelques facettes doivent atteindre le blanc pur.
+- **Halo** : seulement sur les éclats, de 5 à 15 %, sans étoiles ni traînées.
+- **Netteté** : une seule fois, à la taille finale, sur la luminance seulement.
+- **Grandes maisons** :
+  - Graff et Harry Winston : fond noir mat, métal lumineux, diamant très blanc avec son feu ;
+  - De Beers et Cartier : fond charbon en dégradé ;
+  - Mejuri : chaud et doux ;
+  - Tiffany et Graff (campagnes) : film, grain, halation.
+  - Chez ces maisons, les reels de produit seul font moins de vues que ceux avec une personne ou l'atelier (Graff : environ 165 000 vues contre une médiane de 1,2 million). Une belle couleur augmente la qualité perçue, mais c'est le format (une personne, l'atelier, une histoire) qui amène la portée.
+- **Erreur corrigée le jour même** : une première cible « jaune paille, TSV 46-50° » (recherche sur les marques, sans mesure) donnait un or citron (h 91-98°). La version finale suit les mesures des alliages.
+
+**Les 5 looks livrés à Rayane** (`grade_lab/`, vidéos `V2_ovale_or_jaune_<look>`) :
+
+| Look | Fond | Or (CIELAB, vue de face) |
+|---|---|---|
+| A, Noir atelier (Graff, Harry Winston) | 4 % | a* +3,5 ; h 80° |
+| B, Charbon velours (De Beers, Cartier) | gris charbon en dégradé, environ 13 % au centre | même or que A |
+| C, Or chaud (Mejuri) | sombre et chaud | h 77°, C* 30 |
+| D, Film de campagne (Tiffany, Graff) | noirs relevés, grain | halation |
+| E, Naturel, comme sur l'iPhone | naturel | h 81°, C* 18 |
+
+Rayane choisit le soir du 17 nov.

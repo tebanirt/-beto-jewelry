@@ -4,6 +4,7 @@ gold stays gold, luminance S-curve, clipped polish tinted pale 14k gold) + enc_a
 clarity for the mirror polish, light bloom) -> assets/C015_grade_v6.mp4.
 Facts on screen: what the image shows (oval solitaire), what Rayane stated (white diamond, 14k yellow gold) and FAITS.md
 (custom made in Montreal, free consultation). No carat, no lab/natural: unknown for this ring."""
+import os
 import sys
 import pro
 from reelkit import S
@@ -36,7 +37,7 @@ def V1_ovale_cine():
                 end=dict(beats=0, overlay=True, layers={}))
 
 
-G6 = "u:C015_grade_v10.mp4"   # v10: realism first (no denoise, no 4K sharpening, subtle bloom); render with REEL_FPS=24
+G6 = os.environ.get("C015_CLIP", "u:C015_grade_v10.mp4")   # v10: realism first (no denoise, no 4K sharpening, subtle bloom); render with REEL_FPS=24
 POS6 = {24.8: (1085, 2150), 22.6: (1100, 2010), 3.3: (1090, 2100), 2.2: (1142, 2002), 9.6: (932, 2028), 15.0: (944, 1932), 4.6: (1076, 2120), 26.4: (1076, 2106)}   # find_ring.py on the v9 grade (centre of the motion for 24.8 and 3.3)
 
 
@@ -81,7 +82,7 @@ def V2_ovale_or_jaune():
         dict(html=lux("Fait sur mesure", "à <i>Montréal.</i>", size=80), at=7, until=13),
         dict(html=end_dark(), at=16, until=23),
     ]
-    return dict(name="V2_ovale_or_jaune", music="434", shots=shots, texts=texts,
+    return dict(name="V2_ovale_or_jaune" + os.environ.get("C015_SUFFIX", ""), music="434", shots=shots, texts=texts,
                 end=dict(beats=0, overlay=True, layers={}))
 
 
