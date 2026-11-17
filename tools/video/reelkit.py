@@ -230,8 +230,11 @@ def render_shot(s):
     vf = ",".join(f)
     inp = (["-loop", "1", "-framerate", "30", "-t", f"{src_dur:.3f}", "-i", path] if kind == "still"
            else ["-ss", f"{s['start']:.3f}", "-t", f"{src_dur:.3f}", "-i", path])
+    # write to a temporary file, then rename: parallel renders sharing a shot never read a half-written file
+    part = f"{out[:-4]}.part{os.getpid()}.mp4"
     run(["ffmpeg", "-v", "error", "-y", *inp,
-         "-an", "-vf", vf, "-frames:v", str(n_out), *ENC, out])
+         "-an", "-vf", vf, "-frames:v", str(n_out), *ENC, part])
+    os.replace(part, out)
     return out
 
 

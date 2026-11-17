@@ -45,6 +45,8 @@ BANNED = {
     "img:241cce9f-image.jpg", "img:24415bb1-image.jpg", "img:54566917-image.jpg", "img:60c85281-image.jpg",
     "img:783455ee-image.jpg", "img:ba0c6f27-image.jpg", "img:31bb3b32-image.jpg", "img:002c71b8-image.jpg",
 }
+# Clips that are fine only at the start: the laptop with the competitor page enters the frame later.
+MAXEND = {"b1626012": 3.5}   # loose stones with tweezers: laptop from ~3 s, Brilliant Earth page readable from ~4.5 s
 
 
 # ---------------- assets ----------------
@@ -203,6 +205,11 @@ def build(spec, out_dir=None):
         dur = (b - a) + Tin / 2 + Tout / 2
         if i < len(spec["shots"]):
             sh = dict(spec["shots"][i]["shot"]); sh["dur"] = round(dur, 3)
+            lim = MAXEND.get(sh["clip"])
+            if lim is not None:
+                src_end = sh["start"] + dur * sh.get("speed", 1.0) * (0.5 if sh.get("slowmo") else 1.0)
+                if src_end > lim:
+                    raise SystemExit(f"{name}: {sh['clip']} used up to {src_end:.1f}s, past {lim}s (competitor screen)")
             files.append(rk.render_shot(sh))
         else:
             files.append(rk.solid("0xF6F3EE", round(dur + 0.1, 3)))
