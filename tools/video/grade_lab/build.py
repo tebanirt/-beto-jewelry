@@ -49,5 +49,6 @@ if __name__ == "__main__":
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-t", "28", "-i", SRC, "-t", "28", "-i", MASK, "-an", "-filter_complex", g, "-map", "[v]",
                         "-c:v", "libx264", "-preset", "fast", "-crf", "10", "-profile:v", "high", "-r", "24",
                         "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709", "-color_range", "tv",
-                        "-movflags", "+faststart", out], check=True)
+                        "-movflags", "+faststart", out + ".part.mp4"], check=True)
+        os.replace(out + ".part.mp4", out)      # a restart mid-encode never leaves a broken master
         print("OK", out)
