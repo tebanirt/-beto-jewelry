@@ -47,6 +47,12 @@ Le thème change chaque jour :
 - Espace couleur **Rec.709**, pas Apple Log ni HDR : sinon, voile blanc et travail de couleur en plus.
 - Sources : guide Blackmagic Camera de Silent Eye (Patreon), forum Blackmagic Design.
 
+**Gros plans en Apple Log 2 + DaVinci Resolve** (demandé par Rayane le 17 nov. 2026 : voir la LUT pendant le tournage, puis faire la couleur dans DaVinci)
+- Blackmagic Camera : Color Space **Apple Log 2** ; codec ProRes 422 HQ (ou HEVC 10 bits si l'espace manque) ; 4K ; 24 i/s avec obturateur **1/60** (144°, sans scintillement sur le courant à 60 Hz) ; 60 i/s à 1/120 pour les ralentis ; ISO le plus bas ; balance des blancs fixe ; mise au point manuelle avec focus peaking ; zébras à 95 % ; stabilisation coupée sur trépied.
+- LUT : une LUT **Apple Log 2 → Rec.709** (pas une LUT Apple Log : les couleurs de base diffèrent), importée dans LUTs > Import LUT, **Display LUT activé**, **Record LUT to Clip désactivé** : l'écran montre l'image corrigée, le fichier reste en Log pour DaVinci.
+- DaVinci Resolve : sur un nœud, Color Space Transform, entrée Apple Log 2 / Apple Log 2, sortie Rec.709 / Gamma 2.4 (si la version ne propose pas Apple Log 2 : la même LUT sur le nœud). Timeline verticale 2160 × 3840, 24 i/s.
+- **À m'envoyer : l'export de DaVinci (Rec.709)**, pas le fichier Log : le moteur de montage ne lit pas encore le Log (voir §7.4). Toujours comparer la couleur des pierres à l'écran avec la vraie pierre.
+
 **Sans ce matériel** (téléphone seul)
 - 4K à 60 i/s, ralenti à 240 i/s pour l'éclat, **vidéo HDR désactivée**.
 - Mise au point et exposition verrouillées par un appui long sur l'écran, et un trépied.
