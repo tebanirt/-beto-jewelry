@@ -391,7 +391,7 @@ Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden ha
   - **Jamais d'agrandissement** : zoom de 2 au maximum dans un 4K vertical, donc au moins 1 080 pixels de la prise pour 1 080 à l'écran. Réduction en lanczos. Plus de Ken Burns : le zoompan de ffmpeg avance par pixels entiers (tremblement) et dépasse le 1:1.
   - **24 i/s comme la prise** (`REEL_FPS=24`) : passer de 24 à 30 i/s répétait une image sur quatre, d'où des saccades sur le plateau.
   - Pas d'agrandissement par IA (Topaz, Real-ESRGAN) : il invente des facettes, donc une pierre qui n'est pas la vraie (`docs/design-brief.md` §6).
-  - **LUT pour l'app et DaVinci** : `tools/video/luts/Beto_AppleLog2_Or14k_33.cube`. C'est la même couleur, sans le masque de la pierre ni le halo. Elle est faite pour son éclairage actuel, avec la balance des blancs de l'app à 5 600 K : si les lampes ou ce réglage changent, il faut la refaire.
+  - **LUT d'aperçu** : la LUT « or 14k » de cette version a été retirée avec le rendu refusé. Pour l'app, on utilise maintenant `tools/video/luts/Beto_AppleLog2_Rec709_neutre_33.cube` : conversion neutre, sans effet (18 nov.).
 - **Pièges** :
   - une courbe forte appliquée canal par canal rendait l'anneau rosé ;
   - des blancs réglés sur la pierre rendaient le jonc d'or blanc ;

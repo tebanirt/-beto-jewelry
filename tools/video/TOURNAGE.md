@@ -50,7 +50,7 @@ Le thème change chaque jour :
 **Gros plans en Apple Log 2 + DaVinci Resolve** (demandé par Rayane le 17 nov. 2026 : voir la LUT pendant le tournage, puis faire la couleur dans DaVinci)
 - Blackmagic Camera : Color Space **Apple Log 2** ; codec ProRes 422 HQ (ou HEVC 10 bits si l'espace manque) ; 4K ; 24 i/s avec obturateur **1/60** (144°, sans scintillement sur le courant à 60 Hz) ; 60 i/s à 1/120 pour les ralentis ; ISO le plus bas ; balance des blancs fixe ; mise au point manuelle avec focus peaking ; zébras à 95 % ; stabilisation coupée sur trépied.
 - Réglages vérifiés sur le téléphone de Rayane le 17 nov. : **Obturation sans scintillement basée sur 60 Hz** (l'app était à 50 Hz, le réglage européen), Mesure obturateur en Vitesse, **Activer la vidéo verticale**, balance des blancs et teinte en manuel, exposition en manuel, données d'emplacement et téléversement Blackmagic Cloud coupés. HEVC plutôt que ProRes : seulement 16 Go libres sur l'iPhone ce jour-là.
-- LUT : une LUT **Apple Log 2 → Rec.709** (pas une LUT Apple Log : les couleurs de base diffèrent), importée dans LUTs > Import LUT, **Display LUT activé**, **Record LUT to Clip désactivé** : l'écran montre l'image corrigée, le fichier reste en Log pour DaVinci.
+- LUT : une LUT **Apple Log 2 → Rec.709** (pas une LUT Apple Log : les couleurs de base diffèrent), importée dans LUTs > Import LUT, **Display LUT activé**, **Record LUT to Clip désactivé** : l'écran montre l'image corrigée, le fichier reste en Log pour DaVinci. Depuis le 18 nov. : `luts/Beto_AppleLog2_Rec709_neutre_33.cube` (voir §7.2 bis.2).
 - DaVinci Resolve : sur un nœud, Color Space Transform, entrée Apple Log 2 / Apple Log 2, sortie Rec.709 / Gamma 2.4 (si la version ne propose pas Apple Log 2 : la même LUT sur le nœud). Timeline verticale 2160 × 3840, 24 i/s.
 - **À m'envoyer : l'export de DaVinci (Rec.709)**, pas le fichier Log : le moteur de montage ne lit pas encore le Log (voir §7.4). Toujours comparer la couleur des pierres à l'écran avec la vraie pierre.
 
@@ -222,6 +222,29 @@ Montage proposé, sans rien acheter :
 6. **Carte grise** : 3 secondes au début de chaque prise, posée à la place de la bague.
 
 Avec la boîte à lumière, les boîtes NEEWER du §7.2 ter deviennent optionnelles : la boîte fait déjà la lumière douce. Le plus utile à acheter : un dessus de plateau en velours noir, ou un plateau à soi, 2 petites lampes dures et une carte grise (environ 70 à 90 $).
+
+### 7.2 bis.2 Réglages Blackmagic Camera pour le plateau bague (18 nov. 2026)
+
+| Où | Réglage |
+|---|---|
+| Format | 4K (2160 × 3840), **vidéo verticale activée**, 24 i/s |
+| Codec | **Apple ProRes 422 HQ** si au moins 20 Go sont libres (environ 5 Go par minute). Sinon HEVC, à la qualité la plus haute proposée |
+| Espace couleur | **Apple Log 2** |
+| Obturateur | mesure en vitesse, **1/60 s**, anti-scintillement **60 Hz** |
+| ISO | le plus bas possible |
+| Balance des blancs | sur la carte grise (auto une seule fois, puis verrouillée), **teinte 0**. Toutes les lumières à la même température |
+| Exposition | manuelle. Exposer pour l'or. **Zébras à 95 %** : seuls les éclats de la pierre peuvent les toucher, jamais le métal |
+| Mise au point | manuelle, **focus peaking** activé, sur la table de la pierre |
+| Objectif | **4x** si la mise au point se fait, sinon 2x en se rapprochant. Jamais 0,5x (déformation) |
+| Stabilisation | coupée (trépied) |
+| LUT | `Beto_AppleLog2_Rec709_neutre_33.cube` importée, **affichage de la LUT activé**, **LUT gravée dans le clip désactivée**. Le fichier reste en Log pour DaVinci |
+| Divers | données d'emplacement et Blackmagic Cloud coupés. iPhone en mode avion, luminosité de l'écran au maximum |
+
+À chaque prise :
+1. Carte grise 3 secondes, posée à la place de la bague.
+2. Bague **centrée sur l'axe du plateau** : elle reste nette et cadrée pendant le tour.
+3. Deux tours complets, à la vitesse lente.
+4. Une prise par angle : de face, de trois quarts, de profil à hauteur de la pierre, un peu au-dessus. Puis une prise serrée sur la pierre.
 
 ### 7.2 ter Ton propre plateau de tournage, sur Amazon.ca (17 nov. 2026, à acheter par Rayane)
 
