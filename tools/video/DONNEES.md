@@ -452,4 +452,13 @@ Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden ha
   2. Le grain ajouté au master 4K alourdissait énormément le fichier. Il est maintenant ajouté sur la vidéo finale en 1080, avec un débit plafonné à 20 Mb/s (Instagram recommande 25 Mb/s au maximum).
   3. Le conteneur est recyclé quand la session reste inactive pendant un long encodage en arrière-plan. Il faut encoder au premier plan, une version par appel (environ 7 minutes chacune).
 
-Rayane choisit son look.
+**Refusées par Rayane le 17 nov. au soir** (« pas de bonne qualité, on dirait des filtres dégueulasses »). Troisième refus du clip C015.
+
+**Leçon** :
+- Empiler les corrections (fond refait, teinte de l'or déplacée, masque de la pierre, halo, grain, nettoyage du fond) donne un aspect « filtre ».
+- La même prise, convertie sans aucun filtre (conversion officielle Apple Log 2, balance et exposition seulement), montre un plateau en plastique gris moyen et un or qui tire vers le rose ou le cuivre. Sans carte grise dans l'image, on ne connaît pas le vrai neutre : chaque correction était une supposition.
+- **La limite vient de la prise** : lumière et plateau prêtés, aucune référence de couleur, bague à 29 % de l'image, HEVC. Ça ne se corrige pas au montage.
+- **Désormais** :
+  1. On corrige la prise d'abord : `TOURNAGE.md` §7.2 bis et §7.2 ter.
+  2. L'étalonnage se fait dans DaVinci, sur l'ordinateur de Rayane, avec une recette courte : conversion d'espace couleur, balance sur la carte grise, exposition et contraste, saturation légère.
+  3. Plus aucune couche « look » ajoutée sur une prise sans référence.
