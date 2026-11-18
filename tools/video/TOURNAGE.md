@@ -203,6 +203,26 @@ Mesuré sur le clip C015 : la bague occupait environ 29 % de la largeur de l'ima
 - Le fond est un plateau en plastique noir : son grain est normal, on ne le traite pas au montage (règle de Rayane : rien qui touche la qualité de la bague).
 - **Instagram** : Paramètres > Qualité des médias > **Importer en qualité maximale**, activé. Sans ce réglage, l'app envoie parfois une version plus légère.
 
+### 7.2 bis.1 Montage du plateau avec le matériel actuel (vidéo de Rayane, 18 nov. 2026)
+
+Ce que montre la vidéo :
+- **Boîte à lumière PULUZ à Rayane** : intérieur argenté, bandeau DEL en haut, ouverture sur le dessus.
+- **Plateau tournant prêté** : gris mat, en plastique.
+- **Lumière annulaire prêtée** : sur un bras.
+- **Support de téléphone** sur trépied, et gants noirs.
+
+Montage proposé, sans rien acheter :
+1. **Fond** : le fond noir de la boîte au fond et au sol. **Couvrir le plateau gris** d'un velours ou d'un carton noir mat : c'est ce qui donnait le fond gris texturé du clip C015.
+2. **Métal** : garder la lumière du haut de la boîte allumée. Les parois argentées donnent les reflets doux et longs qui rendent l'or doré.
+3. **Diamant** :
+   - **Ne pas mettre l'anneau en face de la bague** : il se reflète en cercle dans la table de la pierre, et la lumière devient plate.
+   - **Pour les éclats** : l'anneau sur le côté ou derrière, assez bas et éloigné ; ou mieux, une petite lampe dure (lampe de poche d'un autre téléphone, ou VL49), à hauteur de la pierre.
+4. **Reflets** : un carton noir derrière la bague, juste hors du cadre. Il donne des lignes sombres dans le métal (l'or a l'air d'or) et empêche la paroi argentée de blanchir la pierre.
+5. **Téléphone** : par l'ouverture de devant, sur le trépied, à hauteur de la pierre ou un peu au-dessus. La bague doit remplir de 60 à 80 % de la largeur.
+6. **Carte grise** : 3 secondes au début de chaque prise, posée à la place de la bague.
+
+Avec la boîte à lumière, les boîtes NEEWER du §7.2 ter deviennent optionnelles : la boîte fait déjà la lumière douce. Le plus utile à acheter : un dessus de plateau en velours noir, ou un plateau à soi, 2 petites lampes dures et une carte grise (environ 70 à 90 $).
+
 ### 7.2 ter Ton propre plateau de tournage, sur Amazon.ca (17 nov. 2026, à acheter par Rayane)
 
 Le plateau tournant et la lumière du clip C015 sont prêtés par le sertisseur. Liste proposée, vue sur Amazon.ca le 17 nov. 2026. **Vérifier le prix et le logo Prime sur la page avant d'acheter** : les prix bougent. La décision d'achat revient à Rayane.
@@ -212,7 +232,7 @@ Le plateau tournant et la lumière du clip C015 sont prêtés par le sertisseur.
 | Plateau tournant, dessus en velours noir | [Inovat 8", ultra silencieux, velours noir](https://www.amazon.ca/Inovat-Direction-Motorized-Rotating-Collectible/dp/B077NHHKW3) | à vérifier | Le velours absorbe la lumière : fond noir mat, sans la texture grise du plastique. |
 | Ou plateau à dessus miroir noir, 3 vitesses | [Plateau 138 mm, miroir noir, 2, 4 ou 6 tours/min](https://www.amazon.ca/Motorized-Rotating-Turntable-Photography-Adjustable/dp/B0FCB8Y3FX) | à vérifier | Reflet de la bague dans le miroir (look « reflet »). La vitesse lente (2 tours/min) garde les facettes nettes. |
 | Petites lumières dures (les éclats) | [ULANZI VL49, 5 500 K, IRC 95+, ×2 ou 3](https://www.amazon.ca/ULANZI-2000mAh-Mounts-Charging-Mobile/dp/B07YSF3X8K) | environ 23 $ chacune | Des points lumineux font scintiller le diamant. |
-| Grande lumière douce (le dégradé du métal) | [NEEWER NK103, 2 boîtes de 60 × 60 cm, bicolores, IRC 95](https://www.amazon.ca/NEEWER-2900K-7000K-Photography-Continuous-NK103/dp/B0DX9NH1SG) | environ 156 $ | Longs reflets doux sur l'or jaune. |
+| Grande lumière douce (le dégradé du métal), **optionnelle avec la boîte PULUZ** | [NEEWER NK103, 2 boîtes de 60 × 60 cm, bicolores, IRC 95](https://www.amazon.ca/NEEWER-2900K-7000K-Photography-Continuous-NK103/dp/B0DX9NH1SG) | environ 156 $ | Longs reflets doux sur l'or jaune. |
 | Carte grise 18 %, blanche et noire | [JJC 10 × 8 po](https://www.amazon.ca/Gray-JJC-Exposure-Photography-Calibration/dp/B07B2SRPSZ) | environ 21 $ | Balance des blancs et exposition exactes au début de chaque prise. |
 | Fond en velours noir | [Velours noir 70 × 100 cm](https://www.amazon.ca/Photography-Backdrops-Professional-Reflective-Background/dp/B0C8N1ZMP6) | environ 11 $ | Derrière et sous le plateau : noir uniforme. |
 
