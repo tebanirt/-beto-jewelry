@@ -39,21 +39,25 @@ def shots(*seq):
     return out
 
 
+HEADHALO = ("JOBBY2T", 5.7)   # one continuous shot: the hidden halo from the side, then the floral head
+
+
 def S1(variant="A"):
-    """Guess the price: the answer (the price) is the payoff. B = price in the first card (only the hook changes)."""
-    hook = ("Marquise 4 carats.<br>Devine le prix." if variant == "A"
-            else "Marquise 4 carats, or jaune 14k :<br>3 350 $ + taxes.")
+    """Guess the price: the answer (the price) is the payoff and the last image. B = price in the hook (only the
+    hook and the last card change). Cards merged so each one has time to be read (pacing.py)."""
+    if variant == "A":
+        hook, last = "Marquise 4 carats.<br>Devine le prix.", price(small="T'avais deviné combien ?")
+    else:
+        hook, last = "Marquise 4 carats :<br>3 350 $ + taxes.", nat(CTA)
     texts = [
         dict(html=pill(hook.split("<br>")), at=0, until=2),
         dict(html=nat("Diamant de laboratoire<br>or jaune 14k"), at=2, until=6),
-        dict(html=nat("Tête florale"), at=6, until=10),
-        dict(html=nat("Halo caché"), at=10, until=14),
-        dict(html=nat("Accents marquise<br>dans l'anneau"), at=14, until=18),
-        dict(html=price(small="T'avais deviné combien ?" if variant == "A" else "Certificat IGI inclus"), at=18, until=22),
-        dict(html=nat(CTA), at=22, until=24),
+        dict(html=nat("Tête florale<br>et halo caché"), at=6, until=10),
+        dict(html=nat("Accents marquise<br>dans l'anneau"), at=10, until=14),
+        dict(html=last, at=14, until=18),
     ]
     return dict(name=f"S1{variant}_devine_le_prix", music="1176",
-                shots=shots((FACE, 2), (ROT, 4), (HEAD, 4), (HALO, 4), (BAND, 4), (FACE2, 4), (FACE, 2)),
+                shots=shots((FACE, 2), (ROT, 4), (HEADHALO, 4), (BAND, 4), (FACE2, 4)),
                 texts=texts, end=dict(beats=0, overlay=True, layers={}))
 
 
@@ -64,10 +68,9 @@ def S2():
         dict(html=nat("D'abord :<br>une tête florale."), at=6, until=10),
         dict(html=nat("Un halo caché,<br>sous la marquise."), at=10, until=14),
         dict(html=nat("Visible seulement<br>de côté."), at=14, until=18),
-        dict(html=nat(CTA), at=18, until=20),
     ]
     return dict(name="S2_secret_dessous", music="485",
-                shots=shots((FACE, 2), (FACE_W, 4), (HEAD, 4), (HALO, 4), (("JOBBY2T", 6.2), 4), (FACE, 2)),
+                shots=shots((FACE, 2), (FACE_W, 4), (HEAD, 4), (HALO, 4), (("JOBBY2T", 6.2), 4)),
                 texts=texts, end=dict(beats=0, overlay=True, layers={}))
 
 
@@ -76,7 +79,7 @@ def S3():
         dict(html=pill(["3 détails que tu vas manquer…", "0/3"]), at=0, until=3),
         dict(html=nat("1. Accents marquise<br>dans l'anneau"), at=3, until=7),
         dict(html=nat("2. Tête florale"), at=7, until=11),
-        dict(html=nat("3. …"), at=11, until=12),
+        dict(html=nat("3. …"), at=11, until=12, min_s=1.5),
         dict(html=nat("3. Un halo caché"), at=12, until=15),
         dict(html=nat("T'en avais vu combien ?<br><span class='y'>Réponds 0, 1, 2 ou 3</span>"), at=15, until=18),
     ]
@@ -89,14 +92,13 @@ def S4():
     texts = [
         dict(html=pill(["Si quelqu'un t'a envoyé ça…"]), at=0, until=2),
         dict(html=nat("…c'est pas un hasard."), at=2, until=6),
-        dict(html=nat("Marquise 4 carats"), at=6, until=9),
-        dict(html=nat("Or jaune 14k"), at=9, until=11),
-        dict(html=nat("Halo caché"), at=11, until=14),
-        dict(html=nat("C'est un indice.<br>Fais semblant de rien."), at=14, until=18),
-        dict(html=nat("Envoie-la à qui de droit."), at=18, until=20),
+        dict(html=nat("Marquise 4 carats<br>or jaune 14k"), at=6, until=10),
+        dict(html=nat("Halo caché"), at=10, until=12),
+        dict(html=nat("C'est un indice.<br>Fais semblant de rien."), at=12, until=16),
+        dict(html=nat("Envoie-la à qui de droit."), at=16, until=18),
     ]
     return dict(name="S4_indice", music="783",
-                shots=shots((FACE, 2), (ROT, 4), (HEAD, 3), (BAND, 2), (HALO, 3), (FACE2, 4), (FACE, 2)),
+                shots=shots((FACE, 2), (ROT, 4), (HEAD, 4), (HALO, 2), (FACE2, 4), (FACE, 2)),
                 texts=texts, end=dict(beats=0, overlay=True, layers={}))
 
 
@@ -107,10 +109,9 @@ def S5():
         dict(html=nat("Design 3D en 48 h"), at=6, until=10),
         dict(html=nat("Bague prête en 2 semaines"), at=10, until=14),
         dict(html=nat("Oui, si tu commandes<br><span class='y'>avant le 11 décembre.</span>"), at=14, until=18),
-        dict(html=nat(CTA), at=18, until=20),
     ]
     return dict(name="S5_noel", music="864",
-                shots=shots((FACE, 2), (ROT, 4), (HEAD, 4), (HALO, 4), (FACE2, 4), (FACE, 2)),
+                shots=shots((FACE, 2), (ROT, 4), (HEAD, 4), (HALO, 4), (FACE2, 4)),
                 texts=texts, end=dict(beats=0, overlay=True, layers={}))
 
 
@@ -124,8 +125,8 @@ def _app_at(f, bpm, k, tag):
 
 
 # Rayane posts these in the app with the song (beats on the song's tempo, k keeps ~2.3 s of reading per card)
-REELS["S1B_APP128"] = lambda: _app_at(lambda: S1("B"), 128, 1.25, "128")   # « Angel Of My Dreams », JADE, 128 BPM
-REELS["S5_APP150"] = lambda: _app_at(S5, 150, 1.6, "150")                  # « All I Want for Christmas Is You », ~150 BPM
+REELS["S1B_APP128"] = lambda: _app_at(lambda: S1("B"), 128, 1.0, "128")   # « Angel Of My Dreams », JADE, 128 BPM
+REELS["S5_APP150"] = lambda: _app_at(S5, 150, 1.0, "150")                  # « All I Want for Christmas Is You », ~150 BPM
 
 if __name__ == "__main__":
     for n in sys.argv[1:]:

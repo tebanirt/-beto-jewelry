@@ -553,3 +553,16 @@ T01 est le seul à passer la règle des 72 h (saut sous 65 % et au moins 5 s reg
 5. **Pour la suite** : Rayane face caméra, un vrai visage ou une vraie bague qui brille dès la 1re image, une croyance contredite ou un prix clair. Chaque nouveau plan entre dans la banque vidéo (`BANQUE.md`) et chaque reel dans `social_reels`, avec son format et sa leçon.
 
 **Publication** : l'outil est bloqué depuis la fin de l'essai Supermetrics, donc le partage aux abonnés se fait dans l'app. Profil, puis tableau de bord professionnel, puis les reels d'essai : ouvrir le reel, « Partager avec les abonnés », puis l'épingler. Le même fichier n'est pas republié, et le reel garde ses vues.
+
+## 24. Cadence : laisser le temps de lire (18 nov. 2026)
+
+Rayane : « les vidéos sont trop rapides… il faut laisser le temps aux gens de lire ». Avant, le moteur coupait les cartes sur le rythme de la musique sans vérifier la lecture : 1,1 à 1,4 s pour l'accroche, et 2,2 s par carte sur les morceaux rapides.
+
+**Règle dans le moteur** (`pacing.py`, appelé par `pro.build` pour toutes les vidéos) :
+- chaque texte reste au moins 0,7 s + 1 s par 13 caractères. C'est plus lent que les sous-titres de Netflix (17 à 20 caractères par seconde pour un adulte), parce qu'un reel se lit sur un téléphone, souvent pendant qu'on fait défiler ;
+- jamais moins de 2 s par carte, ni moins de 2,5 s pour l'accroche, et aucun plan sous 2 s ;
+- la vidéo s'allonge par temps entiers, donc les coupes tombent toujours sur la musique ;
+- un temps court voulu (« 3. … ») se fixe avec `min_s` ;
+- si un plan devient plus long que la prise, il commence plus tôt (jamais d'image figée).
+
+**Pour garder des vidéos de 15 à 18 s** : on retire des mots au lieu d'accélérer. Dans la vague 2 de la marquise, « Tête florale et halo caché » tient sur un seul plan continu, et la dernière carte « Consultation gratuite » est retirée là où la description le dit déjà (sauf S1B, qui sert aussi de pub). Résultat : 2,1 à 4,5 s par texte, au lieu de 1,1 à 2,8 s.

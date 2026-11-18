@@ -168,6 +168,8 @@ def build(spec, out_dir=None):
         bpm = float(spec["bpm"])
         info = dict(bpm=bpm, beats=list(np.arange(0, 600) * 60.0 / bpm))
         spec.setdefault("start", 0.0)
+    import pacing  # reading time for every caption, no shot under 2 s (Rayane, 18 Nov 2026)
+    spec = pacing.pace(spec, info["bpm"])
     beats = np.array(info["beats"])
     total_beats = sum(s["beats"] for s in spec["shots"]) + spec["end"]["beats"]
     approx = total_beats * 60 / info["bpm"]
@@ -205,6 +207,7 @@ def build(spec, out_dir=None):
         dur = (b - a) + Tin / 2 + Tout / 2
         if i < len(spec["shots"]):
             sh = dict(spec["shots"][i]["shot"]); sh["dur"] = round(dur, 3)
+            sh = pacing.fit_start(sh, rk.src_info(sh["clip"])[0])
             lim = MAXEND.get(sh["clip"])
             if lim is not None:
                 src_end = sh["start"] + dur * sh.get("speed", 1.0) * (0.5 if sh.get("slowmo") else 1.0)
