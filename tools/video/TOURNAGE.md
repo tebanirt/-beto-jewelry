@@ -207,12 +207,14 @@ Mesuré sur le clip C015 : la bague occupait environ 29 % de la largeur de l'ima
 
 Ce que montre la vidéo :
 - **Boîte à lumière PULUZ à Rayane** : intérieur argenté, bandeau DEL en haut, ouverture sur le dessus.
-- **Plateau tournant prêté** : gris mat, en plastique.
+- **Plateau tournant prêté** : **noir**, en plastique (correction de Rayane, 18 nov.). Fond et sol de la boîte déjà noirs ; seuls les côtés sont argentés.
 - **Lumière annulaire prêtée** : sur un bras.
 - **Support de téléphone** sur trépied, et gants noirs.
 
 Montage proposé, sans rien acheter :
-1. **Fond** : le fond noir de la boîte au fond et au sol. **Couvrir le plateau gris** d'un velours ou d'un carton noir mat : c'est ce qui donnait le fond gris texturé du clip C015.
+1. **Fond** : déjà noir. Le plateau noir sortait gris et texturé dans C015 parce que son plastique un peu brillant renvoie la lumière des côtés argentés et du haut. Correctifs :
+   - exposer pour l'or ;
+   - poser des cartons noirs sur le **bas** des côtés argentés, sous la hauteur de la bague. Le haut reste argenté pour les reflets du jonc.
 2. **Métal** : garder la lumière du haut de la boîte allumée. Les parois argentées donnent les reflets doux et longs qui rendent l'or doré.
 3. **Diamant** :
    - **Ne pas mettre l'anneau en face de la bague** : il se reflète en cercle dans la table de la pierre, et la lumière devient plate.
