@@ -566,3 +566,30 @@ Rayane : « les vidéos sont trop rapides… il faut laisser le temps aux gens d
 - si un plan devient plus long que la prise, il commence plus tôt (jamais d'image figée).
 
 **Pour garder des vidéos de 15 à 18 s** : on retire des mots au lieu d'accélérer. Dans la vague 2 de la marquise, « Tête florale et halo caché » tient sur un seul plan continu, et la dernière carte « Consultation gratuite » est retirée là où la description le dit déjà (sauf S1B, qui sert aussi de pub). Résultat : 2,1 à 4,5 s par texte, au lieu de 1,1 à 2,8 s.
+
+## 25. Plans du bureau privé (18 nov. 2026, C038 à C040)
+
+**Ce qu'ils sont** : 3 plans à la main de 12 à 14 s, iPhone 17 Pro Max (objectif 24 mm), Apple Log 2, ProRes HQ, 4K vertical, 24 i/s, ISO 80, obturateur à 144°, balance des blancs à 5600 K. On y voit la table ronde, l'écran mural avec le design 3D en cours, les écrins, le plateau de bagues d'essai et la pochette d'évaluation.
+
+**Étalonnage** : voir `grade_lab/README.md`. Masters A (corrigé) et B (cinéma léger) dans le dossier de travail.
+
+**Plans utilisables** (nets, mouvement lent) :
+- C038, de 8,0 à 11,0 s : le bureau en entier, l'écran et la table (le meilleur) ;
+- C039, de 11,0 à 12,4 s, et C040, de 12,3 à 13,6 s : la table et l'écran ;
+- C040, de 5,5 à 7,0 s : les écrins et la pochette d'évaluation.
+
+**À ne pas utiliser** :
+- les gros plans de bagues (C039 vers 7,5 s, C040 vers 3,5 s) : la mise au point a lâché, ils sont flous ;
+- le coin avec un sac par terre (C039, de 0 à 1,5 s) ;
+- la bague dans un sac de plastique (C040, de 2 à 3 s).
+
+**Attention avant de publier** :
+- **Le titre du fichier sur l'écran contient le prénom d'un client** (« jeremy… 5 ct oval hidden halo… »). Illisible à 1080, mais jamais de zoom sur l'écran.
+- **Le design affiché est la bague d'un client** : demander à Rayane s'il peut être montré (surprise de demande).
+- **La pochette dit « Évaluation de bijoux · Jewellery Evaluation »** : c'est l'évaluation du gemmologue, pas le logo de Beto. Elle peut illustrer « certificat inclus », jamais « notre marque ».
+
+**Pour le prochain tournage au bureau** :
+1. Régler la balance des blancs sur la lumière de la pièce (environ 3200 à 3500 K, ou mesurer sur une feuille blanche dans Blackmagic Camera) au lieu de 5600 K.
+2. Verrouiller la mise au point avant un gros plan (appui long), ou passer à l'objectif macro, ou reculer et recadrer.
+3. Des mouvements 2 fois plus lents et une prise de 5 s immobile à la fin de chaque mouvement.
+4. Ranger les câbles et la tour de prises, et fermer le fichier client sur l'écran (ou montrer un design déjà livré).

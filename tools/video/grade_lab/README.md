@@ -55,3 +55,23 @@ python build.py A_noir                       # master 4K (28 premières secondes
 C015_CLIP=u:C015_A_noir.mp4 C015_SUFFIX=_A_noir REEL_FPS=24 python ../reels_c015.py V2_ovale_or_jaune
 ```
 Le masque de la pierre se fabrique avec `stone_mask.py` (voir `../enc_applelog2.sh`). `C015_DIR` indique le dossier qui contient `C015.mov` et `mask_c015.mkv`.
+
+## Intérieur : le bureau privé (18 nov. 2026), `bureau_grade.py`
+
+Ordre des étapes, celui des étalonneurs (DaVinci, ACES ; méthode en 3 étapes de gamut.io, nœuds types de Frame.io) :
+1. **Conversion** : Apple Log 2 vers ACEScct, avec la transformation officielle. On n'étalonne jamais le log plat.
+2. **Exposition**, puis **contraste** autour du gris à 18 %.
+3. **Balance des blancs** mesurée sur une vraie référence blanche, la table : des zones de 24 × 24 px choisies à l'œil.
+4. **Saturation**.
+5. **Raccord** : chaque plan est mesuré de la même façon et reçoit la même cible.
+6. **Secondaires** : aucune ici (pas de peau, pas de couleur parasite).
+7. **Look**, léger et en dernier (version B seulement).
+8. **Sortie** : ACES 2.0 SDR, Rec.709 gamma 2.2 pour les téléphones. La netteté s'ajoute à 1080 dans le moteur des reels.
+
+**Piège découvert** : sous l'éclairage du bureau (environ 3000 K, alors que la caméra est réglée à 5600 K), la table blanche est très orange dans le fichier log (ACEScg 1,3 / 0,96 / 0,5). Un filtre automatique « peu coloré » la rate. De son côté, la sortie ACES blanchit les hautes lumières toute seule : la table paraît blanche, mais les fauteuils sortent orange. Il faut donc mesurer sur la table elle-même. Gains trouvés : 0,80 / 1,06 / 2,18, puis +1,17 diaphragme, avec −0,25 sur la version finale pour garder la texture des gros plans.
+
+Utilisation :
+```
+python bureau_grade.py DIR C038:0.3:300:600 C040:13.0:120:720 ...   # mesure, LUT A et B, images avant/après
+python bureau_grade.py DIR --render C038 C039 C040                  # masters verticaux 4K, A et B
+```
