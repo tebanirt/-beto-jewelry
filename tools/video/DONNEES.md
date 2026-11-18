@@ -462,3 +462,32 @@ Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden ha
   1. On corrige la prise d'abord : `TOURNAGE.md` §7.2 bis et §7.2 ter.
   2. L'étalonnage se fait dans DaVinci, sur l'ordinateur de Rayane, avec une recette courte : conversion d'espace couleur, balance sur la carte grise, exposition et contraste, saturation légère.
   3. Plus aucune couche « look » ajoutée sur une prise sans référence.
+
+
+## 21. Bague marquise 4 carats, prises ProRes du 17 nov. 2026 au soir
+
+**Les prises** : 3 prises de Rayane, de 22 à 25 s, avec le plateau réglé.
+- ProRes 422 HQ, 4K vertical, 24 i/s, 1/60 s (144°), ISO 80, 5 600 K, teinte 0, objectif 48 mm.
+- Couleur finie dans l'app (LUT d'aperçu « Rec 709 Neutral »).
+- Sur Drive, elles s'appellent « Jobby 4 ct marquise tete florale accent band hidden halo 1, 2, 3 ».
+
+**Pourquoi elles sont meilleures que C015** :
+- la bague occupe environ la moitié de la largeur ;
+- le ProRes garde le détail des facettes ;
+- le fond est noir ;
+- l'or et le diamant sont naturels.
+
+**Le seul traitement** :
+- niveaux : noir à 3 % et blanc à 92 %, ramenés à la pleine échelle, car les reflets plafonnaient à 92 % ;
+- une netteté fine, une seule fois, à la taille finale (`REEL_SDR_GRADE`) ;
+- aucun look, aucune secondaire, aucun masque, aucun halo ;
+- fichiers de travail sans métadonnées : les prises de l'app contiennent la position GPS.
+
+**Les montages** (`reels_jobby.py`, 24 i/s, zoom de 2 au maximum) :
+- **J1_marquise_4ct**, 12 s :
+  - accroche : marquise de face avec du feu, « Marquise 4 carats » ;
+  - puis trois détails nommés : « Accents marquise », « Tête florale », « Halo caché » ;
+  - fin : logo, « Consultation gratuite », « Lien en bio ».
+- **J2_tour_360**, 9,6 s : un tour complet à 1,4×, sans coupe, titre fixe. La vidéo boucle.
+- Versions `_APP` sans musique, à 100 BPM.
+- Aucun nom de client à l'écran. Ni carats d'or ni « laboratoire ou naturel » : on ne les connaît pas.

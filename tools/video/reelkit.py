@@ -190,7 +190,7 @@ def render_shot(s):
         f.append(f"zoompan=z='1.10-0.10*in/{n_in}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={ow}x{oh}:fps={zr}")
     else:
         f.append(f"scale={ow}:{oh}:flags=lanczos")
-    f.append(GRADE if kind == "hdr" else GRADE_SDR)
+    f.append(GRADE if kind == "hdr" else os.environ.get("REEL_SDR_GRADE", GRADE_SDR))   # REEL_SDR_GRADE: e.g. only a fine sharpening for camera-finished footage
     if "glow" in fx:  # soft bloom on highlights: diamonds sparkle more (in RGB, else the colours shift)
         f.append("format=gbrp,split[ga][gb];[gb]curves=master='0/0 0.62/0.04 1/1',gblur=sigma=16[gc];"
                  "[ga][gc]blend=all_mode=screen:all_opacity=0.22,format=yuv420p")
