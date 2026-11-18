@@ -491,3 +491,31 @@ Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden ha
 - **J2_tour_360**, 9,6 s : un tour complet à 1,4×, sans coupe, titre fixe. La vidéo boucle.
 - Versions `_APP` sans musique, à 100 BPM.
 - Aucun nom de client à l'écran. Ni carats d'or ni « laboratoire ou naturel » : on ne les connaît pas.
+
+## 22. Marquise 4 ct, vague 2 : scripts tirés de l'étude de marché (18 nov. 2026)
+
+**Étude** (vidéos de bague seule à plus de 1 M de vues) : la bague brille dès la 1re image ; la 1re phrase nomme la bague exacte, souvent avec son prix (marquise 3 ct + prix en 1re ligne : 10,2 M vues) ; 8 à 15 s ; une question reste ouverte jusqu'à la fin ; la dernière image reprend la première (boucle).
+
+**Six reels** (`reels_jobby_v2.py`, bague verrouillée au centre avec `ringlock.py`) :
+| Reel | Accroche | Mécanique |
+|---|---|---|
+| S1A | « Marquise 4 carats. Devine le prix. » | boucle ouverte, prix à 12 s |
+| S1B | « Marquise 4 carats, or jaune 14k : 3 350 $ + taxes. » | prix en 1re ligne ; une seule chose change par rapport à S1A |
+| S2 | « Tout le monde regarde la pierre. » | contredire le regard : tête florale et halo caché |
+| S3 | « 3 détails que tu vas manquer… 0/3 » | compteur + « réponds 0, 1, 2 ou 3 » |
+| S4 | « Si quelqu'un t'a envoyé ça… » | pousse le partage en privé |
+| S5 | « Encore possible pour Noël ? » | date limite approuvée (11 décembre) |
+
+**Corrections du contrôle** :
+- Le haut gris de la boîte paraissait dans le plan de profil large : nouveau verrouillage `JOBBY1M` (zoom 1,5, bague à 42 % de la hauteur, variable `RING_Y`).
+- Dans le plan des accents, le texte touchait la pointe de la pierre : `JOBBY1U` (zoom 1,75, bague à 51 %).
+- Tous les textes remontés à 280 px, pour garder la même place d'une carte à l'autre.
+- Le cache des plans ne tient pas compte de la date du fichier source : après un nouveau verrouillage, supprimer `cache/u_<CLIP>.mp4_*`.
+
+**Versions pour l'app** (sans musique, coupées au tempo de la chanson) :
+- `S1B_devine_le_prix_APP128` pour « Angel Of My Dreams » (JADE, 128 BPM) ;
+- `S5_noel_APP150` pour « All I Want for Christmas Is You » (environ 150 BPM) ;
+- les autres `_APP` à 100 BPM.
+Coupe 4:5 pour la pub : `S1B_devine_le_prix_4x5` (recadrage à partir de y = 200, textes compris).
+
+**Publication bloquée** : l'essai Supermetrics a pris fin le 17 nov. Lecture des chiffres et nouveaux envois refusés (`TRIAL_EXPIRED`). Les publications déjà programmées continuent de sortir : celles du 17 et du 18 nov. sont parties, et il en reste 12 jusqu'au 20 nov. Sans abonnement, la règle des 72 h ne peut pas être appliquée et Rayane publie lui-même dans l'app. L'abonnement est une décision d'argent qui revient à Rayane.
