@@ -519,3 +519,37 @@ Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden ha
 Coupe 4:5 pour la pub : `S1B_devine_le_prix_4x5` (recadrage à partir de y = 200, textes compris).
 
 **Publication bloquée** : l'essai Supermetrics a pris fin le 17 nov. Lecture des chiffres et nouveaux envois refusés (`TRIAL_EXPIRED`). Les publications déjà programmées continuent de sortir : celles du 17 et du 18 nov. sont parties, et il en reste 12 jusqu'au 20 nov. Sans abonnement, la règle des 72 h ne peut pas être appliquée et Rayane publie lui-même dans l'app. L'abonnement est une décision d'argent qui revient à Rayane.
+
+## 23. Bilan de toutes les vagues : ce qui marche, ce qui ne marche pas (18 nov. 2026)
+
+**Sources** : statistiques privées Supermetrics jusqu'au 17 nov. (taux de saut, temps regardé), puis compteurs publics lus le 18 nov. avec ScrapeCreators (vues et j'aime, sans taux de saut). 120 vidéos dans `social_reels`, réparties en 22 vagues ; chacune a maintenant un `format`, et la vue `v_reels_formats` les compare par format.
+
+**Les meilleurs**
+| Reel | Format | Vues | Saut | Temps vu |
+|---|---|---|---|---|
+| W06 « Lab diamonds are fake. » (EN) | mythe du labo | 165 | 55,4 % (le meilleur) | 4 s |
+| J01 « Une journée avec ton joaillier » | journée du joaillier | 158 | 80 % | 2 s |
+| W05 « Ce que personne ne te dit sur le diamant de laboratoire » | mythe du labo | 141 en moins d'un jour (le plus rapide) | — | — |
+| W04 « POV : ton joaillier te montre ta bague en 3D » | POV | 130, 4 j'aime (le plus aimé) | 62,1 % | 3 s |
+| T05 « 5 stars isn't enough » (EN) | avis Google | 119 en 16 h | — | — |
+| T01 « Vous êtes vraiment à l'écoute. » | avis Google + Rayane | 111 | 62,4 % | **13 s sur 14,5** |
+
+T01 est le seul à passer la règle des 72 h (saut sous 65 % et au moins 5 s regardées) : on le regarde presque jusqu'au bout. C'est lui qu'on partage aux abonnés.
+
+**Les pires**
+- P01 « Pas besoin de tout payer d'un coup » (paiement) : 4 vues.
+- E02 « Ta bague en 4 étapes » (processus) : 9 vues.
+- T04 et T03 (avis Google, variantes FR de T01) : 9 et 10 vues.
+- E01 « C'est un vrai diamant ? » : 24 vues.
+- M01 « Elle va dire oui ? » : 27 vues.
+- N02 « Tu fais ta demande à Noël ? » : 29 vues, 96 % de saut.
+- P10 et P08b « Ta bague existe avant d'exister » (du rendu 3D à l'or) : 31 et 34 vues, 86 et 97 % de saut.
+
+**Ce que ça apprend**
+1. **Contredire une croyance dès la 1re ligne** (« un diamant de labo, c'est du faux ») est le format qui attire le plus. On le garde, et on le décline sur d'autres croyances (prix, certificat, sur mesure = cher).
+2. **Les vrais avis Google avec Rayane** retiennent le mieux. Mais trois variantes FR presque identiques à la suite (T03, T04) sont tombées à 10 vues : Instagram montre moins les vidéos qui se ressemblent. Une seule variante à la fois, avec une vraie différence (autre client, autre plan, la voix de Rayane).
+3. **L'anglais va plus loin chez les non-abonnés** (W06 : 165 vues, contre 75 pour P11 en FR ; T05 : 119, contre 10 pour T03). Les clients sont au Québec : le FR reste pour les abonnés, l'EN sert à la portée.
+4. **Ce qui échoue** : les listes d'étapes, le paiement, le Noël générique et le passage du rendu 3D à l'or, en texte sur les mêmes plans de la séance de consultation. Personne à l'écran, aucune surprise dans la première seconde. À ne plus faire sous cette forme.
+5. **Pour la suite** : Rayane face caméra, un vrai visage ou une vraie bague qui brille dès la 1re image, une croyance contredite ou un prix clair. Chaque nouveau plan entre dans la banque vidéo (`BANQUE.md`) et chaque reel dans `social_reels`, avec son format et sa leçon.
+
+**Publication** : l'outil est bloqué depuis la fin de l'essai Supermetrics, donc le partage aux abonnés se fait dans l'app. Profil, puis tableau de bord professionnel, puis les reels d'essai : ouvrir le reel, « Partager avec les abonnés », puis l'épingler. Le même fichier n'est pas republié, et le reel garde ses vues.
