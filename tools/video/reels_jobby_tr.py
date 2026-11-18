@@ -66,7 +66,7 @@ def T3_prix():
         dict(html=pill(["Combien coûte une marquise", "de 4 carats sur mesure ?"]), at=0, until=4),
         dict(html=[f'<div class="nat" style="top:300px;font-size:58px">{spec}</div>'], at=4, until=8),
         dict(html=[f'<div class="nat" style="top:330px;font-size:96px"><span class="y">{prix}</span></div>'
-                   f'<div class="nat" style="top:460px;font-size:44px">+ taxes, tout inclus</div>'], at=8, until=12),
+                   f'<div class="nat" style="top:460px;font-size:44px">+ taxes · certificat IGI inclus</div>'], at=8, until=12),
         dict(html=cap("Consultation gratuite.<br>Lien en bio.", top=300), at=12, until=16),
     ]
     return dict(name="T3_prix", music="1176", shots=shots, texts=texts, end=dict(beats=0, overlay=True, layers={}))
