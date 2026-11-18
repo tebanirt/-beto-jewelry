@@ -446,4 +446,10 @@ Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden ha
 | D, Film de campagne (Tiffany, Graff) | noirs relevés, grain | halation |
 | E, Naturel, comme sur l'iPhone | naturel | h 81°, C* 18 |
 
-Rayane choisit le soir du 17 nov.
+- Livrées le 18 nov. vers 1 h 15 : 13,8 s, 24 i/s, de 17 à 21 Mb/s. Contrôle à 100 % : or jaune sous tous les angles, feu du diamant gardé, aucun halo de masque.
+- **Pièges de la nuit** :
+  1. Le calque de vignettage (`movie=…,loop=-1`) tournait à l'infini : l'encodage ne finissait jamais (5,6 Go pour 28 s). Correction : image fixe en entrée normale à 24 i/s, et `blend=…:shortest=1`.
+  2. Le grain ajouté au master 4K alourdissait énormément le fichier. Il est maintenant ajouté sur la vidéo finale en 1080, avec un débit plafonné à 20 Mb/s (Instagram recommande 25 Mb/s au maximum).
+  3. Le conteneur est recyclé quand la session reste inactive pendant un long encodage en arrière-plan. Il faut encoder au premier plan, une version par appel (environ 7 minutes chacune).
+
+Rayane choisit son look.

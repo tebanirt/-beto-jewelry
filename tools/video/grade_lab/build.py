@@ -13,6 +13,12 @@ def vignette(k, path):
     v = 1 - (1 - k) * np.clip((d - 0.35) / 0.9, 0, 1) ** 1.6
     Image.fromarray((np.repeat(v[..., None], 3, -1) * 65535).astype(np.uint16), "RGB").save(path) if False else \
         Image.fromarray((v * 255 + 0.5).astype(np.uint8)).save(path)
+def vig_inputs(L, dur):
+    if L.get("vignette", 1) < 1:
+        vp = f"{D}/vig_{int(L['vignette']*100)}.png"; vignette(L["vignette"], vp)
+        return ["-loop", "1", "-framerate", "24", "-t", str(dur), "-i", vp]
+    return []
+
 def chain(key, L):
     m, s = f"{D}/{key}_main.cube", f"{D}/{key}_stone.cube"
     if not os.path.exists(m): lab.bake(L, m, s)
@@ -26,7 +32,7 @@ def chain(key, L):
     g += ",format=gbrp"
     if L.get("vignette", 1) < 1:
         vp = f"{D}/vig_{int(L['vignette']*100)}.png"; vignette(L["vignette"], vp)
-        g += f"[y];movie={vp},format=gbrp,loop=-1:1:0[vg];[y][vg]blend=all_mode=multiply"
+        g += "[y];[2:v]format=gbrp[vg];[y][vg]blend=all_mode=multiply:shortest=1"   # input 2 = still vignette at 24 fps
     if L.get("glow") or L.get("halation"):
         g += "[z];[z]split[z1][z2];[z2]scale=540:960,curves=all='0/0 0.86/0 1/1',split[h1][h2];"
         g += "[h1]gblur=sigma=2.5[q1];[h2]gblur=sigma=9[q2];[q1][q2]blend=all_mode=screen"
@@ -34,20 +40,30 @@ def chain(key, L):
             g += ",colorchannelmixer=rr=1:gg=0.55:bb=0.32"
         g += f",scale=2160:3840[gl];[z1][gl]blend=all_mode=screen:all_opacity={L.get('glow') or L.get('halation'):.3f}"
     g += ",format=yuv444p"
-    if L.get("grain"):
-        g += f",noise=c0s={L['grain']*4:.1f}:c0f=t"
+    # grain is NOT added to the 4K master (it made a 28 s master weigh 5.6 GB): see grain_pass() on the final 1080 video
     g += ",scale=out_range=tv:flags=accurate_rnd,format=yuv420p[v]"
     return g
+def grain_pass(path, L):
+    """Fine luma grain on the final 1080 video (helps against banding in dark gradients once Instagram re-encodes)."""
+    if not L.get("grain"): return
+    tmp = path + ".grain.mp4"
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", path, "-vf", f"noise=c0s={L['grain']*3:.1f}:c0f=t",
+                    "-c:v", "libx264", "-preset", "slow", "-crf", "16", "-maxrate", "20M", "-bufsize", "40M", "-pix_fmt", "yuv420p", "-color_primaries", "bt709",
+                    "-color_trc", "bt709", "-colorspace", "bt709", "-c:a", "copy", "-movflags", "+faststart", tmp], check=True)
+    os.replace(tmp, path)
+
 if __name__ == "__main__":
+    if sys.argv[1] == "grain":
+        grain_pass(sys.argv[3], looks.LOOKS[sys.argv[2]]); sys.exit()
     key = sys.argv[1]; L = looks.LOOKS[key]; g = chain(key, L)
     if len(sys.argv) > 2 and sys.argv[2] == "test":
         for t in sys.argv[3:]:
-            subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", t, "-i", SRC, "-ss", t, "-i", MASK, "-frames:v", "1",
+            subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", t, "-i", SRC, "-ss", t, "-i", MASK, *vig_inputs(L, 1), "-frames:v", "1",
                             "-filter_complex", g, "-map", "[v]", f"{D}/test_{key}_{t}.png"], check=True)
     else:
         out = os.environ.get("C015_OUT", os.path.join(D, "..", "edit", "assets", f"C015_{key}.mp4"))
-        subprocess.run(["ffmpeg", "-v", "error", "-y", "-t", "28", "-i", SRC, "-t", "28", "-i", MASK, "-an", "-filter_complex", g, "-map", "[v]",
-                        "-c:v", "libx264", "-preset", "fast", "-crf", "10", "-profile:v", "high", "-r", "24",
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-t", "28", "-i", SRC, "-t", "28", "-i", MASK, *vig_inputs(L, 28), "-an", "-filter_complex", g, "-map", "[v]",
+                        "-c:v", "libx264", "-preset", "faster", "-crf", "12", "-profile:v", "high", "-r", "24",
                         "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709", "-color_range", "tv",
                         "-movflags", "+faststart", out + ".part.mp4"], check=True)
         os.replace(out + ".part.mp4", out)      # a restart mid-encode never leaves a broken master
