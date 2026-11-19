@@ -593,3 +593,25 @@ Rayane : « les vidéos sont trop rapides… il faut laisser le temps aux gens d
 2. Verrouiller la mise au point avant un gros plan (appui long), ou passer à l'objectif macro, ou reculer et recadrer.
 3. Des mouvements 2 fois plus lents et une prise de 5 s immobile à la fin de chaque mouvement.
 4. Ranger les câbles et la tour de prises, et fermer le fichier client sur l'écran (ou montrer un design déjà livré).
+
+## 26. Référence « Trailer » de @evelynn.waite (19 nov. 2026)
+
+**Chiffres** : 3,27 M de vues, 275 000 j'aime, 2 500 commentaires, 16,6 s. Son original de la créatrice, environ 112 BPM. Image en 16:9 (format cinéma) au centre de l'écran vertical. Rayane en a enregistré les 5,5 dernières secondes.
+
+**Construction**, mesurée image par image sur l'enregistrement :
+1. **Coupes en ping-pong sur les demi-temps** (environ 0,27 s) : on alterne 2 ou 3 angles (gros plan d'un visage, vue large de la tente, profil) pendant la partie forte de la musique.
+2. **Cassure** : quand la musique baisse, environ 0,5 s d'effets « album photo » (photos qui apparaissent, petits textes et graphiques, bande de couleur qui saute, 2 images en négatif).
+3. **Montée** : des plans plus longs (la cérémonie, environ 0,5 s), puis des coupes de plus en plus rapprochées (3,63, 3,80, 3,93 et 4,07 s).
+4. **Chute de basse** : le plan héros (le visage qui sourit), un très gros plan avec un reflet de soleil, un reflet d'objectif, puis un éclair blanc et un fondu au noir.
+
+**Couleur** : chaude et dorée, avec des verts adoucis, des ombres légèrement bleutées, des noirs un peu relevés, des reflets de lumière et du grain.
+
+**Ce qu'on en reprend pour une « bande-annonce de bague »** :
+- la structure ping-pong, cassure, montée et chute, coupée au tempo du son ;
+- le plan héros au moment de la chute, c'est-à-dire le dévoilement de la bague de face ;
+- un éclair blanc à la fin ;
+- presque pas de texte : une seule carte, à la fin, laissée assez longtemps pour être lue (`pacing.py`).
+
+**Ce qu'on adoucit**, pour rester dans le luxe épuré (`docs/design-brief.md`) : pas d'images en négatif ni de graphiques façon écran d'ordinateur. Les reflets viennent de la pierre elle-même.
+
+**Musique** : la version `_APP` est coupée sur ce son, et Rayane l'ajoute dans l'app avec « Utiliser l'audio ». Il faut l'enregistrement complet du reel pour caler la chute de basse.
