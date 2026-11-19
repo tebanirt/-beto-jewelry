@@ -615,3 +615,27 @@ Rayane : « les vidéos sont trop rapides… il faut laisser le temps aux gens d
 **Ce qu'on adoucit**, pour rester dans le luxe épuré (`docs/design-brief.md`) : pas d'images en négatif ni de graphiques façon écran d'ordinateur. Les reflets viennent de la pierre elle-même.
 
 **Musique** : la version `_APP` est coupée sur ce son, et Rayane l'ajoute dans l'app avec « Utiliser l'audio ». Il faut l'enregistrement complet du reel pour caler la chute de basse.
+
+## 27. Production du 19 nov. 2026
+
+**Chiffres** : Supermetrics est bloqué (essai terminé le 17 nov.), donc ni taux de saut ni abonnements. Compteurs publics lus avec ScrapeCreators.
+- **Ton profil (les reels normaux, que tu as publiés toi-même avant les trial reels)** :
+  - « Créer votre bague de rêve » (21 août) : 4 621 vues ;
+  - « Day in a Life » (9 août) : 4 129 vues et 90 j'aime ;
+  - 23 oct. : 1 650 vues ;
+  - les autres : 289 à 587 vues.
+  Nos trial reels font de 4 à 165 vues. **Leçon** : un reel normal montré aux abonnés, avec toi à l'écran (« Day in a Life »), fait 25 fois plus de vues qu'un trial reel en texte sur des plans de bague. On repasse au reel normal avec ton visage dès que possible.
+- **Non publiés** : R02 « Qui est Rayane » (prévu le 18 nov.) et T06 (prévu le 16 nov.) ne sont pas sur le profil. Ils restent « rendered ».
+
+**Règle des 72 h** : pas appliquée, faute de taux de saut et d'abonnements.
+
+**Veille** (TikTok, « engagement ring reveal jeweler », 3 derniers mois, les plus aimées) :
+| Compte | Vues | Durée | Ce que c'est |
+|---|---|---|---|
+| @prestigiojewelers | 1,56 M | 98 s | « Arrêtez de payer trop cher en grande surface », face caméra |
+| @oorejewelry | 1,39 M | 29 s | La joaillière fabrique une monture florale « Briar rose » et raconte, du début à la fin |
+| @dougthejeweler | 726 k | 88 s | Série « je note vos bagues » (déjà notée le 17 nov.) |
+| @meicrosoft | 688 k | 34 s | Une cliente dévoile sa bague, en réponse à un commentaire |
+| @tams.diamonds | 542 k | 125 s | Histoire d'un couple et de sa bague, perles en pierres de côté |
+
+**Nouveau** : la fabrication d'une **monture florale** racontée par la joaillière (1,39 M vues, 29 s). C'est exactement la tête florale de la marquise de Jobby. Ajouté à `LISTE_A_FILMER.md`.

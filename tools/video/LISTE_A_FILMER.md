@@ -22,6 +22,7 @@ Elle s'appuie sur trois sources :
 
 | # | À filmer | Durée | Pourquoi |
 |---|---|---|---|
+| 0 | **La fabrication d'une tête florale, racontée par toi** : le design 3D sur l'écran, la fonte, le sertissage au microscope (chez ton sertisseur), la bague finie qui tourne. Une phrase par étape, à voix haute. | 25 à 30 s en tout | @oorejewelry : 1,39 M de vues avec une monture florale fabriquée et racontée (veille du 19 nov.). On a déjà la bague finie de Jobby : il manque les étapes. |
 | 1 | **Toi, face caméra : 10 accroches** (liste plus bas), une prise chacune | 10 à 15 s chacune | Ton visage est le seul format qui passe la barre chez nous (62 % de saut, contre 90 à 100 % pour une bague seule). Le joaillier qui explique : 11,4 M de vues chez @brooker_brothers. |
 | 2 | **Une pierre de chaque coupe, en vrai** : rond, ovale, poire, marquise, taille émeraude, coussin, radiant, princesse. Diamants de laboratoire blancs, 2 ct si possible, sur velours noir, soulevés à la pince. | 5 à 8 s par coupe | La série « toutes les coupes » utilise aujourd'hui des dessins. Avec tes vraies pierres, elle devient beaucoup plus forte. |
 | 3 | **Les carats sur l'annulaire** : la même coupe en 1, 1,5, 2, 2,5 et 3 ct, posée une à une sur l'annulaire seulement (jamais une réglette sur tous les doigts). | 5 s par carat | Format qui revient chez les gros comptes : « 3 carat oval on a size 6 finger », « pick your perfect carat size ». |
