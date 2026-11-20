@@ -737,3 +737,9 @@ Leçon : le style natif (TikTok Sans) sert aux trial reels organiques, où il im
 - Un essai avec le fond élargi et flou a été écarté : on voyait le cadre, et ça faisait amateur.
 - Pour le site : une boucle aller-retour sans fin (14 s, sans texte ni son, carré et portrait, 3,5 Mo en version web) et des photos de 2160 px.
 - Pour une vidéo d'accueil en format paysage, il faut refilmer le groupe téléphone à l'horizontale, les bagues sur environ 60 % de la largeur.
+
+**Reprise de la production (20 nov. 2026)** : la pause du 16 nov. est levée, puisque Rayane a envoyé des plans jamais publiés (C041, C056, C064 et C067).
+- Premier reel de la reprise : `R_laquelle`. C'est le reel normal du jour : Rayane le publie dans l'app à 17 h 10, avec une chanson tendance.
+- Chiffres et règle des 72 h : bloqués. L'essai Supermetrics a pris fin le 17 nov. (`TRIAL_EXPIRED`), et les crédits Firecrawl sont épuisés jusqu'au 21 nov. La veille du jour est sautée.
+- Les reels de prix et les pubs restent en attente : les pubs Meta sont en pause jusqu'à ce que la comptabilité soit en place.
+

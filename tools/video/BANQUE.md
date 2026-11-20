@@ -37,8 +37,18 @@ L'ancien dossier « Frame » (`1w-XwO_5-ELvI2BD7lWnYFFrcDo9zTJsX`, 41 clips de l
 
 | Date | Fichier | Dossier | Fiche (coupe, carat, métal, modèle, pierre) | Accord client | Utilisé dans |
 |---|---|---|---|---|---|
-| | | | | | |
+| 2026-11-18 | `2026-11-18_07_bureau_table-ecran-design3d_C038.mov` | 07 | Bureau : table, écran mural avec un design 3D client, Apple Log 2 | Écran : prénom d'un client et sa bague, jamais en gros plan | Étalonné (DONNEES §25), pas encore publié |
+| 2026-11-18 | `2026-11-18_07_bureau_table-ecran_C039.mov` | 07 | Bureau : table et écran (gros plan de bague flou vers 7,5 s) | Idem | Pas encore publié |
+| 2026-11-18 | `2026-11-18_07_bureau_ecrins-pochette-evaluation_C040.mov` | 07 | Bureau : écrins, pochette d'évaluation du gemmologue | — | Pas encore publié |
+| 2026-11-19 | `A001_11190117_C041.mov` (dossier « Bague vidéo pro ») | 03 | Benny : marquise 2 ct labo E VVS2, or blanc 14k, anneau torsadé serti, halo caché, griffes serties ; tour complet | — | R_laquelle, AD_multi_groupe |
+| 2026-11-19 | `A001_1119011x_C042` à `C044` (« Bague vidéo pro ») | 03 | Benny, face, profil et anneau | — | AD_B_prix, B1, B2, B3, AD_multi_2bagues, AD_benny_15 |
+| 2026-11-20 | `A001_11200841_C056.mov` (« Bague vidéo pro ») | 03 | Jobby : marquise 4 ct labo E VVS2, or jaune 14k, tête florale, halo caché, accents marquise ; tour | — | R_laquelle, AD_multi_groupe |
+| 2026-11-20 | `A001_11200855_C064.mov` (« Bague vidéo pro ») | 03 | Les 4 bagues ensemble (Benny, Jobby, large jonc blanc, marquise or jaune et jonc pavé) ; filmé serré | — | R_laquelle, AD_multi_groupe, boucle et photos du site |
+| 2026-11-20 | `A001_11200859_C067.mov` (« Bague vidéo pro ») | 03 | Marquise en or jaune avec son jonc pavé : fiche et prix à demander | — | R_laquelle |
 
 ## Problème au 15 nov. 2026 : Drive plein
 
 Le Drive de betojewlz@gmail.com a dépassé son espace : la création d'un Google Doc a été refusée (« storage quota has been exceeded »). Tant que Rayane n'a pas libéré de l'espace ou pris un forfait Google One (décision d'argent : la sienne), il ne peut pas y déposer de vidéos. En attendant, il envoie ses vidéos directement dans le chat Claude.
+
+**Au 20 nov. 2026** : « 00 · À trier » contient aussi `Beto-Jewelry_Recu-depot_Ryan.pdf`, un reçu de dépôt client. Ce n'est pas une vidéo : il reste là, signalé à Rayane, pour qu'il le range dans la comptabilité. Les plans de bagues arrivent dans le dossier partagé « Bague vidéo pro » (`1ewW4YxZnK3wXCjxVP_xVHQDkezG_-3Aw`), où ils restent, puisque Rayane y dépose ses fichiers. Ils sont notés ci-dessus. C060, C066, C068 et C069 ne sont pas arrivés (connexion instable) : Rayane doit les renvoyer.
+
