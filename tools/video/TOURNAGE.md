@@ -47,6 +47,13 @@ Le thème change chaque jour :
 - Espace couleur **Rec.709**, pas Apple Log ni HDR : sinon, voile blanc et travail de couleur en plus.
 - Sources : guide Blackmagic Camera de Silent Eye (Patreon), forum Blackmagic Design.
 
+**Gros plans en Apple Log 2 + DaVinci Resolve** (demandé par Rayane le 17 nov. 2026 : voir la LUT pendant le tournage, puis faire la couleur dans DaVinci)
+- Blackmagic Camera : Color Space **Apple Log 2** ; codec ProRes 422 HQ (ou HEVC 10 bits si l'espace manque) ; 4K ; 24 i/s avec obturateur **1/60** (144°, sans scintillement sur le courant à 60 Hz) ; 60 i/s à 1/120 pour les ralentis ; ISO le plus bas ; balance des blancs fixe ; mise au point manuelle avec focus peaking ; zébras à 95 % ; stabilisation coupée sur trépied.
+- Réglages vérifiés sur le téléphone de Rayane le 17 nov. : **Obturation sans scintillement basée sur 60 Hz** (l'app était à 50 Hz, le réglage européen), Mesure obturateur en Vitesse, **Activer la vidéo verticale**, balance des blancs et teinte en manuel, exposition en manuel, données d'emplacement et téléversement Blackmagic Cloud coupés. HEVC plutôt que ProRes : seulement 16 Go libres sur l'iPhone ce jour-là.
+- LUT : une LUT **Apple Log 2 → Rec.709** (pas une LUT Apple Log : les couleurs de base diffèrent), importée dans LUTs > Import LUT, **Display LUT activé**, **Record LUT to Clip désactivé** : l'écran montre l'image corrigée, le fichier reste en Log pour DaVinci. Depuis le 18 nov. : `luts/Beto_AppleLog2_Rec709_neutre_33.cube` (voir §7.2 bis.2).
+- DaVinci Resolve : sur un nœud, Color Space Transform, entrée Apple Log 2 / Apple Log 2, sortie Rec.709 / Gamma 2.4 (si la version ne propose pas Apple Log 2 : la même LUT sur le nœud). Timeline verticale 2160 × 3840, 24 i/s.
+- **À m'envoyer : l'export de DaVinci (Rec.709)**, pas le fichier Log : le moteur de montage ne lit pas encore le Log (voir §7.4). Toujours comparer la couleur des pierres à l'écran avec la vraie pierre.
+
 **Sans ce matériel** (téléphone seul)
 - 4K à 60 i/s, ralenti à 240 i/s pour l'éclat, **vidéo HDR désactivée**.
 - Mise au point et exposition verrouillées par un appui long sur l'écran, et un trépied.
@@ -185,6 +192,76 @@ Réglages et règles :
 - Nettoyer la bague (chiffon microfibre, poire à air) juste avant : la macro montre chaque trace de doigt.
 - Manipuler avec des gants de coton, mais **jamais une bague enfilée sur un doigt de gant**, et **jamais à l'auriculaire** (règle de Rayane). Bague portée : seulement à l'annulaire.
 - Les plans à faire sont ceux du §2.
+
+### 7.2 bis Le maximum de détail (leçons du premier clip, 17 nov. 2026)
+
+Mesuré sur le clip C015 : la bague occupait environ 29 % de la largeur de l'image (620 pixels sur 2 160). Pour un gros plan de la pierre, il fallait donc zoomer 2 à 2,5 fois au montage, et la résolution se perd au-delà de 2 fois. Le détail vient de la prise, pas du montage :
+- **Remplir l'image à la prise** : la bague à 60-80 % de la largeur pour les plans larges, et une prise séparée encore plus serrée pour la pierre. Essayer le 4x (100 mm) ; s'il ne fait pas la mise au point, reculer un peu jusqu'à ce qu'il la fasse.
+- **Codec ProRes 422 HQ** plutôt que HEVC. Le HEVC (environ 36 Mb/s pour ce clip) lisse les petites facettes. Le ProRes 422 HQ s'enregistre dans l'iPhone, mais il prend environ 5 Go par minute en 4K : libérer de l'espace avant de tourner. Le ProRes RAW, et le plein capteur (Open Gate), demandent un disque SSD externe : c'est une dépense, la décision revient à Rayane.
+- **Plateau plus lent**, s'il se règle : à 1/60 s, les facettes restent plus nettes quand la pierre tourne lentement.
+- **Zébras à 95 %** : de dos, le jonc était brûlé. Baisser la lumière ou l'exposition d'environ ⅓ jusqu'à ce que les zébras disparaissent du métal (quelques éclats sur la pierre, c'est normal).
+- Le fond est un plateau en plastique noir : son grain est normal, on ne le traite pas au montage (règle de Rayane : rien qui touche la qualité de la bague).
+- **Instagram** : Paramètres > Qualité des médias > **Importer en qualité maximale**, activé. Sans ce réglage, l'app envoie parfois une version plus légère.
+
+### 7.2 bis.1 Montage du plateau avec le matériel actuel (vidéo de Rayane, 18 nov. 2026)
+
+Ce que montre la vidéo :
+- **Boîte à lumière PULUZ à Rayane** : intérieur argenté, bandeau DEL en haut, ouverture sur le dessus.
+- **Plateau tournant prêté** : **noir**, en plastique (correction de Rayane, 18 nov.). Fond et sol de la boîte déjà noirs ; seuls les côtés sont argentés.
+- **Lumière annulaire prêtée** : sur un bras.
+- **Support de téléphone** sur trépied, et gants noirs.
+
+Montage proposé, sans rien acheter :
+1. **Fond** : déjà noir. Le plateau noir sortait gris et texturé dans C015 parce que son plastique un peu brillant renvoie la lumière des côtés argentés et du haut. Correctifs :
+   - exposer pour l'or ;
+   - poser des cartons noirs sur le **bas** des côtés argentés, sous la hauteur de la bague. Le haut reste argenté pour les reflets du jonc.
+2. **Métal** : garder la lumière du haut de la boîte allumée. Les parois argentées donnent les reflets doux et longs qui rendent l'or doré.
+3. **Diamant** :
+   - **Ne pas mettre l'anneau en face de la bague** : il se reflète en cercle dans la table de la pierre, et la lumière devient plate.
+   - **Pour les éclats** : l'anneau sur le côté ou derrière, assez bas et éloigné ; ou mieux, une petite lampe dure (lampe de poche d'un autre téléphone, ou VL49), à hauteur de la pierre.
+4. **Reflets** : un carton noir derrière la bague, juste hors du cadre. Il donne des lignes sombres dans le métal (l'or a l'air d'or) et empêche la paroi argentée de blanchir la pierre.
+5. **Téléphone** : par l'ouverture de devant, sur le trépied, à hauteur de la pierre ou un peu au-dessus. La bague doit remplir de 60 à 80 % de la largeur.
+6. **Carte grise** : 3 secondes au début de chaque prise, posée à la place de la bague.
+
+Avec la boîte à lumière, les boîtes NEEWER du §7.2 ter deviennent optionnelles : la boîte fait déjà la lumière douce. Le plus utile à acheter : un dessus de plateau en velours noir, ou un plateau à soi, 2 petites lampes dures et une carte grise (environ 70 à 90 $).
+
+### 7.2 bis.2 Réglages Blackmagic Camera pour le plateau bague (18 nov. 2026)
+
+| Où | Réglage |
+|---|---|
+| Format | 4K (2160 × 3840), **vidéo verticale activée**, 24 i/s |
+| Codec | **Apple ProRes 422 HQ** si au moins 20 Go sont libres (environ 5 Go par minute). Sinon HEVC, à la qualité la plus haute proposée |
+| Espace couleur | **Apple Log 2** |
+| Obturateur | mesure en vitesse, **1/60 s**, anti-scintillement **60 Hz** |
+| ISO | le plus bas possible |
+| Balance des blancs | sur la carte grise (auto une seule fois, puis verrouillée), **teinte 0**. Toutes les lumières à la même température |
+| Exposition | manuelle. Exposer pour l'or. **Zébras à 95 %** : seuls les éclats de la pierre peuvent les toucher, jamais le métal |
+| Mise au point | manuelle, **focus peaking** activé, sur la table de la pierre |
+| Objectif | **4x** si la mise au point se fait, sinon 2x en se rapprochant. Jamais 0,5x (déformation) |
+| Stabilisation | coupée (trépied) |
+| LUT | `Beto_AppleLog2_Rec709_neutre_33.cube` importée, **affichage de la LUT activé**, **LUT gravée dans le clip désactivée**. Le fichier reste en Log pour DaVinci |
+| Divers | données d'emplacement et Blackmagic Cloud coupés. iPhone en mode avion, luminosité de l'écran au maximum |
+
+À chaque prise :
+1. Carte grise 3 secondes, posée à la place de la bague.
+2. Bague **centrée sur l'axe du plateau** : elle reste nette et cadrée pendant le tour.
+3. Deux tours complets, à la vitesse lente.
+4. Une prise par angle : de face, de trois quarts, de profil à hauteur de la pierre, un peu au-dessus. Puis une prise serrée sur la pierre.
+
+### 7.2 ter Ton propre plateau de tournage, sur Amazon.ca (17 nov. 2026, à acheter par Rayane)
+
+Le plateau tournant et la lumière du clip C015 sont prêtés par le sertisseur. Liste proposée, vue sur Amazon.ca le 17 nov. 2026. **Vérifier le prix et le logo Prime sur la page avant d'acheter** : les prix bougent. La décision d'achat revient à Rayane.
+
+| Rôle | Produit (Amazon.ca) | Prix vu | Pourquoi |
+|---|---|---|---|
+| Plateau tournant, dessus en velours noir | [Inovat 8", ultra silencieux, velours noir](https://www.amazon.ca/Inovat-Direction-Motorized-Rotating-Collectible/dp/B077NHHKW3) | à vérifier | Le velours absorbe la lumière : fond noir mat, sans la texture grise du plastique. |
+| Ou plateau à dessus miroir noir, 3 vitesses | [Plateau 138 mm, miroir noir, 2, 4 ou 6 tours/min](https://www.amazon.ca/Motorized-Rotating-Turntable-Photography-Adjustable/dp/B0FCB8Y3FX) | à vérifier | Reflet de la bague dans le miroir (look « reflet »). La vitesse lente (2 tours/min) garde les facettes nettes. |
+| Petites lumières dures (les éclats) | [ULANZI VL49, 5 500 K, IRC 95+, ×2 ou 3](https://www.amazon.ca/ULANZI-2000mAh-Mounts-Charging-Mobile/dp/B07YSF3X8K) | environ 23 $ chacune | Des points lumineux font scintiller le diamant. |
+| Grande lumière douce (le dégradé du métal), **optionnelle avec la boîte PULUZ** | [NEEWER NK103, 2 boîtes de 60 × 60 cm, bicolores, IRC 95](https://www.amazon.ca/NEEWER-2900K-7000K-Photography-Continuous-NK103/dp/B0DX9NH1SG) | environ 156 $ | Longs reflets doux sur l'or jaune. |
+| Carte grise 18 %, blanche et noire | [JJC 10 × 8 po](https://www.amazon.ca/Gray-JJC-Exposure-Photography-Calibration/dp/B07B2SRPSZ) | environ 21 $ | Balance des blancs et exposition exactes au début de chaque prise. |
+| Fond en velours noir | [Velours noir 70 × 100 cm](https://www.amazon.ca/Photography-Backdrops-Professional-Reflective-Background/dp/B0C8N1ZMP6) | environ 11 $ | Derrière et sous le plateau : noir uniforme. |
+
+À compléter sans Amazon : des cartons noirs et blancs (Dollarama) pour contrôler les reflets, et de la cire de musée pour tenir la bague. Total d'environ 230 à 260 $ avant taxes, selon le plateau choisi.
 
 ### 7.3 Matériel recommandé (prix vus le 16 nov. 2026, avant taxes, à revérifier)
 

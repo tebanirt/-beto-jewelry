@@ -330,3 +330,312 @@ Recherche ScrapeCreators : « lab diamond engagement ring price », « hidden ha
 2. La voix de Rayane ou sa parole face caméra dans la plupart des reels (son original).
 3. Chaque reel bâti sur un plan neuf ; un plan déjà publié ne sert plus qu'en complément.
 4. Repartir des avis Google (le seul format gagnant) avec les trois façons de Mosseri : nouveau format, réponse à une question, ce qui a changé.
+
+## 17. Production du 16 nov. 2026 (pause) : chiffres, règle des 72 h et veille
+
+**Chiffres** (Supermetrics, 7 derniers jours, lus à 9 h 42)
+- Abonnés : 234, inchangé.
+- La portée monte : les 6 trial reels du 15 nov. ont eu 100 à 165 vues chacun (contre 10 à 30 du 10 au 13 nov.).
+  - Meilleur : W06 en anglais (« Lab diamonds are fake »), 165 vues, 55 % de saut, mais 4 s regardées (la barre est à 5 s).
+  - W04 (POV du design 3D) : 63 % de saut, 3 s regardées.
+- T01 (avis Google avec Rayane) reste le seul à passer : 62 % de saut, 13 s regardées.
+- Seules sauvegardes de la semaine : J01 (une journée avec ton joaillier) et R01 (pourquoi à Montréal), 1 chacun. Aucun partage, aucun abonnement amené par un reel.
+
+**Règle des 72 h** : 4 reels de plus retirés (A01 écrin, P11 mythe du labo, P09b designs 3D, P12b EN sous le sapin), tous au-dessus de 70 % de saut et sous 4 s regardées. Aucun gagnant parmi les reels jugés aujourd'hui.
+
+**Veille** (TikTok, bijoutiers, les plus aimées des 3 derniers mois)
+| Compte | Vues | Durée | Ce que c'est |
+|---|---|---|---|
+| @massoyanjewelers | 4,7 M | 76 s | Histoire d'une cliente racontée : mettre un 5 carats dans la bague de sa grand-mère sans perdre le design |
+| @diamondrensu | 4,3 M | 16 s | « Elle l'aimait, mais détestait la bague » : on garde le diamant, on refait le reste |
+| @brooker_brothers | 2,4 M | 70 s | Le joaillier fabrique une 5 carats de A à Z, en parlant (« Hey, this is Wyatt ») |
+| @thediamondvaulthtx | 2,0 M | 15 s | Bague finie : marquise 3 ct, sertissage cathédrale sur mesure |
+| @prestigiojewelers | 1,5 M | 99 s | Face caméra : « arrête de payer trop cher en grande surface » |
+
+**Ce que ça apprend** : les trois plus vues sont des histoires de 70 à 100 s racontées par le joaillier, ou une histoire de cliente. Des formats impossibles sans la voix de Rayane : les messages vocaux de la liste à filmer (point 6) sont la priorité de la reprise. Les vitrines courtes (15 s) marchent seulement avec une vraie bague finie, filmée de près.
+
+## 18. Production du 17 nov. 2026 (pause)
+
+**Chiffres** (Supermetrics, lus à 9 h 42)
+- Abonnés : 234, inchangé depuis le 15 nov.
+- Reels du 16 nov. : portée faible (E01 labo 24 vues, W08 halo caché 9, P01 paiement 4), contre 100 à 165 vues pour ceux du 15 nov. Le seul bon signe : E01 à 62,5 % de saut, mais 2 s regardées.
+- T06 (avis Google, reel normal à publier par Rayane le 16 nov. à 17 h 10) n'apparaît pas dans les médias : pas publié.
+
+**Règle des 72 h** : 3 reels retirés (A02 vitrine rose, P08b EN rendu à l'or, N02 demande à Noël), tous au-dessus de 95 % de saut.
+
+**Veille** (TikTok, conseils de joaillier, les plus aimées des 3 derniers mois)
+| Compte | Vues | Durée | Ce que c'est |
+|---|---|---|---|
+| @adam5thave | 10,6 M | 70 s | Joaillier du Diamond District (New York) |
+| @massoyanjewelers | 4,8 M | 76 s | Histoire de cliente racontée (déjà vue le 16 nov.) |
+| @brooker_brothers | 2,4 M | 70 s | Fabrication racontée par le joaillier (déjà vue) |
+| @michaelsjewelers_nj | 1,2 M | 288 s | « Les bagues qu'on refuse de faire, et que tu ne devrais pas acheter » (griffe unique, etc.) |
+| @dougthejeweler | 724 k et 361 k | 75 à 89 s | Série « je note vos bagues de fiançailles » (partie 12) |
+
+**Ce que ça apprend** : deux formats nouveaux pour nous, tous les deux face caméra et faciles à tourner. (1) L'expert franc : « les bagues que je refuse de faire ». (2) Une série qui revient chaque semaine : « je note vos bagues ». Ce dernier suppose des photos envoyées par les abonnés (avec leur accord) ; à démarrer quand le compte aura des commentaires. Ajoutés à `LISTE_A_FILMER.md`.
+
+## 19. Premier plan du studio en Apple Log 2 (17 nov. 2026)
+
+- **Clip de Rayane** : solitaire ovale sur le plateau tournant (noir, en plastique : son grain est normal), **jonc en or jaune 14 k, diamant blanc** (précisé par Rayane le 17 nov. ; carat, et laboratoire ou naturel : inconnus, donc jamais à l'écran).
+  - Prise : iPhone 17 Pro Max, 48 mm, Apple Log 2, 24 i/s, 144°, ISO 80, 5 600 K.
+  - Fichier : 36 s, 4K vertical, HEVC 4:2:2 10 bits, 163 Mo, déposé dans « Beto — Banque vidéo ».
+- **Transfert** : l'outil Google Drive ne télécharge pas plus de 10 Mo. Pour un gros fichier, Rayane active le partage par lien (lecteur), je télécharge, puis il remet le partage sur « Limité ».
+- **Couleur, version finale (v10, « réalisme d'abord », 17 nov. au soir)**. Trois scripts dans `tools/video/` : `applelog2_grade.py` (LUT), `stone_mask.py` (masque de la pierre) et `enc_applelog2.sh` (rendu).
+  - Décodage de la courbe Apple Log.
+  - **Blancs réglés sur le fond noir**, jamais sur la pierre ou le jonc, qui renvoient la couleur de l'or. Ses lampes sont plus chaudes que les 5 600 K de l'app (R/V 1,34 sur le fond).
+  - Courbe en S sur la luminance seulement, bague lumineuse (Rayane trouvait la v9 un peu sombre), fond naturel.
+  - Couleur plus riche dans les tons moyens (l'or), qui tend vers le blanc dans les facettes les plus claires. Les tons chauds penchent vers le jaune, pas le rose.
+  - Les reflets brûlés du jonc deviennent or pâle au lieu d'argent.
+  - **Le diamant reste blanc** : un masque suit la pierre image par image, là où les petites arêtes des facettes sont les plus denses. Le jonc, lisse, reste hors du masque ; la pierre y est désaturée à 15 %.
+  - Réalisme d'abord (Rayane, 17 nov. : « que la bague et la pierre aient l'air le plus ultra réaliste possible ») : aucun débruitage (il adoucissait les facettes) ; aucune netteté sur le 4K (ses halos se voyaient après réduction) ; une seule netteté fine, à la taille finale ; halo des éclats très léger (12 %).
+  - **Jamais d'agrandissement** : zoom de 2 au maximum dans un 4K vertical, donc au moins 1 080 pixels de la prise pour 1 080 à l'écran. Réduction en lanczos. Plus de Ken Burns : le zoompan de ffmpeg avance par pixels entiers (tremblement) et dépasse le 1:1.
+  - **24 i/s comme la prise** (`REEL_FPS=24`) : passer de 24 à 30 i/s répétait une image sur quatre, d'où des saccades sur le plateau.
+  - Pas d'agrandissement par IA (Topaz, Real-ESRGAN) : il invente des facettes, donc une pierre qui n'est pas la vraie (`docs/design-brief.md` §6).
+  - **LUT d'aperçu** : la LUT « or 14k » de cette version a été retirée avec le rendu refusé. Pour l'app, on utilise maintenant `tools/video/luts/Beto_AppleLog2_Rec709_neutre_33.cube` : conversion neutre, sans effet (18 nov.).
+- **Pièges** :
+  - une courbe forte appliquée canal par canal rendait l'anneau rosé ;
+  - des blancs réglés sur la pierre rendaient le jonc d'or blanc ;
+  - un masque de « zones claires » prenait aussi le jonc poli, qui devenait argenté de dos ;
+  - un mélange (blend) en 16 bits dans ffmpeg délavait l'image : le halo se fait en 8 bits ;
+  - le zoom numérique au-delà de 2 fois et le passage de 24 à 30 i/s font perdre le réalisme : voir `TOURNAGE.md` §7.2 bis pour remplir l'image dès la prise.
+- **Montage V2_ovale_or_jaune** (`reels_c015.py`), structure accroche → révélation → fin :
+  - 13,8 s ; coupes nettes sur le temps (les fondus laissaient une image double) ; plus de faux reflet de lumière, qui faisait une traînée grise sur le fond ; vitesse réelle du plateau (le ralenti calculé, minterpolate, brouillait les facettes du diamant).
+  - **Accroche** : la pierre qui se tourne de face, en gros plan, dès la 1re image.
+  - **Révélation** : côté, profil (griffes), arrière, retour.
+  - **Fin** : la pierre qui passe de face, sous le logo blanc, « Consultation gratuite », « Lien en bio » et « Montréal · ou en vidéo ». Elle reste à l'écran sans fondu, pour que la vidéo boucle sur l'accroche.
+  - Textes : « Solitaire ovale. Diamant blanc, or jaune 14k. » et « Fait sur mesure à Montréal. ».
+  - Version `_APP` sans musique, coupée à 100 BPM, pour une chanson tendance ajoutée dans l'app.
+  - Référence de structure : GemIQ, « The 3-Asset Fix » (accroche de 3 s sans logo, révélation de 6 à 12 s, fin de 4 s avec un seul appel à l'action, dernière image tenue).
+
+## 20. Étalonnage pro : recherche et 5 looks (17 nov. 2026, soir)
+
+**Refus de Rayane** : il a donné 2 sur 10 à la v10 (« Je crois que tu confonds cinématique avec juste noir »). L'or ne ressemblait pas à du 14k, le diamant pas à un diamant, et l'ensemble faisait l'effet d'un filtre noir et blanc.
+
+**Mesures de la v10, par rapport à la prise brute** :
+- l'or est deux fois moins lumineux : luminosité de 0,51 à 0,27 ;
+- la pierre a été désaturée de force : saturation de 0,18 à 0,10, ce qui a tué son feu ;
+- le fond est presque noir : de 0,50 à 0,06.
+
+**La cause** : le fond (plastique gris moyen) est presque aussi lumineux que l'or. Foncer toute l'image fonçait donc l'or. La solution est de séparer le fond, l'or et la pierre, comme le font les coloristes.
+
+**Recherche faite par deux agents, avec leurs sources** :
+- **Entrée** : OpenColorIO 2.6 a la vraie transformation Apple Log 2 (courbe + gamme Apple Wide Gamut) dans la configuration ACES 2.1 « studio-config-v5.0.0 ». Mon décodage maison oubliait la gamme de couleurs.
+- **Sortie ACES 2.0** : elle place le gris moyen environ 0,8 diaphragme plus bas qu'une vue Rec.709 simple, et les éclats plafonnent à environ 97 %. Il faut compenser l'exposition, sinon « cinématique » veut seulement dire « plus sombre ».
+- **Or 14k mesuré** (fiches techniques des alliages Shapeways/Legor SCA5 et Golden Sun) :
+  - en aplat : L* 85-87, a* +2 à +3, b* 18-19, teinte h 81-84° ;
+  - avec plusieurs reflets : C* 32-46, h 71-76° ;
+  - les erreurs à éviter : rose ou rosé (a* au-dessus d'environ 8), cuivré (h sous 65°), citron ou laiton (h au-dessus d'environ 90°, a* négatif), argenté (or délavé vers le blanc), sale (ombres bleutées).
+- **Diamant** : on retire seulement la teinte de fond (pixels peu saturés) et on garde intacts les éclats saturés (le feu). Quelques facettes doivent atteindre le blanc pur.
+- **Halo** : seulement sur les éclats, de 5 à 15 %, sans étoiles ni traînées.
+- **Netteté** : une seule fois, à la taille finale, sur la luminance seulement.
+- **Grandes maisons** :
+  - Graff et Harry Winston : fond noir mat, métal lumineux, diamant très blanc avec son feu ;
+  - De Beers et Cartier : fond charbon en dégradé ;
+  - Mejuri : chaud et doux ;
+  - Tiffany et Graff (campagnes) : film, grain, halation.
+  - Chez ces maisons, les reels de produit seul font moins de vues que ceux avec une personne ou l'atelier (Graff : environ 165 000 vues contre une médiane de 1,2 million). Une belle couleur augmente la qualité perçue, mais c'est le format (une personne, l'atelier, une histoire) qui amène la portée.
+- **Erreur corrigée le jour même** : une première cible « jaune paille, TSV 46-50° » (recherche sur les marques, sans mesure) donnait un or citron (h 91-98°). La version finale suit les mesures des alliages.
+
+**Les 5 looks livrés à Rayane** (`grade_lab/`, vidéos `V2_ovale_or_jaune_<look>`) :
+
+| Look | Fond | Or (CIELAB, vue de face) |
+|---|---|---|
+| A, Noir atelier (Graff, Harry Winston) | 4 % | a* +3,5 ; h 80° |
+| B, Charbon velours (De Beers, Cartier) | gris charbon en dégradé, environ 13 % au centre | même or que A |
+| C, Or chaud (Mejuri) | sombre et chaud | h 77°, C* 30 |
+| D, Film de campagne (Tiffany, Graff) | noirs relevés, grain | halation |
+| E, Naturel, comme sur l'iPhone | naturel | h 81°, C* 18 |
+
+- Livrées le 18 nov. vers 1 h 15 : 13,8 s, 24 i/s, de 17 à 21 Mb/s. Contrôle à 100 % : or jaune sous tous les angles, feu du diamant gardé, aucun halo de masque.
+- **Pièges de la nuit** :
+  1. Le calque de vignettage (`movie=…,loop=-1`) tournait à l'infini : l'encodage ne finissait jamais (5,6 Go pour 28 s). Correction : image fixe en entrée normale à 24 i/s, et `blend=…:shortest=1`.
+  2. Le grain ajouté au master 4K alourdissait énormément le fichier. Il est maintenant ajouté sur la vidéo finale en 1080, avec un débit plafonné à 20 Mb/s (Instagram recommande 25 Mb/s au maximum).
+  3. Le conteneur est recyclé quand la session reste inactive pendant un long encodage en arrière-plan. Il faut encoder au premier plan, une version par appel (environ 7 minutes chacune).
+
+**Refusées par Rayane le 17 nov. au soir** (« pas de bonne qualité, on dirait des filtres dégueulasses »). Troisième refus du clip C015.
+
+**Leçon** :
+- Empiler les corrections (fond refait, teinte de l'or déplacée, masque de la pierre, halo, grain, nettoyage du fond) donne un aspect « filtre ».
+- La même prise, convertie sans aucun filtre (conversion officielle Apple Log 2, balance et exposition seulement), montre un plateau en plastique gris moyen et un or qui tire vers le rose ou le cuivre. Sans carte grise dans l'image, on ne connaît pas le vrai neutre : chaque correction était une supposition.
+- **La limite vient de la prise** : lumière et plateau prêtés, aucune référence de couleur, bague à 29 % de l'image, HEVC. Ça ne se corrige pas au montage.
+- **Désormais** :
+  1. On corrige la prise d'abord : `TOURNAGE.md` §7.2 bis et §7.2 ter.
+  2. L'étalonnage se fait dans DaVinci, sur l'ordinateur de Rayane, avec une recette courte : conversion d'espace couleur, balance sur la carte grise, exposition et contraste, saturation légère.
+  3. Plus aucune couche « look » ajoutée sur une prise sans référence.
+
+
+## 21. Bague marquise 4 carats, prises ProRes du 17 nov. 2026 au soir
+
+**Les prises** : 3 prises de Rayane, de 22 à 25 s, avec le plateau réglé.
+- ProRes 422 HQ, 4K vertical, 24 i/s, 1/60 s (144°), ISO 80, 5 600 K, teinte 0, objectif 48 mm.
+- Couleur finie dans l'app (LUT d'aperçu « Rec 709 Neutral »).
+- Sur Drive, elles s'appellent « Jobby 4 ct marquise tete florale accent band hidden halo 1, 2, 3 ».
+
+**Pourquoi elles sont meilleures que C015** :
+- la bague occupe environ la moitié de la largeur ;
+- le ProRes garde le détail des facettes ;
+- le fond est noir ;
+- l'or et le diamant sont naturels.
+
+**Le seul traitement** :
+- niveaux : noir à 3 % et blanc à 92 %, ramenés à la pleine échelle, car les reflets plafonnaient à 92 % ;
+- une netteté fine, une seule fois, à la taille finale (`REEL_SDR_GRADE`) ;
+- aucun look, aucune secondaire, aucun masque, aucun halo ;
+- fichiers de travail sans métadonnées : les prises de l'app contiennent la position GPS.
+
+**Les montages** (`reels_jobby.py`, 24 i/s, zoom de 2 au maximum) :
+- **J1_marquise_4ct**, 12 s :
+  - accroche : marquise de face avec du feu, « Marquise 4 carats » ;
+  - puis trois détails nommés : « Accents marquise », « Tête florale », « Halo caché » ;
+  - fin : logo, « Consultation gratuite », « Lien en bio ».
+- **J2_tour_360**, 9,6 s : un tour complet à 1,4×, sans coupe, titre fixe. La vidéo boucle.
+- Versions `_APP` sans musique, à 100 BPM.
+- Aucun nom de client à l'écran. Ni carats d'or ni « laboratoire ou naturel » : on ne les connaît pas.
+
+## 22. Marquise 4 ct, vague 2 : scripts tirés de l'étude de marché (18 nov. 2026)
+
+**Étude** (vidéos de bague seule à plus de 1 M de vues) : la bague brille dès la 1re image ; la 1re phrase nomme la bague exacte, souvent avec son prix (marquise 3 ct + prix en 1re ligne : 10,2 M vues) ; 8 à 15 s ; une question reste ouverte jusqu'à la fin ; la dernière image reprend la première (boucle).
+
+**Six reels** (`reels_jobby_v2.py`, bague verrouillée au centre avec `ringlock.py`) :
+| Reel | Accroche | Mécanique |
+|---|---|---|
+| S1A | « Marquise 4 carats. Devine le prix. » | boucle ouverte, prix à 12 s |
+| S1B | « Marquise 4 carats, or jaune 14k : 3 350 $ + taxes. » | prix en 1re ligne ; une seule chose change par rapport à S1A |
+| S2 | « Tout le monde regarde la pierre. » | contredire le regard : tête florale et halo caché |
+| S3 | « 3 détails que tu vas manquer… 0/3 » | compteur + « réponds 0, 1, 2 ou 3 » |
+| S4 | « Si quelqu'un t'a envoyé ça… » | pousse le partage en privé |
+| S5 | « Encore possible pour Noël ? » | date limite approuvée (11 décembre) |
+
+**Corrections du contrôle** :
+- Le haut gris de la boîte paraissait dans le plan de profil large : nouveau verrouillage `JOBBY1M` (zoom 1,5, bague à 42 % de la hauteur, variable `RING_Y`).
+- Dans le plan des accents, le texte touchait la pointe de la pierre : `JOBBY1U` (zoom 1,75, bague à 51 %).
+- Tous les textes remontés à 280 px, pour garder la même place d'une carte à l'autre.
+- Le cache des plans ne tient pas compte de la date du fichier source : après un nouveau verrouillage, supprimer `cache/u_<CLIP>.mp4_*`.
+
+**Versions pour l'app** (sans musique, coupées au tempo de la chanson) :
+- `S1B_devine_le_prix_APP128` pour « Angel Of My Dreams » (JADE, 128 BPM) ;
+- `S5_noel_APP150` pour « All I Want for Christmas Is You » (environ 150 BPM) ;
+- les autres `_APP` à 100 BPM.
+Coupe 4:5 pour la pub : `S1B_devine_le_prix_4x5` (recadrage à partir de y = 200, textes compris).
+
+**Publication bloquée** : l'essai Supermetrics a pris fin le 17 nov. Lecture des chiffres et nouveaux envois refusés (`TRIAL_EXPIRED`). Les publications déjà programmées continuent de sortir : celles du 17 et du 18 nov. sont parties, et il en reste 12 jusqu'au 20 nov. Sans abonnement, la règle des 72 h ne peut pas être appliquée et Rayane publie lui-même dans l'app. L'abonnement est une décision d'argent qui revient à Rayane.
+
+## 23. Bilan de toutes les vagues : ce qui marche, ce qui ne marche pas (18 nov. 2026)
+
+**Sources** : statistiques privées Supermetrics jusqu'au 17 nov. (taux de saut, temps regardé), puis compteurs publics lus le 18 nov. avec ScrapeCreators (vues et j'aime, sans taux de saut). 120 vidéos dans `social_reels`, réparties en 22 vagues ; chacune a maintenant un `format`, et la vue `v_reels_formats` les compare par format.
+
+**Les meilleurs**
+| Reel | Format | Vues | Saut | Temps vu |
+|---|---|---|---|---|
+| W06 « Lab diamonds are fake. » (EN) | mythe du labo | 165 | 55,4 % (le meilleur) | 4 s |
+| J01 « Une journée avec ton joaillier » | journée du joaillier | 158 | 80 % | 2 s |
+| W05 « Ce que personne ne te dit sur le diamant de laboratoire » | mythe du labo | 141 en moins d'un jour (le plus rapide) | — | — |
+| W04 « POV : ton joaillier te montre ta bague en 3D » | POV | 130, 4 j'aime (le plus aimé) | 62,1 % | 3 s |
+| T05 « 5 stars isn't enough » (EN) | avis Google | 119 en 16 h | — | — |
+| T01 « Vous êtes vraiment à l'écoute. » | avis Google + Rayane | 111 | 62,4 % | **13 s sur 14,5** |
+
+T01 est le seul à passer la règle des 72 h (saut sous 65 % et au moins 5 s regardées) : on le regarde presque jusqu'au bout. C'est lui qu'on partage aux abonnés.
+
+**Les pires**
+- P01 « Pas besoin de tout payer d'un coup » (paiement) : 4 vues.
+- E02 « Ta bague en 4 étapes » (processus) : 9 vues.
+- T04 et T03 (avis Google, variantes FR de T01) : 9 et 10 vues.
+- E01 « C'est un vrai diamant ? » : 24 vues.
+- M01 « Elle va dire oui ? » : 27 vues.
+- N02 « Tu fais ta demande à Noël ? » : 29 vues, 96 % de saut.
+- P10 et P08b « Ta bague existe avant d'exister » (du rendu 3D à l'or) : 31 et 34 vues, 86 et 97 % de saut.
+
+**Ce que ça apprend**
+1. **Contredire une croyance dès la 1re ligne** (« un diamant de labo, c'est du faux ») est le format qui attire le plus. On le garde, et on le décline sur d'autres croyances (prix, certificat, sur mesure = cher).
+2. **Les vrais avis Google avec Rayane** retiennent le mieux. Mais trois variantes FR presque identiques à la suite (T03, T04) sont tombées à 10 vues : Instagram montre moins les vidéos qui se ressemblent. Une seule variante à la fois, avec une vraie différence (autre client, autre plan, la voix de Rayane).
+3. **L'anglais va plus loin chez les non-abonnés** (W06 : 165 vues, contre 75 pour P11 en FR ; T05 : 119, contre 10 pour T03). Les clients sont au Québec : le FR reste pour les abonnés, l'EN sert à la portée.
+4. **Ce qui échoue** : les listes d'étapes, le paiement, le Noël générique et le passage du rendu 3D à l'or, en texte sur les mêmes plans de la séance de consultation. Personne à l'écran, aucune surprise dans la première seconde. À ne plus faire sous cette forme.
+5. **Pour la suite** : Rayane face caméra, un vrai visage ou une vraie bague qui brille dès la 1re image, une croyance contredite ou un prix clair. Chaque nouveau plan entre dans la banque vidéo (`BANQUE.md`) et chaque reel dans `social_reels`, avec son format et sa leçon.
+
+**Publication** : l'outil est bloqué depuis la fin de l'essai Supermetrics, donc le partage aux abonnés se fait dans l'app. Profil, puis tableau de bord professionnel, puis les reels d'essai : ouvrir le reel, « Partager avec les abonnés », puis l'épingler. Le même fichier n'est pas republié, et le reel garde ses vues.
+
+## 24. Cadence : laisser le temps de lire (18 nov. 2026)
+
+Rayane : « les vidéos sont trop rapides… il faut laisser le temps aux gens de lire ». Avant, le moteur coupait les cartes sur le rythme de la musique sans vérifier la lecture : 1,1 à 1,4 s pour l'accroche, et 2,2 s par carte sur les morceaux rapides.
+
+**Règle dans le moteur** (`pacing.py`, appelé par `pro.build` pour toutes les vidéos) :
+- chaque texte reste au moins 0,7 s + 1 s par 13 caractères. C'est plus lent que les sous-titres de Netflix (17 à 20 caractères par seconde pour un adulte), parce qu'un reel se lit sur un téléphone, souvent pendant qu'on fait défiler ;
+- jamais moins de 2 s par carte, ni moins de 2,5 s pour l'accroche, et aucun plan sous 2 s ;
+- la vidéo s'allonge par temps entiers, donc les coupes tombent toujours sur la musique ;
+- un temps court voulu (« 3. … ») se fixe avec `min_s` ;
+- si un plan devient plus long que la prise, il commence plus tôt (jamais d'image figée).
+
+**Pour garder des vidéos de 15 à 18 s** : on retire des mots au lieu d'accélérer. Dans la vague 2 de la marquise, « Tête florale et halo caché » tient sur un seul plan continu, et la dernière carte « Consultation gratuite » est retirée là où la description le dit déjà (sauf S1B, qui sert aussi de pub). Résultat : 2,1 à 4,5 s par texte, au lieu de 1,1 à 2,8 s.
+
+## 25. Plans du bureau privé (18 nov. 2026, C038 à C040)
+
+**Ce qu'ils sont** : 3 plans à la main de 12 à 14 s, iPhone 17 Pro Max (objectif 24 mm), Apple Log 2, ProRes HQ, 4K vertical, 24 i/s, ISO 80, obturateur à 144°, balance des blancs à 5600 K. On y voit la table ronde, l'écran mural avec le design 3D en cours, les écrins, le plateau de bagues d'essai et la pochette d'évaluation.
+
+**Étalonnage** : voir `grade_lab/README.md`. Masters A (corrigé) et B (cinéma léger) dans le dossier de travail.
+
+**Plans utilisables** (nets, mouvement lent) :
+- C038, de 8,0 à 11,0 s : le bureau en entier, l'écran et la table (le meilleur) ;
+- C039, de 11,0 à 12,4 s, et C040, de 12,3 à 13,6 s : la table et l'écran ;
+- C040, de 5,5 à 7,0 s : les écrins et la pochette d'évaluation.
+
+**À ne pas utiliser** :
+- les gros plans de bagues (C039 vers 7,5 s, C040 vers 3,5 s) : la mise au point a lâché, ils sont flous ;
+- le coin avec un sac par terre (C039, de 0 à 1,5 s) ;
+- la bague dans un sac de plastique (C040, de 2 à 3 s).
+
+**Attention avant de publier** :
+- **Le titre du fichier sur l'écran contient le prénom d'un client** (« jeremy… 5 ct oval hidden halo… »). Illisible à 1080, mais jamais de zoom sur l'écran.
+- **Le design affiché est la bague d'un client** : demander à Rayane s'il peut être montré (surprise de demande).
+- **La pochette dit « Évaluation de bijoux · Jewellery Evaluation »** : c'est l'évaluation du gemmologue, pas le logo de Beto. Elle peut illustrer « certificat inclus », jamais « notre marque ».
+
+**Pour le prochain tournage au bureau** :
+1. Régler la balance des blancs sur la lumière de la pièce (environ 3200 à 3500 K, ou mesurer sur une feuille blanche dans Blackmagic Camera) au lieu de 5600 K.
+2. Verrouiller la mise au point avant un gros plan (appui long), ou passer à l'objectif macro, ou reculer et recadrer.
+3. Des mouvements 2 fois plus lents et une prise de 5 s immobile à la fin de chaque mouvement.
+4. Ranger les câbles et la tour de prises, et fermer le fichier client sur l'écran (ou montrer un design déjà livré).
+
+## 26. Référence « Trailer » de @evelynn.waite (19 nov. 2026)
+
+**Chiffres** : 3,27 M de vues, 275 000 j'aime, 2 500 commentaires, 16,6 s. Son original de la créatrice, environ 112 BPM. Image en 16:9 (format cinéma) au centre de l'écran vertical. Rayane en a enregistré les 5,5 dernières secondes.
+
+**Construction**, mesurée image par image sur l'enregistrement :
+1. **Coupes en ping-pong sur les demi-temps** (environ 0,27 s) : on alterne 2 ou 3 angles (gros plan d'un visage, vue large de la tente, profil) pendant la partie forte de la musique.
+2. **Cassure** : quand la musique baisse, environ 0,5 s d'effets « album photo » (photos qui apparaissent, petits textes et graphiques, bande de couleur qui saute, 2 images en négatif).
+3. **Montée** : des plans plus longs (la cérémonie, environ 0,5 s), puis des coupes de plus en plus rapprochées (3,63, 3,80, 3,93 et 4,07 s).
+4. **Chute de basse** : le plan héros (le visage qui sourit), un très gros plan avec un reflet de soleil, un reflet d'objectif, puis un éclair blanc et un fondu au noir.
+
+**Couleur** : chaude et dorée, avec des verts adoucis, des ombres légèrement bleutées, des noirs un peu relevés, des reflets de lumière et du grain.
+
+**Ce qu'on en reprend pour une « bande-annonce de bague »** :
+- la structure ping-pong, cassure, montée et chute, coupée au tempo du son ;
+- le plan héros au moment de la chute, c'est-à-dire le dévoilement de la bague de face ;
+- un éclair blanc à la fin ;
+- presque pas de texte : une seule carte, à la fin, laissée assez longtemps pour être lue (`pacing.py`).
+
+**Ce qu'on adoucit**, pour rester dans le luxe épuré (`docs/design-brief.md`) : pas d'images en négatif ni de graphiques façon écran d'ordinateur. Les reflets viennent de la pierre elle-même.
+
+**Musique** : la version `_APP` est coupée sur ce son, et Rayane l'ajoute dans l'app avec « Utiliser l'audio ». Il faut l'enregistrement complet du reel pour caler la chute de basse.
+
+## 27. Production du 19 nov. 2026
+
+**Chiffres** : Supermetrics est bloqué (essai terminé le 17 nov.), donc ni taux de saut ni abonnements. Compteurs publics lus avec ScrapeCreators.
+- **Ton profil (les reels normaux, que tu as publiés toi-même avant les trial reels)** :
+  - « Créer votre bague de rêve » (21 août) : 4 621 vues ;
+  - « Day in a Life » (9 août) : 4 129 vues et 90 j'aime ;
+  - 23 oct. : 1 650 vues ;
+  - les autres : 289 à 587 vues.
+  Nos trial reels font de 4 à 165 vues. **Leçon** : un reel normal montré aux abonnés, avec toi à l'écran (« Day in a Life »), fait 25 fois plus de vues qu'un trial reel en texte sur des plans de bague. On repasse au reel normal avec ton visage dès que possible.
+- **Non publiés** : R02 « Qui est Rayane » (prévu le 18 nov.) et T06 (prévu le 16 nov.) ne sont pas sur le profil. Ils restent « rendered ».
+
+**Règle des 72 h** : pas appliquée, faute de taux de saut et d'abonnements.
+
+**Veille** (TikTok, « engagement ring reveal jeweler », 3 derniers mois, les plus aimées) :
+| Compte | Vues | Durée | Ce que c'est |
+|---|---|---|---|
+| @prestigiojewelers | 1,56 M | 98 s | « Arrêtez de payer trop cher en grande surface », face caméra |
+| @oorejewelry | 1,39 M | 29 s | La joaillière fabrique une monture florale « Briar rose » et raconte, du début à la fin |
+| @dougthejeweler | 726 k | 88 s | Série « je note vos bagues » (déjà notée le 17 nov.) |
+| @meicrosoft | 688 k | 34 s | Une cliente dévoile sa bague, en réponse à un commentaire |
+| @tams.diamonds | 542 k | 125 s | Histoire d'un couple et de sa bague, perles en pierres de côté |
+
+**Nouveau** : la fabrication d'une **monture florale** racontée par la joaillière (1,39 M vues, 29 s). C'est exactement la tête florale de la marquise de Jobby. Ajouté à `LISTE_A_FILMER.md`.

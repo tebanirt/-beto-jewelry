@@ -22,12 +22,13 @@ Elle s'appuie sur trois sources :
 
 | # | À filmer | Durée | Pourquoi |
 |---|---|---|---|
+| 0 | **La fabrication d'une tête florale, racontée par toi** : le design 3D sur l'écran, la fonte, le sertissage au microscope (chez ton sertisseur), la bague finie qui tourne. Une phrase par étape, à voix haute. | 25 à 30 s en tout | @oorejewelry : 1,39 M de vues avec une monture florale fabriquée et racontée (veille du 19 nov.). On a déjà la bague finie de Jobby : il manque les étapes. |
 | 1 | **Toi, face caméra : 10 accroches** (liste plus bas), une prise chacune | 10 à 15 s chacune | Ton visage est le seul format qui passe la barre chez nous (62 % de saut, contre 90 à 100 % pour une bague seule). Le joaillier qui explique : 11,4 M de vues chez @brooker_brothers. |
 | 2 | **Une pierre de chaque coupe, en vrai** : rond, ovale, poire, marquise, taille émeraude, coussin, radiant, princesse. Diamants de laboratoire blancs, 2 ct si possible, sur velours noir, soulevés à la pince. | 5 à 8 s par coupe | La série « toutes les coupes » utilise aujourd'hui des dessins. Avec tes vraies pierres, elle devient beaucoup plus forte. |
 | 3 | **Les carats sur l'annulaire** : la même coupe en 1, 1,5, 2, 2,5 et 3 ct, posée une à une sur l'annulaire seulement (jamais une réglette sur tous les doigts). | 5 s par carat | Format qui revient chez les gros comptes : « 3 carat oval on a size 6 finger », « pick your perfect carat size ». |
 | 4 | **Chaque bague finie au plateau tournant**, sur velours noir : un tour complet, puis un gros plan des griffes et du profil, puis l'écrin qui s'ouvre | 15 s + 10 s + 8 s | Les vidéos de prix les plus vues montrent la vraie bague : Juno Lab 10,2 M, Princess Bride 6,4 M, Diamaura 2,5 M. |
 | 5 | **La bague portée à l'annulaire**, la main qui bouge lentement vers la lumière | 10 s | « Ring tour » : 4,6 M de vues (@misscarriejune). |
-| 6 | **3 messages vocaux par semaine** : l'histoire d'un client, sans son nom. Ce qu'il voulait, le défi, le résultat. | 30 à 45 s | Format le plus fort de la niche : Massoyan, 1,3 M de vues médianes. @diamondrensu, 4,3 M : « What if she loved him but hated the ring? So we kept the diamond and changed everything else. » |
+| 6 | **3 messages vocaux par semaine** : l'histoire d'un client, sans son nom. Ce qu'il voulait, le défi, le résultat. Une fois par semaine, une version longue (60 à 90 s) : les histoires racontées de cette durée sont les plus vues de la niche (@massoyanjewelers, 4,7 M de vues, 76 s, 16 nov.). | 30 à 45 s, ou 60 à 90 s | Format le plus fort de la niche : Massoyan, 1,3 M de vues médianes. @diamondrensu, 4,3 M : « What if she loved him but hated the ring? So we kept the diamond and changed everything else. » |
 
 **Les 10 accroches face caméra (point 1)**. Dis-les avec tes mots ; la première phrase compte le plus.
 1. « Une bague de 2 carats en diamant de laboratoire, ça coûte combien ? »
@@ -40,6 +41,8 @@ Elle s'appuie sur trois sources :
 8. « Couleur E, pureté VVS2 : ça veut dire quoi ? »
 9. « Pourquoi je fais toujours un design 3D avant de fabriquer. »
 10. « Les filles, envoyez ça à votre chum. »
+11. « Les bagues que je refuse de faire, et pourquoi. » (l'expert franc : 1,2 M de vues chez @michaelsjewelers_nj, 17 nov.)
+12. « Je note ta bague de fiançailles. » Une série, une bague par semaine, seulement avec une photo envoyée par un abonné qui accepte (724 k de vues chez @dougthejeweler).
 
 ## Priorité 2 — le processus, du 3D à la bague
 
