@@ -4,7 +4,7 @@ import { balanceDue, money } from "@/lib/workspace";
 import { loadWorkspace } from "../data";
 import { QuickAdd } from "../ui";
 
-export const metadata = { title: "Clients — Beto Jewelry" };
+export const metadata = { title: "Clients" };
 
 const STATUS_EN: Record<string, string> = {
   nouveau: "New",

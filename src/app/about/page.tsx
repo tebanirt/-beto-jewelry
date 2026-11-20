@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import AboutContent from "@/components/site/pages/AboutPage";
 
 export const metadata: Metadata = {
-  title: "About Beto Jewelry",
+  title: "About",
   description: "Meet Rayane Tebani, the certified goldsmith behind Beto Jewelry in Montreal — his training, his values, and why he designs every ring with you, not just for you.",
   alternates: { canonical: "/about" },
   openGraph: {

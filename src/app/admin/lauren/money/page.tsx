@@ -6,7 +6,7 @@ import VueToggle from "../../VueToggle";
 import { getAdminSession } from "@/lib/adminSession";
 import { entiteDe, taxesManquantes, vueAutorisee, type VueVentes } from "@/lib/entite";
 
-export const metadata = { title: "Money — Beto Jewelry" };
+export const metadata = { title: "Money" };
 
 export default async function MoneyPage({ searchParams }: PageProps<"/admin/lauren/money">) {
   const sp = await searchParams;

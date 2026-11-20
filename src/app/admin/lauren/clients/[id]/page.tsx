@@ -4,7 +4,7 @@ import { getSupabaseAdmin, type Client } from "@/lib/supabase";
 import { ORDER_STATUSES, PAYMENT_METHODS, balanceDue, firstName, money, paidTotal, type Order } from "@/lib/workspace";
 import { ClientDetailsForm, ClientToggles, EditOrderButton, MessagePicker, NewOrderButton, NoteForm, OrderStatusButtons, PaymentForm } from "../../ui";
 
-export const metadata = { title: "Client — Beto Jewelry" };
+export const metadata = { title: "Client" };
 
 const fmtDate = (iso: string | null) =>
   iso ? new Date(iso.length === 10 ? `${iso}T12:00:00` : iso).toLocaleDateString("en-CA", { month: "short", day: "numeric", year: "numeric", timeZone: "America/Toronto" }) : "—";
