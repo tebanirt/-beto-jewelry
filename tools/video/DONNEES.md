@@ -658,3 +658,22 @@ Rayane : « les vidéos sont trop rapides… il faut laisser le temps aux gens d
 - `B2_pierre_cachee`, sur le détail que seule la fiancée connaît.
 
 Le dossier Drive « Bague vidéo pro » est partagé par lien depuis le 20 nov. (accord de Rayane).
+
+## 29. Pub à plusieurs bagues (20 nov. 2026)
+
+**Demande de Rayane** (20 nov.) : « faire un edit de plusieurs bagues avec des prix pour plusieurs bagues. Ça va faire vraiment vendeur ». Le format compte sur l'ancrage de prix : voir plusieurs vraies pièces, chacune avec son prix, rend le prix de chacune plus normal.
+
+**Montage** (`reels_multi.py`, `AD_multi_2bagues`, 9:16 et 4:5, 25 s) :
+1. Accroche « Nos dernières bagues, avec leur vrai prix. » sur la pierre de 4 ct.
+2. Une carte par bague, de la moins chère à la plus chère : le prix et « + taxes » sur une ligne, puis le modèle, puis le détail rare. Chaque bague a deux plans, de face puis le détail.
+   - Benny : 2 600 $, griffes serties de diamants.
+   - Jobby : 3 350 $, tête florale et halo caché.
+3. Les deux façons de commencer, sur un voile plus foncé (74 %), parce que la pierre est juste sous les petites lignes.
+
+**Règles du format** :
+- Seulement des bagues filmées pour vrai, et des prix donnés par Rayane.
+- Jamais une autre bague sous un prix.
+- Ajouter une bague, c'est ajouter une ligne à `RINGS`.
+- Avec 4 bagues, la pub passerait à environ 38 s au rythme de lecture. Pour rester sous 30 s, on garde un seul plan par bague.
+
+**Correction de cadrage** : sous la carte, le haut de la tête florale touchait la dernière ligne. `JOBBY2T62` est le même plan, avec la bague verrouillée plus bas (`RING_Y=0.62` au lieu de 0,54). Le plan d'origine `JOBBY2T` reste celui des autres reels.
