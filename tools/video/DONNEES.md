@@ -711,3 +711,22 @@ Leçon : le style natif (TikTok Sans) sert aux trial reels organiques, où il im
 - Deux versions de 15 s, une par bague (`AD_benny_15`, `AD_jobby_15`), pour les nouveaux publics. La version complète sert au reciblage des gens qui ont regardé la vidéo.
 
 **Destination proposée** : une page dédiée `/vrai-prix` qui reprend les deux bagues et leurs prix, avec trois choix (« la même » pour chacune des deux bagues, ou « une bague inspirée »), puis prénom, courriel et téléphone facultatif, puis le dépôt ou la consultation gratuite. C'est une maquette, à faire approuver par Rayane avant d'écrire le code du site. Les formulaires instantanés Meta d'octobre ont amené beaucoup de leads mais très peu de rendez-vous et de dépôts, comparés à Calendly et au site. Les chiffres sont dans le CRM.
+
+## 31. Nouveaux plans du 20 nov. 2026 (C041, C056, C064, C067)
+
+**Plans reçus** (dossier Drive « Bague vidéo pro ») : iPhone 17 Pro Max 48 mm, ProRes HQ, LUT Rec 709 Neutral, plateau tournant.
+- C041 : la bague de Benny, un tour complet. Le master s'appelle `BENNY41`.
+- C056 : la bague de Jobby qui tourne (`JOBBY56`). On y voit aussi une petite pierre rose ou mauve à l'intérieur de l'anneau, comme sur celle de Benny.
+- C064 : quatre bagues ensemble (`QUATRE64`) : Benny, Jobby, un large jonc blanc serti sur le bord, et une marquise en or jaune avec son jonc pavé.
+- C067 : la marquise en or jaune avec son jonc pavé (`DUO67`). La fiche et le prix sont à demander à Rayane.
+
+**La position GPS est encore enregistrée dans les fichiers.** Elle est retirée des masters. Il faut la couper dans Blackmagic Camera.
+
+**Cadrage** :
+- `ringframe.py` ignore maintenant le fond éclairé derrière le plateau et les reflets du tissu au bord du plateau.
+- Le zoom est plafonné à 1,4 (`MAX_ZOOM`) : jamais de « super zoom », même quand la bague tiendrait plus serrée.
+- Zooms retenus : `BENNY41W` 1,31, `JOBBY56W` et `DUO67W` 1,4. `QUATRE64` reste en plan large, sans verrouillage.
+
+**Montages** (`reels_new.py`) :
+- `AD_multi_groupe` : la pub qui ouvre sur les quatre bagues ensemble, puis Benny et Jobby avec leur prix. Elle est à tester contre la version qui ouvre sur le prix. Tant que les deux nouvelles pièces n'ont pas de prix, l'accroche « avec leur vrai prix » ne vaut que pour deux bagues sur quatre.
+- `R_laquelle` (16 s) et sa version `_APP` : « Laquelle tu choisis ? », puis les bagues 1, 2 et 3, puis « Écris 1, 2 ou 3 en commentaire ». Le but est de faire commenter. Aucun prix sur une bague que Rayane n'a pas chiffrée.
