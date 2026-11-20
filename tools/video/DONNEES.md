@@ -677,3 +677,12 @@ Le dossier Drive « Bague vidéo pro » est partagé par lien depuis le 20 nov. 
 - Avec 4 bagues, la pub passerait à environ 38 s au rythme de lecture. Pour rester sous 30 s, on garde un seul plan par bague.
 
 **Correction de cadrage** : sous la carte, le haut de la tête florale touchait la dernière ligne. `JOBBY2T62` est le même plan, avec la bague verrouillée plus bas (`RING_Y=0.62` au lieu de 0,54). Le plan d'origine `JOBBY2T` reste celui des autres reels.
+
+**Typo de luxe (20 nov., même soir)** : Lauren a trouvé la police « dégueulasse » (TikTok Sans en gras, contour noir, prix en jaune, bulle blanche). Rayane a demandé quelque chose de « plus luxueux, plus vendeur ». Le style « lx » remplace cette police dans les pubs (`layers2.js`, classes `lxs`, `lxo`, `lxp`, `lxt`, `lxi`, `lxd`, `lxh`) :
+- seulement les polices du site, Bodoni Moda (500) et Jost, en ivoire et en or champagne, comme la carte de fin ;
+- un dégradé sombre en haut de l'image donne le contraste, sans contour ni bulle ;
+- la carte de prix arrive en deux temps : d'abord la coupe, les carats, le prix et « + taxes », puis le détail rare (Bodoni italique) et la fiche (« Diamant de laboratoire · or … 14k »). La fiche nomme toujours le diamant de laboratoire, pour qu'un prix de 2 ou 4 carats ne laisse pas croire à un diamant naturel ;
+- avec plus de texte, la règle de lecture porte la pub à 29 s.
+
+Leçon : le style natif (TikTok Sans) sert aux trial reels organiques, où il imite la plateforme. Dans une pub payée avec un prix, il fait bon marché.
+
