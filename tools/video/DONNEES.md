@@ -686,3 +686,28 @@ Le dossier Drive « Bague vidéo pro » est partagé par lien depuis le 20 nov. 
 
 Leçon : le style natif (TikTok Sans) sert aux trial reels organiques, où il imite la plateforme. Dans une pub payée avec un prix, il fait bon marché.
 
+
+## 30. Cadrage sans « super zoom », qualité et conversion (20 nov. 2026)
+
+**Demande de Rayane** : « enlève les super zooms… la bague disparaît un peu sur les extrémités », une qualité supérieure, et une étude de cas pour convertir le mieux.
+
+**Cadrage** (`ringframe.py`) :
+- Il mesure la vraie taille de la bague dans chaque image : pixels clairs sur le tissu sombre, à 540 x 960.
+- Il donne le zoom le plus serré qui garde toute la bague, pendant tout le clip :
+  - sous la carte de prix (haut de la bague sous 33 % de la hauteur) ;
+  - dans le recadrage 4:5 (bas au-dessus de 80 %) ;
+  - avec 4 % de marge sur les côtés.
+- Résultat : Benny à 1,25 (au lieu de 1,6 et 2,0), Jobby à 1,09 (au lieu de 1,35 et 1,75). La bague est centrée à `RING_Y=0.565`.
+- Les nouveaux masters s'appellent `*W`. Les anciens `L` et `T` coupaient les bouts de l'anneau quand la bague tournait.
+
+**Qualité** :
+- Un cadrage plus large veut dire qu'on réduit une plus grande partie de l'image 4K vers le 1080. L'image est donc plus fine.
+- Verrouillage : crf 10, preset slow, `aq-mode=3` (le fond sombre garde ses bits : moins d'aplats et de blocs).
+- Masters de pub (`render_ads.sh`) : crf 14, preset slower, `aq-mode=3`, débit maximum de 24 Mb/s, GOP fermé de 2 s. Meta demande un GOP fermé de 2 à 5 s (Reels Publishing API).
+- La version 4:5 est recadrée de la 9:16 en crf 13, avec les mêmes réglages.
+
+**Remontage selon l'étude de conversion** :
+- Le prix est à l'écran dès la première image. L'accroche en texte seul est retirée : 47 % de la valeur d'une pub vidéo se joue dans les 3 premières secondes (Facebook et Nielsen, 2015). La phrase « Nos dernières bagues, avec leur vrai prix. » va dans le texte de la pub.
+- Deux versions de 15 s, une par bague (`AD_benny_15`, `AD_jobby_15`), pour les nouveaux publics. La version complète sert au reciblage des gens qui ont regardé la vidéo.
+
+**Destination proposée** : une page dédiée `/vrai-prix` qui reprend les deux bagues et leurs prix, avec trois choix (« la même » pour chacune des deux bagues, ou « une bague inspirée »), puis prénom, courriel et téléphone facultatif, puis le dépôt ou la consultation gratuite. C'est une maquette, à faire approuver par Rayane avant d'écrire le code du site. Les formulaires instantanés Meta d'octobre ont amené beaucoup de leads mais très peu de rendez-vous et de dépôts, comparés à Calendly et au site. Les chiffres sont dans le CRM.

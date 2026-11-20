@@ -331,8 +331,10 @@ def build(spec, out_dir=None):
     os.makedirs(out_dir, exist_ok=True)
     out = f"{out_dir}/{name}.mp4"
     _run(["ffmpeg", "-v", "error", "-y", *inputs, "-filter_complex", fc, "-map", "[vout]", "-map", "[aout]",
-          "-c:v", "libx264", "-preset", "slow", "-crf", "17", "-profile:v", "high", "-level", "4.2",
-          "-pix_fmt", "yuv420p", "-r", str(FPS), "-maxrate", "16M", "-bufsize", "32M",
+          "-c:v", "libx264", "-preset", os.environ.get("REEL_PRESET", "slow"), "-crf", os.environ.get("REEL_CRF", "17"),
+          "-profile:v", "high", "-level", "4.2", "-x264-params", os.environ.get("REEL_X264", "aq-mode=3"),
+          "-pix_fmt", "yuv420p", "-r", str(FPS), "-maxrate", os.environ.get("REEL_MAXRATE", "16M"),
+          "-bufsize", os.environ.get("REEL_BUFSIZE", "32M"),
           "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709",
           "-c:a", "aac", "-b:a", "256k", "-ar", "48000", "-t", f"{total:.3f}", "-movflags", "+faststart", out])
     return out, total, info["bpm"], float(beats[b0])

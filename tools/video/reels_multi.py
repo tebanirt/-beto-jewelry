@@ -7,12 +7,14 @@ from reels_jobby_v2 import shots
 from reels_jobby_tr import choice_card
 from reels_app import app
 
+# W masters (20 Nov 2026, Rayane: « enlève les super zooms »): zoom picked by ringframe.py so the whole ring stays in
+# frame, under the price card and inside the 4:5 crop, for the whole clip (Benny 1.25, Jobby 1.09 instead of 1.6 to 2.0).
 # name, price (Rayane, before taxes), overline (cut and carats), the rare detail, the spec line, two shots (front, detail)
 RINGS = [
     ("Benny", "2 600", "Marquise · 2 carats", "Griffes serties de diamants", "Diamant de laboratoire · or blanc 14k",
-     (("BENNY42L", 1.0), ("BENNY43L", 4.0))),
+     (("BENNY42W", 1.0), ("BENNY43W", 4.0))),
     ("Jobby", "3 350", "Marquise · 4 carats", "Tête florale et halo caché", "Diamant de laboratoire · or jaune 14k",
-     (("JOBBY3T", 20.3), ("JOBBY2T62", 5.7))),   # 2T62: same clip, ring locked lower (RING_Y 0.62), clear of the card
+     (("JOBBY3W", 20.3), ("JOBBY2W", 5.7))),
 ]
 
 # Luxury typography (20 Nov 2026: Lauren found the TikTok Sans + yellow price "dégueulasse"; Rayane: « plus luxueux,
@@ -38,23 +40,29 @@ def ring_card(price, over, detail, spec, top=240):
     return [head, head + why]
 
 
-def AD_multi(rings=RINGS):
-    """Hook over a teaser shot, then each ring for 6 beats (front, then detail) under its own price card, then the
-    two ways to start over the last ring."""
-    seq = [(("JOBBY3L", 5.0), 3)]                     # teaser: the 4 ct stone, a different moment from its section
-    texts = [dict(html=hook_card(), at=0, until=3, every=1)]
-    at = 3
+def AD_multi(rings=RINGS, name=None, hook=False):
+    """Each ring for 6 beats (front, then detail) under its own price card, then the two ways to start over the last
+    ring. 20 Nov 2026 (conversion study): the price is on screen from the first frame (no text-only hook: 47 % of a
+    video ad's value is delivered in its first 3 s); the hook sentence moves to the ad's primary text."""
+    seq, texts, at = [], [], 0
+    if hook:
+        seq = [(("JOBBY3W", 5.0), 3)]
+        texts = [dict(html=hook_card(), at=0, until=3, every=1)]
+        at = 3
     for _, price, over, detail, spec, (front, det) in rings:
         seq += [(front, 3), (det, 3)]
         texts.append(dict(html=ring_card(price, over, detail, spec), at=at, until=at + 6, every=2))
         at += 6
     seq.append((rings[-1][5][0], 8))
     texts.append(dict(html=choice_card(.74), at=at, until=at + 8, every=1.2, min_s=7))
-    return dict(name=f"AD_multi_{len(rings)}bagues", music="228", shots=shots(*seq), texts=texts,
+    return dict(name=name or f"AD_multi_{len(rings)}bagues", music="228", shots=shots(*seq), texts=texts,
                 end=dict(beats=0, overlay=True, layers={}))
 
 
-REELS = {"AD_multi": AD_multi, "AD_multi_APP": lambda: app(AD_multi(), 100)}
+REELS = {"AD_multi": AD_multi,
+         "AD_benny_15": lambda: AD_multi([RINGS[0]], "AD_benny_15"),      # one ring: about 15 s, for cold audiences
+         "AD_jobby_15": lambda: AD_multi([RINGS[1]], "AD_jobby_15"),
+         "AD_multi_APP": lambda: app(AD_multi(), 100)}
 
 if __name__ == "__main__":
     for n in sys.argv[1:]:
