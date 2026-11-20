@@ -128,6 +128,25 @@ def _app_at(f, bpm, k, tag):
 REELS["S1B_APP128"] = lambda: _app_at(lambda: S1("B"), 128, 1.0, "128")   # « Angel Of My Dreams », JADE, 128 BPM
 REELS["S5_APP150"] = lambda: _app_at(S5, 150, 1.0, "150")                  # « All I Want for Christmas Is You », ~150 BPM
 
+
+def AD_prix():
+    """Facebook/Instagram ad (Rayane, 18 Nov): the price in the hook, the three details, then the two ways to start
+    (deposit to start the design, or a free consultation to try stone sizes). Mixkit music in the file (ads)."""
+    from reels_jobby_tr import choice_card
+    texts = [
+        dict(html=pill(["Marquise 4 carats :", "3 350 $ + taxes."]), at=0, until=2),
+        dict(html=nat("Diamant de laboratoire<br>or jaune 14k"), at=2, until=6),
+        dict(html=nat("Tête florale<br>et halo caché"), at=6, until=10),
+        dict(html=nat("Accents marquise<br>dans l'anneau"), at=10, until=14),
+        dict(html=choice_card(), at=14, until=22, every=1.2, min_s=7),
+    ]
+    return dict(name="AD_prix", music="1176",
+                shots=shots((FACE, 2), (ROT, 4), (HEADHALO, 4), (BAND, 4), (FACE2, 8)),
+                texts=texts, end=dict(beats=0, overlay=True, layers={}))
+
+
+REELS["AD_prix"] = AD_prix
+
 if __name__ == "__main__":
     for n in sys.argv[1:]:
         out, total, bpm, st = pro.build(REELS[n]())
