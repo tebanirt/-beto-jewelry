@@ -6,7 +6,8 @@ const DESCRIPTION =
   "Bague de fiançailles sur mesure conçue et fabriquée à Montréal par un joaillier diplômé (DEP). Rendu 3D en 48h, plus de 500 créations, consultation gratuite.";
 
 export const metadata: Metadata = {
-  title: TITLE,
+  // absolute : le titre contient déjà la marque ; sans ça, le gabarit du layout l'ajoute une deuxième fois.
+  title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: {
     canonical: "/bagues-de-fiancailles-sur-mesure-montreal",
