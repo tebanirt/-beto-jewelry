@@ -644,7 +644,9 @@ Rayane : « les vidéos sont trop rapides… il faut laisser le temps aux gens d
 
 **Fiche** (donnée par Rayane) : marquise 2 carats, diamant de laboratoire E VVS2, or blanc 14k, halo caché, anneau torsadé serti en demi-éternité, et une petite pierre rose cachée à l'intérieur de l'anneau. La nature de cette pierre est à confirmer.
 
-**Prix montré** : 2 600 $ + taxes, choisi par Rayane le 20 nov. Le formulaire du site affiche 2 450 $ pour une bague 2 ct en halo caché et demi-éternité, en 14k. L'anneau torsadé et les griffes justifient l'écart.
+**Griffes serties de diamants** (Rayane, 20 nov. : « c'est quand même quelque chose d'assez rare à faire dans le domaine et assez précis ») : c'est le détail le plus rare de la bague. Il se voit de profil (C043), pas de face. La pub et `B1` ont maintenant une carte « Griffes serties de diamants », avec « Anneau torsadé et halo caché » sur une seule carte. Le reel `B3_griffes_serties` est construit sur cette accroche.
+
+**Prix montré** : 2 600 $ + taxes, choisi par Rayane le 20 nov. Le formulaire du site affiche 2 450 $ pour une bague 2 ct en halo caché et demi-éternité, en 14k. L'écart s'explique par les griffes serties de diamants, un travail rare et précis, et par l'anneau torsadé.
 
 **Tournage** : iPhone 17 Pro Max, objectif 48 mm, ProRes HQ, LUT « Rec 709 Neutral » gravée dans les fichiers (pas de log), ISO 80, balance des blancs à 5600 K. **La localisation GPS était enregistrée dans les fichiers** : elle est retirée des masters (`-map_metadata -1`). Il faut la couper dans Blackmagic Camera.
 
