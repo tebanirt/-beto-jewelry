@@ -639,3 +639,20 @@ Rayane : « les vidéos sont trop rapides… il faut laisser le temps aux gens d
 | @tams.diamonds | 542 k | 125 s | Histoire d'un couple et de sa bague, perles en pierres de côté |
 
 **Nouveau** : la fabrication d'une **monture florale** racontée par la joaillière (1,39 M vues, 29 s). C'est exactement la tête florale de la marquise de Jobby. Ajouté à `LISTE_A_FILMER.md`.
+
+## 28. Bague de Benny (20 nov. 2026, prises C042 à C044)
+
+**Fiche** (donnée par Rayane) : marquise 2 carats, diamant de laboratoire E VVS2, or blanc 14k, halo caché, anneau torsadé serti en demi-éternité, et une petite pierre rose cachée à l'intérieur de l'anneau. La nature de cette pierre est à confirmer.
+
+**Prix montré** : 2 600 $ + taxes, choisi par Rayane le 20 nov. Le formulaire du site affiche 2 450 $ pour une bague 2 ct en halo caché et demi-éternité, en 14k. L'anneau torsadé et les griffes justifient l'écart.
+
+**Tournage** : iPhone 17 Pro Max, objectif 48 mm, ProRes HQ, LUT « Rec 709 Neutral » gravée dans les fichiers (pas de log), ISO 80, balance des blancs à 5600 K. **La localisation GPS était enregistrée dans les fichiers** : elle est retirée des masters (`-map_metadata -1`). Il faut la couper dans Blackmagic Camera.
+
+**Masters** : niveaux 0,05 à 0,92, fond charbon d'environ 17 %. Bague verrouillée à des zooms de 1,6 (L) et de 2,0 (T). De profil, le zoom 2,0 coupe la pierre : on garde L.
+
+**Montages** (`reels_benny.py`) :
+- `AD_B_prix` (pub, 9:16 et 4:5) ;
+- `B1_prix_marquise_2ct`, avec le prix dans l'accroche, et sa version `_APP` ;
+- `B2_pierre_cachee`, sur le détail que seule la fiancée connaît.
+
+Le dossier Drive « Bague vidéo pro » est partagé par lien depuis le 20 nov. (accord de Rayane).
