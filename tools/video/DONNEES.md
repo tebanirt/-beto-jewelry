@@ -730,3 +730,10 @@ Leçon : le style natif (TikTok Sans) sert aux trial reels organiques, où il im
 **Montages** (`reels_new.py`) :
 - `AD_multi_groupe` : la pub qui ouvre sur les quatre bagues ensemble, puis Benny et Jobby avec leur prix. Elle est à tester contre la version qui ouvre sur le prix. Tant que les deux nouvelles pièces n'ont pas de prix, l'accroche « avec leur vrai prix » ne vaut que pour deux bagues sur quatre.
 - `R_laquelle` (16 s) et sa version `_APP` : « Laquelle tu choisis ? », puis les bagues 1, 2 et 3, puis « Écris 1, 2 ou 3 en commentaire ». Le but est de faire commenter. Aucun prix sur une bague que Rayane n'a pas chiffrée.
+
+**Plan des 4 bagues, corrigé le 21 nov.** (Rayane : « tu as crop trop. Il faut que toutes les bagues se voient ») :
+- C064 a été filmé serré : les quatre bagues prennent 93 % de la largeur, et sur Instagram les boutons à droite cachent le jonc.
+- Ce plan est maintenant montré en entier, comme une photo encadrée (940 x 764) sur fond encre, avec un filet champagne. Il n'est ni recadré, ni agrandi, et rien n'est inventé autour.
+- Un essai avec le fond élargi et flou a été écarté : on voyait le cadre, et ça faisait amateur.
+- Pour le site : une boucle aller-retour sans fin (14 s, sans texte ni son, carré et portrait, 3,5 Mo en version web) et des photos de 2160 px.
+- Pour une vidéo d'accueil en format paysage, il faut refilmer le groupe téléphone à l'horizontale, les bagues sur environ 60 % de la largeur.

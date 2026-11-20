@@ -8,18 +8,39 @@ from reels_jobby_v2 import shots
 from reels_jobby_tr import choice_card
 from reels_multi import RINGS, ring_card
 from reels_app import app
+from reelkit import S
+
+# The group shot (C064) was filmed tight: the four rings fill 93 % of the width, and on Instagram the buttons on the right
+# hide the band (Rayane, 21 Nov 2026: « il faut que toutes les bagues se voient »). It is shown whole, as a framed print
+# on ink with a champagne hairline: never cropped, never blown up, nothing invented around it.
+BOX = (70, 560, 940, 764)
+FRAME = (f'<div style="position:absolute;left:{BOX[0] - 2}px;top:{BOX[1] - 2}px;width:{BOX[2]}px;height:{BOX[3]}px;'
+         'border:2px solid rgba(201,168,106,.55)"></div>')
 
 
-def hook_small(top=236):
-    """Compact hook for the group shot: ends above y 430, where the rings start."""
-    base = '<div class="lxs"></div>' + f'<div class="lx lxo" style="top:{top}px">Beto Jewelry · Montréal</div>'
-    l1 = f'<div class="lx lxh" style="top:{top + 44}px;font-size:68px">Nos dernières bagues,</div>'
-    l2 = f'<div class="lx lxh" style="top:{top + 118}px;font-size:68px"><i>avec leur vrai prix.</i></div>'
+def G(t):
+    return S("u:QUATRE64.mp4", t, 1, zoom=1.0, cx=1080, cy=1950, fx=[], box=BOX + ("#0F0E0C",))
+
+
+def gshots(seq):
+    """shots() that accepts ("G", t) for the framed group shot."""
+    out = shots(*[(c if c[0] != "G" else ("JOBBY3W", 0), b) for c, b in seq])
+    for d, (c, b) in zip(out, seq):
+        if c[0] == "G":
+            d["shot"] = G(c[1])
+    return out
+
+
+def hook_small(top=250):
+    """Hook above the framed group shot (no dark gradient: the background is already ink). Ends above y 520."""
+    base = FRAME + f'<div class="lx lxo" style="top:{top}px">Beto Jewelry · Montréal</div>'
+    l1 = f'<div class="lx lxh" style="top:{top + 46}px;font-size:76px">Nos dernières bagues,</div>'
+    l2 = f'<div class="lx lxh" style="top:{top + 128}px;font-size:76px"><i>avec leur vrai prix.</i></div>'
     return [base + l1, base + l1 + l2]
 
 
 def AD_multi_groupe():
-    seq = [(("QUATRE64", 0.5), 4)]
+    seq = [(("G", 0.5), 4)]
     texts = [dict(html=hook_small(), at=0, until=4, every=1)]
     at = 4
     rings = [RINGS[0][:5] + ((("BENNY41W", 1.0), ("BENNY43W", 4.0)),),
@@ -30,7 +51,7 @@ def AD_multi_groupe():
         at += 6
     seq.append((("JOBBY3W", 20.3), 8))
     texts.append(dict(html=choice_card(.74), at=at, until=at + 8, every=1.2, min_s=7))
-    return dict(name="AD_multi_groupe", music="228", shots=shots(*seq), texts=texts,
+    return dict(name="AD_multi_groupe", music="228", shots=gshots(seq), texts=texts,
                 end=dict(beats=0, overlay=True, layers={}))
 
 
@@ -41,20 +62,17 @@ def num(n, line, top=250):
 
 
 def R_laquelle():
-    seq = [(("QUATRE64", 0.5), 4), (("BENNY41W", 2.0), 4), (("JOBBY56W", 2.0), 4), (("DUO67W", 1.0), 4),
-           (("QUATRE64", 3.5), 6)]
-    texts = [dict(html=['<div class="lxs" style="height:620px"></div>'
-                        '<div class="lx lxh" style="top:250px;font-size:76px">Laquelle tu <i>choisis ?</i></div>'],
+    seq = [(("G", 0.5), 4), (("BENNY41W", 2.0), 4), (("JOBBY56W", 2.0), 4), (("DUO67W", 1.0), 4), (("G", 3.5), 6)]
+    texts = [dict(html=[FRAME + '<div class="lx lxh" style="top:300px;font-size:80px">Laquelle tu <i>choisis ?</i></div>'],
                   at=0, until=4),
              dict(html=num(1, "Or blanc · anneau torsadé"), at=4, until=8),
              dict(html=num(2, "Or jaune · tête florale"), at=8, until=12),
              dict(html=num(3, "Or jaune · avec son jonc pavé"), at=12, until=16),
-             dict(html=['<div class="lxs" style="height:640px"></div>'
-                        '<div class="lx lxh" style="top:236px;font-size:70px">Écris <i>1, 2 ou 3</i></div>'
-                        '<div class="lx lxo" style="top:330px">en commentaire</div>'
-                        '<div class="lx lxd" style="top:384px">Consultation gratuite · lien en bio</div>'],
+             dict(html=[FRAME + '<div class="lx lxh" style="top:286px;font-size:76px">Écris <i>1, 2 ou 3</i></div>'
+                        '<div class="lx lxo" style="top:388px">en commentaire</div>'
+                        '<div class="lx lxd" style="top:1384px">Consultation gratuite · lien en bio</div>'],
                   at=16, until=22, min_s=3.5)]
-    return dict(name="R_laquelle", music="432", shots=shots(*seq), texts=texts, end=dict(beats=0, overlay=True, layers={}))
+    return dict(name="R_laquelle", music="432", shots=gshots(seq), texts=texts, end=dict(beats=0, overlay=True, layers={}))
 
 
 REELS = {"AD_multi_groupe": AD_multi_groupe, "R_laquelle": R_laquelle,
