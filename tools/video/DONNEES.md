@@ -743,3 +743,34 @@ Leçon : le style natif (TikTok Sans) sert aux trial reels organiques, où il im
 - Chiffres et règle des 72 h : bloqués. L'essai Supermetrics a pris fin le 17 nov. (`TRIAL_EXPIRED`), et les crédits Firecrawl sont épuisés jusqu'au 21 nov. La veille du jour est sautée.
 - Les reels de prix et les pubs restent en attente : les pubs Meta sont en pause jusqu'à ce que la comptabilité soit en place.
 
+## 32. Instagram, recherche Google et acquisition (recherche du 21 nov. 2026)
+
+Demande de Rayane (21 nov.) : « optimiser mon Instagram… les réseaux sociaux par rapport aux recherches web… toutes les nouvelles façons… pour l'acquisition client ».
+
+**Ce que l'agent ne peut pas faire** : changer les réglages du compte Instagram. Aucun outil officiel ne le permet, et Supermetrics ne sert qu'à publier et lire les chiffres. Les réglages sont listés pour Rayane dans le rapport du 21 nov.
+
+**Recherches Google à Montréal** (Google Ads via DataForSEO, moyenne mensuelle de nov. 2025 à oct. 2026, coût par clic en $ US) :
+- « engagement ring » : 2 400 (2 900 en janvier), 1,61 $ ;
+- « bague de fiançailles » : 1 300 (1 600 en janvier), 1,97 $ ;
+- « jeweler montreal » : 880 ;
+- « engagement ring(s) montreal » : 590, 4,51 $ ;
+- « lab grown diamond » : 480 ;
+- « bijoutier montréal » : 260 ;
+- « lab grown diamond montreal », « diamant de laboratoire », « custom engagement ring » : environ 70 chacun ;
+- « bague sur mesure Montréal » : trop rare pour être mesuré.
+
+**Règles appliquées à partir de maintenant** (`pack.py`) :
+- La première ligne d'une description est la recherche exacte, en français puis en anglais, par exemple « Bague de fiançailles marquise sur mesure à Montréal · Engagement ring, Montreal ». On vise « bague de fiançailles » et « engagement ring montreal ».
+- La description est complète en français d'abord : l'OQLF applique l'article 52 de la Charte aux publications commerciales.
+- 5 hashtags au maximum (limite d'Instagram depuis déc. 2025). Un texte alternatif pour chaque publication. Une couverture propre dans le cadre 3:4 de la grille.
+- Google montre les reels et les TikTok dans ses carrousels de vidéos courtes. Depuis le 29 juil. 2026, Search Console accepte les comptes sociaux comme « propriétés de plateforme ». Rayane y ajoute @betojewelry, TikTok et YouTube, pour voir quelles recherches mènent à chaque vidéo (developers.google.com/search/blog/2026/07/platform-properties-social-video-guide).
+- On ne sait pas si Google lit les paroles et le texte à l'écran. À tester avec Search Console : dire la phrase-clé à voix haute et l'afficher.
+
+**Sources principales** :
+- help.instagram.com/147542625391305 (apparaître dans les moteurs de recherche) ;
+- about.instagram.com/blog/announcements/break-down-how-instagram-search-works ;
+- developers.google.com/search/docs/monitor-debug/analyze-social-video-content ;
+- support.google.com/business/answer/3038177 (règles de la fiche Google : à vérifier pour les bureaux en espace partagé) ;
+- crtc.gc.ca/eng/com500/faq500.htm (LCAP) ;
+- canadianjewellers.com/cja-guidelines-to-advertising-lab-grown-diamonds.
+
