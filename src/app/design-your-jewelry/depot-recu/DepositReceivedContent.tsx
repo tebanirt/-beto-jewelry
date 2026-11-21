@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { CheckCircle2 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import { trackFunnel } from "@/lib/funnel";
+import { trackMetaPurchase } from "@/lib/metaPixel";
+import { DEPOSIT_AMOUNT_CAD } from "@/lib/deposit";
 import CalendlyNextStep from "@/components/shared/CalendlyNextStep";
 
 export default function DepositReceivedContent() {
@@ -12,6 +14,13 @@ export default function DepositReceivedContent() {
 
   useEffect(() => {
     trackFunnel("deposit_paid", 0, {}, "deposit");
+    // Stripe renvoie ici avec ?session_id=cs_… seulement après un vrai
+    // paiement : sans cet identifiant (visite directe), aucun achat n'est
+    // signalé à Meta. Valeur avant taxes, comme dans les Finances.
+    const sessionId = new URLSearchParams(window.location.search).get("session_id") ?? "";
+    if (/^cs_[A-Za-z0-9_]{10,}$/.test(sessionId)) {
+      trackMetaPurchase(DEPOSIT_AMOUNT_CAD, "CAD", sessionId);
+    }
   }, []);
 
   return (

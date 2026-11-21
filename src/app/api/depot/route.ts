@@ -57,7 +57,9 @@ export async function GET(request: NextRequest) {
       ...(UUID_RE.test(clientRef) ? { client_reference_id: clientRef } : {}),
       ...(EMAIL_RE.test(email) ? { customer_email: email } : {}),
       phone_number_collection: { enabled: true },
-      success_url: `${SITE}/design-your-jewelry/depot-recu`,
+      // {CHECKOUT_SESSION_ID} est remplacé par Stripe : la page de
+      // confirmation s'en sert pour signaler un seul achat à Meta par paiement.
+      success_url: `${SITE}/design-your-jewelry/depot-recu?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: fallback.toString(),
     });
     if (!session.url) throw new Error("Checkout session without URL");
