@@ -111,7 +111,7 @@ def AD_avis():
           dict(shot=b(1617419, 2.0, fx=[]), beats=3, tr="cut"),
           dict(shot=L("BENNY42W", 1.0), beats=8)]
     hook = [PANEL + '<div class="lx lxo" style="top:290px">Rayane · joaillier diplômé</div>'
-            '<div class="lx lxh" style="top:336px;font-size:68px">Plus de 500 bagues.<br><i>Voici ce qu’en disent mes clients.</i></div>']
+            '<div class="lx lxh" style="top:336px;font-size:68px">Plus de 500 créations.<br><i>Voici ce qu’en disent mes clients.</i></div>']
     texts = [dict(html=hook, at=0, until=4),
              dict(html=quote("Je suis absolument en amour avec ma bague !"), at=4, until=7),
              dict(html=quote("Rayane très professionnel et courtois."), at=7, until=10),

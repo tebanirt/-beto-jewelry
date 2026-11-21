@@ -797,6 +797,8 @@ Demandes de Rayane (21 nov.) : relances de Noël approuvées ; « une pub qui po
 - Crédit : une pub de produit peut dire seulement « Possibilité de crédit » ou « Crédit offert » (Règlement d'application de la LPC, art. 80). « Financement disponible » n'est pas dans cette liste : **à trancher par Rayane** (conflit avec le §10 du brief). Une pub qui détaille le crédit ne montre jamais la bague (LPC art. 245). Chez Meta, une pub de crédit au Canada peut exiger la catégorie spéciale : la recherche conseille de garder le crédit hors des pubs de Noël, d'où la variante `_credit` séparée.
 - Zone sûre des Reels de Meta : texte entre y 269 et 1248 (14 % en haut, 35 % en bas, 6 % sur les côtés). Une ligne qui touchait les bords de la pub « collection » a été raccourcie (« Prix + taxes »).
 - Toujours « diamant de laboratoire », petites pierres comprises (carte Benny corrigée : « Griffes serties · Diamants de laboratoire · or blanc 14k »).
+- L'accroche de la pub d'avis dit « Plus de 500 créations », le chiffre confirmé (FAITS.md), et non « 500 bagues ».
+- Étude de cas complète (tunnel, budget, calendrier, scripts, légal, textos) : doc « Noël 2026 : pubs Meta et tunnel de vente », https://claude.ai/artifact/Mm14M7KNi7c811PA86BfSC
 
 **Relances de Noël** :
 - 32 brouillons créés le 21 nov. par la file `gmail_draft_queue`, objet « {Prénom}, votre bague pour Noël ? », avec STOP. 20 remplacent un ancien brouillon de relance. Une note dans chaque fiche du CRM.
