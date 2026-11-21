@@ -73,3 +73,17 @@ N'écrire à l'écran ou en description **que** ces faits. Tout nouveau prix, d�
 - Trial reels : montrés d'abord aux non-abonnés. Il faut au moins 200 abonnés. Résultats après environ 24 h ; décision à 72 h.
 - 5 hashtags maximum. Ne jamais republier le même fichier.
 - Signaux principaux : temps regardé, mentions J'aime par portée, envois par portée.
+
+## Prix des pièces filmées (Rayane, 20 et 21 nov. 2026) : ce sont des PRIX DES FÊTES
+Rayane, 21 nov. : « ça c'est des prix pour le temps des fêtes. C'est un rabais pour le temps des fêtes. En réalité, sur le site web, ça devrait coûter plus cher. »
+- Benny : marquise 2 ct, diamant de laboratoire E VVS2, or blanc 14k, anneau torsadé, halo caché, griffes serties : **2 600 $ + taxes**.
+- Joberson (« Jobby ») : marquise 4 ct, diamant de laboratoire E VVS2, or jaune 14k, tête florale, halo caché, jonc de 2,5 mm serti de marquises de 2,5 × 5 mm et de ronds de 2,5 mm : **3 350 $ + taxes**.
+- Jonc large en or blanc, serti sur le bord : **1 800 $ + taxes** (carat de l'or et nature des petites pierres à confirmer).
+- Marquise en or jaune avec son jonc pavé : prix pas encore donné.
+- **Formulation** : voir DONNEES.md §33 (règles du Québec sur les prix réduits). Jamais « rabais », « au lieu de » ou un prix barré, tant qu'un prix régulier n'a pas vraiment été pratiqué.
+
+## Accords
+- Collier prénom « Lamisa » (C069) : la cliente a donné son accord (Rayane, 21 nov. 2026). Le prénom peut être montré.
+
+## Financement (Rayane, 21 nov. 2026 : « on offre le financement »)
+- À l'écran et dans une pub avec une bague : au plus « Financement disponible ». Jamais un montant par mois, un taux, un nombre de versements ni « payez plus tard » (DONNEES.md §9 et §33).

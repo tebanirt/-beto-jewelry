@@ -43,3 +43,6 @@ Message me for more info.
 - Benny : marquise 2 ct, or blanc 14k, 2 600 $ + taxes (21 nov. 2026).
 - Joberson (« Jobby ») : marquise 4 ct, tête florale, or jaune 14k, 3 350 $ + taxes (21 nov. 2026).
 - Marquise en or jaune avec son jonc pavé : en attente de la fiche et du prix de Rayane.
+- Jonc large en or blanc : 1 800 $ + taxes (prix des Fêtes) ; pas encore de photo seule (seulement dans les plans de groupe).
+
+Les prix ci-dessus sont des prix des Fêtes (Rayane, 21 nov. 2026) : voir FAITS.md.
