@@ -17,7 +17,7 @@ def B1(cta=True):
         dict(html=pill(["Marquise 2 carats :", "2 600 $ + taxes."]), at=0, until=2),
         dict(html=nat("Diamant de laboratoire<br>or blanc 14k"), at=2, until=6),
         dict(html=nat("Anneau torsadé<br>et halo caché"), at=6, until=10),
-        dict(html=nat("Griffes serties<br>de diamants"), at=10, until=14),
+        dict(html=nat("Griffes serties de<br>diamants de laboratoire"), at=10, until=14),
         dict(html=nat(CTA), at=14, until=18),
     ]
     return dict(name="B1_prix_marquise_2ct", music="220",
@@ -46,7 +46,7 @@ def AD_B():
         dict(html=pill(["Marquise 2 carats :", "2 600 $ + taxes."]), at=0, until=2),
         dict(html=nat("Diamant de laboratoire<br>or blanc 14k"), at=2, until=6),
         dict(html=nat("Anneau torsadé<br>et halo caché"), at=6, until=10),
-        dict(html=nat("Griffes serties<br>de diamants"), at=10, until=14),
+        dict(html=nat("Griffes serties de<br>diamants de laboratoire"), at=10, until=14),
         dict(html=choice_card(), at=14, until=22, every=1.2, min_s=7),
     ]
     return dict(name="AD_B_prix", music="738",
