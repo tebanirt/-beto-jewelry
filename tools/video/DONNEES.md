@@ -639,3 +639,203 @@ Rayane : « les vidéos sont trop rapides… il faut laisser le temps aux gens d
 | @tams.diamonds | 542 k | 125 s | Histoire d'un couple et de sa bague, perles en pierres de côté |
 
 **Nouveau** : la fabrication d'une **monture florale** racontée par la joaillière (1,39 M vues, 29 s). C'est exactement la tête florale de la marquise de Jobby. Ajouté à `LISTE_A_FILMER.md`.
+
+## 28. Bague de Benny (20 nov. 2026, prises C042 à C044)
+
+**Fiche** (donnée par Rayane) : marquise 2 carats, diamant de laboratoire E VVS2, or blanc 14k, halo caché, anneau torsadé serti en demi-éternité, et une petite pierre rose cachée à l'intérieur de l'anneau. La nature de cette pierre est à confirmer.
+
+**Griffes serties de diamants** (Rayane, 20 nov. : « c'est quand même quelque chose d'assez rare à faire dans le domaine et assez précis ») : c'est le détail le plus rare de la bague. Il se voit de profil (C043), pas de face. La pub et `B1` ont maintenant une carte « Griffes serties de diamants », avec « Anneau torsadé et halo caché » sur une seule carte. Le reel `B3_griffes_serties` est construit sur cette accroche.
+
+**Prix montré** : 2 600 $ + taxes, choisi par Rayane le 20 nov. Le formulaire du site affiche 2 450 $ pour une bague 2 ct en halo caché et demi-éternité, en 14k. L'écart s'explique par les griffes serties de diamants, un travail rare et précis, et par l'anneau torsadé.
+
+**Tournage** : iPhone 17 Pro Max, objectif 48 mm, ProRes HQ, LUT « Rec 709 Neutral » gravée dans les fichiers (pas de log), ISO 80, balance des blancs à 5600 K. **La localisation GPS était enregistrée dans les fichiers** : elle est retirée des masters (`-map_metadata -1`). Il faut la couper dans Blackmagic Camera.
+
+**Masters** : niveaux 0,05 à 0,92, fond charbon d'environ 17 %. Bague verrouillée à des zooms de 1,6 (L) et de 2,0 (T). De profil, le zoom 2,0 coupe la pierre : on garde L.
+
+**Montages** (`reels_benny.py`) :
+- `AD_B_prix` (pub, 9:16 et 4:5) ;
+- `B1_prix_marquise_2ct`, avec le prix dans l'accroche, et sa version `_APP` ;
+- `B2_pierre_cachee`, sur le détail que seule la fiancée connaît.
+
+Le dossier Drive « Bague vidéo pro » est partagé par lien depuis le 20 nov. (accord de Rayane).
+
+## 29. Pub à plusieurs bagues (20 nov. 2026)
+
+**Demande de Rayane** (20 nov.) : « faire un edit de plusieurs bagues avec des prix pour plusieurs bagues. Ça va faire vraiment vendeur ». Le format compte sur l'ancrage de prix : voir plusieurs vraies pièces, chacune avec son prix, rend le prix de chacune plus normal.
+
+**Montage** (`reels_multi.py`, `AD_multi_2bagues`, 9:16 et 4:5, 25 s) :
+1. Accroche « Nos dernières bagues, avec leur vrai prix. » sur la pierre de 4 ct.
+2. Une carte par bague, de la moins chère à la plus chère : le prix et « + taxes » sur une ligne, puis le modèle, puis le détail rare. Chaque bague a deux plans, de face puis le détail.
+   - Benny : 2 600 $, griffes serties de diamants.
+   - Jobby : 3 350 $, tête florale et halo caché.
+3. Les deux façons de commencer, sur un voile plus foncé (74 %), parce que la pierre est juste sous les petites lignes.
+
+**Règles du format** :
+- Seulement des bagues filmées pour vrai, et des prix donnés par Rayane.
+- Jamais une autre bague sous un prix.
+- Ajouter une bague, c'est ajouter une ligne à `RINGS`.
+- Avec 4 bagues, la pub passerait à environ 38 s au rythme de lecture. Pour rester sous 30 s, on garde un seul plan par bague.
+
+**Correction de cadrage** : sous la carte, le haut de la tête florale touchait la dernière ligne. `JOBBY2T62` est le même plan, avec la bague verrouillée plus bas (`RING_Y=0.62` au lieu de 0,54). Le plan d'origine `JOBBY2T` reste celui des autres reels.
+
+**Typo de luxe (20 nov., même soir)** : Lauren a trouvé la police « dégueulasse » (TikTok Sans en gras, contour noir, prix en jaune, bulle blanche). Rayane a demandé quelque chose de « plus luxueux, plus vendeur ». Le style « lx » remplace cette police dans les pubs (`layers2.js`, classes `lxs`, `lxo`, `lxp`, `lxt`, `lxi`, `lxd`, `lxh`) :
+- seulement les polices du site, Bodoni Moda (500) et Jost, en ivoire et en or champagne, comme la carte de fin ;
+- un dégradé sombre en haut de l'image donne le contraste, sans contour ni bulle ;
+- la carte de prix arrive en deux temps : d'abord la coupe, les carats, le prix et « + taxes », puis le détail rare (Bodoni italique) et la fiche (« Diamant de laboratoire · or … 14k »). La fiche nomme toujours le diamant de laboratoire, pour qu'un prix de 2 ou 4 carats ne laisse pas croire à un diamant naturel ;
+- avec plus de texte, la règle de lecture porte la pub à 29 s.
+
+Leçon : le style natif (TikTok Sans) sert aux trial reels organiques, où il imite la plateforme. Dans une pub payée avec un prix, il fait bon marché.
+
+
+## 30. Cadrage sans « super zoom », qualité et conversion (20 nov. 2026)
+
+**Demande de Rayane** : « enlève les super zooms… la bague disparaît un peu sur les extrémités », une qualité supérieure, et une étude de cas pour convertir le mieux.
+
+**Cadrage** (`ringframe.py`) :
+- Il mesure la vraie taille de la bague dans chaque image : pixels clairs sur le tissu sombre, à 540 x 960.
+- Il donne le zoom le plus serré qui garde toute la bague, pendant tout le clip :
+  - sous la carte de prix (haut de la bague sous 33 % de la hauteur) ;
+  - dans le recadrage 4:5 (bas au-dessus de 80 %) ;
+  - avec 4 % de marge sur les côtés.
+- Résultat : Benny à 1,25 (au lieu de 1,6 et 2,0), Jobby à 1,09 (au lieu de 1,35 et 1,75). La bague est centrée à `RING_Y=0.565`.
+- Les nouveaux masters s'appellent `*W`. Les anciens `L` et `T` coupaient les bouts de l'anneau quand la bague tournait.
+
+**Qualité** :
+- Un cadrage plus large veut dire qu'on réduit une plus grande partie de l'image 4K vers le 1080. L'image est donc plus fine.
+- Verrouillage : crf 10, preset slow, `aq-mode=3` (le fond sombre garde ses bits : moins d'aplats et de blocs).
+- Masters de pub (`render_ads.sh`) : crf 14, preset slower, `aq-mode=3`, débit maximum de 24 Mb/s, GOP fermé de 2 s. Meta demande un GOP fermé de 2 à 5 s (Reels Publishing API).
+- La version 4:5 est recadrée de la 9:16 en crf 13, avec les mêmes réglages.
+
+**Remontage selon l'étude de conversion** :
+- Le prix est à l'écran dès la première image. L'accroche en texte seul est retirée : 47 % de la valeur d'une pub vidéo se joue dans les 3 premières secondes (Facebook et Nielsen, 2015). La phrase « Nos dernières bagues, avec leur vrai prix. » va dans le texte de la pub.
+- Deux versions de 15 s, une par bague (`AD_benny_15`, `AD_jobby_15`), pour les nouveaux publics. La version complète sert au reciblage des gens qui ont regardé la vidéo.
+
+**Destination proposée** : une page dédiée `/vrai-prix` qui reprend les deux bagues et leurs prix, avec trois choix (« la même » pour chacune des deux bagues, ou « une bague inspirée »), puis prénom, courriel et téléphone facultatif, puis le dépôt ou la consultation gratuite. C'est une maquette, à faire approuver par Rayane avant d'écrire le code du site. Les formulaires instantanés Meta d'octobre ont amené beaucoup de leads mais très peu de rendez-vous et de dépôts, comparés à Calendly et au site. Les chiffres sont dans le CRM.
+
+## 31. Nouveaux plans du 20 nov. 2026 (C041, C056, C064, C067)
+
+**Plans reçus** (dossier Drive « Bague vidéo pro ») : iPhone 17 Pro Max 48 mm, ProRes HQ, LUT Rec 709 Neutral, plateau tournant.
+- C041 : la bague de Benny, un tour complet. Le master s'appelle `BENNY41`.
+- C056 : la bague de Jobby qui tourne (`JOBBY56`). On y voit aussi une petite pierre rose ou mauve à l'intérieur de l'anneau, comme sur celle de Benny.
+- C064 : quatre bagues ensemble (`QUATRE64`) : Benny, Jobby, un large jonc blanc serti sur le bord, et une marquise en or jaune avec son jonc pavé.
+- C067 : la marquise en or jaune avec son jonc pavé (`DUO67`). La fiche et le prix sont à demander à Rayane.
+
+**La position GPS est encore enregistrée dans les fichiers.** Elle est retirée des masters. Il faut la couper dans Blackmagic Camera.
+
+**Cadrage** :
+- `ringframe.py` ignore maintenant le fond éclairé derrière le plateau et les reflets du tissu au bord du plateau.
+- Le zoom est plafonné à 1,4 (`MAX_ZOOM`) : jamais de « super zoom », même quand la bague tiendrait plus serrée.
+- Zooms retenus : `BENNY41W` 1,31, `JOBBY56W` et `DUO67W` 1,4. `QUATRE64` reste en plan large, sans verrouillage.
+
+**Montages** (`reels_new.py`) :
+- `AD_multi_groupe` : la pub qui ouvre sur les quatre bagues ensemble, puis Benny et Jobby avec leur prix. Elle est à tester contre la version qui ouvre sur le prix. Tant que les deux nouvelles pièces n'ont pas de prix, l'accroche « avec leur vrai prix » ne vaut que pour deux bagues sur quatre.
+- `R_laquelle` (16 s) et sa version `_APP` : « Laquelle tu choisis ? », puis les bagues 1, 2 et 3, puis « Écris 1, 2 ou 3 en commentaire ». Le but est de faire commenter. Aucun prix sur une bague que Rayane n'a pas chiffrée.
+
+**Plan des 4 bagues, corrigé le 21 nov.** (Rayane : « tu as crop trop. Il faut que toutes les bagues se voient ») :
+- C064 a été filmé serré : les quatre bagues prennent 93 % de la largeur, et sur Instagram les boutons à droite cachent le jonc.
+- Ce plan est maintenant montré en entier, comme une photo encadrée (940 x 764) sur fond encre, avec un filet champagne. Il n'est ni recadré, ni agrandi, et rien n'est inventé autour.
+- Un essai avec le fond élargi et flou a été écarté : on voyait le cadre, et ça faisait amateur.
+- Pour le site : une boucle aller-retour sans fin (14 s, sans texte ni son, carré et portrait, 3,5 Mo en version web) et des photos de 2160 px.
+- Pour une vidéo d'accueil en format paysage, il faut refilmer le groupe téléphone à l'horizontale, les bagues sur environ 60 % de la largeur.
+
+**Reprise de la production (20 nov. 2026)** : la pause du 16 nov. est levée, puisque Rayane a envoyé des plans jamais publiés (C041, C056, C064 et C067).
+- Premier reel de la reprise : `R_laquelle`. C'est le reel normal du jour : Rayane le publie dans l'app à 17 h 10, avec une chanson tendance.
+- Chiffres et règle des 72 h : bloqués. L'essai Supermetrics a pris fin le 17 nov. (`TRIAL_EXPIRED`), et les crédits Firecrawl sont épuisés jusqu'au 21 nov. La veille du jour est sautée.
+- Les reels de prix et les pubs restent en attente : les pubs Meta sont en pause jusqu'à ce que la comptabilité soit en place.
+
+## 32. Instagram, recherche Google et acquisition (recherche du 21 nov. 2026)
+
+Demande de Rayane (21 nov.) : « optimiser mon Instagram… les réseaux sociaux par rapport aux recherches web… toutes les nouvelles façons… pour l'acquisition client ».
+
+**Ce que l'agent ne peut pas faire** : changer les réglages du compte Instagram. Aucun outil officiel ne le permet, et Supermetrics ne sert qu'à publier et lire les chiffres. Les réglages sont listés pour Rayane dans le rapport du 21 nov.
+
+**Recherches Google à Montréal** (Google Ads via DataForSEO, moyenne mensuelle de nov. 2025 à oct. 2026, coût par clic en $ US) :
+- « engagement ring » : 2 400 (2 900 en janvier), 1,61 $ ;
+- « bague de fiançailles » : 1 300 (1 600 en janvier), 1,97 $ ;
+- « jeweler montreal » : 880 ;
+- « engagement ring(s) montreal » : 590, 4,51 $ ;
+- « lab grown diamond » : 480 ;
+- « bijoutier montréal » : 260 ;
+- « lab grown diamond montreal », « diamant de laboratoire », « custom engagement ring » : environ 70 chacun ;
+- « bague sur mesure Montréal » : trop rare pour être mesuré.
+
+**Règles appliquées à partir de maintenant** (`pack.py`) :
+- La première ligne d'une description est la recherche exacte, en français puis en anglais, par exemple « Bague de fiançailles marquise sur mesure à Montréal · Engagement ring, Montreal ». On vise « bague de fiançailles » et « engagement ring montreal ».
+- La description est complète en français d'abord : l'OQLF applique l'article 52 de la Charte aux publications commerciales.
+- 5 hashtags au maximum (limite d'Instagram depuis déc. 2025). Un texte alternatif pour chaque publication. Une couverture propre dans le cadre 3:4 de la grille.
+- Google montre les reels et les TikTok dans ses carrousels de vidéos courtes. Depuis le 29 juil. 2026, Search Console accepte les comptes sociaux comme « propriétés de plateforme ». Rayane y ajoute @betojewelry, TikTok et YouTube, pour voir quelles recherches mènent à chaque vidéo (developers.google.com/search/blog/2026/07/platform-properties-social-video-guide).
+- On ne sait pas si Google lit les paroles et le texte à l'écran. À tester avec Search Console : dire la phrase-clé à voix haute et l'afficher.
+
+**Sources principales** :
+- help.instagram.com/147542625391305 (apparaître dans les moteurs de recherche) ;
+- about.instagram.com/blog/announcements/break-down-how-instagram-search-works ;
+- developers.google.com/search/docs/monitor-debug/analyze-social-video-content ;
+- support.google.com/business/answer/3038177 (règles de la fiche Google : à vérifier pour les bureaux en espace partagé) ;
+- crtc.gc.ca/eng/com500/faq500.htm (LCAP) ;
+- canadianjewellers.com/cja-guidelines-to-advertising-lab-grown-diamonds.
+
+
+## 33. Campagne de Noël : pubs, relances et règles (21 nov. 2026)
+
+Demandes de Rayane (21 nov.) : relances de Noël approuvées ; « une pub qui pousse le financement » ; « prépare-moi toutes les pubs optimisées… pour Noël » ; ensemble à 4 000 $ ; jonc large en or blanc 14k finalement à **2 200 $** ; accord de Lamisa pour la vidéo du collier.
+
+**Pubs rendues** (`reels_fetes.py`, `render_fetes.sh`, réglages de pub : CRF 14, 9:16 et 4:5) :
+
+| Nom | Durée | Idée |
+|---|---|---|
+| AD_fetes_collection | 15,4 s | Les 4 pièces en un plan cadré, puis la liste des prix |
+| AD_fetes_benny | 18,3 s | Marquise 2 ct, or blanc 14k : 2 600 $ |
+| AD_fetes_jobby | 18,3 s | Marquise 4 ct, tête florale, or jaune 14k : 3 350 $ |
+| AD_fetes_ensemble | 16,0 s | Marquise et son jonc pavé, or jaune : 4 000 $ |
+| AD_fetes_sapin | 13,1 s | Texte de pub approuvé (« Une bague sur mesure sous le sapin ? ») |
+| AD_fetes_avis | 27,2 s | Rayane en consultation + 2 avis Google mot pour mot |
+| AD_fetes_3etapes | 29,7 s | 250 $ pour commencer, 50 % à l'approbation, solde à la remise |
+| AD_fetes_3etapes_credit | 29,7 s | La même, avec « Possibilité de crédit » sur la carte de fin |
+
+**Règles appliquées** (recherche juridique du 21 nov.) :
+- Jamais « Prix des Fêtes », « rabais », un prix barré ni « Économisez » tant qu'un prix régulier plus haut n'a pas vraiment été demandé (Loi sur la concurrence, critères de temps et de volume ; LPC art. 225 b). On écrit le prix seul et « Commandez avant le 11 décembre », la vraie date limite de fabrication.
+- Crédit : une pub de produit peut dire seulement « Possibilité de crédit » ou « Crédit offert » (Règlement d'application de la LPC, art. 80). « Financement disponible » n'est pas dans cette liste : **à trancher par Rayane** (conflit avec le §10 du brief). Une pub qui détaille le crédit ne montre jamais la bague (LPC art. 245). Chez Meta, une pub de crédit au Canada peut exiger la catégorie spéciale : la recherche conseille de garder le crédit hors des pubs de Noël, d'où la variante `_credit` séparée.
+- Zone sûre des Reels de Meta : texte entre y 269 et 1248 (14 % en haut, 35 % en bas, 6 % sur les côtés). Une ligne qui touchait les bords de la pub « collection » a été raccourcie (« Prix + taxes »).
+- Toujours « diamant de laboratoire », petites pierres comprises (carte Benny corrigée : « Griffes serties · Diamants de laboratoire · or blanc 14k »).
+- L'accroche de la pub d'avis dit « Plus de 500 créations », le chiffre confirmé (FAITS.md), et non « 500 bagues ».
+- Étude de cas complète (tunnel, budget, calendrier, scripts, légal, textos) : doc « Noël 2026 : pubs Meta et tunnel de vente », https://claude.ai/artifact/Mm14M7KNi7c811PA86BfSC
+
+**Relances de Noël** :
+- 32 brouillons créés le 21 nov. par la file `gmail_draft_queue`, objet « {Prénom}, votre bague pour Noël ? », avec STOP. 20 remplacent un ancien brouillon de relance. Une note dans chaque fiche du CRM.
+- Rayane a envoyé celui de Tommy Deschênes le 21 nov. à 8 h 56.
+- Pas de courriel : Nes (argent 925), Étienne (contacté le 19 nov., demande pour le printemps), Luc Bouchard (adresse invalide : texto).
+- Par texto, préparés pour Rayane : Paul, Elvis, Sergo, Nadia, Zachary Casault, William, Luc.
+- Suite prévue : mer. 2 déc. « Noël : il reste 9 jours pour commander », puis mer. 9 déc. « Dernier appel pour Noël, {Prénom} ».
+
+**B-roll « Frames » de Benny** (Observa Media) : introuvable avec les accès de betojewlz@gmail.com le 21 nov. (ni Drive partagé, ni projet Drive, ni courriel). Seul l'ancien dossier « Frame » du 8 nov. (41 plans, déjà utilisés) est visible. Il faut le lien, ou un partage à betojewlz@gmail.com.
+
+## 34. Production du 21 nov. 2026 (tâche quotidienne)
+
+- **Chiffres** : aucun. Supermetrics est bloqué (essai terminé le 17 nov.) et les crédits Firecrawl sont épuisés jusqu'à environ 3 h le 22 nov. Les compteurs publics de ScrapeCreators n'ont donc pas pu être lus.
+- **Règle des 72 h** : T03, T04, T05, W05 et E03 (publiés les 17 et 18 nov.) ont passé 72 h, mais il n'y a aucune donnée pour les juger. Ils restent « published » jusqu'au retour des chiffres.
+- **Reels normaux à publier par Rayane** (R02 le 18 nov., S1B le 19 nov., S5_noel le 20 nov.) : impossible de vérifier s'ils sont en ligne sans outil de lecture.
+- **Banque** : « 00 · À trier » ne contient qu'un PDF (reçu de dépôt), aucune vidéo. Les nouveaux plans de Benny, Jobby et des quatre bagues (C038 à C069) sont déjà montés : 15 reels attendent (B1 à B3, S1 à S5, T1 à T5, R_laquelle, V2), en plus des 8 pubs de Noël. Aucun nouveau reel n'est monté : le blocage vient de l'outil de publication, pas du manque de plans.
+- **Veille** : sautée (crédits Firecrawl épuisés).
+
+## 35. Meilleures heures, descriptions et règle des 600 vues (21 nov. 2026)
+
+Demande de Rayane : poster aux meilleures heures, tout optimiser (description, niche) et passer sur la page réelle les vidéos qui marchent, soit 600 vues et plus, avec un courriel « Demande importante » envoyé à lui-même.
+
+**Nos propres chiffres** (38 reels avec des vues, du 10 au 20 nov., heure de Toronto) :
+
+| Heure | Reels | Vues moyennes | Taux de saut moyen |
+|---|---|---|---|
+| 12 h | 8 | 39 | 76 % |
+| 13 h | 5 | 29 | 71 % |
+| 15 h | 8 | 63 | 83 % |
+| 17 h | 7 | 78 | 87 % |
+| 19 h | 4 | 76 | 74 % |
+| 21 h | 4 | 68 | 64 % |
+
+Par jour : samedi 124 vues en moyenne (3 reels), dimanche 108 (6), mardi 55, jeudi 45, mercredi 30, vendredi 19, lundi 12. L'échantillon est petit et mêle l'heure au contenu (les meilleurs reels, avis Google et vérité sur le labo, sont sortis la fin de semaine du 14-15 nov.). Décision : 19 h 30, 21 h et 17 h 10 ; fin de semaine en priorité ; plus de midi. Revu chaque dimanche.
+
+**Études publiques** : elles se contredisent (Later : minuit et lundi pour 975 000 reels ; Sprout Social : après-midi en semaine ; Metricool : 20 h, dimanche pour les reels). Toutes conseillent de suivre ses propres chiffres, ce qu'on fait. Sources : later.com/blog/best-time-to-post-on-Instagram, sproutsocial.com/best-times-to-post/instagram-media, metricool.com/best-time-to-post-instagram.
+
+**Règle des 600 vues** : notre meilleur reel d'essai a fait 165 vues (W06, 15 nov.) et la moyenne est de 56. Un reel à 600 vues est donc un vrai gagnant, environ 4 fois notre record ; la règle se déclenchera rarement au début. Le courriel « Demande importante » signale aussi le taux de saut : au-delà de 80 %, le reel a été vu sans être regardé, et le partager à la page réelle est douteux.
+
+**Lecture des vues** : bloquée tant que l'outil de publication et de lecture n'est pas rétabli (essai Supermetrics terminé le 17 nov.). D'ici là, une capture de l'écran « Reels d'essai » envoyée par Rayane suffit pour appliquer la règle. Capture du 21 nov. : solitaire princesse 124 vues, marquise (EN) 10, émeraude (EN) 8, rond (EN) 8, coussin 7, radiant 4 : la série des coupes, qui commence toujours par la même image, n'a pas percé.

@@ -9,6 +9,9 @@ const FB = d(`${F}/fontsource-bodoni-moda-5.3.0/files/bodoni-moda-latin-400-norm
 const FBI = d(`${F}/fontsource-bodoni-moda-5.3.0/files/bodoni-moda-latin-400-italic.woff2`);
 const FJ4 = d(`${F}/fontsource-jost-5.3.0/files/jost-latin-400-normal.woff2`);
 const FJ5 = d(`${F}/fontsource-jost-5.3.0/files/jost-latin-500-normal.woff2`);
+const FB5 = d(`${F}/fontsource-bodoni-moda-5.3.0/files/bodoni-moda-latin-500-normal.woff2`);
+const FB5I = d(`${F}/fontsource-bodoni-moda-5.3.0/files/bodoni-moda-latin-500-italic.woff2`);
+const FJ3 = d(`${F}/fontsource-jost-5.3.0/files/jost-latin-300-normal.woff2`);
 const FTT = d(`${F}/tiktoksans/tiktoksans-latin.woff2`);
 const FTTX = d(`${F}/tiktoksans/tiktoksans-latin-ext.woff2`);
 const LOGO = 'data:image/png;base64,' + fs.readFileSync(logoPath).toString('base64');
@@ -24,6 +27,21 @@ const css = `
 @font-face{font-family:Bodoni;font-weight:400;font-style:italic;src:url(${FBI}) format('woff2')}
 @font-face{font-family:Jost;font-weight:400;font-style:normal;src:url(${FJ4}) format('woff2')}
 @font-face{font-family:Jost;font-weight:500;font-style:normal;src:url(${FJ5}) format('woff2')}
+@font-face{font-family:Bodoni;font-weight:500;font-style:normal;src:url(${FB5}) format('woff2')}
+@font-face{font-family:Bodoni;font-weight:500;font-style:italic;src:url(${FB5I}) format('woff2')}
+@font-face{font-family:Jost;font-weight:300;font-style:normal;src:url(${FJ3}) format('woff2')}
+/* luxury price cards for paid ads (20 Nov 2026: the TikTok Sans + yellow look was judged cheap). Site fonts only,
+   no outline, no bubble: a soft dark gradient behind the text carries the contrast. Bodoni 500 keeps its hairlines on a phone. */
+.lxs{position:absolute;left:0;right:0;top:0;height:820px;background:linear-gradient(rgba(10,9,8,.70),rgba(10,9,8,.42) 58%,rgba(10,9,8,0))}
+.lx{position:absolute;left:0;right:0;text-align:center;color:#F6F3EE;text-shadow:0 2px 22px rgba(0,0,0,.5)}
+.lxo{font-family:Jost;font-weight:500;font-size:27px;letter-spacing:.36em;text-transform:uppercase;color:#DABD86;padding-left:.36em}
+.lxp{font-family:Bodoni;font-weight:500;font-size:140px;line-height:1;letter-spacing:-.005em}
+.lxp .cur{font-size:.56em;margin-left:.12em;vertical-align:.62em}
+.lxt{font-family:Jost;font-weight:400;font-size:28px;letter-spacing:.3em;text-transform:uppercase;color:#E9E3D8;padding-left:.3em}
+.lxi{font-family:Bodoni;font-weight:500;font-style:italic;font-size:50px;line-height:1.1}
+.lxd{font-family:Jost;font-weight:400;font-size:32px;letter-spacing:.05em;color:#F1ECE4}
+.lxh{font-family:Bodoni;font-weight:500;font-size:82px;line-height:1.08}
+.lxr{position:absolute;left:50%;width:64px;height:2px;margin-left:-32px;background:#C9A86A}
 html,body{margin:0;background:transparent}
 .stage{position:relative;width:1080px;height:1920px;overflow:hidden}
 i{font-style:italic}
@@ -56,7 +74,7 @@ i{font-style:italic}
   const p = await b.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
   await p.setContent(`<!doctype html><html><head><meta charset="utf-8"><style>${css}</style></head><body><div class="stage" id="s"></div></body></html>`);
   const ok = await p.evaluate(async () => {
-    const specs = ['400 40px Bodoni', 'italic 400 40px Bodoni', '400 40px Jost', '500 40px Jost', '780 40px TT'];
+    const specs = ['400 40px Bodoni', 'italic 400 40px Bodoni', '400 40px Jost', '500 40px Jost', '780 40px TT', '500 40px Bodoni', 'italic 500 40px Bodoni', '300 40px Jost'];
     for (const s of specs) await document.fonts.load(s, 'Aàé');
     return specs.every(s => document.fonts.check(s, 'Aàé'));
   });

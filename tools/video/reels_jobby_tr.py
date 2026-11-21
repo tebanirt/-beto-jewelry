@@ -104,9 +104,9 @@ def T5_feu():
     return dict(name="T5_feu", music="225", shots=shots, texts=texts, end=dict(beats=0, overlay=True, layers={}))
 
 
-def choice_card():
+def choice_card(shade_a=.62):
     """End slate of the ad: the two ways to start. Kept between y 600 and 1300 so a 4:5 crop (y 285-1635) keeps it all."""
-    shade = '<div style="position:absolute;inset:0;background:rgba(8,8,8,.62)"></div>'
+    shade = f'<div style="position:absolute;inset:0;background:rgba(8,8,8,{shade_a})"></div>'
     logo = f'<img class="logo" style="top:560px;width:260px;filter:invert(1)" src="%LOGO%">'
     head = sub("Deux façons de commencer", 760)
     o1 = (f'<div class="ctr serif" style="top:830px;font-size:58px;color:#F6F3EE;{SH}">1. Commence ton <i>design</i></div>'

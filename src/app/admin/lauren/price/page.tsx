@@ -1,7 +1,7 @@
 import { getSupabaseAdmin } from "@/lib/supabase";
 import PriceTool, { type RecentQuote } from "./PriceTool";
 
-export const metadata = { title: "Price — Beto Jewelry" };
+export const metadata = { title: "Price" };
 
 export default async function PricePage() {
   const supabase = getSupabaseAdmin();
