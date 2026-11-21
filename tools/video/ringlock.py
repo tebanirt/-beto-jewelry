@@ -1,5 +1,7 @@
 """Ring-lock: crop window follows the smoothed ring position frame by frame, so the ring stays put while it turns.
-Usage: ringlock.py SRC(2160x3840) ZOOM OUT  (needs SRC_track.npy from ringtrack.py). Output 1080x1920, lanczos, no upscale."""
+Usage: ringlock.py SRC(2160x3840) ZOOM OUT  (needs SRC_track.npy from ringtrack.py). Output 1080x1920, lanczos, no upscale.
+Pick ZOOM and RING_Y with ringframe.py (20 Nov 2026): the whole ring stays in frame, no "super zoom".
+Encode: crf 10, preset slow, aq-mode 3 (dark backgrounds keep their bits: less banding and blocking)."""
 import os, subprocess, sys, numpy as np
 from scipy.ndimage import gaussian_filter1d
 src, zoom, out = sys.argv[1], float(sys.argv[2]), sys.argv[3]
@@ -10,7 +12,8 @@ RING_Y = float(os.environ.get("RING_Y", 0.54))   # 0.46 when the top of the box 
 w = int(round(W / zoom / 2) * 2); h = int(round(w * 16 / 9 / 2) * 2)
 dec = subprocess.Popen(["ffmpeg", "-v", "error", "-i", src, "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], stdout=subprocess.PIPE)
 enc = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{w}x{h}", "-r", "24", "-i", "-",
-                        "-vf", "scale=1080:1920:flags=lanczos", "-c:v", "libx264", "-preset", "faster", "-crf", "12", "-pix_fmt", "yuv420p",
+                        "-vf", "scale=1080:1920:flags=lanczos", "-c:v", "libx264", "-preset", os.environ.get("LOCK_PRESET", "slow"), "-crf", os.environ.get("LOCK_CRF", "10"),
+                        "-x264-params", "aq-mode=3", "-pix_fmt", "yuv420p",
                         "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709", "-movflags", "+faststart", out + ".part.mp4"],
                        stdin=subprocess.PIPE)
 n = 0; fs = W * H * 3
