@@ -62,7 +62,7 @@ POSTS = {
         caption=["Bague de fiançailles marquise 2 carats, diamant de laboratoire · Engagement ring, Montreal",
                  "Sur mesure à Montréal : 2 600 $ + taxes.",
                  "Diamant de laboratoire E VVS2, certificat IGI, or blanc 14k, anneau torsadé serti, halo caché, "
-                 "et des diamants jusque sur les griffes.",
+                 "et des diamants de laboratoire jusque sur les griffes.",
                  "La même, faite pour toi, ou une version à toi. Design 3D en 48 h."],
         tags=[],
         alt="Bague de fiançailles marquise en diamant de laboratoire, or blanc, anneau torsadé serti de petits "

@@ -11,7 +11,7 @@ from reels_app import app
 # frame, under the price card and inside the 4:5 crop, for the whole clip (Benny 1.25, Jobby 1.09 instead of 1.6 to 2.0).
 # name, price (Rayane, before taxes), overline (cut and carats), the rare detail, the spec line, two shots (front, detail)
 RINGS = [
-    ("Benny", "2 600", "Marquise · 2 carats", "Griffes serties de diamants", "Diamant de laboratoire · or blanc 14k",
+    ("Benny", "2 600", "Marquise · 2 carats", "Griffes serties", "Diamants de laboratoire · or blanc 14k",
      (("BENNY42W", 1.0), ("BENNY43W", 4.0))),
     ("Jobby", "3 350", "Marquise · 4 carats", "Tête florale et halo caché", "Diamant de laboratoire · or jaune 14k",
      (("JOBBY3W", 20.3), ("JOBBY2W", 5.7))),

@@ -774,3 +774,35 @@ Demande de Rayane (21 nov.) : « optimiser mon Instagram… les réseaux sociaux
 - crtc.gc.ca/eng/com500/faq500.htm (LCAP) ;
 - canadianjewellers.com/cja-guidelines-to-advertising-lab-grown-diamonds.
 
+
+## 33. Campagne de Noël : pubs, relances et règles (21 nov. 2026)
+
+Demandes de Rayane (21 nov.) : relances de Noël approuvées ; « une pub qui pousse le financement » ; « prépare-moi toutes les pubs optimisées… pour Noël » ; ensemble à 4 000 $ ; jonc large en or blanc 14k finalement à **2 200 $** ; accord de Lamisa pour la vidéo du collier.
+
+**Pubs rendues** (`reels_fetes.py`, `render_fetes.sh`, réglages de pub : CRF 14, 9:16 et 4:5) :
+
+| Nom | Durée | Idée |
+|---|---|---|
+| AD_fetes_collection | 15,4 s | Les 4 pièces en un plan cadré, puis la liste des prix |
+| AD_fetes_benny | 18,3 s | Marquise 2 ct, or blanc 14k : 2 600 $ |
+| AD_fetes_jobby | 18,3 s | Marquise 4 ct, tête florale, or jaune 14k : 3 350 $ |
+| AD_fetes_ensemble | 16,0 s | Marquise et son jonc pavé, or jaune : 4 000 $ |
+| AD_fetes_sapin | 13,1 s | Texte de pub approuvé (« Une bague sur mesure sous le sapin ? ») |
+| AD_fetes_avis | 27,2 s | Rayane en consultation + 2 avis Google mot pour mot |
+| AD_fetes_3etapes | 29,7 s | 250 $ pour commencer, 50 % à l'approbation, solde à la remise |
+| AD_fetes_3etapes_credit | 29,7 s | La même, avec « Possibilité de crédit » sur la carte de fin |
+
+**Règles appliquées** (recherche juridique du 21 nov.) :
+- Jamais « Prix des Fêtes », « rabais », un prix barré ni « Économisez » tant qu'un prix régulier plus haut n'a pas vraiment été demandé (Loi sur la concurrence, critères de temps et de volume ; LPC art. 225 b). On écrit le prix seul et « Commandez avant le 11 décembre », la vraie date limite de fabrication.
+- Crédit : une pub de produit peut dire seulement « Possibilité de crédit » ou « Crédit offert » (Règlement d'application de la LPC, art. 80). « Financement disponible » n'est pas dans cette liste : **à trancher par Rayane** (conflit avec le §10 du brief). Une pub qui détaille le crédit ne montre jamais la bague (LPC art. 245). Chez Meta, une pub de crédit au Canada peut exiger la catégorie spéciale : la recherche conseille de garder le crédit hors des pubs de Noël, d'où la variante `_credit` séparée.
+- Zone sûre des Reels de Meta : texte entre y 269 et 1248 (14 % en haut, 35 % en bas, 6 % sur les côtés). Une ligne qui touchait les bords de la pub « collection » a été raccourcie (« Prix + taxes »).
+- Toujours « diamant de laboratoire », petites pierres comprises (carte Benny corrigée : « Griffes serties · Diamants de laboratoire · or blanc 14k »).
+
+**Relances de Noël** :
+- 32 brouillons créés le 21 nov. par la file `gmail_draft_queue`, objet « {Prénom}, votre bague pour Noël ? », avec STOP. 20 remplacent un ancien brouillon de relance. Une note dans chaque fiche du CRM.
+- Rayane a envoyé celui de Tommy Deschênes le 21 nov. à 8 h 56.
+- Pas de courriel : Nes (argent 925), Étienne (contacté le 19 nov., demande pour le printemps), Luc Bouchard (adresse invalide : texto).
+- Par texto, préparés pour Rayane : Paul, Elvis, Sergo, Nadia, Zachary Casault, William, Luc.
+- Suite prévue : mer. 2 déc. « Noël : il reste 9 jours pour commander », puis mer. 9 déc. « Dernier appel pour Noël, {Prénom} ».
+
+**B-roll « Frames » de Benny** (Observa Media) : introuvable avec les accès de betojewlz@gmail.com le 21 nov. (ni Drive partagé, ni projet Drive, ni courriel). Seul l'ancien dossier « Frame » du 8 nov. (41 plans, déjà utilisés) est visible. Il faut le lien, ou un partage à betojewlz@gmail.com.

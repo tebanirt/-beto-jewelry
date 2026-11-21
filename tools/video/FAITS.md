@@ -78,7 +78,7 @@ N'écrire à l'écran ou en description **que** ces faits. Tout nouveau prix, d�
 Rayane, 21 nov. : « ça c'est des prix pour le temps des fêtes. C'est un rabais pour le temps des fêtes. En réalité, sur le site web, ça devrait coûter plus cher. »
 - Benny : marquise 2 ct, diamant de laboratoire E VVS2, or blanc 14k, anneau torsadé, halo caché, griffes serties : **2 600 $ + taxes**.
 - Joberson (« Jobby ») : marquise 4 ct, diamant de laboratoire E VVS2, or jaune 14k, tête florale, halo caché, jonc de 2,5 mm serti de marquises de 2,5 × 5 mm et de ronds de 2,5 mm : **3 350 $ + taxes**.
-- Jonc large en or blanc, serti sur le bord : **1 800 $ + taxes** (carat de l'or et nature des petites pierres à confirmer).
+- Jonc large en or blanc 14k, serti sur le bord : **2 200 $ + taxes** (Rayane, 21 nov. 2026 ; d'abord annoncé à 1 800 $). Nature des petites pierres à confirmer.
 - Marquise en or jaune avec son jonc pavé, l'ensemble : **4 000 $ + taxes** (21 nov. 2026 ; carat, 14k ou 18k et nature de la pierre à confirmer).
 - **Formulation** : voir DONNEES.md §33 (règles du Québec sur les prix réduits). Jamais « rabais », « au lieu de » ou un prix barré, tant qu'un prix régulier n'a pas vraiment été pratiqué.
 
