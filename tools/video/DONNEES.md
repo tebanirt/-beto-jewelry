@@ -808,3 +808,11 @@ Demandes de Rayane (21 nov.) : relances de Noël approuvées ; « une pub qui po
 - Suite prévue : mer. 2 déc. « Noël : il reste 9 jours pour commander », puis mer. 9 déc. « Dernier appel pour Noël, {Prénom} ».
 
 **B-roll « Frames » de Benny** (Observa Media) : introuvable avec les accès de betojewlz@gmail.com le 21 nov. (ni Drive partagé, ni projet Drive, ni courriel). Seul l'ancien dossier « Frame » du 8 nov. (41 plans, déjà utilisés) est visible. Il faut le lien, ou un partage à betojewlz@gmail.com.
+
+## 34. Production du 21 nov. 2026 (tâche quotidienne)
+
+- **Chiffres** : aucun. Supermetrics est bloqué (essai terminé le 17 nov.) et les crédits Firecrawl sont épuisés jusqu'à environ 3 h le 22 nov. Les compteurs publics de ScrapeCreators n'ont donc pas pu être lus.
+- **Règle des 72 h** : T03, T04, T05, W05 et E03 (publiés les 17 et 18 nov.) ont passé 72 h, mais il n'y a aucune donnée pour les juger. Ils restent « published » jusqu'au retour des chiffres.
+- **Reels normaux à publier par Rayane** (R02 le 18 nov., S1B le 19 nov., S5_noel le 20 nov.) : impossible de vérifier s'ils sont en ligne sans outil de lecture.
+- **Banque** : « 00 · À trier » ne contient qu'un PDF (reçu de dépôt), aucune vidéo. Les nouveaux plans de Benny, Jobby et des quatre bagues (C038 à C069) sont déjà montés : 15 reels attendent (B1 à B3, S1 à S5, T1 à T5, R_laquelle, V2), en plus des 8 pubs de Noël. Aucun nouveau reel n'est monté : le blocage vient de l'outil de publication, pas du manque de plans.
+- **Veille** : sautée (crédits Firecrawl épuisés).
