@@ -816,3 +816,26 @@ Demandes de Rayane (21 nov.) : relances de Noël approuvées ; « une pub qui po
 - **Reels normaux à publier par Rayane** (R02 le 18 nov., S1B le 19 nov., S5_noel le 20 nov.) : impossible de vérifier s'ils sont en ligne sans outil de lecture.
 - **Banque** : « 00 · À trier » ne contient qu'un PDF (reçu de dépôt), aucune vidéo. Les nouveaux plans de Benny, Jobby et des quatre bagues (C038 à C069) sont déjà montés : 15 reels attendent (B1 à B3, S1 à S5, T1 à T5, R_laquelle, V2), en plus des 8 pubs de Noël. Aucun nouveau reel n'est monté : le blocage vient de l'outil de publication, pas du manque de plans.
 - **Veille** : sautée (crédits Firecrawl épuisés).
+
+## 35. Meilleures heures, descriptions et règle des 600 vues (21 nov. 2026)
+
+Demande de Rayane : poster aux meilleures heures, tout optimiser (description, niche) et passer sur la page réelle les vidéos qui marchent, soit 600 vues et plus, avec un courriel « Demande importante » envoyé à lui-même.
+
+**Nos propres chiffres** (38 reels avec des vues, du 10 au 20 nov., heure de Toronto) :
+
+| Heure | Reels | Vues moyennes | Taux de saut moyen |
+|---|---|---|---|
+| 12 h | 8 | 39 | 76 % |
+| 13 h | 5 | 29 | 71 % |
+| 15 h | 8 | 63 | 83 % |
+| 17 h | 7 | 78 | 87 % |
+| 19 h | 4 | 76 | 74 % |
+| 21 h | 4 | 68 | 64 % |
+
+Par jour : samedi 124 vues en moyenne (3 reels), dimanche 108 (6), mardi 55, jeudi 45, mercredi 30, vendredi 19, lundi 12. L'échantillon est petit et mêle l'heure au contenu (les meilleurs reels, avis Google et vérité sur le labo, sont sortis la fin de semaine du 14-15 nov.). Décision : 19 h 30, 21 h et 17 h 10 ; fin de semaine en priorité ; plus de midi. Revu chaque dimanche.
+
+**Études publiques** : elles se contredisent (Later : minuit et lundi pour 975 000 reels ; Sprout Social : après-midi en semaine ; Metricool : 20 h, dimanche pour les reels). Toutes conseillent de suivre ses propres chiffres, ce qu'on fait. Sources : later.com/blog/best-time-to-post-on-Instagram, sproutsocial.com/best-times-to-post/instagram-media, metricool.com/best-time-to-post-instagram.
+
+**Règle des 600 vues** : notre meilleur reel d'essai a fait 165 vues (W06, 15 nov.) et la moyenne est de 56. Un reel à 600 vues est donc un vrai gagnant, environ 4 fois notre record ; la règle se déclenchera rarement au début. Le courriel « Demande importante » signale aussi le taux de saut : au-delà de 80 %, le reel a été vu sans être regardé, et le partager à la page réelle est douteux.
+
+**Lecture des vues** : bloquée tant que l'outil de publication et de lecture n'est pas rétabli (essai Supermetrics terminé le 17 nov.). D'ici là, une capture de l'écran « Reels d'essai » envoyée par Rayane suffit pour appliquer la règle. Capture du 21 nov. : solitaire princesse 124 vues, marquise (EN) 10, émeraude (EN) 8, rond (EN) 8, coussin 7, radiant 4 : la série des coupes, qui commence toujours par la même image, n'a pas percé.
