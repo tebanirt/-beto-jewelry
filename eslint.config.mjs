@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Standalone Node/Python tooling, not part of the Next.js app build
+    // (CommonJS `require()` by design, run directly via `node`).
+    "tools/**",
   ]),
 ]);
 

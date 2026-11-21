@@ -4,7 +4,7 @@ import { balanceDue, followupsDue, orderAlerts, money, firstName } from "@/lib/w
 import { loadWorkspace } from "./data";
 import { FollowupActions, MessagePicker, QuickAdd } from "./ui";
 
-export const metadata = { title: "Today — Beto Jewelry" };
+export const metadata = { title: "Today" };
 
 export default async function TodayPage({ searchParams }: PageProps<"/admin/lauren">) {
   const session = await getAdminSession();

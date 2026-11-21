@@ -31,7 +31,6 @@ const routes = [
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticEntries: MetadataRoute.Sitemap = routes.map((route) => ({
     url: `${BASE_URL}${route}`,
-    lastModified: new Date(),
     changeFrequency: route === "" ? "weekly" : "monthly",
     priority:
       route === ""
@@ -52,7 +51,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const styleEntries: MetadataRoute.Sitemap = stylePages.map((page) => ({
     url: `${BASE_URL}/${page.category}/${page.slug}`,
-    lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 0.85,
   }));
