@@ -839,3 +839,21 @@ Par jour : samedi 124 vues en moyenne (3 reels), dimanche 108 (6), mardi 55, jeu
 **Règle des 600 vues** : notre meilleur reel d'essai a fait 165 vues (W06, 15 nov.) et la moyenne est de 56. Un reel à 600 vues est donc un vrai gagnant, environ 4 fois notre record ; la règle se déclenchera rarement au début. Le courriel « Demande importante » signale aussi le taux de saut : au-delà de 80 %, le reel a été vu sans être regardé, et le partager à la page réelle est douteux.
 
 **Lecture des vues** : bloquée tant que l'outil de publication et de lecture n'est pas rétabli (essai Supermetrics terminé le 17 nov.). D'ici là, une capture de l'écran « Reels d'essai » envoyée par Rayane suffit pour appliquer la règle. Capture du 21 nov. : solitaire princesse 124 vues, marquise (EN) 10, émeraude (EN) 8, rond (EN) 8, coussin 7, radiant 4 : la série des coupes, qui commence toujours par la même image, n'a pas percé.
+
+## 36. Production du 22 nov. 2026 (dimanche)
+
+- **Outils** : Supermetrics refuse toujours de publier et de lire (`TRIAL_EXPIRED`). Le token de l'outil officiel d'Instagram enregistré le 21 nov. est invalide (« Cannot parse access token ») : il faut le token de « Générer un token » à côté de @betojewelry (environ 150 à 250 caractères, commence en général par IG), pas l'identifiant ni la clé secrète de l'app.
+- **Publication** : B1_prix_marquise_2ct (corrigé : « Griffes serties de diamants de laboratoire ») envoyé à Rayane pour ce soir, 19 h 30, en reel d'essai dans l'app. S2_secret_dessous lui avait été envoyé le 21 nov. ; impossible de vérifier s'il l'a publié.
+- **Seuil du dimanche et meilleures heures** : pas de nouvelles données (aucune lecture possible), donc rien ne change (65 % ; 19 h 30, puis 21 h).
+- **Banque** : seule nouveauté, « Video V8.mp4 » (43 Mo, déposée le 21 nov. vers 21 h 40 dans « Beto — Banque vidéo »), toujours privée : pas téléchargeable tant que Rayane n'envoie pas le lien de partage.
+- **Veille** (TikTok, « jeweler custom engagement ring process », les plus aimées des 3 derniers mois) :
+
+| Compte | Vues | Durée | Accroche et format | Son |
+|---|---|---|---|---|
+| @brooker_brothers | 12,1 M | 76 s | « White Gold Maintenance & Care: NONE!!! » : le joaillier démonte une idée reçue sur l'or blanc, face caméra | Voix originale |
+| @massoyanjewelers | 5,9 M | 76 s | Histoire d'une cliente : un 5 carats dans la bague de sa grand-mère, sans perdre le dessin d'origine | Voix originale |
+| @brooker_brothers | 2,7 M | 70 s | « Would you wear a 5 carat diamond ring? » puis la fabrication de A à Z | Voix originale |
+| @oorejewelry | 1,4 M | 29 s | Fabrication d'une monture florale, plan par plan ; 24 000 partages | Son tendance |
+| @jeanpaulxavier | 0,7 M | 71 s | Coulisses d'une bague « sculpturale » pour une demande | Musique |
+
+  Ce qui revient : la voix du joaillier, un sujet qui corrige une croyance (« l'or blanc… ») ou l'histoire d'un client, et des vidéos longues (70 à 76 s) quand quelqu'un parle. Les 4 premières utilisent le son original. Rien de tout ça n'est possible sans la voix ou le visage de Rayane : c'est le plan à filmer en priorité.
