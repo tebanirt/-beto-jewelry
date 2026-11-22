@@ -96,5 +96,6 @@ Montage final du contrat avec Observa Media (dossier Drive « Edit », V1 à V8 
 - **La bague tenue au bout du gant noir** (6 s) : acceptée par Rayane pour cette pub.
 - **L'homme à lunettes en consultation** (17 à 19 s) : c'est Rayane.
 - **Retiré** : les deux plans de main de 5,1 à 6,1 s (bague à l'auriculaire, règle du brief §10), remplacés par l'écrin princesse du dossier « Frame » (Frame01086738), avec les sous-titres d'origine.
+- **Version B** (`Beto_Pub_Fetes_V8B_Jobby_*`) : même correction, mais avec la marquise 4 ct de Jobby qui tourne (C056, de 4,55 à 5,7 s, étalonnage sur la luminosité seulement pour garder la couleur de la pierre). Rayane, 22 nov. : « tu peux utiliser » nos gros plans de bagues dans ces pubs. A et B sont à tester l'une contre l'autre.
 - **Ajouté** : « Consultation gratuite » sous le logo, de 23,4 s à la fin ; son monté à environ −15 LUFS (crête −0,9 dB).
 - **À ne pas utiliser** : V3, V4 et V5, qui contiennent des photos de banque d'images (couples en bijouterie, bagues d'autres marques).
