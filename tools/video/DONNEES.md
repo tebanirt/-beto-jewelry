@@ -857,3 +857,33 @@ Par jour : samedi 124 vues en moyenne (3 reels), dimanche 108 (6), mardi 55, jeu
 | @jeanpaulxavier | 0,7 M | 71 s | Coulisses d'une bague « sculpturale » pour une demande | Musique |
 
   Ce qui revient : la voix du joaillier, un sujet qui corrige une croyance (« l'or blanc… ») ou l'histoire d'un client, et des vidéos longues (70 à 76 s) quand quelqu'un parle. Les 4 premières utilisent le son original. Rien de tout ça n'est possible sans la voix ou le visage de Rayane : c'est le plan à filmer en priorité.
+
+## 37. Reprise de la publication par Supermetrics (22 nov. 2026)
+
+Rayane a payé Supermetrics (forfait Starter, Instagram Insights + Facebook Ads). La publication par l'outil remarche ; 236 abonnés.
+
+- **Programmés en reels d'essai** (SS_PERFORMANCE, description du gabarit pack.py) :
+
+  | Date | Heure | Reel |
+  |---|---|---|
+  | dim. 22 nov. | 19 h 30 | S2_secret_dessous |
+  | dim. 22 nov. | 21 h | B1_prix_marquise_2ct |
+  | lun. 23 nov. | 19 h 30 | S5_noel |
+  | mar. 24 nov. | 19 h 30 | B3_griffes_serties |
+  | mer. 25 nov. | 19 h 30 | R_laquelle |
+  | jeu. 26 nov. | 19 h 30 | S3_trois_details |
+
+- On alterne les bagues (Jobby, Benny, trois bagues) pour ne pas répéter les mêmes plans.
+- **B3 corrigé avant publication** : la carte disait « Des diamants jusque sur les griffes ». Elle dit maintenant « Diamants de laboratoire jusque sur les griffes ».
+- **Gardés pour plus tard** : S1A_devine_le_prix et S4_indice, même bague Jobby. On décide après le verdict 72 h de S2 (25 nov.).
+- **Chiffres des 14 derniers jours** : 45 reels relevés et enregistrés dans `social_reels`.
+  - Meilleurs : W06_EN_lab_truth (165 vues), J01_journee (158), W05_labo_verite (141), W04_pov_3d (130), C_princesse (124).
+  - Aucun reel à 600 vues ; aucun abonnement mesuré (`media_follows` vide partout) ; 1 seul partage (C_toutes_coupes).
+- **Règle des 72 h**
+  - Retirés : C_marquise, C_emeraude et C_EN_marquise (7 à 10 vues).
+  - Bons :
+    - W05_labo_verite (saut 49,6 %, 5 s regardées) ;
+    - T01_avis_google (saut 62,4 %, 13 s regardées) ;
+    - C_toutes_coupes (1 partage, signal faible).
+- **À corriger dans l'app par Rayane** : le reel d'essai P01_paiement (16 nov., 4 vues) contient encore « Financement disponible » dans sa description. L'API ne permet pas de modifier la description d'un reel publié.
+- **TikTok** : pas dans le forfait. Rayane publie lui-même le paquet `TikTok_semaine_22-25nov.txt`.
