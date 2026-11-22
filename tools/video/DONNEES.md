@@ -887,3 +887,21 @@ Rayane a payé Supermetrics (forfait Starter, Instagram Insights + Facebook Ads)
     - C_toutes_coupes (1 partage, signal faible).
 - **À corriger dans l'app par Rayane** : le reel d'essai P01_paiement (16 nov., 4 vues) contient encore « Financement disponible » dans sa description. L'API ne permet pas de modifier la description d'un reel publié.
 - **TikTok** : pas dans le forfait. Rayane publie lui-même le paquet `TikTok_semaine_22-25nov.txt`.
+
+**Rattrapage du même jour** (Rayane : « Publiez-les la même journée… il ne faut pas que ce contenu-là part au waste ») : 12 reels de plus, pour 18 en tout.
+
+| Date | 15 h | 17 h 10 | 19 h 30 | 21 h | 22 h 15 |
+|---|---|---|---|---|---|
+| dim. 22 | R02_qui_est_rayane (15 h 30) | T06_avis_parfait | S2 | B1 | W02_EN_mistakes |
+| lun. 23 | C_rond | T1_tour | S5_noel | T4_pov | |
+| mar. 24 | M02_noel | T5_feu | B3 | S1A | |
+| mer. 25 | T2_details | S4_indice | R_laquelle | | |
+| jeu. 26 | | S1B | S3 | | |
+
+- **C_rond** : `pricing_config` n'a pas changé depuis le 6 nov., et le site affichait 2 350 $ le 15 nov. La fourchette de 2 300 à 2 400 $ tient toujours.
+- **T06** : « 20 avis, tous à 5 étoiles » est retiré de la description, faute de chiffre vérifié aujourd'hui.
+- **Non publiés** :
+  - V2_ovale_or_jaune : clip refusé 3 fois par Rayane, et « Diamant blanc » sans origine connue.
+  - B2_pierre_cachee : la petite pierre rose est à confirmer par Rayane.
+  - Le premier lot du 10 nov. (R01 à R10, B01 à B10, C01 à C05, D, E, F, G, H, I) : ancien son synthétisé, refusé par Rayane, et la plupart sont déjà sortis en version pro (série P).
+  - Les pubs AD_* : réservées à Facebook Ads.
