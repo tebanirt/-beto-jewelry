@@ -950,6 +950,17 @@ Rayane : « quelques vidéos… qui tournaient sur le plateau où les transition
 - Pubs en pause, avec toutes les retouches automatiques de Meta désactivées :
   - 2 600 $ (52569201656979) ;
   - « sous le sapin » (52569201740379) ;
-  - collection et avis, en cours de création.
-  - La pub de Benny (V8) sera ajoutée à son arrivée.
+  - collection (52569212660979) et avis (52569212632779) : re-téléversées à partir des rendus corrigés (24 i/s, cartes de fin), en révision chez Meta le 22 nov. ;
+  - Rayane en ville, dès 2 000 $ (52569206488579, V8 de Benny corrigée, voir plus bas), approuvée.
+  - Piège de l'outil : avec des vidéos de 80 Mo et plus, `manage_campaign` dépasse son délai et la pub n'est pas toujours créée, même si les vidéos arrivent dans la bibliothèque. Vérifier les `assets`, puis créer la pub avec les `asset_id` (instantané).
+- Plan de match complet (marché, réglages, règle pour doubler, tunnel, test de dépôt, 6 scripts, calendrier) : doc « Noël 2026 : pubs Meta et tunnel de vente », onglet « Plan de match (22 nov.) ». Les 6 scripts sont aussi dans `LISTE_A_FILMER.md`, priorité 0.
+- **Ancienne campagne de formulaire supprimée** (Rayane, 22 nov. : « supprime la pub qui tournait… pour remplir le formulaire… trop large ») : « BETO JEWELRY | LEADS | OCT 2026 | V1 » (52561352986579) est en `REMOVED`. On garde « BETO | WEBSITE BOOKING | OCT 2026 | V1 » (52561385176379, consultation gratuite sur le site), en pause.
+
+**Pub V8 de Benny (Rayane qui marche au centre-ville), corrigée le 22 nov.** Les 6 versions reçues (V1, V2, V6, V7, V8 ; V3 à V5 non retenues par Rayane) ont la même image, seule la voix change. On garde la V8. Trois défauts réglés :
+- **Saccade** : la vidéo était en 30 i/s avec des prises en 24 i/s (une image doublée sur 5). Ramenée en 24 i/s (`decimate`), plus aucun motif de doublon.
+- **Bague à l'auriculaire** (5,1 à 6,1 s, interdit, §10 du brief) : remplacée par le plan de la princesse dans son écrin (B-roll de Benny, `Frame01086738.mov`), avec les sous-titres d'origine remis par-dessus.
+- **Fin** : la pastille « Consultation gratuite » ajoutée à partir de 23,4 s ; son à −15 LUFS.
+- Formats 9:16 et 4:5 (recadrage à y = 370 : sous-titres et « 14-18 ou platine » restent dans le cadre).
+- La vidéo dit « de seulement 2000 dollars » : le texte de la pub précise « à partir de 2 000 $ + taxes ».
+- Fin du partenariat avec Benny (Rayane, 22 nov.) : ses deux banques de plans restent utilisables ; les nouvelles pubs seront tournées par Rayane (scripts plus bas).
 - Recherche : brief de recherche du 22 nov., résumé dans la réponse à Rayane.
