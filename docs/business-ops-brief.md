@@ -213,7 +213,13 @@ Prochaines briques (en attente que Rayane connecte les outils sur claude.ai, je 
 - Bird (envoi WhatsApp/SMS) → canal de notification proactive.
 - Une fois ces deux connectés : une routine programmée (ex. quotidienne) qui vérifie performance pub + pipeline CRM, et envoie un résumé "table ronde" proactif par WhatsApp.
 
-**⛔ Publicités Meta en pause (ordre de Rayane, 3 nov. 2026)** : les deux campagnes (« BETO JEWELRY | LEADS | OCT 2026 | V1 » et « BETO | WEBSITE BOOKING | OCT 2026 | V1 ») sont en pause **jusqu'à ce que la comptabilité soit en place** (numéros TPS/TVQ, comptable). Aucun agent ne les relance ni ne propose de les relancer ; seul un ordre explicite de Rayane les remet en marche. La table ronde continue l'analyse et le CRM, sans proposition de budget.
+**Relance des pubs Meta pour Noël (Rayane, 22 nov. 2026 : « je veux seulement commencer avec 40 $ par jour pour toutes les vidéos… après 2-3 jours, si on a eu des rencontres ou des ventes… on peut double down »)** :
+- La campagne « BETO | NOËL 2026 | CONSULTATIONS | V1 » est préparée en pause : objectif Prospects, formulaire qualifié qui mène au Calendly, 40 $/jour, du 23 nov. au 11 déc.
+- Elle part seulement sur le « go » de Rayane.
+- Toute hausse de budget reste à Rayane : l'agent propose (+20 à 30 % toutes les 48 à 72 h si les consultations suivent), il n'augmente jamais seul.
+- Les règles plus bas restent en vigueur pour tout le reste.
+
+**⛔ Publicités Meta en pause (ordre de Rayane, 3 nov. 2026, levé pour Noël le 22 nov., voir plus haut)** : les deux campagnes (« BETO JEWELRY | LEADS | OCT 2026 | V1 » et « BETO | WEBSITE BOOKING | OCT 2026 | V1 ») sont en pause **jusqu'à ce que la comptabilité soit en place** (numéros TPS/TVQ, comptable). Aucun agent ne les relance ni ne propose de les relancer ; seul un ordre explicite de Rayane les remet en marche. La table ronde continue l'analyse et le CRM, sans proposition de budget.
 
 **Table ronde du matin** (active depuis le 3 nov. 2026, approuvée par Rayane — tâche programmée « Table ronde du matin — Beto Jewelry », tous les jours 7 h 52, notification push) : croise la performance Facebook/Instagram (Supermetrics) avec le pipeline CRM (Supabase : nouveaux leads par `attribution`, statuts, dépôts, marges `sale_price - production_cost`) et produit un résumé court par expert (Marketing / Ventes / Finances). **Les changements de budget pub sont seulement proposés** (montant actuel → proposé, et pourquoi) — Rayane approuve avant toute mise en marche ; la tâche n'utilise jamais d'outil d'écriture publicitaire (`manage_campaign` ou autre) et n'envoie jamais de message.
 

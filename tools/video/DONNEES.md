@@ -905,3 +905,51 @@ Rayane a payé Supermetrics (forfait Starter, Instagram Insights + Facebook Ads)
   - B2_pierre_cachee : la petite pierre rose est à confirmer par Rayane.
   - Le premier lot du 10 nov. (R01 à R10, B01 à B10, C01 à C05, D, E, F, G, H, I) : ancien son synthétisé, refusé par Rayane, et la plupart sont déjà sortis en version pro (série P).
   - Les pubs AD_* : réservées à Facebook Ads.
+
+## 38. Contrôle qualité complet et campagne de Noël (22 nov. 2026, demande de Rayane)
+
+Rayane : « quelques vidéos… qui tournaient sur le plateau où les transitions étaient un peu saccadées… faut enlever tous les bugs ».
+
+**Contrôle automatique** (`qc_smooth/analyze.py`, scratchpad) : cadence, images doublées, sauts entre images, sur les 18 reels programmés et les 15 pubs.
+
+- **Bug 1, la saccade du plateau.**
+  - Où : B1 (2 600 $) et B3 (griffes serties).
+  - Cause : les prises de Benny sont en 24 i/s, mais elles ont été rendues en 30 i/s, d'où une image doublée sur 5.
+  - Correction : re-rendus avec `REEL_FPS=24`, puis remplacés dans la file Instagram (27409, 27410).
+  - **Règle : toute prise à 24 i/s (ProRes de Rayane) se rend avec `REEL_FPS=24`.**
+- **Bug 2, le clignotement des cartes de fin** (« Deux façons de commencer »).
+  - Cause : deux étapes se superposaient avec chacune son voile sombre, et la bague derrière clignotait.
+  - Correction dans `pro.py` : les étapes cumulatives s'empilent.
+  - Toutes les pubs ont été re-rendues (CRF 14, 9:16 et 4:5).
+- **Texte.**
+  - Pubs 12 à 15 : « diamants de laboratoire » ajouté (code déjà corrigé, re-rendu).
+  - Pub de l'ensemble : « Diamants de laboratoire · or jaune » ajouté.
+- **Autres vidéos programmées** (Jobby à 24 i/s, consultation à 30 i/s) : aucun doublon. Les sauts détectés sont des coupes voulues.
+
+**Tunnel de vente, les chiffres** (CRM et Meta, sept. au 22 nov.) :
+- Formulaire Meta d'octobre : 435 $, 46 prospects (9,45 $ chacun). Résultat : 0 vente, environ 4 consultations, 39 prospects jamais avancés.
+  - Le formulaire le plus rentable en volume promettait « le prix de ton bijou en 1 heure ». C'est une promesse retirée depuis, qui attirait des curieux du prix.
+- Campagne « réservation sur le site » : 323 $ pour 3 prospects (pixel).
+- Ce qui vend :
+  - réservations Calendly directes : 10 contacts, 2 ventes ;
+  - site : 10 contacts, 2 ventes ;
+  - Instagram en message privé : 1 vente sur 2 ;
+  - Marketplace : 27 ventes.
+- Formulaire « Commencer mon design » (6 au 21 nov.) :
+  - 38 sessions, 26 ont choisi une pièce, 14 ont vu le prix, 4 ont envoyé le formulaire ;
+  - la plus grosse perte est à l'étape des détails (15 sessions sur 26 quittent là).
+- Pixel : Lead, Schedule (page « merci-consultation ») et Purchase (dépôt) sont en place, mais seulement dans le navigateur et après le consentement de la Loi 25. Pas d'API Conversions : il faut un jeton Meta, la voie gratuite est en attente.
+
+**Campagne préparée en pause** (compte act_1886625265689108) :
+- Campagne : « BETO | NOËL 2026 | CONSULTATIONS | V1 » (52569201493379).
+- Objectif Prospects, 40 $/jour en budget de campagne, du 23 nov. au 11 déc.
+- Un ensemble Advantage+ (52569201494979) : Montréal + 40 km, 18-65 ans avec suggestion 24-45 ans, placements automatiques.
+- Nouveau formulaire « BETO | NOËL 2026 | CONSULTATION QUALIFIÉE | V1 » (1120103827294880).
+  - 3 questions : pour quand, budget avant taxes, moyen de contact.
+  - L'écran de fin mène directement au Calendly.
+- Pubs en pause, avec toutes les retouches automatiques de Meta désactivées :
+  - 2 600 $ (52569201656979) ;
+  - « sous le sapin » (52569201740379) ;
+  - collection et avis, en cours de création.
+  - La pub de Benny (V8) sera ajoutée à son arrivée.
+- Recherche : brief de recherche du 22 nov., résumé dans la réponse à Rayane.
