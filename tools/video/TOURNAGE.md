@@ -163,6 +163,20 @@ Placement :
 - Fond : l'établi ou l'atelier, à 1,5 à 2 m derrière Rayane, avec une petite lampe chaude allumée pour la profondeur.
 - Micro pincé à 15 à 20 cm sous le menton, réduction de bruit activée.
 
+Réglages Blackmagic Camera pour le face caméra (22 nov. 2026, après une capture de Rayane où les réglages avaient bougé : 16:9, 72°, 3350 K, 1x) :
+
+| Réglage | Valeur |
+|---|---|
+| Format | 4K, **vidéo verticale activée** (l'écran ne doit plus afficher 16:9) |
+| Images par seconde | **24** (pas 23,98) |
+| Obturateur | mesure en vitesse, **1/60 s** (144°), anti-scintillement **60 Hz**. À 72° (1/120 s), le mouvement saccade |
+| ISO | le plus bas possible, viser 50 à 100 ; ajouter de la lumière plutôt que monter l'ISO |
+| Balance des blancs | **5600 K**, teinte 0, avec des lampes lumière du jour |
+| Objectif | **2x (48 mm)** pour le visage ; 4x (100 mm) pour les bagues (§7.2 bis.2) |
+| Espace couleur | **Rec.709** pour le face caméra : le fichier s'envoie tel quel, sans DaVinci. Apple Log 2 seulement pour les bagues sur le plateau |
+| Codec | ProRes 422 HQ si 20 Go ou plus sont libres, sinon HEVC |
+| Divers | stabilisation coupée sur trépied, données d'emplacement coupées, micro DJI branché |
+
 Pendant la prise :
 - Regarder l'objectif, pas l'écran.
 - Pas de texte lu. Une carte avec 3 mots-clés, collée juste sous le téléphone.
