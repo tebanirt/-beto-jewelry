@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import Analytics from "@/components/analytics/Analytics";
 import AttributionCapture from "@/components/analytics/AttributionCapture";
 import HideOnAdmin from "@/components/layout/HideOnAdmin";
+import StickyBookBar from "@/components/layout/StickyBookBar";
 
 // Système visuel « Site 50 000 $ » : Bodoni Moda pour les titres (avec l'axe
 // de taille optique), Jost pour le texte et l'interface.
@@ -195,6 +196,7 @@ export default function RootLayout({
         <main id="contenu" tabIndex={-1} className="outline-none">{children}</main>
         <HideOnAdmin>
           <Footer />
+          <StickyBookBar />
         </HideOnAdmin>
       </body>
     </html>

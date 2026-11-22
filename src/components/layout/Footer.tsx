@@ -18,7 +18,7 @@ export default function Footer() {
   const { c, language, setLanguage } = useSite();
   const f = c.footer;
   return (
-    <footer className="bj-gutter border-t border-beto-offwhite/10 bg-beto-ink text-beto-stone" style={{ paddingTop: "clamp(64px, 7vw, 96px)", paddingBottom: 40 }}>
+    <footer className="bj-gutter border-t border-beto-offwhite/10 bg-beto-ink text-beto-stone" style={{ paddingTop: "clamp(64px, 7vw, 96px)", paddingBottom: 112 /* 40 + place pour la barre « Réserver » */ }}>
       <div className="bj-container">
         <div className="grid grid-cols-2 gap-x-6 gap-y-12 sm:gap-x-10 lg:grid-cols-[minmax(0,1.3fr)_repeat(4,minmax(0,1fr))]">
           <div className="col-span-2 max-w-[340px] lg:col-span-1">
