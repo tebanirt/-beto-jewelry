@@ -87,3 +87,15 @@ Rayane, 21 nov. : « ça c'est des prix pour le temps des fêtes. C'est un rabai
 
 ## Financement (Rayane, 21 nov. 2026 : « on offre le financement »)
 - À l'écran et dans une pub avec une bague : au plus « Possibilité de crédit » ou « Crédit offert par Affirm et Klarna » (« Financement disponible » n'est pas une mention permise, brief §3bis). Jamais un montant par mois, un taux, un nombre de versements ni « payez plus tard » (DONNEES.md §9 et §33).
+
+## Pub de Noël d'Observa Media, « Video V8 » (décisions de Rayane, 22 nov. 2026)
+Montage final du contrat avec Observa Media (dossier Drive « Edit », V1 à V8 ; plans bruts dans « Frame », 56 clips du 19 nov.). Version corrigée : `Beto_Pub_Fetes_V8_corrigee_9x16.mp4` et `_4x5.mp4`.
+- **« À partir de 2 000 $ »** pour une bague de fiançailles sur mesure : vrai (Rayane : les bagues de 1,5 ou 2 ct sont « un peu plus que 2 000 $ »). Dans le texte de la pub, écrire « + taxes ».
+- **« Plus d'une centaine de clients »** : vrai (Rayane).
+- **Avis Google montrés tels quels** (noms et photos publics sur Google) : accord de Rayane pour cette pub.
+- **La bague tenue au bout du gant noir** (6 s) : acceptée par Rayane pour cette pub.
+- **L'homme à lunettes en consultation** (17 à 19 s) : c'est Rayane.
+- **Retiré** : les deux plans de main de 5,1 à 6,1 s (bague à l'auriculaire, règle du brief §10), remplacés par l'écrin princesse du dossier « Frame » (Frame01086738), avec les sous-titres d'origine.
+- **Version B** (`Beto_Pub_Fetes_V8B_Jobby_*`) : même correction, mais avec la marquise 4 ct de Jobby qui tourne (C056, de 4,55 à 5,7 s, étalonnage sur la luminosité seulement pour garder la couleur de la pierre). Rayane, 22 nov. : « tu peux utiliser » nos gros plans de bagues dans ces pubs. A et B sont à tester l'une contre l'autre.
+- **Ajouté** : « Consultation gratuite » sous le logo, de 23,4 s à la fin ; son monté à environ −15 LUFS (crête −0,9 dB).
+- **À ne pas utiliser** : V3, V4 et V5, qui contiennent des photos de banque d'images (couples en bijouterie, bagues d'autres marques).

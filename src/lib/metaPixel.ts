@@ -21,6 +21,43 @@ export function trackMetaLead(formType: string) {
 }
 
 /**
+ * Fires a Meta Pixel "Purchase" event when a design deposit has really been
+ * paid (Stripe sends the visitor back with its Checkout session id). The
+ * session id is the eventID, so Meta counts one purchase per payment even if
+ * the page is reloaded; a sessionStorage flag also stops a second send from
+ * the same tab. The pixel only exists after the visitor accepted measurement
+ * (Loi 25) and loads a moment after the page, so we wait for it a few seconds
+ * instead of losing the event.
+ */
+export function trackMetaPurchase(value: number, currency: string, eventId: string) {
+  if (typeof window === "undefined") return;
+  const key = `bj_purchase_${eventId}`;
+  try {
+    if (window.sessionStorage.getItem(key)) return;
+  } catch {
+    // storage blocked: Meta still dedupes on eventID
+  }
+  let tries = 0;
+  const send = () => {
+    if (typeof window.fbq !== "function") {
+      tries += 1;
+      if (tries < 20) window.setTimeout(send, 250);
+      return;
+    }
+    window.fbq("track", "Purchase", { value, currency, content_name: "design_deposit" }, { eventID: eventId });
+    if (typeof window.gtag === "function") {
+      window.gtag("event", "purchase", { transaction_id: eventId, value, currency, items: [{ item_name: "design_deposit" }] });
+    }
+    try {
+      window.sessionStorage.setItem(key, "1");
+    } catch {
+      // ignore
+    }
+  };
+  send();
+}
+
+/**
  * Fires a Meta Pixel "Schedule" event once a Calendly booking is actually
  * confirmed — call this from the `calendly.event_scheduled` postMessage
  * event, not on widget load or tab click, so ad delivery optimizes toward
