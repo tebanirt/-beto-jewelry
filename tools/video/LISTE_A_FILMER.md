@@ -18,6 +18,23 @@ Elle s'appuie sur trois sources :
 
 **Ce que je ne publierai jamais** : le visage d'un client sans son accord écrit, son nom, un numéro de certificat lisible, une gravure personnelle, l'écran d'une autre marque, une bague portée à l'auriculaire.
 
+## Priorité 0 — les 6 pubs de Noël et de la Saint-Valentin (22 nov. 2026)
+
+Rayane, 22 nov. : fin du partenariat avec Benny ; Rayane tourne lui-même ses vidéos face caméra, éducatives et publicitaires. Scripts tirés de l'étude de marché du 22 nov. (plan complet dans le doc « Noël 2026 : pubs Meta et tunnel de vente », onglet « Plan de match (22 nov.) »).
+
+Ordre : **5 et 1 avant le 28 nov.** (pour servir avant la date limite du 11 déc.), puis 6, puis 2, 3 et 4 pour janvier.
+
+| # | Vidéo | Accroche (1re seconde) | Plans | Fin |
+|---|---|---|---|---|
+| 5 | Date limite de Noël, 15 s | Texte « Demande à Noël ? Commandez avant le 11 décembre » | Un écrin sous un vrai sapin ; « Design 3D en 48 h, bague prête en 2 semaines » ; carte « Platine : avant le 4 décembre » | « Réservez cette semaine. » Retirée le 11 déc. |
+| 1 | Le prix d'un 2 carats, 20 s | « Solitaire 2 carats : 2 300 à 2 400 $ + taxes » ; « Voici ce que coûte un 2 carats chez nous. » | Plateau noir ; fiche (diamant de laboratoire, E, VVS2, IGI, or blanc 18k) ; « Je la dessine avec vous en 3D en 48 h » ; la bague dans l'écrin | Consultation gratuite, 2 bureaux privés ou en vidéo |
+| 6 | 2 000, 3 000 ou 4 000 $ ?, 30 s | La question en texte géant | Chaque bague sur le plateau avec sa carte : jonc large 2 200 $, solitaire 2 ct 2 300–2 400 $, marquise 2 ct 2 600 $, marquise 4 ct 3 350 $, ensemble 4 000 $ | « Dites-moi votre budget, je vous montre ce qu'on peut faire. » |
+| 2 | Le diamant de laboratoire est-il un faux ?, 25 s | « On me pose la question chaque semaine. » | Carbone, même structure ; selon le GIA, mêmes propriétés chimiques, physiques et optiques ; la pierre à la pince et à la loupe ; certificat IGI, numéro flouté ; « Naturel ou laboratoire, je travaille les deux. » | « Posez-moi vos questions. » Jamais « identique » |
+| 3 | Ta bague en 4 étapes, 30 s | « Votre bague en 4 étapes » | Consultation (bureau privé) ; 3D en 48 h (vrai écran MatrixGold, jamais le configurateur) ; dépôt 250 $ + taxes crédité à 100 % ; 2 semaines, 3 en platine (fonte, polissage, bague finie) | « Je prépare un premier rendu avant notre rencontre. » |
+| 4 | Mes clients parlent, 20 s | « Tous nos avis Google : 5 étoiles » (nombre revérifié le jour même) | Fiche Google sur un écran ; 2 extraits réels, prénom seulement ; « Je suis chaque bague du croquis à la remise » ; remise d'écrin, mains seulement, accord écrit | « À votre tour : consultation gratuite. » |
+
+Règles : iPhone vertical, 4K, 24 i/s (le montage se fait alors avec `REEL_FPS=24`) ; lumière de face, micro-cravate ; 3 prises par phrase ; plans de 3 à 5 s. Toujours « diamant de laboratoire », le prix avec « + taxes », aucun mot sur le crédit, jamais une bague à l'auriculaire.
+
 ## Priorité 1 — cette semaine (c'est ce qui manque le plus)
 
 | # | À filmer | Durée | Pourquoi |
