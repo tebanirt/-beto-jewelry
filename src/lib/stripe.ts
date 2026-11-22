@@ -1,7 +1,6 @@
 import Stripe from "stripe";
 
-/** Dépôt de design (en dollars CAD), entièrement crédité sur la pièce finale. */
-export const DEPOSIT_AMOUNT_CAD = 250;
+export { DEPOSIT_AMOUNT_CAD } from "./deposit";
 
 export type PaymentKind = "depot" | "solde";
 
