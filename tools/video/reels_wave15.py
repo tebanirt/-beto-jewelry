@@ -112,7 +112,7 @@ def R01_montreal_APP():
     return _montreal(True)
 
 
-# ---- P01: payment in 3 steps + « Financement disponible » (brief §3bis, 11 Nov 2026: Affirm/Klarna on the 50 % and balance links).
+# ---- P01: payment in 3 steps + « Possibilité de crédit » (brief §3bis, 11 Nov 2026: Affirm/Klarna on the payment-plan link only).
 #      OPC rule: an ad that shows the ring may only say that financing is available — never a monthly amount, rate or term.
 @reel
 def P01_paiement_DRAFT():
@@ -137,7 +137,7 @@ def P01_paiement_DRAFT():
         dict(type="steps", at=5, until=17, out="cut", x=100, y=1100, w=920, gap=112, tsize=44, ssize=30, items=steps),
     ]
     return dict(name="P01_paiement_DRAFT", music="1073", shots=shots, texts=[], motion=dict(elements=el),
-                end=dict(beats=5, overlay=True, layers=pro.end_overlay("En 3 étapes.<br><i>Financement disponible.</i>", **FR)),
+                end=dict(beats=5, overlay=True, layers=pro.end_overlay("En 3 étapes.<br><i>Possibilité de crédit.</i>", **FR)),
                 glints=[dict(at=1.5, x=540, y=920, s=0.8), dict(at=18.5, x=540, y=930, s=0.9)])
 
 

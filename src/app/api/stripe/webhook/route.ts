@@ -225,7 +225,14 @@ async function recordPayment(stripe: Stripe, session: Stripe.Checkout.Session) {
 
   // 2. La note dans la fiche du client, une seule fois aussi.
   const money = (n: number) => n.toLocaleString("fr-CA", { style: "currency", currency: "CAD" });
-  const label = metadata.stage === "approbation" ? "paiement de 50 % à l’approbation" : kind === "solde" ? "solde" : "dépôt";
+  const label =
+    metadata.stage === "approbation"
+      ? "paiement de 50 % à l’approbation"
+      : metadata.stage === "plan"
+        ? "paiement complet (plan de paiement)"
+        : kind === "solde"
+          ? "solde"
+          : "dépôt";
   const detail = taxes.detailed ? `${money(taxes.base)} + TPS ${money(taxes.tps)} + TVQ ${money(taxes.tvq)}` : "taxes à vérifier";
   const total = money((session.amount_total ?? 0) / 100);
   if (!client.notes?.includes(session.id)) {

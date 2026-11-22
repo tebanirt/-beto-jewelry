@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { LINKS } from "@/lib/site-content";
 import { useSite } from "../useSite";
-import { Eyebrow, FinalCta, PhotoSlot, RingPhoto, RuledList, T } from "../ui";
+import { Eyebrow, FinalCta, PaymentOptions, PhotoSlot, RingPhoto, RuledList, T } from "../ui";
 import { SHOW_PHOTO_SLOTS } from "@/lib/constants";
 
 export default function ProcessPage() {
@@ -148,6 +148,8 @@ export default function ProcessPage() {
           </div>
         </div>
       </section>
+
+      <PaymentOptions ctaHref={LINKS.form} ctaLabel={c.common.seePrice} />
 
       <FinalCta
         title={p.finalTitle}

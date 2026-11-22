@@ -279,6 +279,63 @@ export function SectionHead({
   );
 }
 
+/**
+ * Étapes de paiement + possibilité de crédit (Affirm ou Klarna). Loi sur la
+ * protection du consommateur (art. 244, 245 et 247, règlement art. 80) : dans
+ * une publicité, seulement « Crédit offert », « Possibilité de crédit » ou le
+ * nom du prêteur ; jamais de montant par mois, de taux ou de durée, jamais
+ * d'incitation à acheter à crédit, et pas de photo de bague à côté.
+ */
+export function PaymentOptions({ id = "paiement", ctaHref, ctaLabel }: { id?: string; ctaHref: string; ctaLabel: string }) {
+  const { c } = useSite();
+  const p = c.payments;
+  return (
+    <section aria-labelledby={id} className="bj-gutter bg-beto-white" style={{ paddingTop: "clamp(88px, 10vw, 144px)", paddingBottom: "clamp(88px, 10vw, 144px)" }}>
+      <div className="bj-container">
+        <SectionHead eyebrow={p.eyebrow} title={p.title} id={id}>
+          <p className="mt-6 text-pretty text-beto-gray" style={{ fontSize: 16, lineHeight: 1.75, maxWidth: "36em" }}>
+            <T text={p.lead} />
+          </p>
+        </SectionHead>
+        <ol className="grid list-none p-0" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(240px, 100%), 1fr))", gap: "40px 32px" }}>
+          {p.steps.map((s, i) => (
+            <li key={s.title} className="bj-reveal" style={{ borderTop: "1px solid #1B1A17", paddingTop: 28, ["--bj-delay" as string]: `${i * 80}ms` }}>
+              <p className="bj-serif text-beto-gold-dark" style={{ fontSize: 40, lineHeight: 1 }}>
+                {String(i + 1).padStart(2, "0")}
+              </p>
+              <h3 className="bj-serif bj-opsz-18 text-beto-black" style={{ fontSize: 26, lineHeight: 1.2, marginTop: 24 }}>
+                <T text={s.title} />
+              </h3>
+              <p className="text-beto-gray" style={{ fontSize: 15, lineHeight: 1.7, marginTop: 12 }}>
+                <T text={s.body} />
+              </p>
+            </li>
+          ))}
+        </ol>
+        <div className="bj-reveal mt-16 flex flex-wrap items-end justify-between gap-x-12 gap-y-8 bg-beto-ink text-beto-offwhite" style={{ padding: "clamp(32px, 4vw, 56px)" }}>
+          <div style={{ maxWidth: "40em" }}>
+            <h3 className="bj-serif text-beto-offwhite" style={{ fontSize: "clamp(26px, 2.6vw, 36px)", lineHeight: 1.15 }}>
+              <T text={p.planTitle} />
+            </h3>
+            <p className="mt-5 text-beto-stone" style={{ fontSize: 15, lineHeight: 1.75 }}>
+              <T text={p.planBody} />
+            </p>
+            <p className="mt-4 text-beto-gold-light" style={{ fontSize: 15, lineHeight: 1.75 }}>
+              <T text={p.planWhy} />
+            </p>
+          </div>
+          <Link href={ctaHref} className="bj-btn bj-btn-gold">
+            {ctaLabel}
+          </Link>
+        </div>
+        <p className="mt-6 text-beto-gray" style={{ fontSize: 13, lineHeight: 1.7 }}>
+          <T text={p.note} />
+        </p>
+      </div>
+    </section>
+  );
+}
+
 /** Liste à filet fin (titre serif + texte), sur fond clair ou sombre. */
 export function RuledList({
   items,

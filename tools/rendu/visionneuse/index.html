@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Visionneuse Beto</title>
+<style>html,body{margin:0;background:#fafafa}canvas{width:100vw;height:100vh;display:block}</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/","three-mesh-bvh":"https://cdn.jsdelivr.net/npm/three-mesh-bvh@0.8.3/build/index.module.js"}}</script>
+</head><body><canvas id="c"></canvas>
+<script type="module">
+import { createViewer } from './beto-viewer.js';
+const q = new URLSearchParams(location.search);
+window.viewer = await createViewer(document.getElementById('c'), { preserve: true, gemGain: +(q.get('gain') || 1), exposure: +(q.get('exp') || 1.05), view: q.get('view') || 'principale', transparent: q.get('solo') === '1', config: { solo: q.get('solo') === '1', stone: q.get('stone') ? JSON.parse(q.get('stone')) : null, pave: q.get('pave') === '1', shape: q.get('shape') || 'ovale', metal: q.get('metal') || 'blanc' } });
+setTimeout(() => { window.ready = true; }, 300);
+</script></body></html>

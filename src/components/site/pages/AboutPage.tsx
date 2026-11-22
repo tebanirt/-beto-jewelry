@@ -110,8 +110,8 @@ export default function AboutPage() {
       <FinalCta
         title={p.finalTitle}
         body={p.finalBody}
-        primary={{ href: LINKS.book, label: c.common.bookConsultation }}
-        secondary={{ href: LINKS.form, label: c.common.seePrice }}
+        primary={{ href: LINKS.form, label: c.common.seePrice }}
+        secondary={{ href: LINKS.book, label: c.common.bookConsultation }}
       />
     </>
   );

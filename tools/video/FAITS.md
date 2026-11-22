@@ -86,7 +86,7 @@ Rayane, 21 nov. : « ça c'est des prix pour le temps des fêtes. C'est un rabai
 - Collier prénom « Lamisa » (C069) : la cliente a donné son accord (Rayane, 21 nov. 2026). Le prénom peut être montré.
 
 ## Financement (Rayane, 21 nov. 2026 : « on offre le financement »)
-- À l'écran et dans une pub avec une bague : au plus « Financement disponible ». Jamais un montant par mois, un taux, un nombre de versements ni « payez plus tard » (DONNEES.md §9 et §33).
+- À l'écran et dans une pub avec une bague : au plus « Possibilité de crédit » ou « Crédit offert par Affirm et Klarna » (« Financement disponible » n'est pas une mention permise, brief §3bis). Jamais un montant par mois, un taux, un nombre de versements ni « payez plus tard » (DONNEES.md §9 et §33).
 
 ## Pub de Noël d'Observa Media, « Video V8 » (décisions de Rayane, 22 nov. 2026)
 Montage final du contrat avec Observa Media (dossier Drive « Edit », V1 à V8 ; plans bruts dans « Frame », 56 clips du 19 nov.). Version corrigée : `Beto_Pub_Fetes_V8_corrigee_9x16.mp4` et `_4x5.mp4`.
