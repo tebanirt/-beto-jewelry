@@ -46,7 +46,28 @@ def N01_avis_natif():
                 end=dict(beats=0, overlay=True, layers={}))
 
 
-REELS = {"N01_avis_natif": N01_avis_natif}
+def N02_rose_natif():
+    """Léo's ring in the native style (23 Nov 2026), never published organically: the ad AD_fetes_rose is a different
+    edit, reserved for Facebook Ads. Facts from the CRM (4 Nov 2026): round 3 ct lab-grown vivid pink, floral head,
+    14k yellow gold. No price (the 2 800 $ was its Marketplace price, before the company)."""
+    from reels_jobby_tr import L
+    shots = [
+        dict(shot=L("ROSE72W", 0.8), beats=4, tr="cut"),      # the stone from the front, turning
+        dict(shot=L("ROSE73W", 0.5), beats=4, tr="cut"),      # the floral head from behind
+        dict(shot=L("ROSE72W", 6.0), beats=4, tr="cut"),      # later in the same turn (never a rewind)
+        dict(shot=L("ROSE73W", 3.6), beats=4),
+    ]
+    texts = [
+        dict(html=pill(["Un diamant rose vif.", "Diamant de laboratoire."], top=300), at=0, until=4),
+        dict(html=cap("Solitaire rond · <span class='y'>3 carats</span>", top=1470), at=4, until=7),
+        dict(html=cap("Une tête florale<br>sous la pierre.", top=1470), at=7, until=10),
+        dict(html=cap("Or jaune 14k.<br>Fait sur mesure à Montréal.", top=1470), at=10, until=13),
+        dict(html=cap("Rose ou blanc ?<br>Dis-le en commentaire.", top=1470), at=13, until=16),
+    ]
+    return dict(name="N02_rose_natif", music="432", shots=shots, texts=texts, end=dict(beats=0, overlay=True, layers={}))
+
+
+REELS = {"N01_avis_natif": N01_avis_natif, "N02_rose_natif": N02_rose_natif}
 
 if __name__ == "__main__":
     for n in sys.argv[1:] or list(REELS):

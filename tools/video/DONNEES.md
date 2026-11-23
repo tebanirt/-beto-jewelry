@@ -1012,3 +1012,12 @@ Rayane, 22 nov. au soir : « une nouvelle bague, tête florale… pierre Fancy V
   - Réponse : jamais une photo d'une autre marque retouchée (droit d'auteur, confiance). À la place, une illustration IA décrite (Canva, son compte) ou une photo sous licence libre, toujours marquée « Illustration ». La règle est au brief §10.
   - Test Canva : réaliste, mais peu fidèle à la demande (or blanc dans un écrin au lieu d'or jaune sur fond blanc). L'outil Canva impose les mots de Rayane ; s'il écrit « écris les descriptions toi-même », on pourra décrire précisément.
   - Sites de photos libres autorisés le 23 nov. (Unsplash, Pexels, Wikimedia). L'accès direct au site d'Unsplash a été refusé par le contrôle de sécurité (point d'accès interne non officiel). Wikimedia marche par son API officielle, mais ce sont surtout des photos produit d'autres joailliers en CC BY-SA : à éviter.
+
+## 41. Production du 23 nov. 2026 (lundi, tâche quotidienne)
+
+- **Abonnés** : 237 (+1).
+- **Sortis du rattrapage** : W02_EN_mistakes 126 vues (saut 66 %), T06_avis_parfait 111 (53 %), B1_prix_marquise_2ct 31 (93 %, accroche de prix ratée cette fois), S2_secret_dessous 17, R02_qui_est_rayane 6.
+- **Règle des 72 h** : C_princesse (124 vues, 1 enregistrement, mais 4 s regardées), C_coussin et C_radiant sont retirés. La série des coupes à 2 ct est épuisée. Aucun reel à 600 vues.
+- **Leçon** : les formats qui tiennent sont l'éducation (W05, W02) et les avis Google lus mot pour mot (T06, T05). Les prix seuls ne retiennent pas : B1 a un saut de 93 %.
+- **Programmé** : `N02_rose_natif` (style natif, diamant rose vif 3 ct, tête florale) le **sam. 28 nov. à 19 h 30** (28848). La fin de semaine compte maintenant X01 (ven. 19 h 30), le carrousel (sam. 17 h 10) et N02 (sam. 19 h 30).
+- **Banque** : « 00 · À trier » ne contient qu'un reçu PDF, aucune vidéo. Veille sautée (pas de crédits Firecrawl).
