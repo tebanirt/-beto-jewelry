@@ -67,6 +67,34 @@ def single(ring, name, music="228"):
     return dict(name=name, music=music, shots=shots(*seq), texts=texts, end=dict(beats=0, overlay=True, layers={}))
 
 
+ROSE = ("ROSE72W", 0.8), ("ROSE73W", 0.5)   # C072 front turn, C073 back view (the floral basket), 22 Nov 2026
+
+
+def rose_card(top=278, price=None):
+    """Léo's ring (CRM, 4 Nov 2026): cathedral solitaire, floral head, 3 ct round lab-grown Vivid Pink, 14k yellow gold.
+    No price unless Rayane confirms one for ads: 2 800 $ was its Marketplace price, before the company (orders.entite)."""
+    big = (f'<div class="lx lxp" style="top:{top + 40}px">{price}<span class="cur">$</span></div>'
+           f'<div class="lx lxt" style="top:{top + 188}px">+ taxes · avant le 11 déc.</div>') if price else \
+          (f'<div class="lx lxh" style="top:{top + 48}px;font-size:80px">Diamant <i>rose vif</i></div>'
+           f'<div class="lx lxt" style="top:{top + 188}px">Diamant de laboratoire</div>')
+    head = '<div class="lxs"></div>' + f'<div class="lx lxo" style="top:{top}px">Solitaire rond · 3 carats</div>' + big
+    why = (f'<div class="lxr" style="top:{top + 234}px"></div>'
+           f'<div class="lx lxi" style="top:{top + 250}px">Une tête florale sous la pierre</div>'
+           f'<div class="lx lxd" style="top:{top + 314}px">Or jaune 14k · fait sur mesure à Montréal</div>')
+    return [head, head + why]
+
+
+def AD_rose(price=None):
+    """The pink round next to the white marquises (Rayane, 22 Nov 2026: « ça va faire un beau contraste »), ~15 s:
+    the front of the stone, the floral head from behind, the front again under the two ways to start."""
+    front, back = ROSE
+    seq = [(front, 3), (back, 3), ((front[0], front[1] + 5.0), 8)]
+    texts = [dict(html=rose_card(price=price), at=0, until=6, every=2),
+             dict(html=end_card(), at=6, until=14, every=1.2, min_s=8)]
+    return dict(name="AD_fetes_rose" + ("_prix" if price else ""), music="228", shots=shots(*seq), texts=texts,
+                end=dict(beats=0, overlay=True, layers={}))
+
+
 def collection_card():
     """The four pieces on the framed group picture, each named next to its own price, revealed line by line."""
     head = (f'<div class="lx lxo" style="top:226px">{DEADLINE}</div>'
@@ -161,6 +189,8 @@ REELS = {
     "AD_fetes_jobby": lambda: single(JOBBY, "AD_fetes_jobby"),
     "AD_fetes_ensemble": lambda: single(SET, "AD_fetes_ensemble"),
     "AD_fetes_avis": AD_avis,
+    "AD_fetes_rose": AD_rose,
+    "AD_fetes_rose_prix": lambda: AD_rose(price="2 800"),
     "AD_fetes_sapin": AD_sapin,
     "AD_fetes_3etapes": AD_3etapes,
     "AD_fetes_3etapes_credit": lambda: AD_3etapes(credit=True),

@@ -964,3 +964,12 @@ Rayane : « quelques vidéos… qui tournaient sur le plateau où les transition
 - La vidéo dit « de seulement 2000 dollars » : le texte de la pub précise « à partir de 2 000 $ + taxes ».
 - Fin du partenariat avec Benny (Rayane, 22 nov.) : ses deux banques de plans restent utilisables ; les nouvelles pubs seront tournées par Rayane (scripts plus bas).
 - Recherche : brief de recherche du 22 nov., résumé dans la réponse à Rayane.
+
+## 39. La bague rose de Léo dans les pubs (23 nov. 2026)
+
+Rayane, 22 nov. au soir : « une nouvelle bague, tête florale… pierre Fancy Vivid Pink lab… vendue à Léo pour 2 800… en 14 carats jaune… on peut les ajouter aux vidéos. Ça va faire un beau contraste avec les diamants blancs. »
+
+- **Fiche (CRM, commande du 4 nov.)** : solitaire cathédrale, tête florale, diamant de laboratoire rond de 3 carats, rose vif (Vivid Pink), or jaune 14k, 2 800 $. Vente faite avant la société (Marketplace).
+- **Plans reçus** (Drive « Bague vidéo pro ») : C072 (tour de face, 12 s) et C073 (de dos, le panier floral, 7 s). ProRes, 24 i/s, Rec.709. Deux autres plans restent à venir. Masters `ROSE72W` et `ROSE73W` (`ringlock.py`, zoom 1,4, `RING_Y` 0,565).
+- **Pub `AD_fetes_rose`** (`reels_fetes.py`, 19 s, 9:16 et 4:5) : « Solitaire rond · 3 carats / Diamant *rose vif* / Diamant de laboratoire », puis « Une tête florale sous la pierre / Or jaune 14k · fait sur mesure à Montréal », puis la carte « Deux façons de commencer ». **Aucun prix à l'écran** : 2 800 $ était le prix Marketplace, et un prix dans une pub reste à Rayane. La version avec prix (`AD_fetes_rose_prix`, « 2 800 $ + taxes ») est prête dans le code, à rendre sur son accord.
+- Ajoutée active à la campagne de Noël le 23 nov. (même ensemble, même formulaire, budget inchangé).
