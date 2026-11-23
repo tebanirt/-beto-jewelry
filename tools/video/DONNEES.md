@@ -1021,3 +1021,23 @@ Rayane, 22 nov. au soir : « une nouvelle bague, tête florale… pierre Fancy V
 - **Leçon** : les formats qui tiennent sont l'éducation (W05, W02) et les avis Google lus mot pour mot (T06, T05). Les prix seuls ne retiennent pas : B1 a un saut de 93 %.
 - **Programmé** : `N02_rose_natif` (style natif, diamant rose vif 3 ct, tête florale) le **sam. 28 nov. à 19 h 30** (28848). La fin de semaine compte maintenant X01 (ven. 19 h 30), le carrousel (sam. 17 h 10) et N02 (sam. 19 h 30).
 - **Banque** : « 00 · À trier » ne contient qu'un reçu PDF, aucune vidéo. Veille sautée (pas de crédits Firecrawl).
+
+## 42. Pubs Meta : compte rendu toutes les 2 h (Rayane, 23 nov. 2026)
+
+Demande de Rayane : « à chaque 2 heures… des comptes rendus des pubs… regarde ce qu'on peut faire pour améliorer le tout… en te basant sur des recherches fondées sur les pubs Meta pour optimiser petit à petit ».
+
+- **Tâche** : « Pubs Meta : compte rendu toutes les 2 h — Beto Jewelry » (`trig_01TXxGTc75phQXQHQb5FXeNn`), de 8 h 07 à 22 h 07, heure de Toronto, dans la conversation principale (c'est là que se trouvent les accès Supermetrics, Gmail et Supabase ; une tâche en session neuve n'a reçu aucun connecteur). Elle est en lecture seule : elle propose, et Rayane répond « go pubs » pour appliquer. Elle s'arrête après le 12 déc. 2026, à la fin de la campagne.
+- **Premier contrôle (lun. 23 nov., 11 h)** : les 6 pubs sont approuvées et diffusent, sans doublon. 21,07 $ dépensés, 853 affichages, 5 clics, 0 lead. « Sous le sapin » prend la plus grosse part.
+- **Règles tirées des recherches (nov. 2026)** :
+  - **Apprentissage** : il faut environ 50 conversions par semaine pour en sortir, et une campagne de prospects en sort en 5 à 8 jours (stackmatix, adlibrary). Aucun changement les 72 premières heures, sauf un problème réel : pub refusée, pub qui ne diffuse pas, plus de 70 $ en un jour, lead non transmis.
+  - **Changements regroupés** : au plus une proposition par jour, dans le compte rendu de 20 h 07. Meta recommande, en haute saison, d'ajouter les nouvelles pubs d'un seul coup (shhots.ai).
+  - **Budget** : +20 à 30 % au plus, toutes les 48 à 72 h, et seulement si les consultations suivent. L'idée qu'un changement de plus de 20 % relance l'apprentissage vient de blogues, pas de Meta.
+  - **Fatigue** : fréquence sur 7 jours au-dessus d'environ 2,5 à 3 pour une audience froide, ou CTR en baisse de 20 à 30 % depuis le meilleur jour, et une nouvelle vidéo la remplace. Meta ne publie aucun seuil officiel : c'est une règle empirique.
+  - **Nombre de pubs** : 3 à 6 pubs bien différentes par ensemble. Que Meta mette presque tout le budget sur 1 ou 2 pubs est normal.
+  - **Repères de coût par lead** : environ 36 à 48 $ CA au Canada (Superads, nov. 2025 à oct. 2026, toutes industries) ; aucun chiffre propre à la bijouterie. On juge sur le coût par consultation réservée, puis sur le dépôt.
+- **Règle du plan de match (22 nov.)** :
+  - 50 $ ou moins par consultation réservée : proposer +20 à 30 %.
+  - De 50 à 100 $ : garder 40 $ par jour et remplacer la pub la plus faible.
+  - Plus de 100 $, ou aucune consultation après 150 $ dépensés : changer l'offre ou les vidéos.
+  - Une pub à 60 $ dépensés sans lead : proposer de la mettre en pause.
+- Sources : [adlibrary, fatigue](https://adlibrary.com/posts/ad-fatigue) · [succession.media](https://succession.media/guides/meta-creative-fatigue-how-many-creatives-to-test/) · [stackmatix, budget minimum](https://www.stackmatix.com/blog/facebook-ads-minimum-budget-requirements) · [adlibrary, apprentissage](https://adlibrary.com/posts/how-to-fix-meta-learning-phase-stuck) · [shhots.ai](https://shhots.ai/blog/meta-ad-creative-fatigue/) · [withblip](https://withblip.com/blog/how-many-ads-to-run-meta-campaign/) · [Superads, coût par lead au Canada](https://www.superads.ai/facebook-ads-costs/cost-per-lead/canada)
