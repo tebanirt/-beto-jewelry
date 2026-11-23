@@ -1,14 +1,15 @@
 // Motion layer renderer: node motion.js <fontsDir> <spec.json> <outDir> <logo.png> <motion_lib.js>
-// spec.json = { beats:[t of beat k], total: seconds, elements:[...] } -> outDir/00000.png ... (1080x1920, transparent, 30 fps)
+// spec.json = { beats:[t of beat k], total: seconds, fps, elements:[...] } -> outDir/00000.png ... (1080x1920, transparent, spec.fps)
 const { chromium } = require('playwright');
 const fs = require('fs'), path = require('path');
 const [,, F, specPath, outDir, logoPath, libPath] = process.argv;
 const spec = JSON.parse(fs.readFileSync(specPath, 'utf8'));
+for (const e of spec.elements) if (e.svg) e.svgText = fs.readFileSync(e.svg, 'utf8');  // schema bank drawings
 for (const e of spec.elements) if (e.src) {  // images are inlined as data URIs (cut-outs: PNG with alpha)
   const ext = e.src.toLowerCase().endsWith('.png') ? 'png' : 'jpeg';
   e.data = `data:image/${ext};base64,` + fs.readFileSync(e.src).toString('base64');
 }
-const FPS = 30;
+const FPS = spec.fps || 30;   // must equal the reel frame rate (REEL_FPS), or the layer drifts off the beat
 const d = p => 'data:font/woff2;base64,' + fs.readFileSync(p).toString('base64');
 const pkg = n => F + '/' + fs.readdirSync(F).filter(x => x.startsWith('fontsource-' + n) && !x.endsWith('.tgz')).sort().pop();
 const BOD = `${pkg('bodoni-moda')}/files/bodoni-moda-latin`, JO = `${pkg('jost')}/files/jost-latin`;

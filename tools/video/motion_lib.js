@@ -565,6 +565,54 @@
     },
   };
 
+  // ---- vector diagram from the schema bank (schemas/schemas.py), drawn on stroke by stroke, with focus on parts
+  // e.svgText (inlined by motion.js from e.svg), centre x/y, size px, draw = beats to draw it all,
+  // focus = [{steps:['halo-cache'], at, until}] lights those groups in gold and dims the rest.
+  T.schema = {
+    init(e) {
+      const sz = e.size || 900;
+      e.root = mk('div', `position:absolute;left:${(e.x || 540) - sz / 2}px;top:${(e.y || 900) - sz / 2}px;width:${sz}px;height:${sz}px;transform-origin:50% 50%;`);
+      e.root.innerHTML = e.svgText.replace('width="1000" height="1000"', `width="${sz}" height="${sz}"`);
+      const s = e.root.querySelector('svg');
+      s.style.cssText = 'display:block;overflow:visible;';
+      if (e.color) s.querySelectorAll('g[data-step]').forEach(g => g.setAttribute('stroke', e.color));
+      e.paths = [...s.querySelectorAll('g[data-step] > path')].map(p => ({
+        el: p, step: p.parentNode.getAttribute('data-step'), w: +p.getAttribute('stroke-width'),
+        fo: p.hasAttribute('fill-opacity') ? +p.getAttribute('fill-opacity') : 0,
+      }));
+      e.paths.forEach(o => { o.el.style.strokeDasharray = '1 1'; });
+    },
+    render(e, t) {
+      const w = win(e, t);
+      if (!w) { e.root.style.display = 'none'; return 0; }
+      e.root.style.display = '';
+      const N = e.paths.length, k = Math.max(3, N * (e.overlap || 0.18));
+      const drawDur = Math.max(0.2, B(e.at + (e.draw != null ? e.draw : 4)) - w.t0);
+      const prog = e.anim === 'fade' ? N + k : EZ.inOut(cl(w.lt / drawDur)) * (N + k);
+      let fa = 0, fs = [];
+      for (const f of e.focus || []) {
+        const a = B(f.at), b = f.until != null ? B(f.until) : 1e9;
+        if (t >= a && t < b) { fa = Math.min(cl((t - a) / 0.35), cl((b - t) / 0.25)); fs = f.steps; }
+      }
+      const glow = e.focusColor || GOLD_L;
+      e.paths.forEach((o, i) => {
+        const f = cl((prog - i) / k);
+        o.el.style.strokeDashoffset = 1 - f;
+        const on = fs.some(st => o.step === st || o.step.startsWith(st + '-'));
+        o.el.style.opacity = on ? 1 : 1 - (e.dim != null ? e.dim : 0.72) * fa;
+        o.el.style.stroke = on && fa > 0 ? glow : '';
+        o.el.setAttribute('stroke-width', o.w * (on ? 1 + 0.9 * fa : 1));
+        if (o.fo) o.el.setAttribute('fill-opacity', o.fo * f * (on ? 1 + 3 * fa : 1));
+      });
+      const ent = e.anim === 'fade' ? EZ.out3(cl(w.lt / 0.5)) : 1;
+      const z = e.zoom ? e.zoom[0] + (e.zoom[1] - e.zoom[0]) * cl(w.lt / Math.max(0.5, (e.until != null ? B(e.until) : w.t0 + 4) - w.t0)) : 1;
+      const fl = e.float ? Math.sin(w.lt * 1.4) * e.float : 0;
+      e.root.style.transform = `translateY(${fl}px) scale(${z}) ${exitStyle(e, w.xo)}`;
+      e.root.style.opacity = ent * w.xo;
+      return 1;
+    },
+  };
+
   // ---- progress bar at the top (explainers: "where are we")
   T.progress = {
     init(e) {

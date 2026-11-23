@@ -14,7 +14,8 @@ def render(name, mspec, beat_times, total):
     spec = dict(mspec)
     spec["beats"] = [round(float(x), 4) for x in beat_times]
     spec["total"] = round(float(total), 4)
-    srcs = "".join(f"{e['src']}:{os.path.getmtime(e['src'])}" for e in spec.get("elements", []) if e.get("src"))
+    spec["fps"] = rk.FPS   # 24 fps reels read the frames at 24: rendering them at 30 slowed the layer by 25 % (fixed 23 Nov 2026)
+    srcs = "".join(f"{e[k]}:{os.path.getmtime(e[k])}" for e in spec.get("elements", []) for k in ("src", "svg") if e.get(k))
     key = hashlib.md5((json.dumps(spec, sort_keys=True, ensure_ascii=False) + lib + srcs).encode()).hexdigest()[:12]
     d = f"{E}/motion/{name}_{key}"
     if os.path.exists(f"{d}/done"):

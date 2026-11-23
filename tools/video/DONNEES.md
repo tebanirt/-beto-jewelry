@@ -973,3 +973,33 @@ Rayane, 22 nov. au soir : « une nouvelle bague, tête florale… pierre Fancy V
 - **Plans reçus** (Drive « Bague vidéo pro ») : C072 (tour de face, 12 s) et C073 (de dos, le panier floral, 7 s). ProRes, 24 i/s, Rec.709. Deux autres plans restent à venir. Masters `ROSE72W` et `ROSE73W` (`ringlock.py`, zoom 1,4, `RING_Y` 0,565).
 - **Pub `AD_fetes_rose`** (`reels_fetes.py`, 19 s, 9:16 et 4:5) : « Solitaire rond · 3 carats / Diamant *rose vif* / Diamant de laboratoire », puis « Une tête florale sous la pierre / Or jaune 14k · fait sur mesure à Montréal », puis la carte « Deux façons de commencer ». **Aucun prix à l'écran** : 2 800 $ était le prix Marketplace, et un prix dans une pub reste à Rayane. La version avec prix (`AD_fetes_rose_prix`, « 2 800 $ + taxes ») est prête dans le code, à rendre sur son accord.
 - Ajoutée active à la campagne de Noël le 23 nov. (même ensemble, même formulaire, budget inchangé).
+
+## 40. Banque de schémas, vidéos explicatives et rendus 3D (23 nov. 2026, demande de Rayane : « améliore tout »)
+
+- **Banque de schémas** (`schemas/schemas.py`, `render_schemas.js`, `planche.js`) :
+  - 36 dessins vectoriels, en SVG et en PNG 2160 px à fond transparent, en 3 couleurs (or, ivoire, encre).
+  - 10 formes vues de dessus (vraies facettes de taille brillant ou à degrés), l'anatomie d'un rond, 11 carats à l'échelle (0,5 à 5 ct, diamètres moyens publiés, toujours « environ »), 10 bagues de profil et 4 vues de dessus.
+  - Rayane (23 nov.) : les formes, « c'est déjà bien, j'aime bien » ; les bagues dessinées, « dégueulasses ». **Les bagues en traits ne servent plus** ; seules les formes et les carats restent.
+- **Moteur** :
+  - élément `schema` dans `motion_lib.js` : le dessin se trace trait par trait et `focus` allume une partie en or.
+  - **Bogue corrigé** : à 24 i/s, la couche motion était rendue à 30 i/s, donc 25 % trop lente et décalée de la musique. `motion.js` prend maintenant `spec.fps`. Aucun reel programmé n'était touché : M02_noel est à 30 i/s, et S5, R_laquelle et T* n'ont pas de couche motion.
+- **Reels** (`reels_schemas.py`) :
+  - `X01_formes` (31 s, piste 432) : les 10 formes dessinées sur le temps, puis les quatre bagues réelles ; contrôlé, prêt.
+  - `X02_halo_cache` : retiré, il utilise un dessin de bague.
+- **Carrousels** (`schemas/carrousel.js`, `carrousels.py`, 1080 x 1350) :
+  - « 10 formes de diamant » (12 images) : prêt.
+  - « styles » : retiré tant que les bagues ne sont pas en rendu réaliste.
+- **Rendus 3D réalistes** (`rendu3d/studio.py`) :
+  - Blender 5.3 sous forme de module Python (`pip install bpy`, Blender Foundation, GPL), Cycles sur le processeur.
+  - Vraie taille brillant à 57 facettes : table 56 %, couronne 34,5°, pavillon 40,75°, indice 2,417, dispersion (Abbe 55).
+  - Or 14k jaune, blanc ou rose ; fond blanc et studio à bandes, avec une carte noire autour de l'objectif pour le contraste du diamant.
+  - Solitaire construit par le script : environ 40 s pour une image de 600 px.
+  - À faire : un diamant plus contrasté et plus net, puis les vrais modèles de Rayane.
+  - **Les modèles 3D de Rayane** (199 fichiers STL et 3DM, dossier Drive « impression », `1r4fq_HURpakwQmsANoKAdq8uQpTiRZAI`) sont privés. Pour les télécharger, il faut que Rayane partage le dossier par lien, en lecture. L'agent ne change pas ce partage lui-même : le connecteur ne peut pas le retirer ensuite.
+- **Recherche du jour** :
+  - Les reels éducatifs sont nos meilleurs : W06 165 vues, W05 141.
+  - Mosseri (2026) : l'originalité et les envois par portée comptent ; les carrousels rapportent des enregistrements.
+  - Meta Business Suite a un « commentaire → message » gratuit : 5 mots-clés, réglé sur ordinateur, envoyé après 15 min si personne n'a répondu.
+  - Pinterest : un moteur de recherche gratuit pour les idées de bagues de fiançailles.
+  - Publier sur la fiche Google par Supermetrics coûte un supplément (`LICENSE_DATA_SOURCE_NOT_AVAILABLE`) : refusé, Rayane publie lui-même depuis son téléphone.
+  - Sous-titres automatiques : le modèle Whisper vient de huggingface.co, bloqué dans l'environnement.
