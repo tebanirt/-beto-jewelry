@@ -353,6 +353,12 @@ Ce fichier doit être mis à jour à chaque nouvelle règle ou correction durabl
   1. le visage ;
   2. les mains seulement (la bague passée à l'annulaire, l'écrin qui s'ouvre) ;
   3. la voix seulement, ou un avis écrit.
+- **Images d'illustration pour les explications (Rayane, 23 nov. 2026 : « tu utilises les photos… sans droit d'auteur… pour générer une image… qui a l'air à peu près réaliste »)**. Pour montrer à quoi ressemble un style (cathédrale, halo, éternité) ou une forme de pierre, l'agent peut utiliser :
+  - une image générée par IA à partir d'une description (Canva, avec le compte de Rayane), jamais à partir d'une photo d'une autre marque ;
+  - une photo sous licence libre (Unsplash, Pexels, Wikimedia), en respectant sa licence.
+  - Toujours la mention « Illustration » à l'écran. Jamais présentée comme une pièce de Beto, jamais à côté d'un prix, jamais dans une pub sans l'accord de Rayane (`docs/design-brief.md` §6 reste en vigueur pour tout le reste).
+  - Jamais une photo de Brilliant Earth ou d'une autre marque retouchée : leurs images sont protégées par le droit d'auteur. Elles servent seulement de référence pour le style.
+  - Les photos Wikimedia sont souvent en CC BY-SA, et beaucoup sont des photos produit d'autres joailliers. Les éviter dans les vidéos : il faudrait citer l'auteur et mettre la vidéo sous la même licence.
 - **Studio produit** (Rayane, 15 nov. 2026) : plateau tournant motorisé, fond noir, trépied, beaucoup de lumière et l'app Blackmagic Camera. Le matériel et les réglages sont dans `tools/video/TOURNAGE.md` §2.
 - **TikTok** : Rayane a un compte et le connecte le 16 nov. 2026. Les mêmes fichiers originaux y sont publiés, avec un texte adapté.
 - **Mix demandé par Rayane (12 nov. 2026)** : du motion design avec beaucoup de vie (typo géante, transitions, explicatifs), de vrais plans de ses bagues (photos retouchées, fonds de marque) et un peu de banque d'images (gens, mariages, hiver). Chaque reel a une accroche, une montée et un appel à l'action. La banque d'images (Mixkit) reste un ingrédient en noir et blanc, jamais une bague en gros plan, jamais présentée comme Montréal ou comme nos clients. Selon l'étude de marché du 12 nov. (`tools/video/DONNEES.md` §9), le format le plus fort est l'atelier raconté par la voix de Rayane : il filme et envoie des messages vocaux (voir `tools/video/TOURNAGE.md`).
