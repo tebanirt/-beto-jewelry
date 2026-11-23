@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import Image from "next/image";
 import PageHero from "@/components/shared/PageHero";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Button from "@/components/ui/Button";
-import { useStore } from "@/store/useStore";
+import { useLang } from "@/hooks/useLang";
 import type { BlogPost } from "@/lib/blog-posts";
 
 const copy = {
@@ -14,7 +14,7 @@ const copy = {
 };
 
 export default function BlogArticleContent({ post }: { post: BlogPost }) {
-  const language = useStore((s) => s.language);
+  const language = useLang();
   const post_l = post[language];
   const c = copy[language];
 

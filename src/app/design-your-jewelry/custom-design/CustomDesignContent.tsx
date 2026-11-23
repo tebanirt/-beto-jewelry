@@ -15,7 +15,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import Magnetic from "@/components/ui/Magnetic";
 import { useTranslation } from "@/hooks/useTranslation";
-import { useStore } from "@/store/useStore";
+import { useLang } from "@/hooks/useLang";
 import { trackMetaLead } from "@/lib/metaPixel";
 import { trackFunnel } from "@/lib/funnel";
 import {
@@ -406,7 +406,7 @@ function Reveal({ show, id, children }: { show: boolean; id: string; children: R
 export default function CustomDesignContent({ priceTable }: { priceTable: EngagementPriceTable | null }) {
   const tr = useTranslation();
   const cd = tr.pages.customDesign;
-  const language = useStore((s) => s.language);
+  const language = useLang();
   const reduceMotion = useReducedMotion();
 
   const [step, setStep] = useState(0);

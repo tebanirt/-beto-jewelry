@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import { useEffect, useRef, useState } from "react";
 import { GOOGLE_REVIEW_URL } from "@/lib/constants";
 import { LINKS, PHONE_DISPLAY } from "@/lib/site-content";

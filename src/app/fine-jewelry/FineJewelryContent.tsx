@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import AnimatedSection from "@/components/ui/AnimatedSection";

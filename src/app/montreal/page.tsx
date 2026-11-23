@@ -1,36 +1,12 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-meta";
 import { t } from "@/lib/translations";
 import MontrealContent from "./MontrealContent";
 
 const METADATA_DESCRIPTION =
   "Design a custom engagement ring in Montréal directly with independent goldsmith Rayane Tebani. 3D CAD in ~48h, rings from about $2,000 CAD, delivered in about two weeks. In person in Montréal or by video across Canada.";
 
-export const metadata: Metadata = {
-  title: "Custom Engagement Rings Montréal",
-  description: METADATA_DESCRIPTION,
-  keywords: [
-    "custom engagement rings Montreal",
-    "bague de fiançailles sur mesure Montréal",
-    "joaillier sur mesure Montréal",
-    "independent jeweller Montreal",
-    "bespoke engagement ring Montreal",
-    "custom jewellery Montreal",
-  ],
-  alternates: {
-    canonical: "/montreal",
-    languages: {
-      en: "/montreal",
-      "fr-CA": "/bagues-de-fiancailles-sur-mesure-montreal",
-    },
-  },
-  openGraph: {
-    title: "Custom Engagement Rings Montréal | Beto Jewelry",
-    description:
-      "Design a custom engagement ring in Montréal directly with the goldsmith who makes it. 3D CAD in ~48h, honest pricing, delivered in about two weeks.",
-    type: "website",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Beto Jewelry — Custom Engagement Rings Montréal" }],
-  },
-};
+export const metadata: Metadata = pageMetadata("/montreal", "en");
 
 const m = t.en.pages.montreal;
 

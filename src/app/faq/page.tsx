@@ -1,18 +1,9 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-meta";
 import { SITE } from "@/lib/site-content";
 import FAQContent from "@/components/site/pages/FaqPage";
 
-export const metadata: Metadata = {
-  title: "FAQ",
-  description: "Answers to the questions we get asked most — custom design process, timelines, materials, sizing, and more.",
-  alternates: { canonical: "/faq" },
-  openGraph: {
-    title: "FAQ | Beto Jewelry",
-    description: "Answers to the questions we get asked most — custom design process, timelines, materials, sizing, and more.",
-    type: "website",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Beto Jewelry — Custom Fine Jewelry Montreal" }],
-  },
-};
+export const metadata: Metadata = pageMetadata("/faq", "fr");
 
 const faqJsonLd = {
   "@context": "https://schema.org",

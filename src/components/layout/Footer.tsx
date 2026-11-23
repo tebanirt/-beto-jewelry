@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import { EMAIL_DISPLAY, LINKS, PHONE_DISPLAY } from "@/lib/site-content";
 import { useSite } from "@/components/site/useSite";
 import { T } from "@/components/site/ui";
