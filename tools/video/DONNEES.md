@@ -1003,3 +1003,12 @@ Rayane, 22 nov. au soir : « une nouvelle bague, tête florale… pierre Fancy V
   - Pinterest : un moteur de recherche gratuit pour les idées de bagues de fiançailles.
   - Publier sur la fiche Google par Supermetrics coûte un supplément (`LICENSE_DATA_SOURCE_NOT_AVAILABLE`) : refusé, Rayane publie lui-même depuis son téléphone.
   - Sous-titres automatiques : le modèle Whisper vient de huggingface.co, bloqué dans l'environnement.
+
+- **Programmés (23 nov., nuit)** :
+  - `X01_formes` en reel d'essai le **ven. 27 nov. à 19 h 30** (`scheduled_id` 27781). Fichier allégé `X01_formes_ig.mp4` (CRF 17, 57 Mo au lieu de 97).
+  - Carrousel « guide des formes » sur le profil le **sam. 28 nov. à 17 h 10** (`scheduled_id` 27793), 7 images. **Instagram limite un carrousel à 10 images** (2 à 10 par l'API), donc deux formes par image.
+- **Rayane (23 nov.)** :
+  - Il veut des images réalistes des styles, basées sur des photos (Brilliant Earth ou le web).
+  - Réponse : jamais une photo d'une autre marque retouchée (droit d'auteur, confiance). À la place, une illustration IA décrite (Canva, son compte) ou une photo sous licence libre, toujours marquée « Illustration ». La règle est au brief §10.
+  - Test Canva : réaliste, mais peu fidèle à la demande (or blanc dans un écrin au lieu d'or jaune sur fond blanc). L'outil Canva impose les mots de Rayane ; s'il écrit « écris les descriptions toi-même », on pourra décrire précisément.
+  - Sites de photos libres autorisés le 23 nov. (Unsplash, Pexels, Wikimedia). L'accès direct au site d'Unsplash a été refusé par le contrôle de sécurité (point d'accès interne non officiel). Wikimedia marche par son API officielle, mais ce sont surtout des photos produit d'autres joailliers en CC BY-SA : à éviter.

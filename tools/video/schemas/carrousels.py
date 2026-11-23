@@ -35,8 +35,10 @@ STYLES = [
 def spec_formes(svg):
     slides = [dict(kind="cover", kicker="Le guide des formes", svg=f"{svg}/or/forme_rond.svg",
                    title="10 formes<br>de diamant", text="Laquelle est la tienne ?")]
-    for f, name, text in FORMES:
-        slides.append(dict(kind="item", svg=f"{svg}/ivoire/forme_{f}.svg", title=name, text=text))
+    # Instagram takes 10 images at most per carousel: two shapes per image
+    for k in range(0, len(FORMES), 2):
+        items = [dict(svg=f"{svg}/ivoire/forme_{f}.svg", title=name, text=text) for f, name, text in FORMES[k:k + 2]]
+        slides.append(dict(kind="pair", kicker=f"{k + 1:02d} — {k + 2:02d} / {len(FORMES)}", items=items))
     slides.append(dict(kind="end", svg=f"{svg}/or/forme_ovale.svg", title="La forme de ton choix",
                        text="Design 3D en 48 h, bague prête en 2 semaines.<br>Créée sur mesure à Montréal."))
     return dict(slides=slides)
