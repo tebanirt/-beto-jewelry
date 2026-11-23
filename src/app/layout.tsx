@@ -170,6 +170,16 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        {/* `lang` vaut "fr-CA" au départ (la racine est en français) ; sur une adresse /en/…,
+            on le corrige tout de suite, avant l'affichage — sans ça, un lecteur d'écran ou
+            Google lirait l'anglais annoncé comme du français au premier rendu serveur.
+            Navigation.tsx corrige aussi `lang` à chaque changement de page côté client (ce
+            script ne rejoue pas lui-même lors d'une navigation sans rechargement). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.lang = (location.pathname === '/en' || location.pathname.indexOf('/en/') === 0) ? 'en-CA' : 'fr-CA'",
+          }}
+        />
         {/* Les apparitions au défilement ne masquent le contenu que si JavaScript tourne. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('bj-js')" }} />
       </head>
