@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import { usePathname } from "next/navigation";
+import { stripLocale } from "@/lib/locale";
 import { LINKS } from "@/lib/site-content";
 import { useSite } from "@/components/site/useSite";
 
@@ -47,7 +48,7 @@ function wasClosed() {
 }
 
 export default function StickyBookBar() {
-  const pathname = usePathname();
+  const pathname = stripLocale(usePathname() || "/");
   const { language } = useSite();
   const t = TEXT[language];
   const [scrolled, setScrolled] = useState(false);

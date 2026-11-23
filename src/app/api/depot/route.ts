@@ -22,7 +22,9 @@ export async function GET(request: NextRequest) {
   const english = q.get("lang") === "en";
   const email = q.get("prefilled_email")?.trim() ?? "";
   const clientRef = q.get("client_reference_id")?.trim() ?? "";
-  const fallback = new URL("/design-your-jewelry/consultation", SITE);
+  // Pages de retour dans la langue du visiteur (anglais sous /en).
+  const base = english ? "/en" : "";
+  const fallback = new URL(`${base}/design-your-jewelry/consultation`, SITE);
 
   const taxed = addTaxes(DEPOSIT_AMOUNT_CAD);
   const metadata = {
@@ -59,7 +61,7 @@ export async function GET(request: NextRequest) {
       phone_number_collection: { enabled: true },
       // {CHECKOUT_SESSION_ID} est remplacé par Stripe : la page de
       // confirmation s'en sert pour signaler un seul achat à Meta par paiement.
-      success_url: `${SITE}/design-your-jewelry/depot-recu?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${SITE}${base}/design-your-jewelry/depot-recu?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: fallback.toString(),
     });
     if (!session.url) throw new Error("Checkout session without URL");

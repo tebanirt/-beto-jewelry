@@ -1,35 +1,30 @@
 "use client";
 
 import { useCallback } from "react";
-import { useStore, detectLanguage } from "@/store/useStore";
+import { usePathname, useRouter } from "next/navigation";
+import { useLang } from "@/hooks/useLang";
+import { localizePath, stripLocale } from "@/lib/locale";
 import { SITE } from "@/lib/site-content";
 
 const LANG_KEY = "beto-lang";
 
-/** Langue choisie par le visiteur (mémorisée sur cet appareil), sinon celle du navigateur. */
-export function initialLanguage(): "fr" | "en" {
-  try {
-    const saved = window.localStorage.getItem(LANG_KEY);
-    if (saved === "fr" || saved === "en") return saved;
-  } catch {
-    // stockage bloqué (navigation privée) : on garde la langue du navigateur
-  }
-  return detectLanguage();
-}
-
 export function useSite() {
-  const language = useStore((s) => s.language);
-  const setLanguageInStore = useStore((s) => s.setLanguage);
+  const language = useLang();
+  const pathname = usePathname();
+  const router = useRouter();
+  // Changer de langue, c'est aller à l'adresse de la même page dans l'autre langue.
   const setLanguage = useCallback(
     (lang: "fr" | "en") => {
-      setLanguageInStore(lang);
       try {
         window.localStorage.setItem(LANG_KEY, lang);
       } catch {
         // sans stockage, le choix vaut pour la visite en cours
       }
+      if (lang === language) return;
+      const search = typeof window !== "undefined" ? window.location.search + window.location.hash : "";
+      router.push(localizePath(stripLocale(pathname || "/"), lang) + search);
     },
-    [setLanguageInStore]
+    [language, pathname, router]
   );
   return { c: SITE[language], language, setLanguage };
 }

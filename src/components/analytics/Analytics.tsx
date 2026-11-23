@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import { useEffect, useState } from "react";
 import { useTranslation } from "@/hooks/useTranslation";
 import { CONSENT_EVENT, readConsent, writeConsent, type ConsentChoice } from "@/lib/consent";

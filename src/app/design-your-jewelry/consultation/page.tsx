@@ -1,17 +1,8 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-meta";
 import ConsultationContent from "@/components/site/pages/BookPage";
 
-export const metadata: Metadata = {
-  title: "Book a Consultation",
-  description: "Schedule a free consultation with our jewelry designer. Virtual or in-person in Montreal. No obligation.",
-  alternates: { canonical: "/design-your-jewelry/consultation" },
-  openGraph: {
-    title: "Book a Consultation | Beto Jewelry",
-    description: "Schedule a free consultation with our jewelry designer. Virtual or in-person in Montreal. No obligation.",
-    type: "website",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Beto Jewelry — Custom Fine Jewelry Montreal" }],
-  },
-};
+export const metadata: Metadata = pageMetadata("/design-your-jewelry/consultation", "fr");
 
 export default function ConsultationPage() {
   return <ConsultationContent />;

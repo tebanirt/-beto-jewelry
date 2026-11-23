@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getStylePage, getStylePagesByCategory, CATEGORY_LABEL } from "@/lib/style-pages";
 import StylePageContent from "@/components/shared/StylePageContent";
+import { styleMetadata } from "@/lib/dynamic-meta";
 
 const CATEGORY = "grillz" as const;
 
@@ -15,20 +16,7 @@ export async function generateMetadata({
   params: Promise<{ style: string }>;
 }): Promise<Metadata> {
   const { style } = await params;
-  const page = getStylePage(CATEGORY, style);
-  if (!page) return {};
-
-  return {
-    title: page.fr.seoTitle,
-    description: page.fr.seoDescription,
-    alternates: { canonical: `/${page.category}/${page.slug}` },
-    openGraph: {
-      title: page.fr.seoTitle,
-      description: page.fr.seoDescription,
-      type: "website",
-      images: [{ url: page.heroImage, alt: page.heroImageAlt.fr }],
-    },
-  };
+  return styleMetadata(CATEGORY, style, "fr");
 }
 
 export default async function GrillzStylePage({

@@ -2,11 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import { usePathname } from "next/navigation";
-import { useStore } from "@/store/useStore";
+import { stripLocale } from "@/lib/locale";
 import { LINKS, PHONE_DISPLAY } from "@/lib/site-content";
-import { initialLanguage, useSite } from "@/components/site/useSite";
+import { useSite } from "@/components/site/useSite";
 import { RevealObserver } from "@/components/site/ui";
 
 /**
@@ -17,19 +17,15 @@ import { RevealObserver } from "@/components/site/ui";
  * plein écran.
  */
 export default function Navigation() {
-  const pathname = usePathname();
+  const fullPath = usePathname() || "/";
+  // Chemin sans le préfixe /en : les liens du menu sont écrits en français.
+  const pathname = stripLocale(fullPath);
   const isHome = pathname === "/";
   const { c, language, setLanguage } = useSite();
-  const setStoreLanguage = useStore((s) => s.setLanguage);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const burgerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-
-  // Langue : appliquée après l'hydratation (le rendu serveur est en anglais).
-  useEffect(() => {
-    setStoreLanguage(initialLanguage());
-  }, [setStoreLanguage]);
 
   useEffect(() => {
     document.documentElement.lang = language === "fr" ? "fr-CA" : "en-CA";
@@ -43,9 +39,9 @@ export default function Navigation() {
   }, []);
 
   // Le panneau se ferme à chaque changement de page.
-  const [lastPath, setLastPath] = useState(pathname);
-  if (lastPath !== pathname) {
-    setLastPath(pathname);
+  const [lastPath, setLastPath] = useState(fullPath);
+  if (lastPath !== fullPath) {
+    setLastPath(fullPath);
     setOpen(false);
   }
 

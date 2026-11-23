@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { useTranslation } from "@/hooks/useTranslation";
 

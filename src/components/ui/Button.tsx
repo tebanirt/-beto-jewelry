@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import { cn } from "@/lib/utils";
 
 type ButtonVariant = "primary" | "secondary" | "ghost" | "gold";

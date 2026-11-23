@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import { useEffect, type CSSProperties, type ReactNode } from "react";
 import { LINKS, RINGS } from "@/lib/site-content";
 import { SHOW_PHOTO_SLOTS } from "@/lib/constants";
