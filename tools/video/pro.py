@@ -227,12 +227,20 @@ def build(spec, out_dir=None):
         if nst > 1:
             step = min(step, (win - hold) / (nst - 1))
         starts = [t_of(t["at"] + j * step) for j in range(nst)]
+        # Cumulative cards (each stage = the previous one + more, e.g. the end card with its dark shade): stack the added
+        # part on top and keep every stage to the end. Overlapping two full stages doubled the shade for a few frames and
+        # made the ring behind blink dark (found 22 Nov 2026 in the ad end cards).
+        stacked = nst > 1 and all(stages[k].startswith(stages[k - 1]) for k in range(1, nst))
         for j, h in enumerate(stages):
             lid = f"t{ti}_{j}"
+            if stacked and j > 0:
+                h = h[len(stages[j - 1]):]
+                if not h.strip():
+                    continue
             layers[lid] = h
             st = starts[j]
             # each stage stays under the next one until it has faded in: no blink between words
-            en = t_of(t["until"]) if j == nst - 1 else starts[j + 1] + 0.12
+            en = t_of(t["until"]) if (j == nst - 1 or stacked) else starts[j + 1] + 0.12
             tl.append((lid, st, 0.12 if j == 0 else 0.09, en, 0.0, 10 if j == 0 else 0))
     end = spec["end"]
     e0 = len(cuts) and cuts[-1]

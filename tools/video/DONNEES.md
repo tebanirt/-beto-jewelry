@@ -839,3 +839,128 @@ Par jour : samedi 124 vues en moyenne (3 reels), dimanche 108 (6), mardi 55, jeu
 **Règle des 600 vues** : notre meilleur reel d'essai a fait 165 vues (W06, 15 nov.) et la moyenne est de 56. Un reel à 600 vues est donc un vrai gagnant, environ 4 fois notre record ; la règle se déclenchera rarement au début. Le courriel « Demande importante » signale aussi le taux de saut : au-delà de 80 %, le reel a été vu sans être regardé, et le partager à la page réelle est douteux.
 
 **Lecture des vues** : bloquée tant que l'outil de publication et de lecture n'est pas rétabli (essai Supermetrics terminé le 17 nov.). D'ici là, une capture de l'écran « Reels d'essai » envoyée par Rayane suffit pour appliquer la règle. Capture du 21 nov. : solitaire princesse 124 vues, marquise (EN) 10, émeraude (EN) 8, rond (EN) 8, coussin 7, radiant 4 : la série des coupes, qui commence toujours par la même image, n'a pas percé.
+
+## 36. Production du 22 nov. 2026 (dimanche)
+
+- **Outils** : Supermetrics refuse toujours de publier et de lire (`TRIAL_EXPIRED`). Le token de l'outil officiel d'Instagram enregistré le 21 nov. est invalide (« Cannot parse access token ») : il faut le token de « Générer un token » à côté de @betojewelry (environ 150 à 250 caractères, commence en général par IG), pas l'identifiant ni la clé secrète de l'app.
+- **Publication** : B1_prix_marquise_2ct (corrigé : « Griffes serties de diamants de laboratoire ») envoyé à Rayane pour ce soir, 19 h 30, en reel d'essai dans l'app. S2_secret_dessous lui avait été envoyé le 21 nov. ; impossible de vérifier s'il l'a publié.
+- **Seuil du dimanche et meilleures heures** : pas de nouvelles données (aucune lecture possible), donc rien ne change (65 % ; 19 h 30, puis 21 h).
+- **Banque** : seule nouveauté, « Video V8.mp4 » (43 Mo, déposée le 21 nov. vers 21 h 40 dans « Beto — Banque vidéo »), toujours privée : pas téléchargeable tant que Rayane n'envoie pas le lien de partage.
+- **Veille** (TikTok, « jeweler custom engagement ring process », les plus aimées des 3 derniers mois) :
+
+| Compte | Vues | Durée | Accroche et format | Son |
+|---|---|---|---|---|
+| @brooker_brothers | 12,1 M | 76 s | « White Gold Maintenance & Care: NONE!!! » : le joaillier démonte une idée reçue sur l'or blanc, face caméra | Voix originale |
+| @massoyanjewelers | 5,9 M | 76 s | Histoire d'une cliente : un 5 carats dans la bague de sa grand-mère, sans perdre le dessin d'origine | Voix originale |
+| @brooker_brothers | 2,7 M | 70 s | « Would you wear a 5 carat diamond ring? » puis la fabrication de A à Z | Voix originale |
+| @oorejewelry | 1,4 M | 29 s | Fabrication d'une monture florale, plan par plan ; 24 000 partages | Son tendance |
+| @jeanpaulxavier | 0,7 M | 71 s | Coulisses d'une bague « sculpturale » pour une demande | Musique |
+
+  Ce qui revient : la voix du joaillier, un sujet qui corrige une croyance (« l'or blanc… ») ou l'histoire d'un client, et des vidéos longues (70 à 76 s) quand quelqu'un parle. Les 4 premières utilisent le son original. Rien de tout ça n'est possible sans la voix ou le visage de Rayane : c'est le plan à filmer en priorité.
+
+## 37. Reprise de la publication par Supermetrics (22 nov. 2026)
+
+Rayane a payé Supermetrics (forfait Starter, Instagram Insights + Facebook Ads). La publication par l'outil remarche ; 236 abonnés.
+
+- **Programmés en reels d'essai** (SS_PERFORMANCE, description du gabarit pack.py) :
+
+  | Date | Heure | Reel |
+  |---|---|---|
+  | dim. 22 nov. | 19 h 30 | S2_secret_dessous |
+  | dim. 22 nov. | 21 h | B1_prix_marquise_2ct |
+  | lun. 23 nov. | 19 h 30 | S5_noel |
+  | mar. 24 nov. | 19 h 30 | B3_griffes_serties |
+  | mer. 25 nov. | 19 h 30 | R_laquelle |
+  | jeu. 26 nov. | 19 h 30 | S3_trois_details |
+
+- On alterne les bagues (Jobby, Benny, trois bagues) pour ne pas répéter les mêmes plans.
+- **B3 corrigé avant publication** : la carte disait « Des diamants jusque sur les griffes ». Elle dit maintenant « Diamants de laboratoire jusque sur les griffes ».
+- **Gardés pour plus tard** : S1A_devine_le_prix et S4_indice, même bague Jobby. On décide après le verdict 72 h de S2 (25 nov.).
+- **Chiffres des 14 derniers jours** : 45 reels relevés et enregistrés dans `social_reels`.
+  - Meilleurs : W06_EN_lab_truth (165 vues), J01_journee (158), W05_labo_verite (141), W04_pov_3d (130), C_princesse (124).
+  - Aucun reel à 600 vues ; aucun abonnement mesuré (`media_follows` vide partout) ; 1 seul partage (C_toutes_coupes).
+- **Règle des 72 h**
+  - Retirés : C_marquise, C_emeraude et C_EN_marquise (7 à 10 vues).
+  - Bons :
+    - W05_labo_verite (saut 49,6 %, 5 s regardées) ;
+    - T01_avis_google (saut 62,4 %, 13 s regardées) ;
+    - C_toutes_coupes (1 partage, signal faible).
+- **À corriger dans l'app par Rayane** : le reel d'essai P01_paiement (16 nov., 4 vues) contient encore « Financement disponible » dans sa description. L'API ne permet pas de modifier la description d'un reel publié.
+- **TikTok** : pas dans le forfait. Rayane publie lui-même le paquet `TikTok_semaine_22-25nov.txt`.
+
+**Rattrapage du même jour** (Rayane : « Publiez-les la même journée… il ne faut pas que ce contenu-là part au waste ») : 12 reels de plus, pour 18 en tout.
+
+| Date | 15 h | 17 h 10 | 19 h 30 | 21 h | 22 h 15 |
+|---|---|---|---|---|---|
+| dim. 22 | R02_qui_est_rayane (15 h 30) | T06_avis_parfait | S2 | B1 | W02_EN_mistakes |
+| lun. 23 | C_rond | T1_tour | S5_noel | T4_pov | |
+| mar. 24 | M02_noel | T5_feu | B3 | S1A | |
+| mer. 25 | T2_details | S4_indice | R_laquelle | | |
+| jeu. 26 | | S1B | S3 | | |
+
+- **C_rond** : `pricing_config` n'a pas changé depuis le 6 nov., et le site affichait 2 350 $ le 15 nov. La fourchette de 2 300 à 2 400 $ tient toujours.
+- **T06** : « 20 avis, tous à 5 étoiles » est retiré de la description, faute de chiffre vérifié aujourd'hui.
+- **Non publiés** :
+  - V2_ovale_or_jaune : clip refusé 3 fois par Rayane, et « Diamant blanc » sans origine connue.
+  - B2_pierre_cachee : la petite pierre rose est à confirmer par Rayane.
+  - Le premier lot du 10 nov. (R01 à R10, B01 à B10, C01 à C05, D, E, F, G, H, I) : ancien son synthétisé, refusé par Rayane, et la plupart sont déjà sortis en version pro (série P).
+  - Les pubs AD_* : réservées à Facebook Ads.
+
+## 38. Contrôle qualité complet et campagne de Noël (22 nov. 2026, demande de Rayane)
+
+Rayane : « quelques vidéos… qui tournaient sur le plateau où les transitions étaient un peu saccadées… faut enlever tous les bugs ».
+
+**Contrôle automatique** (`qc_smooth/analyze.py`, scratchpad) : cadence, images doublées, sauts entre images, sur les 18 reels programmés et les 15 pubs.
+
+- **Bug 1, la saccade du plateau.**
+  - Où : B1 (2 600 $) et B3 (griffes serties).
+  - Cause : les prises de Benny sont en 24 i/s, mais elles ont été rendues en 30 i/s, d'où une image doublée sur 5.
+  - Correction : re-rendus avec `REEL_FPS=24`, puis remplacés dans la file Instagram (27409, 27410).
+  - **Règle : toute prise à 24 i/s (ProRes de Rayane) se rend avec `REEL_FPS=24`.**
+- **Bug 2, le clignotement des cartes de fin** (« Deux façons de commencer »).
+  - Cause : deux étapes se superposaient avec chacune son voile sombre, et la bague derrière clignotait.
+  - Correction dans `pro.py` : les étapes cumulatives s'empilent.
+  - Toutes les pubs ont été re-rendues (CRF 14, 9:16 et 4:5).
+- **Texte.**
+  - Pubs 12 à 15 : « diamants de laboratoire » ajouté (code déjà corrigé, re-rendu).
+  - Pub de l'ensemble : « Diamants de laboratoire · or jaune » ajouté.
+- **Autres vidéos programmées** (Jobby à 24 i/s, consultation à 30 i/s) : aucun doublon. Les sauts détectés sont des coupes voulues.
+
+**Tunnel de vente, les chiffres** (CRM et Meta, sept. au 22 nov.) :
+- Formulaire Meta d'octobre : 435 $, 46 prospects (9,45 $ chacun). Résultat : 0 vente, environ 4 consultations, 39 prospects jamais avancés.
+  - Le formulaire le plus rentable en volume promettait « le prix de ton bijou en 1 heure ». C'est une promesse retirée depuis, qui attirait des curieux du prix.
+- Campagne « réservation sur le site » : 323 $ pour 3 prospects (pixel).
+- Ce qui vend :
+  - réservations Calendly directes : 10 contacts, 2 ventes ;
+  - site : 10 contacts, 2 ventes ;
+  - Instagram en message privé : 1 vente sur 2 ;
+  - Marketplace : 27 ventes.
+- Formulaire « Commencer mon design » (6 au 21 nov.) :
+  - 38 sessions, 26 ont choisi une pièce, 14 ont vu le prix, 4 ont envoyé le formulaire ;
+  - la plus grosse perte est à l'étape des détails (15 sessions sur 26 quittent là).
+- Pixel : Lead, Schedule (page « merci-consultation ») et Purchase (dépôt) sont en place, mais seulement dans le navigateur et après le consentement de la Loi 25. Pas d'API Conversions : il faut un jeton Meta, la voie gratuite est en attente.
+
+**Campagne préparée en pause** (compte act_1886625265689108) :
+- Campagne : « BETO | NOËL 2026 | CONSULTATIONS | V1 » (52569201493379).
+- Objectif Prospects, 40 $/jour en budget de campagne, du 23 nov. au 11 déc.
+- Un ensemble Advantage+ (52569201494979) : Montréal + 40 km, 18-65 ans avec suggestion 24-45 ans, placements automatiques.
+- Nouveau formulaire « BETO | NOËL 2026 | CONSULTATION QUALIFIÉE | V1 » (1120103827294880).
+  - 3 questions : pour quand, budget avant taxes, moyen de contact.
+  - L'écran de fin mène directement au Calendly.
+- Pubs en pause, avec toutes les retouches automatiques de Meta désactivées :
+  - 2 600 $ (52569201656979) ;
+  - « sous le sapin » (52569201740379) ;
+  - collection (52569212660979) et avis (52569212632779) : re-téléversées à partir des rendus corrigés (24 i/s, cartes de fin), en révision chez Meta le 22 nov. ;
+  - Rayane en ville, dès 2 000 $ (52569206488579, V8 de Benny corrigée, voir plus bas), approuvée.
+  - Piège de l'outil : avec des vidéos de 80 Mo et plus, `manage_campaign` dépasse son délai et la pub n'est pas toujours créée, même si les vidéos arrivent dans la bibliothèque. Vérifier les `assets`, puis créer la pub avec les `asset_id` (instantané).
+- Plan de match complet (marché, réglages, règle pour doubler, tunnel, test de dépôt, 6 scripts, calendrier) : doc « Noël 2026 : pubs Meta et tunnel de vente », onglet « Plan de match (22 nov.) ». Les 6 scripts sont aussi dans `LISTE_A_FILMER.md`, priorité 0.
+- **Ancienne campagne de formulaire supprimée** (Rayane, 22 nov. : « supprime la pub qui tournait… pour remplir le formulaire… trop large ») : « BETO JEWELRY | LEADS | OCT 2026 | V1 » (52561352986579) est en `REMOVED`. On garde « BETO | WEBSITE BOOKING | OCT 2026 | V1 » (52561385176379, consultation gratuite sur le site), en pause.
+
+**Pub V8 de Benny (Rayane qui marche au centre-ville), corrigée le 22 nov.** Les 6 versions reçues (V1, V2, V6, V7, V8 ; V3 à V5 non retenues par Rayane) ont la même image, seule la voix change. On garde la V8. Trois défauts réglés :
+- **Saccade** : la vidéo était en 30 i/s avec des prises en 24 i/s (une image doublée sur 5). Ramenée en 24 i/s (`decimate`), plus aucun motif de doublon.
+- **Bague à l'auriculaire** (5,1 à 6,1 s, interdit, §10 du brief) : remplacée par le plan de la princesse dans son écrin (B-roll de Benny, `Frame01086738.mov`), avec les sous-titres d'origine remis par-dessus.
+- **Fin** : la pastille « Consultation gratuite » ajoutée à partir de 23,4 s ; son à −15 LUFS.
+- Formats 9:16 et 4:5 (recadrage à y = 370 : sous-titres et « 14-18 ou platine » restent dans le cadre).
+- La vidéo dit « de seulement 2000 dollars » : le texte de la pub précise « à partir de 2 000 $ + taxes ».
+- Fin du partenariat avec Benny (Rayane, 22 nov.) : ses deux banques de plans restent utilisables ; les nouvelles pubs seront tournées par Rayane (scripts plus bas).
+- Recherche : brief de recherche du 22 nov., résumé dans la réponse à Rayane.

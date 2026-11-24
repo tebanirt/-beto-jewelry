@@ -10,12 +10,12 @@ import {
   type ReactNode,
 } from "react";
 import { motion, AnimatePresence, useReducedMotion, type Variants } from "framer-motion";
-import { AlertCircle, Check, CheckCircle2, Clock, ExternalLink, Loader2, Upload, X } from "lucide-react";
+import { AlertCircle, Check, CheckCircle2, Clock, ExternalLink, Loader2, Plus, Upload, X } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import Magnetic from "@/components/ui/Magnetic";
 import { useTranslation } from "@/hooks/useTranslation";
-import { useStore } from "@/store/useStore";
+import { useLang } from "@/hooks/useLang";
 import { trackMetaLead } from "@/lib/metaPixel";
 import { trackFunnel } from "@/lib/funnel";
 import {
@@ -406,7 +406,7 @@ function Reveal({ show, id, children }: { show: boolean; id: string; children: R
 export default function CustomDesignContent({ priceTable }: { priceTable: EngagementPriceTable | null }) {
   const tr = useTranslation();
   const cd = tr.pages.customDesign;
-  const language = useStore((s) => s.language);
+  const language = useLang();
   const reduceMotion = useReducedMotion();
 
   const [step, setStep] = useState(0);
@@ -421,6 +421,9 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
 
   const [images, setImages] = useState<InspirationImage[]>([]);
   const [preparing, setPreparing] = useState(0);
+  // The photo and the note are optional: folded behind one button so the details step looks short
+  // (funnel_events, 6 to 21 Nov: 15 of 26 sessions left at this step).
+  const [extrasOpen, setExtrasOpen] = useState(false);
   const [uploadMessage, setUploadMessage] = useState("");
   const [dragging, setDragging] = useState(false);
 
@@ -581,6 +584,7 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
     ? quote.prices.map((p) => `${money(p.price)} ${cd.estimateIn.replace("{k}", cd.gradeLabels[p.karat])}`).join(" · ")
     : "";
   // Live price while choosing (step 2 of 5), like a ring builder's running total.
+  const showExtras = extrasOpen || images.length > 0 || preparing > 0 || d.notes.trim() !== "";
   const showLivePrice = step === 1 && isEngagement && d.stone === "lab";
   const livePriceText =
     images.length > 0
@@ -1279,105 +1283,130 @@ export default function CustomDesignContent({ priceTable }: { priceTable: Engage
                 </ChoiceGroup>
 
                 <SectionTitle>{cd.sectionInspiration}</SectionTitle>
-                {isEngagement && images.length === 0 && d.stone === "lab" && (
-                  <p className="text-xs text-beto-gray -mt-2 mb-5 leading-relaxed">{cd.uploadHourNote}</p>
-                )}
-                <div className="mb-10">
-                  <p className="text-xs font-medium text-beto-black tracking-wide mb-3">
-                    {cd.uploadLabel} <span className="text-beto-gray/80 font-normal">{cd.uploadOpt}</span>
-                  </p>
-                  <label
-                    htmlFor="inspiration-images"
-                    onDragOver={(e) => {
-                      e.preventDefault();
-                      setDragging(true);
+                {!showExtras && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setExtrasOpen(true);
+                      trackFunnel("choice", stepRef.current, { field: "extras", value: "open" });
+                      // Keyboard and screen-reader users land on the photo field that just appeared.
+                      window.setTimeout(() => document.getElementById("inspiration-images")?.focus(), 60);
                     }}
-                    onDragLeave={() => setDragging(false)}
-                    onDrop={onDrop}
                     className={cn(
-                      "block border-2 border-dashed p-8 sm:p-10 text-center bg-beto-white cursor-pointer transition-[border-color,background-color] duration-200",
-                      "focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-beto-black",
-                      dragging ? "border-beto-gold bg-beto-gold/5" : "border-beto-gray-subtle hover:border-beto-gold/60"
+                      "group flex w-full items-center gap-3 border border-dashed border-beto-gray-subtle bg-beto-white px-5 py-4 text-left text-sm text-beto-black transition-colors duration-200 hover:border-beto-gold/60",
+                      pressable,
+                      focusRing
                     )}
                   >
-                    <Upload size={20} className="text-beto-gray mx-auto mb-3" aria-hidden />
-                    <span className="block text-sm text-beto-black mb-1">{cd.uploadDrop}</span>
-                    <span className="block text-xs text-beto-gray/80">{cd.uploadHint}</span>
-                    <input
-                      id="inspiration-images"
-                      type="file"
-                      accept="image/*"
-                      multiple
-                      className="sr-only"
-                      onChange={(e) => {
-                        if (e.target.files?.length) void addFiles(e.target.files);
-                        e.target.value = "";
-                      }}
-                    />
-                  </label>
-
-                  {(images.length > 0 || preparing > 0) && (
-                    <ul className="flex flex-wrap gap-4 mt-5">
-                      <AnimatePresence initial={false}>
-                        {images.map((img) => (
-                          <motion.li
-                            key={img.id}
-                            layout={!reduceMotion}
-                            initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.92 }}
-                            animate={{ opacity: 1, scale: 1, transition: { duration: 0.25, ease: EASE_OUT } }}
-                            exit={{ opacity: 0, scale: reduceMotion ? 1 : 0.92, transition: { duration: 0.15, ease: EASE_IN } }}
-                            className="relative w-24 h-24 border border-beto-gray-subtle bg-beto-white"
-                          >
-                            {/* eslint-disable-next-line @next/next/no-img-element -- local blob preview */}
-                            <img src={img.previewUrl} alt="" className="w-full h-full object-cover" />
-                            <button
-                              type="button"
-                              onClick={() => removeImage(img.id)}
-                              aria-label={cd.uploadRemove}
-                              className={cn(
-                                "absolute -top-3 -right-3 w-8 h-8 rounded-full bg-beto-black text-white flex items-center justify-center hover:bg-beto-gold hover:text-beto-black transition-colors duration-200",
-                                "after:absolute after:-inset-1.5 after:content-['']",
-                                pressable,
-                                focusRing
-                              )}
-                            >
-                              <X size={14} aria-hidden />
-                            </button>
-                          </motion.li>
-                        ))}
-                      </AnimatePresence>
-                      {preparing > 0 && (
-                        <li className="w-24 h-24 border border-dashed border-beto-gray-subtle flex flex-col items-center justify-center gap-2 px-2 text-center text-[11px] text-beto-gray">
-                          <Loader2 size={16} className="motion-safe:animate-spin" aria-hidden />
-                          {cd.uploadPreparing}
-                        </li>
-                      )}
-                    </ul>
+                    <Plus size={16} className="shrink-0 text-beto-gold-dark" aria-hidden />
+                    <span>
+                      {cd.extrasToggle} <span className="text-beto-gray/80">{cd.extrasOpt}</span>
+                    </span>
+                  </button>
+                )}
+                <Reveal show={showExtras} id="inspiration-extras">
+                  <div id="inspiration-extras">
+                  {isEngagement && images.length === 0 && d.stone === "lab" && (
+                    <p className="text-xs text-beto-gray -mt-2 mb-5 leading-relaxed">{cd.uploadHourNote}</p>
                   )}
-                  <div aria-live="polite">
-                    <FieldError id="upload-error" message={uploadMessage || undefined} />
-                    {isEngagement && images.length > 0 && (
-                      <p className="flex items-start gap-2 text-xs text-beto-black mt-4 leading-relaxed">
-                        <Clock size={14} className="text-beto-gold-dark shrink-0 mt-px" aria-hidden />
-                        {cd.uploadHourNote}
-                      </p>
-                    )}
-                  </div>
-                </div>
+                  <div className="mb-10">
+                    <p className="text-xs font-medium text-beto-black tracking-wide mb-3">
+                      {cd.uploadLabel} <span className="text-beto-gray/80 font-normal">{cd.uploadOpt}</span>
+                    </p>
+                    <label
+                      htmlFor="inspiration-images"
+                      onDragOver={(e) => {
+                        e.preventDefault();
+                        setDragging(true);
+                      }}
+                      onDragLeave={() => setDragging(false)}
+                      onDrop={onDrop}
+                      className={cn(
+                        "block border-2 border-dashed p-8 sm:p-10 text-center bg-beto-white cursor-pointer transition-[border-color,background-color] duration-200",
+                        "focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-beto-black",
+                        dragging ? "border-beto-gold bg-beto-gold/5" : "border-beto-gray-subtle hover:border-beto-gold/60"
+                      )}
+                    >
+                      <Upload size={20} className="text-beto-gray mx-auto mb-3" aria-hidden />
+                      <span className="block text-sm text-beto-black mb-1">{cd.uploadDrop}</span>
+                      <span className="block text-xs text-beto-gray/80">{cd.uploadHint}</span>
+                      <input
+                        id="inspiration-images"
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        className="sr-only"
+                        onChange={(e) => {
+                          if (e.target.files?.length) void addFiles(e.target.files);
+                          e.target.value = "";
+                        }}
+                      />
+                    </label>
 
-                <div>
-                  <label htmlFor="design-notes" className="text-xs font-medium text-beto-black tracking-wide mb-2 block">
-                    {cd.additionalNotes} <span className="text-beto-gray/80 font-normal">{cd.notesOpt}</span>
-                  </label>
-                  <textarea
-                    id="design-notes"
-                    rows={4}
-                    value={d.notes}
-                    onChange={(e) => set("notes", e.target.value)}
-                    placeholder={cd.notesPlaceholder}
-                    className={cn(inputClass, inputIdle, "resize-none")}
-                  />
-                </div>
+                    {(images.length > 0 || preparing > 0) && (
+                      <ul className="flex flex-wrap gap-4 mt-5">
+                        <AnimatePresence initial={false}>
+                          {images.map((img) => (
+                            <motion.li
+                              key={img.id}
+                              layout={!reduceMotion}
+                              initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.92 }}
+                              animate={{ opacity: 1, scale: 1, transition: { duration: 0.25, ease: EASE_OUT } }}
+                              exit={{ opacity: 0, scale: reduceMotion ? 1 : 0.92, transition: { duration: 0.15, ease: EASE_IN } }}
+                              className="relative w-24 h-24 border border-beto-gray-subtle bg-beto-white"
+                            >
+                              {/* eslint-disable-next-line @next/next/no-img-element -- local blob preview */}
+                              <img src={img.previewUrl} alt="" className="w-full h-full object-cover" />
+                              <button
+                                type="button"
+                                onClick={() => removeImage(img.id)}
+                                aria-label={cd.uploadRemove}
+                                className={cn(
+                                  "absolute -top-3 -right-3 w-8 h-8 rounded-full bg-beto-black text-white flex items-center justify-center hover:bg-beto-gold hover:text-beto-black transition-colors duration-200",
+                                  "after:absolute after:-inset-1.5 after:content-['']",
+                                  pressable,
+                                  focusRing
+                                )}
+                              >
+                                <X size={14} aria-hidden />
+                              </button>
+                            </motion.li>
+                          ))}
+                        </AnimatePresence>
+                        {preparing > 0 && (
+                          <li className="w-24 h-24 border border-dashed border-beto-gray-subtle flex flex-col items-center justify-center gap-2 px-2 text-center text-[11px] text-beto-gray">
+                            <Loader2 size={16} className="motion-safe:animate-spin" aria-hidden />
+                            {cd.uploadPreparing}
+                          </li>
+                        )}
+                      </ul>
+                    )}
+                    <div aria-live="polite">
+                      <FieldError id="upload-error" message={uploadMessage || undefined} />
+                      {isEngagement && images.length > 0 && (
+                        <p className="flex items-start gap-2 text-xs text-beto-black mt-4 leading-relaxed">
+                          <Clock size={14} className="text-beto-gold-dark shrink-0 mt-px" aria-hidden />
+                          {cd.uploadHourNote}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="design-notes" className="text-xs font-medium text-beto-black tracking-wide mb-2 block">
+                      {cd.additionalNotes} <span className="text-beto-gray/80 font-normal">{cd.notesOpt}</span>
+                    </label>
+                    <textarea
+                      id="design-notes"
+                      rows={4}
+                      value={d.notes}
+                      onChange={(e) => set("notes", e.target.value)}
+                      placeholder={cd.notesPlaceholder}
+                      className={cn(inputClass, inputIdle, "resize-none")}
+                    />
+                  </div>
+                  </div>
+                </Reveal>
                 {helpLine}
               </>
             )}

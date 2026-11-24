@@ -61,8 +61,8 @@ def B3():
     """Hook on the rarest detail: the prongs themselves are set with diamonds."""
     texts = [
         dict(html=pill(["Même les griffes sont serties."]), at=0, until=2),
-        dict(html=nat("Des diamants<br>jusque sur les griffes."), at=2, until=6),
-        dict(html=nat("Un travail rare,<br>et très précis."), at=6, until=10),
+        dict(html=nat("Diamants de laboratoire<br>jusque sur les griffes."), at=2, until=6.4),
+        dict(html=nat("Un travail rare,<br>et très précis."), at=6.4, until=10),
         dict(html=nat("Marquise 2 carats<br>or blanc 14k"), at=10, until=14),
         dict(html=nat(CTA), at=14, until=18),
     ]

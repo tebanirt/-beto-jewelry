@@ -26,7 +26,7 @@ HOLIDAY = None   # no « Prix des Fêtes »: it implies a discount from a regula
 DEADLINE = "Commandez avant le 11 décembre"   # approved copy (brief §6)
 
 BENNY, JOBBY = RINGS
-SET = ("Ensemble", "4 000", "Marquise · avec son jonc", "L'ensemble, jonc pavé compris", "Or jaune",
+SET = ("Ensemble", "4 000", "Marquise · avec son jonc", "L'ensemble, jonc pavé compris", "Diamants de laboratoire · or jaune",
        (("DUO68W", 1.5), ("DUO67W", 2.5)))
 
 # the collection, cheapest first; the band has no solo shot, so it is only ever priced on the group picture

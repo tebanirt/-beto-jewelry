@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import Analytics from "@/components/analytics/Analytics";
 import AttributionCapture from "@/components/analytics/AttributionCapture";
 import HideOnAdmin from "@/components/layout/HideOnAdmin";
+import StickyBookBar from "@/components/layout/StickyBookBar";
 
 // Système visuel « Site 50 000 $ » : Bodoni Moda pour les titres (avec l'axe
 // de taille optique), Jost pour le texte et l'interface.
@@ -27,44 +28,36 @@ const jost = Jost({
 export const metadata: Metadata = {
   metadataBase: new URL("https://betojewelry.com"),
   title: {
-    default: "Beto Jewelry | Custom Engagement Rings Montreal",
+    default: "Beto Jewelry | Bagues de fiançailles sur mesure à Montréal",
     template: "%s | Beto Jewelry",
   },
   description:
-    "Custom engagement rings and fine jewelry in Montreal, designed with you by certified goldsmith Rayane Tebani. 3D rendering in 48 hours, engagement rings delivered in about two weeks.",
-  keywords: [
-    "custom engagement rings Montreal",
-    "bespoke jewelry Montreal",
-    "wedding bands Montreal",
-    "fine jewelry Montreal",
-    "custom jewelry designer Montreal",
-    "bague de fiançailles Montreal",
-    "bijoux sur mesure Montreal",
-  ],
+    "Bagues de fiançailles et bijoux sur mesure à Montréal, dessinés avec vous par le joaillier diplômé Rayane Tebani. Rendu 3D en 48 heures, bague de fiançailles prête en environ deux semaines.",
   authors: [{ name: "Beto Jewelry" }],
   creator: "Beto Jewelry",
   openGraph: {
     type: "website",
-    locale: "en_CA",
+    locale: "fr_CA",
+    alternateLocale: "en_CA",
     url: "https://betojewelry.com",
     siteName: "Beto Jewelry",
-    title: "Beto Jewelry | Custom Engagement Rings Montreal",
+    title: "Beto Jewelry | Bagues de fiançailles sur mesure à Montréal",
     description:
-      "Custom engagement rings and fine jewelry in Montreal. Every ring is designed with you, directly by the goldsmith who makes it.",
+      "Bagues de fiançailles sur mesure à Montréal. Chaque bague est dessinée avec vous, directement par le joaillier qui la fabrique.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Beto Jewelry — Custom Fine Jewelry Montreal",
+        alt: "Beto Jewelry — Bagues de fiançailles sur mesure, Montréal",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Beto Jewelry | Custom Engagement Rings Montreal",
+    title: "Beto Jewelry | Bagues de fiançailles sur mesure à Montréal",
     description:
-      "Custom engagement rings and fine jewelry in Montreal. Every ring is designed with you, directly by the goldsmith who makes it.",
+      "Bagues de fiançailles sur mesure à Montréal. Chaque bague est dessinée avec vous, directement par le joaillier qui la fabrique.",
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -172,11 +165,21 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
-      lang="en"
+      lang="fr-CA"
       className={`${bodoni.variable} ${jost.variable}`}
       suppressHydrationWarning
     >
       <head>
+        {/* `lang` vaut "fr-CA" au départ (la racine est en français) ; sur une adresse /en/…,
+            on le corrige tout de suite, avant l'affichage — sans ça, un lecteur d'écran ou
+            Google lirait l'anglais annoncé comme du français au premier rendu serveur.
+            Navigation.tsx corrige aussi `lang` à chaque changement de page côté client (ce
+            script ne rejoue pas lui-même lors d'une navigation sans rechargement). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.lang = (location.pathname === '/en' || location.pathname.indexOf('/en/') === 0) ? 'en-CA' : 'fr-CA'",
+          }}
+        />
         {/* Les apparitions au défilement ne masquent le contenu que si JavaScript tourne. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('bj-js')" }} />
       </head>
@@ -195,6 +198,7 @@ export default function RootLayout({
         <main id="contenu" tabIndex={-1} className="outline-none">{children}</main>
         <HideOnAdmin>
           <Footer />
+          <StickyBookBar />
         </HideOnAdmin>
       </body>
     </html>

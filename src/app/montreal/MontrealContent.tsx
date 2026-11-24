@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import { ArrowRight } from "lucide-react";
 import PageHero from "@/components/shared/PageHero";
 import TrustBar from "@/components/shared/TrustBar";
@@ -8,7 +8,7 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import Button from "@/components/ui/Button";
 import Magnetic from "@/components/ui/Magnetic";
 import { useTranslation } from "@/hooks/useTranslation";
-import { useStore } from "@/store/useStore";
+import { useLang } from "@/hooks/useLang";
 import { getBlogPost } from "@/lib/blog-posts";
 import PrivateOffices from "@/components/shared/PrivateOffices";
 
@@ -22,7 +22,7 @@ const RELATED_SLUGS = [
 
 export default function MontrealContent() {
   const tr = useTranslation();
-  const language = useStore((s) => s.language);
+  const language = useLang();
   const p = tr.pages.montreal;
 
   const related = RELATED_SLUGS.map((slug) => {

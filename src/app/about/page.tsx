@@ -1,17 +1,8 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-meta";
 import AboutContent from "@/components/site/pages/AboutPage";
 
-export const metadata: Metadata = {
-  title: "About",
-  description: "Meet Rayane Tebani, the certified goldsmith behind Beto Jewelry in Montreal — his training, his values, and why he designs every ring with you, not just for you.",
-  alternates: { canonical: "/about" },
-  openGraph: {
-    title: "About Beto Jewelry | Beto Jewelry",
-    description: "Meet Rayane Tebani, the certified goldsmith behind Beto Jewelry in Montreal — his training, his values, and why he designs every ring with you, not just for you.",
-    type: "website",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Beto Jewelry — Custom Fine Jewelry Montreal" }],
-  },
-};
+export const metadata: Metadata = pageMetadata("/about", "fr");
 
 export default function AboutPage() {
   return <AboutContent />;

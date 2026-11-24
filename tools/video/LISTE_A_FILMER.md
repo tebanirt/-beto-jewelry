@@ -18,11 +18,30 @@ Elle s'appuie sur trois sources :
 
 **Ce que je ne publierai jamais** : le visage d'un client sans son accord écrit, son nom, un numéro de certificat lisible, une gravure personnelle, l'écran d'une autre marque, une bague portée à l'auriculaire.
 
+## Priorité 0 — les 6 pubs de Noël et de la Saint-Valentin (22 nov. 2026)
+
+Rayane, 22 nov. : fin du partenariat avec Benny ; Rayane tourne lui-même ses vidéos face caméra, éducatives et publicitaires. Scripts tirés de l'étude de marché du 22 nov. (plan complet dans le doc « Noël 2026 : pubs Meta et tunnel de vente », onglet « Plan de match (22 nov.) »).
+
+Ordre : **5 et 1 avant le 28 nov.** (pour servir avant la date limite du 11 déc.), puis 6, puis 2, 3 et 4 pour janvier.
+
+| # | Vidéo | Accroche (1re seconde) | Plans | Fin |
+|---|---|---|---|---|
+| 5 | Date limite de Noël, 15 s | Texte « Demande à Noël ? Commandez avant le 11 décembre » | Un écrin sous un vrai sapin ; « Design 3D en 48 h, bague prête en 2 semaines » ; carte « Platine : avant le 4 décembre » | « Réservez cette semaine. » Retirée le 11 déc. |
+| 1 | Le prix d'un 2 carats, 20 s | « Solitaire 2 carats : 2 300 à 2 400 $ + taxes » ; « Voici ce que coûte un 2 carats chez nous. » | Plateau noir ; fiche (diamant de laboratoire, E, VVS2, IGI, or blanc 18k) ; « Je la dessine avec vous en 3D en 48 h » ; la bague dans l'écrin | Consultation gratuite, 2 bureaux privés ou en vidéo |
+| 6 | 2 000, 3 000 ou 4 000 $ ?, 30 s | La question en texte géant | Chaque bague sur le plateau avec sa carte : jonc large 2 200 $, solitaire 2 ct 2 300–2 400 $, marquise 2 ct 2 600 $, marquise 4 ct 3 350 $, ensemble 4 000 $ | « Dites-moi votre budget, je vous montre ce qu'on peut faire. » |
+| 2 | Le diamant de laboratoire est-il un faux ?, 25 s | « On me pose la question chaque semaine. » | Carbone, même structure ; selon le GIA, mêmes propriétés chimiques, physiques et optiques ; la pierre à la pince et à la loupe ; certificat IGI, numéro flouté ; « Naturel ou laboratoire, je travaille les deux. » | « Posez-moi vos questions. » Jamais « identique » |
+| 3 | Ta bague en 4 étapes, 30 s | « Votre bague en 4 étapes » | Consultation (bureau privé) ; 3D en 48 h (vrai écran MatrixGold, jamais le configurateur) ; dépôt 250 $ + taxes crédité à 100 % ; 2 semaines, 3 en platine (fonte, polissage, bague finie) | « Je prépare un premier rendu avant notre rencontre. » |
+| 4 | Mes clients parlent, 20 s | « Tous nos avis Google : 5 étoiles » (nombre revérifié le jour même) | Fiche Google sur un écran ; 2 extraits réels, prénom seulement ; « Je suis chaque bague du croquis à la remise » ; remise d'écrin, mains seulement, accord écrit | « À votre tour : consultation gratuite. » |
+
+Règles : iPhone vertical, 4K, 24 i/s (le montage se fait alors avec `REEL_FPS=24`) ; lumière de face, micro-cravate ; 3 prises par phrase ; plans de 3 à 5 s. Toujours « diamant de laboratoire », le prix avec « + taxes », aucun mot sur le crédit, jamais une bague à l'auriculaire.
+
 ## Priorité 1 — cette semaine (c'est ce qui manque le plus)
 
 | # | À filmer | Durée | Pourquoi |
 |---|---|---|---|
 | 0 | **La fabrication d'une tête florale, racontée par toi** : le design 3D sur l'écran, la fonte, le sertissage au microscope (chez ton sertisseur), la bague finie qui tourne. Une phrase par étape, à voix haute. | 25 à 30 s en tout | @oorejewelry : 1,39 M de vues avec une monture florale fabriquée et racontée (veille du 19 nov.). On a déjà la bague finie de Jobby : il manque les étapes. |
+| 1b | **Toi, face caméra : « Ce qu'on ne te dit pas sur l'or blanc »**, avec tes propres mots (ce que tu fais vraiment pour l'entretien et le polissage à vie) | 30 à 60 s | Veille du 22 nov. : @brooker_brothers, 12,1 M de vues avec une idée reçue sur l'or blanc corrigée face caméra. Sujet utile à tous tes clients en or blanc. |
+| 1c | **L'histoire d'une bague de client**, racontée par toi (avec son accord écrit : visage, mains seulement ou voix seulement) | 30 à 60 s | Veille du 22 nov. : @massoyanjewelers, 5,9 M de vues avec l'histoire d'une cliente et de sa bague de famille. |
 | 1 | **Toi, face caméra : 10 accroches** (liste plus bas), une prise chacune | 10 à 15 s chacune | Ton visage est le seul format qui passe la barre chez nous (62 % de saut, contre 90 à 100 % pour une bague seule). Le joaillier qui explique : 11,4 M de vues chez @brooker_brothers. |
 | 2 | **Une pierre de chaque coupe, en vrai** : rond, ovale, poire, marquise, taille émeraude, coussin, radiant, princesse. Diamants de laboratoire blancs, 2 ct si possible, sur velours noir, soulevés à la pince. | 5 à 8 s par coupe | La série « toutes les coupes » utilise aujourd'hui des dessins. Avec tes vraies pierres, elle devient beaucoup plus forte. |
 | 3 | **Les carats sur l'annulaire** : la même coupe en 1, 1,5, 2, 2,5 et 3 ct, posée une à une sur l'annulaire seulement (jamais une réglette sur tous les doigts). | 5 s par carat | Format qui revient chez les gros comptes : « 3 carat oval on a size 6 finger », « pick your perfect carat size ». |

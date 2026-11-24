@@ -1,13 +1,13 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import Image from "next/image";
 import PageHero from "@/components/shared/PageHero";
 import TrustBar from "@/components/shared/TrustBar";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Button from "@/components/ui/Button";
 import Magnetic from "@/components/ui/Magnetic";
-import { useStore } from "@/store/useStore";
+import { useLang } from "@/hooks/useLang";
 import { CATEGORY_LABEL, type StylePage } from "@/lib/style-pages";
 import { blogPosts } from "@/lib/blog-posts";
 
@@ -17,7 +17,7 @@ const copy = {
 };
 
 export default function StylePageContent({ page }: { page: StylePage }) {
-  const language = useStore((s) => s.language);
+  const language = useLang();
   const p = page[language];
   const c = copy[language];
   const catLabel = CATEGORY_LABEL[page.category][language];

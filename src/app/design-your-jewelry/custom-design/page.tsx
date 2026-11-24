@@ -1,18 +1,9 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-meta";
 import CustomDesignContent from "./CustomDesignContent";
 import { getEngagementPriceTable } from "@/lib/engagementPriceTable.server";
 
-export const metadata: Metadata = {
-  title: "Start Your Custom Design",
-  description: "Begin your custom jewelry journey — tell us about your project, stone, metal, and budget. Free consultation, no obligation.",
-  alternates: { canonical: "/design-your-jewelry/custom-design" },
-  openGraph: {
-    title: "Start Your Custom Design | Beto Jewelry",
-    description: "Begin your custom jewelry journey — tell us about your project, stone, metal, and budget. Free consultation, no obligation.",
-    type: "website",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Beto Jewelry — Custom Fine Jewelry Montreal" }],
-  },
-};
+export const metadata: Metadata = pageMetadata("/design-your-jewelry/custom-design", "fr");
 
 // Prices are recomputed from the private cost table at most once an hour.
 export const revalidate = 3600;
