@@ -1041,3 +1041,10 @@ Demande de Rayane : « à chaque 2 heures… des comptes rendus des pubs… rega
   - Plus de 100 $, ou aucune consultation après 150 $ dépensés : changer l'offre ou les vidéos.
   - Une pub à 60 $ dépensés sans lead : proposer de la mettre en pause.
 - Sources : [adlibrary, fatigue](https://adlibrary.com/posts/ad-fatigue) · [succession.media](https://succession.media/guides/meta-creative-fatigue-how-many-creatives-to-test/) · [stackmatix, budget minimum](https://www.stackmatix.com/blog/facebook-ads-minimum-budget-requirements) · [adlibrary, apprentissage](https://adlibrary.com/posts/how-to-fix-meta-learning-phase-stuck) · [shhots.ai](https://shhots.ai/blog/meta-ad-creative-fatigue/) · [withblip](https://withblip.com/blog/how-many-ads-to-run-meta-campaign/) · [Superads, coût par lead au Canada](https://www.superads.ai/facebook-ads-costs/cost-per-lead/canada)
+
+## 43. Projets vitrines (canal de la session des opérations, 24 nov. 2026)
+
+- La session des opérations note dans la table Supabase `projets_vitrines` les commandes qui sortent de l'ordinaire : histoire, points forts, plan de contenu par étape, `surprise`, `publiable_apres`, `accord_client`, et une colonne `notes_marketing` pour l'agent vidéo. Elle le fait à la demande de Rayane du 24 nov. La règle est au §10 du brief, sur sa branche.
+- La production quotidienne lit la table à chaque passage (étape 0bis), monte hors ligne dans `pro/vitrines/<client>/` et ajoute une ligne datée dans `notes_marketing`.
+- **Jamais de publication** tant que `accord_client` ≠ 'accorde' et que la condition de `publiable_apres` n'est pas remplie. Projet surprise : aucun plan reconnaissable nulle part avant la demande, reels d'essai et pubs compris. Seul Rayane décide de ces publications.
+- Premier projet : la bague « Guatemala » de Danny (ovale de laboratoire de 2 ct, or jaune 14k, split shank, pont gravé de volcans et de fleurs), demande surprise, accord à demander. Plan noté le 24 nov. : « le détail caché » (12 à 15 s), le processus en 30 s, l'histoire avec ses mots, un carrousel pour la page Réalisations.
