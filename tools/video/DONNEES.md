@@ -1049,3 +1049,17 @@ Demande de Rayane : « à chaque 2 heures… des comptes rendus des pubs… rega
 - **Valeurs de `accord_client`** (contrainte dans la base) : 'a_demander' (rien de publiable), 'histoire_et_visage', 'mains_seulement' (mains et écrin, sans visage), 'voix_ou_avis' (sa voix ou un avis écrit, sans image de lui), 'details_sans_histoire' (détails de la bague seulement, sans l'histoire), 'refuse' (rien). La session des opérations ne met une valeur qu'avec l'accord écrit.
 - **Jamais de publication** tant que `accord_client` vaut 'a_demander' ou 'refuse', ou que la condition de `publiable_apres` n'est pas remplie. Ensuite, seulement ce que la valeur permet. Projet surprise : aucun plan reconnaissable nulle part avant la demande, reels d'essai et pubs compris. Seul Rayane décide de ces publications.
 - Premier projet : la bague « Guatemala » de Danny (ovale de laboratoire de 2 ct, or jaune 14k, split shank, pont gravé de volcans et de fleurs), demande surprise, accord à demander. Plan noté le 24 nov. : « le détail caché » (12 à 15 s), le processus en 30 s, l'histoire avec ses mots, un carrousel pour la page Réalisations.
+
+## 44. Production du 24 nov. 2026
+
+- **Abonnés** : 237 (236 le 23 nov.).
+- **Sortis du 23 au 24 nov.** (reliés dans `social_reels`) : T1_tour 50 vues (80 % de saut), T4_pov 26 vues (73,9 %), S5_noel 6 vues (100 %), C_rond 4 vues (66,7 %). Les meilleurs de la semaine restent l'éducation et les avis : W02 (3 erreurs, EN) 126 vues, C_princesse 124, T05 (5 étoiles, EN) 120, T06 (avis mot pour mot) 112 vues et 53,6 % de saut, notre meilleur taux de la semaine.
+- **Règle des 72 h** : C_EN_emerald (8 vues, 100 % de saut) et C_EN_round (8 vues, 87,5 %) retirés. Aucun reel à 600 vues.
+- **Programmé** : le carrousel « guide des carats » (`C02_carrousel_carats`, 8 images) sur le profil le **dim. 29 nov. à 19 h 30** (`scheduled_id` 30973). Les pierres de 1 à 4 ct sont dessinées à la même échelle (environ 6,5 mm pour 1 ct, 8,2 mm pour 2 ct), avec la mention « Illustration à l'échelle » ; une carte explique pourquoi le diamètre ne gagne qu'environ 26 % quand le poids double ; une autre, le certificat IGI dès 1 carat. Le carrousel « styles » est retiré du code (dessins de bagues refusés par Rayane).
+- **Outil** : `put_upload.sh` envoie aussi les images (le type suit l'extension), pour les carrousels.
+- **Veille** (TikTok, « diamond carat size comparison », les plus aimées des 3 derniers mois) :
+  - @addistaubus, « Friendly fire », 14 s : 25,9 M de vues (deux bagues comparées, humour).
+  - @theplussizebride, choisir le carat selon la taille du doigt, 55 s : 6,9 M, 8 300 partages (une opinion qui fait débattre).
+  - @withrenee, « 1, 3, or 5? », 11 s : 1,6 M de vues et **15 000 partages**, plus que de commentaires (5 900). La question « lequel ? » se partage.
+  - Des bijoutiers : @lajoyajewelry, 7 s, 937 k ; @thediamonddaughters, « comment choisir la taille et la forme », 7 s, 573 k ; @claireinfinitediamond, « pick your perfect carat size », 15 s, 221 k.
+  - **Leçon** : les comparaisons de carats sur la main, courtes (7 à 15 s), même cadrage, qui finissent par une question (« 1, 3 ou 5 ? »), sont parmi les vidéos les plus partagées de la niche. On le refait avec de vraies pierres sur l'annulaire (LISTE_A_FILMER, priorité 1, n° 3), jamais à l'auriculaire.
