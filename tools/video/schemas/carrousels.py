@@ -23,14 +23,10 @@ FORMES = [
     ("coeur", "Cœur", "Le symbole par excellence. Il demande une taille très symétrique."),
 ]
 
-STYLES = [
-    ("bague_dessus_solitaire", "Solitaire", "Une seule pierre, quatre griffes. Tout le regard va au diamant."),
-    ("bague_dessus_halo", "Halo", "Un cercle de petits diamants autour de la pierre : elle paraît plus grande."),
-    ("bague_profil_hidden-halo", "Halo caché", "Les petits diamants sont sous la pierre. De dessus, on voit un solitaire ; de côté, la surprise."),
-    ("bague_profil_cathedrale", "Cathédrale", "L'anneau monte en arches jusqu'à la pierre, comme une voûte."),
-    ("bague_dessus_demi-eternite", "Demi-éternité", "Des petits diamants sur le dessus de l'anneau, là où ils se voient."),
-]
-
+# Approximate diameters of well-cut round brilliants (same table as schemas.CARAT_MM). Always "environ".
+CARATS = [(1.0, "1 carat", "6,5"), (1.5, "1,5 carat", "7,4"), (2.0, "2 carats", "8,2"),
+          (2.5, "2,5 carats", "8,8"), (3.0, "3 carats", "9,3"), (4.0, "4 carats", "10,2")]
+ECHELLE = "Illustration à l'échelle · diamètre moyen d'un rond bien taillé, il varie d'une pierre à l'autre"
 
 def spec_formes(svg):
     slides = [dict(kind="cover", kicker="Le guide des formes", svg=f"{svg}/or/forme_rond.svg",
@@ -44,17 +40,30 @@ def spec_formes(svg):
     return dict(slides=slides)
 
 
-def spec_styles(svg):
-    slides = [dict(kind="cover", kicker="Le guide des styles", svg=f"{svg}/or/bague_dessus_halo.svg",
-                   title="Solitaire, halo<br>ou halo caché ?", text="5 styles, expliqués en dessins.")]
-    for f, name, text in STYLES:
-        slides.append(dict(kind="item", svg=f"{svg}/ivoire/{f}.svg", title=name, text=text, artw=760))
-    slides.append(dict(kind="end", title="Tu hésites entre deux ?",
-                       text="On en parle ensemble : design 3D en 48 h,<br>révisions incluses."))
+def spec_carats(svg):
+    f = lambda ct: f"{svg}/ivoire/carat_{round(ct * 100):03d}.svg"
+    slides = [dict(kind="cover", kicker="Le guide des carats", svg=f"{svg}/or/carat_200.svg",
+                   title="2 carats,<br>2 fois plus gros ?", text="Pas vraiment. Voici les vraies tailles.")]
+    for k in range(0, len(CARATS), 2):
+        items = [dict(svg=f(ct), title=name, text=f"environ {mm} mm") for ct, name, mm in CARATS[k:k + 2]]
+        slides.append(dict(kind="pair", kicker="Vu de dessus, à la même échelle", items=items, small=ECHELLE))
+    slides.append(dict(kind="pair", kicker="1 carat contre 2 carats", small=ECHELLE, items=[
+        dict(svg=f(1.0), title="1 carat", text="environ 6,5 mm"),
+        dict(svg=f"{svg}/or/carat_200.svg", color=None, title="2 carats", text="environ 8,2 mm")]))
+    slides.append(dict(kind="fact", kicker="Pourquoi ?", title="Le poids double,<br>le diamètre<br>gagne environ 26 %", top=330, texttop=780,
+                       text="Le carat est un poids : 1 carat = 0,2 gramme.<br>Ce poids se répartit aussi en profondeur,<br>"
+                            "pas seulement sur le dessus de la pierre."))
+    slides.append(dict(kind="fact", kicker="Bon à savoir", title="Dès 1 carat,<br>un certificat IGI", top=400, texttop=720,
+                       text="Nos bagues de fiançailles commencent à 1 carat,<br>"
+                            "et la pierre centrale est accompagnée<br>de son certificat IGI."))
+    slides.append(dict(kind="end", svg=f"{svg}/or/carat_150.svg", title="Le carat de ton choix",
+                       text="Design 3D en 48 h, bague prête en 2 semaines.<br>Créée sur mesure à Montréal."))
     return dict(slides=slides)
 
 
-SPECS = dict(formes=spec_formes, styles=spec_styles)
+# The "styles" carousel was removed on 23 Nov. 2026: Rayane refused the ring drawings. Rings come back only as real
+# photos or realistic renders.
+SPECS = dict(formes=spec_formes, carats=spec_carats)
 
 if __name__ == "__main__":
     svg, out, fonts, logo = sys.argv[1:5]

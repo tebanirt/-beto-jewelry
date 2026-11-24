@@ -1,5 +1,6 @@
 // Instagram carousel from the schema bank: node carrousel.js <fontsDir> <spec.json> <outDir> <logo.png>
-// spec = { slides: [ {kind:'cover'|'item'|'end', kicker, title, text, svg (path), small} ], w:1080, h:1350 }
+// spec = { slides: [ {kind:'cover'|'item'|'pair'|'fact'|'end', kicker, title, text, svg (path), small} ], w:1080, h:1350 }
+// 'pair' draws both SVGs at 400 px: files that share a viewBox scale (the carat bank) stay to scale across slides.
 // Brand: ink background, ivory lines, gold accents, Bodoni Moda italic titles, Jost text. JPEG, 1080 x 1350 (4:5).
 const { chromium } = require('playwright');
 const fs = require('fs'), path = require('path');
@@ -50,8 +51,14 @@ function slide(sl, i, n) {
       <div class="t" style="left:${x - 40}px;right:auto;width:480px;top:810px;font-size:84px">${it.title}</div>
       <div class="x" style="left:${x - 30}px;right:auto;width:460px;top:920px;font-size:29px">${it.text}</div>`;
     return `<div class="s"><div class="k">${sl.kicker}</div>${col(sl.items[0], 80)}${col(sl.items[1], 600)}
-      <div style="position:absolute;left:540px;top:380px;width:1px;height:760px;background:#2A2620"></div></div>`;
+      <div style="position:absolute;left:540px;top:380px;width:1px;height:760px;background:#2A2620"></div>
+      ${sl.small ? `<div class="sm" style="top:1230px">${sl.small}</div>` : ''}</div>`;
   }
+  if (sl.kind === 'fact') return `<div class="s">
+    <div class="k">${sl.kicker || ''}</div>
+    <div class="t" style="top:${sl.top || 360}px;font-size:${sl.size || 96}px">${sl.title}</div>
+    <div class="x" style="top:${sl.texttop || 700}px">${sl.text || ''}</div>
+    ${sl.small ? `<div class="sm" style="top:1230px">${sl.small}</div>` : ''}</div>`;
   return `<div class="s">
     <div class="k">${sl.kicker || `${String(i).padStart(2, '0')} / ${n}`}</div>
     <div class="art" style="top:150px;width:${sl.artw || 700}px;height:${sl.artw || 700}px">${art}</div>
