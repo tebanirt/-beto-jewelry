@@ -1064,3 +1064,25 @@ Demande de Rayane : « à chaque 2 heures… des comptes rendus des pubs… rega
   - Des bijoutiers : @lajoyajewelry, 7 s, 937 k ; @thediamonddaughters, « comment choisir la taille et la forme », 7 s, 573 k ; @claireinfinitediamond, « pick your perfect carat size », 15 s, 221 k.
   - **Leçon** : les comparaisons de carats sur la main, courtes (7 à 15 s), même cadrage, qui finissent par une question (« 1, 3 ou 5 ? »), sont parmi les vidéos les plus partagées de la niche. On le refait avec de vraies pierres sur l'annulaire (LISTE_A_FILMER, priorité 1, n° 3), jamais à l'auriculaire.
 - **Pubs, décision de Rayane (24 nov., 11 h)** : après 72 $, 32 clics et 1 lead (Zya), il dit : « ok on continue jusqu'à jeudi ». Le bilan de décision passe au **jeu. 26 nov. à 20 h 20** (`trig_012ZQHSLkZBSvNQVScHvqGFC`), à environ 150 $ dépensés. On y applique la règle du plan de match, avec une seule recommandation claire. Zya : relance jeudi soir comme prévu, pas avant (environ 3 jours après le texto de lundi, règle du brief §7ter).
+
+## 45. Production du 26 nov. 2026
+
+- **Abonnés** : 238 (237 hier).
+- **Sortis le 25 nov.** : T2_details (15 h, 108 vues, 85,7 % de saut), S4_indice (17 h 25, 0 vue lue pour l'instant), R_laquelle (19 h 30, 68 vues, 80,6 %). Le 24 nov. : T5_feu (103 vues, 98 %), B3_griffes_serties (29 vues, 88 %), M02_noel (13 vues, 92,3 %), S1A_devine_le_prix (2 vues). T4_pov a eu 1 partage, donc il passe la règle des 72 h.
+- **Règle des 72 h, à retirer** (reels publiés le 22 et le 23 nov.) :
+  - R02_qui_est_rayane (6 vues) ;
+  - B1_prix_marquise_2ct (40 vues, 94,7 % de saut) ;
+  - S2_secret_dessous (22 vues, 84,2 %) ;
+  - W02_EN_mistakes (126 vues, 65,8 %) ;
+  - T06_avis_parfait (112 vues). C'est notre meilleur taux de saut de la semaine (53,6 %), mais les gens ne regardent que 3 s en moyenne, sous le seuil de 5 s.
+  - Aucun reel à 600 vues.
+- **Suivi Supabase en attente** : depuis le 25 nov., les écritures dans `social_reels` demandent une autorisation, et les deux essais se sont arrêtés sans réponse. Les liens des reels sortis (ig_media_id) et les retraits ci-dessus sont donc notés ici, à reporter dans la table à la prochaine écriture autorisée.
+- **Leçon de la semaine** : les reels de la marquise de 4 ct (T1, T4, T5, S1A, S2) ont tous un taux de saut de 79 à 98 %. La bague seule sur fond noir ne retient pas. Les reels qui retiennent le mieux sont un avis Google lu mot pour mot (T06) et un reel de prix avec une question (C_princesse).
+- **Veille** (TikTok, « hidden halo engagement ring », les plus aimées des 3 derniers mois) :
+  - @anteaandco, « POV : “The perfect engagement ring doesn't exi—” », 19 s : 2,4 M de vues, 26 600 partages. La fiche est dans la description (ovale 3,5 ct, couleur E, VVS2).
+  - @that_1_jeweler, 2 ct ovale allongée, or jaune 14K, 61 s : 966 k.
+  - @saucygems, 5 ct ovale allongée rose, halo caché en panier « lotus », 39 s : 916 k.
+  - @andrewzdiamonds, marquise 3 ct, or jaune 14K, pont et halo caché, 9 s : 537 k, 7 600 partages. C'est presque la bague de Jobby.
+  - @nickyjeweler, marquise rose à halo caché, 14 s : 322 k.
+  - **Leçon** : ces vidéos montrent la bague **portée à l'annulaire**, qui bouge, puis de côté pour révéler le halo caché. Les nôtres montrent la bague seule. Il faut le plan de la bague portée (LISTE_A_FILMER, priorité 1, n° 5).
+- **Soumission** : Sébastien Rivest (site, venu du lien en bio Instagram, ovale naturelle de 1,5 ct, cathédrale, or jaune 14K, 8 000 à 10 000 $). Premier lead du site qu'on peut rattacher clairement à Instagram.
