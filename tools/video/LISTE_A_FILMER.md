@@ -18,6 +18,17 @@ Elle s'appuie sur trois sources :
 
 **Ce que je ne publierai jamais** : le visage d'un client sans son accord écrit, son nom, un numéro de certificat lisible, une gravure personnelle, l'écran d'une autre marque, une bague portée à l'auriculaire.
 
+## Séance express de 30 minutes : 6 explications face caméra (27 nov. 2026, REGLES_CONTENU.md, format E)
+
+C'est ce qui peut le plus faire passer nos reels au-dessus de 200 vues. Une prise par phrase, iPhone vertical, lumière de face, micro-cravate. **La première parole dès la première seconde** : pas de « Salut », pas de logo. Il faut 30 à 60 s par vidéo. Dis-le avec tes mots ; les phrases ci-dessous sont un guide.
+
+1. **« Je classe les formes de diamant pour une bague portée tous les jours. »** Rond, ovale, coussin, radiant, émeraude, poire, marquise, princesse… Une raison de 8 mots maximum par forme (par exemple : les pointes de la poire et de la marquise sont plus fragiles, donc il faut des griffes dessus). Dévoile le classement dans le désordre et garde le n° 1 pour la fin.
+2. **« Un diamant de laboratoire, c'est un faux ? »** « On me pose la question chaque semaine. » Puis : du carbone, la même structure ; selon le GIA, les mêmes propriétés chimiques, physiques et optiques ; la pierre à la pince ; le certificat IGI, numéro caché. Fin : « Naturel ou labo, je travaille les deux. Tu préfères lequel ? »
+3. **« Qu'est-ce que 2 400 $ t'achète chez nous ? »** Fais deviner : « Tu penses 1 carat ? Non : 2 carats. Couleur ? E. Pureté ? VVS2. Certificat ? IGI. Or blanc 18k. » Le prix exact : « 2 300 à 2 400 $ + taxes ». La bague dans l'écrin à la fin.
+4. **« 4 erreurs avant d'acheter ta bague de fiançailles. »** 8 s par erreur : pas de certificat ; ne pas voir le design avant ; deviner la taille ; payer pour un nom de marque. Fin : « Envoie ça à ton chum. »
+5. **« Il y a une pierre cachée dans cette bague. »** L'ovale de C074 : tourne-la lentement devant la caméra, montre la pierre verte dans l'anneau et dis pourquoi elle est là (à me confirmer : quelle pierre, et quelle histoire on peut raconter).
+6. **« 1, 2 ou 3 carats ? »** Les pierres posées une à une sur ton annulaire, 2 s chacune, même cadrage. Tu poses la question à la fin.
+
 ## Priorité 0 — les 6 pubs de Noël et de la Saint-Valentin (22 nov. 2026)
 
 Rayane, 22 nov. : fin du partenariat avec Benny ; Rayane tourne lui-même ses vidéos face caméra, éducatives et publicitaires. Scripts tirés de l'étude de marché du 22 nov. (plan complet dans le doc « Noël 2026 : pubs Meta et tunnel de vente », onglet « Plan de match (22 nov.) »).
