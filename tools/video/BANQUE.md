@@ -53,5 +53,10 @@ L'ancien dossier « Frame » (`1w-XwO_5-ELvI2BD7lWnYFFrcDo9zTJsX`, 41 clips de l
 
 Le Drive de betojewlz@gmail.com a dépassé son espace : la création d'un Google Doc a été refusée (« storage quota has been exceeded »). Tant que Rayane n'a pas libéré de l'espace ou pris un forfait Google One (décision d'argent : la sienne), il ne peut pas y déposer de vidéos. En attendant, il envoie ses vidéos directement dans le chat Claude.
 
+| 2026-11-26/27 | `A001_11262351_C074` à `C077` (« Bague vidéo pro ») | 03 | Ovale à halo caché, or jaune, avec une petite pierre verte cachée à l'intérieur de l'anneau, au plateau tournant (4K, 24 i/s, Rec.709) | **À demander** : la pierre verte, le carat, le métal, et si c'est la bague d'un client, son accord | Boucle A1_ovale_pierre_cachee (montée le 27 nov.) |
+| 2026-11-27 | `A001_11270000_C079`, `C080`, `C082` (« Bague vidéo pro ») | 03 | Marquise sur anneau torsadé, tête florale et halo caché, pierre verte dans l'anneau (sans doute la bague de Jobby) | À confirmer | — |
+| 2026-11-27 | `A001_11270018_C083`, `C084` (« Bague vidéo pro ») | 03 | Marquise solitaire en or jaune, anneau de petites marquises et de petits ronds | À confirmer : carat, métal, nature des pierres | Boucle A2_marquise_anneau (montée le 27 nov.) |
+| 2026-11-27 | `IMG_6041.mov` (racine du Drive) | 05 | Marquise seule, posée dans la paume du gant noir, devant son certificat IGI | Le numéro du certificat doit être flouté ; carat à confirmer | Pour une explication « certificat IGI » |
+
 **Au 20 nov. 2026** : « 00 · À trier » contient aussi `Beto-Jewelry_Recu-depot_Ryan.pdf`, un reçu de dépôt client. Ce n'est pas une vidéo : il reste là, signalé à Rayane, pour qu'il le range dans la comptabilité. Les plans de bagues arrivent dans le dossier partagé « Bague vidéo pro » (`1ewW4YxZnK3wXCjxVP_xVHQDkezG_-3Aw`), où ils restent, puisque Rayane y dépose ses fichiers. Ils sont notés ci-dessus. C066, C068 et C069 sont arrivés le 20 nov. au soir. C060 manque encore.
 
