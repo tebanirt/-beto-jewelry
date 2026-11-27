@@ -92,10 +92,15 @@ def render(spec, out):
     filters.append("".join(f"[v{k}]" for k in range(n)) + f"concat=n={n}:v=1:a=0[cat]")
     last = "cat"
     if spec.get("text") and FONT:
-        txt = spec["text"].replace(":", r"\:").replace("'", "’")
-        filters.append(f"[cat]drawtext=fontfile={FONT}:text='{txt}':fontsize=66:fontcolor=white:"
-                       f"x=(w-text_w)/2:y=h*0.17:shadowcolor=black@0.55:shadowx=0:shadowy=3:"
-                       f"enable='lt(t,{spec.get('text_dur', 2.6)})'[txt]")
+        # one drawtext per line ("\n" in the spec), centred, so a long hook never runs off the 1080 px frame
+        size = spec.get("fontsize", 66)
+        chain = []
+        for i, line in enumerate(spec["text"].split("\n")):
+            txt = line.replace(":", r"\:").replace("'", "’")
+            chain.append(f"drawtext=fontfile={FONT}:text='{txt}':fontsize={size}:fontcolor=white:"
+                         f"x=(w-text_w)/2:y=h*0.17+{i * round(size * 1.25)}:shadowcolor=black@0.55:shadowx=0:shadowy=3:"
+                         f"enable='lt(t,{spec.get('text_dur', 2.6)})'")
+        filters.append("[cat]" + ",".join(chain) + "[txt]")
         last = "txt"
     os.makedirs(out, exist_ok=True)
     app = os.path.join(out, f"{spec['name']}_APP.mp4")
