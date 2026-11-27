@@ -1096,3 +1096,13 @@ Demande de Rayane : « à chaque 2 heures… des comptes rendus des pubs… rega
 - **Deuxième pub avec le visage de Rayane** : celle du prix d'un 2 carats (LISTE_A_FILMER, priorité 0, n° 1). Rayane la filme ; l'agent la monte et l'ajoute à la campagne (accord de Rayane du 26 nov.).
 - **Leçon** : comme pour les reels, c'est le visage de Rayane qui fait cliquer et réserver ; une bague seule attire des curieux.
 - **Nouveau canal : la recherche par IA.** Sébastien Rivest (ovale naturelle de 1,5 ct, budget de 8 000 à 10 000 $, consultation le 3 déc. à 15 h) a demandé à ChatGPT les meilleures bijouteries de Montréal. Beto Jewelry était dans le top 5. Il est ensuite passé par le lien en bio Instagram, puis par le formulaire du site. C'est gratuit, et ça mérite d'être renforcé : fiche Google, avis, pages claires du site, mentions ailleurs sur le web.
+
+## 47. Production du 27 nov. 2026
+
+- **Compte** : 241 abonnés (+3). Aucun nouveau fichier dans Drive.
+- **Sortis hier** : S3_trois_details (55 vues, 81,5 % de saut) et S1B_devine_le_prix (17 vues, 100 % de saut). R_laquelle monte à 100 vues (79,5 %). S4_indice : 0 vue 2 jours après sa sortie, à vérifier dans l'app.
+- **Règle des 72 h** : T1_tour (64 vues, 1 s regardée), C_rond (7 vues) et S5_noel (7 vues, 100 % de saut) sont retirés. T4_pov passe (1 partage) : 3 variantes d'accroche à faire.
+- **Supabase** : la première écriture a été interrompue (autorisation sans réponse) ; reprise et appliquée à 15 h 15 UTC.
+- **Leçon du jour** : le prix seul sur une bague seule fait le pire saut de la série (100 %). C'est déjà interdit dans REGLES_CONTENU.md §6 ; S1B était monté avant la règle.
+- **Veille** : VRAI (« Halo vs Hidden Halo ») et une série « Diamond Buying 101 » (« What exactly is a hidden halo? ») confirment les formats D (comparaison) et E (explication). Accroche à reprendre pour A1 (ovale à pierre cachée) : « Le détail que personne ne voit de face. » Elle remplace « Regarde à l'intérieur de l'anneau. » si Rayane confirme les faits.
+- **Rien de nouveau programmé** : A1 et A2 attendent les faits de Rayane (pierre verte, carat, métal, accord du client).
