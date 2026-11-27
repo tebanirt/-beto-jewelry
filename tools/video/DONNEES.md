@@ -1086,3 +1086,13 @@ Demande de Rayane : « à chaque 2 heures… des comptes rendus des pubs… rega
   - @nickyjeweler, marquise rose à halo caché, 14 s : 322 k.
   - **Leçon** : ces vidéos montrent la bague **portée à l'annulaire**, qui bouge, puis de côté pour révéler le halo caché. Les nôtres montrent la bague seule. Il faut le plan de la bague portée (LISTE_A_FILMER, priorité 1, n° 5).
 - **Soumission** : Sébastien Rivest (site, venu du lien en bio Instagram, ovale naturelle de 1,5 ct, cathédrale, or jaune 14K, 8 000 à 10 000 $). Premier lead du site qu'on peut rattacher clairement à Instagram.
+
+## 46. Bilan de décision des pubs de Noël (26 nov. 2026, 20 h 20)
+
+- **Chiffres depuis le 23 nov.** : 169 $, 4 734 impressions, 69 clics, 2 leads, 1 consultation réservée (Dominic Janvier, jeu. 3 déc. 12 h 30, Saint-Laurent), soit environ 169 $ par consultation.
+  - « Sous le sapin » (Jobby, sans Rayane) : 107 $, 1 lead (Zya), aucune consultation. Zya ne répond ni à l'appel, ni au texto, ni au courriel.
+  - « Rayane en ville, dès 2 000 $ » (Rayane à l'écran) : 31 $, 1 lead, 1 consultation. Meta l'a poussée d'elle-même après la phase d'apprentissage.
+- **Décision de Rayane** (« Ok, j'accepte tes recommandations. Go pour les deux ») : « Sous le sapin » mise en pause le 26 nov. vers 20 h 25 ; on garde 40 $ par jour. On refait le point le **dim. 29 nov. à 20 h 20** (`trig_01Mb1fynbJh9VMshJs7s4QEX`) : sans 2e consultation venue des pubs, on propose d'arrêter.
+- **Deuxième pub avec le visage de Rayane** : celle du prix d'un 2 carats (LISTE_A_FILMER, priorité 0, n° 1). Rayane la filme ; l'agent la monte et l'ajoute à la campagne (accord de Rayane du 26 nov.).
+- **Leçon** : comme pour les reels, c'est le visage de Rayane qui fait cliquer et réserver ; une bague seule attire des curieux.
+- **Nouveau canal : la recherche par IA.** Sébastien Rivest (ovale naturelle de 1,5 ct, budget de 8 000 à 10 000 $, consultation le 3 déc. à 15 h) a demandé à ChatGPT les meilleures bijouteries de Montréal. Beto Jewelry était dans le top 5. Il est ensuite passé par le lien en bio Instagram, puis par le formulaire du site. C'est gratuit, et ça mérite d'être renforcé : fiche Google, avis, pages claires du site, mentions ailleurs sur le web.
