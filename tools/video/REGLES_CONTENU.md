@@ -115,3 +115,93 @@ Les leviers gratuits qui s'ajoutent aux reels :
 - les 3 meilleures publications épinglées ;
 - répondre à chaque commentaire dans l'heure ;
 - la recherche par IA : Sébastien a trouvé Beto Jewelry par ChatGPT.
+
+## 10. Méthode Schwartz : la fiche obligatoire avant chaque reel et chaque pub (28 nov. 2026)
+
+Tirée de *Breakthrough Advertising* (Eugene Schwartz, 1966, chapitres 1 à 3 et 8), à la demande de Rayane : « implémente ça dans les pubs et la structure de nos publicités pour plus s'accrocher ». Avant de monter un reel ou une pub, on écrit cette fiche dans `social_reels.notes` (ou dans DONNEES.md pour une pub). **Sans fiche, pas de note sur 10, donc pas de publication.**
+
+1. **Quel désir existant ?** On ne crée jamais le désir : on le dirige vers Beto. Les désirs du marché, par ordre de force :
+   - réussir la demande : qu'elle dise oui en pleurant, qu'elle la montre à tout le monde ;
+   - avoir une bague que personne d'autre n'a ;
+   - avoir une grosse pierre sans se ruiner ni se faire avoir ;
+   - être fier de ce qu'on porte toute sa vie (histoire, symbole, détail caché).
+2. **À quel niveau de conscience on parle ?** C'est ce qui décide de la première seconde.
+
+   | Niveau | Qui | Première seconde | Format (§6) |
+   |---|---|---|---|
+   | Ne sait rien | Le gars qui ne pense pas encore à la bague | Une situation où il se reconnaît, une émotion, une histoire. Jamais le produit d'abord. | H, F, G |
+   | Connaît le problème | « Je ne connais rien aux diamants, j'ai peur de me faire avoir » | Le problème dit tout haut | E (erreurs, mythes) |
+   | Connaît la solution | Sait que le sur-mesure ou le labo existent | Une comparaison, une explication, notre façon de faire nommée | D, E |
+   | Connaît Beto | Nous suit, a vu une pub | La preuve : vraies bagues, avis, étapes, le visage de Rayane | A, H, avis |
+   | Prêt à acheter | A demandé un prix | L'offre : dépôt de 250 $ crédité, « commandez avant le 11 décembre » | B, pub de reciblage |
+
+   Les publics froids des pubs et les non-abonnés des reels d'essai sont presque tous aux deux premiers niveaux : **une pub ou un reel d'essai ne commence jamais par la bague et le prix**.
+3. **À quel stade est le marché ?** La bague de fiançailles à Montréal est au **stade 4 ou 5** : tout le monde promet « sur mesure, qualité, bon prix, diamants de laboratoire ». Répéter la promesse ne marche plus. Il reste deux leviers :
+   - **Nommer notre façon de faire** (stade 3 et 4) : « le premier rendu 3D avant même la rencontre », « ta bague en 3D en 48 h », « le pont signature » (voir §11, les termes inventés). Toujours une chose vraie, tirée de `FAITS.md`.
+   - **L'identification** (stade 5) : Rayane, le jeune joaillier montréalais qui parle à la caméra, et les vrais clients dans lesquels le spectateur se reconnaît.
+4. **Le travail de la première seconde** : faire voir la troisième seconde, rien d'autre. Elle ne vend pas, elle ne montre pas forcément la bague.
+5. **Une technique principale par reel**, parmi les 7 du livre :
+   - *Intensifier* : la bague en action, la preuve (loupe, certificat IGI, comparaison) ;
+   - *Faire se reconnaître* : le rôle qu'il veut jouer (« le gars qui a réussi sa demande ») ;
+   - *Bâtir la croyance pas à pas* : partir de ce qu'il croit déjà ;
+   - *Redéfinir* : enlever une objection (« le labo, c'est un vrai diamant ») ;
+   - *Nommer le mécanisme* : expliquer comment on fait ;
+   - *Éliminer les autres options* : pourquoi pas la bijouterie de centre commercial (jamais un nom de marque) ;
+   - *Emprunter la crédibilité* d'un format de confiance : un guide, une réponse à une question.
+
+## 11. Étude des créateurs qui ont percé en montrant leur visage et leurs clients (28 nov. 2026)
+
+Point de départ : les reels envoyés par Danny (client, nov. 2026), qui mènent à deux comptes. Ensuite, une recherche TikTok (« jeweler client story custom engagement ring », les plus aimées des 3 derniers mois). Les chiffres sont ceux du 28 nov. 2026.
+
+**@itsjamesly_ (James Ly, joaillier sur mesure, marque MINHÈ)** : il parle à la caméra, en son original, souvent de 60 à 100 s.
+- Son meilleur reel : 2,08 M de vues (« tous les anneaux de cette vidéo, sauf 2, je les ai faits »), et un autre à 462 k.
+- Il **invente des termes** : « bridge mural », 106 k vues, avec en légende « j'ai inventé ce terme, voyons s'il prend ».
+- Des **opinions** (« hot take », 104 k), des **listes** (« Take notes!! », 67 k ; « les endroits où cacher un détail qui a du sens », 96 k), des vidéos pour un client qui est un ami (25 k), la boîte de sa marque (73 k), « un reel fait à 3 h du matin » (173 k).
+
+**@smirostudio (Smiro Studio, joailliers privés)** : 1 400 à 90 000 vues.
+- « Is this hot or not?? » : 89,5 k vues.
+- La vue du dessus d'un panier tulipe, avec une chanson : 89,9 k.
+- « Lab or natural? On a sorti les vrais chiffres » : 10,6 k.
+- Ils lisent 5 avis de clients au hasard, à la caméra, pour la première fois.
+- « Celui-ci est pour les chums qui ne savent pas quoi offrir à Noël ».
+
+**Les histoires de clients sur TikTok (3 derniers mois)** :
+- @diamondrensu, **7 480 abonnés** : « Et si elle l'aimait, lui, mais détestait la bague ? On a gardé le diamant et changé tout le reste. » 16 s, **4,38 M de vues**, 24 000 partages.
+- @diamontejewelers, **7 949 abonnés** : « Faire une bague de fiançailles, c'est spécial… la faire pour sa fille, c'est autre chose. » 59 s, **1,56 M**.
+- @akkcento, **3 794 abonnés** : « Tu donnes combien à cette alliance d'homme assortie à la bague ? » 5 s, **659 k**, 30 000 partages.
+- @massoyanjewelers : « Sabrina voulait mettre un diamant de 5 ct dans la bague de sa grand-mère sans perdre le dessin d'origine. Il y a 10 ans, ça aurait coûté… » 75 s, voix, 6,8 M.
+- @brooker_brothers : « Tu porterais un 5 carats ? Regarde-moi la fabriquer de A à Z » (2,96 M) ; « J'ai creusé le siège et serti la pierre si bas qu'elle touche presque le doigt » (1,95 M). Voix du joaillier, 70 s.
+- @prestigiojewelers : « Arrête de payer trop cher dans les grandes bijouteries de centre commercial », 98 s, voix, 1,78 M, 35 000 partages.
+- @thebijoulab : la réponse à une cliente déçue qui disait que sa bague ne ressemblait pas à la vidéo. 14 s, 1,98 M.
+
+**Ce qu'ils font tous** :
+1. **Un visage et une voix**, presque toujours en son original. Les longs formats parlés (60 à 100 s) passent quand la première phrase accroche.
+2. **Une histoire avec un enjeu dès la première phrase** : un conflit (« elle détestait la bague »), un lien (« pour ma fille », « pour un ami »), un défi (« sans perdre le dessin de sa grand-mère »).
+3. **La demande du client racontée comme une mission**, puis le résultat. C'est le format H, que nous n'avons encore jamais publié.
+4. **Un terme à eux** (« bridge mural ») qui les rend reconnaissables : c'est le « mécanisme nommé » de Schwartz.
+5. **Une question qui fait voter** (« hot or not ? », « tu lui donnes combien ? », « lab ou naturel ? ») : ces vidéos font le plus de partages.
+6. **La transparence** : avis lus à la caméra, vrais chiffres, réponse à une critique.
+
+**Ce qu'on applique tout de suite** :
+- Le format H passe en priorité n° 1, avec l'accord écrit du client (§6 du brief : visage, mains, ou voix seulement). Gabarit de la première phrase : « [Prénom] voulait [demande inhabituelle]. [Le problème ou le défi]. » Ensuite le rendu 3D, la fabrication, le résultat, et la fin : « Toi, tu mettrais quoi sur la tienne ? »
+- **Le premier candidat : la bague de Danny.** Il a demandé 4 volcans calmes et un coucher de soleil d'un côté du pont, des fleurs de l'autre, en relief 3D, sur un anneau qui se sépare en deux sous la pierre. C'est exactement le « bridge mural » qui a fait 106 k chez James Ly, et c'est son histoire à lui. Il faut son accord, après sa demande si c'est une surprise.
+- **Notre terme à nous** : « le pont signature », pour le dessin personnel sous la pierre. On l'utilise dans chaque reel où il apparaît. Rayane valide le nom avant la première publication.
+- **Les questions qui font voter** dans les formats A et D : « Hot or not ? », « Tu lui donnes combien sur 10 ? », « Jaune ou blanc ? ».
+- **Les avis lus par Rayane à la caméra**, à partir des vrais avis Google (déjà le format de nos meilleurs reels : T06, 53,6 % de saut).
+
+## 12. Structure des pubs Meta (méthode Schwartz, 28 nov. 2026)
+
+Le budget, les pauses et les nouvelles pubs restent à Rayane (« go pubs »). Cette structure sert à préparer les propositions.
+
+- **Public froid** (personnes qui ne connaissent pas Beto) : 2 ou 3 pubs au maximum, chacune pour **un seul niveau de conscience**.
+  - *Ne sait rien* : une histoire de client (format H, 20 à 40 s, sa voix ou celle de Rayane), qui finit sur « Consultation gratuite, à Montréal ou en vidéo ».
+  - *Connaît le problème* : Rayane face caméra, « 3 erreurs avant d'acheter une bague » ou « Labo, un faux ? » (format E, 30 à 45 s).
+  - *Connaît la solution* : « Ta bague en 3D en 48 h, avant même qu'on se rencontre » (le mécanisme nommé), puis les vraies bagues.
+- **Reciblage** (personnes qui ont vu 50 % d'une vidéo, visité le site ou suivi le compte) : la preuve et l'offre : avis Google, vraies bagues, « dépôt de 250 $ crédité à 100 % », « commandez avant le 11 décembre ». **C'est seulement ici qu'on met un prix.**
+- **Le texte de chaque pub** suit le même ordre : le désir ou la situation → le problème → la façon de faire de Beto (nommée) → la preuve → l'appel (consultation gratuite).
+- **Ce qui explique nos résultats** : « Rayane en ville » marche parce qu'elle montre le visage de Rayane (identification, stade 5). « Marquise 2 ct, 2 600 $ » et « Collection avec prix » montrent la bague et le prix à un public froid, qui n'est pas prêt. Ce sont les plus faibles (1,7 % de clics, aucun lead).
+- **Prochaines pubs à tourner**, par ordre :
+  1. L'histoire de Danny (avec son accord).
+  2. « Labo, un faux ? », Rayane face caméra.
+  3. « Ta bague en 3D avant même qu'on se rencontre ».
+  Chaque pub sort en 3 accroches différentes.

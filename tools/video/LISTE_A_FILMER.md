@@ -21,6 +21,10 @@ Elle s'appuie sur trois sources :
 ## Séance express de 30 minutes : 6 explications face caméra (27 nov. 2026, REGLES_CONTENU.md, format E)
 
 > **Mise à jour du 28 nov.** : le script « Labo, un faux ? » passe en premier. La veille montre des comptes de moins de 3 000 abonnés à 770 000 vues et plus avec « les diamants de laboratoire sont de vrais diamants, mais ils ne se valent pas tous » (DONNEES.md §48). Fin à ajouter : « …mais ils ne se valent pas tous : regarde la couleur, la pureté et le certificat IGI. »
+> **Ajout du 28 nov. (méthode Schwartz, REGLES_CONTENU.md §11)** : trois tournages passent devant le reste.
+> 1. **L'histoire de Danny** (avec son accord) : Rayane raconte à la caméra « Danny voulait 4 volcans et un coucher de soleil d'un côté du pont, des fleurs de l'autre ». Ensuite, les rendus 3D, la fonte, la bague finie au plateau tournant, et la fin : « Toi, tu mettrais quoi sur la tienne ? »
+> 2. **Les avis lus à la caméra** : Rayane lit 3 vrais avis Google pour la première fois, sa réaction en direct, 30 à 45 s.
+> 3. **« Labo, un faux ? »** (déjà en tête de liste).
 
 C'est ce qui peut le plus faire passer nos reels au-dessus de 200 vues. Une prise par phrase, iPhone vertical, lumière de face, micro-cravate. **La première parole dès la première seconde** : pas de « Salut », pas de logo. Il faut 30 à 60 s par vidéo. Dis-le avec tes mots ; les phrases ci-dessous sont un guide.
 

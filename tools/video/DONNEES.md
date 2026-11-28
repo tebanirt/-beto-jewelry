@@ -1128,3 +1128,10 @@ Demande de Rayane : « à chaque 2 heures… des comptes rendus des pubs… rega
   - @elijewelry.mi (2 495 abonnés) : « les diamants de laboratoire sont de vrais diamants, mais ils ne se valent pas tous », 37 s, 772 k vues, 7 100 enregistrements (format E).
   - @quietly.emily : une pierre de 4 ct achetée en ligne et montrée à un joaillier pour son verdict, 155 s, 949 k vues (format H, avec l'avis d'un expert).
   - **Leçon** : en novembre 2026, les comptes de moins de 3 000 abonnés passent le million avec deux choses que nous avons déjà : des diamants de laboratoire de couleur en boucle courte, et l'explication « vrai diamant, mais pas tous égaux ». Le script n° 2 de la séance express (« Labo, un faux ? ») devient la priorité n° 1 du tournage ; on y ajoute la fin « …mais ils ne se valent pas tous : regarde la couleur, la pureté et le certificat ».
+
+## 49. Méthode Schwartz et étude des créateurs (28 nov. 2026)
+
+- Rayane, 28 nov. : « implémente ça dans les pubs et la structure de nos publicités pour plus s'accrocher… fais une étude de marché plus moderne… dans le email de Danny… des gens qui montrent leur visage, leur histoire… racontent les histoires de leurs clients ».
+- Règles écrites dans `REGLES_CONTENU.md` §10 (fiche Schwartz obligatoire), §11 (étude : @itsjamesly_, @smirostudio et 7 histoires de clients sur TikTok, dont 3 comptes de moins de 8 000 abonnés entre 659 k et 4,38 M de vues), §12 (structure des pubs par niveau de conscience).
+- **Pour le bilan de dimanche (29 nov., 20 h 20)** : la proposition suit §12. Une pub à un public froid ne montre ni la bague ni le prix en premier. « Marquise 2 ct » et « Collection avec prix » sont les candidates à la pause. Les nouvelles pubs dépendent de ce que Rayane filme (l'histoire de Danny avec son accord, « Labo, un faux ? »).
+- Coût de l'étude : 5 crédits Firecrawl (4 reels, 2 comptes, 1 recherche TikTok).
