@@ -20,6 +20,8 @@ Elle s'appuie sur trois sources :
 
 ## Séance express de 30 minutes : 6 explications face caméra (27 nov. 2026, REGLES_CONTENU.md, format E)
 
+> **Mise à jour du 28 nov.** : le script « Labo, un faux ? » passe en premier. La veille montre des comptes de moins de 3 000 abonnés à 770 000 vues et plus avec « les diamants de laboratoire sont de vrais diamants, mais ils ne se valent pas tous » (DONNEES.md §48). Fin à ajouter : « …mais ils ne se valent pas tous : regarde la couleur, la pureté et le certificat IGI. »
+
 C'est ce qui peut le plus faire passer nos reels au-dessus de 200 vues. Une prise par phrase, iPhone vertical, lumière de face, micro-cravate. **La première parole dès la première seconde** : pas de « Salut », pas de logo. Il faut 30 à 60 s par vidéo. Dis-le avec tes mots ; les phrases ci-dessous sont un guide.
 
 1. **« Je classe les formes de diamant pour une bague portée tous les jours. »** Rond, ovale, coussin, radiant, émeraude, poire, marquise, princesse… Une raison de 8 mots maximum par forme (par exemple : les pointes de la poire et de la marquise sont plus fragiles, donc il faut des griffes dessus). Dévoile le classement dans le désordre et garde le n° 1 pour la fin.

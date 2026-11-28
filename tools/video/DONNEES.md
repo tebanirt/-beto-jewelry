@@ -1107,3 +1107,24 @@ Demande de Rayane : « à chaque 2 heures… des comptes rendus des pubs… rega
 - **Veille** : VRAI (« Halo vs Hidden Halo ») et une série « Diamond Buying 101 » (« What exactly is a hidden halo? ») confirment les formats D (comparaison) et E (explication). Accroche à reprendre pour A1 (ovale à pierre cachée) : « Le détail que personne ne voit de face. » Elle remplace « Regarde à l'intérieur de l'anneau. » si Rayane confirme les faits.
 - **Rien de nouveau programmé** : A1 et A2 attendent les faits de Rayane (pierre verte, carat, métal, accord du client).
 - **A3, marquise 3 carats à anneau européen (montée à 15 h 25 UTC, après le rappel de Rayane)** : format A, 10 s, 4 plans en 4K (face, profil avec le pont et la base carrée, tête florale de dos, retour de face pour la boucle). Musique : Green Chair RnB (95,7 BPM). 3 versions qui ne changent que l'accroche (REGLES_CONTENU.md §3) : A3a « Marquise 3 carats. Regarde sous la pierre. », A3b « Le détail que personne ne voit de face. », A3c « Pourquoi l'anneau est carré en dessous ? ». `boucle.py` accepte maintenant un texte sur 2 lignes (`\n`), pour que l'accroche ne touche plus les bords de l'image.
+
+## 48. Production du 28 nov. 2026
+
+- **Compte** : 241 abonnés (aucun gain depuis hier). Aucun nouveau plan dans Drive : seulement la soumission PDF de Rayane Ait dans « Downloads ».
+- **Sorti hier soir** : X01_formes (`18113512940257101`, ven. 19 h 30) : 12 vues, 91,7 % de saut, 2 s regardées. **Leçon** : un schéma animé sans voix ni visage se fait sauter autant qu'une bague seule. Les explications doivent être parlées par Rayane (format E), pas seulement dessinées.
+- **Hier** : S3_trois_details monte à 61 vues (83,3 %), S1B_devine_le_prix à 21 vues (100 %).
+- **Règle des 72 h, retraits du jour** (reliés par l'heure de publication à `publish_state.txt`) :
+  - M02_noel (`18113070322906398`) : 13 vues, 92,3 % de saut.
+  - T5_feu (`18055839311810999`) : 103 vues, mais 98 % de saut et 1 s regardée.
+  - B3_griffes_serties (`18083074997717354`) : 29 vues, 88 %.
+  - S1A_devine_le_prix (`18020941379993127`) : 2 vues.
+  - S4_indice (`18352402576252803`) : toujours 0 vue ; à retirer ce soir à 22 h 25 UTC (72 h).
+  - Aucun reel à 600 vues ni à 1 000 vues.
+- **Supabase** : les écritures demandent une autorisation qui reste sans réponse (3 essais interrompus le 28 nov.). Ces changements sont à appliquer dans `social_reels` dès que possible : `status = 'retired'` et la leçon ci-dessus pour M02_noel, T5_feu, B3_griffes_serties et S1A_devine_le_prix ; `ig_media_id`, `published_at` (2026-11-28 00:33 UTC), chiffres et leçon pour X01_formes. Les notes « vidéo-cadeau » d'Elliott et d'Ismail ont bien été écrites dans `clients` le 27 nov.
+- **Rien de monté ni de programmé** : les seuls plans neufs (C074 à C084) sont les bagues d'Elliott (ovale) et d'Ismail (marquise 3 ct), qui attendent l'accord des clients, et la marquise de C083/C084, dont les faits manquent. Toujours programmés : le carrousel des formes (aujourd'hui 17 h 10), N02_rose_natif (aujourd'hui 19 h 30), le carrousel des carats (demain 19 h 30).
+- **Veille** (TikTok, « lab grown diamond myth jeweler », les plus aimées des 3 derniers mois) :
+  - @highland_labdiamond (959 abonnés) : diamant de laboratoire rose de 1,47 ct, boucle de 10 s, 852 k vues et **26 000 partages**. Un petit compte, une pierre de couleur, un format A court.
+  - @zenaragemsofficial (2 000 abonnés) : « toutes les pierres ne suivent pas la forme classique », 23 s, 1,09 M de vues et **82 000 partages**.
+  - @elijewelry.mi (2 495 abonnés) : « les diamants de laboratoire sont de vrais diamants, mais ils ne se valent pas tous », 37 s, 772 k vues, 7 100 enregistrements (format E).
+  - @quietly.emily : une pierre de 4 ct achetée en ligne et montrée à un joaillier pour son verdict, 155 s, 949 k vues (format H, avec l'avis d'un expert).
+  - **Leçon** : en novembre 2026, les comptes de moins de 3 000 abonnés passent le million avec deux choses que nous avons déjà : des diamants de laboratoire de couleur en boucle courte, et l'explication « vrai diamant, mais pas tous égaux ». Le script n° 2 de la séance express (« Labo, un faux ? ») devient la priorité n° 1 du tournage ; on y ajoute la fin « …mais ils ne se valent pas tous : regarde la couleur, la pureté et le certificat ».
